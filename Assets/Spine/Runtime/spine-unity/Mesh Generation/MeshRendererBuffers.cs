@@ -1,8 +1,8 @@
 /******************************************************************************
  * Spine Runtimes License Agreement
- * Last updated September 24, 2021. Replaces all prior versions.
+ * Last updated April 5, 2025. Replaces all prior versions.
  *
- * Copyright (c) 2013-2021, Esoteric Software LLC
+ * Copyright (c) 2013-2025, Esoteric Software LLC
  *
  * Integration of the Spine Runtimes into software or otherwise creating
  * derivative works of the Spine Runtimes is permitted under the terms and
@@ -27,8 +27,9 @@
  * THE SPINE RUNTIMES, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-// Not for optimization. Do not disable.
-#define SPINE_TRIANGLECHECK // Avoid calling SetTriangles at the cost of checking for mesh differences (vertex counts, memberwise attachment list compare) every frame.
+// Optimization option: Allows faster BuildMeshWithArrays call and avoids calling SetTriangles at the cost of
+// checking for mesh differences (vertex counts, member-wise attachment list compare) every frame.
+#define SPINE_TRIANGLECHECK
 //#define SPINE_DEBUG
 
 using System;
@@ -107,7 +108,7 @@ namespace Spine.Unity {
 			doubleBufferedMesh = null;
 		}
 
-		///<summary>This is a Mesh that also stores the instructions SkeletonRenderer generated for it.</summary>
+		/// <summary>This is a Mesh that also stores the instructions SkeletonRenderer generated for it.</summary>
 		public class SmartMesh : IDisposable {
 			public Mesh mesh = SpineMesh.NewSkeletonMesh();
 			public SkeletonRendererInstruction instructionUsed = new SkeletonRendererInstruction();

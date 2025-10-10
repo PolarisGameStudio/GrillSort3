@@ -33,7 +33,7 @@ namespace Sonat.Enums
     public enum GamePlacement : byte
     {
         Loading,
-        Gameplay,
+        Gameplay_SkewerJam,
         Home
     }
 

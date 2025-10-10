@@ -16,7 +16,6 @@ namespace MyGame.SkewerJam.Objects
     {
         [SerializeField] private OrderManagerSO orderManagerSO;
         [SerializeField] private OrderEntityConfigSO orderEntityConfigSO;
-        [SerializeField] private float delayAlignOrders = 0.5f;
 
         [Header("Align")]
         [SerializeField] private float distance = 2.6f;
@@ -62,7 +61,7 @@ namespace MyGame.SkewerJam.Objects
                 if (orderEntity.CheckComplete())
                 {
                     var orderIndex = orderEntity.OrderIndex;
-                    orderEntity.SetComplete(true);
+                    orderEntity.Complete = true;
                     _listOrders.Remove(orderEntity);
 
                     var checkNextOrder = OrderHelper.CheckCreateNextOrder();
@@ -79,18 +78,23 @@ namespace MyGame.SkewerJam.Objects
         {
             if (slot.GetGrill() is OrderEntity orderEntity)
             {
-                if (orderEntity.Complete)
+                orderEntity.CompleteCount++;
+                if (orderEntity.Complete && orderEntity.CompleteCount == orderEntity.MaxItems)
                 {
-                    orderEntity.PlayComplete(() =>
-                    {
-                        GameController.Instance.GameLogicHandler.EndCollectItem(orderEntity);
-                        // if (checkNextOrder == false)
-                        // {
-                        //     AlignObjects().Forget();
-                        // }
-                    });
-
                     var nextOrder = _listOrders.Where(e => e.OrderIndex == orderEntity.OrderIndex).FirstOrDefault();
+                    var checkNextOrder = nextOrder != null;
+
+                    orderEntity.PlayComplete(() =>
+                        {
+                            GameController.Instance.GameLogicHandler.EndCollectItem(orderEntity);
+                        }, () =>
+                        {
+                            if (checkNextOrder == false)
+                            {
+                                AlignObjects().Forget();
+                            }
+                        });
+
                     if (nextOrder != null)
                     {
                         PlayAppearNextOrder(nextOrder).Forget();
@@ -183,7 +187,7 @@ namespace MyGame.SkewerJam.Objects
         {
             await UniTask.Delay((int)(orderEntityConfigSO.delayAppearNextOrder * 1000));
 
-            await nextOrder.transform.DOLocalMove(_listOrderLocalPositions[nextOrder.OrderIndex], 0.3f).SetEase(Ease.OutSine);
+            await nextOrder.transform.DOLocalMove(_listOrderLocalPositions[nextOrder.OrderIndex], orderEntityConfigSO.durationMoveIn).SetEase(Ease.OutSine);
 
             GameController.Instance.GameLogicHandler.EndMoveNextOrder(nextOrder);
         }
@@ -275,7 +279,7 @@ namespace MyGame.SkewerJam.Objects
 
         public async UniTask AlignObjects()
         {
-            await UniTask.Delay((int)(delayAlignOrders * 1000));
+            await UniTask.Delay((int)(orderEntityConfigSO.durationAlignOrders * 1000));
             var start = -(_listOrders.Count - 1) * distance / 2;
             var sortedOrders = _listOrders.OrderBy(e => e.OrderIndex).ToList();
             var listLocalTargetPositions = new List<Vector3>();
@@ -287,6 +291,7 @@ namespace MyGame.SkewerJam.Objects
                 orderEntity.transform.DOLocalMove(listLocalTargetPositions[i], 0.1f).SetEase(Ease.OutSine);
                 await UniTask.Delay(75);
             }
+
         }
 
         public void Unlock(OrderEntity orderEntity = null)

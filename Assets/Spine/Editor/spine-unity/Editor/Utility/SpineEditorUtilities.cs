@@ -1,8 +1,8 @@
 /******************************************************************************
  * Spine Runtimes License Agreement
- * Last updated September 24, 2021. Replaces all prior versions.
+ * Last updated April 5, 2025. Replaces all prior versions.
  *
- * Copyright (c) 2013-2021, Esoteric Software LLC
+ * Copyright (c) 2013-2025, Esoteric Software LLC
  *
  * Integration of the Spine Runtimes into software or otherwise creating
  * derivative works of the Spine Runtimes is permitted under the terms and
@@ -75,6 +75,10 @@ namespace Spine.Unity.Editor {
 		public static bool initialized;
 		private static List<string> texturesWithoutMetaFile = new List<string>();
 
+		public static void OnTextureImportedFirstTime (string texturePath) {
+			texturesWithoutMetaFile.Add(texturePath);
+		}
+
 		// Auto-import entry point for textures
 		void OnPreprocessTexture () {
 #if UNITY_2018_1_OR_NEWER
@@ -124,10 +128,10 @@ namespace Spine.Unity.Editor {
 				Mesh mesh = meshFilter.sharedMesh;
 				if (mesh == null) continue;
 
-				string meshName = string.Format("Skeleton Prefab Mesh \"{0}\"", renderer.name);
+				string meshName = string.Format("Skeleton Prefab Mesh [{0}]", renderer.name);
 				if (nameUsageCount.ContainsKey(meshName)) {
 					nameUsageCount[meshName]++;
-					meshName = string.Format("Skeleton Prefab Mesh \"{0} ({1})\"", renderer.name, nameUsageCount[meshName]);
+					meshName = string.Format("Skeleton Prefab Mesh [{0} ({1})]", renderer.name, nameUsageCount[meshName]);
 				} else {
 					nameUsageCount.Add(meshName, 0);
 				}
@@ -172,15 +176,14 @@ namespace Spine.Unity.Editor {
 
 			if (EditorApplication.isPlayingOrWillChangePlaymode) return;
 
-			string[] folders = { "Assets", "Packages" };
 			string[] assets;
 			string assetPath;
-			assets = AssetDatabase.FindAssets("t:texture icon-subMeshRenderer", folders);
+			assets = AssetDatabase.FindAssets("t:texture icon-subMeshRenderer", null);
 			if (assets.Length > 0) {
 				assetPath = AssetDatabase.GUIDToAssetPath(assets[0]);
 				editorGUIPath = Path.GetDirectoryName(assetPath).Replace('\\', '/');
 			}
-			assets = AssetDatabase.FindAssets("t:script SpineEditorUtilities", folders);
+			assets = AssetDatabase.FindAssets("t:script SpineEditorUtilities", null);
 			if (assets.Length > 0) {
 				assetPath = AssetDatabase.GUIDToAssetPath(assets[0]);
 				editorPath = Path.GetDirectoryName(assetPath).Replace('\\', '/');
@@ -238,7 +241,7 @@ namespace Spine.Unity.Editor {
 		}
 
 		public static void ConfirmInitialization () {
-			if (!initialized || Icons.skeleton == null)
+			if (!initialized)
 				Initialize();
 		}
 
@@ -309,6 +312,12 @@ namespace Spine.Unity.Editor {
 
 			if (oldAnimationState != null) {
 				stateComponent.AnimationState.AssignEventSubscribersFrom(oldAnimationState);
+			}
+			if (stateComponent != null) {
+				// Any set animation needs to be applied as well since it might set attachments,
+				// having an effect on generated SpriteMaskMaterials below.
+				stateComponent.AnimationState.Apply(component.skeleton);
+				component.LateUpdate();
 			}
 
 #if BUILT_IN_SPRITE_MASK_COMPONENT
@@ -541,6 +550,16 @@ namespace Spine.Unity.Editor {
 		}
 	}
 
+	public class SpineAssetModificationProcessor : UnityEditor.AssetModificationProcessor {
+		static void OnWillCreateAsset (string assetName) {
+			// Note: This method seems to be called from the main thread,
+			// not from worker threads when Project Settings - Editor - Parallel Import is enabled.
+			int endIndex = assetName.LastIndexOf(".meta");
+			string assetPath = endIndex < 0 ? assetName : assetName.Substring(0, endIndex);
+			SpineEditorUtilities.OnTextureImportedFirstTime(assetPath);
+		}
+	}
+
 	public class TextureModificationWarningProcessor : UnityEditor.AssetModificationProcessor {
 		static string[] OnWillSaveAssets (string[] paths) {
 			if (SpineEditorUtilities.Preferences.textureImporterWarning) {
@@ -557,6 +576,56 @@ namespace Spine.Unity.Editor {
 				}
 			}
 			return paths;
+		}
+	}
+
+	public class AnimationWindowPreview {
+		static System.Type animationWindowType;
+		public static System.Type AnimationWindowType {
+			get {
+				if (animationWindowType == null)
+					animationWindowType = System.Type.GetType("UnityEditor.AnimationWindow,UnityEditor");
+				return animationWindowType;
+			}
+		}
+
+		public static UnityEngine.Object GetOpenAnimationWindow () {
+			UnityEngine.Object[] openAnimationWindows = Resources.FindObjectsOfTypeAll(AnimationWindowType);
+			return openAnimationWindows.Length == 0 ? null : openAnimationWindows[0];
+		}
+
+		public static AnimationClip GetAnimationClip (UnityEngine.Object animationWindow) {
+			if (animationWindow == null)
+				return null;
+
+			const BindingFlags bindingFlagsInstance = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+			FieldInfo animEditorField = AnimationWindowType.GetField("m_AnimEditor", bindingFlagsInstance);
+
+			PropertyInfo selectionProperty = animEditorField.FieldType.GetProperty("selection", bindingFlagsInstance);
+			object animEditor = animEditorField.GetValue(animationWindow);
+			if (animEditor == null) return null;
+			object selection = selectionProperty.GetValue(animEditor, null);
+			if (selection == null) return null;
+
+			PropertyInfo animationClipProperty = selection.GetType().GetProperty("animationClip");
+			return animationClipProperty.GetValue(selection, null) as AnimationClip;
+		}
+
+		public static float GetAnimationTime (UnityEngine.Object animationWindow) {
+			if (animationWindow == null)
+				return 0.0f;
+
+			const BindingFlags bindingFlagsInstance = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+			FieldInfo animEditorField = AnimationWindowType.GetField("m_AnimEditor", bindingFlagsInstance);
+			object animEditor = animEditorField.GetValue(animationWindow);
+
+			System.Type animEditorFieldType = animEditorField.FieldType;
+			PropertyInfo stateProperty = animEditorFieldType.GetProperty("state", bindingFlagsInstance);
+			System.Type animWindowStateType = stateProperty.PropertyType;
+			PropertyInfo timeProperty = animWindowStateType.GetProperty("currentTime", bindingFlagsInstance);
+
+			object state = stateProperty.GetValue(animEditor, null);
+			return (float)timeProperty.GetValue(state, null);
 		}
 	}
 }

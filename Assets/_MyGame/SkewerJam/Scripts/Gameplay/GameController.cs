@@ -1,3 +1,4 @@
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Scripts.SO.SkewerJam.Gameplay;
@@ -7,6 +8,7 @@ using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems.AudioManagement;
 using SonatFramework.Systems.EventBus;
 using SonatFramework.Systems.InventoryManagement;
+using SonatFramework.Systems.InventoryManagement.GameResources;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay
@@ -33,8 +35,7 @@ namespace MyGame.SkewerJam.Gameplay
         public GameViewport GameViewport => gameViewport;
         public GameState GameState => gameState;
         // private int level;
-        private int level { get => PlayerPrefs.GetInt("level", 1); set => PlayerPrefs.SetInt("level", value); }
-
+        private int level;
         public int Level => level;
         private GameState gameState;
         private EventBinding<GameStateChangeEvent> gameStateChangeEvent;
@@ -68,7 +69,7 @@ namespace MyGame.SkewerJam.Gameplay
         private void Initialize()
         {
             gameViewport.Init();
-            // level = MySonatFramework.userDataService.GetLevel(GameMode.SkewerJam);
+            level = MySonatFramework.userDataService.GetLevel(GameMode.SkewerJam);
             gameStateChangeEvent = new EventBinding<GameStateChangeEvent>(OnGameStateChangedEvent);
         }
 
@@ -132,6 +133,7 @@ namespace MyGame.SkewerJam.Gameplay
 
         public async UniTaskVoid Win()
         {
+            Debug.Log("<color=green>[GameController]</color> Win");
             if (gameState == GameState.GameOver) return;
 
             EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent() { level = level, gameMode = GameMode.SkewerJam, success = true });
@@ -144,9 +146,9 @@ namespace MyGame.SkewerJam.Gameplay
             // PopupToast.Cretate("You Win");
 
             await UniTask.Delay(2000);
-            MySonatFramework.audioService.StopMusic();
-            // PopupPreWin popupPreWin = await PanelManager.Instance.OpenPanelAsync<PopupPreWin>();
-            // await UniTask.Delay((int)(popupPreWin.delay * 1000));
+            // MySonatFramework.audioService.StopMusic();
+            PopupPreWin popupPreWin = await PanelManager.Instance.OpenPanelAsync<PopupPreWin_SkewerJam>();
+            await UniTask.Delay((int)(popupPreWin.delay * 1000));
 
             gameplayScreen.HideCurrencies();
 
@@ -158,24 +160,33 @@ namespace MyGame.SkewerJam.Gameplay
             };
             // MySonatFramework.GetService<InventoryService>().AddResource(GameResource.Energy, gameLogicHandler.Pumpkin, log, false);
 
-            // var data = new WinPanelBase.Data()
-            // {
-            //     level = level,
-            //     reward = new ResourceData() { resource = GameResource.Energy, quantity = gameLogicHandler.Pumpkin },
-            //     nextLevel = () => NextLevel()
-            // };
-            // PanelManager.Instance.OpenForget<WinPanel_SkewerJam>(data);
-            // NextLevel();
+            var data = new WinPanelBase.Data()
+            {
+                level = level,
+                reward = new ResourceData() { resource = GameResource.Coin, quantity = gameLogicHandler.Pumpkin },
+                nextLevel = () => NextLevel()
+            };
+            PanelManager.Instance.OpenForget<WinPanel_SkewerJam>(data);
+            NextLevel();
         }
 
         public async UniTaskVoid Stuck(StuckType stuckType)
         {
+            Debug.Log("<color=red>[GameController]</color> Stuck: " + stuckType);
             if (gameState == GameState.GameOver) return;
 
-            // EventBus<LevelEndedEvent_HLW>.Raise(new LevelEndedEvent_HLW() { level = level, gameMode = GameMode.SkewerJam, success = false, loseCause = stuckType.ToString(), lose = false });
-            // GameplayStateSaver.Instance.SetStatus();
-            // ChangeGameState(GameState.GameOver);
+            EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent()
+            {
+                level = level,
+                gameMode = GameMode.SkewerJam,
+                success = false
+            });
 
+            ChangeGameState(GameState.GameOver);
+
+
+            await UniTask.Delay(3000);
+            Lose(stuckType);
             // var showPopupContinue = GameLogicHandler.WaitingGrillManager.ListWaitingGrills.Where(e => e.IsActive == false).Count() > 0;
             // PopupContinue.Data data = new PopupContinue.Data()
             // {
@@ -188,52 +199,52 @@ namespace MyGame.SkewerJam.Gameplay
             // data.Add("ShowPopupContinue", showPopupContinue);
 
             // PanelManager.Instance.OpenForget<PopupWarningStuck>(data);
+
+
         }
 
         private async UniTaskVoid Revive(StuckType stuckType, string by, object[] objectParams = null)
         {
-            // ChangeGameState(GameState.Playing);
+            ChangeGameState(GameState.Playing);
 
-            // EventBus<LevelStartedEvent_HLW>.Raise(new LevelStartedEvent_HLW() { level = level, gameMode = GameMode.SkewerJam });
-            // await UniTask.Delay(1000);
-            // switch (stuckType)
-            // {
-            //     case StuckType.SkewerJam_OutOfSpace:
-            //         switch (by)
-            //         {
-            //             case "play_on_add_trays":
-            //                 // var orderManager = GameLogicHandler.OrderManager;
-            //                 // orderManager.Unlock();
+            EventBus<LevelStartedEvent>.Raise(new LevelStartedEvent() { level = level, gameMode = GameMode.SkewerJam });
+            await UniTask.Delay(1000);
+            switch (stuckType)
+            {
+                case StuckType.OutOfMove:
+                    switch (by)
+                    {
+                        case "play_on_add_trays":
+                            // var orderManager = GameLogicHandler.OrderManager;
+                            // orderManager.Unlock();
 
-            //                 // cộng thêm 2 plates
+                            // cộng thêm 2 plates
 
-            //                 var waitingManager = GameLogicHandler.WaitingGrillManager;
-            //                 waitingManager.Unlock();
-            //                 await UniTask.Delay(1000);
-            //                 waitingManager.Unlock();
-            //                 break;
-            //         }
+                            var waitingManager = GameLogicHandler.WaitingGrillManager;
+                            waitingManager.Unlock();
+                            await UniTask.Delay(1000);
+                            waitingManager.Unlock();
+                            break;
+                    }
 
-            //         break;
-            //     case StuckType.SkewerJam_OutOfEnergy:
-            //         switch (by)
-            //         {
-            //             case "play_on_add_energies":
-            //                 PopupToast.Cretate("Add Energies!");
-            //                 break;
-            //         }
+                    break;
+                case StuckType.OutOfTime:
+                    switch (by)
+                    {
+                        case "play_on_add_energies":
+                            PopupToast.Cretate("Add Energies!");
+                            break;
+                    }
 
-            //         break;
-            // }
+                    break;
+            }
         }
 
         public async UniTaskVoid Lose(StuckType stuckType)
         {
-            // EventBus<LevelEndedEvent_HLW>.Raise(new LevelEndedEvent_HLW() { level = level, gameMode = GameMode.SkewerJam, success = false, lose = true });
-
-            // GameplayStateSaver.Instance.SetStatus(); // không lưu trạng thái
-            // PanelManager.Instance.OpenPanelByName<PopupLose_SkewerJam>("PopupLose_SkewerJam");
-            // GameplayHelper.IsWin = false;
+            EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent() { level = level, gameMode = GameMode.SkewerJam, success = false });
+            PanelManager.Instance.OpenPanelByName<PopupLose_SkewerJam>("PopupLose_SkewerJam");
+            GameplayHelper.IsWin = false;
         }
 
         private void NextLevel()
@@ -249,8 +260,7 @@ namespace MyGame.SkewerJam.Gameplay
 
         public void Continue()
         {
-            // ChangeGameState(GameState.Playing);
-            // GameplayStateSaver.Instance.SetStatus();
+            ChangeGameState(GameState.Playing);
         }
 
 #if UNITY_EDITOR
@@ -273,16 +283,5 @@ namespace MyGame.SkewerJam.Gameplay
         }
 
 #endif
-        public void SetPumpkin(int currentPumpkin)
-        {
-            // gameLogicHandler.SetPumpkin(currentPumpkin);
-            // EventBus<AddItemEvent>.Raise(new AddItemEvent()
-            // {
-            //     resource = GameResource.Pumpkin,
-            //     quantity = currentPumpkin,
-            //     position = Vector3.zero,
-            //     collectEffect = null
-            // });
-        }
     }
 }

@@ -64,22 +64,24 @@ namespace MyGame.SkewerJam.Objects.Entities
             }
         }
 
-        public async UniTask PlayComplete(Action onComplete)
+        public async UniTask PlayComplete(Action onComplete1, Action onComplete2)
         {
             imageLid.gameObject.SetActive(true);
             imageLid.transform.localPosition = Vector3.up * orderEntityConfigSO.up;
             await imageLid.transform.DOLocalMove(Vector3.zero, orderEntityConfigSO.durationUp).SetEase(orderEntityConfigSO.downCurve);
             completeEffect.Play();
             // MySonatFramework.audioService.PlaySound(AudioId.Items_Merge_SMode_HLW_Grill_sort);
-            onComplete?.Invoke();
+            onComplete1?.Invoke();
 
             // MySonatFramework.GetService<VibrationService>().Vibrate(100);
             await UniTask.Delay((int)(orderEntityConfigSO.delayMoveOut * 1000));
+            onComplete2?.Invoke();
 
             var orderEntity = transform.parent.GetComponent<OrderEntity>();
             var targetPos = orderEntity.transform.localPosition + Vector3.up * orderEntityConfigSO.up;
             await orderEntity.transform.DOLocalMove(targetPos, orderEntityConfigSO.durationDown).SetEase(orderEntityConfigSO.upCurve);
             MyGame.SkewerJam.Gameplay.GameFactory.Instance.ReturnEntity(orderEntity);
+
         }
     }
 }

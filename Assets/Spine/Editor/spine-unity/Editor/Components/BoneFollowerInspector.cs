@@ -1,8 +1,8 @@
 /******************************************************************************
  * Spine Runtimes License Agreement
- * Last updated September 24, 2021. Replaces all prior versions.
+ * Last updated April 5, 2025. Replaces all prior versions.
  *
- * Copyright (c) 2013-2021, Esoteric Software LLC
+ * Copyright (c) 2013-2025, Esoteric Software LLC
  *
  * Integration of the Spine Runtimes into software or otherwise creating
  * derivative works of the Spine Runtimes is permitted under the terms and
@@ -37,8 +37,8 @@ namespace Spine.Unity.Editor {
 
 	[CustomEditor(typeof(BoneFollower)), CanEditMultipleObjects]
 	public class BoneFollowerInspector : Editor {
-		SerializedProperty boneName, skeletonRenderer, followXYPosition, followZPosition, followBoneRotation,
-			followLocalScale, followParentWorldScale, followSkeletonFlip, maintainedAxisOrientation;
+		SerializedProperty boneName, skeletonRenderer, followXYPosition, followZPosition, followAttachmentZSpacing,
+			followBoneRotation, followLocalScale, followParentWorldScale, followSkeletonFlip, maintainedAxisOrientation;
 		BoneFollower targetBoneFollower;
 		bool needsReset;
 
@@ -85,6 +85,7 @@ namespace Spine.Unity.Editor {
 			followBoneRotation = serializedObject.FindProperty("followBoneRotation");
 			followXYPosition = serializedObject.FindProperty("followXYPosition");
 			followZPosition = serializedObject.FindProperty("followZPosition");
+			followAttachmentZSpacing = serializedObject.FindProperty("followAttachmentZSpacing");
 			followLocalScale = serializedObject.FindProperty("followLocalScale");
 			followParentWorldScale = serializedObject.FindProperty("followParentWorldScale");
 			followSkeletonFlip = serializedObject.FindProperty("followSkeletonFlip");
@@ -178,6 +179,10 @@ namespace Spine.Unity.Editor {
 				EditorGUILayout.PropertyField(followBoneRotation);
 				EditorGUILayout.PropertyField(followXYPosition);
 				EditorGUILayout.PropertyField(followZPosition);
+				if (followZPosition.boolValue == true) {
+					using (new SpineInspectorUtility.IndentScope())
+						EditorGUILayout.PropertyField(followAttachmentZSpacing, new GUIContent("Attachment Z Spacing"));
+				}
 				EditorGUILayout.PropertyField(followLocalScale);
 				EditorGUILayout.PropertyField(followParentWorldScale);
 				EditorGUILayout.PropertyField(followSkeletonFlip);

@@ -41,15 +41,7 @@ namespace MyGame.SkewerJam.Objects
 
             // game events
             var gameLogicHandler = GameController.Instance.GameLogicHandler;
-            gameLogicHandler.OnItemEndSwitch += GameLogicHandler_OnItemMoveSlot;
-        }
-
-        private void GameLogicHandler_OnItemMoveSlot(Item item, SlotBase slot)
-        {
-            if (slot.GetGrill() is WaitingGrill waitingGrill)
-            {
-                GameController.Instance.GameLogicHandler.TryCheckLoseGame();
-            }
+            gameLogicHandler.OnItemEndSwitch += GameLogicHandler_OnItemEndSwitch;
         }
 
         public void Clear()
@@ -59,6 +51,17 @@ namespace MyGame.SkewerJam.Objects
                 GameFactory.Instance.ReturnEntity(waitingGrill);
             }
             listWaitingGrills.Clear();
+
+            var gameLogicHandler = GameController.Instance.GameLogicHandler;
+            gameLogicHandler.OnItemEndSwitch -= GameLogicHandler_OnItemEndSwitch;
+        }
+
+        private void GameLogicHandler_OnItemEndSwitch(Item item, SlotBase slot)
+        {
+            if (slot.GetGrill() is WaitingGrill waitingGrill)
+            {
+                GameController.Instance.GameLogicHandler.TryCheckLoseGame();
+            }
         }
 
         public (WaitingGrill waitingGrill, SlotBase slot) GetDestinationSlot()

@@ -1,8 +1,8 @@
 /******************************************************************************
  * Spine Runtimes License Agreement
- * Last updated September 24, 2021. Replaces all prior versions.
+ * Last updated April 5, 2025. Replaces all prior versions.
  *
- * Copyright (c) 2013-2021, Esoteric Software LLC
+ * Copyright (c) 2013-2025, Esoteric Software LLC
  *
  * Integration of the Spine Runtimes into software or otherwise creating
  * derivative works of the Spine Runtimes is permitted under the terms and
@@ -37,6 +37,7 @@ namespace Spine.Unity.Editor {
 	[CanEditMultipleObjects]
 	public class SkeletonMecanimInspector : SkeletonRendererInspector {
 		public static bool mecanimSettingsFoldout;
+		public static bool enableScenePreview;
 
 		protected SerializedProperty autoReset;
 		protected SerializedProperty useCustomMixMode;
@@ -53,7 +54,6 @@ namespace Spine.Unity.Editor {
 		}
 
 		protected override void DrawInspectorGUI (bool multi) {
-
 			AddRootMotionComponentIfEnabled();
 
 			base.DrawInspectorGUI(multi);
@@ -75,6 +75,18 @@ namespace Spine.Unity.Editor {
 					}
 				}
 			}
+
+			EditorGUI.BeginChangeCheck();
+			enableScenePreview = EditorGUILayout.Toggle(new GUIContent("Scene Preview",
+				"Preview the Animation Clip selected in the Animation window. Lock this SkeletonMecanim Inspector " +
+				"window, open the Animation window and select the Animation Clip. Then in the Animation window " +
+				"scrub through the timeline."),
+				enableScenePreview, GUILayout.MaxWidth(150f));
+			bool wasScenePreviewChanged = EditorGUI.EndChangeCheck();
+			if (enableScenePreview)
+				HandleAnimationPreview();
+			else if (wasScenePreviewChanged) // just disabled, back to setup pose
+				PreviewAnimationInScene(null, 0.0f);
 		}
 
 		protected void AddRootMotionComponentIfEnabled () {
@@ -87,6 +99,38 @@ namespace Spine.Unity.Editor {
 					}
 				}
 			}
+		}
+
+		protected void HandleAnimationPreview () {
+			UnityEngine.Object animationWindow = AnimationWindowPreview.GetOpenAnimationWindow();
+
+			AnimationClip selectedClip = null;
+			if (animationWindow != null) {
+				selectedClip = AnimationWindowPreview.GetAnimationClip(animationWindow);
+			}
+
+			if (selectedClip != null) {
+				float time = AnimationWindowPreview.GetAnimationTime(animationWindow);
+				PreviewAnimationInScene(selectedClip, time);
+			} else // back to setup pose
+				PreviewAnimationInScene(null, 0.0f);
+		}
+
+		protected void PreviewAnimationInScene (AnimationClip clip, float time) {
+			foreach (UnityEngine.Object c in targets) {
+				SkeletonRenderer skeletonRenderer = c as SkeletonRenderer;
+				if (skeletonRenderer == null) continue;
+				Skeleton skeleton = skeletonRenderer.Skeleton;
+				SkeletonData skeletonData = skeleton.Data;
+
+				skeleton.SetToSetupPose();
+				if (clip != null) {
+					Spine.Animation animation = skeletonData.FindAnimation(clip.name);
+					animation.Apply(skeleton, 0, time, false, null, 1.0f, MixBlend.First, MixDirection.In);
+				}
+				skeletonRenderer.LateUpdate();
+			}
+			SceneView.RepaintAll();
 		}
 
 		protected void DrawLayerSettings () {

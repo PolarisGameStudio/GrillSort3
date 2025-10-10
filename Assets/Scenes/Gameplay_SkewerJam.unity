@@ -232,7 +232,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 55
 --- !u!114 &71863391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,7 +276,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 1020825081
+  m_SortingLayerID: -760053589
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &71863393
@@ -948,10 +948,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadObjectService:
     referenceType: 0
-    reference: {fileID: 11400000, guid: f8dd00fe397436848a770f78622eb3b7, type: 2}
+    reference: {fileID: 11400000, guid: 4ca84e7da4e07b04ba0376bca42397ea, type: 2}
   loadObjectServiceAsync:
     referenceType: 0
-    reference: {fileID: 11400000, guid: eccb0eef64e364a4d8d547a966319925, type: 2}
+    reference: {fileID: 11400000, guid: 16f74984479953b489e5509dcfbfc736, type: 2}
 --- !u!1 &702658947
 GameObject:
   m_ObjectHideFlags: 0
@@ -1375,7 +1375,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1542708555
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &1079220379
@@ -2214,6 +2214,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2044713342}
   m_CullTransparentMesh: 1
+--- !u!1 &2045205799 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3828742250584026993, guid: 093cf2fe83a1eb943a45a6c24911ffaa, type: 3}
+  m_PrefabInstance: {fileID: 5220287136729310168}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2045205805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045205799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6792f5ed6bc37d64c92bd2fec3070209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  needOff: {fileID: 0}
 --- !u!114 &443300769638377569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2558,6 +2576,10 @@ PrefabInstance:
     - target: {fileID: 2101233068098248213, guid: 093cf2fe83a1eb943a45a6c24911ffaa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 2045205805}
+    - target: {fileID: 2101233068098248213, guid: 093cf2fe83a1eb943a45a6c24911ffaa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickCheat
       objectReference: {fileID: 0}
     - target: {fileID: 2853319621983930568, guid: 093cf2fe83a1eb943a45a6c24911ffaa, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2671,7 +2693,10 @@ PrefabInstance:
     - {fileID: 1607617310246857379, guid: 093cf2fe83a1eb943a45a6c24911ffaa, type: 3}
     - {fileID: 8304940251635810257, guid: 093cf2fe83a1eb943a45a6c24911ffaa, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3828742250584026993, guid: 093cf2fe83a1eb943a45a6c24911ffaa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2045205805}
   m_SourcePrefab: {fileID: 100100000, guid: 093cf2fe83a1eb943a45a6c24911ffaa, type: 3}
 --- !u!224 &5295914886637183599 stripped
 RectTransform:
@@ -2739,7 +2764,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 1020825081
+  m_SortingLayerID: 0
   m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!1 &8903755775874853064

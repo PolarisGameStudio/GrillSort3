@@ -1,8 +1,8 @@
 /******************************************************************************
  * Spine Runtimes License Agreement
- * Last updated September 24, 2021. Replaces all prior versions.
+ * Last updated April 5, 2025. Replaces all prior versions.
  *
- * Copyright (c) 2013-2021, Esoteric Software LLC
+ * Copyright (c) 2013-2025, Esoteric Software LLC
  *
  * Integration of the Spine Runtimes into software or otherwise creating
  * derivative works of the Spine Runtimes is permitted under the terms and
@@ -354,27 +354,40 @@ namespace Spine.Unity.AttachmentTools {
 
 				if (originalAttachment is IHasTextureRegion) {
 					MeshAttachment originalMeshAttachment = originalAttachment as MeshAttachment;
-					Attachment newAttachment = (originalMeshAttachment != null) ? originalMeshAttachment.NewLinkedMesh() : originalAttachment.Copy();
-					AtlasRegion region = ((IHasTextureRegion)newAttachment).Region as AtlasRegion;
+					IHasTextureRegion originalTextureAttachment = (IHasTextureRegion)originalAttachment;
+
+					Attachment newAttachment = (originalTextureAttachment.Sequence != null) ? originalAttachment :
+						(originalMeshAttachment != null) ? originalMeshAttachment.NewLinkedMesh() :
+						originalAttachment.Copy();
+					IHasTextureRegion newTextureAttachment = (IHasTextureRegion)newAttachment;
+					AtlasRegion region = newTextureAttachment.Region as AtlasRegion;
+					if (region == null && originalTextureAttachment.Sequence != null)
+						region = (AtlasRegion)originalTextureAttachment.Sequence.Regions[0];
+
 					int existingIndex;
 					if (existingRegions.TryGetValue(region, out existingIndex)) {
 						regionIndices.Add(existingIndex);
 					} else {
-						originalRegions.Add(region);
-						for (int i = 0; i < numTextureParamsToRepack; ++i) {
-							Texture2D regionTexture = (i == 0 ?
-								region.ToTexture(textureFormat, mipmaps) :
-								region.ToTexture((additionalTextureFormats != null && i - 1 < additionalTextureFormats.Length) ?
-									additionalTextureFormats[i - 1] : textureFormat,
-									mipmaps, additionalTexturePropertyIDsToCopy[i - 1], additionalTextureIsLinear[i - 1]));
-							texturesToPackAtParam[i].Add(regionTexture);
-						}
-
 						existingRegions.Add(region, newRegionIndex);
-						regionIndices.Add(newRegionIndex);
-						newRegionIndex++;
+						Sequence originalSequence = originalTextureAttachment.Sequence;
+						if (originalSequence != null) {
+							newTextureAttachment.Sequence = new Sequence(originalSequence);
+							for (int i = 0, regionCount = originalSequence.Regions.Length; i < regionCount; ++i) {
+								AtlasRegion sequenceRegion = (AtlasRegion)originalSequence.Regions[i];
+								AddRegionTexturesToPack(numTextureParamsToRepack, sequenceRegion, textureFormat, mipmaps,
+									additionalTextureFormats, additionalTexturePropertyIDsToCopy, additionalTextureIsLinear);
+								originalRegions.Add(sequenceRegion);
+								regionIndices.Add(newRegionIndex);
+								newRegionIndex++;
+							}
+						} else {
+							AddRegionTexturesToPack(numTextureParamsToRepack, region, textureFormat, mipmaps,
+								additionalTextureFormats, additionalTexturePropertyIDsToCopy, additionalTextureIsLinear);
+							originalRegions.Add(region);
+							regionIndices.Add(newRegionIndex);
+							newRegionIndex++;
+						}
 					}
-
 					outputAttachments[attachmentIndex] = newAttachment;
 				} else {
 					outputAttachments[attachmentIndex] = useOriginalNonrenderables ? originalAttachment : originalAttachment.Copy();
@@ -428,12 +441,24 @@ namespace Spine.Unity.AttachmentTools {
 			}
 
 			// Map the cloned attachments to the repacked atlas.
-			for (int i = 0, n = outputAttachments.Count; i < n; i++) {
-				Attachment attachment = outputAttachments[i];
-				IHasTextureRegion iHasRegion = attachment as IHasTextureRegion;
-				if (iHasRegion != null) {
-					iHasRegion.Region = repackedRegions[regionIndices[i]];
-					iHasRegion.UpdateRegion();
+			for (int attachmentIndex = 0, repackedIndex = 0, n = outputAttachments.Count;
+				attachmentIndex < n;
+				++attachmentIndex, ++repackedIndex) {
+
+				Attachment attachment = outputAttachments[attachmentIndex];
+				IHasTextureRegion textureAttachment = attachment as IHasTextureRegion;
+				if (textureAttachment != null) {
+					if (textureAttachment.Sequence != null) {
+						TextureRegion[] regions = textureAttachment.Sequence.Regions;
+						textureAttachment.Region = repackedRegions[regionIndices[repackedIndex]];
+						for (int r = 0, regionCount = regions.Length; r < regionCount; ++r) {
+							regions[r] = repackedRegions[regionIndices[repackedIndex++]];
+						}
+						--repackedIndex;
+					} else {
+						textureAttachment.Region = repackedRegions[regionIndices[repackedIndex]];
+					}
+					textureAttachment.UpdateRegion();
 				}
 			}
 
@@ -442,6 +467,20 @@ namespace Spine.Unity.AttachmentTools {
 				AtlasUtilities.ClearCache();
 
 			outputMaterial = newMaterial;
+		}
+
+		private static void AddRegionTexturesToPack (int numTextureParamsToRepack, AtlasRegion region,
+			TextureFormat textureFormat, bool mipmaps, TextureFormat[] additionalTextureFormats,
+			int[] additionalTexturePropertyIDsToCopy, bool[] additionalTextureIsLinear) {
+
+			for (int i = 0; i < numTextureParamsToRepack; ++i) {
+				Texture2D regionTexture = (i == 0 ?
+					region.ToTexture(textureFormat, mipmaps) :
+					region.ToTexture((additionalTextureFormats != null && i - 1 < additionalTextureFormats.Length) ?
+						additionalTextureFormats[i - 1] : textureFormat,
+						mipmaps, additionalTexturePropertyIDsToCopy[i - 1], additionalTextureIsLinear[i - 1]));
+				texturesToPackAtParam[i].Add(regionTexture);
+			}
 		}
 
 		/// <summary>
@@ -740,11 +779,12 @@ namespace Spine.Unity.AttachmentTools {
 			float v2 = uvRect.yMin;
 
 			if (referenceRegion.degrees == 270) {
-				// at a 270 degree region, u2/v2 deltas are swapped, and delta-v is negative.
-				float du = u2 - u;
-				float dv = v - v2;
-				u2 = u + dv;
-				v2 = v - du;
+				// at a 270 degree region, u2/v2 deltas and atlas width/height are swapped, and delta-v is negative.
+				float du = uvRect.width; // u2 - u;
+				float dv = uvRect.height; // v - v2;
+				float atlasAspectRatio = (float)page.width / (float)page.height;
+				u2 = u + (dv / atlasAspectRatio);
+				v2 = v - (du * atlasAspectRatio);
 			}
 
 			return new AtlasRegion {

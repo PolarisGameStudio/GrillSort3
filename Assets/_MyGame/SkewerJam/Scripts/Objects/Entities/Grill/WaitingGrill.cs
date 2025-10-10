@@ -85,8 +85,8 @@ namespace MyGame.SkewerJam.Objects.Entities
             // uiData.Add("Price", GameController.Instance.GameConfig.unlockPlatePrice);
             // uiData.Add("OnSuccess", (Action)(() =>
             // {
-            //     var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
-            //     waitingGrillManager.Unlock();
+            var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
+            waitingGrillManager.Unlock();
             // }));
             // PanelManager.Instance.OpenPanel<PopupUnlock_SkewerJam>(uiData);
         }

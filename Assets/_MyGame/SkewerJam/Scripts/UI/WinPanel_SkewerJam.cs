@@ -33,21 +33,21 @@ public class WinPanel_SkewerJam : WinPanelBase
     {
         base.OnClaimClick();
 
-        SonatUtils.DelayCall(delayUpdateScore, () =>
-        {
-            // var pumpkin = MySonatFramework.GetService<InventoryService>().GetResource(Sonat.Enums.GameResource.Pumpkin);
-            // var currentRank = MySonatFramework.GetService<LeaderboardHLWService>().CurrentRank;
-            // var obj = leaderboardScrollView.GetObjectByIndex(currentRank - 1);
-            // if (obj != null && obj.TryGetComponent<LeaderboardItemView>(out var view))
-            // {
-            //     view.UpdateScore(pumpkin);
-            // }
-            // leaderboardItemView.UpdateScore(pumpkin);
-        }, this);
-        MySonatFramework.audioService.StopMusic();
-        // SonatUtils.DelayCall(delaySoundReceived, () =>
+        // SonatUtils.DelayCall(delayUpdateScore, () =>
         // {
-        //     MySonatFramework.audioService.PlaySound(AudioId.Win_HLW_Pumkin_Received_Grill_sort);
+        //     // var pumpkin = MySonatFramework.GetService<InventoryService>().GetResource(Sonat.Enums.GameResource.Pumpkin);
+        //     // var currentRank = MySonatFramework.GetService<LeaderboardHLWService>().CurrentRank;
+        //     // var obj = leaderboardScrollView.GetObjectByIndex(currentRank - 1);
+        //     // if (obj != null && obj.TryGetComponent<LeaderboardItemView>(out var view))
+        //     // {
+        //     //     view.UpdateScore(pumpkin);
+        //     // }
+        //     // leaderboardItemView.UpdateScore(pumpkin);
         // }, this);
+        // MySonatFramework.audioService.StopMusic();
+        // // SonatUtils.DelayCall(delaySoundReceived, () =>
+        // // {
+        // //     MySonatFramework.audioService.PlaySound(AudioId.Win_HLW_Pumkin_Received_Grill_sort);
+        // // }, this);
     }
 }

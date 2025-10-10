@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
@@ -58,19 +59,18 @@ namespace MyGame.SkewerJam.Gameplay
             await CreateGrill(levelData.grillData, grillManager);
             await UniTask.DelayFrame(1);
 
+
             // create waiting grill
             var waitingGrillManager = gameLogicHandler.WaitingGrillManager;
             await CreateWaitingGrill(levelData.ListWaitingGrillData, waitingGrillManager);
-
             await UniTask.DelayFrame(1);
+
             // create order
             var orderManager = gameLogicHandler.OrderManager;
             await CreateOrder(levelData.ListOrderData, orderManager);
-
             await UniTask.DelayFrame(1);
+
             await GameController.Instance.GameViewport.CalculateViewport();
-
-            await UniTask.DelayFrame(1);
             // // create conveyor
             // // tính toán viewport mới create conveyor
             // var conveyorManager = gameLogicHandler.ConveyorManager;
@@ -237,7 +237,8 @@ namespace MyGame.SkewerJam.Gameplay
 
         private async UniTask CreateOrder(List<OrderData_SkewerJam> listOrderData, OrderManager orderManager)
         {
-            await orderManager.SetData(listOrderData);
+            // không cần đợi tạo order
+            orderManager.SetData(listOrderData);
         }
 
         private List<OrderData_SkewerJam> ValidateListOrder(int maxOrder, int defaultNumberOfReadyOrder)
@@ -270,16 +271,16 @@ namespace MyGame.SkewerJam.Gameplay
         //     }
         // }
 
-        // public bool IsStaticGrill(int id)
-        // {
-        //     if (_levelData.conveyorData == null) return true;
-        //     foreach (var conveyorData in _levelData.conveyorData)
-        //     {
-        //         if (conveyorData.grillIds.Contains(id)) return false;
-        //     }
+        public bool IsStaticGrill(int id)
+        {
+            if (_levelData.conveyorData == null) return true;
+            foreach (var conveyorData in _levelData.conveyorData)
+            {
+                if (conveyorData.grillIds.Contains(id)) return false;
+            }
 
-        //     return true;
-        // }
+            return true;
+        }
 
         // private async UniTask GenerateObstacles(List<ObstacleData> listObstacleData, ObstacleManager obstacleManager)
         // {

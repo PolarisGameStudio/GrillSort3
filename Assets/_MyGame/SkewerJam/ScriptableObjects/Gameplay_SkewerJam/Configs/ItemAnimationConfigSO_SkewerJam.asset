@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef53327ba22dbe54fa4c7dab7ed07a48, type: 3}
   m_Name: ItemAnimationConfigSO_SkewerJam
   m_EditorClassIdentifier: 
-  scaleDown: {x: 0.8, y: 1.1, z: 1}
-  scaleDuration: 0.05
+  scaleDown: {x: 1.2, y: 0.8, z: 1}
+  scaleDuration: 0.08
   useSpeed: 0
-  durationMove: 0.4
-  speed: 1
+  durationMove: 0.3
+  speed: 0.3
   curveX:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 1
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -32,7 +32,7 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1
+      inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
@@ -47,20 +47,29 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 1
+      inSlope: 2.987117
+      outSlope: 2.987117
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.065943174
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
+      time: 0.7
+      value: 1.1
+      inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -0.7940469
+      outSlope: -0.7940469
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3189806
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

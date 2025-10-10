@@ -1,8 +1,8 @@
 /******************************************************************************
  * Spine Runtimes License Agreement
- * Last updated September 24, 2021. Replaces all prior versions.
+ * Last updated April 5, 2025. Replaces all prior versions.
  *
- * Copyright (c) 2013-2021, Esoteric Software LLC
+ * Copyright (c) 2013-2025, Esoteric Software LLC
  *
  * Integration of the Spine Runtimes into software or otherwise creating
  * derivative works of the Spine Runtimes is permitted under the terms and
@@ -42,7 +42,7 @@ namespace Spine.Unity.Editor {
 
 	[CustomEditor(typeof(SpineAtlasAsset)), CanEditMultipleObjects]
 	public class SpineAtlasAssetInspector : UnityEditor.Editor {
-		SerializedProperty atlasFile, materials;
+		SerializedProperty atlasFile, materials, textureLoadingMode, onDemandTextureLoader;
 		SpineAtlasAsset atlasAsset;
 
 		GUIContent spriteSlicesLabel;
@@ -70,6 +70,8 @@ namespace Spine.Unity.Editor {
 			SpineEditorUtilities.ConfirmInitialization();
 			atlasFile = serializedObject.FindProperty("atlasFile");
 			materials = serializedObject.FindProperty("materials");
+			textureLoadingMode = serializedObject.FindProperty("textureLoadingMode");
+			onDemandTextureLoader = serializedObject.FindProperty("onDemandTextureLoader");
 			materials.isExpanded = true;
 			atlasAsset = (SpineAtlasAsset)target;
 #if REGION_BAKING_MESH
@@ -130,6 +132,12 @@ namespace Spine.Unity.Editor {
 					EditorGUILayout.HelpBox("Materials cannot be null.", MessageType.Error);
 					return;
 				}
+			}
+
+			if (textureLoadingMode != null) {
+				EditorGUILayout.Space();
+				EditorGUILayout.PropertyField(textureLoadingMode);
+				EditorGUILayout.PropertyField(onDemandTextureLoader);
 			}
 
 			EditorGUILayout.Space();

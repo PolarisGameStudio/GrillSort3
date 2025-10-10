@@ -1,8 +1,8 @@
 /******************************************************************************
  * Spine Runtimes License Agreement
- * Last updated September 24, 2021. Replaces all prior versions.
+ * Last updated April 5, 2025. Replaces all prior versions.
  *
- * Copyright (c) 2013-2021, Esoteric Software LLC
+ * Copyright (c) 2013-2025, Esoteric Software LLC
  *
  * Integration of the Spine Runtimes into software or otherwise creating
  * derivative works of the Spine Runtimes is permitted under the terms and
@@ -435,6 +435,30 @@ namespace Spine.Unity.Editor {
 							}
 
 							EditorGUILayout.LabelField(SpineInspectorUtility.TempContent(string.Format("Path Constraints ({0})", skeleton.PathConstraints.Count), Icons.constraintPath), EditorStyles.boldLabel);
+
+							EditorGUILayout.LabelField(SpineInspectorUtility.TempContent(string.Format("Physics Constraints ({0})", skeleton.PhysicsConstraints.Count), Icons.constraintIK), EditorStyles.boldLabel);
+							using (new SpineInspectorUtility.IndentScope()) {
+								if (skeleton.PhysicsConstraints.Count > 0) {
+									foreach (PhysicsConstraint c in skeleton.PhysicsConstraints) {
+										EditorGUILayout.LabelField(SpineInspectorUtility.TempContent(c.Data.Name, Icons.constraintIK));
+
+										EditorGUI.BeginChangeCheck();
+										c.Mix = EditorGUILayout.Slider("Mix", c.Mix, MixMin, MixMax);
+										c.Inertia = EditorGUILayout.Slider("Inertia", c.Inertia, MixMin, MixMax);
+										c.Strength = EditorGUILayout.Slider("Strength", c.Strength, MixMin, MixMax);
+										c.Damping = EditorGUILayout.Slider("Damping", c.Damping, MixMin, MixMax);
+										c.MassInverse = 1.0f / EditorGUILayout.Slider("Mass", 1.0f / c.MassInverse, MixMin, MixMax);
+										c.Wind = EditorGUILayout.Slider("Wind", c.Wind, MixMin, MixMax);
+										c.Gravity = EditorGUILayout.Slider("Gravity", c.Gravity, MixMin, MixMax);
+										if (EditorGUI.EndChangeCheck()) requireRepaint = true;
+
+										EditorGUILayout.Space();
+									}
+
+								} else {
+									EditorGUILayout.LabelField(NoneText);
+								}
+							}
 
 							EditorGUI.BeginChangeCheck();
 							showPaths = EditorGUILayout.Toggle("Show Paths", showPaths);

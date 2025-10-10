@@ -1,17 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Gameplay.Entities;
-using Gameplay.Entities.Items;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Objects;
 using MyGame.SkewerJam.Objects.Entities;
 using Sonat.Enums;
-using SonatFramework.Scripts.UIModule;
-using SonatFramework.Systems.EventBus;
-using SonatFramework.Systems.InventoryManagement;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay
@@ -87,6 +82,19 @@ namespace MyGame.SkewerJam.Gameplay
             suggestManager.Clear();
         }
 
+        public bool CheckEnergy()
+        {
+            // var energy = MySonatFramework.GetService<InventoryService>().GetResource(GameResource.Energy);
+            // if (energy <= 0 && GameController.Instance.GameState == GameState.Playing)
+            // {
+            //     GameController.Instance.ChangeGameState(GameState.Paused);
+            //     PanelManager.Instance.OpenPanel<PopupWarningEnergy_SkewerJam>(new UIData().Add("GamePlacement", GamePlacement.Gameplay_SkewerJam));
+            //     return false;
+            // }
+            return true;
+        }
+
+        #region Select Item
         public bool SelectItem(Item item)
         {
             // Kiểm tra có vị trí hợp lệ ở order không
@@ -137,7 +145,17 @@ namespace MyGame.SkewerJam.Gameplay
             OnItemStartSwitch?.Invoke(ItemSelected, slot);
         }
 
-        #region Event Actions
+
+        private bool hasCollectItem = false;
+        public bool HasCollectItem => hasCollectItem;
+        public void ItemMoveSlot(Item item, SlotBase slot)
+        {
+            hasCollectItem = false;
+            OnItemEndSwitch?.Invoke(item, slot);
+        }
+        #endregion
+
+        #region MoveNextOrder
         public void StartMoveNextOrder(OrderEntity orderEntity)
         {
             orderEntity.Moving = true;
@@ -155,7 +173,8 @@ namespace MyGame.SkewerJam.Gameplay
             }
 
             int count = 0;
-            foreach (var order in orderManager.ListOrders)
+            var listOrders = new List<OrderEntity>(orderManager.ListOrders);
+            foreach (var order in listOrders)
             {
                 if (order.Ready == false || order.IsActive == false) continue;
                 var targetItem = order.ItemIdTarget;
@@ -175,7 +194,9 @@ namespace MyGame.SkewerJam.Gameplay
 
             TryCheckLoseGame().Forget();
         }
+        #endregion
 
+        #region CollectItem
         public void StartCollectItem(OrderEntity orderEntity)
         {
             OnStartCollectItem?.Invoke(orderEntity);
@@ -185,12 +206,6 @@ namespace MyGame.SkewerJam.Gameplay
             {
                 slot.GetItem()?.OnComplete();
             }
-
-            // if (CheckWinGame())
-            // {
-            //     Debug.Log("<color=green>Win Game</color>");
-            //     GameController.Instance.Win();
-            // }
         }
 
         public void EndCollectItem(OrderEntity orderEntity)
@@ -210,42 +225,16 @@ namespace MyGame.SkewerJam.Gameplay
             //         collectEffectName = "CollectResourceSingleItem_Pumpkin"
             //     }
             // });
-        }
 
-        private bool hasCollectItem = false;
-        public bool HasCollectItem => hasCollectItem;
-        public void ItemMoveSlot(Item item, SlotBase slot)
-        {
-            hasCollectItem = false;
-            OnItemEndSwitch?.Invoke(item, slot);
-        }
 
-        public bool CheckEnergy()
-        {
-            // var energy = MySonatFramework.GetService<InventoryService>().GetResource(GameResource.Energy);
-            // if (energy <= 0 && GameController.Instance.GameState == GameState.Playing)
-            // {
-            //     GameController.Instance.ChangeGameState(GameState.Paused);
-            //     PanelManager.Instance.OpenPanel<PopupWarningEnergy_SkewerJam>(new UIData().Add("GamePlacement", GamePlacement.Gameplay_SkewerJam));
-            //     return false;
-            // }
-            return true;
+            if (CheckWinGame())
+            {
+                GameController.Instance.Win();
+            }
         }
         #endregion
 
-
         #region Check Win Lose Game
-        public async UniTask TryCheckLoseGame()
-        {
-            // await UniTask.Delay(1500);
-            // var stuckType = CheckLoseGame();
-            // if (stuckType != null)
-            // {
-            //     Debug.Log("<color=red>Lose Game</color>");
-            //     GameController.Instance.Stuck(stuckType.Value);
-            // }
-        }
-
         public bool CheckWinGame()
         {
             // Win khi clear hết level hết order
@@ -254,20 +243,34 @@ namespace MyGame.SkewerJam.Gameplay
             return false;
         }
 
+        public async UniTask TryCheckLoseGame()
+        {
+            Debug.Log("TryCheckLoseGame");
+            var stuckType = CheckLoseGame();
+            if (stuckType != null)
+            {
+                GameController.Instance.Stuck(stuckType.Value);
+            }
+        }
+
         public StuckType? CheckLoseGame()
         {
             if (GameController.Instance.GameState != GameState.Playing) return null;
-            // Không thể di chuyển nữa thì thua
 
             // waiting grill còn slot trống thì chưa thua
             var listWaitingGrill = waitingGrillManager.ListWaitingGrills;
             foreach (var waitingGrill in listWaitingGrill)
             {
-                if (waitingGrill.GetSlots().Where(e => e.isEmpty() && waitingGrill.IsActive).Count() > 0) return null;
+                if (waitingGrill.GetSlots().Where(e => e.isEmpty() && waitingGrill.IsActive).Count() > 0)
+                {
+                    Debug.Log("waitingGrill.GetSlots().Where(e => e.isEmpty() && waitingGrill.IsActive).Count() > 0");
+                    return null;
+                }
             }
 
             // nếu order còn có thể di chuyển item vào thì chưa thua + loại các item bị lock
             var listTargetItemIds = orderManager.GetTargetItemIds();
+
             var listItemIdInLayer1 = GrillHelper.GetItemIdListWithLayer(1, true);
             var dictItems = listItemIdInLayer1.GroupBy(e => e).ToDictionary(e => e.Key, e => e.Count());
 
@@ -280,7 +283,11 @@ namespace MyGame.SkewerJam.Gameplay
 
             foreach (var id in listTargetItemIds)
             {
-                if (dictItems.ContainsKey(id) == true && dictItems[id] > 0) return null;
+                if (dictItems.ContainsKey(id) == true && dictItems[id] > 0)
+                {
+                    Debug.Log("dictItems.ContainsKey(id) == true && dictItems[id] > 0");
+                    return null;
+                }
             }
 
             // else continue
@@ -288,45 +295,5 @@ namespace MyGame.SkewerJam.Gameplay
         }
 
         #endregion
-
-        // public List<ItemStateData> GetItemStateDatas()
-        // {
-        //     var list = new List<ItemStateData>();
-        //     foreach (var grill in grillManager.ListGrills)
-        //     {
-        //         for (int i = 0; i < grill.GetSlots().Length; i++)
-        //         {
-        //             var slot = grill.GetSlots()[i];
-        //             if (slot.GetItem() == null) continue;
-        //             if (slot.GetItem() is ItemBombMove itemBombMove)
-        //             {
-        //                 list.Add(new ItemStateData() { grillId = grill.id, slotIndex = i, id = slot.GetItem()?.id ?? 0, bombCount = itemBombMove.MoveRemaining, active = !itemBombMove.Exploded });
-        //             }
-        //         }
-        //     }
-
-        //     foreach (var waitingGrill in waitingGrillManager.ListWaitingGrills)
-        //     {
-        //         for (int i = 0; i < waitingGrill.GetSlots().Length; i++)
-        //         {
-        //             var slot = waitingGrill.GetSlots()[i];
-        //             if (slot.GetItem() == null) continue;
-        //             if (slot.GetItem() is ItemBombMove itemBombMove)
-        //             {
-        //                 list.Add(new ItemStateData() { grillId = waitingGrill.id, slotIndex = i, id = slot.GetItem()?.id ?? 0, bombCount = itemBombMove.MoveRemaining, active = !itemBombMove.Exploded });
-        //             }
-        //             else
-        //             {
-        //                 list.Add(new ItemStateData() { grillId = waitingGrill.id, slotIndex = i, id = slot.GetItem()?.id ?? 0, bombCount = -1, active = false });
-        //             }
-        //         }
-        //     }
-        //     return list;
-        // }
-
-        public void SetPumpkin(int currentPumpkin)
-        {
-            pumpkin = currentPumpkin;
-        }
     }
 }

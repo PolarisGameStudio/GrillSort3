@@ -85,19 +85,19 @@ namespace MyGame.SkewerJam.Gameplay
             var primaryGrills = grillManager.ListGrills;
             foreach (var grill in primaryGrills)
             {
-                // if (levelGenerator.IsStaticGrill(grill.id))
-                // {
-                //     currentBound.Encapsulate(grill.GetBounds());
-                //     if (grill.HasSubGrills())
-                //     {
-                //         currentBound.Encapsulate(grill.GetSubGrillPosition());
-                //     }
-                //     // else if (dropMode)
-                //     // {
-                //     //     currentBound.Encapsulate(grill.transform.position + Vector3.down * 0.5f);
-                //     //     currentBound.Encapsulate(grill.transform.position + Vector3.up * 1.5f);
-                //     // }
-                // }
+                if (levelGenerator.IsStaticGrill(grill.id))
+                {
+                    currentBound.Encapsulate(grill.GetBounds());
+                    if (grill.HasSubGrills())
+                    {
+                        currentBound.Encapsulate(grill.GetSubGrillPosition());
+                    }
+                    // else if (dropMode)
+                    // {
+                    //     currentBound.Encapsulate(grill.transform.position + Vector3.down * 0.5f);
+                    //     currentBound.Encapsulate(grill.transform.position + Vector3.up * 1.5f);
+                    // }
+                }
             }
 
             if (levelGenerator.LevelData.conveyorData != null)

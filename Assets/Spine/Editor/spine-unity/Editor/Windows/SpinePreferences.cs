@@ -1,8 +1,8 @@
 /******************************************************************************
  * Spine Runtimes License Agreement
- * Last updated September 24, 2021. Replaces all prior versions.
+ * Last updated April 5, 2025. Replaces all prior versions.
  *
- * Copyright (c) 2013-2021, Esoteric Software LLC
+ * Copyright (c) 2013-2025, Esoteric Software LLC
  *
  * Integration of the Spine Runtimes into software or otherwise creating
  * derivative works of the Spine Runtimes is permitted under the terms and
@@ -37,6 +37,14 @@
 
 #if UNITY_2020_2_OR_NEWER
 #define HAS_ON_POSTPROCESS_PREFAB
+#endif
+
+#if UNITY_2021_2_OR_NEWER
+#define TEXT_ASSET_HAS_GET_DATA_BYTES
+#endif
+
+#if TEXT_ASSET_HAS_GET_DATA_BYTES
+#define HAS_ANY_UNSAFE_OPTIONS
 #endif
 
 using System.Threading;
@@ -77,6 +85,12 @@ namespace Spine.Unity.Editor {
 		internal const bool DEFAULT_DEFAULT_INSTANTIATE_LOOP = true;
 		public bool defaultInstantiateLoop = DEFAULT_DEFAULT_INSTANTIATE_LOOP;
 
+		internal static readonly Vector2 DEFAULT_DEFAULT_PHYSICS_POSITION_INHERITANCE = Vector2.one;
+		public Vector2 defaultPhysicsPositionInheritance = DEFAULT_DEFAULT_PHYSICS_POSITION_INHERITANCE;
+
+		internal const float DEFAULT_DEFAULT_PHYSICS_ROTATION_INHERITANCE = 1f;
+		public float defaultPhysicsRotationInheritance = DEFAULT_DEFAULT_PHYSICS_ROTATION_INHERITANCE;
+
 		internal const bool DEFAULT_SHOW_HIERARCHY_ICONS = true;
 		public bool showHierarchyIcons = DEFAULT_SHOW_HIERARCHY_ICONS;
 
@@ -111,10 +125,12 @@ namespace Spine.Unity.Editor {
 			return true;
 		}
 
+		internal const bool DEFAULT_APPLY_ADDITIVE_MATERIAL = false;
+		public bool applyAdditiveMaterial = DEFAULT_APPLY_ADDITIVE_MATERIAL;
+
 		public const string DEFAULT_BLEND_MODE_MULTIPLY_MATERIAL = "SkeletonPMAMultiply";
 		public const string DEFAULT_BLEND_MODE_SCREEN_MATERIAL = "SkeletonPMAScreen";
 		public const string DEFAULT_BLEND_MODE_ADDITIVE_MATERIAL = "SkeletonPMAAdditive";
-
 		public Material blendModeMaterialMultiply = null;
 		public Material blendModeMaterialScreen = null;
 		public Material blendModeMaterialAdditive = null;
@@ -294,6 +310,8 @@ namespace Spine.Unity.Editor {
 					SerializedProperty blendModeMaterialMultiply = settings.FindProperty("blendModeMaterialMultiply");
 					SerializedProperty blendModeMaterialScreen = settings.FindProperty("blendModeMaterialScreen");
 					bool isTexturePresetPMA = IsPMAWorkflow(textureSettingsRef.stringValue);
+					EditorGUILayout.PropertyField(settings.FindProperty("applyAdditiveMaterial"),
+						new GUIContent("Apply Additive Material", "The Default Apply Additive Material setting for newly imported SkeletonDataAssets."));
 					ShowBlendModeMaterialProperty(blendModeMaterialAdditive, "Additive", isTexturePresetPMA);
 					ShowBlendModeMaterialProperty(blendModeMaterialMultiply, "Multiply", isTexturePresetPMA);
 					ShowBlendModeMaterialProperty(blendModeMaterialScreen, "Screen", isTexturePresetPMA);
@@ -314,6 +332,11 @@ namespace Spine.Unity.Editor {
 				{
 					EditorGUILayout.Slider(settings.FindProperty("defaultZSpacing"), -0.1f, 0f, new GUIContent("Default Slot Z-Spacing"));
 					EditorGUILayout.PropertyField(settings.FindProperty("defaultInstantiateLoop"), new GUIContent("Default Loop", "Spawn Spine GameObjects with loop enabled."));
+					EditorGUILayout.LabelField("Physics Inheritance");
+					using (new SpineInspectorUtility.IndentScope()) {
+						EditorGUILayout.PropertyField(settings.FindProperty("defaultPhysicsPositionInheritance"), new GUIContent("Default Position", "The Default Physics Inheritance - Position factor."));
+						EditorGUILayout.PropertyField(settings.FindProperty("defaultPhysicsRotationInheritance"), new GUIContent("Default Rotation", "The Default Physics Inheritance - Rotation factor."));
+					}
 				}
 
 				EditorGUILayout.Space();
@@ -342,6 +365,18 @@ namespace Spine.Unity.Editor {
 					SkeletonRenderer.fixPrefabOverrideViaMeshFilterGlobal = settings.FindProperty("fixPrefabOverrideViaMeshFilter").boolValue;
 
 					EditorGUILayout.PropertyField(settings.FindProperty("removePrefabPreviewMeshes"), new GUIContent("Optimize Preview Meshes", "When enabled, Spine prefab preview meshes will be removed in a pre-build step to reduce build size. This increases build time as all prefabs in the project will be processed."));
+				}
+#endif
+
+#if HAS_ANY_UNSAFE_OPTIONS
+				GUILayout.Space(20);
+				EditorGUILayout.LabelField("Unsafe Build Defines", EditorStyles.boldLabel);
+				using (new GUILayout.HorizontalScope()) {
+					EditorGUILayout.PrefixLabel(new GUIContent("Direct data access", "Allow unsafe direct data access. Currently affects reading .skel.bytes files, reading with fewer allocations."));
+					if (GUILayout.Button("Enable", GUILayout.Width(64)))
+						SpineBuildEnvUtility.EnableBuildDefine(SpineBuildEnvUtility.SPINE_ALLOW_UNSAFE_CODE);
+					if (GUILayout.Button("Disable", GUILayout.Width(64)))
+						SpineBuildEnvUtility.DisableBuildDefine(SpineBuildEnvUtility.SPINE_ALLOW_UNSAFE_CODE);
 				}
 #endif
 

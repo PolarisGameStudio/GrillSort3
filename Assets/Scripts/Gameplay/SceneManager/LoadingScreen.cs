@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using DG.Tweening;
+using Sonat;
 using Sonat.AdsModule;
 using Sonat.Enums;
 using SonatFramework.Scripts.Utils;
@@ -16,7 +17,7 @@ namespace Gameplay.SceneManager
     {
         private bool sonatSdkInited = false;
         [SerializeField] private Slider slider;
-        private SkeletonGraphic logoAnim;
+        // private SkeletonGraphic logoAnim;
         // [SerializeField] private LocalizedEntry<SkeletonGraphic> logo;
         private float loadingTime = 2;
 
@@ -38,24 +39,23 @@ namespace Gameplay.SceneManager
 
             slider.DOValue(1, loadingTime).OnComplete(() => { StartCoroutine(IELoading()); });
 
-            // SonatSdkManager.Initialize(OnSonatSdkInited);
-            OnSonatSdkInited();
+            SonatSdkManager.Initialize(OnSonatSdkInited);
+            // OnSonatSdkInited();
         }
 
         private void OnSonatSdkInited()
         {
-            // GameSetup.Setup();
-            // sonatSdkInited = true;
-            // SonatUtils.ExecuteNextFrame(TrackingByHour.Setup, 2); 
+            sonatSdkInited = true;
+            // SonatUtils.ExecuteNextFrame(SonatTrackingService.Setup, 2);
         }
 
         IEnumerator IELoading()
         {
             yield return new WaitUntil(() => sonatSdkInited);
             yield return new WaitForSeconds(0.1f);
-            logoAnim.AnimationState.ClearTracks();
-            logoAnim.Initialize(true);
-            logoAnim.AnimationState.SetAnimation(0, "End", false);
+            // logoAnim.AnimationState.ClearTracks();
+            // logoAnim.Initialize(true);
+            // logoAnim.AnimationState.SetAnimation(0, "End", false);
             yield return new WaitForSeconds(0.43f);
             SonatAds.needShowAppOpenAds = false;
             int level = MySonatFramework.GetService<UserDataService>().GetLevel();
@@ -65,7 +65,7 @@ namespace Gameplay.SceneManager
             // }
             // else
             // {
-            //     MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Gameplay);
+            MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Gameplay_SkewerJam);
             // }
         }
     }

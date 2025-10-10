@@ -1,8 +1,8 @@
 /******************************************************************************
  * Spine Runtimes License Agreement
- * Last updated September 24, 2021. Replaces all prior versions.
+ * Last updated April 5, 2025. Replaces all prior versions.
  *
- * Copyright (c) 2013-2021, Esoteric Software LLC
+ * Copyright (c) 2013-2025, Esoteric Software LLC
  *
  * Integration of the Spine Runtimes into software or otherwise creating
  * derivative works of the Spine Runtimes is permitted under the terms and
@@ -38,8 +38,8 @@ namespace Spine.Unity.Editor {
 	[CustomEditor(typeof(BoneFollowerGraphic)), CanEditMultipleObjects]
 	public class BoneFollowerGraphicInspector : Editor {
 
-		SerializedProperty boneName, skeletonGraphic, followXYPosition, followZPosition, followBoneRotation,
-			followLocalScale, followParentWorldScale, followSkeletonFlip, maintainedAxisOrientation;
+		SerializedProperty boneName, skeletonGraphic, followXYPosition, followZPosition, followAttachmentZSpacing,
+			followBoneRotation, followLocalScale, followParentWorldScale, followSkeletonFlip, maintainedAxisOrientation;
 		BoneFollowerGraphic targetBoneFollower;
 		bool needsReset;
 
@@ -75,6 +75,7 @@ namespace Spine.Unity.Editor {
 			followBoneRotation = serializedObject.FindProperty("followBoneRotation");
 			followXYPosition = serializedObject.FindProperty("followXYPosition");
 			followZPosition = serializedObject.FindProperty("followZPosition");
+			followAttachmentZSpacing = serializedObject.FindProperty("followAttachmentZSpacing");
 			followLocalScale = serializedObject.FindProperty("followLocalScale");
 			followParentWorldScale = serializedObject.FindProperty("followParentWorldScale");
 			followSkeletonFlip = serializedObject.FindProperty("followSkeletonFlip");
@@ -99,19 +100,20 @@ namespace Spine.Unity.Editor {
 
 			Transform transform = skeletonGraphicComponent.transform;
 			Skeleton skeleton = skeletonGraphicComponent.Skeleton;
-			Canvas canvas = skeletonGraphicComponent.canvas;
-			float positionScale = canvas == null ? 1f : skeletonGraphicComponent.canvas.referencePixelsPerUnit;
+			float positionScale = skeletonGraphicComponent.MeshScale;
+			Vector2 positionOffset = skeletonGraphicComponent.GetScaledPivotOffset();
 
 			if (string.IsNullOrEmpty(boneName.stringValue)) {
-				SpineHandles.DrawBones(transform, skeleton, positionScale);
-				SpineHandles.DrawBoneNames(transform, skeleton, positionScale);
+				SpineHandles.DrawBones(transform, skeleton, positionScale, positionOffset);
+				SpineHandles.DrawBoneNames(transform, skeleton, positionScale, positionOffset);
 				Handles.Label(tbf.transform.position, "No bone selected", EditorStyles.helpBox);
 			} else {
 				Bone targetBone = tbf.bone;
 				if (targetBone == null) return;
 
-				SpineHandles.DrawBoneWireframe(transform, targetBone, SpineHandles.TransformContraintColor, positionScale);
-				Handles.Label(targetBone.GetWorldPosition(transform, positionScale), targetBone.Data.Name, SpineHandles.BoneNameStyle);
+				SpineHandles.DrawBoneWireframe(transform, targetBone, SpineHandles.TransformContraintColor, positionScale, positionOffset);
+				Handles.Label(targetBone.GetWorldPosition(transform, positionScale, positionOffset),
+					targetBone.Data.Name, SpineHandles.BoneNameStyle);
 			}
 		}
 
@@ -171,6 +173,10 @@ namespace Spine.Unity.Editor {
 				EditorGUILayout.PropertyField(followBoneRotation);
 				EditorGUILayout.PropertyField(followXYPosition);
 				EditorGUILayout.PropertyField(followZPosition);
+				if (followZPosition.boolValue == true) {
+					using (new SpineInspectorUtility.IndentScope())
+						EditorGUILayout.PropertyField(followAttachmentZSpacing, new GUIContent("Attachment Z Spacing"));
+				}
 				EditorGUILayout.PropertyField(followLocalScale);
 				EditorGUILayout.PropertyField(followParentWorldScale);
 				EditorGUILayout.PropertyField(followSkeletonFlip);

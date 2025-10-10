@@ -1,8 +1,8 @@
 /******************************************************************************
  * Spine Runtimes License Agreement
- * Last updated September 24, 2021. Replaces all prior versions.
+ * Last updated April 5, 2025. Replaces all prior versions.
  *
- * Copyright (c) 2013-2021, Esoteric Software LLC
+ * Copyright (c) 2013-2025, Esoteric Software LLC
  *
  * Integration of the Spine Runtimes into software or otherwise creating
  * derivative works of the Spine Runtimes is permitted under the terms and
@@ -54,7 +54,7 @@ namespace Spine.Unity {
 		#endregion
 
 		AnimationState animationState;
-		Canvas canvas;
+		SkeletonGraphic skeletonGraphic;
 
 		public override Vector2 GetRemainingRootMotion (int trackIndex) {
 			TrackEntry track = animationState.GetCurrent(trackIndex);
@@ -79,7 +79,7 @@ namespace Spine.Unity {
 
 		protected override float AdditionalScale {
 			get {
-				return canvas ? canvas.referencePixelsPerUnit : 1.0f;
+				return skeletonGraphic ? skeletonGraphic.MeshScale : 1.0f;
 			}
 		}
 
@@ -88,14 +88,12 @@ namespace Spine.Unity {
 			animationTrackFlags = DefaultAnimationTrackFlags;
 		}
 
-		protected override void Start () {
-			base.Start();
+		public override void Initialize () {
+			base.Initialize();
 			IAnimationStateComponent animstateComponent = skeletonComponent as IAnimationStateComponent;
 			this.animationState = (animstateComponent != null) ? animstateComponent.AnimationState : null;
 
-			if (this.GetComponent<CanvasRenderer>() != null) {
-				canvas = this.GetComponentInParent<Canvas>();
-			}
+			skeletonGraphic = this.GetComponent<SkeletonGraphic>();
 		}
 
 		protected override Vector2 CalculateAnimationsMovementDelta () {

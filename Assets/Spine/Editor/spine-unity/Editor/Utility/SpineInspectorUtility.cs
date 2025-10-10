@@ -1,8 +1,8 @@
 /******************************************************************************
  * Spine Runtimes License Agreement
- * Last updated September 24, 2021. Replaces all prior versions.
+ * Last updated April 5, 2025. Replaces all prior versions.
  *
- * Copyright (c) 2013-2021, Esoteric Software LLC
+ * Copyright (c) 2013-2025, Esoteric Software LLC
  *
  * Integration of the Spine Runtimes into software or otherwise creating
  * derivative works of the Spine Runtimes is permitted under the terms and
@@ -149,9 +149,21 @@ namespace Spine.Unity.Editor {
 							}
 						}
 					}
-
 					newPropertyPath = propertyPath.Remove(propertyPath.Length - localPathLength, localPathLength) + propertyName;
 					relativeProperty = property.serializedObject.FindProperty(newPropertyPath);
+				}
+				// If this fails as well, try at any base property up the hierarchy
+				if (relativeProperty == null) {
+					int dotIndex = propertyPath.Length - property.name.Length - 1;
+					if (dotIndex > 0) {
+						while (relativeProperty == null) {
+							dotIndex = propertyPath.LastIndexOf('.', dotIndex - 1);
+							if (dotIndex < 0)
+								break;
+							newPropertyPath = propertyPath.Remove(dotIndex + 1) + propertyName;
+							relativeProperty = property.serializedObject.FindProperty(newPropertyPath);
+						}
+					}
 				}
 			}
 

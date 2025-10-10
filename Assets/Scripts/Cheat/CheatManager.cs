@@ -9,6 +9,7 @@ using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems;
 using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.UserData;
+using MyGame.SkewerJam.Gameplay;
 
 public class CheatManager : Singleton<CheatManager>
 {
@@ -20,17 +21,17 @@ public class CheatManager : Singleton<CheatManager>
 
 	// Start is called before the first frame update
 	void Start()
-    {
-        
-    }
+	{
+
+	}
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN
-    // Update is called once per frame
-    void Update()
-    {
+	// Update is called once per frame
+	void Update()
+	{
 		if (Input.GetKeyDown(KeyCode.F1))
 		{
 			CheatPanel cheatPanel = PanelManager.Instance.GetPanel<CheatPanel>();
-			if(cheatPanel == null)
+			if (cheatPanel == null)
 			{
 				PanelManager.Instance.OpenForget<CheatPanel>();
 			}
@@ -69,23 +70,23 @@ public class CheatManager : Singleton<CheatManager>
 	}
 	public static void CheatWin()
 	{
-		//GameplayController.instance.Win();
+		GameController.Instance.Win();
 	}
 	public static void CheatLose()
 	{
-		//GameplayController.instance.Stuck();
+		GameController.Instance.Stuck(StuckType.OutOfMove);
 	}
 
 	public static void CheatLevel(int level)
 	{
-		SonatSystem.GetService<UserDataService>().SaveLevel(level);
-		PlayLevel().Forget();
+		// SonatSystem.GetService<UserDataService>().SaveLevel(level);
+		PlayLevel(level).Forget();
 	}
 
-	private static async UniTaskVoid PlayLevel()
+	private static async UniTaskVoid PlayLevel(int level)
 	{
-		//await GameplayController.instance.CloseTower();
-		//GameplayController.instance.Play();
+		// await GameplayController.instance.CloseTower();
+		GameController.Instance.PlayLevel(level).Forget();
 	}
 
 	public static void CheatResource(GameResource resource, int value)
@@ -97,11 +98,11 @@ public class CheatManager : Singleton<CheatManager>
 
 	public static void CheatRemoteConfig(string key, string value)
 	{
-		if(int.TryParse(value, out var intValue))
+		if (int.TryParse(value, out var intValue))
 		{
 			PlayerPrefs.SetInt($"remote_value_{key}", intValue);
 		}
-		else if(bool.TryParse(value, out var booValue))
+		else if (bool.TryParse(value, out var booValue))
 		{
 			PlayerPrefs.SetInt($"remote_value_{key}", booValue ? 1 : 0);
 		}
@@ -129,12 +130,12 @@ public class CheatManager : Singleton<CheatManager>
 
 	public static bool IsOpenCheat()
 	{
-        return PlayerPrefs.GetInt("SONAT_CHEATED", 0) == 1 || Application.isEditor;
-    }
+		return PlayerPrefs.GetInt("SONAT_CHEATED", 0) == 1 || Application.isEditor;
+	}
 
 	public static CheatLevelSource GetLevelSource()
 	{
-        CheatLevelSource cheatLevelSource = (CheatLevelSource)PlayerPrefs.GetInt("SONAT_CHEATED_LEVELSOURCE", 0);
+		CheatLevelSource cheatLevelSource = (CheatLevelSource)PlayerPrefs.GetInt("SONAT_CHEATED_LEVELSOURCE", 0);
 
 		if (cheatLevelSource == CheatLevelSource.Drive && !IsOpenCheat())
 		{
@@ -142,7 +143,7 @@ public class CheatManager : Singleton<CheatManager>
 		}
 
 		return cheatLevelSource;
-    }
+	}
 
 }
 
@@ -156,15 +157,15 @@ public enum CheatOption
 	Resource,
 	RemoteConfig,
 	PlayerPrefs,
-    GDLevel,
+	GDLevel,
 	StarChest,
 	LevelChest,
 	TransportTracking,
-    MAX,
+	MAX,
 }
 
 public enum CheatLevelSource
-{ 
+{
 	Resources,
 	Drive,
 	MAX,

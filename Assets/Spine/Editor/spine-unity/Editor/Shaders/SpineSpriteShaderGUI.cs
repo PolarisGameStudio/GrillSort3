@@ -1,8 +1,8 @@
 /******************************************************************************
  * Spine Runtimes License Agreement
- * Last updated September 24, 2021. Replaces all prior versions.
+ * Last updated April 5, 2025. Replaces all prior versions.
  *
- * Copyright (c) 2013-2021, Esoteric Software LLC
+ * Copyright (c) 2013-2025, Esoteric Software LLC
  *
  * Integration of the Spine Runtimes into software or otherwise creating
  * derivative works of the Spine Runtimes is permitted under the terms and
@@ -272,14 +272,6 @@ public class SpineSpriteShaderGUI : SpineShaderWithOutlineGUI {
 		_lightAffectsAdditive = FindProperty("_LightAffectsAdditive", props, false);
 		_tintBlack = FindProperty("_TintBlack", props, false);
 		_darkColor = FindProperty("_Black", props, false);
-	}
-
-	static bool BoldToggleField (GUIContent label, bool value) {
-		FontStyle origFontStyle = EditorStyles.label.fontStyle;
-		EditorStyles.label.fontStyle = FontStyle.Bold;
-		value = EditorGUILayout.Toggle(label, value, EditorStyles.toggle);
-		EditorStyles.label.fontStyle = origFontStyle;
-		return value;
 	}
 
 	protected virtual void ShaderPropertiesGUI () {

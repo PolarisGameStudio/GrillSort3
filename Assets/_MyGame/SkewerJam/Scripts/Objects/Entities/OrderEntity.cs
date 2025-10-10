@@ -23,6 +23,7 @@ namespace MyGame.SkewerJam.Objects.Entities
         private bool ready = false; // đã sẵn sàng nhận item chưa
         private bool moving = false; // đang di chuyển không
         private bool complete = false; // đã hoàn thành order chưa
+        private int completeCount = 0; // số lượng item đã hoàn thành
 
         private ItemId itemIdTarget = ItemId.None;
         private int maxItems = 0;
@@ -33,7 +34,8 @@ namespace MyGame.SkewerJam.Objects.Entities
         public int OrderIndex => orderIndex;
         public bool Ready { get => ready; set => ready = value; }
         public bool Moving { get => moving; set => moving = value; }
-        public bool Complete => complete;
+        public bool Complete { get => complete; set => complete = value; }
+        public int CompleteCount { get => completeCount; set => completeCount = value; }
 
         #region Implementations
 
@@ -79,6 +81,8 @@ namespace MyGame.SkewerJam.Objects.Entities
             ready = false;
             complete = false;
             moving = false;
+
+            completeCount = 0;
         }
 
         public void SetData(ItemId itemId, int num)
@@ -95,11 +99,6 @@ namespace MyGame.SkewerJam.Objects.Entities
         public void SetOrderIndex(int index)
         {
             orderIndex = index;
-        }
-
-        public void SetComplete(bool complete)
-        {
-            this.complete = complete;
         }
 
         public void SetTargetItem(ItemId itemId, int num)
@@ -179,13 +178,13 @@ namespace MyGame.SkewerJam.Objects.Entities
             return true; // đã bay tới vị trí slot
         }
 
-        public void PlayComplete(Action onComplete)
+        public void PlayComplete(Action onComplete1, Action onComplete2)
         {
             foreach (var slot in slots)
             {
                 slot.GetItem()?.OnComplete();
             }
-            orderEntityVisual.PlayComplete(onComplete);
+            orderEntityVisual.PlayComplete(onComplete1, onComplete2);
         }
 
         public override void OnReturnObj()
@@ -235,8 +234,8 @@ namespace MyGame.SkewerJam.Objects.Entities
             // uiData.Add("Price", GameController.Instance.GameConfig.unlockTrayPrice);
             // uiData.Add("OnSuccess", (Action)(() =>
             // {
-            //     var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
-            //     orderManager.Unlock(this);
+            var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
+            orderManager.Unlock(this);
             // }));
             // PanelManager.Instance.OpenPanel<PopupUnlock_SkewerJam>(uiData);
         }
@@ -263,35 +262,6 @@ namespace MyGame.SkewerJam.Objects.Entities
                 {
                     gameLogicHandler.EndMoveNextOrder(this);
                 });
-            }
-        }
-
-        public (int itemId, int num) GetData()
-        {
-            return ((int)itemIdTarget, maxItems);
-        }
-
-        public async UniTask SetItems(int number)
-        {
-            await UniTask.WaitUntil(() => checkCreateItemFaded);
-            for (int i = 0; i < number; i++)
-            {
-                var slot = slots[i];
-                if (slot != null && slot.GetItem() == null)
-                {
-                    var item = await GrillBaseBehaviorSO.gameFactorySO.CreateItem<Item>($"Item{ItemType.Normal}", slot.transform);
-                    var itemData = new ItemData()
-                    {
-                        id = (int)itemIdTarget,
-                        itemType = ItemType.Normal,
-                    };
-                    item.SetItemData(itemData, slot);
-                    item.SetIsOnConveyor(false);
-                    item.SetLockState(false);
-
-                    slot.ClearItem();
-                    slot.SetItem(item);
-                }
             }
         }
     }

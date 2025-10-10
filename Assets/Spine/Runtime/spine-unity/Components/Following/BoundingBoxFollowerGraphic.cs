@@ -1,8 +1,8 @@
 /******************************************************************************
  * Spine Runtimes License Agreement
- * Last updated September 24, 2021. Replaces all prior versions.
+ * Last updated April 5, 2025. Replaces all prior versions.
  *
- * Copyright (c) 2013-2021, Esoteric Software LLC
+ * Copyright (c) 2013-2025, Esoteric Software LLC
  *
  * Integration of the Spine Runtimes into software or otherwise creating
  * derivative works of the Spine Runtimes is permitted under the terms and
@@ -57,7 +57,7 @@ namespace Spine.Unity {
 		BoundingBoxAttachment currentAttachment;
 		string currentAttachmentName;
 		PolygonCollider2D currentCollider;
-
+		bool skinBoneEnabled = true;
 		public readonly Dictionary<BoundingBoxAttachment, PolygonCollider2D> colliderTable = new Dictionary<BoundingBoxAttachment, PolygonCollider2D>();
 		public readonly Dictionary<BoundingBoxAttachment, string> nameTable = new Dictionary<BoundingBoxAttachment, string>();
 
@@ -125,10 +125,7 @@ namespace Spine.Unity {
 			int requiredCollidersCount = 0;
 			PolygonCollider2D[] colliders = GetComponents<PolygonCollider2D>();
 			if (this.gameObject.activeInHierarchy) {
-				Canvas canvas = skeletonGraphic.canvas;
-				if (canvas == null) canvas = skeletonGraphic.GetComponentInParent<Canvas>();
-				float scale = canvas != null ? canvas.referencePixelsPerUnit : 100.0f;
-
+				float scale = skeletonGraphic.MeshScale;
 				foreach (Skin skin in skeleton.Data.Skins)
 					AddCollidersForSkin(skin, slotIndex, colliders, scale, ref requiredCollidersCount);
 
@@ -136,6 +133,7 @@ namespace Spine.Unity {
 					AddCollidersForSkin(skeleton.Skin, slotIndex, colliders, scale, ref requiredCollidersCount);
 			}
 			DisposeExcessCollidersAfter(requiredCollidersCount);
+			skinBoneEnabled = slot.Bone.Active;
 
 			if (BoundingBoxFollowerGraphic.DebugMessages) {
 				bool valid = colliderTable.Count != 0;
@@ -214,8 +212,10 @@ namespace Spine.Unity {
 		}
 
 		void LateUpdate () {
-			if (slot != null && slot.Attachment != currentAttachment)
+			if (slot != null && (slot.Attachment != currentAttachment || skinBoneEnabled != slot.Bone.Active)) {
+				skinBoneEnabled = slot.Bone.Active;
 				MatchAttachment(slot.Attachment);
+			}
 		}
 
 		/// <summary>Sets the current collider to match attachment.</summary>
