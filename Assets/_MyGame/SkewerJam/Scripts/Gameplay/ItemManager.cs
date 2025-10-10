@@ -24,32 +24,32 @@ namespace MyGame.SkewerJam.Gameplay
         {
             // await UniTask.WaitUntil(() => GameController.Instance.LevelGenerator.LevelData != null);
 
-            // var levelData = GameController.Instance.LevelGenerator.LevelData;
-            // totalItems = 0;
-            // currentItems = 0;
-            // foreach (var grillData in levelData.grillData)
-            // {
-            //     if (grillData.layer != null)
-            //     {
-            //         foreach (var layerData in grillData.layer)
-            //         {
-            //             if (layerData.itemData != null)
-            //             {
-            //                 foreach (var itemData in layerData.itemData)
-            //                 {
-            //                     if (itemData != null && itemData.id > 0)
-            //                     {
-            //                         totalItems++;
-            //                     }
-            //                 }
-            //             }
-            //         }
-            //     }
-            // }
+            var levelData = GameController.Instance.LevelGenerator.LevelData;
+            totalItems = 0;
+            currentItems = 0;
+            foreach (var grillData in levelData.grillData)
+            {
+                if (grillData.layer != null)
+                {
+                    foreach (var layerData in grillData.layer)
+                    {
+                        if (layerData.itemData != null)
+                        {
+                            foreach (var itemData in layerData.itemData)
+                            {
+                                if (itemData != null && itemData.id > 0)
+                                {
+                                    totalItems++;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
-            // currentItems = totalItems;
-            // Debug.Log($"Init: {currentItems}");
-            // GameController.Instance.GameLogicHandler.OnStartCollectItem += OnStartCollectItem;
+            currentItems = totalItems;
+            Debug.Log($"Init: {currentItems}");
+            GameController.Instance.GameLogicHandler.OnStartCollectItem += OnStartCollectItem;
         }
 
         public void Clear()

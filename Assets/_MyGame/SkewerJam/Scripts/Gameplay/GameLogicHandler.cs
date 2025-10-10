@@ -91,13 +91,13 @@ namespace MyGame.SkewerJam.Gameplay
             var (order, slot) = orderManager.GetDestinationSlot(item);
             if (slot != null)
             {
-                var log = new SpendResourceLogData()
-                {
-                    earnType = "energy",
-                    earnId = "energy",
-                    source = "gameplay"
-                };
-                // MySonatFramework.GetService<InventoryService>().ReduceResource(GameResource.Energy, 1, log);
+                // var log = new SpendResourceLogData()
+                // {
+                //     earnType = "energy",
+                //     earnId = "energy",
+                //     source = "gameplay"
+                // };
+                // MySonatFramework.GetService<InventoryService>().ReduceResource(GameResource.Pumpkin, 1, log);
                 // EventBus<ReduceItemEvent>.Raise(new ReduceItemEvent() { resource = GameResource.Energy, quantity = 1 });
                 SwitchSlot(slot);
                 return true;
@@ -108,14 +108,14 @@ namespace MyGame.SkewerJam.Gameplay
             var (waitingGrill, waitingGrillSlot) = waitingGrillManager.GetDestinationSlot();
             if (waitingGrillSlot != null)
             {
-                var log = new SpendResourceLogData()
-                {
-                    earnType = "energy",
-                    earnId = "energy",
-                    source = "gameplay"
-                };
-                    // MySonatFramework.GetService<InventoryService>().ReduceResource(GameResource.Energy, 1, log);
-                    // EventBus<ReduceItemEvent>.Raise(new ReduceItemEvent() { resource = GameResource.Energy, quantity = 1 });
+                // var log = new SpendResourceLogData()
+                // {
+                //     earnType = "energy",
+                //     earnId = "energy",
+                //     source = "gameplay"
+                // };
+                // MySonatFramework.GetService<InventoryService>().ReduceResource(GameResource.Energy, 1, log);
+                // EventBus<ReduceItemEvent>.Raise(new ReduceItemEvent() { resource = GameResource.Energy, quantity = 1 });
                 SwitchSlot(waitingGrillSlot);
                 return true;
             }
@@ -181,7 +181,7 @@ namespace MyGame.SkewerJam.Gameplay
             if (CheckWinGame())
             {
                 Debug.Log("<color=green>Win Game</color>");
-                // GameController.Instance.Win();
+                GameController.Instance.Win();
             }
         }
 
@@ -191,16 +191,16 @@ namespace MyGame.SkewerJam.Gameplay
 
             // MySonatFramework.GetService<InventoryService>().AddResource(GameResource.Pumpkin, 1);
             pumpkin++;
-            EventBus<AddItemEvent>.Raise(new AddItemEvent()
-            {
-                // resource = GameResource.Pumpkin,
-                quantity = 1,
-                position = orderEntity.transform.position,
-                collectEffect = new CollectEffectSingle()
-                {
-                    collectEffectName = "CollectResourceSingleItem_Pumpkin"
-                }
-            });
+            // EventBus<AddItemEvent>.Raise(new AddItemEvent()
+            // {
+            //     resource = GameResource.Pumpkin,
+            //     quantity = 1,
+            //     position = orderEntity.transform.position,
+            //     collectEffect = new CollectEffectSingle()
+            //     {
+            //         collectEffectName = "CollectResourceSingleItem_Pumpkin"
+            //     }
+            // });
         }
 
         public void StartItemMoveSlot(Item item, SlotBase slot)
@@ -221,7 +221,7 @@ namespace MyGame.SkewerJam.Gameplay
             // var energy = MySonatFramework.GetService<InventoryService>().GetResource(GameResource.Energy);
             // if (energy <= 0 && GameController.Instance.GameState == GameState.Playing)
             // {
-            //     // GameController.Instance.ChangeGameState(GameState.Paused);
+            //     GameController.Instance.ChangeGameState(GameState.Paused);
             //     PanelManager.Instance.OpenPanel<PopupWarningEnergy_SkewerJam>(new UIData().Add("GamePlacement", GamePlacement.Gameplay_SkewerJam));
             //     return false;
             // }
@@ -238,7 +238,7 @@ namespace MyGame.SkewerJam.Gameplay
             if (stuckType != null)
             {
                 Debug.Log("<color=red>Lose Game</color>");
-                // GameController.Instance.Stuck(stuckType.Value);
+                GameController.Instance.Stuck(stuckType.Value);
             }
         }
 

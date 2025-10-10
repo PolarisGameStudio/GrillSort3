@@ -6,6 +6,7 @@ using Gameplay.Entities.Grills;
 using Gameplay.Entities.Items;
 using Gameplay.Entities.Obstacle;
 using Gameplay.LevelData;
+using Helper;
 using MyGame.SkewerJam.Level;
 using MyGame.SkewerJam.Objects;
 using Sonat.Enums;
@@ -16,7 +17,7 @@ namespace MyGame.SkewerJam.Gameplay
 {
     public class LevelGenerator : MonoBehaviour
     {
-        // [SerializeField] private LevelServiceAsync levelService;
+        [SerializeField] private LevelServiceAsync levelService;
         private LevelData_SkewerJam _levelData = null;
 
         public LevelData_SkewerJam LevelData => _levelData;
@@ -50,23 +51,23 @@ namespace MyGame.SkewerJam.Gameplay
         //     }
         //     else
         //     {
-        //         var gameplayState = await GameplayStateSaver.Instance.GetGameplayState();
-        //         GameController.Instance.SetPumpkin(gameplayState.currentPumpkin);
-        //         await LoadGameObjects(
-        //             gameplayState.grillData,
-        //             gameplayState.conveyorData,
-        //             gameplayState.orderInfos,
-        //             gameplayState.listObstacleData,
-        //             gameplayState.waitingGrillIds,
-        //             gameplayState.itemStateDatas
-        //         );
+        //         // var gameplayState = await GameplayStateSaver.Instance.GetGameplayState();
+        //         // GameController.Instance.SetPumpkin(gameplayState.currentPumpkin);
+        //         // await LoadGameObjects(
+        //         //     gameplayState.grillData,
+        //         //     gameplayState.conveyorData,
+        //         //     gameplayState.orderInfos,
+        //         //     gameplayState.listObstacleData,
+        //         //     gameplayState.waitingGrillIds,
+        //         //     gameplayState.itemStateDatas
+        //         // );
 
 
-        //         var grillManager = GameController.Instance.GameLogicHandler.GrillManager;
-        //         grillManager.SetIceState(gameplayState.primaryGrillIces);
+        //         // var grillManager = GameController.Instance.GameLogicHandler.GrillManager;
+        //         // grillManager.SetIceState(gameplayState.primaryGrillIces);
 
-        //         var obstacleManager = GameController.Instance.GameLogicHandler.ObstacleManager;
-        //         obstacleManager.SetObstacleStateData(gameplayState.obstacleStateData);
+        //         // var obstacleManager = GameController.Instance.GameLogicHandler.ObstacleManager;
+        //         // obstacleManager.SetObstacleStateData(gameplayState.obstacleStateData);
         //     }
         // }
 

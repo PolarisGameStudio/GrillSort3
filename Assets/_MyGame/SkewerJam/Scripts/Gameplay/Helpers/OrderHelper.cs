@@ -53,48 +53,48 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
         public static (ItemId itemId, int num) GetItemOrder()
         {
-            // // kiểm tra có sử dụng rescue không
-            // // Sử dụng khi còn lại hàng chờ chỉ còn <= 2 khay trống
-            // var levelData = GameController.Instance.LevelGenerator.LevelData;
-            // var rescueCondition = levelData.rescueCondition;
-            // var logicOrderConfigs = levelData.logicOrderConfigs;
+            // kiểm tra có sử dụng rescue không
+            // Sử dụng khi còn lại hàng chờ chỉ còn <= 2 khay trống
+            var levelData = GameController.Instance.LevelGenerator.LevelData;
+            var rescueCondition = levelData.rescueCondition;
+            var logicOrderConfigs = levelData.logicOrderConfigs;
 
 
-            // if (CheckUseRescue(rescueCondition))
-            // {
-            //     rescueGap = rescueCondition.maxRescueGap;
-            //     currentNumberRescues += 1;
-            //     Debug.Log("<color=green>OrderHelper:</color> Use Rescue");
-            //     return GetItemOrderToRescue();
-            // }
+            if (CheckUseRescue(rescueCondition))
+            {
+                rescueGap = rescueCondition.maxRescueGap;
+                currentNumberRescues += 1;
+                Debug.Log("<color=green>OrderHelper:</color> Use Rescue");
+                return GetItemOrderToRescue();
+            }
 
 
-            // var logicOrderConfig = GetLogicOrderConfig(logicOrderConfigs);
-            // var gameplayInfo = GetGameplayInfoForOrder(); // lấy order info mỗi layer (2 layer đầu) --> OPTIMIZE: giảm tính toán
+            var logicOrderConfig = GetLogicOrderConfig(logicOrderConfigs);
+            var gameplayInfo = GetGameplayInfoForOrder(); // lấy order info mỗi layer (2 layer đầu) --> OPTIMIZE: giảm tính toán
 
-            // var (itemId, num, step) = GetItemOrderBasic(logicOrderConfig.minNumberSteps, gameplayInfo);
-            // if (itemId != ItemId.None)
-            // {
-            //     if (rescueGap > 0) rescueGap--;
-            //     if (step >= 2 && stepGap <= 0)
-            //     {
-            //         stepGap = maxStep2Gap;
-            //         return (itemId, num);
-            //     }
+            var (itemId, num, step) = GetItemOrderBasic(logicOrderConfig.minNumberSteps, gameplayInfo);
+            if (itemId != ItemId.None)
+            {
+                if (rescueGap > 0) rescueGap--;
+                if (step >= 2 && stepGap <= 0)
+                {
+                    stepGap = maxStep2Gap;
+                    return (itemId, num);
+                }
 
-            //     if (step < 2)
-            //     {
-            //         stepGap -= 1;
-            //         stepGap = Mathf.Min(stepGap, maxStep2Gap);
-            //         return (itemId, num);
-            //     }
-            // }
-            // stepGap -= 1;
-            // stepGap = Mathf.Min(stepGap, maxStep2Gap);
-            // var (itemId2, num2, step2) = ForceGetItemOrderBasic(gameplayInfo);
-            // if (step2 >= 2) stepGap = maxStep2Gap;
-            // return (itemId2, num2);
-            return (ItemId.None, 0);
+                if (step < 2)
+                {
+                    stepGap -= 1;
+                    stepGap = Mathf.Min(stepGap, maxStep2Gap);
+                    return (itemId, num);
+                }
+            }
+            stepGap -= 1;
+            stepGap = Mathf.Min(stepGap, maxStep2Gap);
+            var (itemId2, num2, step2) = ForceGetItemOrderBasic(gameplayInfo);
+            if (step2 >= 2) stepGap = maxStep2Gap;
+            return (itemId2, num2);
+
         }
 
         private static bool CheckUseRescue(RescueCondition rescueCondition)
