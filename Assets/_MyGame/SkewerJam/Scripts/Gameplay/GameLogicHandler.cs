@@ -41,14 +41,19 @@ namespace MyGame.SkewerJam.Gameplay
         public ItemManager ItemManager => itemManager;
         public Item ItemSelected { get; set; }
 
-        public event Action<Item, SlotBase> OnStartItemMoveSlot;
-        public event Action<Item, SlotBase> OnItemMoveSlot;
-        public event Action<Item, bool> OnItemStartSwitch;
+        #region Event Actions
+        public event Action<Item, SlotBase> OnItemStartSwitch;
+        public event Action<Item, bool> OnItemStartSwitchSucess;
+
+        public event Action<Item, SlotBase> OnItemEndSwitch;
+
+
         public event Action<OrderEntity> OnAppearNextOrder;
         public event Action<int> OnAppearNextOrderItem;
         public event Action<int> OnCollectItem;
         public event Action<OrderEntity> OnStartCollectItem;
-        public event Action<OrderEntity> OnCompleteCollectItem;
+        public event Action<OrderEntity> OnEndCollectItem;
+        #endregion
 
         private int pumpkin = 0;
         public int Pumpkin => pumpkin;
@@ -128,16 +133,20 @@ namespace MyGame.SkewerJam.Gameplay
 
             ItemSelected.SetLockState(true);
             ItemSelected.SwitchSlot(slot);
-            OnItemStartSwitch?.Invoke(ItemSelected, true);
-
-            // SelectItem(null, false);
-            //Debug.Log("Switched Slot End");
+            OnItemStartSwitchSucess?.Invoke(ItemSelected, true);
+            OnItemStartSwitch?.Invoke(ItemSelected, slot);
         }
 
         #region Event Actions
-        public void AppearNextOrder(OrderEntity orderEntity, bool startLevel = false)
+        public void StartMoveNextOrder(OrderEntity orderEntity)
         {
-            orderEntity.SetReady(true);
+            orderEntity.Moving = true;
+        }
+
+        public void EndMoveNextOrder(OrderEntity orderEntity, bool startLevel = false)
+        {
+            orderEntity.Moving = false;
+            orderEntity.Ready = true;
 
             if (startLevel == false)
             {
@@ -167,9 +176,8 @@ namespace MyGame.SkewerJam.Gameplay
             TryCheckLoseGame().Forget();
         }
 
-        public void CollectItem(OrderEntity orderEntity)
+        public void StartCollectItem(OrderEntity orderEntity)
         {
-            OnCollectItem?.Invoke((int)orderEntity.ItemIdTarget);
             OnStartCollectItem?.Invoke(orderEntity);
 
             hasCollectItem = true;
@@ -185,9 +193,10 @@ namespace MyGame.SkewerJam.Gameplay
             // }
         }
 
-        public void CompleteCollectItem(OrderEntity orderEntity)
+        public void EndCollectItem(OrderEntity orderEntity)
         {
-            OnCompleteCollectItem?.Invoke(orderEntity);
+            OnEndCollectItem?.Invoke(orderEntity);
+            OnCollectItem?.Invoke((int)orderEntity.ItemIdTarget);
 
             // MySonatFramework.GetService<InventoryService>().AddResource(GameResource.Pumpkin, 1);
             pumpkin++;
@@ -203,17 +212,12 @@ namespace MyGame.SkewerJam.Gameplay
             // });
         }
 
-        public void StartItemMoveSlot(Item item, SlotBase slot)
-        {
-            OnStartItemMoveSlot?.Invoke(item, slot);
-        }
-
         private bool hasCollectItem = false;
         public bool HasCollectItem => hasCollectItem;
         public void ItemMoveSlot(Item item, SlotBase slot)
         {
             hasCollectItem = false;
-            OnItemMoveSlot?.Invoke(item, slot);
+            OnItemEndSwitch?.Invoke(item, slot);
         }
 
         public bool CheckEnergy()

@@ -19,8 +19,10 @@ namespace MyGame.SkewerJam.Objects.Entities
         [SerializeField] private Transform container;
         [SerializeField] private OrderEntityVisual orderEntityVisual;
         private int orderIndex;
-        private bool active = false;
-        private bool ready = false;
+        private bool active = false; // đã unlock chưa
+        private bool ready = false; // đã sẵn sàng nhận item chưa
+        private bool moving = false; // đang di chuyển không
+        private bool complete = false; // đã hoàn thành order chưa
 
         private ItemId itemIdTarget = ItemId.None;
         private int maxItems = 0;
@@ -29,7 +31,9 @@ namespace MyGame.SkewerJam.Objects.Entities
         public ItemId ItemIdTarget => itemIdTarget;
         public bool IsActive => active;
         public int OrderIndex => orderIndex;
-        public bool Ready => ready;
+        public bool Ready { get => ready; set => ready = value; }
+        public bool Moving { get => moving; set => moving = value; }
+        public bool Complete => complete;
 
         #region Implementations
 
@@ -68,6 +72,15 @@ namespace MyGame.SkewerJam.Objects.Entities
         }
         #endregion
 
+        public void Init(bool active)
+        {
+            SetActive(active);
+
+            ready = false;
+            complete = false;
+            moving = false;
+        }
+
         public void SetData(ItemId itemId, int num)
         {
             SetTargetItem(itemId, num);
@@ -84,9 +97,9 @@ namespace MyGame.SkewerJam.Objects.Entities
             orderIndex = index;
         }
 
-        public void SetReady(bool ready)
+        public void SetComplete(bool complete)
         {
-            this.ready = ready;
+            this.complete = complete;
         }
 
         public void SetTargetItem(ItemId itemId, int num)
@@ -158,7 +171,7 @@ namespace MyGame.SkewerJam.Objects.Entities
             for (int i = 0; i < maxItems; i++)
             {
                 var slot = slots[i];
-                if (slot.GetItem() == null || slot.GetItem().IsSelected == true)
+                if (slot.GetItem() == null)// || slot.GetItem().IsSelected == true)
                 {
                     return false;
                 }
@@ -248,7 +261,7 @@ namespace MyGame.SkewerJam.Objects.Entities
                 container.position = orderPos;
                 container.DOLocalMove(Vector3.zero, 0.5f).SetEase(Ease.OutSine).OnComplete(() =>
                 {
-                    gameLogicHandler.AppearNextOrder(this);
+                    gameLogicHandler.EndMoveNextOrder(this);
                 });
             }
         }

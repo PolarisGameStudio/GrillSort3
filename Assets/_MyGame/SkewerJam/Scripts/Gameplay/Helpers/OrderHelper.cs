@@ -53,7 +53,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
         public static (ItemId itemId, int num) GetItemOrder()
         {
-            return (ItemId.Item_7, 3);
+            // return (ItemId.Item_7, 3);
             // kiểm tra có sử dụng rescue không
             // Sử dụng khi còn lại hàng chờ chỉ còn <= 2 khay trống
             var levelData = GameController.Instance.LevelGenerator.LevelData;
@@ -67,6 +67,10 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                 currentNumberRescues += 1;
                 Debug.Log("<color=green>OrderHelper:</color> Use Rescue");
                 return GetItemOrderToRescue();
+            }
+            else
+            {
+                return GetRandomItemOrder();
             }
 
 
@@ -244,6 +248,13 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             // return (randomItemId, maxNum, minStep);
         }
 
+        private static (ItemId itemId, int num) GetRandomItemOrder()
+        {
+            var listItemIds = ItemHelper.GetItemIdDictInGameplay(-1);
+            var randomItemId = listItemIds.Keys.ToList()[UnityEngine.Random.Range(0, listItemIds.Keys.Count)];
+            var num = listItemIds[randomItemId];
+            return ((ItemId)randomItemId, num > 3 ? 3 : num);
+        }
         private static GameplayInfo GetGameplayInfoForOrder()
         {
             return new GameplayInfo() { dictNeededSlots = GetDictNeededSlots() };
@@ -276,7 +287,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                         }
                         continue;
                     }
-                    
+
                     if (dp.ContainsKey((ItemId)item.id) == false)
                     {
                         dp[(ItemId)item.id] = new Dictionary<int, int>() { { 1, 0 } };

@@ -41,7 +41,7 @@ namespace MyGame.SkewerJam.Objects
 
             // game events
             var gameLogicHandler = GameController.Instance.GameLogicHandler;
-            gameLogicHandler.OnItemMoveSlot += GameLogicHandler_OnItemMoveSlot;
+            gameLogicHandler.OnItemEndSwitch += GameLogicHandler_OnItemMoveSlot;
         }
 
         private void GameLogicHandler_OnItemMoveSlot(Item item, SlotBase slot)

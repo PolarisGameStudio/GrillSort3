@@ -35,10 +35,15 @@ namespace MyGame.SkewerJam.Objects.Entities
             bonusLid.SetAlpha(1);
         }
 
-        public void SetNormalOrder(bool isNormal)
+        public void SetActive(bool isActive)
         {
-            normalOrder.gameObject.SetActive(isNormal);
-            bonusOrder.gameObject.SetActive(!isNormal);
+            imageLid.gameObject.SetActive(false);
+
+            normalOrder.gameObject.SetActive(isActive);
+            bonusOrder.gameObject.SetActive(!isActive);
+
+            //init
+            completeEffect.Stop();
         }
 
         public virtual void OpenGrill(bool doEffect = true)
@@ -57,16 +62,6 @@ namespace MyGame.SkewerJam.Objects.Entities
             {
                 bonusLid.gameObject.SetActive(false);
             }
-        }
-
-        public void SetActive(bool isActive)
-        {
-            imageLid.gameObject.SetActive(false);
-            // activeSprite.gameObject.SetActive(isActive);
-            // inactiveSprite.gameObject.SetActive(!isActive);
-
-            //init
-            completeEffect.Stop();
         }
 
         public async UniTask PlayComplete(Action onComplete)

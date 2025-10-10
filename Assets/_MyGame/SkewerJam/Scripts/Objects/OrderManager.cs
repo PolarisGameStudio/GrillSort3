@@ -3,7 +3,6 @@ using MyGame.SkewerJam.Objects.Entities;
 using UnityEngine;
 using MyGame.SkewerJam.Gameplay;
 using Gameplay.Entities;
-using Gameplay.LevelData;
 using Cysharp.Threading.Tasks;
 using Manager;
 using DG.Tweening;
@@ -26,7 +25,6 @@ namespace MyGame.SkewerJam.Objects
 
         private List<OrderData_SkewerJam> _listOrderData = new List<OrderData_SkewerJam>();
         private List<OrderEntity> _listOrders = new List<OrderEntity>();
-        private int _nextOrderIndex = 0;
 
         private List<Vector3> _listOrderLocalPositions = new List<Vector3>();
 
@@ -47,38 +45,71 @@ namespace MyGame.SkewerJam.Objects
 
             // game events
             var gameLogicHandler = GameController.Instance.GameLogicHandler;
-            gameLogicHandler.OnItemMoveSlot += GameLogicHandler_OnItemMoveSlot;
+
+            // logic:
+            // - Khi start switch: Tính luôn order mới và xóa order cũ ở list, chuyển trạng thái các order này
+            // - Khi end switch: order mới playcomplete và nextorder playappear
+            gameLogicHandler.OnItemStartSwitch += GameLogicHandler_OnItemStartSwitch;
+            gameLogicHandler.OnItemEndSwitch += GameLogicHandler_OnItemEndSwitch;
 
             OrderHelper.Reset();
         }
 
-        public async UniTask SetData(List<OrderData_SkewerJam> listOrderData)
+        private void GameLogicHandler_OnItemStartSwitch(Item item, SlotBase slot)
         {
-            this._listOrderData = listOrderData;
-
-            _nextOrderIndex = 0;
-            for (int i = 0; i < _listOrderData.Count; i++)
+            if (slot.GetGrill() is OrderEntity orderEntity)
             {
-                if (_listOrderData[i].active == 1)
+                if (orderEntity.CheckComplete())
                 {
-                    var (itemId, num) = OrderHelper.GetItemOrder();
-                    var orderEntity = await CreateNextOrder(itemId, num);
-                    orderEntity.SetOrderIndex(i);
+                    var orderIndex = orderEntity.OrderIndex;
+                    orderEntity.SetComplete(true);
+                    _listOrders.Remove(orderEntity);
+
+                    var checkNextOrder = OrderHelper.CheckCreateNextOrder();
+                    if (checkNextOrder)
+                    {
+                        CreateNextOrder(orderIndex).Forget();
+                    }
+                }
+            }
+        }
+
+
+        private void GameLogicHandler_OnItemEndSwitch(Item item, SlotBase slot)
+        {
+            if (slot.GetGrill() is OrderEntity orderEntity)
+            {
+                if (orderEntity.Complete)
+                {
+                    orderEntity.PlayComplete(() =>
+                    {
+                        GameController.Instance.GameLogicHandler.EndCollectItem(orderEntity);
+                        // if (checkNextOrder == false)
+                        // {
+                        //     AlignObjects().Forget();
+                        // }
+                    });
+
+                    var nextOrder = _listOrders.Where(e => e.OrderIndex == orderEntity.OrderIndex).FirstOrDefault();
+                    if (nextOrder != null)
+                    {
+                        PlayAppearNextOrder(nextOrder).Forget();
+                    }
+
+                    GameController.Instance.GameLogicHandler.StartCollectItem(orderEntity);
                 }
                 else
                 {
-                    var orderEntity = await CreateNextLockedOrder();
-                    orderEntity.SetOrderIndex(i);
+                    GameController.Instance.GameLogicHandler.TryCheckLoseGame();
                 }
             }
 
-            PlayAppearOrders().Forget();
         }
 
         public void Clear()
         {
             var gameLogicHandler = GameController.Instance.GameLogicHandler;
-            gameLogicHandler.OnItemMoveSlot -= GameLogicHandler_OnItemMoveSlot;
+            gameLogicHandler.OnItemEndSwitch -= GameLogicHandler_OnItemEndSwitch;
 
             foreach (var order in _listOrders)
             {
@@ -88,25 +119,51 @@ namespace MyGame.SkewerJam.Objects
             _listOrders.Clear();
 
         }
+
         #endregion
 
-        public async UniTask<OrderEntity> CreateNextOrder(ItemId itemId, int num)
+        #region DATA
+        public async UniTask SetData(List<OrderData_SkewerJam> listOrderData)
+        {
+            this._listOrderData = listOrderData;
+
+            for (int i = 0; i < _listOrderData.Count; i++)
+            {
+                if (_listOrderData[i].active == 1)
+                {
+                    var (itemId, num) = OrderHelper.GetItemOrder();
+                    var orderEntity = await CreateActiveNextOrder(itemId, num);
+                    orderEntity.SetOrderIndex(i);
+                }
+                else
+                {
+                    var orderEntity = await CreateNextLockedOrder();
+                    orderEntity.SetOrderIndex(i);
+                }
+            }
+
+            await PlayAppearOrders();
+        }
+        #endregion
+
+        public async UniTask<OrderEntity> CreateActiveNextOrder(ItemId itemId, int num)
         {
             var orderEntity = await GameFactory.Instance.CreateEntityAsync<OrderEntity>("OrderEntity", transform);
-            orderEntity.SetActive(true);
-            orderEntity.Visual.SetNormalOrder(true);
+            orderEntity.Init(true);
             orderEntity.SetData(itemId, num);
+
             _listOrders.Add(orderEntity);
-            _nextOrderIndex++;
+
             return orderEntity;
         }
 
         public async UniTask<OrderEntity> CreateNextLockedOrder()
         {
             var orderEntity = await GameFactory.Instance.CreateEntityAsync<OrderEntity>("OrderEntity", transform);
-            orderEntity.SetActive(false);
-            orderEntity.Visual.SetNormalOrder(false);
+            orderEntity.Init(false);
+
             _listOrders.Add(orderEntity);
+
             return orderEntity;
         }
 
@@ -114,60 +171,25 @@ namespace MyGame.SkewerJam.Objects
         {
             var (itemId, num) = OrderHelper.GetItemOrder();
 
-            var nextOrder = await CreateNextOrder(itemId, num);
-
+            var nextOrder = await CreateActiveNextOrder(itemId, num);
             var orderPos = leftStartPos.position;
             orderPos.z = 0;
+
             nextOrder.transform.position = orderPos;
             nextOrder.SetOrderIndex(orderIndex);
-
-
-            await UniTask.Delay((int)(orderEntityConfigSO.delayAppearNextOrder * 1000));
-            nextOrder.transform.DOLocalMove(_listOrderLocalPositions[nextOrder.OrderIndex], 0.3f).SetEase(Ease.OutSine).OnComplete(() =>
-            {
-                GameController.Instance.GameLogicHandler.AppearNextOrder(nextOrder);
-            });
         }
 
-        private void GameLogicHandler_OnItemMoveSlot(Item item, SlotBase slot)
+        private async UniTask PlayAppearNextOrder(OrderEntity nextOrder)
         {
-            if (slot.GetGrill() is OrderEntity orderEntity)
-            {
-                if (_listOrders.Contains(orderEntity))
-                {
-                    if (orderEntity.CheckComplete())
-                    {
-                        var orderIndex = orderEntity.OrderIndex;
-                        _listOrders.Remove(orderEntity);
+            await UniTask.Delay((int)(orderEntityConfigSO.delayAppearNextOrder * 1000));
 
-                        var checkNextOrder = OrderHelper.CheckCreateNextOrder();
-                        orderEntity.PlayComplete(() =>
-                        {
-                            GameController.Instance.GameLogicHandler.CompleteCollectItem(orderEntity);
-                            if (checkNextOrder == false)
-                            {
-                                AlignObjects().Forget();
-                            }
-                        });
+            await nextOrder.transform.DOLocalMove(_listOrderLocalPositions[nextOrder.OrderIndex], 0.3f).SetEase(Ease.OutSine);
 
-                        if (checkNextOrder)
-                        {
-                            CreateNextOrder(orderIndex).Forget();
-                        }
-                        GameController.Instance.GameLogicHandler.CollectItem(orderEntity);
-                    }
-                    else
-                    {
-                        GameController.Instance.GameLogicHandler.TryCheckLoseGame();
-                    }
-                }
-            }
-
+            GameController.Instance.GameLogicHandler.EndMoveNextOrder(nextOrder);
         }
 
         public async UniTask PlayAppearOrders()
         {
-            await UniTask.Delay(100);
             // tất cả order xuất hiện đầu game
             for (int i = 0; i < _listOrders.Count; i++)
             {
@@ -180,12 +202,15 @@ namespace MyGame.SkewerJam.Objects
             }
 
             await UniTask.Delay(2000);
+
             for (int i = 0; i < _listOrders.Count; i++)
             {
                 var order = _listOrders[i];
+
+                GameController.Instance.GameLogicHandler.StartMoveNextOrder(order);
                 order.transform.DOLocalMove(_listOrderLocalPositions[order.OrderIndex], 0.3f).SetEase(Ease.OutSine).OnComplete(() =>
                 {
-                    GameController.Instance.GameLogicHandler.AppearNextOrder(order, true);
+                    GameController.Instance.GameLogicHandler.EndMoveNextOrder(order, true);
                 });
                 await UniTask.Delay(200);
             }

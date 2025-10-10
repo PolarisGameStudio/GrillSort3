@@ -9,6 +9,7 @@ using SonatFramework.Systems.SettingsManagement.Vibation;
 using Gameplay.LevelData;
 using Cysharp.Threading.Tasks;
 using SonatFramework.Scripts.Utils;
+using MyGame.SkewerJam.Scripts.SO.Configs;
 
 namespace MyGame.SkewerJam.Scripts.SO.Behavior
 {
@@ -17,13 +18,7 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
     {
         [Space(10)]
         [Header("Animation")]
-        [SerializeField] private Vector3 scaleDown = new Vector3(0.8f, 1.1f, 1f);
-        [SerializeField] private float scaleDuration = 0.05f;
-        [SerializeField] private bool useSpeed = false;
-        [SerializeField, ShowIf("@useSpeed == false")] private float durationMove = 0.4f;
-        [SerializeField, ShowIf("useSpeed")] private float speed = 1f;
-        [SerializeField] private AnimationCurve curveX = AnimationCurve.Linear(0, 0, 1, 1);
-        [SerializeField] private AnimationCurve curveY = AnimationCurve.Linear(0, 0, 1, 1);
+        [SerializeField] private ItemAnimationConfigSO_SkewerJam itemAnimConfig;
 
         private Item selectedItem;
 
@@ -50,7 +45,7 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
 
             selectedItem = item;
             item.DOKill();
-            item.transform.DOScale(scaleDown, scaleDuration);
+            item.transform.DOScale(itemAnimConfig.scaleDown, itemAnimConfig.scaleDuration);
         }
 
         public override void OnMouseExit(Item item)
@@ -60,7 +55,7 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
                 selectedItem = null;
             }
             item.DOKill();
-            item.transform.DOScale(Vector3.one, scaleDuration);
+            item.transform.DOScale(Vector3.one, itemAnimConfig.scaleDuration);
         }
 
         public override void OnMouseUp(Item item)
@@ -76,7 +71,7 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
                 if (switchSuccess == false)
                 {
                     item.transform.DOKill();
-                    item.transform.DOScale(Vector3.one, scaleDuration);
+                    item.transform.DOScale(Vector3.one, itemAnimConfig.scaleDuration);
                 }
             }
             else
@@ -84,7 +79,7 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
                 if (selectedItem != null)
                 {
                     selectedItem.transform.DOKill();
-                    selectedItem.transform.DOScale(Vector3.one, scaleDuration);
+                    selectedItem.transform.DOScale(Vector3.one, itemAnimConfig.scaleDuration);
                 }
             }
             selectedItem = null;
@@ -103,35 +98,34 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
             item.SetSelected(true);
             slot.AddItem(item);
             item.Visual.OnDeselected();
-
             item.Visual.SetSortingOrder(1);
 
-            GameController.Instance.GameLogicHandler.StartItemMoveSlot(item, slot);
-
             var seq = DOTween.Sequence();
-            if (useSpeed)
+            if (itemAnimConfig.useSpeed)
             {
-                seq.Join(item.transform.DOLocalMoveX(0, speed).SetSpeedBased(useSpeed).SetEase(curveX));
-                seq.Join(item.transform.DOLocalMoveY(0, speed).SetSpeedBased(useSpeed).SetEase(curveY));
+                seq.Join(item.transform.DOLocalMoveX(0, itemAnimConfig.speed).SetSpeedBased(itemAnimConfig.useSpeed).SetEase(itemAnimConfig.curveX));
+                seq.Join(item.transform.DOLocalMoveY(0, itemAnimConfig.speed).SetSpeedBased(itemAnimConfig.useSpeed).SetEase(itemAnimConfig.curveY));
             }
             else
             {
-                seq.Join(item.transform.DOLocalMoveX(0, durationMove).SetEase(curveX));
-                seq.Join(item.transform.DOLocalMoveY(0, durationMove).SetEase(curveY));
+                seq.Join(item.transform.DOLocalMoveX(0, itemAnimConfig.durationMove).SetEase(itemAnimConfig.curveX));
+                seq.Join(item.transform.DOLocalMoveY(0, itemAnimConfig.durationMove).SetEase(itemAnimConfig.curveY));
             }
-            seq.Append(item.transform.DOScale(scaleDown, scaleDuration));
-            seq.Append(item.transform.DOScale(Vector3.one, scaleDuration));
+            seq.Append(item.transform.DOScale(itemAnimConfig.scaleDown, itemAnimConfig.scaleDuration));
+            seq.Append(item.transform.DOScale(Vector3.one, itemAnimConfig.scaleDuration));
+
+            var currentItem = item;
             seq.OnComplete(() =>
             {
-                item.SetSelected(false);
-                item.OnDropToSlot(slot);
-                item.Visual.SetSortingOrder(0);
+                currentItem.SetSelected(false);
+                currentItem.OnDropToSlot(slot);
+                currentItem.Visual.SetSortingOrder(0);
                 // MySonatFramework.GetService<VibrationService>().Vibrate(50);
-                GameController.Instance.GameLogicHandler.ItemMoveSlot(item, slot);
+                GameController.Instance.GameLogicHandler.ItemMoveSlot(currentItem, slot);
 
                 foreach (Transform child in slot.Container)
                 {
-                    if (child.gameObject != item.gameObject)
+                    if (child.gameObject != currentItem.gameObject)
                     {
                         GameFactory.Instance.ReturnEntity(child.GetComponent<Item>());
                     }
