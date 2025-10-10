@@ -34,7 +34,8 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             return false;
         }
 
-        #region logic order
+
+        // OPTIMIZE: LOGIC ORDER
         private static int rescueGap = 0;
         private static int currentNumberRescues = 0;
 
@@ -68,11 +69,6 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                 Debug.Log("<color=green>OrderHelper:</color> Use Rescue");
                 return GetItemOrderToRescue();
             }
-            else
-            {
-                return GetRandomItemOrder();
-            }
-
 
             var logicOrderConfig = GetLogicOrderConfig(logicOrderConfigs);
             var gameplayInfo = GetGameplayInfoForOrder(); // lấy order info mỗi layer (2 layer đầu) --> OPTIMIZE: giảm tính toán
@@ -102,6 +98,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
         }
 
+        #region Logic Rescue
         private static bool CheckUseRescue(RescueCondition rescueCondition)
         {
             if (rescueGap > 0) return false;
@@ -114,97 +111,50 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             return waitingGrillManager.ListWaitingGrills.Where(e => e.GetSlots()[0].GetItem() != null).Count() >= threshold;
         }
 
+
+        private static (ItemId itemId, int num) GetItemOrderToRescue()
+        {
+            // ---Tạo order để giải cứu---
+            // Item được lấy từ hàng chờ --> Làm giảm số lượng khay trống nhiều nhất
+            var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
+
+            var itemsInWaiting = waitingGrillManager.ListWaitingGrills.Select(e => e.GetSlots()[0].GetItem());
+            var items = itemsInWaiting.Where(e => e != null).ToList();
+
+            var dictItems = items.GroupBy(e => e.id).ToDictionary(e => e.Key, e => e.Count());
+            var itemId = dictItems.OrderByDescending(e => e.Value).First().Key;
+            var num = dictItems[itemId] > 3 ? 3 : dictItems[itemId];
+            return ((ItemId)itemId, num);
+        }
+        #endregion
+
+        #region Logic Basic Order
         private static LogicOrderConfig GetLogicOrderConfig(List<LogicOrderConfig> logicOrderConfigs)
         {
             var itemManager = GameController.Instance.GameLogicHandler.ItemManager;
             var currentRegion = 1 - (float)itemManager.CurrentItems / itemManager.TotalItems;
-            Debug.Log("<color=green>OrderHelper:</color> GetLogicOrderConfig: " + currentRegion);
+            // Debug.Log("<color=green>OrderHelper:</color> GetLogicOrderConfig: " + currentRegion);
             return logicOrderConfigs.FirstOrDefault(config => config.region >= currentRegion);
         }
 
         private static (ItemId itemId, int num, int step) GetItemOrderBasic(int minStep, GameplayInfo gameplayInfo)
         {
+            // NOTE: Ưu tiên lấy theo numSteps, sau đó mới tính đến numItems
             var dictItems = gameplayInfo.dictNeededSlots;
+            var dictNeededSlots = gameplayInfo.dictNeededSlots;
 
-            if (forward == true)
+            // Loại các item bị lock
+            var idsInLockedGrill = ItemHelper.GetItemIdsInLockedGrill();
+            var unlockedItemIds = dictNeededSlots.Keys.Where(e => idsInLockedGrill.Contains(e) == false).ToList();
+
+            var maxStep = dictNeededSlots.Values.Max(e => e.Values.Max());
+            for (int step = minStep; step <= maxStep; step++)
             {
-                for (int numItems = 3; numItems >= 1; numItems--)
-                {
-                    // chuyển về dict<numStep, List<itemId>>
-                    var dictSteps = new Dictionary<int, List<ItemId>>();
-                    foreach (var item in dictItems)
-                    {
-                        if (item.Value.ContainsKey(numItems))
-                        {
-                            var step = item.Value[numItems];
-                            dictSteps.TryAdd(step, new List<ItemId>());
-                            dictSteps[step].Add(item.Key);
-                        }
-                    }
+                var randomItemIds = unlockedItemIds.Where(e => dictNeededSlots[e].ContainsValue(step)).ToList();
+                if (randomItemIds == null || randomItemIds.Count == 0) continue;
 
-                    foreach (var curStep in dictSteps.Keys)
-                    {
-                        if (curStep >= minStep)
-                        {
-                            var filteredItems = dictSteps[curStep];
-                            if (filteredItems.Count == 0) continue;
-
-                            var randomItemId = filteredItems[UnityEngine.Random.Range(0, filteredItems.Count)];
-                            numItems = numItems > 3 ? 3 : numItems;
-                            Debug.Log("<color=green>OrderHelper:</color> GetItemOrderBasic: " + randomItemId + " " + numItems + " minStep: " + minStep + " steps: " + dictItems[randomItemId][numItems]);
-                            return (randomItemId, numItems, curStep);
-                        }
-                    }
-                }
+                return GetOptimizedRandomItem(randomItemIds, step, dictNeededSlots);
             }
-            else
-            {
-                var dictNeededSlots = gameplayInfo.dictNeededSlots;
-                // không lấy các item trong khay đang bị khóa
-                var idsInLockedGrill = ItemHelper.GetItemIdsInLockedGrill();
-
-                for (int step = minStep; step < 6; step++)
-                {
-                    var randomItemIds = dictNeededSlots.Keys.Where(e => dictNeededSlots[e].ContainsValue(minStep) && idsInLockedGrill.Contains(e) == false).ToList();
-                    var itemIdsList = new List<ItemId>();
-                    var maxNum = 0;
-                    foreach (var itemId in randomItemIds)
-                    {
-                        foreach (var num in dictNeededSlots[itemId].Keys.Where(e => dictNeededSlots[itemId][e] == minStep))
-                        {
-                            if (num > maxNum)
-                            {
-                                maxNum = num;
-                                itemIdsList.Clear();
-                                itemIdsList.Add(itemId);
-                            }
-                            else if (num == maxNum)
-                            {
-                                itemIdsList.Add(itemId);
-                            }
-                        }
-                    }
-                    if (itemIdsList.Count > 0)
-                    {
-                        var randomItemId = itemIdsList[UnityEngine.Random.Range(0, itemIdsList.Count)];
-                        Debug.Log("<color=green>OrderHelper:</color> GetItemOrderBasic: " + randomItemId + " " + maxNum + " minStep: " + minStep);
-                        return (randomItemId, maxNum, minStep);
-                    }
-                    // // lấy ra item có num lớn nhất
-                    // if (randomItemIds.Count > 0)
-                    // {
-                    //     // lấy id có số num lớn nhất với min step
-                    //     var maxNum = randomItemIds.Max(e => dictNeededSlots[e].Keys.Max());
-                    //     var ids = randomItemIds.Where(e => dictNeededSlots[e].Keys.Max() == maxNum).ToList();
-                    //     var randomId = ids[UnityEngine.Random.Range(0, ids.Count)];
-                    //     // var randomItemId = randomItemIds[UnityEngine.Random.Range(0, randomItemIds.Count)];
-                    //     Debug.Log("<color=green>OrderHelper:</color> GetItemOrderBasic: " + randomId + " " + maxNum + " minStep: " + minStep);
-                    //     return ((ItemId)randomId, maxNum, minStep);
-                    // }
-                }
-
-            }
-
 
             return (ItemId.None, 0, 0);
         }
@@ -216,45 +166,22 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             var minStep = dictNeededSlots.Values.Min(e => e.Values.Min());
 
             var randomItemIds = dictNeededSlots.Keys.Where(e => dictNeededSlots[e].ContainsValue(minStep)).ToList();
-            var maxNum = 0;
-            var itemIdsList = new List<ItemId>();
-            foreach (var itemId in randomItemIds)
-            {
-                foreach (var num in dictNeededSlots[itemId].Keys.Where(e => dictNeededSlots[itemId][e] == minStep))
-                {
-                    if (num > maxNum)
-                    {
-                        maxNum = num;
-                        itemIdsList.Clear();
-                        itemIdsList.Add(itemId);
-                    }
-                    else if (num == maxNum)
-                    {
-                        itemIdsList.Add(itemId);
-                    }
-                }
-            }
-            // var ids = randomItemIds.Where(e => dictNeededSlots[e].Keys.Max() == maxNum).ToList();
-            // var randomId = ids[UnityEngine.Random.Range(0, ids.Count)];
-
-            var randomId = itemIdsList[UnityEngine.Random.Range(0, itemIdsList.Count)];
-            Debug.Log("<color=red>OrderHelper:</color> ForceGetItemOrderBasic: " + randomId + " " + maxNum + " minStep: " + minStep);
-            return ((ItemId)randomId, maxNum, minStep);
-
-            // var randomItemId = randomItemIds[UnityEngine.Random.Range(0, randomItemIds.Count)];
-            // var nums = dictNeededSlots[randomItemId].Keys.Where(e => dictNeededSlots[randomItemId][e] == minStep).ToList();
-            // var maxNum = nums.Max();
-            // Debug.Log("<color=red>OrderHelper:</color> ForceGetItemOrderBasic: " + randomItemId + " " + maxNum + " minStep: " + minStep);
-            // return (randomItemId, maxNum, minStep);
+            return GetOptimizedRandomItem(randomItemIds, minStep, dictNeededSlots);
         }
 
-        private static (ItemId itemId, int num) GetRandomItemOrder()
+        private static (ItemId itemId, int num, int step) GetOptimizedRandomItem(List<ItemId> randomItemIds, int step, Dictionary<ItemId, Dictionary<int, int>> dictNeededSlots)
         {
-            var listItemIds = ItemHelper.GetItemIdDictInGameplay(-1);
-            var randomItemId = listItemIds.Keys.ToList()[UnityEngine.Random.Range(0, listItemIds.Keys.Count)];
-            var num = listItemIds[randomItemId];
-            return ((ItemId)randomItemId, num > 3 ? 3 : num);
+            // Lấy item có numItems lớn nhất theo step hiện tại 
+            var randomDictNeededSlots = dictNeededSlots.Where(e => randomItemIds.Contains(e.Key)).ToDictionary(e => e.Key, e => e.Value);
+            var availableMaxNum = randomDictNeededSlots.Values.Where(e => e.ContainsValue(step)).Max(e => e.Keys.Max());
+            var listItemIdsByMaxNum = randomItemIds.Where(e => randomDictNeededSlots[e].Keys.Max() == availableMaxNum).ToList();
+
+            var randomItemId = listItemIdsByMaxNum[UnityEngine.Random.Range(0, listItemIdsByMaxNum.Count)];
+            Debug.Log("<color=green>OrderHelper:</color> GetItemOrderBasic: " + randomItemId + " " + availableMaxNum + " minStep: " + step);
+            return (randomItemId, availableMaxNum, step);
         }
+
+        #region Gameplay Info
         private static GameplayInfo GetGameplayInfoForOrder()
         {
             return new GameplayInfo() { dictNeededSlots = GetDictNeededSlots() };
@@ -265,13 +192,12 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             // dynamic programming
             var dp = new Dictionary<ItemId, Dictionary<int, int>>(); // itemId/numItems/neededSlot
 
-            // order: Chọn item tối ưu giúp clear order
+            // Tính toán order: Sẽ luôn chọn item tối ưu giúp clear order
             var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
             var orderItemsDict = orderManager.GetOrderItemsDict();
-            // order: Chọn item tối ưu giúp clear order
             var neededItemsForCurrentOrder = orderItemsDict.ToDictionary(e => e.Key, e => e.Value.maxItems - e.Value.num);
 
-            // waiting grill
+            #region Calculate waiting grill
             var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
             foreach (var waitingGrill in waitingGrillManager.ListWaitingGrills)
             {
@@ -302,11 +228,14 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                     }
                 }
             }
+            #endregion
 
+            #region Calculate grill
             // tính số slot trống cần tối đa để lấy ra item
             var grillManager = GameController.Instance.GameLogicHandler.GrillManager;
             var dictCountSlotByGrill = new Dictionary<int, int>(); // số slot mỗi grill
             var dictNumItemsInUpperLayer = new Dictionary<int, List<Item>>(); // số lượng item ở layer trên đó
+
             // duyệt qua layer 0
             foreach (var primaryGrill in grillManager.ListGrills)
             {
@@ -347,7 +276,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
             // duyệt qua layer 1
             // Duyệt lần 1 để lấy item tối ưu còn lại cho order
-            var dictMinItemForOrder = new Dictionary<ItemId, List<(List<Item>, int)>>(); // đếm các item (num, neededSlot)
+            var dictListItemStepInfo = new Dictionary<ItemId, List<(List<Item>, int)>>(); // Danh sách các loại item và step cần cửa nó: itemId/(Item, số step cần cửa nó)
             foreach (var primaryGrill in grillManager.ListGrills)
             {
                 var subGrills = primaryGrill.GetSubGrills();
@@ -361,11 +290,11 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                 {
                     if (neededItemsForCurrentOrder.ContainsKey(itemId))
                     {
-                        dictMinItemForOrder.TryAdd(itemId, new List<(List<Item>, int)>());
+                        dictListItemStepInfo.TryAdd(itemId, new List<(List<Item>, int)>());
 
                         var items = listCurrentItems.Where(e => (ItemId)e.id == itemId).ToList();
                         var neededSlot = dictCountSlotByGrill.GetValueOrDefault(primaryGrill.id, 0);
-                        dictMinItemForOrder[itemId].Add((items, neededSlot));
+                        dictListItemStepInfo[itemId].Add((items, neededSlot));
                     }
                 }
             }
@@ -373,10 +302,10 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             var listIgnoreItems = new List<Item>();
             foreach (var itemId in neededItemsForCurrentOrder.Keys)
             {
-                if (dictMinItemForOrder.ContainsKey(itemId))
+                if (dictListItemStepInfo.ContainsKey(itemId))
                 {
                     var neededItems = neededItemsForCurrentOrder[itemId];
-                    listIgnoreItems.AddRange(ChooseItemToIgnore(dictMinItemForOrder[itemId], neededItems));
+                    listIgnoreItems.AddRange(ChooseItemToIgnore(dictListItemStepInfo[itemId], neededItems));
                 }
             }
 
@@ -425,9 +354,11 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                     }
                 }
             }
+            #endregion
 
             return dp;
         }
+
 
         private static List<Item> ChooseItemToIgnore(List<(List<Item>, int)> list, int neededItems)
         {
@@ -485,27 +416,16 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
             return best.chosen;
         }
-
-        private static (ItemId itemId, int num) GetItemOrderToRescue()
-        {
-            // ---Tạo order để giải cứu---
-            // Item được lấy từ hàng chờ --> Làm giảm số lượng khay trống nhiều nhất
-            var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
-
-            var itemsInWaiting = waitingGrillManager.ListWaitingGrills.Select(e => e.GetSlots()[0].GetItem());
-            var items = itemsInWaiting.Where(e => e != null).ToList();
-
-            var dictItems = items.GroupBy(e => e.id).ToDictionary(e => e.Key, e => e.Count());
-            var itemId = dictItems.OrderByDescending(e => e.Value).First().Key;
-            var num = dictItems[itemId] > 3 ? 3 : dictItems[itemId];
-            return ((ItemId)itemId, num);
-        }
         #endregion
+
+        #endregion
+
     }
 
     public class GameplayInfo
     {
         // số step để ăn numItems tối ưu
+        // itemId/ numItems/ neededStep
         public Dictionary<ItemId, Dictionary<int, int>> dictNeededSlots;
     }
 }
