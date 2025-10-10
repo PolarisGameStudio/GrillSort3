@@ -1,14 +1,72 @@
-using SonatFramework.Scripts.Feature.Tracking;
+using Sonat.CustomService;
+using Sonat.Enums;
+using SonatFramework.Scripts.Feature.Lives;
+using SonatFramework.Systems;
 using SonatFramework.Systems.AudioManagement;
+using SonatFramework.Systems.BoosterManagement;
+using SonatFramework.Systems.InventoryManagement;
+using SonatFramework.Systems.LevelManagement;
+using SonatFramework.Systems.LoadObject;
+using SonatFramework.Systems.ObjectPooling;
+using SonatFramework.Systems.TrackingModule;
+using SonatFramework.Systems.UserData;
+using UnityEngine;
 
-public class MySonatFramework : SonatFramework.Systems.SonatSystem
+public class MySonatFramework : SonatSystem
 {
-    public static MySonatFramework instance;
-    public static CustomTrackingService customTrackingService;
+    public static SonatPoolingService poolingService;
+    public static SonatPoolingContainer poolingContainer;
+    public static SonatLoadAddressableAsync sonatLoadAddressableAsync;
+    public static SonatLevelService sonatLevelService;
     public static AudioService audioService;
+    public static UserDataService userDataService;
+    public static LivesService livesService;
+    public static InventoryService inventoryService;
+    public static LevelService levelService;
+    public static CustomTrackingService customTrackingService;
+    public static GameplayAnalyticsService gameplayAnalyticsService;
+    public static SonatBoosterService sonatBoosterService;
 
-    private void Awake()
+    private void Start()
     {
-        instance = this;
+        Application.targetFrameRate = 80;
+        Input.multiTouchEnabled = false;
+        InitService();
+    }
+
+    public static void InitService()
+    {
+        poolingService = GetService<SonatPoolingService>();
+        poolingContainer = GetService<SonatPoolingContainer>();
+        sonatLoadAddressableAsync = GetService<SonatLoadAddressableAsync>();
+        sonatLevelService = GetService<SonatLevelService>();
+        audioService = GetService<AudioService>();
+        userDataService = GetService<UserDataService>();
+        livesService = GetService<LivesService>();
+        inventoryService = GetService<InventoryService>();
+        levelService = GetService<LevelRemoteService>();
+        customTrackingService = GetService<CustomTrackingService>();
+        gameplayAnalyticsService = GetService<GameplayAnalyticsService>();
+        sonatBoosterService = GetService<SonatBoosterService>();
+    }
+
+    public static LevelDifficulty GetLevelDifficulty(int level)
+    {
+        // try
+        // {
+
+        //     return LevelGenerator.levelService != null
+        //         ? LevelGenerator.levelService.GetLevelData<Gameplay.LevelData.LevelData>(level, GameMode.Classic).difficulty
+        //             : levelService.GetLevelData<Gameplay.LevelData.LevelData>(level, GameMode.Classic).difficulty;
+        // }
+        // catch (Exception)
+        // {
+            return LevelDifficulty.Normal;
+        // }
+    }
+
+    public static LevelType GetLevelType(int level)
+    {
+        return levelService.GetLevelData<Gameplay.LevelData.LevelData>(level, GameMode.Classic).levelType;
     }
 }

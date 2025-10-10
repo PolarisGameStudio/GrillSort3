@@ -1,6 +1,6 @@
 using SonatFramework.Systems.EventBus;
 
-namespace SonatFramework.Scripts.Feature.Tracking
+namespace Sonat.CustomService
 {
     public class CustomTrackingService : SonatFramework.Systems.TrackingModule.TrackingService
     {

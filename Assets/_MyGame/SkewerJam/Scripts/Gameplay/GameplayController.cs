@@ -6,9 +6,11 @@ public class GameplayController : MonoBehaviour
     public static GameplayController instance;
     public GameState gameState;
 
+    public LevelGenerator levelGenerator;
+
     private void Awake()
     {
-        instance = this;
+        // instance = this;
     }
 
     public void Start()
