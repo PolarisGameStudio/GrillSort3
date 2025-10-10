@@ -22,8 +22,7 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
 
         public override LevelData GetLevelData()
         {
-            // return GameController.Instance.LevelGenerator.LevelData;
-            return null;
+            return GameController.Instance.LevelGenerator.LevelData;
         }
 
         public override List<PrimaryGrill> GetPrimaryGrills()
@@ -33,16 +32,14 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
 
         public override float GetItemThreshold()
         {
-            // var difficulty = GameController.Instance.LevelGenerator.LevelData.difficulty;
-            // return octoChefConfigSO_SkewerJam.GetItemThreshold(difficulty);
-            return 0;
+            var difficulty = GameController.Instance.LevelGenerator.LevelData.difficulty;
+            return octoChefConfigSO_SkewerJam.GetItemThreshold(difficulty);
         }
 
         public override float GetGrillThreshold()
         {
-            // var difficulty = GameController.Instance.LevelGenerator.LevelData.difficulty;
-            // return octoChefConfigSO_SkewerJam.GetGrillThreshold(difficulty);
-            return 0;
+            var difficulty = GameController.Instance.LevelGenerator.LevelData.difficulty;
+            return octoChefConfigSO_SkewerJam.GetGrillThreshold(difficulty);
         }
 
         public override void SetStartGrill(OctoChefObstacle octoChefObstacle, List<GrillBase> grills)
@@ -63,9 +60,8 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
         private PrimaryGrill GetRandomGrillByOrderItems(List<PrimaryGrill> validGrills, int slotCount, PrimaryGrill lastGrill, System.Random rng, bool force)
         {
 
-            // var difficulty = GameController.Instance.LevelGenerator.LevelData.difficulty;
-            // var (rate0, rate1, rate2) = octoChefConfigSO_SkewerJam.GetRate(difficulty);
-            var (rate0, rate1, rate2) = (0, 0, 0);
+            var difficulty = GameController.Instance.LevelGenerator.LevelData.difficulty;
+            var (rate0, rate1, rate2) = octoChefConfigSO_SkewerJam.GetRate(difficulty);
 
             var dictGrillCountOrderItems = GrillHelper.GetGrillCountOrderItems();
 
@@ -131,7 +127,8 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
                 {
                     if (hit.gameObject == octoChefObstacle.gameObject)
                     {
-                        OpenPopupUnlock(()=>{
+                        OpenPopupUnlock(() =>
+                        {
                             octoChefObstacle.UnlockCurrentGrill();
                             octoChefObstacle.OnComplete();
                         });

@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 //-----------------------------------------------------------------------
 // <copyright file="AddressablesInspectors.cs" company="Sirenix ApS">
 // Copyright (c) Sirenix ApS. All rights reserved.
@@ -1745,4 +1746,5 @@ namespace Sirenix.OdinInspector.Modules.Addressables.Editor
         }
     }
 }
+#endif
 #endif

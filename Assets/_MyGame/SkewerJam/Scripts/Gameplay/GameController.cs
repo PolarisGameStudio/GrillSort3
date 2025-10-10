@@ -167,7 +167,7 @@ namespace MyGame.SkewerJam.Gameplay
                 nextLevel = () => NextLevel()
             };
             PanelManager.Instance.OpenForget<WinPanel_SkewerJam>(data);
-            NextLevel();
+            // NextLevel();
         }
 
         public async UniTaskVoid Stuck(StuckType stuckType)

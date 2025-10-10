@@ -8,6 +8,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1938346913205234754, guid: c094ba5f1a927ae4e98443e9cd89e826, type: 3}
+      propertyPath: maskMaterials.materialsOutsideMask.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1938346913205234754, guid: c094ba5f1a927ae4e98443e9cd89e826, type: 3}
+      propertyPath: maskMaterials.materialsMaskDisabled.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1938346913205234754, guid: c094ba5f1a927ae4e98443e9cd89e826, type: 3}
+      propertyPath: maskMaterials.materialsOutsideMask.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bb14227e9f198d74897700468e7c08de, type: 2}
+    - target: {fileID: 1938346913205234754, guid: c094ba5f1a927ae4e98443e9cd89e826, type: 3}
+      propertyPath: maskMaterials.materialsMaskDisabled.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e3f23e8bd3bb9f64d9df4f2f32a537a5, type: 2}
     - target: {fileID: 2867968906874444103, guid: c094ba5f1a927ae4e98443e9cd89e826, type: 3}
       propertyPath: octoChefBehaviorSO
       value: 
@@ -56,6 +72,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5831210611642654386, guid: c094ba5f1a927ae4e98443e9cd89e826, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5831210611642654386, guid: c094ba5f1a927ae4e98443e9cd89e826, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2106788883
+      objectReference: {fileID: 0}
+    - target: {fileID: 5831210611642654386, guid: c094ba5f1a927ae4e98443e9cd89e826, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bb14227e9f198d74897700468e7c08de, type: 2}
     - target: {fileID: 6894678438735625804, guid: c094ba5f1a927ae4e98443e9cd89e826, type: 3}
       propertyPath: m_Name
       value: _SkewerJam_ObstacleOctoChef
@@ -64,6 +92,34 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6983987300211563895, guid: c094ba5f1a927ae4e98443e9cd89e826, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6983987300211563895, guid: c094ba5f1a927ae4e98443e9cd89e826, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2106788883
+      objectReference: {fileID: 0}
+    - target: {fileID: 8389212050475365638, guid: c094ba5f1a927ae4e98443e9cd89e826, type: 3}
+      propertyPath: maskMaterials.materialsOutsideMask.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8389212050475365638, guid: c094ba5f1a927ae4e98443e9cd89e826, type: 3}
+      propertyPath: maskMaterials.materialsMaskDisabled.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8389212050475365638, guid: c094ba5f1a927ae4e98443e9cd89e826, type: 3}
+      propertyPath: maskMaterials.materialsOutsideMask.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41d9541e4c4a41a42ae611b6529fa6fe, type: 2}
+    - target: {fileID: 8389212050475365638, guid: c094ba5f1a927ae4e98443e9cd89e826, type: 3}
+      propertyPath: maskMaterials.materialsMaskDisabled.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 69b95259cf3bb504da55cf473694cd39, type: 2}
+    - target: {fileID: 8973594710765124849, guid: c094ba5f1a927ae4e98443e9cd89e826, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41d9541e4c4a41a42ae611b6529fa6fe, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 //-----------------------------------------------------------------------
 // <copyright file="OdinAddressableReflection.cs" company="Sirenix ApS">
 // Copyright (c) Sirenix ApS. All rights reserved.
@@ -21,3 +22,4 @@ namespace Sirenix.OdinInspector.Modules.Addressables.Editor.Internal
 		internal static void EnsureConstructed() { }
 	}
 }
+#endif

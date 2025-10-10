@@ -70,16 +70,18 @@ namespace MyGame.SkewerJam.Gameplay
             await CreateOrder(levelData.ListOrderData, orderManager);
             await UniTask.DelayFrame(1);
 
-            await GameController.Instance.GameViewport.CalculateViewport();
-            // // create conveyor
-            // // tính toán viewport mới create conveyor
-            // var conveyorManager = gameLogicHandler.ConveyorManager;
-            // await CreateConveyors(levelData.conveyorData, conveyorManager);
+            // create conveyor
+            var conveyorManager = gameLogicHandler.ConveyorManager;
+            await CreateConveyors(levelData.conveyorData, conveyorManager);
 
-            // await UniTask.DelayFrame(1);
-            // // create obstacle
-            // var obstacleManager = gameLogicHandler.ObstacleManager;
-            // await GenerateObstacles(levelData.obstacleData, obstacleManager);
+            // tính toán viewport mới create conveyor
+            await GameController.Instance.GameViewport.CalculateViewport();
+            await UniTask.DelayFrame(1);
+
+            // create obstacles
+            var obstacleManager = gameLogicHandler.ObstacleManager;
+            await GenerateObstacles(levelData.obstacleData, obstacleManager);
+            await UniTask.DelayFrame(1);
         }
 
 
@@ -252,24 +254,20 @@ namespace MyGame.SkewerJam.Gameplay
         }
         #endregion
 
+        private async UniTask CreateConveyors(List<ConveyorData> listConveyorData, ConveyorManager conveyorManager)
+        {
+            if (listConveyorData == null) return;
 
-
-
-        // private async UniTask CreateConveyors(List<ConveyorData> listConveyorData, ConveyorManager conveyorManager)
-        // {
-        //     if (listConveyorData == null) return;
-
-        //     foreach (var conveyorData in listConveyorData)
-        //     {
-        //         ConveyorType conveyorType = conveyorData.conveyorType == ConveyorType.None
-        //             ? (conveyorData.moveType == MoveType.Horizontal ? ConveyorType.Horizontal : ConveyorType.Vertical)
-        //             : conveyorData.conveyorType;
-        //         var conveyor = await GameFactory.Instance.CreateEntityAsync<ConveyorController>($"Conveyor{conveyorType}", conveyorManager.transform);
-        //         conveyor.SetData(conveyorData);
-        //         //conveyor.transform.SetParent(gameplaySpace);
-        //         conveyorManager.AddConveyor(conveyor);
-        //     }
-        // }
+            foreach (var conveyorData in listConveyorData)
+            {
+                ConveyorType conveyorType = conveyorData.conveyorType == ConveyorType.None
+                    ? (conveyorData.moveType == MoveType.Horizontal ? ConveyorType.Horizontal : ConveyorType.Vertical)
+                    : conveyorData.conveyorType;
+                var conveyor = await GameFactory.Instance.CreateEntityAsync<ConveyorController>($"Conveyor{conveyorType}", conveyorManager.transform);
+                conveyor.SetData(conveyorData);
+                conveyorManager.AddConveyor(conveyor);
+            }
+        }
 
         public bool IsStaticGrill(int id)
         {
@@ -282,27 +280,27 @@ namespace MyGame.SkewerJam.Gameplay
             return true;
         }
 
-        // private async UniTask GenerateObstacles(List<ObstacleData> listObstacleData, ObstacleManager obstacleManager)
-        // {
-        //     if (listObstacleData == null) return;
-        //     foreach (var obstacleData in listObstacleData)
-        //     {
-        //         //var grill = primaryGrills.FirstOrDefault(e => e.id == grillObstacleData.grillId);
-        //         var grillManager = GameController.Instance.GameLogicHandler.GrillManager;
-        //         var listGrills = grillManager.ListGrills;
-        //         var grills = listGrills.FindAll(e => obstacleData.grillIds.Contains(e.id));
-        //         if (grills.Count == 0)
-        //         {
-        //             Debug.LogWarning($"Grill not found");
-        //             continue;
-        //         }
+        private async UniTask GenerateObstacles(List<ObstacleData> listObstacleData, ObstacleManager obstacleManager)
+        {
+            if (listObstacleData == null) return;
+            foreach (var obstacleData in listObstacleData)
+            {
+                //var grill = primaryGrills.FirstOrDefault(e => e.id == grillObstacleData.grillId);
+                var grillManager = GameController.Instance.GameLogicHandler.GrillManager;
+                var listGrills = grillManager.ListGrills;
+                var grills = listGrills.FindAll(e => obstacleData.grillIds.Contains(e.id));
+                if (grills.Count == 0)
+                {
+                    Debug.LogWarning($"Grill not found");
+                    continue;
+                }
 
-        //         var obstacle = await GameFactory.Instance.CreateEntityAsync<ObstacleBase>($"Obstacle{obstacleData.obstacleType}", obstacleManager.transform);
-        //         List<GrillBase> grillsSelected = new List<GrillBase>(grills);
-        //         obstacle.SetData(obstacleData);
-        //         obstacle.SetGrill(grillsSelected);
-        //         obstacleManager.AddObstacle(obstacle);
-        //     }
-        // }
+                var obstacle = await GameFactory.Instance.CreateEntityAsync<ObstacleBase>($"Obstacle{obstacleData.obstacleType}", obstacleManager.transform);
+                List<GrillBase> grillsSelected = new List<GrillBase>(grills);
+                obstacle.SetData(obstacleData);
+                obstacle.SetGrill(grillsSelected);
+                obstacleManager.AddObstacle(obstacle);
+            }
+        }
     }
 }

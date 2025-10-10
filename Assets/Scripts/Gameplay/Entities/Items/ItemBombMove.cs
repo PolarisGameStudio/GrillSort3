@@ -164,6 +164,8 @@ namespace Gameplay.Entities.Items
 
             // PanelManager.Instance.OpenPanelByName<PopupSkipBomb>("PopupBombExplosive",
             //     new UIData().Add("Bomb", this).Add("OnSkipBomb", (Action)SkipBomb).Add("OnGiveUp", (Action)ExplodeBomb));
+
+            ExplodeBomb();
         }
 
         public void ExplodeBomb()

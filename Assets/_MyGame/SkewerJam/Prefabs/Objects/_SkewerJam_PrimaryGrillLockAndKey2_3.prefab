@@ -8,6 +8,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1752198637837949001, guid: 61d944cf8ceb6834e9e934302d814614, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1752198637837949001, guid: 61d944cf8ceb6834e9e934302d814614, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2106788883
+      objectReference: {fileID: 0}
+    - target: {fileID: 3008063973864680350, guid: 61d944cf8ceb6834e9e934302d814614, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3008063973864680350, guid: 61d944cf8ceb6834e9e934302d814614, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2106788883
+      objectReference: {fileID: 0}
     - target: {fileID: 4684110678031289044, guid: 61d944cf8ceb6834e9e934302d814614, type: 3}
       propertyPath: grillBaseBehaviorSO
       value: 
@@ -51,6 +67,14 @@ PrefabInstance:
     - target: {fileID: 6684947822822386181, guid: 61d944cf8ceb6834e9e934302d814614, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7169023005824250725, guid: 61d944cf8ceb6834e9e934302d814614, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7169023005824250725, guid: 61d944cf8ceb6834e9e934302d814614, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2106788883
       objectReference: {fileID: 0}
     - target: {fileID: 8319512468561046463, guid: 61d944cf8ceb6834e9e934302d814614, type: 3}
       propertyPath: m_Name

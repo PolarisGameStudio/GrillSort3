@@ -54,6 +54,20 @@ namespace MyGame.SkewerJam.Objects
             OrderHelper.Reset();
         }
 
+        public void Clear()
+        {
+            var gameLogicHandler = GameController.Instance.GameLogicHandler;
+            gameLogicHandler.OnItemStartSwitch -= GameLogicHandler_OnItemStartSwitch;
+            gameLogicHandler.OnItemEndSwitch -= GameLogicHandler_OnItemEndSwitch;
+
+            foreach (var order in _listOrders)
+            {
+                if (order != null)
+                    GameFactory.Instance.ReturnEntity(order);
+            }
+            _listOrders.Clear();
+        }
+
         private void GameLogicHandler_OnItemStartSwitch(Item item, SlotBase slot)
         {
             if (slot.GetGrill() is OrderEntity orderEntity)
@@ -87,12 +101,13 @@ namespace MyGame.SkewerJam.Objects
                     orderEntity.PlayComplete(() =>
                         {
                             GameController.Instance.GameLogicHandler.EndCollectItem(orderEntity);
-                        }, () =>
-                        {
                             if (checkNextOrder == false)
                             {
                                 AlignObjects().Forget();
                             }
+                        }, () =>
+                        {
+
                         });
 
                     if (nextOrder != null)
@@ -109,21 +124,6 @@ namespace MyGame.SkewerJam.Objects
             }
 
         }
-
-        public void Clear()
-        {
-            var gameLogicHandler = GameController.Instance.GameLogicHandler;
-            gameLogicHandler.OnItemEndSwitch -= GameLogicHandler_OnItemEndSwitch;
-
-            foreach (var order in _listOrders)
-            {
-                if (order != null)
-                    GameFactory.Instance.ReturnEntity(order);
-            }
-            _listOrders.Clear();
-
-        }
-
         #endregion
 
         #region DATA
@@ -136,6 +136,7 @@ namespace MyGame.SkewerJam.Objects
                 if (_listOrderData[i].active == 1)
                 {
                     var (itemId, num) = OrderHelper.GetItemOrder();
+                    Debug.Log("<color=yellow>OrderManager:</color> SetData: " + itemId + " " + num);
                     var orderEntity = await CreateActiveNextOrder(itemId, num);
                     orderEntity.SetOrderIndex(i);
                 }
@@ -174,6 +175,7 @@ namespace MyGame.SkewerJam.Objects
         private async UniTask CreateNextOrder(int orderIndex)
         {
             var (itemId, num) = OrderHelper.GetItemOrder();
+            Debug.Log("<color=yellow>OrderManager:</color> CreateNextOrder: " + itemId + " " + num);
 
             var nextOrder = await CreateActiveNextOrder(itemId, num);
             var orderPos = leftStartPos.position;
@@ -302,27 +304,6 @@ namespace MyGame.SkewerJam.Objects
                 if (orderEntity == null) return;
             }
             orderEntity.PlayUnlock();
-        }
-
-        public List<(int maxNumber, int itemId, int number)> GetOrderItemDatas()
-        {
-            var list = new List<(int maxNumber, int itemId, int number)>();
-            foreach (var order in _listOrders)
-            {
-                if (order.IsActive == false) continue;
-                if (order.ItemIdTarget == ItemId.None) continue;
-
-                int number = 0;
-                foreach (var slot in order.GetSlots())
-                {
-                    if (slot.GetItem() != null)
-                    {
-                        number += 1;
-                    }
-                }
-                list.Add((order.MaxItems, (int)order.ItemIdTarget, number));
-            }
-            return list;
         }
     }
 }

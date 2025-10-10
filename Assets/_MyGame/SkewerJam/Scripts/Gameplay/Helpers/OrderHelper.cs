@@ -66,7 +66,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             {
                 rescueGap = rescueCondition.maxRescueGap;
                 currentNumberRescues += 1;
-                Debug.Log("<color=green>OrderHelper:</color> Use Rescue");
+                Debug.Log("<color=yellow>OrderHelper:</color> Use Rescue");
                 return GetItemOrderToRescue();
             }
 
@@ -124,6 +124,8 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             var dictItems = items.GroupBy(e => e.id).ToDictionary(e => e.Key, e => e.Count());
             var itemId = dictItems.OrderByDescending(e => e.Value).First().Key;
             var num = dictItems[itemId] > 3 ? 3 : dictItems[itemId];
+
+            Debug.Log("<color=yellow>OrderHelper:</color> GetItemOrderToRescue: " + itemId + " " + num);
             return ((ItemId)itemId, num);
         }
         #endregion
@@ -153,7 +155,9 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                 var randomItemIds = unlockedItemIds.Where(e => dictNeededSlots[e].ContainsValue(step)).ToList();
                 if (randomItemIds == null || randomItemIds.Count == 0) continue;
 
-                return GetOptimizedRandomItem(randomItemIds, step, dictNeededSlots);
+                var (itemId, num, s) = GetOptimizedRandomItem(randomItemIds, step, dictNeededSlots);
+                Debug.Log("<color=green>OrderHelper:</color> GetItemOrderBasic: " + itemId + " " + num + " minStep: " + s);
+                return (itemId, num, s);
             }
 
             return (ItemId.None, 0, 0);
@@ -166,19 +170,46 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             var minStep = dictNeededSlots.Values.Min(e => e.Values.Min());
 
             var randomItemIds = dictNeededSlots.Keys.Where(e => dictNeededSlots[e].ContainsValue(minStep)).ToList();
-            return GetOptimizedRandomItem(randomItemIds, minStep, dictNeededSlots);
+            var (itemId, num, step) = GetOptimizedRandomItem(randomItemIds, minStep, dictNeededSlots);
+            Debug.Log("<color=red>OrderHelper:</color> ForceGetItemOrderBasic: " + itemId + " " + num + " minStep: " + step);
+            return (itemId, num, step);
         }
 
         private static (ItemId itemId, int num, int step) GetOptimizedRandomItem(List<ItemId> randomItemIds, int step, Dictionary<ItemId, Dictionary<int, int>> dictNeededSlots)
         {
-            // Lấy item có numItems lớn nhất theo step hiện tại 
-            var randomDictNeededSlots = dictNeededSlots.Where(e => randomItemIds.Contains(e.Key)).ToDictionary(e => e.Key, e => e.Value);
-            var availableMaxNum = randomDictNeededSlots.Values.Where(e => e.ContainsValue(step)).Max(e => e.Keys.Max());
-            var listItemIdsByMaxNum = randomItemIds.Where(e => randomDictNeededSlots[e].Keys.Max() == availableMaxNum).ToList();
+            // // Lấy item có numItems lớn nhất theo step hiện tại 
+            // var randomDictNeededSlots = dictNeededSlots.Where(e => randomItemIds.Contains(e.Key)).ToDictionary(e => e.Key, e => e.Value);
 
-            var randomItemId = listItemIdsByMaxNum[UnityEngine.Random.Range(0, listItemIdsByMaxNum.Count)];
-            Debug.Log("<color=green>OrderHelper:</color> GetItemOrderBasic: " + randomItemId + " " + availableMaxNum + " minStep: " + step);
-            return (randomItemId, availableMaxNum, step);
+            // var availableMaxNum = randomDictNeededSlots.Values.Where(e => e.ContainsValue(step)).Max(e => e.Keys.Max());
+            // var listItemIdsByMaxNum = randomItemIds.Where(e => randomDictNeededSlots.ContainsKey(e) && randomDictNeededSlots[e].Keys.Max() == availableMaxNum).ToList();
+
+            // var randomItemId = listItemIdsByMaxNum[UnityEngine.Random.Range(0, listItemIdsByMaxNum.Count)];
+            // Debug.Log("<color=green>OrderHelper:</color> GetItemOrderBasic: " + randomItemId + " " + availableMaxNum + " minStep: " + step);
+            // return (randomItemId, availableMaxNum, step);
+
+            var maxNum = 0;
+            var itemIdsList = new List<ItemId>();
+            foreach (var itemId in randomItemIds)
+            {
+                foreach (var num in dictNeededSlots[itemId].Keys.Where(e => dictNeededSlots[itemId][e] == step))
+                {
+                    if (num > maxNum)
+                    {
+                        maxNum = num;
+                        itemIdsList.Clear();
+                        itemIdsList.Add(itemId);
+                    }
+                    else if (num == maxNum)
+                    {
+                        itemIdsList.Add(itemId);
+                    }
+                }
+            }
+            // var ids = randomItemIds.Where(e => dictNeededSlots[e].Keys.Max() == maxNum).ToList();
+            // var randomId = ids[UnityEngine.Random.Range(0, ids.Count)];
+
+            var randomId = itemIdsList[UnityEngine.Random.Range(0, itemIdsList.Count)];
+            return ((ItemId)randomId, maxNum, step);
         }
 
         #region Gameplay Info

@@ -8,10 +8,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1068193483240497962, guid: 3633b820cadb9814c93051a395e52e60, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068193483240497962, guid: 3633b820cadb9814c93051a395e52e60, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068193483240497962, guid: 3633b820cadb9814c93051a395e52e60, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068193483240497962, guid: 3633b820cadb9814c93051a395e52e60, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2106788883
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957557517720364490, guid: 3633b820cadb9814c93051a395e52e60, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957557517720364490, guid: 3633b820cadb9814c93051a395e52e60, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2106788883
+      objectReference: {fileID: 0}
     - target: {fileID: 4730223729334251720, guid: 3633b820cadb9814c93051a395e52e60, type: 3}
       propertyPath: itemBehaviorSO
       value: 
       objectReference: {fileID: 11400000, guid: d1c9c00d81718314fb597872590a0e92, type: 2}
+    - target: {fileID: 5974098430099057061, guid: 3633b820cadb9814c93051a395e52e60, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974098430099057061, guid: 3633b820cadb9814c93051a395e52e60, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2106788883
+      objectReference: {fileID: 0}
     - target: {fileID: 7286532562927438961, guid: 3633b820cadb9814c93051a395e52e60, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9
@@ -52,9 +84,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7323925327312408857, guid: 3633b820cadb9814c93051a395e52e60, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323925327312408857, guid: 3633b820cadb9814c93051a395e52e60, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2106788883
+      objectReference: {fileID: 0}
     - target: {fileID: 8596088544105061904, guid: 3633b820cadb9814c93051a395e52e60, type: 3}
       propertyPath: m_Name
       value: _SkewerJam_ItemBomb
+      objectReference: {fileID: 0}
+    - target: {fileID: 8602522926868060605, guid: 3633b820cadb9814c93051a395e52e60, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8602522926868060605, guid: 3633b820cadb9814c93051a395e52e60, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2106788883
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
