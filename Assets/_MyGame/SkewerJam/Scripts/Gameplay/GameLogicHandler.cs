@@ -178,11 +178,11 @@ namespace MyGame.SkewerJam.Gameplay
                 slot.GetItem()?.OnComplete();
             }
 
-            if (CheckWinGame())
-            {
-                Debug.Log("<color=green>Win Game</color>");
-                GameController.Instance.Win();
-            }
+            // if (CheckWinGame())
+            // {
+            //     Debug.Log("<color=green>Win Game</color>");
+            //     GameController.Instance.Win();
+            // }
         }
 
         public void CompleteCollectItem(OrderEntity orderEntity)
@@ -233,13 +233,13 @@ namespace MyGame.SkewerJam.Gameplay
         #region Check Win Lose Game
         public async UniTask TryCheckLoseGame()
         {
-            await UniTask.Delay(1500);
-            var stuckType = CheckLoseGame();
-            if (stuckType != null)
-            {
-                Debug.Log("<color=red>Lose Game</color>");
-                GameController.Instance.Stuck(stuckType.Value);
-            }
+            // await UniTask.Delay(1500);
+            // var stuckType = CheckLoseGame();
+            // if (stuckType != null)
+            // {
+            //     Debug.Log("<color=red>Lose Game</color>");
+            //     GameController.Instance.Stuck(stuckType.Value);
+            // }
         }
 
         public bool CheckWinGame()

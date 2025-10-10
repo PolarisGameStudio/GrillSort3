@@ -9,6 +9,7 @@ using Manager;
 using DG.Tweening;
 using System.Linq;
 using MyGame.SkewerJam.Gameplay.Helpers;
+using MyGame.SkewerJam.Level;
 
 namespace MyGame.SkewerJam.Objects
 {
@@ -23,7 +24,7 @@ namespace MyGame.SkewerJam.Objects
         [SerializeField] private Transform rightStartPos;
         [SerializeField] private Transform leftStartPos;
 
-        private List<(int maxNumber, int itemId, int number)> _listOrderData = new List<(int maxNumber, int itemId, int number)>();
+        private List<OrderData_SkewerJam> _listOrderData = new List<OrderData_SkewerJam>();
         private List<OrderEntity> _listOrders = new List<OrderEntity>();
         private int _nextOrderIndex = 0;
 
@@ -51,46 +52,27 @@ namespace MyGame.SkewerJam.Objects
             OrderHelper.Reset();
         }
 
-        public async UniTask SetData(List<(int maxNumber, int itemId, int number)> listOrderData)
+        public async UniTask SetData(List<OrderData_SkewerJam> listOrderData)
         {
             this._listOrderData = listOrderData;
 
-            if (listOrderData.Count == 0)
+            _nextOrderIndex = 0;
+            for (int i = 0; i < _listOrderData.Count; i++)
             {
-                _nextOrderIndex = 0;
-                for (int i = 0; i < orderManagerSO.DefaultNumberOfReadyOrder; i++)
+                if (_listOrderData[i].active == 1)
                 {
                     var (itemId, num) = OrderHelper.GetItemOrder();
                     var orderEntity = await CreateNextOrder(itemId, num);
                     orderEntity.SetOrderIndex(i);
                 }
-                for (int i = orderManagerSO.DefaultNumberOfReadyOrder; i < orderManagerSO.MaxOrder; i++)
+                else
                 {
                     var orderEntity = await CreateNextLockedOrder();
                     orderEntity.SetOrderIndex(i);
                 }
-
-                PlayAppearOrders().Forget();
-            }
-            else
-            {
-                // backup
-                for (int i = 0; i < listOrderData.Count; i++)
-                {
-                    var orderEntity = await CreateNextOrder((ItemId)listOrderData[i].itemId, listOrderData[i].maxNumber);
-                    orderEntity.SetOrderIndex(i);
-                    orderEntity.SetItems(listOrderData[i].number);
-                }
-
-                for (int i = listOrderData.Count; i < orderManagerSO.MaxOrder; i++)
-                {
-                    var orderEntity = await CreateNextLockedOrder();
-                    orderEntity.SetOrderIndex(i);
-                }
-
-                PlayAppearOrders().Forget();
             }
 
+            PlayAppearOrders().Forget();
         }
 
         public void Clear()

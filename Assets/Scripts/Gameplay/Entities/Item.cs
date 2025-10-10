@@ -97,7 +97,7 @@ namespace Gameplay.Entities
 
         public virtual bool CanNotTouch()
         {
-            return !isPrimary || _isSelected || locked || GameplayController.instance.gameState != GameState.Playing || slot.GetGrill().IsLock || isProcessing;
+            return !isPrimary || _isSelected || locked || GameplayController.instance.GameState != GameState.Playing || slot.GetGrill().IsLock || isProcessing;
         }
 
         public virtual void OnMouseDown()
@@ -128,7 +128,7 @@ namespace Gameplay.Entities
                 }
             }
 
-            if (GameplayController.instance.gameState != GameState.Playing)
+            if (GameplayController.instance.GameState != GameState.Playing)
             {
                 ForceFinishDrag();
                 return;
@@ -326,8 +326,8 @@ namespace Gameplay.Entities
                 float time = Random.Range(3f, 8f);
                 yield return new WaitForSeconds(time);
                 int rand = Random.Range(0, 3);
-                if (rand == 0)
-                    SonatSystem.GetService<PoolingService>().Create<EffectPoolBase>("FoodSmoke", transform.position, transform);
+                // if (rand == 0)
+                //     SonatSystem.GetService<PoolingService>().Create<EffectPoolBase>("FoodSmoke", transform.position, transform);
             }
         }
 

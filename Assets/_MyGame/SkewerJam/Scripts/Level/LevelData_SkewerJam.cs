@@ -8,6 +8,10 @@ namespace MyGame.SkewerJam.Level
     public class LevelData_SkewerJam : LevelData
     {
         public int numberOfWaitingGrill;
+        public int numberOfOrder;
+
+        public List<WaitingGrillData> ListWaitingGrillData { get; set; } = new List<WaitingGrillData>();
+        public List<OrderData_SkewerJam> ListOrderData { get; set; } = new List<OrderData_SkewerJam>();
 
         // logic order rescue
         public RescueCondition rescueCondition;
@@ -36,11 +40,29 @@ namespace MyGame.SkewerJam.Level
                 isDropMode = levelData.isDropMode,
 
                 numberOfWaitingGrill = this.numberOfWaitingGrill,
+                numberOfOrder = this.numberOfOrder,
+
                 rescueCondition = this.rescueCondition,
                 logicOrderConfigs = this.logicOrderConfigs,
             };
             return levelDataSkewerJam;
         }
+    }
+
+
+    [Serializable]
+    public class WaitingGrillData
+    {
+        public List<GrillData> grillData;
+    }
+
+    [Serializable]
+    public class OrderData_SkewerJam
+    {
+        public int id;
+        public int active;
+        public int currentNumber = 0;
+        public int maxNumber = 0;
     }
 
     [Serializable]

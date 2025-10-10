@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace MyGame.SkewerJam.Scripts.SO.SkewerJam.Gameplay
 {
-    [CreateAssetMenu(menuName = "MyGame/SkewerJam/Game Config HLW", fileName = "GameConfigHLW")]
-    public class GameConfigHLW : ScriptableObject
+    [CreateAssetMenu(menuName = "MyGame/SkewerJam/Game Config", fileName = "GameConfig")]
+    public class GameConfig : ScriptableObject
     {
         public ResourceData unlockTrayPrice;
         public ResourceData unlockPlatePrice;

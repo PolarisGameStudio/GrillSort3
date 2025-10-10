@@ -1,19 +1,10 @@
+using MyGame.SkewerJam.Gameplay;
 using Sonat.Enums;
 using UnityEngine;
 
 public class GameplayController : MonoBehaviour
 {
     public static GameplayController instance;
-    public GameState gameState;
+    public GameState GameState => GameController.Instance.GameState;
 
-    public LevelGenerator levelGenerator;
-
-    private void Awake()
-    {
-        // instance = this;
-    }
-
-    public void Start()
-    {
-    }
 }

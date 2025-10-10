@@ -148,7 +148,7 @@ namespace Gameplay.Entities.Obstacle
         private void OnMouseUpAsButton()
         {
             var gameState = primaryGrill.GrillBaseBehaviorSO.GetGameState();
-            if (GameplayController.instance.gameState != GameState.Playing) return;
+            if (GameplayController.instance.GameState != GameState.Playing) return;
             if (isClicked || blockClick) return;
             if (GameRemoteConfigValue.popupUnlockTray)
             {

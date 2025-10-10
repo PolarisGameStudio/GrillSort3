@@ -43,7 +43,7 @@ namespace Gameplay.Entities.Grills
 
         private void OnMouseUpAsButton()
         {
-            if (!IsLock || GameplayController.instance.gameState != GameState.Playing) return;
+            if (!IsLock || GameplayController.instance.GameState != GameState.Playing) return;
             // PanelManager.Instance.ClosePanel<PopupSuggest>();
 
             // if (GameplayController.level <= 6)

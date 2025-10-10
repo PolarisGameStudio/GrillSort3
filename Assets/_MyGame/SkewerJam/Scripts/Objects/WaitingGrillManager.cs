@@ -11,11 +11,14 @@ using DG.Tweening;
 using System.Linq;
 using Gameplay.LevelData;
 using Gameplay.Entities.Items;
+using MyGame.SkewerJam.Level;
 
 namespace MyGame.SkewerJam.Objects
 {
     public class WaitingGrillManager : MonoBehaviour
     {
+        private const int WAITING_GRILL_ID_OFFSET = 1000;
+
         [SerializeField] private int maxWaitingGrills = 10;
         [SerializeField] private Transform centerRefPoint;
         [SerializeField] private float distance = 1.2f;
@@ -73,52 +76,19 @@ namespace MyGame.SkewerJam.Objects
             return (null, null);
         }
 
-        // public async UniTask SetData(List<int> listWaitingGrillIds, List<ItemStateData> itemStateDataInWaitingGrill)
-        // {
-        //     for (int i = 0; i < listWaitingGrillIds.Count; i++)
-        //     {
-        //         var waitingGrill = await GameFactory.Instance.CreateEntityAsync<WaitingGrill>("WaitingGrill", transform);
-        //         waitingGrill.SetId(1000 + listWaitingGrills.Count());
-        //         waitingGrill.SetActive(true);
-        //         listWaitingGrills.Add(waitingGrill);
-        //     }
+        public async UniTask SetData(List<WaitingGrillData> listWaitingGrillData)
+        {
+            for (int i = 0; i < listWaitingGrillData.Count; i++)
+            {
+                var waitingGrill = await GameFactory.Instance.CreateEntityAsync<WaitingGrill>("WaitingGrill", transform);
+                waitingGrill.SetId(WAITING_GRILL_ID_OFFSET + i);
+                waitingGrill.SetActive(true);
+                listWaitingGrills.Add(waitingGrill);
+            }
 
-        //     if (itemStateDataInWaitingGrill != null)
-        //     {
-        //         foreach (var itemStateData in itemStateDataInWaitingGrill)
-        //         {
-        //             var waitingGrill = listWaitingGrills.FirstOrDefault(e => e.id == itemStateData.grillId);
-        //             if (waitingGrill != null)
-        //             {
-        //                 if (itemStateData.slotIndex >= waitingGrill.GetSlots().Length) continue;
-
-        //                 var slot = waitingGrill.GetSlot(itemStateData.slotIndex);
-
-        //                 Item item;
-        //                 if (itemStateData.bombCount >= 0 && itemStateData.active)
-        //                 {
-        //                     item = await GameFactory.Instance.CreateEntityAsync<Item>($"Item{ItemType.Bomb}", waitingGrill.transform);
-        //                     item.SetItemData(
-        //                         new ItemBombData() { id = itemStateData.id, itemType = ItemType.Bomb, moveLimit = itemStateData.bombCount },
-        //                         waitingGrill.GetSlot(itemStateData.slotIndex)
-        //                     );
-        //                     (item as ItemBombMove).StartBomb();
-        //                 }
-        //                 else
-        //                 {
-        //                     item = await GameFactory.Instance.CreateEntityAsync<Item>($"Item{ItemType.Normal}", waitingGrill.transform);
-        //                     item.SetItemData(new ItemData() { id = itemStateData.id, itemType = ItemType.Normal }, waitingGrill.GetSlot(itemStateData.slotIndex));
-        //                 }
-
-        //                 item.SetIsOnConveyor(false);
-        //                 slot.SetItem(item);
-        //             }
-        //         }
-        //     }
-
-        //     await AddLockedWaitingGrill();
-        //     GameplayUtils.AlignObjects(transform, distance);
-        // }
+            await AddLockedWaitingGrill();
+            GameplayUtils.AlignObjects(transform, distance);
+        }
 
         public async UniTask<WaitingGrill> AddLockedWaitingGrill()
         {

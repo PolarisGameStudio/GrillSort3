@@ -1,16 +1,12 @@
-using System;
-using System.Linq;
 using Cysharp.Threading.Tasks;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Scripts.SO.SkewerJam.Gameplay;
-using Sonat.CustomService;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems.AudioManagement;
 using SonatFramework.Systems.EventBus;
 using SonatFramework.Systems.InventoryManagement;
-using SonatFramework.Systems.InventoryManagement.GameResources;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay
@@ -22,21 +18,22 @@ namespace MyGame.SkewerJam.Gameplay
         [SerializeField] private LevelGenerator levelGenerator;
         [SerializeField] private GameLogicHandler gameLogicHandler;
 
-        [Header("UI")][SerializeField] private GameplayScreen gameplayScreen;
+        [Header("UI")]
+        [SerializeField] private GameplayScreen gameplayScreen;
         [SerializeField] private GameViewport gameViewport;
 
         [Header("Game config")]
         [SerializeField]
-        private GameConfigHLW gameConfig;
-
-        public GameConfigHLW GameConfig => gameConfig;
+        private GameConfig gameConfig;
+        public GameConfig GameConfig => gameConfig;
 
 
         public LevelGenerator LevelGenerator => levelGenerator;
         public GameLogicHandler GameLogicHandler => gameLogicHandler;
         public GameViewport GameViewport => gameViewport;
         public GameState GameState => gameState;
-        private int level;
+        // private int level;
+        private int level { get => PlayerPrefs.GetInt("level", 1); set => PlayerPrefs.SetInt("level", value); }
 
         public int Level => level;
         private GameState gameState;
@@ -71,7 +68,7 @@ namespace MyGame.SkewerJam.Gameplay
         private void Initialize()
         {
             gameViewport.Init();
-            level = MySonatFramework.userDataService.GetLevel(GameMode.SkewerJam);
+            // level = MySonatFramework.userDataService.GetLevel(GameMode.SkewerJam);
             gameStateChangeEvent = new EventBinding<GameStateChangeEvent>(OnGameStateChangedEvent);
         }
 
@@ -89,29 +86,20 @@ namespace MyGame.SkewerJam.Gameplay
 
             // PanelManager.Instance.OpenPanelByName<PopupLoading>("PopupLoading_SkewerJam", new UIData().Add("Time", 1f));
             Debug.Log("<color=green>[GameController]</color> PlayLevel: " + level);
-            SonatUtils.DelayCall(0.75f, () =>
-            {
-                var bgm = UnityEngine.Random.Range(0, 2) == 0 ? AudioId.BGM_Ingame_Halloween_Grill_sort : AudioId.BGM_Ingame_Halloween_01_Grill_sort;
-                MySonatFramework.GetService<AudioService>().PlayMusic(bgm);
-            }, this);
+            // SonatUtils.DelayCall(0.75f, () =>
+            // {
+            //     var bgm = UnityEngine.Random.Range(0, 2) == 0 ? AudioId.BGM_Ingame_Halloween_Grill_sort : AudioId.BGM_Ingame_Halloween_01_Grill_sort;
+            //     MySonatFramework.GetService<AudioService>().PlayMusic(bgm);
+            // }, this);
 
 
             this.level = level;
-            gameplayScreen.InitLevel(level);
             ChangeGameState(GameState.Loading);
 
             Debug.Log("<color=green>[GameController]</color> PlayLevel: " + level);
             InitLevel();
 
-            // var backup = GameplayStateSaver.Instance.CheckBackup();
-            // if (backup == false || force == true)
-            // {
-            //     await levelGenerator.GenerateLevel(level);
-            // }
-            // else
-            // {
-            //     await levelGenerator.GenerateLevel(level, true);
-            // }
+            await levelGenerator.GenerateLevel(level);
 
             ChangeGameState(GameState.Playing);
             EventBus<LevelStartedEvent>.Raise(new LevelStartedEvent() { level = level, gameMode = GameMode.SkewerJam });
@@ -124,13 +112,14 @@ namespace MyGame.SkewerJam.Gameplay
 
         public void InitLevel()
         {
-            // levelGenerator.Init();
+            gameplayScreen.InitLevel(level);
+            levelGenerator.Init();
             gameLogicHandler.Init();
         }
 
         public void ClearLevel()
         {
-            // levelGenerator.Clear();
+            levelGenerator.Clear();
             gameLogicHandler.Clear();
         }
 

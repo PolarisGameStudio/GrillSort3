@@ -71,8 +71,8 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
             {
                 var gameLogicHandler = GameController.Instance.GameLogicHandler;
                 var switchSuccess = gameLogicHandler.SelectItem(item);
-                MySonatFramework.GetService<VibrationService>().Vibrate(50);
-                MySonatFramework.audioService.PlaySound(AudioId.Items_Pick_SMode_HLW_Grill_sort);
+                // MySonatFramework.GetService<VibrationService>().Vibrate(50);
+                // MySonatFramework.audioService.PlaySound(AudioId.Items_Pick_SMode_HLW_Grill_sort);
                 if (switchSuccess == false)
                 {
                     item.transform.DOKill();
@@ -126,7 +126,7 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
                 item.SetSelected(false);
                 item.OnDropToSlot(slot);
                 item.Visual.SetSortingOrder(0);
-                MySonatFramework.GetService<VibrationService>().Vibrate(50);
+                // MySonatFramework.GetService<VibrationService>().Vibrate(50);
                 GameController.Instance.GameLogicHandler.ItemMoveSlot(item, slot);
 
                 foreach (Transform child in slot.Container)

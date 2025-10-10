@@ -53,6 +53,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
         public static (ItemId itemId, int num) GetItemOrder()
         {
+            return (ItemId.Item_7, 3);
             // kiểm tra có sử dụng rescue không
             // Sử dụng khi còn lại hàng chờ chỉ còn <= 2 khay trống
             var levelData = GameController.Instance.LevelGenerator.LevelData;
