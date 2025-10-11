@@ -46,9 +46,10 @@ public class PopupPreWin_SkewerJam : PopupPreWin
             psSpawn.gameObject.SetActive(true);
             psSpawn.Play();
         });
+        
         animationBack.AnimationState.SetAnimation(0, "Appear", false);
         animationFront.AnimationState.SetAnimation(0, "Appear", false);
-        await UniTask.Delay((int)(durationAppear * 1000));  
+        await UniTask.Delay((int)(durationAppear * 1000));
         animationBack.AnimationState.SetAnimation(0, "Drop", true);
         animationFront.AnimationState.SetAnimation(0, "Drop", true);
 

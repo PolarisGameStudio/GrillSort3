@@ -12,12 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3355bec891df4340a5fbb567fa81a97, type: 3}
   m_Name: GameConfig_SkewerJam
   m_EditorClassIdentifier: 
+  playOnPrice:
+    resource: 1
+    quantity: 300
+  winRewards:
+  - levelDifficulty: 0
+    reward:
+      resource: 1
+      quantity: 50
+  - levelDifficulty: 1
+    reward:
+      resource: 1
+      quantity: 75
+  - levelDifficulty: 2
+    reward:
+      resource: 1
+      quantity: 100
   unlockTrayPrice:
     resource: 1
     quantity: 150
   unlockPlatePrice:
     resource: 1
-    quantity: 100
+    quantity: 150
   unlockOctoChefPrice:
     resource: 1
-    quantity: 100
+    quantity: 150

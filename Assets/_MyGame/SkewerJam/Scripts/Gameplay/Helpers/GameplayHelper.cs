@@ -25,11 +25,11 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             SonatUtils.DelayCall(0.25f, () => { MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Home); });
         }
 
-        public static void OnClose_ChangeGameState(GameState playing)
+        public static void OnClose_ChangeGameState(GameState gameState)
         {
             SonatUtils.ExecuteNextFrame(() =>
             {
-                EventBus<GameStateChangeEvent>.Raise(new GameStateChangeEvent() { gameState = playing });
+                EventBus<GameStateChangeEvent>.Raise(new GameStateChangeEvent() { gameState = gameState });
             });
         }
 

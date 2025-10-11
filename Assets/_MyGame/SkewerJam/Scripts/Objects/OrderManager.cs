@@ -147,7 +147,17 @@ namespace MyGame.SkewerJam.Objects
                 }
             }
 
-            await PlayAppearOrders();
+            // tất cả order xuất hiện đầu game
+            for (int i = 0; i < _listOrders.Count; i++)
+            {
+                var order = _listOrders[i];
+                order.transform.DOKill();
+
+                var orderPos = rightStartPos.position;
+                orderPos.z = 0;
+                order.transform.position = orderPos;
+            }
+            // await PlayAppearOrders();
         }
         #endregion
 
@@ -196,19 +206,6 @@ namespace MyGame.SkewerJam.Objects
 
         public async UniTask PlayAppearOrders()
         {
-            // tất cả order xuất hiện đầu game
-            for (int i = 0; i < _listOrders.Count; i++)
-            {
-                var order = _listOrders[i];
-                order.transform.DOKill();
-
-                var orderPos = rightStartPos.position;
-                orderPos.z = 0;
-                order.transform.position = orderPos;
-            }
-
-            await UniTask.Delay(2000);
-
             for (int i = 0; i < _listOrders.Count; i++)
             {
                 var order = _listOrders[i];
@@ -281,6 +278,7 @@ namespace MyGame.SkewerJam.Objects
 
         public async UniTask AlignObjects()
         {
+            // chờ tới khi order hoàn thành dừng lại thì mới căn lại
             await UniTask.Delay((int)(orderEntityConfigSO.durationAlignOrders * 1000));
             var start = -(_listOrders.Count - 1) * distance / 2;
             var sortedOrders = _listOrders.OrderBy(e => e.OrderIndex).ToList();

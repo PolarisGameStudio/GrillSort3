@@ -1312,9 +1312,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2994463515154410896}
         m_TargetAssemblyTypeName: CheatPanel, Assembly-CSharp
-        m_MethodName: Unlock
+        m_MethodName: OnCheatClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1645,7 +1645,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2994463515154410896}
         m_TargetAssemblyTypeName: CheatPanel, Assembly-CSharp
         m_MethodName: Close
         m_Mode: 1
@@ -2130,6 +2130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ConformX: 0
   ConformY: 1
+  topIg: 0
   Logging: 0
 --- !u!1 &2693495121794746224
 GameObject:
@@ -2473,8 +2474,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keepCached: 0
   pauseGame: 0
-  gameStateBefore: 0
   ignoreTracking: 1
+  trackingName: 
   openTween: []
   closeTween: []
   panel: {fileID: 3402872916154425686}
@@ -7279,6 +7280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ConformX: 0
   ConformY: 1
+  topIg: 0
   Logging: 0
 --- !u!1 &9012898879335719297
 GameObject:

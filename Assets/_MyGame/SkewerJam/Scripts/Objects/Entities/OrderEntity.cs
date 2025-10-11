@@ -9,7 +9,9 @@ using Manager;
 using MyGame.SkewerJam.Gameplay;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using Sonat.Enums;
+using SonatFramework.Scripts.UIModule;
 using UnityEngine;
+using static PopupUnlockInGame;
 
 namespace MyGame.SkewerJam.Objects.Entities
 {
@@ -229,15 +231,15 @@ namespace MyGame.SkewerJam.Objects.Entities
 
         private void OpenPopupUnlock()
         {
-            // var uiData = new UIData();
-            // uiData.Add("SelectedObjectType", SelectedObjectType.Tray);
-            // uiData.Add("Price", GameController.Instance.GameConfig.unlockTrayPrice);
-            // uiData.Add("OnSuccess", (Action)(() =>
-            // {
-            var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
-            orderManager.Unlock(this);
-            // }));
-            // PanelManager.Instance.OpenPanel<PopupUnlock_SkewerJam>(uiData);
+            var uiData = new UIData();
+            uiData.Add("SelectedObjectType", SelectedObjectType.Tray);
+            uiData.Add("Price", GameController.Instance.GameConfig.unlockTrayPrice);
+            uiData.Add("OnSuccess", (Action)(() =>
+            {
+                var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
+                orderManager.Unlock(this);
+            }));
+            PanelManager.Instance.OpenPanel<PopupUnlockInGame>(uiData);
         }
 
         public void PlayUnlock()

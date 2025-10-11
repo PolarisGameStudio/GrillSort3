@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SonatFramework.Scripts.Feature.Shop
 {
-    [CreateAssetMenu(fileName = "SaleService", menuName = "Sonat Services/Sale Service")]
+    [CreateAssetMenu(fileName = "SaleService", menuName = "MyGame/Services/Sale Service")]
     public class SaleService : SonatServiceSo, IServiceInitialize
     {
         public void Initialize()

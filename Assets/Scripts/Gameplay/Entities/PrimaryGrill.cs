@@ -65,7 +65,7 @@ namespace Gameplay.Entities
             }
 
             // isInGameplaySpace = grillData.position.y < LevelGenerator.maxYGameSpace;
-            OpenGrill();
+            // OpenGrill();
         }
 
         public virtual void SetSlotId()

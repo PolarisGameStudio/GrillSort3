@@ -7,6 +7,9 @@ using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Objects;
 using MyGame.SkewerJam.Objects.Entities;
 using Sonat.Enums;
+using SonatFramework.Systems.EventBus;
+using SonatFramework.Systems.InventoryManagement;
+using SonatFramework.Systems.SettingsManagement.Vibation;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay
@@ -213,18 +216,16 @@ namespace MyGame.SkewerJam.Gameplay
             OnEndCollectItem?.Invoke(orderEntity);
             OnCollectItem?.Invoke((int)orderEntity.ItemIdTarget);
 
-            // MySonatFramework.GetService<InventoryService>().AddResource(GameResource.Pumpkin, 1);
-            pumpkin++;
-            // EventBus<AddItemEvent>.Raise(new AddItemEvent()
-            // {
-            //     resource = GameResource.Pumpkin,
-            //     quantity = 1,
-            //     position = orderEntity.transform.position,
-            //     collectEffect = new CollectEffectSingle()
-            //     {
-            //         collectEffectName = "CollectResourceSingleItem_Pumpkin"
-            //     }
-            // });
+            MySonatFramework.GetService<InventoryService>().AddResource(GameResource.Star, 1);
+            EventBus<AddItemEvent>.Raise(new AddItemEvent()
+            {
+                resource = GameResource.Star,
+                quantity = 1,
+                position = orderEntity.transform.position,
+                collectEffect = new CollectEffectSingle()
+            });
+
+            MySonatFramework.GetService<VibrationService>().Vibrate(75);
 
 
             if (CheckWinGame())

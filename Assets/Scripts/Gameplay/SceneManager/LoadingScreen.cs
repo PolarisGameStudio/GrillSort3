@@ -37,7 +37,8 @@ namespace Gameplay.SceneManager
 
             // logoAnim = logo.GetLocalizedEntry();
 
-            slider.DOValue(1, loadingTime).OnComplete(() => { StartCoroutine(IELoading()); });
+            // slider.DOValue(1, loadingTime).OnComplete(() => { StartCoroutine(IELoading()); });
+            StartCoroutine(IELoading());
 
             SonatSdkManager.Initialize(OnSonatSdkInited);
             // OnSonatSdkInited();
@@ -52,11 +53,11 @@ namespace Gameplay.SceneManager
         IEnumerator IELoading()
         {
             yield return new WaitUntil(() => sonatSdkInited);
-            yield return new WaitForSeconds(0.1f);
+            // yield return new WaitForSeconds(0.1f);
             // logoAnim.AnimationState.ClearTracks();
             // logoAnim.Initialize(true);
             // logoAnim.AnimationState.SetAnimation(0, "End", false);
-            yield return new WaitForSeconds(0.43f);
+            // yield return new WaitForSeconds(0.43f);
             SonatAds.needShowAppOpenAds = false;
             int level = MySonatFramework.GetService<UserDataService>().GetLevel();
             // if (level >= GameRemoteConfigValue.levelForceHome)

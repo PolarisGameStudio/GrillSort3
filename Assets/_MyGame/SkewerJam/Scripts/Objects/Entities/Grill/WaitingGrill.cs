@@ -8,6 +8,7 @@ using MyGame.SkewerJam.Gameplay;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
 using UnityEngine;
+using static PopupUnlockInGame;
 
 namespace MyGame.SkewerJam.Objects.Entities
 {
@@ -80,15 +81,15 @@ namespace MyGame.SkewerJam.Objects.Entities
 
         private void OpenPopupUnlock()
         {
-            // var uiData = new UIData();
-            // uiData.Add("SelectedObjectType", SelectedObjectType.Plate);
-            // uiData.Add("Price", GameController.Instance.GameConfig.unlockPlatePrice);
-            // uiData.Add("OnSuccess", (Action)(() =>
-            // {
-            var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
-            waitingGrillManager.Unlock();
-            // }));
-            // PanelManager.Instance.OpenPanel<PopupUnlock_SkewerJam>(uiData);
+            var uiData = new UIData();
+            uiData.Add("SelectedObjectType", SelectedObjectType.Plate);
+            uiData.Add("Price", GameController.Instance.GameConfig.unlockPlatePrice);
+            uiData.Add("OnSuccess", (Action)(() =>
+            {
+                var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
+                waitingGrillManager.Unlock();
+            }));
+            PanelManager.Instance.OpenPanel<PopupUnlockInGame>(uiData);
         }
         #endregion
 
