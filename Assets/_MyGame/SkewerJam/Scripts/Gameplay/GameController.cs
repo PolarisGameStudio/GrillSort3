@@ -10,6 +10,7 @@ using SonatFramework.Systems.AudioManagement;
 using SonatFramework.Systems.EventBus;
 using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.InventoryManagement.GameResources;
+using SonatFramework.Systems.UserData;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay
@@ -85,7 +86,7 @@ namespace MyGame.SkewerJam.Gameplay
         {
             ClearLevel();
 
-
+            MySonatFramework.GetService<UserDataService>().SaveLevel(level, GameMode.SkewerJam);
             var popupLoading = PanelManager.Instance.OpenPanelByName<PopupLoading>("PopupLoading", new UIData().Add("Time", 2f));
             Debug.Log("<color=green>[GameController]</color> PlayLevel: " + level);
             // SonatUtils.DelayCall(0.75f, () =>

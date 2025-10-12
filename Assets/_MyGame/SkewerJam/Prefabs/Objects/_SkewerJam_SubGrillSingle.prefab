@@ -8,6 +8,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1502396359651017052, guid: aba27bc0eedb2054394a212f4413b730, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1502396359651017052, guid: aba27bc0eedb2054394a212f4413b730, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1502396359651017052, guid: aba27bc0eedb2054394a212f4413b730, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1502396359651017052, guid: aba27bc0eedb2054394a212f4413b730, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 1502396359651017052, guid: aba27bc0eedb2054394a212f4413b730, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3430851745994543039, guid: aba27bc0eedb2054394a212f4413b730, type: 3}
       propertyPath: m_Name
       value: _SkewerJam_SubGrillSingle
@@ -32,6 +52,10 @@ PrefabInstance:
       propertyPath: gameFactorySO
       value: 
       objectReference: {fileID: 11400000, guid: 584fca99a0987ec4db01456647d1bd72, type: 2}
+    - target: {fileID: 6179221991137692488, guid: aba27bc0eedb2054394a212f4413b730, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6fa999c1b3bf12644ab53ed652f66c3c, type: 3}
     - target: {fileID: 6179221991137692488, guid: aba27bc0eedb2054394a212f4413b730, type: 3}
       propertyPath: m_SortingLayer
       value: 0

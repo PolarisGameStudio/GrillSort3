@@ -24,7 +24,7 @@ namespace Gameplay.Entities.Grills
 
         protected override async UniTask<SubGrill> CreateSubGrill(int layer)
         {
-            Vector3 pos = subContainer.position + Vector3.up * layer * 0.035f + Vector3.back * layer * 0.03f + subOffset;
+            Vector3 pos = subContainer.position + (grillData.layer.Count - 1) * Vector3.down * 0.035f + Vector3.up * layer * 0.035f + Vector3.back * layer * 0.03f + subOffset;
             string subGrillName = "SubGrillSingle";
             return await grillBaseBehaviorSO.gameFactorySO.CreateItem<SubGrill>(subGrillName, pos, subContainer);
         }

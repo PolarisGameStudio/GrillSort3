@@ -207,6 +207,7 @@ namespace MyGame.SkewerJam.Objects.Entities
             ready = false;
 
             orderEntityVisual.ResetLid();
+            transform.localScale = Vector3.one;
         }
 
         #region Interact
@@ -242,7 +243,7 @@ namespace MyGame.SkewerJam.Objects.Entities
             PanelManager.Instance.OpenPanel<PopupUnlockInGame>(uiData);
         }
 
-        public void PlayUnlock()
+        public async UniTask PlayUnlock()
         {
             SetActive(true);
             orderEntityVisual.OpenGrill(true);
@@ -253,7 +254,7 @@ namespace MyGame.SkewerJam.Objects.Entities
 
             if (OrderHelper.CheckCreateNextOrder())
             {
-                var (itemId, num) = OrderHelper.GetItemOrder();
+                var (itemId, num) = await OrderHelper.GetItemOrder();
                 Debug.Log("<color=red>itemId: " + itemId + ", num: " + num + "</color>");
                 SetTargetItem(itemId, num);
 

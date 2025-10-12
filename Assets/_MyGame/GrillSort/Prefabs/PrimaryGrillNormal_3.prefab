@@ -227,9 +227,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1171296989
-  m_SortingLayer: 3
+  m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 017593ba5289a8b4c9a2d5bffb9da9e2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e34f2ee2e926fb245985d45699326592, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -545,7 +545,7 @@ MonoBehaviour:
   - {fileID: 7090307334098224950}
   - {fileID: 4353390008287966844}
   - {fileID: 7178781910168462172}
-  grillBaseBehaviorSO: {fileID: 11400000, guid: cc955631a32a2e042ba1aefbc07dc804, type: 2}
+  grillBaseBehaviorSO: {fileID: 0}
   container: {fileID: 1391312127589314080}
   subContainer: {fileID: 6550035185638691559}
   grillVisual: {fileID: 5632403633376292553}
@@ -606,7 +606,7 @@ SortingGroup:
   m_GameObject: {fileID: 8544688536531100001}
   m_Enabled: 1
   m_SortingLayerID: -746388411
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 51
   m_SortAtRoot: 0
 --- !u!1 &8854788861166699823
@@ -682,7 +682,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: ca6ffdd566bd7194d8d9d033098b3ab4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4465a5bfd2e47404bab040f6d51913c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

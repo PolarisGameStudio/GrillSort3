@@ -24,6 +24,7 @@ namespace MyGame.SkewerJam.Objects
 
         private List<OrderData_SkewerJam> _listOrderData = new List<OrderData_SkewerJam>();
         private List<OrderEntity> _listOrders = new List<OrderEntity>();
+        private List<OrderEntity> _listOrdersToAlign = new List<OrderEntity>();
 
         private List<Vector3> _listOrderLocalPositions = new List<Vector3>();
 
@@ -66,6 +67,7 @@ namespace MyGame.SkewerJam.Objects
                     GameFactory.Instance.ReturnEntity(order);
             }
             _listOrders.Clear();
+            _listOrdersToAlign.Clear();
         }
 
         private void GameLogicHandler_OnItemStartSwitch(Item item, SlotBase slot)
@@ -101,9 +103,10 @@ namespace MyGame.SkewerJam.Objects
                     orderEntity.PlayComplete(() =>
                         {
                             GameController.Instance.GameLogicHandler.EndCollectItem(orderEntity);
+                            _listOrdersToAlign.Remove(orderEntity);
                             if (checkNextOrder == false)
                             {
-                                AlignObjects().Forget();
+                                AlignObjects(_listOrdersToAlign).Forget();
                             }
                         }, () =>
                         {
@@ -113,6 +116,7 @@ namespace MyGame.SkewerJam.Objects
                     if (nextOrder != null)
                     {
                         PlayAppearNextOrder(nextOrder).Forget();
+                        _listOrdersToAlign.Add(nextOrder);
                     }
 
                     GameController.Instance.GameLogicHandler.StartCollectItem(orderEntity);
@@ -135,7 +139,7 @@ namespace MyGame.SkewerJam.Objects
             {
                 if (_listOrderData[i].active == 1)
                 {
-                    var (itemId, num) = OrderHelper.GetItemOrder();
+                    var (itemId, num) = await OrderHelper.GetItemOrder();
                     Debug.Log("<color=yellow>OrderManager:</color> SetData: " + itemId + " " + num);
                     var orderEntity = await CreateActiveNextOrder(itemId, num);
                     orderEntity.SetOrderIndex(i);
@@ -147,7 +151,10 @@ namespace MyGame.SkewerJam.Objects
                 }
             }
 
+            _listOrdersToAlign = new List<OrderEntity>(_listOrders);
+
             // tất cả order xuất hiện đầu game
+            Canvas.ForceUpdateCanvases();
             for (int i = 0; i < _listOrders.Count; i++)
             {
                 var order = _listOrders[i];
@@ -184,7 +191,7 @@ namespace MyGame.SkewerJam.Objects
 
         private async UniTask CreateNextOrder(int orderIndex)
         {
-            var (itemId, num) = OrderHelper.GetItemOrder();
+            var (itemId, num) = await OrderHelper.GetItemOrder();
             Debug.Log("<color=yellow>OrderManager:</color> CreateNextOrder: " + itemId + " " + num);
 
             var nextOrder = await CreateActiveNextOrder(itemId, num);
@@ -276,12 +283,16 @@ namespace MyGame.SkewerJam.Objects
         }
         #endregion
 
-        public async UniTask AlignObjects()
+        private bool _isAligning = false;
+
+        public async UniTask AlignObjects(List<OrderEntity> listOrdersToAlign)
         {
             // chờ tới khi order hoàn thành dừng lại thì mới căn lại
             await UniTask.Delay((int)(orderEntityConfigSO.durationAlignOrders * 1000));
-            var start = -(_listOrders.Count - 1) * distance / 2;
-            var sortedOrders = _listOrders.OrderBy(e => e.OrderIndex).ToList();
+            await UniTask.WaitUntil(() => _isAligning == false);
+            _isAligning = true;
+            var start = -(listOrdersToAlign.Count - 1) * distance / 2;
+            var sortedOrders = listOrdersToAlign.OrderBy(e => e.OrderIndex).ToList();
             var listLocalTargetPositions = new List<Vector3>();
             for (int i = 0; i < sortedOrders.Count; i++)
             {
@@ -291,6 +302,9 @@ namespace MyGame.SkewerJam.Objects
                 orderEntity.transform.DOLocalMove(listLocalTargetPositions[i], 0.1f).SetEase(Ease.OutSine);
                 await UniTask.Delay(75);
             }
+
+            await UniTask.Delay(100);
+            _isAligning = false;
 
         }
 

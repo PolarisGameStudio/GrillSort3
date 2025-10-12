@@ -130,10 +130,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2231165827188946659, guid: df8c540138171a547b64b34df7667807, type: 3}
-      propertyPath: m_text
-      value: Loading
-      objectReference: {fileID: 0}
     - target: {fileID: 2411706602335330824, guid: df8c540138171a547b64b34df7667807, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -218,10 +214,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 3441777412776448017, guid: df8c540138171a547b64b34df7667807, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 29694206b5a1b19458a4268e2482a954, type: 3}
     - target: {fileID: 4174272767617125360, guid: df8c540138171a547b64b34df7667807, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -234,22 +226,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4174272767617125360, guid: df8c540138171a547b64b34df7667807, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4846293088161532064, guid: df8c540138171a547b64b34df7667807, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 7573549200591945288, guid: df8c540138171a547b64b34df7667807, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7573549200591945288, guid: df8c540138171a547b64b34df7667807, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 157
-      objectReference: {fileID: 0}
     - target: {fileID: 8357130630088566346, guid: df8c540138171a547b64b34df7667807, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -259,8 +239,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 1543158458940332878, guid: df8c540138171a547b64b34df7667807, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df8c540138171a547b64b34df7667807, type: 3}

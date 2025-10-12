@@ -75,8 +75,8 @@ namespace MyGame.SkewerJam.Objects.Entities
 
             // MySonatFramework.GetService<VibrationService>().Vibrate(100);
             await UniTask.Delay((int)(orderEntityConfigSO.delayMoveOut * 1000));
-            onComplete2?.Invoke();
 
+            onComplete2?.Invoke();
             var orderEntity = transform.parent.GetComponent<OrderEntity>();
             var targetPos = orderEntity.transform.localPosition + Vector3.up * orderEntityConfigSO.up;
             await orderEntity.transform.DOLocalMove(targetPos, orderEntityConfigSO.durationDown).SetEase(orderEntityConfigSO.upCurve);

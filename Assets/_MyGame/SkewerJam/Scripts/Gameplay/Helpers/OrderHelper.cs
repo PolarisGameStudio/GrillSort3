@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using Gameplay.Entities;
 using Manager;
 using MyGame.SkewerJam.Level;
@@ -52,8 +53,12 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             stepGap = 0;
         }
 
-        public static (ItemId itemId, int num) GetItemOrder()
+        private static bool _isFindOrder = false;
+        public static async UniTask<(ItemId itemId, int num)> GetItemOrder()
         {
+            await UniTask.WaitUntil(() => _isFindOrder == false);
+
+            _isFindOrder = true;
             // return (ItemId.Item_7, 3);
             // kiểm tra có sử dụng rescue không
             // Sử dụng khi còn lại hàng chờ chỉ còn <= 2 khay trống
@@ -67,7 +72,9 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                 rescueGap = rescueCondition.maxRescueGap;
                 currentNumberRescues += 1;
                 Debug.Log("<color=yellow>OrderHelper:</color> Use Rescue");
-                return GetItemOrderToRescue();
+                var (rescueItemId, rescueNum) = GetItemOrderToRescue();
+                _isFindOrder = false;
+                return (rescueItemId, rescueNum);
             }
 
             var logicOrderConfig = GetLogicOrderConfig(logicOrderConfigs);
@@ -80,6 +87,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                 if (step >= 2 && stepGap <= 0)
                 {
                     stepGap = maxStep2Gap;
+                    _isFindOrder = false;
                     return (itemId, num);
                 }
 
@@ -87,6 +95,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                 {
                     stepGap -= 1;
                     stepGap = Mathf.Min(stepGap, maxStep2Gap);
+                    _isFindOrder = false;
                     return (itemId, num);
                 }
             }
@@ -94,6 +103,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             stepGap = Mathf.Min(stepGap, maxStep2Gap);
             var (itemId2, num2, step2) = ForceGetItemOrderBasic(gameplayInfo);
             if (step2 >= 2) stepGap = maxStep2Gap;
+            _isFindOrder = false;
             return (itemId2, num2);
 
         }

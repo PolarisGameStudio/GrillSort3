@@ -9,7 +9,7 @@ public class PopupQuit : Panel
     {
         base.Open(uiData);
     }
-    
+
     public void OnContinueClick()
     {
         Close();
@@ -21,6 +21,7 @@ public class PopupQuit : Panel
         Close();
         // GameplayHelper.GoHome();
 
+        GameplayHelper.OnClose_ChangeGameState(GameState.Playing);
         PopupToast.Cretate("Go Home");
     }
 }

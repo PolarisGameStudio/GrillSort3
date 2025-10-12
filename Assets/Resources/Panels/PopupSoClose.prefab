@@ -69,12 +69,16 @@ PrefabInstance:
       value: 98.654785
       objectReference: {fileID: 0}
     - target: {fileID: 1553673191579588081, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6637046151172940825}
+    - target: {fileID: 1553673191579588081, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnContinueClick
+      value: OnGiveUpClick
       objectReference: {fileID: 0}
     - target: {fileID: 1553673191579588081, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PopupAreYouSure, Assembly-CSharp
+      value: PopupContinueBase, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1615552444419329273, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_IsActive
@@ -149,12 +153,16 @@ PrefabInstance:
       value: -179
       objectReference: {fileID: 0}
     - target: {fileID: 3531578008155881032, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6637046151172940825}
+    - target: {fileID: 3531578008155881032, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnContinueClick
+      value: PlayOnWithCoinClick
       objectReference: {fileID: 0}
     - target: {fileID: 3531578008155881032, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PopupAreYouSure, Assembly-CSharp
+      value: PopupSoClose, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3974628350322298483, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_IsActive
@@ -197,12 +205,16 @@ PrefabInstance:
       value: PopupSoClose
       objectReference: {fileID: 0}
     - target: {fileID: 6029476427327543003, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6637046151172940825}
+    - target: {fileID: 6029476427327543003, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnRetryClick
+      value: PlayOnWithAdsClick
       objectReference: {fileID: 0}
     - target: {fileID: 6029476427327543003, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PopupAreYouSure, Assembly-CSharp
+      value: PopupSoClose, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6693080085290027414, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_IsActive
@@ -374,8 +386,8 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   - target: {fileID: 6279403961004350690}
-    configSO: {fileID: 0}
-    custom: 1
+    configSO: {fileID: 11400000, guid: 2f5dd8e40a6759c4280e6b0fd488ef77, type: 2}
+    custom: 0
     config:
       tweenType: 1
       from: 1.1
