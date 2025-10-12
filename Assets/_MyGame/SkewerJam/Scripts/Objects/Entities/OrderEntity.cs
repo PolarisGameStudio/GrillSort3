@@ -243,7 +243,7 @@ namespace MyGame.SkewerJam.Objects.Entities
             PanelManager.Instance.OpenPanel<PopupUnlockInGame>(uiData);
         }
 
-        public async UniTask PlayUnlock()
+        public async UniTask PlayUnlock(bool isRescue = false)
         {
             SetActive(true);
             orderEntityVisual.OpenGrill(true);
@@ -254,7 +254,7 @@ namespace MyGame.SkewerJam.Objects.Entities
 
             if (OrderHelper.CheckCreateNextOrder())
             {
-                var (itemId, num) = await OrderHelper.GetItemOrder();
+                var (itemId, num) = await OrderHelper.GetItemOrder(isRescue);
                 Debug.Log("<color=red>itemId: " + itemId + ", num: " + num + "</color>");
                 SetTargetItem(itemId, num);
 

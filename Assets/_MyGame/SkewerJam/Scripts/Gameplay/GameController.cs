@@ -203,15 +203,26 @@ namespace MyGame.SkewerJam.Gameplay
 
             await UniTask.Delay(1000);
             // var showPopupContinue = GameLogicHandler.WaitingGrillManager.ListWaitingGrills.Where(e => e.IsActive == false).Count() > 0;
-            PopupContinue.Data data = new PopupContinue.Data()
+            if (CanRevive())
             {
-                onPlayOn = (by, objectParams) => Revive(stuckType, by, objectParams).Forget(),
-                onClose = () => Lose(stuckType).Forget(),
-                stuckType = stuckType
-            };
-            PanelManager.Instance.OpenForget<PopupSoClose>(data);
+                PopupContinue.Data data = new PopupContinue.Data()
+                {
+                    onPlayOn = (by, objectParams) => Revive(stuckType, by, objectParams).Forget(),
+                    onClose = () => Lose(stuckType).Forget(),
+                    stuckType = stuckType
+                };
+                PanelManager.Instance.OpenForget<PopupSoClose>(data);
+            }
+            else
+            {
+                Lose(stuckType).Forget();
+            }
 
+        }
 
+        private bool CanRevive()
+        {
+            return GameLogicHandler.OrderManager.ListOrders.Where(e => e.IsActive == false).Count() > 0;
         }
 
         private async UniTaskVoid Revive(StuckType stuckType, string by, object[] objectParams = null)
@@ -226,13 +237,13 @@ namespace MyGame.SkewerJam.Gameplay
                     switch (by)
                     {
                         case "play_on_add_trays":
-                            // var orderManager = GameLogicHandler.OrderManager;
-                            // orderManager.Unlock();
+                            var orderManager = GameLogicHandler.OrderManager;
+                            orderManager.Unlock(isRescue: true);
 
-                            // cộng thêm 2 platesvar waitingManager = GameLogicHandler.WaitingGrillManager;
-                            var waitingManager = GameLogicHandler.WaitingGrillManager;
-                            await waitingManager.AddPlate();
-                            await waitingManager.AddPlate();
+                            // // cộng thêm 2 platesvar waitingManager = GameLogicHandler.WaitingGrillManager;
+                            // var waitingManager = GameLogicHandler.WaitingGrillManager;
+                            // await waitingManager.AddPlate();
+                            // await waitingManager.AddPlate();
                             break;
                     }
 

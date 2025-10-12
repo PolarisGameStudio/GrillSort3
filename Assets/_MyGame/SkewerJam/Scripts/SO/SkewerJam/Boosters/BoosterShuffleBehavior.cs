@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Manager;
 using Gameplay.Entities;
+using SonatFramework.Systems.SettingsManagement.Vibation;
 
 namespace MyGame.SkewerJamSO.Boosters
 {
@@ -170,90 +171,9 @@ namespace MyGame.SkewerJamSO.Boosters
                 }
                 subGrill.SetShuffleLayerData(newLayerData);
             }
-            // var listItemOrderDatas = listItemDatas.Where(e => dictOrderItems.ContainsKey((ItemId)e.id)).ToList();
 
-            // foreach (var primaryGrill in primaryGrills)
-            // {
-            //     var layerData = primaryGrill.GetCurrentData();
-            //     var newLayerData = new LayerData(layerData.itemData.Length);
-
-            //     for (int i = 0; i < layerData.itemData.Length; i++)
-            //     {
-            //         var item = listItemOrderDatas[i];
-            //         newLayerData.itemData[i] = item;
-            //     }
-
-            //     primaryGrill.SetShuffleLayerData(newLayerData);
-            // }
-
-            // // var lis
-            // // idCount.Add(0, new List<ItemData>());
-            // // for (int i = 0; i < 2; i++)
-            // // {
-            // //     var data = i == 0 ? primaryShuffleLayerDatas : subShuffleLayerDatas;
-            // //     foreach (var shuffleLayerData in data)
-            // //     {
-            // //         for (int j = 0; j < shuffleLayerData.layerData.itemData.Length; j++)
-            // //         {
-            // //             var item = shuffleLayerData.layerData.itemData[j];
-            // //             if (item == null) item = new ItemData();
-            // //             if (!idCount.TryAdd(item.id, new List<ItemData>() { item }))
-            // //             {
-            // //                 idCount[item.id].Add(item);
-            // //             }
-            // //         }
-            // //     }
-            // // }
-
-            // // //allItems.Shuffle();
-            // // int typeItem = Mathf.Min(GameRemoteConfigValue.numberSpecialItemPerLevel, primaryGrills.Count, idCount.Count - 1);
-            // // var idsShuffled = ShuffleLayerData(idCount, primarySlot, subSlot, typeItem);
-
-            // // foreach (var shuffleLayerData in primaryShuffleLayerDatas)
-            // // {
-            // //     int numSlot = shuffleLayerData.grill.SlotCount;
-            // //     LayerData layerData = new LayerData(numSlot);
-            // //     for (int i = 0; i < numSlot; i++)
-            // //     {
-            // //         var item = new ItemData();
-            // //         if (idsShuffled.Item1.Count > 0)
-            // //         {
-            // //             item = idsShuffled.Item1[0];
-            // //             idsShuffled.Item1.RemoveAt(0);
-            // //         }
-
-            // //         layerData.itemData[i] = item;
-            // //     }
-
-            // //     shuffleLayerData.grill.SetShuffleLayerData(layerData);
-            // // }
-
-            // // foreach (var shuffleLayerData in primaryShuffleCanNotShuffle)
-            // // {
-            // //     shuffleLayerData.grill.SetShuffleLayerData(shuffleLayerData.layerData);
-            // // }
-
-            // // foreach (var shuffleLayerData in subShuffleLayerDatas)
-            // // {
-            // //     int numSlot = shuffleLayerData.grill.SlotCount;
-            // //     LayerData layerData = new LayerData(numSlot);
-            // //     for (int i = 0; i < numSlot; i++)
-            // //     {
-            // //         var item = new ItemData();
-            // //         if (idsShuffled.Item2.Count > 0)
-            // //         {
-            // //             item = idsShuffled.Item2[0];
-            // //             idsShuffled.Item2.RemoveAt(0);
-            // //         }
-
-            // //         layerData.itemData[i] = item;
-            // //     }
-
-            //     shuffleLayerData.grill.SetShuffleLayerData(layerData);
-            // }
-
-
-
+            MySonatFramework.GetService<VibrationService>().Vibrate(50);
+            await UniTask.Delay(2000);
         }
     }
 }

@@ -54,7 +54,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
         }
 
         private static bool _isFindOrder = false;
-        public static async UniTask<(ItemId itemId, int num)> GetItemOrder()
+        public static async UniTask<(ItemId itemId, int num)> GetItemOrder(bool isRescue = false)
         {
             await UniTask.WaitUntil(() => _isFindOrder == false);
 
@@ -67,7 +67,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             var logicOrderConfigs = levelData.logicOrderConfigs;
 
 
-            if (CheckUseRescue(rescueCondition))
+            if (isRescue || CheckUseRescue(rescueCondition))
             {
                 rescueGap = rescueCondition.maxRescueGap;
                 currentNumberRescues += 1;

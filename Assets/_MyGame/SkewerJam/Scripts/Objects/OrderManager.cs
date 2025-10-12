@@ -308,14 +308,14 @@ namespace MyGame.SkewerJam.Objects
 
         }
 
-        public void Unlock(OrderEntity orderEntity = null)
+        public void Unlock(OrderEntity orderEntity = null, bool isRescue = false)
         {
             if (orderEntity == null)
             {
                 orderEntity = _listOrders.Where(e => e.IsActive == false).FirstOrDefault();
                 if (orderEntity == null) return;
             }
-            orderEntity.PlayUnlock();
+            orderEntity.PlayUnlock(isRescue);
         }
     }
 }
