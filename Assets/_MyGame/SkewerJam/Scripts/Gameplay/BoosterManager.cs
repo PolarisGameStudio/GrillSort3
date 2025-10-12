@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using MyGame.SO.Boosters;
@@ -11,14 +12,24 @@ namespace MyGame.SkewerJam.Gameplay
         private const string LOG_TAG = "<color=yellow>BoosterLogicHandler: </color>";
         [SerializeField] private BaseBoosterBehaviorSO[] boosterBehaviors;
 
+        public BaseBoosterBehaviorSO GetBoosterBehavior(GameResource boosterType)
+        {
+            return boosterBehaviors.FirstOrDefault(e => e.boosterType == boosterType);
+        }
         public async UniTask UseBooster(GameResource boosterType)
         {
-            var boosterBehavior = boosterBehaviors.FirstOrDefault(e => e.boosterType == boosterType);
+            var boosterBehavior = GetBoosterBehavior(boosterType);
             if (boosterBehavior == null)
             {
                 Debug.Log($"{LOG_TAG} SBooster behavior not found: {boosterType}");
             }
             await boosterBehavior.UseBooster();
+        }
+
+        public bool CanUseBooster(GameResource boosterType)
+        {
+            var boosterBehavior = GetBoosterBehavior(boosterType);
+            return boosterBehavior.CanUseBooster();
         }
     }
 }

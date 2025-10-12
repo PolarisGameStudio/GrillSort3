@@ -231,9 +231,8 @@ namespace MyGame.SkewerJam.Gameplay
 
                             // cộng thêm 2 platesvar waitingManager = GameLogicHandler.WaitingGrillManager;
                             var waitingManager = GameLogicHandler.WaitingGrillManager;
-                            waitingManager.Unlock();
-                            await UniTask.Delay(1000);
-                            waitingManager.Unlock();
+                            await waitingManager.AddPlate();
+                            await waitingManager.AddPlate();
                             break;
                     }
 

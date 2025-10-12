@@ -23,6 +23,7 @@ namespace Gameplay.Entities
         [SerializeField] protected GrillBaseBehaviorSO grillBaseBehaviorSO;
 
         public GrillBaseBehaviorSO GrillBaseBehaviorSO => grillBaseBehaviorSO;
+        public bool Showed => showed;
 
 #if UNITY_EDITOR
         private void OnValidate()

@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 597868025132776610, guid: 8064dd49d7889d040ad90ad66cd205a0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 961377704419127706, guid: 8064dd49d7889d040ad90ad66cd205a0, type: 3}
       propertyPath: behavior
       value: 
@@ -60,9 +64,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1788527588764352531, guid: 8064dd49d7889d040ad90ad66cd205a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2470340720197935450, guid: 8064dd49d7889d040ad90ad66cd205a0, type: 3}
       propertyPath: m_Name
       value: _SkewerJam_PrimaryGrillIce_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3621401223507671424, guid: 8064dd49d7889d040ad90ad66cd205a0, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3621401223507671424, guid: 8064dd49d7889d040ad90ad66cd205a0, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2106788883
       objectReference: {fileID: 0}
     - target: {fileID: 3943299275388667661, guid: 8064dd49d7889d040ad90ad66cd205a0, type: 3}
       propertyPath: gameFactorySO
@@ -88,9 +104,21 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 2106788883
       objectReference: {fileID: 0}
+    - target: {fileID: 4981036255516259375, guid: 8064dd49d7889d040ad90ad66cd205a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5270566980759646137, guid: 8064dd49d7889d040ad90ad66cd205a0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.045
+      objectReference: {fileID: 0}
     - target: {fileID: 6387385585648245715, guid: 8064dd49d7889d040ad90ad66cd205a0, type: 3}
       propertyPath: sortingGroup
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589093469951890132, guid: 8064dd49d7889d040ad90ad66cd205a0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.045
       objectReference: {fileID: 0}
     - target: {fileID: 7211306362924791375, guid: 8064dd49d7889d040ad90ad66cd205a0, type: 3}
       propertyPath: m_SortingLayer

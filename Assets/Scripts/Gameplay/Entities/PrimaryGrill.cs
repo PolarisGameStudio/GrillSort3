@@ -710,5 +710,42 @@ namespace Gameplay.Entities
             }
             return layerData;
         }
+
+        public virtual LayerData GetLayerData(int layer)
+        {
+            if (layer == 0) return GetCurrentData();
+            if (subGrills == null || subGrills.Count == 0) return null;
+            return subGrills[layer - 1].GetCurrentData();
+        }
+
+        public async UniTask<Item> GetItem(int layer, int slot)
+        {
+            if (layer == 0)
+            {
+                return GetSlot(slot).GetItem();
+            }
+
+            if (layer - 1 >= subGrills.Count) return null;
+
+            if (subGrills[layer - 1].Showed)
+            {
+                return subGrills[layer - 1].GetSlot(slot).GetItem();
+            }
+            else
+            {
+                var layerData = subGrills[layer - 1].GetCurrentData();
+                var itemData = layerData.itemData[slot];
+                if (itemData == null) return null;
+
+                var item = await CreateItem(itemData);
+                item.SetItemData(itemData, subGrills[layer - 1].GetSlot(slot));
+                item.SetIsOnConveyor(isOnConveyor);
+                subGrills[layer - 1].GetSlot(slot).SetItem(item);
+                return item;
+            }
+
+
+
+        }
     }
 }

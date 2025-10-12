@@ -11,6 +11,31 @@ namespace MyGame.SkewerJam.Gameplay.Booster
 {
     public class UIBooster : UIBoosterBase
     {
+        public override void ClickBooster()
+        {
+            if (usingBooster) return;
+
+            var boosterManager = GameController.Instance.GameLogicHandler.BoosterManager;
+            if (boosterService.Instance.CanUseBooster(boosterType))
+            {
+                if (boosterManager.CanUseBooster(boosterType))
+                {
+                    UseBooster();
+                }
+                else
+                {
+                    PopupToast.Cretate("Unusable!");
+                }
+            }
+            else
+            {
+                if (unlocked) OnOutOfBooster();
+                else
+                {
+                    BoosterLockFeedback();
+                }
+            }
+        }
         public override void OnOutOfBooster()
         {
             UIData uiData = new UIData();
@@ -21,7 +46,7 @@ namespace MyGame.SkewerJam.Gameplay.Booster
         protected override void BoosterLockFeedback()
         {
             base.BoosterLockFeedback();
-            
+
             PopupToast.Cretate("Unlock at level " + config.levelUnlock);
         }
 

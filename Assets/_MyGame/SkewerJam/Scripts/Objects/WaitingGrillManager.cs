@@ -5,12 +5,9 @@ using Gameplay.Entities;
 using MyGame.SkewerJam.Gameplay;
 using MyGame.SkewerJam.Gameplay.Utils;
 using MyGame.SkewerJam.Objects.Entities;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using DG.Tweening;
 using System.Linq;
-using Gameplay.LevelData;
-using Gameplay.Entities.Items;
 using MyGame.SkewerJam.Level;
 
 namespace MyGame.SkewerJam.Objects
@@ -35,6 +32,7 @@ namespace MyGame.SkewerJam.Objects
             }
         }
 
+        #region Init
         public void Init()
         {
             transform.position = centerRefPoint.position;
@@ -63,6 +61,27 @@ namespace MyGame.SkewerJam.Objects
                 GameController.Instance.GameLogicHandler.TryCheckLoseGame();
             }
         }
+        #endregion
+
+        public async UniTask SetData(List<WaitingGrillData> listWaitingGrillData)
+        {
+            for (int i = 0; i < listWaitingGrillData.Count; i++)
+            {
+                var waitingGrill = await AddWaitingGrill(true);
+                waitingGrill.SetId(WAITING_GRILL_ID_OFFSET + i);
+            }
+
+            // await AddLockedWaitingGrill();
+            await AlignObjects(() => { });
+        }
+
+        public async UniTask<WaitingGrill> AddWaitingGrill(bool active = true)
+        {
+            var waitingGrill = await GameFactory.Instance.CreateEntityAsync<WaitingGrill>("WaitingGrill", transform);
+            waitingGrill.SetActive(active);
+            listWaitingGrills.Add(waitingGrill);
+            return waitingGrill;
+        }
 
         public (WaitingGrill waitingGrill, SlotBase slot) GetDestinationSlot()
         {
@@ -77,28 +96,6 @@ namespace MyGame.SkewerJam.Objects
             }
 
             return (null, null);
-        }
-
-        public async UniTask SetData(List<WaitingGrillData> listWaitingGrillData)
-        {
-            for (int i = 0; i < listWaitingGrillData.Count; i++)
-            {
-                var waitingGrill = await GameFactory.Instance.CreateEntityAsync<WaitingGrill>("WaitingGrill", transform);
-                waitingGrill.SetId(WAITING_GRILL_ID_OFFSET + i);
-                waitingGrill.SetActive(true);
-                listWaitingGrills.Add(waitingGrill);
-            }
-
-            await AddLockedWaitingGrill();
-            GameplayUtils.AlignObjects(transform, distance);
-        }
-
-        public async UniTask<WaitingGrill> AddLockedWaitingGrill()
-        {
-            var waitingGrill = await GameFactory.Instance.CreateEntityAsync<WaitingGrill>("WaitingGrill", transform);
-            waitingGrill.SetActive(false);
-            listWaitingGrills.Add(waitingGrill);
-            return waitingGrill;
         }
 
         public async UniTask AlignObjects(Action callback)
@@ -117,13 +114,20 @@ namespace MyGame.SkewerJam.Objects
             callback?.Invoke();
         }
 
-        public void Unlock()
+        public async UniTask AddPlate()
         {
-            var lockedWaitingGrill = listWaitingGrills.Where(e => e.IsActive == false).FirstOrDefault();
-            if (lockedWaitingGrill != null)
-            {
-                lockedWaitingGrill.PlayUnlock(listWaitingGrills.Count < maxWaitingGrills);
-            }
+            // var lockedWaitingGrill = listWaitingGrills.Where(e => e.IsActive == false).FirstOrDefault();
+            // if (lockedWaitingGrill != null)
+            // {
+            //     lockedWaitingGrill.PlayUnlock(listWaitingGrills.Count < maxWaitingGrills);
+            // }
+            var waitingGrill = await AddWaitingGrill(true);
+            waitingGrill.transform.localScale = Vector3.zero;
+            await AlignObjects(() => {
+                waitingGrill.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutSine);
+            });
+
+            await UniTask.Delay(500);
         }
 
         public bool CheckClearAllItems()
@@ -158,23 +162,5 @@ namespace MyGame.SkewerJam.Objects
             }
             return list;
         }
-
-        // public List<ItemStateData> GetItemStateDataInWaitingGrill()
-        // {
-        //     var list = new List<ItemStateData>();
-        //     foreach (var waitingGrill in listWaitingGrills)
-        //     {
-        //         var item = waitingGrill.GetSlot(0).GetItem();
-        //         if (item != null && item is ItemBombMove)
-        //         {
-        //             list.Add(new ItemStateData() { id = item.id, bombCount = (item as ItemBombMove).MoveRemaining });
-        //         }
-        //         else
-        //         {
-        //             list.Add(new ItemStateData() { id = 0, bombCount = -1 });
-        //         }
-        //     }
-        //     return list;
-        // }
     }
 }
