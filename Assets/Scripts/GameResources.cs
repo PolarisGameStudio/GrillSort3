@@ -1,3 +1,5 @@
+using System;
+
 namespace Sonat.Enums
 {
     public enum GameResource : byte
@@ -7,7 +9,12 @@ namespace Sonat.Enums
         Lives = 2,
         LivesService_SingleLive,
         Star,
-        MAX,
+
+        BoosterAddPlate = 101,
+        BoosterSpatula,
+        BoosterShuffle,
+        BoosterFoodBox,
+        MAX = Byte.MaxValue, // 255
     }
 
     public enum GameResourceType : byte
@@ -27,6 +34,11 @@ namespace Sonat.Enums
                 case GameResource.Coin:
                 case GameResource.Lives:
                     return GameResourceType.Currency;
+                case GameResource.BoosterAddPlate:
+                case GameResource.BoosterSpatula:
+                case GameResource.BoosterShuffle:
+                case GameResource.BoosterFoodBox:
+                    return GameResourceType.Booster;
             }
 
             return GameResourceType.None;

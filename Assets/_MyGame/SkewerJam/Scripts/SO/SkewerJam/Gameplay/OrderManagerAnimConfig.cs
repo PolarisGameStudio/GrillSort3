@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay
 {
-    [CreateAssetMenu(fileName = "OrderManagerAnimConfigSO", menuName = "MyGame/SkewerJam/Config/OrderManagerAnimConfigSO")]
+    [CreateAssetMenu(fileName = "OrderEntityConfigSO", menuName = "MyGame/SkewerJam/OrderConfigs/OrderEntityConfigSO")]
     public class OrderEntityConfigSO : ScriptableObject
     {
         [Header("Appear")]

@@ -79,7 +79,7 @@ public class CheatManager : Singleton<CheatManager>
 
 	public static void CheatLevel(int level)
 	{
-		SonatSystem.GetService<UserDataService>().SaveLevel(level, GameMode.SkewerJam);
+		SonatSystem.GetService<UserDataService>().SaveLevel(level, GameMode.Classic);
 		PlayLevel(level).Forget();
 	}
 

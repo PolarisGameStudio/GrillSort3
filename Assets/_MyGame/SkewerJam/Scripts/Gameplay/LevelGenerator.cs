@@ -39,7 +39,7 @@ namespace MyGame.SkewerJam.Gameplay
         {
             _level = level;
             Debug.Log("<color=green>[LevelGenerator]</color> GenerateLevel: " + level);
-            _levelData = await levelService.GetLevelData<LevelData_SkewerJam>(level, GameMode.SkewerJam);
+            _levelData = await levelService.GetLevelData<LevelData_SkewerJam>(level, GameMode.Classic);
             _levelData = ValidateLevelData(_levelData);
 
             Debug.Log("<color=green>[LevelGenerator]</color> GenerateLevel: " + level);

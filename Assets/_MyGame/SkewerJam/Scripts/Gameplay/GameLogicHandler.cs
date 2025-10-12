@@ -24,6 +24,8 @@ namespace MyGame.SkewerJam.Gameplay
         [SerializeField] private OrderManager orderManager;
         [SerializeField] private ItemManager itemManager;
 
+        [SerializeField] private BoosterManager boosterManager;
+
         [Header("Additional")]
         [SerializeField] private ConveyorManager conveyorManager;
         [SerializeField] private ObstacleManager obstacleManager;
@@ -37,6 +39,9 @@ namespace MyGame.SkewerJam.Gameplay
         public ConveyorManager ConveyorManager => conveyorManager;
         public ObstacleManager ObstacleManager => obstacleManager;
         public ItemManager ItemManager => itemManager;
+
+        public BoosterManager BoosterManager => boosterManager;
+
         public Item ItemSelected { get; set; }
 
         #region Event Actions
@@ -294,7 +299,6 @@ namespace MyGame.SkewerJam.Gameplay
             // else continue
             return StuckType.OutOfMove;
         }
-
         #endregion
     }
 }

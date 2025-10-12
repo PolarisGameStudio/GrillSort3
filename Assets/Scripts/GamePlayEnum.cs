@@ -3,8 +3,7 @@ namespace Sonat.Enums
 {
     public enum GameMode : byte
     {
-        Classic,
-        SkewerJam
+        Classic
     }
 
     public enum LevelDifficulty : byte

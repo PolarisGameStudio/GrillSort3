@@ -71,7 +71,7 @@ namespace MyGame.SkewerJam.Gameplay
         private void Initialize()
         {
             gameViewport.Init();
-            level = MySonatFramework.userDataService.GetLevel(GameMode.SkewerJam);
+            level = MySonatFramework.userDataService.GetLevel(GameMode.Classic);
             gameStateChangeEvent = new EventBinding<GameStateChangeEvent>(OnGameStateChangedEvent);
         }
 
@@ -86,7 +86,7 @@ namespace MyGame.SkewerJam.Gameplay
         {
             ClearLevel();
 
-            MySonatFramework.GetService<UserDataService>().SaveLevel(level, GameMode.SkewerJam);
+            MySonatFramework.GetService<UserDataService>().SaveLevel(level, GameMode.Classic);
             var popupLoading = PanelManager.Instance.OpenPanelByName<PopupLoading>("PopupLoading", new UIData().Add("Time", 2f));
             Debug.Log("<color=green>[GameController]</color> PlayLevel: " + level);
             // SonatUtils.DelayCall(0.75f, () =>
@@ -105,7 +105,7 @@ namespace MyGame.SkewerJam.Gameplay
             await levelGenerator.GenerateLevel(level);
 
             ChangeGameState(GameState.Playing);
-            EventBus<LevelStartedEvent>.Raise(new LevelStartedEvent() { level = level, gameMode = GameMode.SkewerJam });
+            EventBus<LevelStartedEvent>.Raise(new LevelStartedEvent() { level = level, gameMode = GameMode.Classic });
 
             PlayStartGame().Forget();
             // if (GameplayHelper.CheckStart() == false)
@@ -151,9 +151,9 @@ namespace MyGame.SkewerJam.Gameplay
             Debug.Log("<color=green>[GameController]</color> Win");
             if (gameState == GameState.GameOver) return;
 
-            EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent() { level = level, gameMode = GameMode.SkewerJam, success = true });
-            var newLevel = MySonatFramework.userDataService.GetLevel(GameMode.SkewerJam) + 1;
-            MySonatFramework.userDataService.SaveLevel(newLevel, GameMode.SkewerJam);
+            EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent() { level = level, gameMode = GameMode.Classic, success = true });
+            var newLevel = MySonatFramework.userDataService.GetLevel(GameMode.Classic) + 1;
+            MySonatFramework.userDataService.SaveLevel(newLevel, GameMode.Classic);
 
             // GameplayStateSaver.Instance.SetStatus(); // không lưu trạng thái
             ChangeGameState(GameState.GameOver);
@@ -194,7 +194,7 @@ namespace MyGame.SkewerJam.Gameplay
             EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent()
             {
                 level = level,
-                gameMode = GameMode.SkewerJam,
+                gameMode = GameMode.Classic,
                 success = false
             });
 
@@ -218,7 +218,7 @@ namespace MyGame.SkewerJam.Gameplay
         {
             ChangeGameState(GameState.Playing);
 
-            EventBus<LevelStartedEvent>.Raise(new LevelStartedEvent() { level = level, gameMode = GameMode.SkewerJam });
+            EventBus<LevelStartedEvent>.Raise(new LevelStartedEvent() { level = level, gameMode = GameMode.Classic });
             await UniTask.Delay(1000);
             switch (stuckType)
             {
@@ -243,14 +243,14 @@ namespace MyGame.SkewerJam.Gameplay
 
         public async UniTaskVoid Lose(StuckType stuckType)
         {
-            EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent() { level = level, gameMode = GameMode.SkewerJam, success = false });
+            EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent() { level = level, gameMode = GameMode.Classic, success = false });
             PanelManager.Instance.OpenPanelByName<PopupLose_SkewerJam>("PopupLose_SkewerJam");
             GameplayHelper.IsWin = false;
         }
 
         private void NextLevel()
         {
-            level = MySonatFramework.userDataService.GetLevel(GameMode.SkewerJam);
+            level = MySonatFramework.userDataService.GetLevel(GameMode.Classic);
             PlayLevel(level).Forget();
         }
 
