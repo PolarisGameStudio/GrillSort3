@@ -25,6 +25,7 @@ public class EffectPoolBase : MonoBehaviour, IPoolingObject
 
     public void Destroy()
     {
-        SonatSystem.GetService<PoolingService>().ReturnObj(this);
+        gameObject.SetActive(false);
+        // SonatSystem.GetService<PoolingServiceAsync>().ReturnObj(this);
     }
 }

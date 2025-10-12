@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using MyGame.SkewerJam.Gameplay;
@@ -11,7 +12,14 @@ namespace MyGame.SkewerJamSO.Boosters
     [CreateAssetMenu(fileName = "BoosterAddPlateBehaviorSO", menuName = "MyGame/SkewerJam/Boosters/BoosterAddPlateBehaviorSO")]
     public class BoosterAddPlateBehaviorSO : BaseBoosterBehaviorSO
     {
+        [SerializeField] private int maxPlate = 10;
         public override GameResource boosterType => GameResource.BoosterAddPlate;
+
+        public override bool CanUseBooster()
+        {
+            var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
+            return waitingGrillManager.ListWaitingGrills.Count() < maxPlate;
+        }
 
         public override async UniTask UseBooster()
         {

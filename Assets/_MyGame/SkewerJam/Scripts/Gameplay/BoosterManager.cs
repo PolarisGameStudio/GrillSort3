@@ -3,6 +3,7 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using MyGame.SO.Boosters;
 using Sonat.Enums;
+using SonatFramework.Systems.ObjectPooling;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay
@@ -23,6 +24,7 @@ namespace MyGame.SkewerJam.Gameplay
             {
                 Debug.Log($"{LOG_TAG} SBooster behavior not found: {boosterType}");
             }
+
             await boosterBehavior.UseBooster();
         }
 
