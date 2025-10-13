@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using DG.Tweening;
+using Manager;
 using Sonat;
 using Sonat.AdsModule;
 using Sonat.Enums;
@@ -59,6 +60,8 @@ namespace Gameplay.SceneManager
             // logoAnim.AnimationState.SetAnimation(0, "End", false);
             // yield return new WaitForSeconds(0.43f);
             SonatAds.needShowAppOpenAds = false;
+            GameRemoteConfigValue.LoadData();
+            
             int level = MySonatFramework.GetService<UserDataService>().GetLevel();
             // if (level >= GameRemoteConfigValue.levelForceHome)
             // {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using MyGame.SkewerJam.Gameplay;
 using MyGame.SkewerJam.Objects.Entities;
 using Sonat.Enums;
+using SonatFramework.Systems.AudioManagement;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay
@@ -38,6 +39,13 @@ namespace MyGame.SkewerJam.Gameplay
         private void OnEndCollectItem(OrderEntity orderEntity)
         {
             AddCombo();
+
+            var audioId = (AudioId)((int)AudioId.Items_Merge_combo_1 + combo - 1);
+            if (audioId > AudioId.Items_Merge_combo_13)
+            {
+                audioId = AudioId.Items_Merge_combo_13;
+            }
+            MySonatFramework.GetService<AudioService>().PlaySound(audioId);
         }
 
         public void ResetCombo()

@@ -5,39 +5,28 @@ namespace Sonat.Enums
     {
         None = 0,
         ButtonClick = 1,
-        Win_Music,
-        Lose_Music,
-        BGM_Ingame_Summer,
-        Items_Merge,
-        Items_Pick,
-        Items_Put,
-        Coin_Received,
+
+        BGM_Ingame_Halloween_Grill_sort = 2,
+        BGM_Ingame_Halloween_01_Grill_sort,
+
+
+        Win_HLW_Music_fireworks_Grill_sort = 10,
+        Win_Music_sfx_Grill3,
+        Win_HLW_Particle_loop_Grill_sort,
+        Win_HLW_Pumkin_Received_Grill_sort,
+
+
+
+        Lose_HLW_Music_Grill_sort = 20,
+        Lose_OutOfMove_popup_Grill3,
+
+
+
+        Items_Merge_SMode_HLW_Grill_sort = 30,
+        Items_Pick_SMode_HLW_Grill_sort,
+
         Obstacle_Chain_01,
-        Obstacle_Chain_02,
-        Obstacle_Chain_03,
-        Items_Fly_Whoosh,
-        Stars_Fill,
-        Items_Collected,
-        Chest_Level_Appear,
-        Chest_Level_Idle,
-        Chest_Level_Open,
-        Time_Warning,
-        Time_Count,
-
-
-        Items_Pick_0 = 20,
-        Items_Pick_1 = 21,
-        Items_Pick_2 = 22,
-        Items_Put_0 = 30,
-        Items_Put_1 = 31,
-        Items_Put_2 = 32,
-
-        Items_Direct_Pick_Grill_sort,
-        Items_Direct_Put_Grill_sort,
-        Items_Glass_Put_Grill_sort,
-        Items_Tray_Put_Grill_sort,
-
-        Items_Merge_combo_1 = 41,
+        Items_Merge_combo_1 = 40,
         Items_Merge_combo_2,
         Items_Merge_combo_3,
         Items_Merge_combo_4,
@@ -117,17 +106,11 @@ namespace Sonat.Enums
         Spin_Rolling_Grill_sort,
         Spin_Win_prize_Grill_sort,
 
-        Items_Merge_SMode_HLW_Grill_sort,
-        Items_Pick_SMode_HLW_Grill_sort,
-
         PreWin_Music,
-        Lose_HLW_Music_Grill_sort,
         Lose_HLW_Panel_Outofmove_Appear_Grill_sort,
         Lose_HLW_Panel_Outofmove_Out_Grill_sort,
         Pre_win_HLW_sound_Grill_sort,
-        Win_HLW_Music_fireworks_Grill_sort,
-        Win_HLW_Particle_loop_Grill_sort,
-        Win_HLW_Pumkin_Received_Grill_sort,
+
 
 
 
@@ -137,10 +120,7 @@ namespace Sonat.Enums
 
         BGM_Ingame_Summer_old = 1000,
         BGM_Ingame_Japan_Grill_sort,
-        BGM_Home_summer_Grill_sort,
-
-        BGM_Ingame_Halloween_Grill_sort,
-        BGM_Ingame_Halloween_01_Grill_sort,
+        BGM_Home_summer_Grill_sort
     }
 }
 #endif

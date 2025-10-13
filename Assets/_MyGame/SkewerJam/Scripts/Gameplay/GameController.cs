@@ -43,6 +43,7 @@ namespace MyGame.SkewerJam.Gameplay
         public int Level => level;
         private GameState gameState;
         private EventBinding<GameStateChangeEvent> gameStateChangeEvent;
+        private AudioId bgm;
 
         private void Awake()
         {
@@ -91,11 +92,11 @@ namespace MyGame.SkewerJam.Gameplay
             MySonatFramework.GetService<UserDataService>().SaveLevel(level, GameMode.Classic);
             var popupLoading = PanelManager.Instance.OpenPanelByName<PopupLoading>("PopupLoading", new UIData().Add("Time", 2f));
             Debug.Log("<color=green>[GameController]</color> PlayLevel: " + level);
-            // SonatUtils.DelayCall(0.75f, () =>
-            // {
-            //     var bgm = UnityEngine.Random.Range(0, 2) == 0 ? AudioId.BGM_Ingame_Halloween_Grill_sort : AudioId.BGM_Ingame_Halloween_01_Grill_sort;
-            //     MySonatFramework.GetService<AudioService>().PlayMusic(bgm);
-            // }, this);
+            SonatUtils.DelayCall(0.75f, () =>
+            {
+                bgm = UnityEngine.Random.Range(0, 2) == 0 ? AudioId.BGM_Ingame_Halloween_Grill_sort : AudioId.BGM_Ingame_Halloween_01_Grill_sort;
+                MySonatFramework.GetService<AudioService>().PlayMusic(bgm);
+            }, this);
 
 
             this.level = level;
@@ -140,7 +141,7 @@ namespace MyGame.SkewerJam.Gameplay
         {
             levelGenerator.Clear();
             gameLogicHandler.Clear();
-            comboManager.ResetCombo();
+            comboManager.Clear();
         }
 
         #endregion
@@ -232,7 +233,7 @@ namespace MyGame.SkewerJam.Gameplay
         private async UniTaskVoid Revive(StuckType stuckType, string by, object[] objectParams = null)
         {
             ChangeGameState(GameState.Playing);
-
+            MySonatFramework.GetService<AudioService>().PlayMusic(bgm);
             EventBus<LevelStartedEvent>.Raise(new LevelStartedEvent() { level = level, gameMode = GameMode.Classic });
             await UniTask.Delay(1000);
             switch (stuckType)

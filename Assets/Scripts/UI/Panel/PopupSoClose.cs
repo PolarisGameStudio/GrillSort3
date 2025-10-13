@@ -1,12 +1,8 @@
 using Sonat.Enums;
 using SonatFramework.Scripts.Feature.Shop.UI;
-using SonatFramework.Scripts.Helper;
 using SonatFramework.Scripts.UIModule;
-using SonatFramework.Systems;
+using SonatFramework.Systems.AudioManagement;
 using SonatFramework.Systems.InventoryManagement;
-using SonatFramework.Systems.TrackingModule;
-using UnityEngine;
-
 public class PopupSoClose : PopupContinueBase
 {
     public override void OnSetup()
@@ -17,6 +13,10 @@ public class PopupSoClose : PopupContinueBase
     public override void Open(UIData uiData)
     {
         base.Open(uiData);
+
+
+        MySonatFramework.GetService<AudioService>().StopMusic();
+        MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Lose_OutOfMove_popup_Grill3);
 
     }
 

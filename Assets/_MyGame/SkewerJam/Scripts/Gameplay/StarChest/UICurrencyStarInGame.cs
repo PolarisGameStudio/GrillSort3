@@ -4,9 +4,13 @@ using DG.Tweening;
 using SonatFramework.Scripts.UIModule.UIElements;
 using SonatFramework.Systems;
 using SonatFramework.Systems.EventBus;
+using UnityEngine;
 
 public class UICurrencyStarInGame : UICurrency
 {
+    [Header("UIcurrencyStarInGame")]
+    [SerializeField] private bool forceValue = false;
+    [SerializeField] private bool isMiss = false;
     private readonly Service<StarChestService> starChestService = new();
     private EventBinding<LevelStartedEvent> levelStartedEvent;
     public override void OnEnable()
@@ -14,6 +18,12 @@ public class UICurrencyStarInGame : UICurrency
         base.OnEnable();
 
         levelStartedEvent = new EventBinding<LevelStartedEvent>(OnLevelStarted);
+
+        if (forceValue)
+        {
+            value = starChestService.Instance.Star * (isMiss ? -1 : 1);
+            txtValue.text = value.ToString();
+        }
     }
 
     protected override void OnDisable()

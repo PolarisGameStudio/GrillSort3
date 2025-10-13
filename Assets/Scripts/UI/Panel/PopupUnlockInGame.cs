@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Manager;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
@@ -109,7 +110,8 @@ public class PopupUnlockInGame : Panel
 
         if (txtPrice) txtPrice.text = price.quantity.ToString();
 
-        // if(rwdButton) rwdButton.SetActive(checkRemoteByLevelCounter.CheckCounter());
+        var level = MySonatFramework.userDataService.GetLevel();
+        if(rwdButton) rwdButton.SetActive(level >= GameRemoteConfigValue.showRewardAdsLevel);
     }
 
     private void HideAllLayouts()

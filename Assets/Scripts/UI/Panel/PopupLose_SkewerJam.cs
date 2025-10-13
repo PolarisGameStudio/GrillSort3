@@ -1,7 +1,9 @@
 using MyGame.SkewerJam.Gameplay;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using Sonat.Enums;
+using SonatFramework.Systems;
 using SonatFramework.Scripts.UIModule;
+using SonatFramework.Systems.AudioManagement;
 
 public class PopupLose_SkewerJam : Panel
 {
@@ -9,8 +11,8 @@ public class PopupLose_SkewerJam : Panel
     {
         base.Open(uiData);
 
-        // MySonatFramework.audioService.StopMusic();
-        // MySonatFramework.audioService.PlaySound(AudioId.Lose_HLW_Music_Grill_sort);
+        MySonatFramework.GetService<AudioService>().StopMusic();
+        MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Lose_HLW_Music_Grill_sort);
     }
 
     public void OnClickRetry()

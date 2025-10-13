@@ -42,24 +42,12 @@ namespace Manager
         public static bool shuffleItemIds;
         public static LevelReplayData levelReplayData;
 
+
+        public static int showRewardAdsLevel;
+
         public static void LoadData()
         {
-            voiceInterval = SonatSDKAdapter.GetRemoteInt("voice_interval", 5);
-            levelForceHome = SonatSDKAdapter.GetRemoteInt("levelForceHome", 6);
-            levelAppearLuckySpin = SonatSDKAdapter.GetRemoteInt("levelAppearLuckySpin", 11);
-            levelBeginReceivePiggyPoint = SonatSDKAdapter.GetRemoteInt("levelBeginReceivePiggyPoint", 2);
-            // bgrMusic = SonatSDKAdapter.GetRemoteConfig<AudioId>("bgr_music", AudioId.BGM_Ingame_Summer);
-            forceTutBooster = SonatSDKAdapter.GetRemoteBool("force_tut_booster", false);
-            numberSpecialItemPerLevel = SonatSDKAdapter.GetRemoteInt("number_special_item_per_level", 3);
-            iceGrillStep = SonatSDKAdapter.GetRemoteInt("ice_grill_step", 4);
-            iceGrillStep_SkewerJam = SonatSDKAdapter.GetRemoteInt("ice_grill_step_skewer_jam", 6);
-            itemBombLimit = SonatSDKAdapter.GetRemoteInt("item_bomb_move_limit", 10);
-            popupUnlockTray = SonatSDKAdapter.GetRemoteBool("popup_unlock_tray", true);
-            numberItemCanMergeAfterShuffle = SonatSDKAdapter.GetRemoteInt("number_item_can_merge_after_shuffle", 5);
-            levelShowInterLose = SonatSDKAdapter.GetRemoteInt("level_show_inter_lose", 0);
-            levelShowInterWin = SonatSDKAdapter.GetRemoteInt("level_show_inter_win", 0);
-            levelShowInterReplay = SonatSDKAdapter.GetRemoteInt("level_show_inter_replay", 0);
-            localizeJapan = SonatSDKAdapter.GetRemoteBool("localize_japan", false);
+            showRewardAdsLevel = SonatSDKAdapter.GetRemoteInt("show_reward_ads_level", 9999);
 
             countLoseToShowOffer = SonatSDKAdapter.GetRemoteInt("count_lose_to_show_offer", 0);
             noCharacter = SonatSDKAdapter.GetRemoteBool("no_character", true);
