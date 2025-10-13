@@ -220,16 +220,6 @@ namespace MyGame.SkewerJam.Gameplay
         {
             OnEndCollectItem?.Invoke(orderEntity);
             OnCollectItem?.Invoke((int)orderEntity.ItemIdTarget);
-
-            MySonatFramework.GetService<InventoryService>().AddResource(GameResource.Star, 1);
-            EventBus<AddItemEvent>.Raise(new AddItemEvent()
-            {
-                resource = GameResource.Star,
-                quantity = 1,
-                position = orderEntity.transform.position,
-                collectEffect = new CollectEffectSingle()
-            });
-
             MySonatFramework.GetService<VibrationService>().Vibrate(75);
 
 

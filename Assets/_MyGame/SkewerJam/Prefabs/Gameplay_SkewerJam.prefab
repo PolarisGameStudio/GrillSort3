@@ -130,6 +130,7 @@ Transform:
   - {fileID: 5556033389620933087}
   - {fileID: 1120177808615533912}
   - {fileID: 4764933475735923921}
+  - {fileID: 202172252753773398}
   - {fileID: 1203575786013136779}
   - {fileID: 8124541142911591577}
   - {fileID: 3333203937593100959}
@@ -540,6 +541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelGenerator: {fileID: 5313676994870603207}
   gameLogicHandler: {fileID: 3352650157346697696}
+  comboManager: {fileID: 7606624987743944617}
   gameplayScreen: {fileID: 0}
   gameViewport: {fileID: 0}
   gameConfig: {fileID: 11400000, guid: a204b9400f0887b4d824ef9cf8117eb9, type: 2}
@@ -588,6 +590,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelService: {fileID: 11400000, guid: bec8c49623ad7bc498f848e3cfa8eb7c, type: 2}
+--- !u!1 &7941646188474037459
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 202172252753773398}
+  - component: {fileID: 7606624987743944617}
+  m_Layer: 0
+  m_Name: ComboManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &202172252753773398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7941646188474037459}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7597675867907486549}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7606624987743944617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7941646188474037459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ceab72ae80661c489ef62c2000abd1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comboConfigSO: {fileID: 11400000, guid: 77dbd3e0a89099348846e3a68be9fcd4, type: 2}
 --- !u!1 &8647375863644526159
 GameObject:
   m_ObjectHideFlags: 0

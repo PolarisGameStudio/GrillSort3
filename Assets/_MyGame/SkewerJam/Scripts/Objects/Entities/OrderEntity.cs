@@ -85,6 +85,8 @@ namespace MyGame.SkewerJam.Objects.Entities
             moving = false;
 
             completeCount = 0;
+
+            transform.localScale = Vector3.one;
         }
 
         public void SetData(ItemId itemId, int num)

@@ -59,6 +59,9 @@ namespace MyGame.SkewerJam.Gameplay
             await CreateGrill(levelData.grillData, grillManager);
             await UniTask.DelayFrame(1);
 
+            // tính toán viewport mới create conveyor
+            await GameController.Instance.GameViewport.CalculateViewport();
+            await UniTask.DelayFrame(1);
 
             // create waiting grill
             var waitingGrillManager = gameLogicHandler.WaitingGrillManager;
@@ -74,9 +77,6 @@ namespace MyGame.SkewerJam.Gameplay
             var conveyorManager = gameLogicHandler.ConveyorManager;
             await CreateConveyors(levelData.conveyorData, conveyorManager);
 
-            // tính toán viewport mới create conveyor
-            await GameController.Instance.GameViewport.CalculateViewport();
-            await UniTask.DelayFrame(1);
 
             // create obstacles
             var obstacleManager = gameLogicHandler.ObstacleManager;

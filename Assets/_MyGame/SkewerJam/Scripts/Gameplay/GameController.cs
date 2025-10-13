@@ -21,6 +21,7 @@ namespace MyGame.SkewerJam.Gameplay
 
         [SerializeField] private LevelGenerator levelGenerator;
         [SerializeField] private GameLogicHandler gameLogicHandler;
+        [SerializeField] private ComboManager comboManager;
 
         [Header("UI")]
         [SerializeField] private GameplayScreen gameplayScreen;
@@ -36,6 +37,7 @@ namespace MyGame.SkewerJam.Gameplay
         public GameLogicHandler GameLogicHandler => gameLogicHandler;
         public GameViewport GameViewport => gameViewport;
         public GameState GameState => gameState;
+        public ComboManager ComboManager => comboManager;
         // private int level;
         private int level;
         public int Level => level;
@@ -131,12 +133,14 @@ namespace MyGame.SkewerJam.Gameplay
             gameplayScreen.InitLevel(level);
             levelGenerator.Init();
             gameLogicHandler.Init();
+            comboManager.Initialize();
         }
 
         public void ClearLevel()
         {
             levelGenerator.Clear();
             gameLogicHandler.Clear();
+            comboManager.ResetCombo();
         }
 
         #endregion
