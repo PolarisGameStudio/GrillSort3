@@ -63,8 +63,9 @@ namespace MyGame.SkewerJam.Gameplay
             if (cooldownCoroutine != null)
             {
                 StopCoroutine(cooldownCoroutine);
+                cooldownCoroutine = null;
             }
-            StartCoroutine(ComboCooldown());
+            cooldownCoroutine = StartCoroutine(ComboCooldown());
             OnComboChange?.Invoke();
         }
 
