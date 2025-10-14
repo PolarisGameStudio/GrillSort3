@@ -14,26 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playOnPrice:
     resource: 1
-    quantity: 150
+    quantity: 900
   winRewards:
   - levelDifficulty: 0
     reward:
       resource: 1
-      quantity: 50
+      quantity: 10
   - levelDifficulty: 1
     reward:
       resource: 1
-      quantity: 75
+      quantity: 15
   - levelDifficulty: 2
     reward:
       resource: 1
-      quantity: 100
+      quantity: 25
   unlockTrayPrice:
     resource: 1
-    quantity: 150
+    quantity: 500
   unlockPlatePrice:
     resource: 1
-    quantity: 150
+    quantity: 500
   unlockOctoChefPrice:
     resource: 1
-    quantity: 150
+    quantity: 500
