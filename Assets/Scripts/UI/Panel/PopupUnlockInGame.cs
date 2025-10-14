@@ -4,6 +4,7 @@ using System.Linq;
 using Manager;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using Sonat.Enums;
+using SonatFramework.Scripts.Feature.Shop.UI;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems;
 using SonatFramework.Systems.InventoryManagement;
@@ -111,7 +112,7 @@ public class PopupUnlockInGame : Panel
         if (txtPrice) txtPrice.text = price.quantity.ToString();
 
         var level = MySonatFramework.userDataService.GetLevel();
-        if(rwdButton) rwdButton.SetActive(level >= GameRemoteConfigValue.showRewardAdsLevel);
+        if (rwdButton) rwdButton.SetActive(level >= GameRemoteConfigValue.showRewardAdsLevel);
     }
 
     private void HideAllLayouts()
@@ -141,7 +142,7 @@ public class PopupUnlockInGame : Panel
         else
         {
             PopupToast.Cretate("Not enough coin!");
-            // PanelManager.Instance.OpenPanelByName<ShopPanelBase>("ShopPanel");
+            PanelManager.Instance.OpenPanelByName<ShopPanelBase>("ShopPanel");
         }
     }
 
