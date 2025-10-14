@@ -27,7 +27,7 @@ namespace MyGame.SkewerJamSO.Boosters
         public override (bool canUse, string reason) CanUseBooster()
         {
             var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
-            if (waitingGrillManager.ListWaitingGrills.Any(e => e.GetSlot(0).GetItem() == null)) return (false, "No items on plate");
+            if (waitingGrillManager.ListWaitingGrills.All(e => e.GetSlot(0).GetItem() == null)) return (false, "No items on plate");
             return (true, "");
         }
 

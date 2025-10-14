@@ -257,6 +257,7 @@ namespace MyGame.SkewerJam.Gameplay
 
         public async UniTaskVoid Lose(StuckType stuckType)
         {
+            MySonatFramework.livesService.ReduceLive(1, "lose");
             EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent() { level = level, gameMode = GameMode.Classic, success = false });
             PanelManager.Instance.OpenPanelByName<PopupLose_SkewerJam>("PopupLose_SkewerJam");
             GameplayHelper.IsWin = false;

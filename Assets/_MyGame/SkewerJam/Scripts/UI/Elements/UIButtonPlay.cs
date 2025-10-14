@@ -1,6 +1,9 @@
 using MyGame.SkewerJam.Gameplay;
 using Sonat.Enums;
+using SonatFramework.Scripts.Feature.Lives;
 using SonatFramework.Scripts.UIModule;
+using SonatFramework.Systems;
+using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.SceneManagement;
 using UnityEngine;
 
@@ -8,6 +11,8 @@ namespace SkewerJam.UI.Elements
 {
     public class UIButtonPlay : MonoBehaviour
     {
+        private readonly Service<LivesService> livesService = new();
+
         private void OnEnable()
         {
 
@@ -20,19 +25,15 @@ namespace SkewerJam.UI.Elements
 
         public void PlayClick()
         {
-            // PanelManager.Instance.ClosePanel<PopupLose_SkewerJam>();
-
-            // GameController.Instance.Replay();
-            // if (GameplayHelper.CheckStart() || forcePlay || PlayerPrefs.GetInt("FirstPlayHLW", 0) == 0)
-            // {
-            // PlayerPrefs.SetInt("FirstPlayHLW", 1);
-            MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Gameplay_SkewerJam);
-            // }
-            // else
-            // {
-            //     // PanelManager.Instance.OpenPanel<PopupWarningEnergy_SkewerJam>(new UIData().Add("GamePlacement", GamePlacement.Home));
-            //     PanelManager.Instance.OpenPanel<PopupTrickOrTreat_HLW>();
-            // }
+            if (livesService.Instance.CanPlay())
+            {
+                MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Gameplay_SkewerJam);
+            }
+            else
+            {
+                PanelManager.Instance.OpenPanel<PopupRefillLives>();
+                PopupToast.Cretate("No more lives left!");
+            }
         }
     }
 }

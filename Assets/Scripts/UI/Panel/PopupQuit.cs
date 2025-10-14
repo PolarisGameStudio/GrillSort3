@@ -1,3 +1,4 @@
+using System;
 using MyGame.SkewerJam.Gameplay;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using Sonat.Enums;
@@ -7,29 +8,32 @@ using SonatFramework.Systems.SceneManagement;
 
 public class PopupQuit : Panel
 {
+    private Action onConfirm;
     public override void Open(UIData uiData)
     {
         base.Open(uiData);
+
+        if (uiData != null)
+        {
+            uiData.TryGet("OnConfirm", out onConfirm);
+        }
+    }
+
+    public override void Close()
+    {
+        base.Close();
+        GameplayHelper.OnClose_ChangeGameState(GameState.Playing);
     }
 
     public void OnContinueClick()
     {
         Close();
-        GameplayHelper.OnClose_ChangeGameState(GameState.Playing);
     }
 
     public void OnQuitClick()
     {
         Close();
-        // GameplayHelper.GoHome();
+        onConfirm?.Invoke();
 
-        // GameplayHelper.OnClose_ChangeGameState(GameState.Playing);
-        // PopupToast.Cretate("Go Home");
-
-        LoadingInstance.Instance.Show(3f);
-        SonatUtils.DelayCall(1.5f, () =>
-        {
-            MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Home);
-        });
     }
 }

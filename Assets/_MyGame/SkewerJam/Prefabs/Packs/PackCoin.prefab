@@ -702,6 +702,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1369265957399534943}
   - component: {fileID: 2465495298928619154}
+  - component: {fileID: -7308541211270530126}
   m_Layer: 5
   m_Name: PackCoin
   m_TagString: Untagged
@@ -750,6 +751,21 @@ MonoBehaviour:
   onBuySuccess:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-7308541211270530126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2162266868284295063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d0b865fb7f3154aa5aca74f3d835cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
+  shopPacks:
+  - {fileID: 2465495298928619154}
 --- !u!1 &2594381338933694491
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,6 +778,8 @@ GameObject:
   - component: {fileID: 6308511275078427140}
   - component: {fileID: 6288593688270810378}
   - component: {fileID: 8910807628834977682}
+  - component: {fileID: 7242813331214770926}
+  - component: {fileID: 5484419169634379090}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -871,6 +889,40 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7242813331214770926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2594381338933694491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 235fbdd43ea180149a6dccd6023e4fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverScale: 1.1
+  clickScale: 0.9
+  duration: 0.09
+  baseScale: {x: 1, y: 1, z: 1}
+--- !u!114 &5484419169634379090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2594381338933694491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb4df7fa440a9a469647450de79e72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioTracks: 1
+  audioId: 0
+  volume: 1
+  audioService:
+    referenceType: 1
+    reference: {fileID: 0}
 --- !u!1 &3336299383470764360
 GameObject:
   m_ObjectHideFlags: 0

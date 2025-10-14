@@ -1,5 +1,4 @@
 using System;
-using Cysharp.Threading.Tasks;
 using Manager;
 using MyGame.SkewerJam.Gameplay;
 using Sonat.Enums;
@@ -23,25 +22,14 @@ public class PopupSettings : PopupSettingsBase
     {
         if (clicked) return;
 
-        // if (MySonatFramework.livesService.CanPlay())
-        // {
-        //     UIData data = new UIData();
-        //     data.Add("OnConfirm", (Action)ConfirmReplay);
-        //     PanelManager.Instance.OpenPanel<PopupLostLives>(data);
-        // }
-        // else
-        // {
-        //     PanelManager.Instance.OpenPanel<PopupRefillLives>();
-        // }
-
-        // Replay();
         uiButtonSetting.GoOut(false);
-        PanelManager.Instance.OpenPanel<PopupAreYouSure>();
+        UIData data = new UIData();
+        data.Add("OnConfirm", (Action)ConfirmReplay);
+        PanelManager.Instance.OpenPanel<PopupAreYouSure>(data);
     }
 
     protected override void Replay()
     {
-        // Close();
         GameController.Instance.Replay();
     }
 
@@ -61,8 +49,8 @@ public class PopupSettings : PopupSettingsBase
     {
         if (MySonatFramework.livesService.CanPlay())
         {
-            Replay();
             MySonatFramework.livesService.ReduceLive(1, "replay");
+            AfterRefillLive();
         }
         else
         {
@@ -87,21 +75,10 @@ public class PopupSettings : PopupSettingsBase
     {
         if (clicked) return;
 
-        // if (MySonatFramework.livesService.CanPlay())
-        // {
-        //     clicked = true;
-        //     SonatSDKAdapter.ShowInterAds("BackHome", GoHome);
-        // }
-        // else
-        // {
-        //     UIData data = new UIData();
-        //     data.Add("OnConfirm", (Action)ConfirmGoHome);
-        //     PanelManager.Instance.OpenPanel<PopupLostLives>(data);
-        // }
-        // ConfirmGoHome();
-
         uiButtonSetting.GoOut(false);
-        PanelManager.Instance.OpenPanel<PopupQuit>();
+        UIData data = new UIData();
+        data.Add("OnConfirm", (Action)ConfirmGoHome);
+        PanelManager.Instance.OpenPanel<PopupQuit>(data);
     }
 
     private void ConfirmGoHome()
@@ -109,19 +86,17 @@ public class PopupSettings : PopupSettingsBase
         clicked = true;
         var level = MySonatFramework.userDataService.GetLevel();
         // string cause = GameplayController.instance.levelGenerator.CheckOutOfMove() ? "back_home_ out_of_move" : "back_home";
-        // EventBus<LevelQuitEvent>.Raise(new LevelQuitEvent() { cause = cause });
-        // EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent() { gameMode = GameMode.Classic, level = level, success = false });
-        // MySonatFramework.livesService.ReduceLive(1, "back_home");
-        // if (level >= GameRemoteConfigValue.levelShowInterLose)
-        // {
-        //     SonatSDKAdapter.ShowInterAds("BackHome", GoHome);
-        // }
-        // else
-        // {
-        GoHome();
-        // }
-
-        // PopupToast.Cretate("Go Home");
+        EventBus<LevelQuitEvent>.Raise(new LevelQuitEvent() { cause = "back_home" });
+        EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent() { gameMode = GameMode.Classic, level = level, success = false });
+        MySonatFramework.livesService.ReduceLive(1, "back_home");
+        if (level >= GameRemoteConfigValue.levelShowInterLose)
+        {
+            SonatSDKAdapter.ShowInterAds("BackHome", GoHome);
+        }
+        else
+        {
+            GoHome();
+        }
     }
 
     protected override void LoadHomeScene()
@@ -137,22 +112,11 @@ public class PopupSettings : PopupSettingsBase
 
     public void RateClick()
     {
-        // PanelManager.Instance.OpenPanel<PopupRate>();
+        PanelManager.Instance.OpenPanel<PopupRate>();
     }
 
     protected override void GoHome()
     {
-        // var consecutiveWinService = MySonatFramework.GetService<ConsecutiveWinService>();
-        // var level = MySonatFramework.userDataService.GetLevel();
-        // // load lại prewin
-        // if (consecutiveWinService.CheckStart(level))
-        // {
-        //     GameplayController.instance.Replay();
-        // }
-        // else
-        // {
-        // LoadHomeScene();
-        // }
         LoadingInstance.Instance.Show();
 
         SonatUtils.DelayCall(1.5f, () =>
