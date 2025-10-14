@@ -24,10 +24,11 @@ namespace MyGame.SkewerJamSO.Boosters
         [SerializeField] private AnimationCurve scaleEase = AnimationCurve.EaseInOut(0, 0, 1, 1);
         [SerializeField] private float delay = 0.5f;
 
-        public override bool CanUseBooster()
+        public override (bool canUse, string reason) CanUseBooster()
         {
             var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
-            return waitingGrillManager.ListWaitingGrills.Count(e => e.GetSlot(0).GetItem() != null) > 0;
+            if (waitingGrillManager.ListWaitingGrills.Any(e => e.GetSlot(0).GetItem() == null)) return (false, "No items on plate");
+            return (true, "");
         }
 
         public override async UniTask UseBooster(Vector3 position)
@@ -61,7 +62,7 @@ namespace MyGame.SkewerJamSO.Boosters
 
         public async UniTask PlayBoosterAnim(Vector3 position)
         {
-            
+
         }
     }
 }

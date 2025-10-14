@@ -26,8 +26,8 @@ public class PopupQuit : Panel
         // GameplayHelper.OnClose_ChangeGameState(GameState.Playing);
         // PopupToast.Cretate("Go Home");
 
-        PanelManager.Instance.OpenPanel<PopupLoading>(new UIData().Add("Time", 2f));
-        SonatUtils.DelayCall(2f, () =>
+        LoadingInstance.Instance.Show(3f);
+        SonatUtils.DelayCall(1.5f, () =>
         {
             MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Home);
         });

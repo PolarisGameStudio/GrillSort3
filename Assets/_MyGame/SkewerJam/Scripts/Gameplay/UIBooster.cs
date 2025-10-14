@@ -14,18 +14,23 @@ namespace MyGame.SkewerJam.Gameplay.Booster
     {
         public override void ClickBooster()
         {
+            if (GameController.Instance.GameState != GameState.Playing) return;
             if (usingBooster) return;
 
             var boosterManager = GameController.Instance.GameLogicHandler.BoosterManager;
             if (boosterService.Instance.CanUseBooster(boosterType))
             {
-                if (boosterManager.CanUseBooster(boosterType))
+                var (canUse, reason) = boosterManager.CanUseBooster(boosterType);
+                if (canUse)
                 {
                     UseBooster();
                 }
                 else
                 {
-                    PopupToast.Cretate("Unusable!");
+                    if (string.IsNullOrEmpty(reason) == false)
+                    {
+                        PopupToast.Cretate(reason);
+                    }
                 }
             }
             else

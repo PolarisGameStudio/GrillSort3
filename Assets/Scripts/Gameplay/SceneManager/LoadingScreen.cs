@@ -19,7 +19,6 @@ namespace Gameplay.SceneManager
         [SerializeField] private float startSpeed = 0.5f;
         [SerializeField] private float loadingSpeed = 0.01f;
         [SerializeField] private float endSpeed = 1f;
-        private float loadingTime = 2;
 
         private void Start()
         {
@@ -27,11 +26,10 @@ namespace Gameplay.SceneManager
 
             if (PlayerPrefs.HasKey("LoadingFirstTime"))
             {
-                loadingTime = 1;
+                minLoadingTime = 1;
             }
             else
             {
-                loadingTime = 0.5f;
                 PlayerPrefs.SetInt("LoadingFirstTime", 1);
             }
 

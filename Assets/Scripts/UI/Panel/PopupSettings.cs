@@ -153,9 +153,9 @@ public class PopupSettings : PopupSettingsBase
         // {
         // LoadHomeScene();
         // }
-        PanelManager.Instance.OpenPanel<PopupLoading>(new UIData().Add("Time", 2f));
+        LoadingInstance.Instance.Show();
 
-        SonatUtils.DelayCall(2f, () =>
+        SonatUtils.DelayCall(1.5f, () =>
         {
             MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Home);
         });

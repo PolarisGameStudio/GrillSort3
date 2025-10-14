@@ -28,9 +28,9 @@ namespace MyGame.SkewerJam.Gameplay
             await boosterBehavior.UseBooster(position);
         }
 
-        public bool CanUseBooster(GameResource boosterType)
+        public (bool canUse, string reason) CanUseBooster(GameResource boosterType)
         {
-            if (GameController.Instance.GameState != GameState.Playing) return false;
+            if (GameController.Instance.GameState != GameState.Playing) return (false, "");
 
             var boosterBehavior = GetBoosterBehavior(boosterType);
             return boosterBehavior.CanUseBooster();

@@ -12,9 +12,9 @@ namespace MyGame.SO.Boosters
         public abstract GameResource boosterType { get; }
         public abstract UniTask UseBooster(Vector3 position);
 
-        public virtual bool CanUseBooster()
+        public virtual (bool canUse, string reason) CanUseBooster()
         {
-            return true;
+            return (true, "");
         }
 
         protected virtual async UniTask PlayBoosterAnim(Vector3 position)

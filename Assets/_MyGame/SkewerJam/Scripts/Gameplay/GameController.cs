@@ -90,9 +90,9 @@ namespace MyGame.SkewerJam.Gameplay
             ClearLevel();
 
             MySonatFramework.GetService<UserDataService>().SaveLevel(level, GameMode.Classic);
-            var popupLoading = PanelManager.Instance.OpenPanelByName<PopupLoading>("PopupLoading", new UIData().Add("Time", 2f));
+            LoadingInstance.Instance.Show();
             Debug.Log("<color=green>[GameController]</color> PlayLevel: " + level);
-            SonatUtils.DelayCall(0.75f, () =>
+            SonatUtils.DelayCall(2f, () =>
             {
                 // bgm = UnityEngine.Random.Range(0, 2) == 0 ? AudioId.BGM_Ingame_Halloween_Grill_sort : AudioId.BGM_Ingame_Halloween_01_Grill_sort;
                 bgm = AudioId.BGM_Ingame_Summer_Grill3;
@@ -120,7 +120,7 @@ namespace MyGame.SkewerJam.Gameplay
 
         public async UniTask PlayStartGame()
         {
-            await UniTask.Delay(1500);
+            await UniTask.Delay(2500);
             foreach (var grill in gameLogicHandler.GrillManager.ListGrills)
             {
                 grill.GrillVisual.OpenGrill();

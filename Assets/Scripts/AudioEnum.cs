@@ -40,9 +40,6 @@ namespace Sonat.Enums
         Items_Merge_combo_8,
         Items_Merge_combo_9,
         Items_Merge_combo_10,
-        Items_Merge_combo_11,
-        Items_Merge_combo_12,
-        Items_Merge_combo_13,
 
 
         Obstacle_Ice_break_Grill_sort_01 = 60,

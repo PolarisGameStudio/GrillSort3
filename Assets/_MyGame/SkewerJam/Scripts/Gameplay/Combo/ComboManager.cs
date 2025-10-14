@@ -42,9 +42,9 @@ namespace MyGame.SkewerJam.Gameplay
             AddCombo();
 
             var audioId = (AudioId)((int)AudioId.Items_Merge_combo_1 + combo - 1);
-            if (audioId > AudioId.Items_Merge_combo_13)
+            if (audioId > AudioId.Items_Merge_combo_10)
             {
-                audioId = AudioId.Items_Merge_combo_13;
+                audioId = AudioId.Items_Merge_combo_10;
             }
             MySonatFramework.GetService<AudioService>().PlaySound(audioId);
         }

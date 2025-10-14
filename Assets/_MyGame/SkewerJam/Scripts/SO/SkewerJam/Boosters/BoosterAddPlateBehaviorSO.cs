@@ -20,10 +20,11 @@ namespace MyGame.SkewerJamSO.Boosters
         [SerializeField] private float delay = 2f;
         public override GameResource boosterType => GameResource.BoosterAddPlate;
 
-        public override bool CanUseBooster()
+        public override (bool canUse, string reason) CanUseBooster()
         {
             var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
-            return waitingGrillManager.ListWaitingGrills.Count() < maxPlate;
+            if (waitingGrillManager.ListWaitingGrills.Count() >= maxPlate) return (false, "Max plate reached");
+            return (true, "");
         }
 
         public override async UniTask UseBooster(Vector3 position)

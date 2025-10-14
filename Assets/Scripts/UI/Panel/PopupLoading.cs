@@ -1,39 +1,43 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using DG.Tweening;
-using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.Utils;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PopupLoading : Panel
+public class PopupLoading : MonoBehaviour
 {
-    private float time = 1;
     [SerializeField] private Slider slider;
     [SerializeField] private TMP_Text txtLoading;
     [SerializeField] private float delayBetweenTexts = 0.5f;
     [SerializeField] private string[] loadingTexts = { "Loading...", "Loading..", "Loading." };
 
+    private float time = 1;
+
     private Coroutine loadingCoroutine;
-    public override void Open(UIData uiData)
+
+    private void OnEnable()
     {
-        base.Open(uiData);
-        if (uiData != null && uiData.TryGet("Time", out time))
+        // slider.value = 0;
+        // loadingCoroutine = StartCoroutine(IELoading());
+    }
+
+    private void OnDisable()
+    {
+        StopCoroutine(loadingCoroutine);
+        loadingCoroutine = null;
+    }
+
+    public void SetTime(float time)
+    {
+        SonatUtils.DelayCall(time, () =>
         {
-            SonatUtils.DelayCall(time, Close);
-        }
+            gameObject.SetActive(false);
+        }, this);
         slider.value = 0;
 
         loadingCoroutine = StartCoroutine(IELoading());
     }
 
-    public override void OnOpenCompleted()
-    {
-        base.OnOpenCompleted();
-        slider.DOValue(1, time);
-    }
 
     private IEnumerator IELoading()
     {
@@ -48,11 +52,5 @@ public class PopupLoading : Panel
                 index = 0;
             }
         }
-    }
-
-    public override void Close()
-    {
-        base.Close();
-        StopCoroutine(loadingCoroutine);
     }
 }

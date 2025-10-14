@@ -1,5 +1,7 @@
 using Cysharp.Threading.Tasks;
+using Sonat.Enums;
 using SonatFramework.Systems;
+using SonatFramework.Systems.AudioManagement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +18,8 @@ public class HomeManager : SingletonSimple<HomeManager>
         if (uINavigateBar == null)
             uINavigateBar = GetComponentInChildren<UINavigateBarSlide>();
         //OnCompleteAlbum();
+
+        MySonatFramework.GetService<AudioService>().PlayMusic(AudioId.BGM_Ingame_Summer_Grill3);
     }
     public async UniTask SwitchTab(Sonat.Enums.NavigationType navigation, float delay = 0)
     {
