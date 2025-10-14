@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 94642958046586625, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -268
+      value: -3920.25
       objectReference: {fileID: 0}
     - target: {fileID: 94642958046586625, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -90,16 +90,56 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1357628248029537808, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: key
-      value: 12
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1470561203537638050, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1525808697765994831, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8a24b048622e65c4fae7b43f09a71e8d, type: 3}
     - target: {fileID: 2302743461176799268, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_Name
-      value: LimitedBundle
+      value: LegendaryBundle_1
       objectReference: {fileID: 0}
+    - target: {fileID: 2345795032216548762, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2cfbe5e4c72a23d4d807d1e2adcdd474, type: 3}
+    - target: {fileID: 2700025029971077428, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 2700025029971077428, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 273
+      objectReference: {fileID: 0}
+    - target: {fileID: 4892736783187194642, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: m_text
+      value: Legendary Bundle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4892736783187194642, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: m_fontSize
+      value: 65.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4892736783187194642, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 0bd511f1592a90442ba25459736c0c49, type: 2}
+    - target: {fileID: 5021228179410338451, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1242bba7f733ba24c88237acb4895a76, type: 3}
+    - target: {fileID: 8327486294048181001, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8327486294048181001, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2cfbe5e4c72a23d4d807d1e2adcdd474, type: 3}
     - target: {fileID: 8934566491478307726, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_text
       value: 60% Sale
