@@ -1976,6 +1976,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5235331486902931712}
   m_SourcePrefab: {fileID: 100100000, guid: b3886f02809de454383b21112b46a072, type: 3}
+--- !u!224 &1017788047959456841 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 9141805345166389359, guid: b3886f02809de454383b21112b46a072, type: 3}
+  m_PrefabInstance: {fileID: 8125020741254646822}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2568536404820395620 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6009096099012315714, guid: b3886f02809de454383b21112b46a072, type: 3}
@@ -1997,9 +2002,84 @@ MonoBehaviour:
   pauseGame: 0
   ignoreTracking: 0
   trackingName: 
-  openTween: []
+  openTween:
+  - target: {fileID: 1017788047959456841}
+    configSO: {fileID: 11400000, guid: f5deaa398b128a447889a074544bf531, type: 2}
+    custom: 0
+    config:
+      tweenType: 2
+      from: 0.5
+      to: 0.9
+      mFrom: {x: 0, y: 0, z: 0}
+      mTo: {x: 0, y: 0, z: 0}
+      duration: 0.35
+      delay: 0
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 1
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 1
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  - target: {fileID: 8482367777950403813}
+    configSO: {fileID: 11400000, guid: 2f5dd8e40a6759c4280e6b0fd488ef77, type: 2}
+    custom: 0
+    config:
+      tweenType: 1
+      from: 1.1
+      to: 1
+      mFrom: {x: 0, y: 0, z: 0}
+      mTo: {x: 0, y: 0, z: 0}
+      duration: 0.35
+      delay: 0
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 3.0944235
+          outSlope: 3.0944235
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.038022812
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: -1.0730765
+          outSlope: -1.0730765
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.033982337
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
   closeTween: []
   starContainer: {fileID: 2520718677541213940}
+--- !u!224 &8482367777950403813 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 393699781657886915, guid: b3886f02809de454383b21112b46a072, type: 3}
+  m_PrefabInstance: {fileID: 8125020741254646822}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8627561340217501706 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 538916849243694124, guid: b3886f02809de454383b21112b46a072, type: 3}
