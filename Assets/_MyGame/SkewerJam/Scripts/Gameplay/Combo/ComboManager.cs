@@ -23,7 +23,7 @@ namespace MyGame.SkewerJam.Gameplay
             ResetCombo();
 
             var gameLogicHandler = GameController.Instance.GameLogicHandler;
-            gameLogicHandler.OnEndCollectItem += OnEndCollectItem;
+            gameLogicHandler.OnStartCollectItem += OnStartCollectItem;
 
             uiCombo.Init();
         }
@@ -31,12 +31,13 @@ namespace MyGame.SkewerJam.Gameplay
         public void Clear()
         {
             var gameLogicHandler = GameController.Instance.GameLogicHandler;
-            gameLogicHandler.OnEndCollectItem -= OnEndCollectItem;
+            gameLogicHandler.OnStartCollectItem -= OnStartCollectItem;
 
+            ResetCombo();
             uiCombo.Clear();
         }
 
-        private void OnEndCollectItem(OrderEntity orderEntity)
+        private void OnStartCollectItem(OrderEntity orderEntity)
         {
             AddCombo();
 

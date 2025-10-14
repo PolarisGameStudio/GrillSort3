@@ -1378,6 +1378,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UICurrencyStarInGame
       objectReference: {fileID: 0}
+    - target: {fileID: 2582924790688880936, guid: 69467e67d9973514fb9158d4a37a27f1, type: 3}
+      propertyPath: m_fontSize
+      value: 43
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1399,6 +1403,10 @@ PrefabInstance:
     - target: {fileID: 634426983639386274, guid: 27e0671a0d5ef5943af42955b6598b41, type: 3}
       propertyPath: m_Name
       value: UIBoosterShuffle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2498084240726555041, guid: 27e0671a0d5ef5943af42955b6598b41, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 7902322350869440643, guid: 27e0671a0d5ef5943af42955b6598b41, type: 3}
       propertyPath: m_Pivot.x
@@ -2010,6 +2018,10 @@ PrefabInstance:
     - target: {fileID: 1741356371209998921, guid: 31d3f3ef704e8b8478aabbcda677684c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281044055571284843, guid: 31d3f3ef704e8b8478aabbcda677684c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 9029107922090177128, guid: 31d3f3ef704e8b8478aabbcda677684c, type: 3}
       propertyPath: m_Name

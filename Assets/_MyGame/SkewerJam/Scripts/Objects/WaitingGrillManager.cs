@@ -79,6 +79,7 @@ namespace MyGame.SkewerJam.Objects
         {
             var waitingGrill = await GameFactory.Instance.CreateEntityAsync<WaitingGrill>("WaitingGrill", transform);
             waitingGrill.SetActive(active);
+            waitingGrill.transform.localScale = Vector3.one;
             listWaitingGrills.Add(waitingGrill);
             return waitingGrill;
         }
@@ -123,8 +124,10 @@ namespace MyGame.SkewerJam.Objects
             // }
             var waitingGrill = await AddWaitingGrill(true);
             waitingGrill.transform.localScale = Vector3.zero;
-            await AlignObjects(() => {
-                waitingGrill.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutSine);
+            var targetScale = listWaitingGrills[0].transform.localScale;
+            await AlignObjects(() =>
+            {
+                waitingGrill.transform.DOScale(targetScale, 0.3f).SetEase(Ease.OutSine);
             });
 
             await UniTask.Delay(500);

@@ -137,13 +137,13 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
         {
             SonatUtils.DelayCall(1f, () =>
             {
-                // GameController.Instance.Lose(StuckType.SkewerJa m_BombExplosion);
+                GameController.Instance.Lose(StuckType.OutOfMove);
             }, itemBombMove);
         }
 
         public override async UniTask ProcessExplodeBomb(ItemBombMove itemBombMove)
         {
-            // GameController.Instance.ChangeGameState(GameState.Paused);
+            GameController.Instance.ChangeGameState(GameState.Paused);
             await UniTask.WhenAny(
                 UniTask.WaitUntil(() => GameController.Instance.GameLogicHandler.HasCollectItem == true),
                 UniTask.Delay(1000)
@@ -153,7 +153,7 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
                 // chờ thêm để xem có order nào ăn item bomb này không  
                 await UniTask.Delay(4000);
             }
-            // GameController.Instance.ChangeGameState(GameState.Playing);
+            GameController.Instance.ChangeGameState(GameState.Playing);
         }
     }
 }

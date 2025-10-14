@@ -5,14 +5,22 @@ namespace Sonat.Enums
         None = -1,
         no_ads = 0,
         no_ads_just_fun = 1,
-        starter_pack = 2,
-        safety_net = 3,
-        special_offer = 4,
-        gold_1 = 10,
-        gold_2 = 11,
-        gold_3 = 12,
-        gold_4 = 13,
-        gold_5 = 14,
-        gold_6 = 15
+
+        gold_1 = 2,
+        gold_2 = 3,
+        gold_3 = 4,
+        gold_4 = 5,
+        gold_5 = 6,
+        gold_6 = 7,
+
+        starter_bundle = 10,
+        mini_bundle = 11,
+        limited_bundle = 12,
+
+        large_bundle = 13,
+        ultra_bundle = 14,
+        giant_bundle = 15,
+        legendary_bundle = 16,
+
     }
 }

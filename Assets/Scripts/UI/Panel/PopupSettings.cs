@@ -118,10 +118,10 @@ public class PopupSettings : PopupSettingsBase
         // }
         // else
         // {
-        //     GoHome();
+        GoHome();
         // }
 
-        PopupToast.Cretate("Go Home");
+        // PopupToast.Cretate("Go Home");
     }
 
     protected override void LoadHomeScene()
@@ -151,8 +151,14 @@ public class PopupSettings : PopupSettingsBase
         // }
         // else
         // {
-        LoadHomeScene();
+        // LoadHomeScene();
         // }
+        PanelManager.Instance.OpenPanel<PopupLoading>(new UIData().Add("Time", 2f));
+
+        SonatUtils.DelayCall(2f, () =>
+        {
+            MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Home);
+        });
     }
 
     public void OpenFanPage()

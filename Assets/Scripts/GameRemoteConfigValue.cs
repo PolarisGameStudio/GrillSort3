@@ -11,7 +11,6 @@ namespace Manager
     public static class GameRemoteConfigValue
     {
         public static bool showNativeAds;
-        public static int voiceInterval;
         public static int levelForceHome;
         public static int levelAppearLuckySpin;
         public static int levelBeginReceivePiggyPoint;
@@ -48,6 +47,8 @@ namespace Manager
         public static void LoadData()
         {
             showRewardAdsLevel = SonatSDKAdapter.GetRemoteInt("show_reward_ads_level", 9999);
+            levelForceHome = SonatSDKAdapter.GetRemoteInt("level_force_home", 5);
+
 
             countLoseToShowOffer = SonatSDKAdapter.GetRemoteInt("count_lose_to_show_offer", 0);
             noCharacter = SonatSDKAdapter.GetRemoteBool("no_character", true);

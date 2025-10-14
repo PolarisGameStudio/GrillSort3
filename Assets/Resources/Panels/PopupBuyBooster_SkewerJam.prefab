@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: SonatFramework.Scripts.UIModule.Panel, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 1615552444419329273, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1912769391028483679, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 436
@@ -75,6 +79,10 @@ PrefabInstance:
     - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_text
       value: Unlock
+      objectReference: {fileID: 0}
+    - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_fontSize
+      value: 97.8
       objectReference: {fileID: 0}
     - target: {fileID: 2338080940412523142, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_AnchorMax.y
@@ -98,7 +106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2666681406775041360, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2956704467941102775, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_Sprite
@@ -136,6 +144,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4570516174493971043, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_fontSize
+      value: 85
+      objectReference: {fileID: 0}
     - target: {fileID: 4855997368239842548, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -158,7 +170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6009096099012315714, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_Name
-      value: PopupBuyBooster
+      value: PopupBuyBooster_SkewerJam
       objectReference: {fileID: 0}
     - target: {fileID: 6029476427327543003, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -194,7 +206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7794184162579932216, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_text
-      value: Unlock another tray!
+      value: xxx
       objectReference: {fileID: 0}
     - target: {fileID: 8966111214114131189, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_ReverseArrangement
@@ -393,6 +405,7 @@ MonoBehaviour:
   icon: {fileID: 5723804186790024739}
   iconNamePattern: ico_{0}
   buyWithRwdButton: {fileID: 2727434607560985283}
+  txtName: {fileID: 5595274392850461369}
 --- !u!114 &1026501817691213048 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6659841476006072537, guid: b3886f02809de454383b21112b46a072, type: 3}
@@ -414,6 +427,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 9141805345166389359, guid: b3886f02809de454383b21112b46a072, type: 3}
   m_PrefabInstance: {fileID: 5931908660698962977}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5595274392850461369 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
+  m_PrefabInstance: {fileID: 5931908660698962977}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6007627099965299514 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 75785467097204507, guid: b3886f02809de454383b21112b46a072, type: 3}

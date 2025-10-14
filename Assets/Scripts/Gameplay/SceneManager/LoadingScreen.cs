@@ -4,11 +4,8 @@ using Manager;
 using Sonat;
 using Sonat.AdsModule;
 using Sonat.Enums;
-using SonatFramework.Scripts.Utils;
-using SonatFramework.Systems.AudioManagement;
 using SonatFramework.Systems.SceneManagement;
 using SonatFramework.Systems.UserData;
-using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,8 +15,10 @@ namespace Gameplay.SceneManager
     {
         private bool sonatSdkInited = false;
         [SerializeField] private Slider slider;
-        // private SkeletonGraphic logoAnim;
-        // [SerializeField] private LocalizedEntry<SkeletonGraphic> logo;
+        [SerializeField] private float minLoadingTime = 2;
+        [SerializeField] private float startSpeed = 0.5f;
+        [SerializeField] private float loadingSpeed = 0.01f;
+        [SerializeField] private float endSpeed = 1f;
         private float loadingTime = 2;
 
         private void Start()
@@ -36,41 +35,63 @@ namespace Gameplay.SceneManager
                 PlayerPrefs.SetInt("LoadingFirstTime", 1);
             }
 
-            // logoAnim = logo.GetLocalizedEntry();
-
-            // slider.DOValue(1, loadingTime).OnComplete(() => { StartCoroutine(IELoading()); });
-            StartCoroutine(IELoading());
+            StartCoroutine(PlaySlider());
 
             SonatSdkManager.Initialize(OnSonatSdkInited);
-            // OnSonatSdkInited();
         }
 
         private void OnSonatSdkInited()
         {
             sonatSdkInited = true;
-            // SonatUtils.ExecuteNextFrame(SonatTrackingService.Setup, 2);
         }
 
-        IEnumerator IELoading()
+        IEnumerator PlaySlider()
         {
-            yield return new WaitUntil(() => sonatSdkInited);
-            // yield return new WaitForSeconds(0.1f);
-            // logoAnim.AnimationState.ClearTracks();
-            // logoAnim.Initialize(true);
-            // logoAnim.AnimationState.SetAnimation(0, "End", false);
-            // yield return new WaitForSeconds(0.43f);
+            // tăng nhanh đến 0.5f và di chuyển tạm tới khi inited
+            // bắt buộc load ít nhất 2s
+            slider.value = 0;
+            var startTime = Time.time;
+            while (slider.value < 0.5f)
+            {
+                slider.value += startSpeed * Time.deltaTime;
+                yield return null;
+            }
+
+            while (slider.value < 1)
+            {
+                slider.value += loadingSpeed * Time.deltaTime;
+                yield return null;
+                if (sonatSdkInited && Time.time - startTime >= minLoadingTime)
+                {
+                    break;
+                }
+            }
+
+            while (slider.value < 1)
+            {
+                slider.value += endSpeed * Time.deltaTime;
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(0.5f);
+            CompleteLoading();
+
+        }
+
+        void CompleteLoading()
+        {
             SonatAds.needShowAppOpenAds = false;
             GameRemoteConfigValue.LoadData();
-            
+
             int level = MySonatFramework.GetService<UserDataService>().GetLevel();
-            // if (level >= GameRemoteConfigValue.levelForceHome)
-            // {
-            //     MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Home);
-            // }
-            // else
-            // {
-            MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Gameplay_SkewerJam);
-            // }
+            if (level >= GameRemoteConfigValue.levelForceHome)
+            {
+                MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Home);
+            }
+            else
+            {
+                MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Gameplay_SkewerJam);
+            }
         }
     }
 }

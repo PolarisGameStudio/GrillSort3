@@ -41,6 +41,7 @@ namespace Sonat.Enums
         None = 0,
         Home,
         Shop,
+        Settings,
         Leaderboard,
     }
 

@@ -1,9 +1,10 @@
 using Cysharp.Threading.Tasks;
 using Gameplay.LevelData;
-using Sonat.CustomService;
+using MyGame.SkewerJam.UI.Tut;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
-using SonatFramework.Scripts.Utils;
+using SonatFramework.Systems;
+using SonatFramework.Systems.BoosterManagement;
 using SonatFramework.Systems.EventBus;
 using UnityEngine;
 
@@ -13,24 +14,22 @@ namespace MyGame.SkewerJam.Gameplay
     {
         EventBinding<LevelStartedEvent> eventBinding;
 
+        private readonly Service<BoosterService> boosterService = new();
+
         private void OnEnable()
         {
             eventBinding = new EventBinding<LevelStartedEvent>(OnStartLevel);
+            boosterService.Instance.onUnlockBooster += OnUnlockBooster;
         }
 
         private void OnDisable()
         {
             EventBus<LevelStartedEvent>.Deregister(eventBinding);
+            boosterService.Instance.onUnlockBooster -= OnUnlockBooster;
         }
 
         private void OnStartLevel(LevelStartedEvent eventData)
         {
-            if (eventData.level == 1)
-            {
-                TryOpenPopupStartGameplay().Forget();
-                return;
-            }
-
             var tutorialType = CheckTutorial(eventData.level);
             if (tutorialType != TutorialType.None)
             {
@@ -40,6 +39,11 @@ namespace MyGame.SkewerJam.Gameplay
                 }
                 CheckShowTutObstacle(tutorialType.ToString());
             }
+        }
+
+        private void OnUnlockBooster(GameResource boosterType)
+        {
+            // ShowPopupTutorial<PopupTutBooster>("PopupTut" + boosterType.ToString()).Forget();
         }
 
         private TutorialType CheckTutorial(int level)
@@ -67,8 +71,7 @@ namespace MyGame.SkewerJam.Gameplay
 
         private async UniTask ShowPopupTutorial<T>(string tutorial) where T : Panel
         {
-            // await UniTask.WaitUntil(() => UIFlowController.CheckConditionShowPopupTutNewMode());
-            // PanelManager.Instance.OpenPanelByName<T>(tutorial);
+            PanelManager.Instance.OpenPanelByName<T>(tutorial);
         }
 
 
@@ -91,6 +94,10 @@ namespace MyGame.SkewerJam.Gameplay
     public enum TutorialType
     {
         None,
+        PopupTutBoosterAddPlate,
+        PopupTutBoosterSpatula,
+        PopupTutBoosterShuffle,
+        PopupTutBoosterFoodBox,
         PopupTutOctochef_SkewerJam
     }
 }

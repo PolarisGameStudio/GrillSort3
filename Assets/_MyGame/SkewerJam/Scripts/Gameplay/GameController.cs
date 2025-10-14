@@ -157,8 +157,6 @@ namespace MyGame.SkewerJam.Gameplay
             if (gameState == GameState.GameOver) return;
 
             EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent() { level = level, gameMode = GameMode.Classic, success = true });
-            var newLevel = MySonatFramework.userDataService.GetLevel(GameMode.Classic) + 1;
-            MySonatFramework.userDataService.SaveLevel(newLevel, GameMode.Classic);
 
             // GameplayStateSaver.Instance.SetStatus(); // không lưu trạng thái
             ChangeGameState(GameState.GameOver);

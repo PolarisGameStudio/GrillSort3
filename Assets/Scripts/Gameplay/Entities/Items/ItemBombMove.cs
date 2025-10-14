@@ -139,7 +139,7 @@ namespace Gameplay.Entities.Items
             }
             else
             {
-                // MySonatFramework.audioService.PlaySound(AudioId.Obstacle_Bomb_counting_Grill_sort, 0.5f);
+                MySonatFramework.audioService.PlaySound(AudioId.Obstacle_Bomb_counting_Grill_sort, 0.5f);
                 CheckWarningBomb();
             }
         }

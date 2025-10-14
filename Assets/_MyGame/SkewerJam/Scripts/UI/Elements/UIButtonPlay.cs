@@ -1,5 +1,7 @@
 using MyGame.SkewerJam.Gameplay;
+using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
+using SonatFramework.Systems.SceneManagement;
 using UnityEngine;
 
 namespace SkewerJam.UI.Elements
@@ -18,13 +20,13 @@ namespace SkewerJam.UI.Elements
 
         public void PlayClick()
         {
-            PanelManager.Instance.ClosePanel<PopupLose_SkewerJam>();
+            // PanelManager.Instance.ClosePanel<PopupLose_SkewerJam>();
 
-            GameController.Instance.Replay();
+            // GameController.Instance.Replay();
             // if (GameplayHelper.CheckStart() || forcePlay || PlayerPrefs.GetInt("FirstPlayHLW", 0) == 0)
             // {
             // PlayerPrefs.SetInt("FirstPlayHLW", 1);
-            // MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Gameplay_SkewerJam);
+            MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Gameplay_SkewerJam);
             // }
             // else
             // {
