@@ -189,7 +189,7 @@ MonoBehaviour:
         quantity: 4
       - resource: 2
         quantity: 21600
-    noAds: 0
+    noAds: 1
     noAdsFree: 0
     oneTimePurchase: 0
     group: 0
@@ -198,18 +198,18 @@ MonoBehaviour:
     rewardData:
       resourceDatas:
       - resource: 1
-        quantity: 4000
+        quantity: 50000
       - resource: 101
-        quantity: 4
+        quantity: 8
       - resource: 102
-        quantity: 4
+        quantity: 8
       - resource: 103
-        quantity: 4
+        quantity: 8
       - resource: 104
-        quantity: 4
+        quantity: 8
       - resource: 2
-        quantity: 3600
-    noAds: 0
+        quantity: 43200
+    noAds: 1
     noAdsFree: 0
     oneTimePurchase: 0
     group: 0
@@ -218,17 +218,71 @@ MonoBehaviour:
     rewardData:
       resourceDatas:
       - resource: 1
-        quantity: 5000
+        quantity: 65000
       - resource: 101
-        quantity: 5
+        quantity: 15
       - resource: 102
-        quantity: 5
+        quantity: 15
       - resource: 103
-        quantity: 5
+        quantity: 15
       - resource: 104
-        quantity: 5
+        quantity: 15
       - resource: 2
-        quantity: 3600
+        quantity: 64800
+    noAds: 1
+    noAdsFree: 0
+    oneTimePurchase: 0
+    group: 0
+  - active: 1
+    key: 20
+    rewardData:
+      resourceDatas:
+      - resource: 1
+        quantity: 2000
+      - resource: 104
+        quantity: 2
+    noAds: 0
+    noAdsFree: 0
+    oneTimePurchase: 1
+    group: 0
+  - active: 1
+    key: 21
+    rewardData:
+      resourceDatas:
+      - resource: 1
+        quantity: 6000
+      - resource: 101
+        quantity: 2
+      - resource: 102
+        quantity: 2
+      - resource: 103
+        quantity: 2
+      - resource: 104
+        quantity: 2
+    noAds: 0
+    noAdsFree: 0
+    oneTimePurchase: 0
+    group: 0
+  - active: 1
+    key: 30
+    rewardData:
+      resourceDatas: []
+    noAds: 0
+    noAdsFree: 0
+    oneTimePurchase: 1
+    group: 0
+  - active: 1
+    key: 31
+    rewardData:
+      resourceDatas: []
+    noAds: 0
+    noAdsFree: 0
+    oneTimePurchase: 0
+    group: 0
+  - active: 1
+    key: 32
+    rewardData:
+      resourceDatas: []
     noAds: 0
     noAdsFree: 0
     oneTimePurchase: 0

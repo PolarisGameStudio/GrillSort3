@@ -22,5 +22,11 @@ namespace Sonat.Enums
         giant_bundle = 15,
         legendary_bundle = 16,
 
+        rescue_pack_1 = 20,
+        rescue_pack_2 = 21,
+
+        daily_deal_1 = 30,
+        daily_deal_2 = 31,
+        daily_deal_3 = 32,
     }
 }
