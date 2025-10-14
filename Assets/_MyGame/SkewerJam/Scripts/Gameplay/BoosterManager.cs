@@ -17,7 +17,7 @@ namespace MyGame.SkewerJam.Gameplay
         {
             return boosterBehaviors.FirstOrDefault(e => e.boosterType == boosterType);
         }
-        public async UniTask UseBooster(GameResource boosterType)
+        public async UniTask UseBooster(GameResource boosterType, Vector3 position)
         {
             var boosterBehavior = GetBoosterBehavior(boosterType);
             if (boosterBehavior == null)
@@ -25,7 +25,7 @@ namespace MyGame.SkewerJam.Gameplay
                 Debug.Log($"{LOG_TAG} SBooster behavior not found: {boosterType}");
             }
 
-            await boosterBehavior.UseBooster();
+            await boosterBehavior.UseBooster(position);
         }
 
         public bool CanUseBooster(GameResource boosterType)

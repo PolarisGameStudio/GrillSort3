@@ -59,20 +59,12 @@ namespace MyGame.SkewerJam.Gameplay.Booster
             UseBoosterAsync(boosterType).Forget();
         }
 
+
         private async UniTask UseBoosterAsync(GameResource boosterType)
         {
-            await PlayBoosterAnim();
-            await UniTask.Delay(2000);
             var gameLogicHanlder = GameController.Instance.GameLogicHandler;
-            await gameLogicHanlder.BoosterManager.UseBooster(boosterType);
+            await gameLogicHanlder.BoosterManager.UseBooster(boosterType, transform.position);
             OnUseBoosterSuccess();
-        }
-
-        private async UniTask PlayBoosterAnim()
-        {
-            var boosterAnim = await MySonatFramework.GetService<PoolingServiceAsync>().CreateAsync<BoosterAnim>("BoosterAnim", PanelManager.Instance.transform);
-            boosterAnim.SetBooster(boosterType);
-            boosterAnim.SetData(transform.position);
         }
     }
 }

@@ -9,6 +9,8 @@ using System.Linq;
 using Manager;
 using Gameplay.Entities;
 using SonatFramework.Systems.SettingsManagement.Vibation;
+using SonatFramework.Systems.ObjectPooling;
+using SonatFramework.Scripts.UIModule;
 
 namespace MyGame.SkewerJamSO.Boosters
 {
@@ -17,8 +19,11 @@ namespace MyGame.SkewerJamSO.Boosters
     {
         public override GameResource boosterType => GameResource.BoosterShuffle;
 
-        public override async UniTask UseBooster()
+        [SerializeField] private float delay = 2f;
+
+        public override async UniTask UseBooster(Vector3 position)
         {
+            await PlayBoosterAnim(position);
             Debug.Log("<color=yellow>BoosterShuffleBehaviorSO: </color> UseBooster Shuffle");
             // shuffle cho tất cả các item order lên layer 1
             // tạo cảm giác shuffle layer 1 và 2
@@ -174,6 +179,16 @@ namespace MyGame.SkewerJamSO.Boosters
 
             MySonatFramework.GetService<VibrationService>().Vibrate(50);
             await UniTask.Delay(2000);
+        }
+
+        protected override async UniTask PlayBoosterAnim(Vector3 position)
+        {
+            var boosterAnim = await MySonatFramework.GetService<PoolingServiceAsync>().CreateAsync<BoosterAnim>(
+                "BoosterAnimShuffle", 
+                PanelManager.Instance.transform);
+            // boosterAnim.SetBooster(boosterType);
+            // boosterAnim.SetData(position);
+            await UniTask.Delay((int)(delay * 1000));
         }
     }
 }

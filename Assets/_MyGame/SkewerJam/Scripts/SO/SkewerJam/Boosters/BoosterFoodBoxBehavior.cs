@@ -25,8 +25,9 @@ namespace MyGame.SkewerJamSO.Boosters
             return waitingGrillManager.ListWaitingGrills.Count(e => e.GetSlot(0).GetItem() != null) > 0;
         }
 
-        public override async UniTask UseBooster()
+        public override async UniTask UseBooster(Vector3 position)
         {
+            await PlayBoosterAnim(position);
             var gameLogicHandler = GameController.Instance.GameLogicHandler;
             var waitingGrillManager = gameLogicHandler.WaitingGrillManager;
             foreach (var waitingGrill in waitingGrillManager.ListWaitingGrills)

@@ -21,8 +21,9 @@ namespace MyGame.SkewerJamSO.Boosters
             return waitingGrillManager.ListWaitingGrills.Count() < maxPlate;
         }
 
-        public override async UniTask UseBooster()
+        public override async UniTask UseBooster(Vector3 position)
         {
+            await PlayBoosterAnim(position);
             var gameLogicHanlder = GameController.Instance.GameLogicHandler;
             var waitingManager = gameLogicHanlder.WaitingGrillManager;
             await waitingManager.AddPlate();

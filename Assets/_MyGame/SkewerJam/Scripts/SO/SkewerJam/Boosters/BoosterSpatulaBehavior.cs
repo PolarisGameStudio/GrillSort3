@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using Gameplay.Entities;
 using MyGame.SkewerJam.Objects.Entities;
+using SonatFramework.Systems.ObjectPooling;
+using SonatFramework.Scripts.UIModule;
 
 namespace MyGame.SkewerJamSO.Boosters
 {
@@ -18,9 +20,11 @@ namespace MyGame.SkewerJamSO.Boosters
         public override GameResource boosterType => GameResource.BoosterSpatula;
 
         [SerializeField] private float delayBetweenItems = 0.3f;
+        [SerializeField] private float delay = 2f;
 
-        public override async UniTask UseBooster()
+        public override async UniTask UseBooster(Vector3 position)
         {
+            await PlayBoosterAnim(position);
             var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
             var listOrders = new List<OrderEntity>(orderManager.ListOrders);
             Debug.Log($"BoosterSpatulaBehaviorSO: UseBooster: {listOrders.Count}");
@@ -81,6 +85,16 @@ namespace MyGame.SkewerJamSO.Boosters
             }
 
             return null;
+        }
+
+        protected override async UniTask PlayBoosterAnim(Vector3 position)
+        {
+            var boosterAnim = await MySonatFramework.GetService<PoolingServiceAsync>().CreateAsync<BoosterAnim>(
+                "BoosterAnimSpatula",
+                PanelManager.Instance.transform);
+            // boosterAnim.SetBooster(boosterType);
+            // boosterAnim.SetData(position);
+            await UniTask.Delay((int)(delay * 1000));
         }
     }
 }
