@@ -7,6 +7,10 @@ using DG.Tweening;
 using System.Threading.Tasks;
 using System.Linq;
 using SonatFramework.Systems.SettingsManagement.Vibation;
+using SonatFramework.Systems.ObjectPooling;
+using SonatFramework.Scripts.UIModule;
+using Gameplay.Entities;
+using System.Collections.Generic;
 
 namespace MyGame.SkewerJamSO.Boosters
 {
@@ -18,6 +22,7 @@ namespace MyGame.SkewerJamSO.Boosters
         [SerializeField] private float delayBetweenItems = 0.1f;
         [SerializeField] private float scaleDuration = 0.3f;
         [SerializeField] private AnimationCurve scaleEase = AnimationCurve.EaseInOut(0, 0, 1, 1);
+        [SerializeField] private float delay = 0.5f;
 
         public override bool CanUseBooster()
         {
@@ -27,9 +32,10 @@ namespace MyGame.SkewerJamSO.Boosters
 
         public override async UniTask UseBooster(Vector3 position)
         {
-            await PlayBoosterAnim(position);
             var gameLogicHandler = GameController.Instance.GameLogicHandler;
             var waitingGrillManager = gameLogicHandler.WaitingGrillManager;
+
+            var listItem = new List<Item>();
             foreach (var waitingGrill in waitingGrillManager.ListWaitingGrills)
             {
                 var item = waitingGrill.GetSlot(0).GetItem();
@@ -37,13 +43,25 @@ namespace MyGame.SkewerJamSO.Boosters
 
                 waitingGrill.GetSlot(0).SetItem(null);
                 // waitingGrill.transform.DOShakePosition(scaleDuration, 0.5f, 10, 90);
-                item.transform.DOScale(0, scaleDuration).SetEase(Ease.InBack).OnComplete(() =>
-                {
-                    MySonatFramework.GetService<VibrationService>().Vibrate(50);
-                    GameFactory.Instance.ReturnEntity(item);
-                });
-                await UniTask.Delay((int)(delayBetweenItems * 1000));
+                // item.transform.DOScale(0, scaleDuration).SetEase(Ease.InBack).OnComplete(() =>
+                // {
+                //     MySonatFramework.GetService<VibrationService>().Vibrate(50);
+                //     GameFactory.Instance.ReturnEntity(item);
+                // });
+
+                // GameFactory.Instance.ReturnEntity(item);
+                listItem.Add(item);
             }
+
+            var boosterAnim = await MySonatFramework.GetService<PoolingServiceAsync>().CreateAsync<BoosterAnim_BoosterFoodBox>(
+                "BoosterAnimFoodBox",
+                PanelManager.Instance.transform);
+            await boosterAnim.SetData(position, listItem);
+        }
+
+        public async UniTask PlayBoosterAnim(Vector3 position)
+        {
+            
         }
     }
 }

@@ -94,7 +94,8 @@ namespace MyGame.SkewerJam.Gameplay
             Debug.Log("<color=green>[GameController]</color> PlayLevel: " + level);
             SonatUtils.DelayCall(0.75f, () =>
             {
-                bgm = UnityEngine.Random.Range(0, 2) == 0 ? AudioId.BGM_Ingame_Halloween_Grill_sort : AudioId.BGM_Ingame_Halloween_01_Grill_sort;
+                // bgm = UnityEngine.Random.Range(0, 2) == 0 ? AudioId.BGM_Ingame_Halloween_Grill_sort : AudioId.BGM_Ingame_Halloween_01_Grill_sort;
+                bgm = AudioId.BGM_Ingame_Summer_Grill3;
                 MySonatFramework.GetService<AudioService>().PlayMusic(bgm);
             }, this);
 

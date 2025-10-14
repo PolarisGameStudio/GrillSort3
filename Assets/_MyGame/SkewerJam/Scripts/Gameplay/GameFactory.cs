@@ -33,5 +33,10 @@ namespace MyGame.SkewerJam.Gameplay
         {
             poolingService.ReturnObj(order, true);
         }
+
+        internal object GetEffect<T>()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

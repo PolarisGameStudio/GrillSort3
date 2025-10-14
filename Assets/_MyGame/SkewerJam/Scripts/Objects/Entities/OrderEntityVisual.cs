@@ -72,7 +72,7 @@ namespace MyGame.SkewerJam.Objects.Entities
             imageLid.transform.localPosition = Vector3.up * orderEntityConfigSO.up;
             await imageLid.transform.DOLocalMove(Vector3.zero, orderEntityConfigSO.durationUp).SetEase(orderEntityConfigSO.downCurve);
             completeEffect.Play();
-            MySonatFramework.audioService.PlaySound(AudioId.Items_Merge_SMode_HLW_Grill_sort);
+            MySonatFramework.audioService.PlaySound(AudioId.Box_Close_Grill3);
             onComplete1?.Invoke();
 
             MySonatFramework.GetService<VibrationService>().Vibrate(100);

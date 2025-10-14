@@ -12,7 +12,7 @@ public class PopupLose_SkewerJam : Panel
         base.Open(uiData);
 
         MySonatFramework.GetService<AudioService>().StopMusic();
-        MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Lose_HLW_Music_Grill_sort);
+        MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Lose_Giveup_Grill3);
     }
 
     public void OnClickRetry()

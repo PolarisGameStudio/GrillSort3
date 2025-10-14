@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule.SpriteService;
 using SonatFramework.Scripts.UIModule.UIElements;
@@ -20,11 +21,12 @@ public class BoosterAnim : EffectPoolBase
     [SerializeField] protected AnimationCurve scaleCurve;
 
     [Header("Shake")]
-    [SerializeField] protected float shakeDelay = 0.75f;
-    [SerializeField] protected float shakeDuration = 0.5f;
-    [SerializeField] protected float shakeStrength = 0.5f;
-    [SerializeField] protected int shakeVibrato = 5;
-    [SerializeField] protected float shakeRandomness = 90f;
+    [SerializeField, ShowIf("isShake")] protected bool isShake = true;
+    [SerializeField, ShowIf("isShake")] protected float shakeDelay = 0.75f;
+    [SerializeField, ShowIf("isShake")] protected float shakeDuration = 0.5f;
+    [SerializeField, ShowIf("isShake")] protected float shakeStrength = 0.5f;
+    [SerializeField, ShowIf("isShake")] protected int shakeVibrato = 5;
+    [SerializeField, ShowIf("isShake")] protected float shakeRandomness = 90f;
 
     public void SetBooster(GameResource boosterType)
     {
@@ -39,8 +41,11 @@ public class BoosterAnim : EffectPoolBase
         transform.localScale = Vector3.one * scale;
         transform.DOScale(Vector3.one, scaleDuration).SetEase(scaleCurve);
 
-        transform.DOShakePosition(shakeDuration, shakeStrength, shakeVibrato, shakeRandomness, false, true, ShakeRandomnessMode.Full)
+        if (isShake)
+        {
+            transform.DOShakePosition(shakeDuration, shakeStrength, shakeVibrato, shakeRandomness, false, true, ShakeRandomnessMode.Full)
             .SetEase(Ease.OutBounce)
             .SetDelay(shakeDelay);
+        }
     }
 }

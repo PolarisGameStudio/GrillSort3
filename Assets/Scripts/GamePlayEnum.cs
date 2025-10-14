@@ -26,7 +26,8 @@ namespace Sonat.Enums
         Playing,
         Paused,
         GameOver,
-        Tool
+        Tool,
+        UsingBooster
     }
 
     public enum GamePlacement : byte

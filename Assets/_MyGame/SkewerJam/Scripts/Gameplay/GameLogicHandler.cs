@@ -40,6 +40,7 @@ namespace MyGame.SkewerJam.Gameplay
         public BoosterManager BoosterManager => boosterManager;
 
         public Item ItemSelected { get; set; }
+        public bool BlockClick { get; set; } = false;
 
         #region Event Actions
         public event Action<Item, SlotBase> OnItemStartSwitch;
@@ -71,6 +72,7 @@ namespace MyGame.SkewerJam.Gameplay
             suggestManager.Init();
 
             pumpkin = 0;
+            BlockClick = false;
         }
 
         public void Clear()
@@ -104,6 +106,7 @@ namespace MyGame.SkewerJam.Gameplay
         {
             // Kiểm tra có vị trí hợp lệ ở order không
             if (CheckEnergy() == false) return false;
+            if (BlockClick) return false;
 
             ItemSelected = item;
             var (order, slot) = orderManager.GetDestinationSlot(item);
@@ -259,27 +262,27 @@ namespace MyGame.SkewerJam.Gameplay
                 }
             }
 
-            // nếu order còn có thể di chuyển item vào thì chưa thua + loại các item bị lock
-            var listTargetItemIds = orderManager.GetTargetItemIds();
+            // // nếu order còn có thể di chuyển item vào thì chưa thua + loại các item bị lock
+            // var listTargetItemIds = orderManager.GetTargetItemIds();
 
-            var listItemIdInLayer1 = GrillHelper.GetItemIdListWithLayer(1, true);
-            var dictItems = listItemIdInLayer1.GroupBy(e => e).ToDictionary(e => e.Key, e => e.Count());
+            // var listItemIdInLayer1 = GrillHelper.GetItemIdListWithLayer(1, true);
+            // var dictItems = listItemIdInLayer1.GroupBy(e => e).ToDictionary(e => e.Key, e => e.Count());
 
-            var listLockedItems = ItemHelper.GetItemIdsInLockedGrill();
-            foreach (var item in listLockedItems)
-            {
-                if (dictItems.ContainsKey(item) == false) continue;
-                dictItems[item]--;
-            }
+            // var listLockedItems = ItemHelper.GetItemIdsInLockedGrill();
+            // foreach (var item in listLockedItems)
+            // {
+            //     if (dictItems.ContainsKey(item) == false) continue;
+            //     dictItems[item]--;
+            // }
 
-            foreach (var id in listTargetItemIds)
-            {
-                if (dictItems.ContainsKey(id) == true && dictItems[id] > 0)
-                {
-                    Debug.Log("dictItems.ContainsKey(id) == true && dictItems[id] > 0");
-                    return null;
-                }
-            }
+            // foreach (var id in listTargetItemIds)
+            // {
+            //     if (dictItems.ContainsKey(id) == true && dictItems[id] > 0)
+            //     {
+            //         Debug.Log("dictItems.ContainsKey(id) == true && dictItems[id] > 0");
+            //         return null;
+            //     }
+            // }
 
             // else continue
             return StuckType.OutOfMove;

@@ -1,4 +1,5 @@
 ﻿using System;
+using Sonat.Enums;
 using Spine.Unity;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -28,7 +29,7 @@ namespace Gameplay.Entities.Obstacle.Visual
         {
             idleRandom = Random.Range(2, 4);
             PlayAnimation($"Stage{state}_Appear", false, Idle);
-            MySonatFramework.audioService.PlaySound("Obstacle_Octochef_Appear");
+            MySonatFramework.audioService.PlaySound(AudioId.Obstacle_Octochef_Appear);
         }
 
         public void Idle()

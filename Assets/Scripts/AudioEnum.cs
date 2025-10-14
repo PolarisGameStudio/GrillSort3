@@ -8,6 +8,7 @@ namespace Sonat.Enums
 
         BGM_Ingame_Halloween_Grill_sort = 2,
         BGM_Ingame_Halloween_01_Grill_sort,
+        BGM_Ingame_Summer_Grill3,
 
 
         Win_HLW_Music_fireworks_Grill_sort = 10,
@@ -19,11 +20,14 @@ namespace Sonat.Enums
 
         Lose_HLW_Music_Grill_sort = 20,
         Lose_OutOfMove_popup_Grill3,
+        Lose_Giveup_Grill3,
 
 
 
         Items_Merge_SMode_HLW_Grill_sort = 30,
         Items_Pick_SMode_HLW_Grill_sort,
+        Box_Close_Grill3,
+
 
         Obstacle_Chain_01,
         Items_Merge_combo_1 = 40,
@@ -40,11 +44,13 @@ namespace Sonat.Enums
         Items_Merge_combo_12,
         Items_Merge_combo_13,
 
-        Items_Special_Merge_Grill_sort,
 
         Obstacle_Ice_break_Grill_sort_01 = 60,
         Obstacle_Ice_break_Grill_sort_02 = 61,
         Obstacle_Ice_break_Grill_sort_03 = 62,
+
+        Obstacle_Octochef_Appear = 63,
+        Obstacle_Octochef_Dissappear = 64,
 
         Obstacle_Bomb_counting_Grill_sort = 65,
         Obstacle_Bomb_explosion_Grill_sort,

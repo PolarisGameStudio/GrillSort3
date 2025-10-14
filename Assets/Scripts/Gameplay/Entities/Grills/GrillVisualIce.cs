@@ -54,7 +54,7 @@ namespace Gameplay.Entities.Grills
                             });
                             iceEffects[state].gameObject.SetActive(true);
                             iceEffects[state].Play();
-                            // MySonatFramework.audioService.PlaySound(AudioId.Obstacle_Ice_break_Grill_sort_01 + (ushort)state);
+                            MySonatFramework.audioService.PlaySound(AudioId.Obstacle_Ice_break_Grill_sort_01 + (ushort)state);
                         }, this);
                     }
                     // else

@@ -182,7 +182,7 @@ namespace Gameplay.Entities.Items
 
             await UniTask.Delay(waitTime);
             particleExplosion.Play();
-            // MySonatFramework.audioService.PlaySound(AudioId.Obstacle_Bomb_explosion_Grill_sort);
+            MySonatFramework.audioService.PlaySound(AudioId.Obstacle_Bomb_explosion_Grill_sort);
             itemsSprite.material = materialExplosion;
         }
 

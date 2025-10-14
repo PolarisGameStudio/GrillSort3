@@ -55,6 +55,7 @@ namespace MyGame.SkewerJam.Gameplay.Booster
         {
             base.UseBooster();
 
+            GameController.Instance.ChangeGameState(GameState.UsingBooster);
             var boosterType = config.booster;
             UseBoosterAsync(boosterType).Forget();
         }
@@ -65,6 +66,7 @@ namespace MyGame.SkewerJam.Gameplay.Booster
             var gameLogicHanlder = GameController.Instance.GameLogicHandler;
             await gameLogicHanlder.BoosterManager.UseBooster(boosterType, transform.position);
             OnUseBoosterSuccess();
+            GameController.Instance.ChangeGameState(GameState.Playing);
         }
     }
 }
