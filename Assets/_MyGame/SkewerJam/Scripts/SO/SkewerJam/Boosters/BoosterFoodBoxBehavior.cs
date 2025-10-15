@@ -28,6 +28,7 @@ namespace MyGame.SkewerJamSO.Boosters
         {
             var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
             if (waitingGrillManager.ListWaitingGrills.All(e => e.GetSlot(0).GetItem() == null)) return (false, "No items on plate");
+
             return (true, "");
         }
 
@@ -58,6 +59,7 @@ namespace MyGame.SkewerJamSO.Boosters
                 "BoosterAnimFoodBox",
                 PanelManager.Instance.transform);
             await boosterAnim.SetData(position, listItem);
+            await GameController.Instance.GameLogicHandler.TryCheckWinGame();
         }
 
         public async UniTask PlayBoosterAnim(Vector3 position)

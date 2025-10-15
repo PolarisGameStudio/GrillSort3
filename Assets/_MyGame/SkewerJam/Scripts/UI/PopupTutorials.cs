@@ -5,7 +5,6 @@ using UnityEngine;
 public class PopupTutorials : Panel
 {
     [SerializeField] private float delay;
-    [SerializeField] private GameObject[] layouts;
 
     private bool readyClose = false;
 

@@ -47,7 +47,7 @@ namespace Manager
         public static void LoadData()
         {
             showRewardAdsLevel = SonatSDKAdapter.GetRemoteInt("show_reward_ads_level", 5);
-            levelForceHome = SonatSDKAdapter.GetRemoteInt("level_force_home", 5);
+            levelForceHome = SonatSDKAdapter.GetRemoteInt("level_force_home", 6);
 
             levelShowInterLose = SonatSDKAdapter.GetRemoteInt("level_show_inter_lose", 3);
             levelShowInterReplay = SonatSDKAdapter.GetRemoteInt("level_show_inter_replay", 3);

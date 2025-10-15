@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using Gameplay.LevelData;
 using Manager;
+using MyGame.SkewerJam.Gameplay;
 using Sonat.Enums;
 using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.Utils;
+using SonatFramework.Systems.InventoryManagement;
+using SonatFramework.Systems.InventoryManagement.GameResources;
 using Spine.Unity;
 using TMPro;
 using UnityEngine;
@@ -35,7 +38,7 @@ namespace Gameplay.Entities.Obstacle
 
         public void StartProgress()
         {
-            if(started) return;
+            if (started) return;
             started = true;
             var grillBehavior = primaryGrill.GrillBaseBehaviorSO;
             grillBehavior.eventSystemSO.RegisterEvents_OnCollectItem(OnCollectAItem);
@@ -56,14 +59,14 @@ namespace Gameplay.Entities.Obstacle
             started = false;
             UpdateVisual();
             UpdateAnim("Idle", true);
-            
+
             lockObstacles ??= new();
             lockObstacles.Add(this);
             blockClick = false;
 
             isClicked = false;
         }
-        
+
         public static void CheckAndStartProgress()
         {
             if (lockObstacles is not { Count: > 0 }) return;
@@ -106,7 +109,7 @@ namespace Gameplay.Entities.Obstacle
             {
                 NextProgress();
             }
-            
+
             UpdateAnim("Unlock", false, () =>
             {
                 if (progress == 0)
@@ -148,19 +151,20 @@ namespace Gameplay.Entities.Obstacle
         private void OnMouseUpAsButton()
         {
             var gameState = primaryGrill.GrillBaseBehaviorSO.GetGameState();
-            if (GameplayController.instance.GameState != GameState.Playing) return;
+            if (GameController.Instance.GameState != GameState.Playing) return;
             if (isClicked || blockClick) return;
-            if (GameRemoteConfigValue.popupUnlockTray)
-            {
-                // PanelManager.Instance.OpenPanelByName<PopupUnlockGrill>(
-                //     "PopupUnlockLockGrill", 
-                //     new UIData().Add("Callback", (Action)ForceUnlock).Add("PrimaryGrill", primaryGrill)
-                //     );
-            }
-            else
-            {
-                SonatSDKAdapter.ShowRewardAds(ForceUnlock, "booster", "unlock");
-            }
+            // if (GameRemoteConfigValue.popupUnlockTray)
+            // {
+            var rewardData = new ResourceData(GameResource.Coin, 500);
+            PanelManager.Instance.OpenPanelByName<PopupUnlockTray>(
+                "PopupUnlockTray",
+                new UIData().Add("OnSuccess", (Action)ForceUnlock).Add("Price", rewardData)
+                );
+            // }
+            // else
+            // {
+            //     SonatSDKAdapter.ShowRewardAds(ForceUnlock, "booster", "unlock");
+            // }
         }
 
         public void ForceUnlock()
@@ -172,7 +176,7 @@ namespace Gameplay.Entities.Obstacle
                 AudioId breakAudio = AudioId.Obstacle_Chain_01 + (ushort)Random.Range(0, 3);
                 MySonatFramework.audioService.PlaySound(breakAudio);
             }, this);
-            
+
             NextProgress();
 
             UpdateAnim("Unlock", false, () =>

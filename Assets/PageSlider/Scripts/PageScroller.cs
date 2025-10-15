@@ -52,12 +52,12 @@ namespace TS.PageSlider
         {
             get
             {
-#if UNITY_EDITOR
+                // #if UNITY_EDITOR
                 if (_scrollRect == null)
                 {
                     _scrollRect = FindScrollRect();
                 }
-#endif
+                // #endif
                 return ((RectTransform)_scrollRect.transform).rect;
             }
         }

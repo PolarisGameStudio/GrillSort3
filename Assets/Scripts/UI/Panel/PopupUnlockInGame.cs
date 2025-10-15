@@ -111,8 +111,9 @@ public class PopupUnlockInGame : Panel
 
         if (txtPrice) txtPrice.text = price.quantity.ToString();
 
-        var level = MySonatFramework.userDataService.GetLevel();
-        if (rwdButton) rwdButton.SetActive(level >= GameRemoteConfigValue.showRewardAdsLevel);
+        // var level = MySonatFramework.userDataService.GetLevel();
+        // if (rwdButton) rwdButton.SetActive(level >= GameRemoteConfigValue.showRewardAdsLevel);
+        rwdButton.SetActive(false);
     }
 
     private void HideAllLayouts()

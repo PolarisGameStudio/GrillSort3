@@ -7,6 +7,7 @@ using Sonat.Enums;
 using SonatFramework.Scripts.Feature.Lives;
 using SonatFramework.Systems.SceneManagement;
 using SonatFramework.Systems.UserData;
+using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,9 @@ namespace Gameplay.SceneManager
         [SerializeField] private float loadingSpeed = 0.01f;
         [SerializeField] private float endSpeed = 1f;
 
+        [Header("Anim")]
+        [SerializeField] private SkeletonGraphic skeletonGraphic;
+
         private void Start()
         {
             slider.value = 0;
@@ -34,9 +38,14 @@ namespace Gameplay.SceneManager
                 PlayerPrefs.SetInt("LoadingFirstTime", 1);
             }
 
+
             StartCoroutine(PlaySlider());
 
             SonatSdkManager.Initialize(OnSonatSdkInited);
+            skeletonGraphic.AnimationState.SetAnimation(0, "Appear", false).Complete += (track) =>
+            {
+                skeletonGraphic.AnimationState.SetAnimation(0, "Idle", true);
+            };
         }
 
         private void OnSonatSdkInited()
@@ -65,6 +74,11 @@ namespace Gameplay.SceneManager
                     break;
                 }
             }
+
+            skeletonGraphic.AnimationState.SetAnimation(0, "End", false).Complete += (track) =>
+            {
+                skeletonGraphic.gameObject.SetActive(false);
+            };
 
             while (slider.value < 1)
             {

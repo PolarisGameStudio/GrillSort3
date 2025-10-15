@@ -59,6 +59,11 @@ namespace MyGame.SkewerJam.Objects
         {
             if (slot.GetGrill() is WaitingGrill waitingGrill)
             {
+                var gameLogicHandler = GameController.Instance.GameLogicHandler;
+                if (gameLogicHandler.CheckWarningWaitingGrill(true) == true)
+                {
+                    gameLogicHandler.WarningWaitingGrill();
+                }
                 GameController.Instance.GameLogicHandler.TryCheckLoseGame();
             }
         }

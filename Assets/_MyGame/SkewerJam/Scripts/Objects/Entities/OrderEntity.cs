@@ -217,6 +217,7 @@ namespace MyGame.SkewerJam.Objects.Entities
         {
             // Khi nhả chuột trái
             //  var popup = PanelManager.Instance.GetPanel<PopupUnlock_SkewerJam>();
+            if (GameController.Instance.GameLogicHandler.IsClearAllItems) return;
             if (GameController.Instance.GameState == GameState.Playing && !active && Input.GetMouseButtonUp(0))
             {
                 var hits = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition));

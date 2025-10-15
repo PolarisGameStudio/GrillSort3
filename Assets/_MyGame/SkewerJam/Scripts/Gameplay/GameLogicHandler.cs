@@ -7,6 +7,7 @@ using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Objects;
 using MyGame.SkewerJam.Objects.Entities;
 using Sonat.Enums;
+using SonatFramework.Scripts.Utils;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay
@@ -59,6 +60,8 @@ namespace MyGame.SkewerJam.Gameplay
         private int pumpkin = 0;
         public int Pumpkin => pumpkin;
 
+        public bool IsClearAllItems { get; private set; } = false;
+
 
         public void Init()
         {
@@ -73,6 +76,8 @@ namespace MyGame.SkewerJam.Gameplay
 
             pumpkin = 0;
             BlockClick = false;
+
+            IsClearAllItems = false;
         }
 
         public void Clear()
@@ -102,24 +107,21 @@ namespace MyGame.SkewerJam.Gameplay
         }
 
         #region Select Item
+        public bool warning = false;
         public bool SelectItem(Item item)
         {
             // Kiểm tra có vị trí hợp lệ ở order không
             if (CheckEnergy() == false) return false;
             if (BlockClick) return false;
 
-            // var listEmptyWaitingGrill = ListWaitingGrills.Where(e => e.IsActive && e.GetSlot(0).GetItem() == null).ToList();
-            //     if (listEmptyWaitingGrill.Count == 1)
-            //     {
-            //         listEmptyWaitingGrill[0].Visual.PlayWarning();
-            //         // chặn click
-            //         var gameLogicHandler = GameController.Instance.GameLogicHandler;
-            //         gameLogicHandler.BlockClick = true;
-            //         SonatUtils.DelayCall(1f, () =>
-            //         {
-            //             gameLogicHandler.BlockClick = false;
-            //         }, this);
-            //     }
+            if (CheckWarningWaitingGrill() == true)
+            {
+                warning = true;
+                WarningWaitingGrill();
+                return false;
+            }
+
+
 
             ItemSelected = item;
             var (order, slot) = orderManager.GetDestinationSlot(item);
@@ -153,7 +155,62 @@ namespace MyGame.SkewerJam.Gameplay
                 SwitchSlot(waitingGrillSlot);
                 return true;
             }
+
+
             return false;
+        }
+
+        public bool CheckWarningWaitingGrill(bool force = false)
+        {
+            var listWaitingGrill = waitingGrillManager.ListWaitingGrills;
+            var listEmptyWaitingGrill = listWaitingGrill.Where(e => e.IsActive && e.GetSlot(0).GetItem() == null).ToList();
+            if (force)
+            {
+                if (listEmptyWaitingGrill.Count == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            if (warning)
+            {
+                if (listEmptyWaitingGrill.Count == 1)
+                {
+
+                }
+                else
+                {
+                    warning = false;
+                }
+                return false;
+            }
+            else
+            {
+                if (listEmptyWaitingGrill.Count == 1)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public void WarningWaitingGrill()
+        {
+            var listWaitingGrill = waitingGrillManager.ListWaitingGrills;
+            var listEmptyWaitingGrill = listWaitingGrill.Where(e => e.IsActive && e.GetSlot(0).GetItem() == null).ToList();
+            listEmptyWaitingGrill[0].Visual.PlayWarning();
+            // chặn click
+            var gameLogicHandler = GameController.Instance.GameLogicHandler;
+            gameLogicHandler.BlockClick = true;
+            SonatUtils.DelayCall(1f, () =>
+            {
+                gameLogicHandler.BlockClick = false;
+            }, this);
         }
 
         private void SwitchSlot(SlotBase slot)
@@ -164,6 +221,11 @@ namespace MyGame.SkewerJam.Gameplay
             ItemSelected.SwitchSlot(slot);
             OnItemStartSwitchSucess?.Invoke(ItemSelected, true);
             OnItemStartSwitch?.Invoke(ItemSelected, slot);
+
+            if (grillManager.CheckClearAllItems())
+            {
+                IsClearAllItems = true;
+            }
         }
 
 
@@ -234,18 +296,26 @@ namespace MyGame.SkewerJam.Gameplay
             OnEndCollectItem?.Invoke(orderEntity);
             OnCollectItem?.Invoke((int)orderEntity.ItemIdTarget);
 
+            TryCheckWinGame().Forget();
+        }
+        #endregion
+
+        #region Check Win Lose Game
+
+        public async UniTask TryCheckWinGame()
+        {
             if (CheckWinGame())
             {
                 GameController.Instance.Win();
             }
         }
-        #endregion
-
-        #region Check Win Lose Game
         public bool CheckWinGame()
         {
             // Win khi clear hết level hết order
-            if (GameController.Instance.GameState != GameState.Playing) return false;
+
+            if (GameController.Instance.GameState != GameState.Playing && GameController.Instance.GameState != GameState.UsingBooster)
+                return false;
+
             if (grillManager.CheckClearAllItems() && waitingGrillManager.CheckClearAllItems()) return true;
             return false;
         }

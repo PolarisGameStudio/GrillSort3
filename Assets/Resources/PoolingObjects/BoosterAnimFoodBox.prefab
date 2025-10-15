@@ -236,7 +236,7 @@ MonoBehaviour:
   startPos: {fileID: 7703890546536977094}
   centerPos: {fileID: 442834182225097368}
   endPos: {fileID: 8214281949435581786}
-  durationMove: 0.5
+  durationMove: 0.3
   moveInCurve:
     serializedVersion: 2
     m_Curve:
@@ -285,9 +285,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  duration: 2
+  duration: 0.7
   itemsContainer: {fileID: 7447233340446532886}
-  delayCollectItems: 0.5
+  delayCollectItems: 0
   durationItem: 0.3
   itemCurve:
     serializedVersion: 2

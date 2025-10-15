@@ -5,6 +5,7 @@ using Manager;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Scripts.SO.SkewerJam.Gameplay;
 using Sonat.Enums;
+using SonatFramework.Scripts.Helper;
 using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.Utils;
@@ -191,7 +192,13 @@ namespace MyGame.SkewerJam.Gameplay
             };
             PanelManager.Instance.OpenForget<WinPanel_SkewerJam>(data);
             // NextLevel();
+
+            if( level == 5){
+                _checkRewardFreeLives.Value = 1;
+            }
         }
+
+        private IntDataPref _checkRewardFreeLives = new IntDataPref("check_reward_free_lives");
 
         public async UniTaskVoid Stuck(StuckType stuckType)
         {

@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Sonat.Enums;
+using SonatFramework.Scripts.Helper;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems;
 using SonatFramework.Systems.AudioManagement;
@@ -34,12 +35,35 @@ public class HomeManager : SingletonSimple<HomeManager>
     {
         running = false;
         MySonatFramework.GetService<AudioService>().PlayMusic(AudioId.BGM_Ingame_Summer_Grill3);
+
+        ClaimRewardFreeLives().Forget();
     }
 
     private void OnDisable()
     {
         running = false;
 
+    }
+
+    private async UniTask ClaimRewardFreeLives()
+    {
+
+        var checkRewardFreeLives = new IntDataPref("check_reward_free_lives");
+        if (checkRewardFreeLives.Value == 1)
+        {
+            checkRewardFreeLives.Value = 0;
+            var rewardData = new RewardData();
+            rewardData.AddReward(new ResourceData(GameResource.Lives, 900));
+            MySonatFramework.GetService<InventoryService>().AddReward(rewardData, new EarnResourceLogData
+            {
+                spendType = "reward_free_lives",
+                spendId = "reward_free_lives",
+                isFirstBuy = false,
+                source = "non_iap"
+            }, false);
+            await UniTask.Delay(2000);
+            PanelManager.Instance.OpenPanel<PopupReward>(new UIData().Add(PopupReward.KEY_REWARD, rewardData));
+        }
     }
 
 #if UNITY_EDITOR

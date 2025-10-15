@@ -3,6 +3,7 @@ using Gameplay.LevelData;
 using MyGame.SkewerJam.UI.Tut;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
+using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems;
 using SonatFramework.Systems.BoosterManagement;
 using SonatFramework.Systems.EventBus;
@@ -19,13 +20,13 @@ namespace MyGame.SkewerJam.Gameplay
         private void OnEnable()
         {
             eventBinding = new EventBinding<LevelStartedEvent>(OnStartLevel);
-            boosterService.Instance.onUnlockBooster += OnUnlockBooster;
+            // boosterService.Instance.onUnlockBooster += OnUnlockBooster;
         }
 
         private void OnDisable()
         {
             EventBus<LevelStartedEvent>.Deregister(eventBinding);
-            boosterService.Instance.onUnlockBooster -= OnUnlockBooster;
+            // boosterService.Instance.onUnlockBooster -= OnUnlockBooster;
         }
 
         private void OnStartLevel(LevelStartedEvent eventData)
@@ -39,12 +40,41 @@ namespace MyGame.SkewerJam.Gameplay
                 }
                 CheckShowTutObstacle(tutorialType.ToString());
             }
+
+            GameResource boosterType = GameResource.None;
+            switch (eventData.level)
+            {
+                case 2:
+                    boosterType = GameResource.BoosterAddPlate;
+                    break;
+                case 5:
+                    boosterType = GameResource.BoosterSpatula;
+                    break;
+                case 7:
+                    boosterType = GameResource.BoosterShuffle;
+                    break;
+                case 9:
+                    boosterType = GameResource.BoosterFoodBox;
+                    break;
+            }
+
+            if (boosterType != GameResource.None && !PlayerPrefs.HasKey($"{boosterType.ToString()}Showed"))
+            {
+                PlayerPrefs.SetInt($"{boosterType.ToString()}Showed", 1);
+
+                var uiData = new UIData();
+                uiData.Add("BoosterType", boosterType);
+                SonatUtils.DelayCall(2.75f, () =>
+                {
+                    PanelManager.Instance.OpenPanel<PopupTutBooster>(uiData);
+                }, this);
+            }
         }
 
-        private void OnUnlockBooster(GameResource boosterType)
-        {
-            // ShowPopupTutorial<PopupTutBooster>("PopupTut" + boosterType.ToString()).Forget();
-        }
+        // private void OnUnlockBooster(GameResource boosterType)
+        // {
+        //     // ShowPopupTutorial<PopupTutBooster>("PopupTut" + boosterType.ToString()).Forget();
+        // }
 
         private TutorialType CheckTutorial(int level)
         {
