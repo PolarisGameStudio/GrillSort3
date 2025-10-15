@@ -21,8 +21,9 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
         public static void GoHome()
         {
+            LoadingInstance.Instance.Show();
             // PanelManager.Instance.OpenPanelByName<PopupLoading>("PopupLoading_SkewerJam");
-            SonatUtils.DelayCall(0.25f, () => { MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Home); });
+            SonatUtils.DelayCall(1.5f, () => { MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Home); });
         }
 
         public static void OnClose_ChangeGameState(GameState gameState)

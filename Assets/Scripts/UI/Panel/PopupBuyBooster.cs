@@ -25,7 +25,8 @@ public class PopupBuyBooster : PopupBuyBoosterBase
                 txtDescription.text = "Finish an order faster";
                 break;
             case GameResource.BoosterShuffle:
-                txtName.text = "Refresh all items";
+                txtName.text = "Shuffle";
+                txtDescription.text = "Shuffle all items";
                 break;
             case GameResource.BoosterFoodBox:
                 txtName.text = "Food Box";

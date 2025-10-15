@@ -2352,6 +2352,7 @@ RectTransform:
   - {fileID: 2637961810011739260}
   - {fileID: 5365437853560111136}
   - {fileID: 5434197980035812623}
+  - {fileID: 3701737127541232684}
   - {fileID: 1473737340310597236}
   m_Father: {fileID: 1705529579835932216}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4645,8 +4646,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3701737127541232684}
+  m_Children: []
   m_Father: {fileID: 2801590766826484118}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5475,12 +5475,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2637961810011739260}
+  m_Father: {fileID: 2801590766826484118}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -204}
-  m_SizeDelta: {x: 0, y: 408}
+  m_AnchoredPosition: {x: 0, y: -500}
+  m_SizeDelta: {x: 0, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2396445217363678881
 CanvasRenderer:
@@ -8840,7 +8840,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1473931887448620233, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -22
       objectReference: {fileID: 0}
     - target: {fileID: 1473931887448620233, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -10744,6 +10744,34 @@ PrefabInstance:
     - target: {fileID: 2922319963984092274, guid: b85d897c7951c3a4d99ff4720dfe35e1, type: 3}
       propertyPath: maxElementsShow
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3016854555295587514, guid: b85d897c7951c3a4d99ff4720dfe35e1, type: 3}
+      propertyPath: onWatchedAds.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3016854555295587514, guid: b85d897c7951c3a4d99ff4720dfe35e1, type: 3}
+      propertyPath: onWatchedAds.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3016854555295587514, guid: b85d897c7951c3a4d99ff4720dfe35e1, type: 3}
+      propertyPath: onWatchedAds.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5813071603495819665}
+    - target: {fileID: 3016854555295587514, guid: b85d897c7951c3a4d99ff4720dfe35e1, type: 3}
+      propertyPath: onWatchedAds.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3016854555295587514, guid: b85d897c7951c3a4d99ff4720dfe35e1, type: 3}
+      propertyPath: onWatchedAds.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SwitchToHome
+      objectReference: {fileID: 0}
+    - target: {fileID: 3016854555295587514, guid: b85d897c7951c3a4d99ff4720dfe35e1, type: 3}
+      propertyPath: onWatchedAds.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UINavigateBarSlide, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3016854555295587514, guid: b85d897c7951c3a4d99ff4720dfe35e1, type: 3}
+      propertyPath: onWatchedAds.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3205163809581253409, guid: b85d897c7951c3a4d99ff4720dfe35e1, type: 3}
       propertyPath: m_AnchorMax.y

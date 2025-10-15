@@ -1,5 +1,5 @@
 //
-//  AppLovinInternalSettings.cs
+//  AppLovinInternalSettigns.cs
 //  AppLovin User Engagement Unity Plugin
 //
 //  Created by Santosh Bagadi on 9/15/22.
@@ -20,7 +20,7 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
     /// </summary>
     public class AppLovinInternalSettings : ScriptableObject
     {
-        private static AppLovinInternalSettings instance;
+        private static AppLovinInternalSettings _instance;
 
         private const string DefaultUserTrackingDescriptionEn = "This uses device info for more personalized ads and content";
         private const string DefaultUserTrackingDescriptionDe = "Dies benutzt Gerätinformationen für relevantere Werbeinhalte";
@@ -53,33 +53,33 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
         {
             get
             {
-                if (instance != null) return instance;
+                if (_instance != null) return _instance;
 
-                instance = CreateInstance<AppLovinInternalSettings>();
+                _instance = CreateInstance<AppLovinInternalSettings>();
 
                 var projectRootPath = Path.GetDirectoryName(Application.dataPath);
                 var settingsFilePath = Path.Combine(projectRootPath, SettingsFilePath);
                 if (!File.Exists(settingsFilePath))
                 {
-                    instance.Save();
-                    return instance;
+                    _instance.Save();
+                    return _instance;
                 }
 
                 var settingsJson = File.ReadAllText(settingsFilePath);
                 if (string.IsNullOrEmpty(settingsJson))
                 {
-                    instance.Save();
-                    return instance;
+                    _instance.Save();
+                    return _instance;
                 }
 
-                JsonUtility.FromJsonOverwrite(settingsJson, instance);
-                return instance;
+                JsonUtility.FromJsonOverwrite(settingsJson, _instance);
+                return _instance;
             }
         }
 
         public void Save()
         {
-            var settingsJson = JsonUtility.ToJson(instance);
+            var settingsJson = JsonUtility.ToJson(_instance);
             try
             {
                 var projectRootPath = Path.GetDirectoryName(Application.dataPath);

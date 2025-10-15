@@ -9,7 +9,6 @@
 using System;
 using System.Collections;
 using System.IO;
-using AppLovinMax.Internal;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -24,7 +23,6 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
         public Network[] MediatedNetworks;
         public Network[] PartnerMicroSdks;
         public DynamicLibraryToEmbed[] ThirdPartyDynamicLibrariesToEmbed;
-        public Alert[] Alerts;
     }
 
     [Serializable]
@@ -60,7 +58,6 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
         [NonSerialized] public Versions CurrentVersions;
         [NonSerialized] public MaxSdkUtils.VersionComparisonResult CurrentToLatestVersionComparisonResult = MaxSdkUtils.VersionComparisonResult.Lesser;
         [NonSerialized] public bool RequiresUpdate;
-        [NonSerialized] public bool IsCurrentlyInstalling;
     }
 
     [Serializable]
@@ -80,44 +77,6 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
             FrameworkNames = frameworkNames;
             MinVersion = minVersion;
             MaxVersion = maxVersion;
-        }
-    }
-
-    public enum Severity
-    {
-        Info,
-        Warning,
-        Error
-    }
-
-    [Serializable]
-    public class Alert
-    {
-        public string SeverityType;
-        public string Title;
-        public string Message;
-        public string Url;
-
-        public Severity Severity;
-
-        public void InitializeSeverityEnum()
-        {
-            switch (SeverityType)
-            {
-                case "INFO":
-                    Severity = Severity.Info;
-                    break;
-                case "WARNING":
-                    Severity = Severity.Warning;
-                    break;
-                case "ERROR":
-                    Severity = Severity.Error;
-                    break;
-                default:
-                    MaxSdkLogger.E(string.Format("Alert <{0}> has unsupported severity type <{1}>.", Title, SeverityType));
-                    Severity = Severity.Info;
-                    break;
-            }
         }
     }
 
@@ -156,8 +115,6 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
 
         private static string AdapterSdkVersion(string adapterVersion)
         {
-            if (string.IsNullOrEmpty(adapterVersion)) return "";
-
             var index = adapterVersion.LastIndexOf(".", StringComparison.Ordinal);
             return index > 0 ? adapterVersion.Substring(0, index) : adapterVersion;
         }
@@ -169,30 +126,32 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
     public class AppLovinIntegrationManager
     {
         /// <summary>
-        /// Delegate to be called when a plugin package's import is started.
+        /// Delegate to be called when downloading a plugin with the progress percentage. 
         /// </summary>
-        internal delegate void ImportPackageStartedCallback(Network network);
+        /// <param name="pluginName">The name of the plugin being downloaded.</param>
+        /// <param name="progress">Percentage downloaded.</param>
+        /// <param name="done">Whether or not the download is complete.</param>
+        public delegate void DownloadPluginProgressCallback(string pluginName, float progress, bool done);
 
         /// <summary>
-        /// Delegate to be called when a plugin package is finished importing.
+        /// Delegate to be called when a plugin package is imported.
         /// </summary>
         /// <param name="network">The network data for which the package is imported.</param>
-        internal delegate void ImportPackageCompletedCallback(Network network);
+        public delegate void ImportPackageCompletedCallback(Network network);
 
         private static readonly AppLovinIntegrationManager instance = new AppLovinIntegrationManager();
 
         internal static readonly string GradleTemplatePath = Path.Combine("Assets/Plugins/Android", "mainTemplate.gradle");
         private const string MaxSdkAssetExportPath = "MaxSdk/Scripts/MaxSdk.cs";
-        private const string MaxSdkMediationExportPath = "MaxSdk/Mediation";
 
-        private const string PluginDataEndpoint = "https://unity.applovin.com/max/1.0/integration_manager_info?plugin_version={0}";
+        private static readonly string PluginDataEndpoint = "https://unity.applovin.com/max/1.0/integration_manager_info?plugin_version={0}";
 
-        private static string externalDependencyManagerVersion;
+        private static string _externalDependencyManagerVersion;
 
-        internal static ImportPackageStartedCallback OnImportPackageStartedCallback;
-        internal static ImportPackageCompletedCallback OnImportPackageCompletedCallback;
+        public static DownloadPluginProgressCallback OnDownloadPluginProgressCallback;
+        public static ImportPackageCompletedCallback OnImportPackageCompletedCallback;
 
-        private MaxWebRequest maxWebRequest;
+        private UnityWebRequest webRequest;
         private Network importingNetwork;
 
         /// <summary>
@@ -210,22 +169,13 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
         {
             get
             {
-                // Search for the asset with the export path label.
-                // Paths are normalized using AltDirectorySeparatorChar (/) to ensure compatibility across platforms (in case of migrating a project from Windows to Mac or vice versa).
+                // Search for the asset with the default exported path first, In most cases, we should be able to find the asset.
+                // In some cases where we don't, use the platform specific export path to search for the asset (in case of migrating a project from Windows to Mac or vice versa).
                 var maxSdkScriptAssetPath = MaxSdkUtils.GetAssetPathForExportPath(MaxSdkAssetExportPath);
 
                 // maxSdkScriptAssetPath will always have AltDirectorySeparatorChar (/) as the path separator. Convert to platform specific path.
                 return maxSdkScriptAssetPath.Replace(MaxSdkAssetExportPath, "")
                     .Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
-            }
-        }
-
-        public static string MediationDirectory
-        {
-            get
-            {
-                var mediationAssetPath = MaxSdkUtils.GetAssetPathForExportPath(MaxSdkMediationExportPath);
-                return mediationAssetPath.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
             }
         }
 
@@ -268,33 +218,26 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
         {
             get
             {
-                if (MaxSdkUtils.IsValidString(externalDependencyManagerVersion)) return externalDependencyManagerVersion;
+                if (MaxSdkUtils.IsValidString(_externalDependencyManagerVersion)) return _externalDependencyManagerVersion;
 
                 try
                 {
                     var versionHandlerVersionNumberType = Type.GetType("Google.VersionHandlerVersionNumber, Google.VersionHandlerImpl");
-                    externalDependencyManagerVersion = versionHandlerVersionNumberType.GetProperty("Value").GetValue(null, null).ToString();
+                    _externalDependencyManagerVersion = versionHandlerVersionNumberType.GetProperty("Value").GetValue(null, null).ToString();
                 }
 #pragma warning disable 0168
                 catch (Exception ignored)
 #pragma warning restore 0168
                 {
-                    externalDependencyManagerVersion = "Failed to get version.";
+                    _externalDependencyManagerVersion = "Failed to get version.";
                 }
 
-                return externalDependencyManagerVersion;
+                return _externalDependencyManagerVersion;
             }
         }
 
         private AppLovinIntegrationManager()
         {
-            AssetDatabase.importPackageStarted += packageName =>
-            {
-                if (!IsImportingNetwork(packageName)) return;
-
-                CallImportPackageStartedCallback(importingNetwork);
-            };
-
             // Add asset import callbacks.
             AssetDatabase.importPackageCompleted += packageName =>
             {
@@ -310,6 +253,7 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
             {
                 if (!IsImportingNetwork(packageName)) return;
 
+                MaxSdkLogger.UserDebug("Package import cancelled.");
                 importingNetwork = null;
             };
 
@@ -327,15 +271,15 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
         public static PluginData LoadPluginDataSync()
         {
             var url = string.Format(PluginDataEndpoint, MaxSdk.Version);
-            var webRequestConfig = new WebRequestConfig()
+            using (var unityWebRequest = UnityWebRequest.Get(url))
             {
-                EndPoint = url,
-            };
+                var operation = unityWebRequest.SendWebRequest();
 
-            var maxWebRequest = new MaxWebRequest(webRequestConfig);
-            var webResponse = maxWebRequest.SendSync();
+                // Just wait till www is done
+                while (!operation.isDone) { }
 
-            return CreatePluginDataFromWebResponse(webResponse);
+                return CreatePluginDataFromWebResponse(unityWebRequest);
+            }
         }
 
         /// <summary>
@@ -345,22 +289,25 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
         public IEnumerator LoadPluginData(Action<PluginData> callback)
         {
             var url = string.Format(PluginDataEndpoint, MaxSdk.Version);
-            var webRequestConfig = new WebRequestConfig()
+            using (var unityWebRequest = UnityWebRequest.Get(url))
             {
-                EndPoint = url,
-            };
+                var operation = unityWebRequest.SendWebRequest();
 
-            maxWebRequest = new MaxWebRequest(webRequestConfig);
-            yield return maxWebRequest.Send(webResponse =>
-            {
-                var pluginData = CreatePluginDataFromWebResponse(webResponse);
+                while (!operation.isDone) yield return new WaitForSeconds(0.1f); // Just wait till www is done. Our coroutine is pretty rudimentary.
+
+                var pluginData = CreatePluginDataFromWebResponse(unityWebRequest);
+
                 callback(pluginData);
-            });
+            }
         }
 
-        private static PluginData CreatePluginDataFromWebResponse(WebResponse webResponse)
+        private static PluginData CreatePluginDataFromWebResponse(UnityWebRequest unityWebRequest)
         {
-            if (!webResponse.IsSuccess)
+#if UNITY_2020_1_OR_NEWER
+            if (unityWebRequest.result != UnityWebRequest.Result.Success)
+#else
+            if (unityWebRequest.isNetworkError || unityWebRequest.isHttpError)
+#endif
             {
                 MaxSdkLogger.E("Failed to load plugin data. Please check your internet connection.");
                 return null;
@@ -369,7 +316,7 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
             PluginData pluginData;
             try
             {
-                pluginData = JsonUtility.FromJson<PluginData>(webResponse.ResponseMessage);
+                pluginData = JsonUtility.FromJson<PluginData>(unityWebRequest.downloadHandler.text);
                 AppLovinPackageManager.PluginData = pluginData;
             }
             catch (Exception exception)
@@ -395,14 +342,6 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
                 AppLovinPackageManager.UpdateCurrentVersions(partnerMicroSdk);
             }
 
-            if (pluginData.Alerts == null) return pluginData;
-
-            // Initiate Severity enums from the raw strings in the response
-            foreach (var alert in pluginData.Alerts)
-            {
-                alert.InitializeSeverityEnum();
-            }
-
             return pluginData;
         }
 
@@ -415,25 +354,36 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
         public IEnumerator DownloadPlugin(Network network, bool showImport = true)
         {
             var path = Path.Combine(Application.temporaryCachePath, GetPluginFileName(network)); // TODO: Maybe delete plugin file after finishing import.
-            var webRequestConfig = new WebRequestConfig()
+            var downloadHandler = new DownloadHandlerFile(path);
+            webRequest = new UnityWebRequest(network.DownloadUrl)
             {
-                DownloadHandler = new DownloadHandlerFile(path),
-                EndPoint = network.DownloadUrl
+                method = UnityWebRequest.kHttpVerbGET,
+                downloadHandler = downloadHandler
             };
 
-            maxWebRequest = new MaxWebRequest(webRequestConfig);
-            yield return maxWebRequest.Send(webResponse =>
+            var operation = webRequest.SendWebRequest();
+            while (!operation.isDone)
             {
-                if (webResponse.IsSuccess)
-                {
-                    importingNetwork = network;
-                    AssetDatabase.ImportPackage(path, showImport);
-                }
-                else
-                {
-                    MaxSdkLogger.UserError("Failed to download plugin package: " + webResponse.ErrorMessage);
-                }
-            });
+                yield return new WaitForSeconds(0.1f); // Just wait till webRequest is completed. Our coroutine is pretty rudimentary.
+                CallDownloadPluginProgressCallback(network.DisplayName, operation.progress, operation.isDone);
+            }
+
+#if UNITY_2020_1_OR_NEWER
+            if (webRequest.result != UnityWebRequest.Result.Success)
+#else
+            if (webRequest.isNetworkError || webRequest.isHttpError)
+#endif
+            {
+                MaxSdkLogger.UserError(webRequest.error);
+            }
+            else
+            {
+                importingNetwork = network;
+                AssetDatabase.ImportPackage(path, showImport);
+            }
+
+            webRequest.Dispose();
+            webRequest = null;
         }
 
         /// <summary>
@@ -441,9 +391,9 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
         /// </summary>
         public void CancelDownload()
         {
-            if (maxWebRequest == null) return;
+            if (webRequest == null) return;
 
-            maxWebRequest.Abort();
+            webRequest.Abort();
         }
 
         /// <summary>
@@ -474,11 +424,11 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
             return importingNetwork != null && GetPluginFileName(importingNetwork).Contains(packageName);
         }
 
-        private static void CallImportPackageStartedCallback(Network network)
+        private static void CallDownloadPluginProgressCallback(string pluginName, float progress, bool isDone)
         {
-            if (OnImportPackageStartedCallback == null) return;
+            if (OnDownloadPluginProgressCallback == null) return;
 
-            OnImportPackageStartedCallback(network);
+            OnDownloadPluginProgressCallback(pluginName, progress, isDone);
         }
 
         private static void CallImportPackageCompletedCallback(Network network)

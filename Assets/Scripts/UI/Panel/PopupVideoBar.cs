@@ -12,6 +12,7 @@ using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems;
 using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.ObjectPooling;
+using SonatFramework.Systems.TimeManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,9 +32,12 @@ public class PopupVideoBar : Panel
     private IntDataPref _currentNum;
     private IntDataPref _claimedMilestoneNum;
     private IntDataPref _currentNumVisual;
+    private LongDataPref _todayClaimedNum;
 
     private bool _collected;
     private int _maxNumber;
+
+    private DateTime _today;
 
     private readonly Service<PoolingContainerService> poolingContainer = new();
 
@@ -57,20 +61,51 @@ public class PopupVideoBar : Panel
             milestone.SetData(_config.milestones[i].index + 1, (_config.milestones[i].index + 1) * 1.0f / _maxNumber, _config.milestones[i].rewardData);
         }
 
-        _slider.value = _currentNumVisual.Value * 1.0f / _maxNumber;
+        _slider.value = (_currentNumVisual.Value + 1) * 1.0f / _maxNumber;
     }
 
 
     private void LoadData()
     {
-        _currentNum = new IntDataPref(VIDEO_BAR_KEY + "_currentNum", 0);
-        _claimedMilestoneNum = new IntDataPref(VIDEO_BAR_KEY + "_claimedMilestoneNum", 0);
-        _currentNumVisual = new IntDataPref(VIDEO_BAR_KEY + "_currentNumVisual", 0);
+        _currentNum = new IntDataPref(VIDEO_BAR_KEY + "_currentNum", -1);
+        _claimedMilestoneNum = new IntDataPref(VIDEO_BAR_KEY + "_claimedMilestoneNum", -1);
+        _currentNumVisual = new IntDataPref(VIDEO_BAR_KEY + "_currentNumVisual", -1);
+
+        _todayClaimedNum = new LongDataPref(VIDEO_BAR_KEY + "_todayClaimedNum");
+
+        if (_todayClaimedNum.Value == 0)
+        {
+            _today = MySonatFramework.GetService<TimeService>().GetCurrentTime();
+        }
+        else
+        {
+            _today = DateTimeOffset.FromUnixTimeSeconds(_todayClaimedNum.Value).DateTime;
+
+            if (_today.Date != MySonatFramework.GetService<TimeService>().GetCurrentTime().Date)
+            {
+                ResetData();
+            }
+        }
     }
+
+    private void ResetData()
+    {
+        _todayClaimedNum.Value = MySonatFramework.GetService<TimeService>().GetUnixTimeSeconds();
+        _today = MySonatFramework.GetService<TimeService>().GetCurrentTime();
+
+        _currentNum.Value = 0;
+        _claimedMilestoneNum.Value = -1;
+        _currentNumVisual.Value = 0;
+    }
+
     public void OnClickWatchAds()
     {
-        if (_collected) return;
+        if (CheckFull())
+        {
+            PopupToast.Cretate("Come back tomorrow");
+        }
 
+        if (_collected) return;
         if (SonatSDKAdapter.IsRewardAdsReady())
         {
             _collected = true;
@@ -82,39 +117,45 @@ public class PopupVideoBar : Panel
         }
     }
 
+    private bool CheckFull()
+    {
+        return _currentNum.Value + 1 >= _maxNumber;
+    }
+
     private void OnWatchedVideo()
     {
         _currentNum.Value++;
 
-        var nextMildestone = _config.milestones.OrderBy(x => x.index).FirstOrDefault(x => x.index > _claimedMilestoneNum.Value);
-        if (_currentNum.Value == nextMildestone.index)
-        {
-            Claim(nextMildestone);
-        }
+        // var nextMildestone = _config.milestones[_currentNum.Value];
+        // if (_currentNum.Value == nextMildestone.index)
+        // {
+        var currentMilestone = _config.milestones[_currentNum.Value];
+        Claim(currentMilestone);
+        // }
     }
 
-    private void Claim(MilestoneData nextMildestone)
+    private void Claim(MilestoneData currentMilestone)
     {
-        _claimedMilestoneNum.Value = nextMildestone.index;
+        _claimedMilestoneNum.Value = currentMilestone.index;
         var log = new EarnResourceLogData
         {
             spendType = "video_bar",
             spendId = "video_bar"
         };
-        MySonatFramework.GetService<InventoryService>().AddReward(nextMildestone.rewardData, log, false);
+        MySonatFramework.GetService<InventoryService>().AddReward(currentMilestone.rewardData, log, false);
 
         UpdateUI(() =>
         {
             _collected = false;
-            PanelManager.Instance.OpenPanel<PopupReward>(new UIData().Add(PopupReward.KEY_REWARD, nextMildestone.rewardData));
+            PanelManager.Instance.OpenPanel<PopupReward>(new UIData().Add(PopupReward.KEY_REWARD, currentMilestone.rewardData));
         }).Forget();
     }
 
     private async UniTask UpdateUI(Action onComplete)
     {
         await UniTask.Delay((int)_delay * 1000);
-        var current = _currentNumVisual.Value;
-        var newValue = _currentNum.Value * 1.0f / _maxNumber;
+        var current = (_currentNumVisual.Value + 1) * 1.0f / _maxNumber;
+        var newValue = (_currentNum.Value + 1) * 1.0f / _maxNumber;
         await _slider.DOValue(newValue, _duration).From(current);
         _currentNumVisual.Value = _currentNum.Value;
         onComplete?.Invoke();

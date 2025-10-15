@@ -14,7 +14,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using AppLovinMax.Internal;
 using UnityEditor;
 using UnityEditor.Callbacks;
 #if UNITY_2019_3_OR_NEWER
@@ -75,7 +74,7 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
         /// 1. Downloads the Quality Service ruby script.
         /// 2. Runs the script using Ruby which integrates AppLovin Quality Service to the project.
         /// </summary>
-        [PostProcessBuild(AppLovinPreProcess.CallbackOrder)] // We want to run Quality Service script last.
+        [PostProcessBuild(int.MaxValue)] // We want to run Quality Service script last.
         public static void OnPostProcessBuild(BuildTarget buildTarget, string buildPath)
         {
             if (!AppLovinSettings.Instance.QualityServiceEnabled) return;
@@ -96,22 +95,30 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
                 return;
             }
 
-            var webRequestConfig = new WebRequestConfig()
-            {
-                DownloadHandler = new DownloadHandlerFile(outputFilePath),
-                JsonString = string.Format("{{\"sdk_key\" : \"{0}\"}}", sdkKey),
-                EndPoint = "https://api2.safedk.com/v1/build/ios_setup2",
-                RequestType = WebRequestType.Post,
-            };
+            // Download the ruby script needed to install Quality Service
+            var downloadHandler = new DownloadHandlerFile(outputFilePath);
+            var postJson = string.Format("{{\"sdk_key\" : \"{0}\"}}", sdkKey);
+            var bodyRaw = Encoding.UTF8.GetBytes(postJson);
+            var uploadHandler = new UploadHandlerRaw(bodyRaw);
+            uploadHandler.contentType = "application/json";
 
-            webRequestConfig.Headers.Add("Content-Type", "application/json");
-
-            var maxWebRequest = new MaxWebRequest(webRequestConfig);
-            AppLovinEditorCoroutine.StartCoroutine(maxWebRequest.Send(webResponse =>
+            using (var unityWebRequest = new UnityWebRequest("https://api2.safedk.com/v1/build/ios_setup2"))
             {
-                if (!webResponse.IsSuccess)
+                unityWebRequest.method = UnityWebRequest.kHttpVerbPOST;
+                unityWebRequest.downloadHandler = downloadHandler;
+                unityWebRequest.uploadHandler = uploadHandler;
+                var operation = unityWebRequest.SendWebRequest();
+
+                // Wait for the download to complete or the request to timeout.
+                while (!operation.isDone) { }
+
+#if UNITY_2020_1_OR_NEWER
+                if (unityWebRequest.result != UnityWebRequest.Result.Success)
+#else
+                if (unityWebRequest.isNetworkError || unityWebRequest.isHttpError)
+#endif
                 {
-                    MaxSdkLogger.UserError("AppLovin Quality Service installation failed. Failed to download script with error: " + webResponse.ErrorMessage);
+                    MaxSdkLogger.UserError("AppLovin Quality Service installation failed. Failed to download script with error: " + unityWebRequest.error);
                     return;
                 }
 
@@ -130,7 +137,7 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
                 if (result.ExitCode != 0) MaxSdkLogger.UserError("Failed to set up AppLovin Quality Service");
 
                 MaxSdkLogger.UserDebug(result.Message);
-            }));
+            }
         }
 
         [PostProcessBuild(AppLovinEmbedFrameworksPriority)]
@@ -440,19 +447,9 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
                 project.SetBuildProperty(unityFrameworkTargetGuid, "SWIFT_VERSION", "5.0");
             }
 
-            // Some publishers may configure these settings in their own post-processing scripts.
-            // Only set them if they haven't already been defined to avoid overwriting publisher-defined values.
-            var enableModules = project.GetBuildPropertyForAnyConfig(unityFrameworkTargetGuid, "CLANG_ENABLE_MODULES");
-            if (string.IsNullOrEmpty(enableModules))
-            {
-                project.SetBuildProperty(unityFrameworkTargetGuid, "CLANG_ENABLE_MODULES", "YES");
-            }
-
-            var alwaysEmbedSwiftLibraries = project.GetBuildPropertyForAnyConfig(unityMainTargetGuid, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES");
-            if (string.IsNullOrEmpty(alwaysEmbedSwiftLibraries))
-            {
-                project.SetBuildProperty(unityMainTargetGuid, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "YES");
-            }
+            // Enable Swift modules
+            project.AddBuildProperty(unityFrameworkTargetGuid, "CLANG_ENABLE_MODULES", "YES");
+            project.AddBuildProperty(unityMainTargetGuid, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "YES");
         }
 
         private static void CreateSwiftFile(string swiftFilePath)
@@ -470,14 +467,14 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
             }
         }
 
-        [PostProcessBuild(AppLovinPreProcess.CallbackOrder)]
+        [PostProcessBuild(int.MaxValue)]
         public static void MaxPostProcessPlist(BuildTarget buildTarget, string path)
         {
             var plistPath = Path.Combine(path, "Info.plist");
             var plist = new PlistDocument();
             plist.ReadFromFile(plistPath);
 
-            RemoveAttributionReportEndpointIfNeeded(plist);
+            SetAttributionReportEndpointIfNeeded(plist);
 
             EnableVerboseLoggingIfNeeded(plist);
             AddGoogleApplicationIdIfNeeded(plist);
@@ -489,16 +486,23 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
             plist.WriteToFile(plistPath);
         }
 
-        private static void RemoveAttributionReportEndpointIfNeeded(PlistDocument plist)
+        private static void SetAttributionReportEndpointIfNeeded(PlistDocument plist)
         {
-            PlistElement attributionReportEndPoint;
-            plist.root.values.TryGetValue("NSAdvertisingAttributionReportEndpoint", out attributionReportEndPoint);
+            if (AppLovinSettings.Instance.SetAttributionReportEndpoint)
+            {
+                plist.root.SetString("NSAdvertisingAttributionReportEndpoint", AppLovinAdvertisingAttributionEndpoint);
+            }
+            else
+            {
+                PlistElement attributionReportEndPoint;
+                plist.root.values.TryGetValue("NSAdvertisingAttributionReportEndpoint", out attributionReportEndPoint);
 
-            // We no longer support this feature. Check if we had previously set the attribution endpoint and un-set it.
-            if (attributionReportEndPoint == null || !AppLovinAdvertisingAttributionEndpoint.Equals(attributionReportEndPoint.AsString())) return;
-
-            MaxSdkLogger.UserWarning("Global SKAdNetwork postback forwarding is no longer supported by AppLovin. Removing AppLovin Advertising Attribution Endpoint from Info.plist.");
-            plist.root.values.Remove("NSAdvertisingAttributionReportEndpoint");
+                // Check if we had previously set the attribution endpoint and un-set it.
+                if (attributionReportEndPoint != null && AppLovinAdvertisingAttributionEndpoint.Equals(attributionReportEndPoint.AsString()))
+                {
+                    plist.root.values.Remove("NSAdvertisingAttributionReportEndpoint");
+                }
+            }
         }
 
         private static void EnableVerboseLoggingIfNeeded(PlistDocument plist)
@@ -684,28 +688,31 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
                 uriBuilder.Query += string.Format("ad_networks={0}", adNetworks);
             }
 
-            var webRequestConfig = new WebRequestConfig()
+            using (var unityWebRequest = UnityWebRequest.Get(uriBuilder.ToString()))
             {
-                EndPoint = uriBuilder.ToString()
-            };
+                var operation = unityWebRequest.SendWebRequest();
+                // Wait for the download to complete or the request to timeout.
+                while (!operation.isDone) { }
 
-            var maxWebRequest = new MaxWebRequest(webRequestConfig);
-            var webResponse = maxWebRequest.SendSync();
+#if UNITY_2020_1_OR_NEWER
+                if (unityWebRequest.result != UnityWebRequest.Result.Success)
+#else
+                if (unityWebRequest.isNetworkError || unityWebRequest.isHttpError)
+#endif
+                {
+                    MaxSdkLogger.UserError("Failed to retrieve SKAdNetwork IDs with error: " + unityWebRequest.error);
+                    return new SkAdNetworkData();
+                }
 
-            if (!webResponse.IsSuccess)
-            {
-                MaxSdkLogger.UserError("Failed to retrieve SKAdNetwork IDs with error: " + webResponse.ErrorMessage);
-                return new SkAdNetworkData();
-            }
-
-            try
-            {
-                return JsonUtility.FromJson<SkAdNetworkData>(webResponse.ResponseMessage);
-            }
-            catch (Exception exception)
-            {
-                MaxSdkLogger.UserError("Failed to parse data '" + webResponse.ResponseMessage + "' with exception: " + exception);
-                return new SkAdNetworkData();
+                try
+                {
+                    return JsonUtility.FromJson<SkAdNetworkData>(unityWebRequest.downloadHandler.text);
+                }
+                catch (Exception exception)
+                {
+                    MaxSdkLogger.UserError("Failed to parse data '" + unityWebRequest.downloadHandler.text + "' with exception: " + exception);
+                    return new SkAdNetworkData();
+                }
             }
         }
 

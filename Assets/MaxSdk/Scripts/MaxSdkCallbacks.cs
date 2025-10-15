@@ -1,130 +1,133 @@
-// ReSharper disable RedundantArgumentDefaultValue
+/**
+ * This is is a global Unity object that is used to forward callbacks from native iOS / Android Max code to the application.
+ */
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using AppLovinMax.ThirdParty.MiniJson;
 using AppLovinMax.Internal;
 
-/// <summary>
-/// This is is a global Unity object that is used to forward callbacks from native iOS / Android Max code to the application.
-/// </summary>
 public static class MaxSdkCallbacks
 {
-    /// <summary>
-    /// Fired when the SDK has finished initializing
-    /// </summary>
-    private static Action<MaxSdkBase.SdkConfiguration> onSdkInitializedEvent;
+    // Fired when the SDK has finished initializing
+    private static Action<MaxSdkBase.SdkConfiguration> _onSdkInitializedEvent;
     public static event Action<MaxSdkBase.SdkConfiguration> OnSdkInitializedEvent
     {
         add
         {
             LogSubscribedToEvent("OnSdkInitializedEvent");
-            onSdkInitializedEvent += value;
+            _onSdkInitializedEvent += value;
         }
         remove
         {
             LogUnsubscribedToEvent("OnSdkInitializedEvent");
-            onSdkInitializedEvent -= value;
+            _onSdkInitializedEvent -= value;
         }
     }
 
+    private static Action<bool> _onApplicationStateChangedEvent;
     /// <summary>
     /// Fired when the application is paused or resumed.
     /// </summary>
-    private static Action<bool> onApplicationStateChangedEvent;
     public static event Action<bool> OnApplicationStateChangedEvent
     {
         add
         {
             LogSubscribedToEvent("OnApplicationStateChangedEvent");
-            onApplicationStateChangedEvent += value;
+            _onApplicationStateChangedEvent += value;
         }
         remove
         {
             LogUnsubscribedToEvent("OnApplicationStateChangedEvent");
-            onApplicationStateChangedEvent -= value;
+            _onApplicationStateChangedEvent -= value;
         }
     }
 
-    public static class Interstitial
+    private static Action<string, MaxSdkBase.AdInfo> _onInterstitialAdLoadedEventV2;
+    private static Action<string, MaxSdkBase.ErrorInfo> _onInterstitialAdLoadFailedEventV2;
+    private static Action<string, MaxSdkBase.AdInfo> _onInterstitialAdDisplayedEventV2;
+    private static Action<string, MaxSdkBase.ErrorInfo, MaxSdkBase.AdInfo> _onInterstitialAdFailedToDisplayEventV2;
+    private static Action<string, MaxSdkBase.AdInfo> _onInterstitialAdClickedEventV2;
+    private static Action<string, MaxSdkBase.AdInfo> _onInterstitialAdRevenuePaidEvent;
+    private static Action<string, MaxSdkBase.AdInfo, MaxSdkBase.AdInfo> _onExpiredInterstitialAdReloadedEvent;
+    private static Action<string, string, MaxSdkBase.AdInfo> _onInterstitialAdReviewCreativeIdGeneratedEvent;
+    private static Action<string, MaxSdkBase.AdInfo> _onInterstitialAdHiddenEventV2;
+
+    public class Interstitial
     {
-        internal static Action<string, MaxSdkBase.AdInfo> onAdLoadedEvent;
         public static event Action<string, MaxSdkBase.AdInfo> OnAdLoadedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnInterstitialAdLoadedEvent");
-                onAdLoadedEvent += value;
+                _onInterstitialAdLoadedEventV2 += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnInterstitialAdLoadedEvent");
-                onAdLoadedEvent -= value;
+                _onInterstitialAdLoadedEventV2 -= value;
             }
         }
 
-        internal static Action<string, MaxSdkBase.ErrorInfo> onAdLoadFailedEvent;
         public static event Action<string, MaxSdkBase.ErrorInfo> OnAdLoadFailedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnInterstitialAdLoadFailedEvent");
-                onAdLoadFailedEvent += value;
+                _onInterstitialAdLoadFailedEventV2 += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnInterstitialAdLoadFailedEvent");
-                onAdLoadFailedEvent -= value;
+                _onInterstitialAdLoadFailedEventV2 -= value;
             }
         }
 
-        /// <summary>
-        /// Fired when an interstitial ad is displayed (may not be received by Unity until the interstitial ad closes).
-        /// </summary>
-        internal static Action<string, MaxSdkBase.AdInfo> onAdDisplayedEvent;
+        /**
+         * Fired when an interstitial ad is displayed (may not be received by Unity until the interstitial ad closes).
+         */
         public static event Action<string, MaxSdkBase.AdInfo> OnAdDisplayedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnInterstitialAdDisplayedEvent");
-                onAdDisplayedEvent += value;
+                _onInterstitialAdDisplayedEventV2 += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnInterstitialAdDisplayedEvent");
-                onAdDisplayedEvent -= value;
+                _onInterstitialAdDisplayedEventV2 -= value;
             }
         }
 
-        internal static Action<string, MaxSdkBase.ErrorInfo, MaxSdkBase.AdInfo> onAdDisplayFailedEvent;
         public static event Action<string, MaxSdkBase.ErrorInfo, MaxSdkBase.AdInfo> OnAdDisplayFailedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnInterstitialAdDisplayFailedEvent");
-                onAdDisplayFailedEvent += value;
+                _onInterstitialAdFailedToDisplayEventV2 += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnInterstitialAdDisplayFailedEvent");
-                onAdDisplayFailedEvent -= value;
+                _onInterstitialAdFailedToDisplayEventV2 -= value;
             }
         }
 
-        internal static Action<string, MaxSdkBase.AdInfo> onAdClickedEvent;
         public static event Action<string, MaxSdkBase.AdInfo> OnAdClickedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnInterstitialAdClickedEvent");
-                onAdClickedEvent += value;
+                _onInterstitialAdClickedEventV2 += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnInterstitialAdClickedEvent");
-                onAdClickedEvent -= value;
+                _onInterstitialAdClickedEventV2 -= value;
             }
         }
 
@@ -132,36 +135,34 @@ public static class MaxSdkCallbacks
         /// Fired when an interstitial ad impression was validated and revenue will be paid.
         /// Executed on a background thread to avoid any delays in execution.
         /// </summary>
-        internal static Action<string, MaxSdkBase.AdInfo> onAdRevenuePaidEvent;
         public static event Action<string, MaxSdkBase.AdInfo> OnAdRevenuePaidEvent
         {
             add
             {
                 LogSubscribedToEvent("OnInterstitialAdRevenuePaidEvent");
-                onAdRevenuePaidEvent += value;
+                _onInterstitialAdRevenuePaidEvent += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnInterstitialAdRevenuePaidEvent");
-                onAdRevenuePaidEvent -= value;
+                _onInterstitialAdRevenuePaidEvent -= value;
             }
         }
 
         /// <summary>
         /// Fired when an expired interstitial ad is reloaded.
         /// </summary>
-        internal static Action<string, MaxSdkBase.AdInfo, MaxSdkBase.AdInfo> onExpiredAdReloadedEvent;
         public static event Action<string, MaxSdkBase.AdInfo, MaxSdkBase.AdInfo> OnExpiredAdReloadedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnExpiredInterstitialAdReloadedEvent");
-                onExpiredAdReloadedEvent += value;
+                _onExpiredInterstitialAdReloadedEvent += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnExpiredInterstitialAdReloadedEvent");
-                onExpiredAdReloadedEvent -= value;
+                _onExpiredInterstitialAdReloadedEvent -= value;
             }
         }
 
@@ -170,114 +171,116 @@ public static class MaxSdkCallbacks
         /// The parameters returned are the adUnitIdentifier, adReviewCreativeId, and adInfo in that respective order.
         /// Executed on a background thread to avoid any delays in execution.
         /// </summary>
-        internal static Action<string, string, MaxSdkBase.AdInfo> onAdReviewCreativeIdGeneratedEvent;
         public static event Action<string, string, MaxSdkBase.AdInfo> OnAdReviewCreativeIdGeneratedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnInterstitialAdReviewCreativeIdGeneratedEvent");
-                onAdReviewCreativeIdGeneratedEvent += value;
+                _onInterstitialAdReviewCreativeIdGeneratedEvent += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnInterstitialAdReviewCreativeIdGeneratedEvent");
-                onAdReviewCreativeIdGeneratedEvent -= value;
+                _onInterstitialAdReviewCreativeIdGeneratedEvent -= value;
             }
         }
 
-        internal static Action<string, MaxSdkBase.AdInfo> onAdHiddenEvent;
         public static event Action<string, MaxSdkBase.AdInfo> OnAdHiddenEvent
         {
             add
             {
                 LogSubscribedToEvent("OnInterstitialAdHiddenEvent");
-                onAdHiddenEvent += value;
+                _onInterstitialAdHiddenEventV2 += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnInterstitialAdHiddenEvent");
-                onAdHiddenEvent -= value;
+                _onInterstitialAdHiddenEventV2 -= value;
             }
         }
     }
 
-    public static class AppOpen
+    private static Action<string, MaxSdkBase.AdInfo> _onAppOpenAdLoadedEvent;
+    private static Action<string, MaxSdkBase.ErrorInfo> _onAppOpenAdLoadFailedEvent;
+    private static Action<string, MaxSdkBase.AdInfo> _onAppOpenAdDisplayedEvent;
+    private static Action<string, MaxSdkBase.ErrorInfo, MaxSdkBase.AdInfo> _onAppOpenAdFailedToDisplayEvent;
+    private static Action<string, MaxSdkBase.AdInfo> _onAppOpenAdClickedEvent;
+    private static Action<string, MaxSdkBase.AdInfo> _onAppOpenAdRevenuePaidEvent;
+    private static Action<string, MaxSdkBase.AdInfo, MaxSdkBase.AdInfo> _onExpiredAppOpenAdReloadedEvent;
+    private static Action<string, MaxSdkBase.AdInfo> _onAppOpenAdHiddenEvent;
+
+    public class AppOpen
     {
-        internal static Action<string, MaxSdkBase.AdInfo> onAdLoadedEvent;
         public static event Action<string, MaxSdkBase.AdInfo> OnAdLoadedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnAppOpenAdLoadedEvent");
-                onAdLoadedEvent += value;
+                _onAppOpenAdLoadedEvent += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnAppOpenAdLoadedEvent");
-                onAdLoadedEvent -= value;
+                _onAppOpenAdLoadedEvent -= value;
             }
         }
 
-        internal static Action<string, MaxSdkBase.ErrorInfo> onAdLoadFailedEvent;
         public static event Action<string, MaxSdkBase.ErrorInfo> OnAdLoadFailedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnAppOpenAdLoadFailedEvent");
-                onAdLoadFailedEvent += value;
+                _onAppOpenAdLoadFailedEvent += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnAppOpenAdLoadFailedEvent");
-                onAdLoadFailedEvent -= value;
+                _onAppOpenAdLoadFailedEvent -= value;
             }
         }
 
-        /// <summary>
-        /// Fired when an app open ad is displayed (may not be received by Unity until the app open ad closes).
-        /// </summary>
-        internal static Action<string, MaxSdkBase.AdInfo> onAdDisplayedEvent;
+        /**
+         * Fired when an app open ad is displayed (may not be received by Unity until the app open ad closes).
+         */
         public static event Action<string, MaxSdkBase.AdInfo> OnAdDisplayedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnAppOpenAdDisplayedEvent");
-                onAdDisplayedEvent += value;
+                _onAppOpenAdDisplayedEvent += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnAppOpenAdDisplayedEvent");
-                onAdDisplayedEvent -= value;
+                _onAppOpenAdDisplayedEvent -= value;
             }
         }
 
-        internal static Action<string, MaxSdkBase.ErrorInfo, MaxSdkBase.AdInfo> onAdDisplayFailedEvent;
         public static event Action<string, MaxSdkBase.ErrorInfo, MaxSdkBase.AdInfo> OnAdDisplayFailedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnAppOpenAdDisplayFailedEvent");
-                onAdDisplayFailedEvent += value;
+                _onAppOpenAdFailedToDisplayEvent += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnAppOpenAdDisplayFailedEvent");
-                onAdDisplayFailedEvent -= value;
+                _onAppOpenAdFailedToDisplayEvent -= value;
             }
         }
 
-        internal static Action<string, MaxSdkBase.AdInfo> onAdClickedEvent;
         public static event Action<string, MaxSdkBase.AdInfo> OnAdClickedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnAppOpenAdClickedEvent");
-                onAdClickedEvent += value;
+                _onAppOpenAdClickedEvent += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnAppOpenAdClickedEvent");
-                onAdClickedEvent -= value;
+                _onAppOpenAdClickedEvent -= value;
             }
         }
 
@@ -285,131 +288,135 @@ public static class MaxSdkCallbacks
         /// Fired when an app open ad impression was validated and revenue will be paid.
         /// Executed on a background thread to avoid any delays in execution.
         /// </summary>
-        internal static Action<string, MaxSdkBase.AdInfo> onAdRevenuePaidEvent;
         public static event Action<string, MaxSdkBase.AdInfo> OnAdRevenuePaidEvent
         {
             add
             {
                 LogSubscribedToEvent("OnAppOpenAdRevenuePaidEvent");
-                onAdRevenuePaidEvent += value;
+                _onAppOpenAdRevenuePaidEvent += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnAppOpenAdRevenuePaidEvent");
-                onAdRevenuePaidEvent -= value;
+                _onAppOpenAdRevenuePaidEvent -= value;
             }
         }
 
         /// <summary>
         /// Fired when an expired app open ad is reloaded.
         /// </summary>
-        internal static Action<string, MaxSdkBase.AdInfo, MaxSdkBase.AdInfo> onExpiredAdReloadedEvent;
         public static event Action<string, MaxSdkBase.AdInfo, MaxSdkBase.AdInfo> OnExpiredAdReloadedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnExpiredAppOpenAdReloadedEvent");
-                onExpiredAdReloadedEvent += value;
+                _onExpiredAppOpenAdReloadedEvent += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnExpiredAppOpenAdReloadedEvent");
-                onExpiredAdReloadedEvent -= value;
+                _onExpiredAppOpenAdReloadedEvent -= value;
             }
         }
 
-        internal static Action<string, MaxSdkBase.AdInfo> onAdHiddenEvent;
         public static event Action<string, MaxSdkBase.AdInfo> OnAdHiddenEvent
         {
             add
             {
                 LogSubscribedToEvent("OnAppOpenAdHiddenEvent");
-                onAdHiddenEvent += value;
+                _onAppOpenAdHiddenEvent += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnAppOpenAdHiddenEvent");
-                onAdHiddenEvent -= value;
+                _onAppOpenAdHiddenEvent -= value;
             }
         }
     }
-    public static class Rewarded
+
+    private static Action<string, MaxSdkBase.AdInfo> _onRewardedAdLoadedEventV2;
+    private static Action<string, MaxSdkBase.ErrorInfo> _onRewardedAdLoadFailedEventV2;
+    private static Action<string, MaxSdkBase.AdInfo> _onRewardedAdDisplayedEventV2;
+    private static Action<string, MaxSdkBase.ErrorInfo, MaxSdkBase.AdInfo> _onRewardedAdFailedToDisplayEventV2;
+    private static Action<string, MaxSdkBase.AdInfo> _onRewardedAdClickedEventV2;
+    private static Action<string, MaxSdkBase.AdInfo> _onRewardedAdRevenuePaidEvent;
+    private static Action<string, MaxSdkBase.AdInfo, MaxSdkBase.AdInfo> _onExpiredRewardedAdReloadedEvent;
+    private static Action<string, string, MaxSdkBase.AdInfo> _onRewardedAdReviewCreativeIdGeneratedEvent;
+    private static Action<string, MaxSdkBase.Reward, MaxSdkBase.AdInfo> _onRewardedAdReceivedRewardEventV2;
+    private static Action<string, MaxSdkBase.AdInfo> _onRewardedAdHiddenEventV2;
+
+    public class Rewarded
     {
-        internal static Action<string, MaxSdkBase.AdInfo> onAdLoadedEvent;
         public static event Action<string, MaxSdkBase.AdInfo> OnAdLoadedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnRewardedAdLoadedEvent");
-                onAdLoadedEvent += value;
+                _onRewardedAdLoadedEventV2 += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnRewardedAdLoadedEvent");
-                onAdLoadedEvent -= value;
+                _onRewardedAdLoadedEventV2 -= value;
             }
         }
 
-        internal static Action<string, MaxSdkBase.ErrorInfo> onAdLoadFailedEvent;
         public static event Action<string, MaxSdkBase.ErrorInfo> OnAdLoadFailedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnRewardedAdLoadFailedEvent");
-                onAdLoadFailedEvent += value;
+                _onRewardedAdLoadFailedEventV2 += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnRewardedAdLoadFailedEvent");
-                onAdLoadFailedEvent -= value;
+                _onRewardedAdLoadFailedEventV2 -= value;
             }
         }
 
-        /// <summary>
-        ///Fired when a rewarded ad is displayed (may not be received by Unity until the rewarded ad closes).
-        /// </summary>
-        internal static Action<string, MaxSdkBase.AdInfo> onAdDisplayedEvent;
+        /**
+         * Fired when a rewarded ad is displayed (may not be received by Unity until the rewarded ad closes).
+         */
         public static event Action<string, MaxSdkBase.AdInfo> OnAdDisplayedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnRewardedAdDisplayedEvent");
-                onAdDisplayedEvent += value;
+                _onRewardedAdDisplayedEventV2 += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnRewardedAdDisplayedEvent");
-                onAdDisplayedEvent -= value;
+                _onRewardedAdDisplayedEventV2 -= value;
             }
         }
 
-        internal static Action<string, MaxSdkBase.ErrorInfo, MaxSdkBase.AdInfo> onAdDisplayFailedEvent;
         public static event Action<string, MaxSdkBase.ErrorInfo, MaxSdkBase.AdInfo> OnAdDisplayFailedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnRewardedAdDisplayFailedEvent");
-                onAdDisplayFailedEvent += value;
+                _onRewardedAdFailedToDisplayEventV2 += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnRewardedAdDisplayFailedEvent");
-                onAdDisplayFailedEvent -= value;
+                _onRewardedAdFailedToDisplayEventV2 -= value;
             }
         }
 
-        internal static Action<string, MaxSdkBase.AdInfo> onAdClickedEvent;
         public static event Action<string, MaxSdkBase.AdInfo> OnAdClickedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnRewardedAdClickedEvent");
-                onAdClickedEvent += value;
+                _onRewardedAdClickedEventV2 += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnRewardedAdClickedEvent");
-                onAdClickedEvent -= value;
+                _onRewardedAdClickedEventV2 -= value;
             }
         }
 
@@ -417,303 +424,682 @@ public static class MaxSdkCallbacks
         /// Fired when a rewarded ad impression was validated and revenue will be paid.
         /// Executed on a background thread to avoid any delays in execution.
         /// </summary>
-        internal static Action<string, MaxSdkBase.AdInfo> onAdRevenuePaidEvent;
         public static event Action<string, MaxSdkBase.AdInfo> OnAdRevenuePaidEvent
         {
             add
             {
                 LogSubscribedToEvent("OnRewardedAdRevenuePaidEvent");
-                onAdRevenuePaidEvent += value;
+                _onRewardedAdRevenuePaidEvent += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnRewardedAdRevenuePaidEvent");
-                onAdRevenuePaidEvent -= value;
+                _onRewardedAdRevenuePaidEvent -= value;
             }
         }
 
         /// <summary>
         /// Fired when an expired rewarded ad is reloaded.
         /// </summary>
-        internal static Action<string, MaxSdkBase.AdInfo, MaxSdkBase.AdInfo> onExpiredAdReloadedEvent;
         public static event Action<string, MaxSdkBase.AdInfo, MaxSdkBase.AdInfo> OnExpiredAdReloadedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnExpiredRewardedAdReloadedEvent");
-                onExpiredAdReloadedEvent += value;
+                _onExpiredRewardedAdReloadedEvent += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnExpiredRewardedAdReloadedEvent");
-                onExpiredAdReloadedEvent -= value;
+                _onExpiredRewardedAdReloadedEvent -= value;
             }
         }
 
         /// <summary>
         /// Fired when an Ad Review Creative ID has been generated.
+        /// The parameters returned are the adUnitIdentifier, adReviewCreativeId, and adInfo in that respective order.
+        /// Executed on a background thread to avoid any delays in execution.
         /// </summary>
-        internal static Action<string, string, MaxSdkBase.AdInfo> onAdReviewCreativeIdGeneratedEvent;
         public static event Action<string, string, MaxSdkBase.AdInfo> OnAdReviewCreativeIdGeneratedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnRewardedAdReviewCreativeIdGeneratedEvent");
-                onAdReviewCreativeIdGeneratedEvent += value;
+                _onRewardedAdReviewCreativeIdGeneratedEvent += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnRewardedAdReviewCreativeIdGeneratedEvent");
-                onAdReviewCreativeIdGeneratedEvent -= value;
+                _onRewardedAdReviewCreativeIdGeneratedEvent -= value;
             }
         }
 
-        internal static Action<string, MaxSdkBase.Reward, MaxSdkBase.AdInfo> onAdReceivedRewardEvent;
         public static event Action<string, MaxSdkBase.Reward, MaxSdkBase.AdInfo> OnAdReceivedRewardEvent
         {
             add
             {
                 LogSubscribedToEvent("OnRewardedAdReceivedRewardEvent");
-                onAdReceivedRewardEvent += value;
+                _onRewardedAdReceivedRewardEventV2 += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnRewardedAdReceivedRewardEvent");
-                onAdReceivedRewardEvent -= value;
+                _onRewardedAdReceivedRewardEventV2 -= value;
             }
         }
 
-        internal static Action<string, MaxSdkBase.AdInfo> onAdHiddenEvent;
         public static event Action<string, MaxSdkBase.AdInfo> OnAdHiddenEvent
         {
             add
             {
                 LogSubscribedToEvent("OnRewardedAdHiddenEvent");
-                onAdHiddenEvent += value;
+                _onRewardedAdHiddenEventV2 += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnRewardedAdHiddenEvent");
-                onAdHiddenEvent -= value;
+                _onRewardedAdHiddenEventV2 -= value;
             }
         }
     }
-    public static class Banner
+
+    private static Action<string, MaxSdkBase.AdInfo> _onBannerAdLoadedEventV2;
+    private static Action<string, MaxSdkBase.ErrorInfo> _onBannerAdLoadFailedEventV2;
+    private static Action<string, MaxSdkBase.AdInfo> _onBannerAdClickedEventV2;
+    private static Action<string, MaxSdkBase.AdInfo> _onBannerAdRevenuePaidEvent;
+    private static Action<string, string, MaxSdkBase.AdInfo> _onBannerAdReviewCreativeIdGeneratedEvent;
+    private static Action<string, MaxSdkBase.AdInfo> _onBannerAdExpandedEventV2;
+    private static Action<string, MaxSdkBase.AdInfo> _onBannerAdCollapsedEventV2;
+
+    public class Banner
     {
-        internal static Action<string, MaxSdkBase.AdInfo> onAdLoadedEvent;
         public static event Action<string, MaxSdkBase.AdInfo> OnAdLoadedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnBannerAdLoadedEvent");
-                onAdLoadedEvent += value;
+                _onBannerAdLoadedEventV2 += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnBannerAdLoadedEvent");
-                onAdLoadedEvent -= value;
+                _onBannerAdLoadedEventV2 -= value;
             }
         }
 
-        internal static Action<string, MaxSdkBase.ErrorInfo> onAdLoadFailedEvent;
         public static event Action<string, MaxSdkBase.ErrorInfo> OnAdLoadFailedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnBannerAdLoadFailedEvent");
-                onAdLoadFailedEvent += value;
+                _onBannerAdLoadFailedEventV2 += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnBannerAdLoadFailedEvent");
-                onAdLoadFailedEvent -= value;
+                _onBannerAdLoadFailedEventV2 -= value;
             }
         }
 
-        internal static Action<string, MaxSdkBase.AdInfo> onAdClickedEvent;
         public static event Action<string, MaxSdkBase.AdInfo> OnAdClickedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnBannerAdClickedEvent");
-                onAdClickedEvent += value;
+                _onBannerAdClickedEventV2 += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnBannerAdClickedEvent");
-                onAdClickedEvent -= value;
+                _onBannerAdClickedEventV2 -= value;
             }
         }
 
-        internal static Action<string, MaxSdkBase.AdInfo> onAdRevenuePaidEvent;
         public static event Action<string, MaxSdkBase.AdInfo> OnAdRevenuePaidEvent
         {
             add
             {
                 LogSubscribedToEvent("OnBannerAdRevenuePaidEvent");
-                onAdRevenuePaidEvent += value;
+                _onBannerAdRevenuePaidEvent += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnBannerAdRevenuePaidEvent");
-                onAdRevenuePaidEvent -= value;
-            }
-        }
-
-        internal static Action<string, string, MaxSdkBase.AdInfo> onAdReviewCreativeIdGeneratedEvent;
-        public static event Action<string, string, MaxSdkBase.AdInfo> OnAdReviewCreativeIdGeneratedEvent
-        {
-            add
-            {
-                LogSubscribedToEvent("OnBannerAdReviewCreativeIdGeneratedEvent");
-                onAdReviewCreativeIdGeneratedEvent += value;
-            }
-            remove
-            {
-                LogUnsubscribedToEvent("OnBannerAdReviewCreativeIdGeneratedEvent");
-                onAdReviewCreativeIdGeneratedEvent -= value;
-            }
-        }
-
-        internal static Action<string, MaxSdkBase.AdInfo> onAdExpandedEvent;
-        public static event Action<string, MaxSdkBase.AdInfo> OnAdExpandedEvent
-        {
-            add
-            {
-                LogSubscribedToEvent("OnBannerAdExpandedEvent");
-                onAdExpandedEvent += value;
-            }
-            remove
-            {
-                LogUnsubscribedToEvent("OnBannerAdExpandedEvent");
-                onAdExpandedEvent -= value;
-            }
-        }
-
-        internal static Action<string, MaxSdkBase.AdInfo> onAdCollapsedEvent;
-        public static event Action<string, MaxSdkBase.AdInfo> OnAdCollapsedEvent
-        {
-            add
-            {
-                LogSubscribedToEvent("OnBannerAdCollapsedEvent");
-                onAdCollapsedEvent += value;
-            }
-            remove
-            {
-                LogUnsubscribedToEvent("OnBannerAdCollapsedEvent");
-                onAdCollapsedEvent -= value;
-            }
-        }
-    }
-
-    public static class MRec
-    {
-        internal static Action<string, MaxSdkBase.AdInfo> onAdLoadedEvent;
-        public static event Action<string, MaxSdkBase.AdInfo> OnAdLoadedEvent
-        {
-            add
-            {
-                LogSubscribedToEvent("OnMRecAdLoadedEvent");
-                onAdLoadedEvent += value;
-            }
-            remove
-            {
-                LogUnsubscribedToEvent("OnMRecAdLoadedEvent");
-                onAdLoadedEvent -= value;
-            }
-        }
-
-        internal static Action<string, MaxSdkBase.ErrorInfo> onAdLoadFailedEvent;
-        public static event Action<string, MaxSdkBase.ErrorInfo> OnAdLoadFailedEvent
-        {
-            add
-            {
-                LogSubscribedToEvent("OnMRecAdLoadFailedEvent");
-                onAdLoadFailedEvent += value;
-            }
-            remove
-            {
-                LogUnsubscribedToEvent("OnMRecAdLoadFailedEvent");
-                onAdLoadFailedEvent -= value;
-            }
-        }
-
-        internal static Action<string, MaxSdkBase.AdInfo> onAdClickedEvent;
-        public static event Action<string, MaxSdkBase.AdInfo> OnAdClickedEvent
-        {
-            add
-            {
-                LogSubscribedToEvent("OnMRecAdClickedEvent");
-                onAdClickedEvent += value;
-            }
-            remove
-            {
-                LogUnsubscribedToEvent("OnMRecAdClickedEvent");
-                onAdClickedEvent -= value;
-            }
-        }
-
-        internal static Action<string, MaxSdkBase.AdInfo> onAdRevenuePaidEvent;
-        public static event Action<string, MaxSdkBase.AdInfo> OnAdRevenuePaidEvent
-        {
-            add
-            {
-                LogSubscribedToEvent("OnMRecAdRevenuePaidEvent");
-                onAdRevenuePaidEvent += value;
-            }
-            remove
-            {
-                LogUnsubscribedToEvent("OnMRecAdRevenuePaidEvent");
-                onAdRevenuePaidEvent -= value;
+                _onBannerAdRevenuePaidEvent -= value;
             }
         }
 
         /// <summary>
         /// Fired when an Ad Review Creative ID has been generated.
+        /// The parameters returned are the adUnitIdentifier, adReviewCreativeId, and adInfo in that respective order.
         /// </summary>
-        internal static Action<string, string, MaxSdkBase.AdInfo> onAdReviewCreativeIdGeneratedEvent;
+        public static event Action<string, string, MaxSdkBase.AdInfo> OnAdReviewCreativeIdGeneratedEvent
+        {
+            add
+            {
+                LogSubscribedToEvent("OnBannerAdReviewCreativeIdGeneratedEvent");
+                _onBannerAdReviewCreativeIdGeneratedEvent += value;
+            }
+            remove
+            {
+                LogUnsubscribedToEvent("OnBannerAdReviewCreativeIdGeneratedEvent");
+                _onBannerAdReviewCreativeIdGeneratedEvent -= value;
+            }
+        }
+
+        public static event Action<string, MaxSdkBase.AdInfo> OnAdExpandedEvent
+        {
+            add
+            {
+                LogSubscribedToEvent("OnBannerAdExpandedEvent");
+                _onBannerAdExpandedEventV2 += value;
+            }
+            remove
+            {
+                LogUnsubscribedToEvent("OnBannerAdExpandedEvent");
+                _onBannerAdExpandedEventV2 -= value;
+            }
+        }
+
+        public static event Action<string, MaxSdkBase.AdInfo> OnAdCollapsedEvent
+        {
+            add
+            {
+                LogSubscribedToEvent("OnBannerAdCollapsedEvent");
+                _onBannerAdCollapsedEventV2 += value;
+            }
+            remove
+            {
+                LogUnsubscribedToEvent("OnBannerAdCollapsedEvent");
+                _onBannerAdCollapsedEventV2 -= value;
+            }
+        }
+    }
+
+    private static Action<string, MaxSdkBase.AdInfo> _onMRecAdLoadedEventV2;
+    private static Action<string, MaxSdkBase.ErrorInfo> _onMRecAdLoadFailedEventV2;
+    private static Action<string, MaxSdkBase.AdInfo> _onMRecAdClickedEventV2;
+    private static Action<string, MaxSdkBase.AdInfo> _onMRecAdRevenuePaidEvent;
+    private static Action<string, string, MaxSdkBase.AdInfo> _onMRecAdReviewCreativeIdGeneratedEvent;
+    private static Action<string, MaxSdkBase.AdInfo> _onMRecAdExpandedEventV2;
+    private static Action<string, MaxSdkBase.AdInfo> _onMRecAdCollapsedEventV2;
+
+    public class MRec
+    {
+        public static event Action<string, MaxSdkBase.AdInfo> OnAdLoadedEvent
+        {
+            add
+            {
+                LogSubscribedToEvent("OnMRecAdLoadedEvent");
+                _onMRecAdLoadedEventV2 += value;
+            }
+            remove
+            {
+                LogUnsubscribedToEvent("OnMRecAdLoadedEvent");
+                _onMRecAdLoadedEventV2 -= value;
+            }
+        }
+
+        public static event Action<string, MaxSdkBase.ErrorInfo> OnAdLoadFailedEvent
+        {
+            add
+            {
+                LogSubscribedToEvent("OnMRecAdLoadFailedEvent");
+                _onMRecAdLoadFailedEventV2 += value;
+            }
+            remove
+            {
+                LogUnsubscribedToEvent("OnMRecAdLoadFailedEvent");
+                _onMRecAdLoadFailedEventV2 -= value;
+            }
+        }
+
+        public static event Action<string, MaxSdkBase.AdInfo> OnAdClickedEvent
+        {
+            add
+            {
+                LogSubscribedToEvent("OnMRecAdClickedEvent");
+                _onMRecAdClickedEventV2 += value;
+            }
+            remove
+            {
+                LogUnsubscribedToEvent("OnMRecAdClickedEvent");
+                _onMRecAdClickedEventV2 -= value;
+            }
+        }
+
+        public static event Action<string, MaxSdkBase.AdInfo> OnAdRevenuePaidEvent
+        {
+            add
+            {
+                LogSubscribedToEvent("OnMRecAdRevenuePaidEvent");
+                _onMRecAdRevenuePaidEvent += value;
+            }
+            remove
+            {
+                LogUnsubscribedToEvent("OnMRecAdRevenuePaidEvent");
+                _onMRecAdRevenuePaidEvent -= value;
+            }
+        }
+
+        /// <summary>
+        /// Fired when an Ad Review Creative ID has been generated.
+        /// The parameters returned are the adUnitIdentifier, adReviewCreativeId, and adInfo in that respective order.
+        /// </summary>
         public static event Action<string, string, MaxSdkBase.AdInfo> OnAdReviewCreativeIdGeneratedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnMRecAdReviewCreativeIdGeneratedEvent");
-                onAdReviewCreativeIdGeneratedEvent += value;
+                _onMRecAdReviewCreativeIdGeneratedEvent += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnMRecAdReviewCreativeIdGeneratedEvent");
-                onAdReviewCreativeIdGeneratedEvent -= value;
+                _onMRecAdReviewCreativeIdGeneratedEvent -= value;
             }
         }
 
-        internal static Action<string, MaxSdkBase.AdInfo> onAdExpandedEvent;
         public static event Action<string, MaxSdkBase.AdInfo> OnAdExpandedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnMRecAdExpandedEvent");
-                onAdExpandedEvent += value;
+                _onMRecAdExpandedEventV2 += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnMRecAdExpandedEvent");
-                onAdExpandedEvent -= value;
+                _onMRecAdExpandedEventV2 -= value;
             }
         }
 
-        internal static Action<string, MaxSdkBase.AdInfo> onAdCollapsedEvent;
         public static event Action<string, MaxSdkBase.AdInfo> OnAdCollapsedEvent
         {
             add
             {
                 LogSubscribedToEvent("OnMRecAdCollapsedEvent");
-                onAdCollapsedEvent += value;
+                _onMRecAdCollapsedEventV2 += value;
             }
             remove
             {
                 LogUnsubscribedToEvent("OnMRecAdCollapsedEvent");
-                onAdCollapsedEvent -= value;
+                _onMRecAdCollapsedEventV2 -= value;
             }
+        }
+    }
+
+    private static Action<string> _onBannerAdLoadedEvent;
+    private static Action<string, int> _onBannerAdLoadFailedEvent;
+    private static Action<string> _onBannerAdClickedEvent;
+    private static Action<string> _onBannerAdExpandedEvent;
+    private static Action<string> _onBannerAdCollapsedEvent;
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.Banner.OnAdLoadedEvent` instead.")]
+    public static event Action<string> OnBannerAdLoadedEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnBannerAdLoadedEvent");
+            _onBannerAdLoadedEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnBannerAdLoadedEvent");
+            _onBannerAdLoadedEvent -= value;
+        }
+    }
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.Banner.OnAdLoadFailedEvent` instead.")]
+    public static event Action<string, int> OnBannerAdLoadFailedEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnBannerAdLoadFailedEvent");
+            _onBannerAdLoadFailedEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnBannerAdLoadFailedEvent");
+            _onBannerAdLoadFailedEvent -= value;
+        }
+    }
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.Banner.OnAdClickedEvent` instead.")]
+    public static event Action<string> OnBannerAdClickedEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnBannerAdClickedEvent");
+            _onBannerAdClickedEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnBannerAdClickedEvent");
+            _onBannerAdClickedEvent -= value;
+        }
+    }
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.Banner.OnAdExpandedEvent` instead.")]
+    public static event Action<string> OnBannerAdExpandedEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnBannerAdExpandedEvent");
+            _onBannerAdExpandedEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnBannerAdExpandedEvent");
+            _onBannerAdExpandedEvent -= value;
+        }
+    }
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.Banner.OnAdCollapsedEvent` instead.")]
+    public static event Action<string> OnBannerAdCollapsedEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnBannerAdCollapsedEvent");
+            _onBannerAdCollapsedEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnBannerAdCollapsedEvent");
+            _onBannerAdCollapsedEvent -= value;
+        }
+    }
+
+    private static Action<string> _onMRecAdLoadedEvent;
+    private static Action<string, int> _onMRecAdLoadFailedEvent;
+    private static Action<string> _onMRecAdClickedEvent;
+    private static Action<string> _onMRecAdExpandedEvent;
+    private static Action<string> _onMRecAdCollapsedEvent;
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.MRec.OnAdLoadedEvent` instead.")]
+    public static event Action<string> OnMRecAdLoadedEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnMRecAdLoadedEvent");
+            _onMRecAdLoadedEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnMRecAdLoadedEvent");
+            _onMRecAdLoadedEvent -= value;
+        }
+    }
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.MRec.OnAdLoadFailedEvent` instead.")]
+    public static event Action<string, int> OnMRecAdLoadFailedEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnMRecAdLoadFailedEvent");
+            _onMRecAdLoadFailedEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnMRecAdLoadFailedEvent");
+            _onMRecAdLoadFailedEvent -= value;
+        }
+    }
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.MRec.OnAdClickedEvent` instead.")]
+    public static event Action<string> OnMRecAdClickedEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnMRecAdClickedEvent");
+            _onMRecAdClickedEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnMRecAdClickedEvent");
+            _onMRecAdClickedEvent -= value;
+        }
+    }
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.MRec.OnAdExpandedEvent` instead.")]
+    public static event Action<string> OnMRecAdExpandedEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnMRecAdExpandedEvent");
+            _onMRecAdExpandedEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnMRecAdExpandedEvent");
+            _onMRecAdExpandedEvent -= value;
+        }
+    }
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.MRec.OnAdCollapsedEvent` instead.")]
+    public static event Action<string> OnMRecAdCollapsedEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnMRecAdCollapsedEvent");
+            _onMRecAdCollapsedEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnMRecAdCollapsedEvent");
+            _onMRecAdCollapsedEvent -= value;
+        }
+    }
+
+    private static Action<string> _onInterstitialAdLoadedEvent;
+    private static Action<string, int> _onInterstitialLoadFailedEvent;
+    private static Action<string> _onInterstitialAdDisplayedEvent;
+    private static Action<string, int> _onInterstitialAdFailedToDisplayEvent;
+    private static Action<string> _onInterstitialAdClickedEvent;
+    private static Action<string> _onInterstitialAdHiddenEvent;
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.Interstitial.OnAdLoadedEvent` instead.")]
+    public static event Action<string> OnInterstitialLoadedEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnInterstitialLoadedEvent");
+            _onInterstitialAdLoadedEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnInterstitialLoadedEvent");
+            _onInterstitialAdLoadedEvent -= value;
+        }
+    }
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.Interstitial.OnAdLoadFailedEvent` instead.")]
+    public static event Action<string, int> OnInterstitialLoadFailedEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnInterstitialLoadFailedEvent");
+            _onInterstitialLoadFailedEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnInterstitialLoadFailedEvent");
+            _onInterstitialLoadFailedEvent -= value;
+        }
+    }
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.Interstitial.OnAdHiddenEvent` instead.")]
+    public static event Action<string> OnInterstitialHiddenEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnInterstitialHiddenEvent");
+            _onInterstitialAdHiddenEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnInterstitialHiddenEvent");
+            _onInterstitialAdHiddenEvent -= value;
+        }
+    }
+
+    // Fired when an interstitial ad is displayed (may not be received by Unity until the interstitial closes)
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.Interstitial.OnAdDisplayedEvent` instead.")]
+    public static event Action<string> OnInterstitialDisplayedEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnInterstitialDisplayedEvent");
+            _onInterstitialAdDisplayedEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnInterstitialDisplayedEvent");
+            _onInterstitialAdDisplayedEvent -= value;
+        }
+    }
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.Interstitial.OnAdDisplayFailedEvent` instead.")]
+    public static event Action<string, int> OnInterstitialAdFailedToDisplayEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnInterstitialAdFailedToDisplayEvent");
+            _onInterstitialAdFailedToDisplayEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnInterstitialAdFailedToDisplayEvent");
+            _onInterstitialAdFailedToDisplayEvent -= value;
+        }
+    }
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.Interstitial.OnAdClickedEvent` instead.")]
+    public static event Action<string> OnInterstitialClickedEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnInterstitialClickedEvent");
+            _onInterstitialAdClickedEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnInterstitialClickedEvent");
+            _onInterstitialAdClickedEvent -= value;
+        }
+    }
+
+    private static Action<string> _onRewardedAdLoadedEvent;
+    private static Action<string, int> _onRewardedAdLoadFailedEvent;
+    private static Action<string> _onRewardedAdDisplayedEvent;
+    private static Action<string, int> _onRewardedAdFailedToDisplayEvent;
+    private static Action<string> _onRewardedAdClickedEvent;
+    private static Action<string, MaxSdkBase.Reward> _onRewardedAdReceivedRewardEvent;
+    private static Action<string> _onRewardedAdHiddenEvent;
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.Rewarded.OnAdLoadedEvent` instead.")]
+    public static event Action<string> OnRewardedAdLoadedEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnRewardedAdLoadedEvent");
+            _onRewardedAdLoadedEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnRewardedAdLoadedEvent");
+            _onRewardedAdLoadedEvent -= value;
+        }
+    }
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.Rewarded.OnAdLoadFailedEvent` instead.")]
+    public static event Action<string, int> OnRewardedAdLoadFailedEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnRewardedAdLoadFailedEvent");
+            _onRewardedAdLoadFailedEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnRewardedAdLoadFailedEvent");
+            _onRewardedAdLoadFailedEvent -= value;
+        }
+    }
+
+    // Fired when an rewarded ad is displayed (may not be received by Unity until the rewarded ad closes)
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.Rewarded.OnAdDisplayedEvent` instead.")]
+    public static event Action<string> OnRewardedAdDisplayedEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnRewardedAdDisplayedEvent");
+            _onRewardedAdDisplayedEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnRewardedAdDisplayedEvent");
+            _onRewardedAdDisplayedEvent -= value;
+        }
+    }
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.Rewarded.OnAdHiddenEvent` instead.")]
+    public static event Action<string> OnRewardedAdHiddenEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnRewardedAdHiddenEvent");
+            _onRewardedAdHiddenEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnRewardedAdHiddenEvent");
+            _onRewardedAdHiddenEvent -= value;
+        }
+    }
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.Rewarded.OnAdClickedEvent` instead.")]
+    public static event Action<string> OnRewardedAdClickedEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnRewardedAdClickedEvent");
+            _onRewardedAdClickedEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnRewardedAdClickedEvent");
+            _onRewardedAdClickedEvent -= value;
+        }
+    }
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.Rewarded.OnAdDisplayFailedEvent` instead.")]
+    public static event Action<string, int> OnRewardedAdFailedToDisplayEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnRewardedAdFailedToDisplayEvent");
+            _onRewardedAdFailedToDisplayEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnRewardedAdFailedToDisplayEvent");
+            _onRewardedAdFailedToDisplayEvent -= value;
+        }
+    }
+
+    [Obsolete("This callback has been deprecated. Please use `MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent` instead.")]
+    public static event Action<string, MaxSdkBase.Reward> OnRewardedAdReceivedRewardEvent
+    {
+        add
+        {
+            LogSubscribedToEvent("OnRewardedAdReceivedRewardEvent");
+            _onRewardedAdReceivedRewardEvent += value;
+        }
+        remove
+        {
+            LogUnsubscribedToEvent("OnRewardedAdReceivedRewardEvent");
+            _onRewardedAdReceivedRewardEvent -= value;
         }
     }
 
@@ -735,7 +1121,7 @@ public static class MaxSdkCallbacks
         else if (eventName == "OnSdkInitializedEvent")
         {
             var sdkConfiguration = MaxSdkBase.SdkConfiguration.Create(eventProps);
-            InvokeEvent(onSdkInitializedEvent, sdkConfiguration, eventName, keepInBackground);
+            InvokeEvent(_onSdkInitializedEvent, sdkConfiguration, eventName, keepInBackground);
         }
         else if (eventName == "OnCmpCompletedEvent")
         {
@@ -745,7 +1131,7 @@ public static class MaxSdkCallbacks
         else if (eventName == "OnApplicationStateChanged")
         {
             var isPaused = MaxSdkUtils.GetBoolFromDictionary(eventProps, "isPaused");
-            InvokeEvent(onApplicationStateChangedEvent, isPaused, eventName, keepInBackground);
+            InvokeEvent(_onApplicationStateChangedEvent, isPaused, eventName, keepInBackground);
         }
         // Ad Events
         else
@@ -761,15 +1147,15 @@ public static class MaxSdkCallbacks
                 var expiredAdInfo = new MaxSdkBase.AdInfo(MaxSdkUtils.GetDictionaryFromDictionary(eventProps, "expiredAdInfo"));
                 if (eventName == "OnExpiredInterstitialAdReloadedEvent")
                 {
-                    InvokeEvent(Interstitial.onExpiredAdReloadedEvent, adUnitIdentifier, expiredAdInfo, adInfo, eventName, keepInBackground);
+                    InvokeEvent(_onExpiredInterstitialAdReloadedEvent, adUnitIdentifier, expiredAdInfo, adInfo, eventName, keepInBackground);
                 }
                 else if (eventName == "OnExpiredAppOpenAdReloadedEvent")
                 {
-                    InvokeEvent(AppOpen.onExpiredAdReloadedEvent, adUnitIdentifier, expiredAdInfo, adInfo, eventName, keepInBackground);
+                    InvokeEvent(_onExpiredAppOpenAdReloadedEvent, adUnitIdentifier, expiredAdInfo, adInfo, eventName, keepInBackground);
                 }
                 else if (eventName == "OnExpiredRewardedAdReloadedEvent")
                 {
-                    InvokeEvent(Rewarded.onExpiredAdReloadedEvent, adUnitIdentifier, expiredAdInfo, adInfo, eventName, keepInBackground);
+                    InvokeEvent(_onExpiredRewardedAdReloadedEvent, adUnitIdentifier, expiredAdInfo, adInfo, eventName, keepInBackground);
                 }
                 else
                 {
@@ -778,163 +1164,197 @@ public static class MaxSdkCallbacks
             }
             else if (eventName == "OnBannerAdLoadedEvent")
             {
-                InvokeEvent(Banner.onAdLoadedEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onBannerAdLoadedEvent, adUnitIdentifier, eventName, keepInBackground);
+                InvokeEvent(_onBannerAdLoadedEventV2, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnBannerAdLoadFailedEvent")
             {
+                var errorCode = MaxSdkUtils.GetIntFromDictionary(eventProps, "errorCode", -1);
+                InvokeEvent(_onBannerAdLoadFailedEvent, adUnitIdentifier, errorCode, eventName, keepInBackground);
+
                 var errorInfo = new MaxSdkBase.ErrorInfo(eventProps);
-                InvokeEvent(Banner.onAdLoadFailedEvent, adUnitIdentifier, errorInfo, eventName, keepInBackground);
+                InvokeEvent(_onBannerAdLoadFailedEventV2, adUnitIdentifier, errorInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnBannerAdClickedEvent")
             {
-                InvokeEvent(Banner.onAdClickedEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onBannerAdClickedEvent, adUnitIdentifier, eventName, keepInBackground);
+                InvokeEvent(_onBannerAdClickedEventV2, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnBannerAdRevenuePaidEvent")
             {
-                InvokeEvent(Banner.onAdRevenuePaidEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onBannerAdRevenuePaidEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnBannerAdReviewCreativeIdGeneratedEvent")
             {
                 var adReviewCreativeId = MaxSdkUtils.GetStringFromDictionary(eventProps, "adReviewCreativeId", "");
-                InvokeEvent(Banner.onAdReviewCreativeIdGeneratedEvent, adUnitIdentifier, adReviewCreativeId, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onBannerAdReviewCreativeIdGeneratedEvent, adUnitIdentifier, adReviewCreativeId, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnBannerAdExpandedEvent")
             {
-                InvokeEvent(Banner.onAdExpandedEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onBannerAdExpandedEvent, adUnitIdentifier, eventName, keepInBackground);
+                InvokeEvent(_onBannerAdExpandedEventV2, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnBannerAdCollapsedEvent")
             {
-                InvokeEvent(Banner.onAdCollapsedEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onBannerAdCollapsedEvent, adUnitIdentifier, eventName, keepInBackground);
+                InvokeEvent(_onBannerAdCollapsedEventV2, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnMRecAdLoadedEvent")
             {
-                InvokeEvent(MRec.onAdLoadedEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onMRecAdLoadedEvent, adUnitIdentifier, eventName, keepInBackground);
+                InvokeEvent(_onMRecAdLoadedEventV2, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnMRecAdLoadFailedEvent")
             {
+                var errorCode = MaxSdkUtils.GetIntFromDictionary(eventProps, "errorCode", -1);
+                InvokeEvent(_onMRecAdLoadFailedEvent, adUnitIdentifier, errorCode, eventName, keepInBackground);
+
                 var errorInfo = new MaxSdkBase.ErrorInfo(eventProps);
-                InvokeEvent(MRec.onAdLoadFailedEvent, adUnitIdentifier, errorInfo, eventName, keepInBackground);
+                InvokeEvent(_onMRecAdLoadFailedEventV2, adUnitIdentifier, errorInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnMRecAdClickedEvent")
             {
-                InvokeEvent(MRec.onAdClickedEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onMRecAdClickedEvent, adUnitIdentifier, eventName, keepInBackground);
+                InvokeEvent(_onMRecAdClickedEventV2, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnMRecAdRevenuePaidEvent")
             {
-                InvokeEvent(MRec.onAdRevenuePaidEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onMRecAdRevenuePaidEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnMRecAdReviewCreativeIdGeneratedEvent")
             {
                 var adReviewCreativeId = MaxSdkUtils.GetStringFromDictionary(eventProps, "adReviewCreativeId", "");
-                InvokeEvent(MRec.onAdReviewCreativeIdGeneratedEvent, adUnitIdentifier, adReviewCreativeId, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onMRecAdReviewCreativeIdGeneratedEvent, adUnitIdentifier, adReviewCreativeId, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnMRecAdExpandedEvent")
             {
-                InvokeEvent(MRec.onAdExpandedEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onMRecAdExpandedEvent, adUnitIdentifier, eventName, keepInBackground);
+                InvokeEvent(_onMRecAdExpandedEventV2, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnMRecAdCollapsedEvent")
             {
-                InvokeEvent(MRec.onAdCollapsedEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onMRecAdCollapsedEvent, adUnitIdentifier, eventName, keepInBackground);
+                InvokeEvent(_onMRecAdCollapsedEventV2, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnInterstitialLoadedEvent")
             {
-                InvokeEvent(Interstitial.onAdLoadedEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onInterstitialAdLoadedEvent, adUnitIdentifier, eventName, keepInBackground);
+                InvokeEvent(_onInterstitialAdLoadedEventV2, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnInterstitialLoadFailedEvent")
             {
+                var errorCode = MaxSdkUtils.GetIntFromDictionary(eventProps, "errorCode", -1);
+                InvokeEvent(_onInterstitialLoadFailedEvent, adUnitIdentifier, errorCode, eventName, keepInBackground);
+
                 var errorInfo = new MaxSdkBase.ErrorInfo(eventProps);
-                InvokeEvent(Interstitial.onAdLoadFailedEvent, adUnitIdentifier, errorInfo, eventName, keepInBackground);
+                InvokeEvent(_onInterstitialAdLoadFailedEventV2, adUnitIdentifier, errorInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnInterstitialHiddenEvent")
             {
-                InvokeEvent(Interstitial.onAdHiddenEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onInterstitialAdHiddenEvent, adUnitIdentifier, eventName, keepInBackground);
+                InvokeEvent(_onInterstitialAdHiddenEventV2, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnInterstitialDisplayedEvent")
             {
-                InvokeEvent(Interstitial.onAdDisplayedEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onInterstitialAdDisplayedEvent, adUnitIdentifier, eventName, keepInBackground);
+                InvokeEvent(_onInterstitialAdDisplayedEventV2, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnInterstitialAdFailedToDisplayEvent")
             {
+                var errorCode = MaxSdkUtils.GetIntFromDictionary(eventProps, "errorCode", -1);
+                InvokeEvent(_onInterstitialAdFailedToDisplayEvent, adUnitIdentifier, errorCode, eventName, keepInBackground);
+
                 var errorInfo = new MaxSdkBase.ErrorInfo(eventProps);
-                InvokeEvent(Interstitial.onAdDisplayFailedEvent, adUnitIdentifier, errorInfo, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onInterstitialAdFailedToDisplayEventV2, adUnitIdentifier, errorInfo, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnInterstitialClickedEvent")
             {
-                InvokeEvent(Interstitial.onAdClickedEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onInterstitialAdClickedEvent, adUnitIdentifier, eventName, keepInBackground);
+                InvokeEvent(_onInterstitialAdClickedEventV2, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnInterstitialAdRevenuePaidEvent")
             {
-                InvokeEvent(Interstitial.onAdRevenuePaidEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onInterstitialAdRevenuePaidEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnInterstitialAdReviewCreativeIdGeneratedEvent")
             {
                 var adReviewCreativeId = MaxSdkUtils.GetStringFromDictionary(eventProps, "adReviewCreativeId", "");
-                InvokeEvent(Interstitial.onAdReviewCreativeIdGeneratedEvent, adUnitIdentifier, adReviewCreativeId, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onInterstitialAdReviewCreativeIdGeneratedEvent, adUnitIdentifier, adReviewCreativeId, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnAppOpenAdLoadedEvent")
             {
-                InvokeEvent(AppOpen.onAdLoadedEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onAppOpenAdLoadedEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnAppOpenAdLoadFailedEvent")
             {
                 var errorInfo = new MaxSdkBase.ErrorInfo(eventProps);
-                InvokeEvent(AppOpen.onAdLoadFailedEvent, adUnitIdentifier, errorInfo, eventName, keepInBackground);
+                InvokeEvent(_onAppOpenAdLoadFailedEvent, adUnitIdentifier, errorInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnAppOpenAdHiddenEvent")
             {
-                InvokeEvent(AppOpen.onAdHiddenEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onAppOpenAdHiddenEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnAppOpenAdDisplayedEvent")
             {
-                InvokeEvent(AppOpen.onAdDisplayedEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onAppOpenAdDisplayedEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnAppOpenAdFailedToDisplayEvent")
             {
                 var errorInfo = new MaxSdkBase.ErrorInfo(eventProps);
-                InvokeEvent(AppOpen.onAdDisplayFailedEvent, adUnitIdentifier, errorInfo, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onAppOpenAdFailedToDisplayEvent, adUnitIdentifier, errorInfo, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnAppOpenAdClickedEvent")
             {
-                InvokeEvent(AppOpen.onAdClickedEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onAppOpenAdClickedEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnAppOpenAdRevenuePaidEvent")
             {
-                InvokeEvent(AppOpen.onAdRevenuePaidEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onAppOpenAdRevenuePaidEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnRewardedAdLoadedEvent")
             {
-                InvokeEvent(Rewarded.onAdLoadedEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onRewardedAdLoadedEvent, adUnitIdentifier, eventName, keepInBackground);
+                InvokeEvent(_onRewardedAdLoadedEventV2, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnRewardedAdLoadFailedEvent")
             {
+                var errorCode = MaxSdkUtils.GetIntFromDictionary(eventProps, "errorCode", -1);
+                InvokeEvent(_onRewardedAdLoadFailedEvent, adUnitIdentifier, errorCode, eventName, keepInBackground);
+
                 var errorInfo = new MaxSdkBase.ErrorInfo(eventProps);
-                InvokeEvent(Rewarded.onAdLoadFailedEvent, adUnitIdentifier, errorInfo, eventName, keepInBackground);
+                InvokeEvent(_onRewardedAdLoadFailedEventV2, adUnitIdentifier, errorInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnRewardedAdDisplayedEvent")
             {
-                InvokeEvent(Rewarded.onAdDisplayedEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onRewardedAdDisplayedEvent, adUnitIdentifier, eventName, keepInBackground);
+                InvokeEvent(_onRewardedAdDisplayedEventV2, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnRewardedAdHiddenEvent")
             {
-                InvokeEvent(Rewarded.onAdHiddenEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onRewardedAdHiddenEvent, adUnitIdentifier, eventName, keepInBackground);
+                InvokeEvent(_onRewardedAdHiddenEventV2, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnRewardedAdClickedEvent")
             {
-                InvokeEvent(Rewarded.onAdClickedEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onRewardedAdClickedEvent, adUnitIdentifier, eventName, keepInBackground);
+                InvokeEvent(_onRewardedAdClickedEventV2, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnRewardedAdRevenuePaidEvent")
             {
-                InvokeEvent(Rewarded.onAdRevenuePaidEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onRewardedAdRevenuePaidEvent, adUnitIdentifier, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnRewardedAdReviewCreativeIdGeneratedEvent")
             {
                 var adReviewCreativeId = MaxSdkUtils.GetStringFromDictionary(eventProps, "adReviewCreativeId", "");
-                InvokeEvent(Rewarded.onAdReviewCreativeIdGeneratedEvent, adUnitIdentifier, adReviewCreativeId, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onRewardedAdReviewCreativeIdGeneratedEvent, adUnitIdentifier, adReviewCreativeId, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnRewardedAdFailedToDisplayEvent")
             {
+                var errorCode = MaxSdkUtils.GetIntFromDictionary(eventProps, "errorCode", -1);
+                InvokeEvent(_onRewardedAdFailedToDisplayEvent, adUnitIdentifier, errorCode, eventName, keepInBackground);
+
                 var errorInfo = new MaxSdkBase.ErrorInfo(eventProps);
-                InvokeEvent(Rewarded.onAdDisplayFailedEvent, adUnitIdentifier, errorInfo, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onRewardedAdFailedToDisplayEventV2, adUnitIdentifier, errorInfo, adInfo, eventName, keepInBackground);
             }
             else if (eventName == "OnRewardedAdReceivedRewardEvent")
             {
@@ -944,7 +1364,8 @@ public static class MaxSdkCallbacks
                     Amount = MaxSdkUtils.GetIntFromDictionary(eventProps, "rewardAmount", 0)
                 };
 
-                InvokeEvent(Rewarded.onAdReceivedRewardEvent, adUnitIdentifier, reward, adInfo, eventName, keepInBackground);
+                InvokeEvent(_onRewardedAdReceivedRewardEvent, adUnitIdentifier, reward, eventName, keepInBackground);
+                InvokeEvent(_onRewardedAdReceivedRewardEventV2, adUnitIdentifier, reward, adInfo, eventName, keepInBackground);
             }
             else
             {
@@ -956,9 +1377,9 @@ public static class MaxSdkCallbacks
 #if UNITY_EDITOR
     public static void EmitSdkInitializedEvent()
     {
-        if (onSdkInitializedEvent == null) return;
+        if (_onSdkInitializedEvent == null) return;
 
-        onSdkInitializedEvent(MaxSdkBase.SdkConfiguration.CreateEmpty());
+        _onSdkInitializedEvent(MaxSdkBase.SdkConfiguration.CreateEmpty());
     }
 #endif
 
@@ -1089,51 +1510,77 @@ public static class MaxSdkCallbacks
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     private static void ResetOnDomainReload()
     {
-        onSdkInitializedEvent = null;
+        _onSdkInitializedEvent = null;
 
-        Interstitial.onAdLoadedEvent = null;
-        Interstitial.onAdLoadFailedEvent = null;
-        Interstitial.onAdDisplayedEvent = null;
-        Interstitial.onAdDisplayFailedEvent = null;
-        Interstitial.onAdClickedEvent = null;
-        Interstitial.onAdRevenuePaidEvent = null;
-        Interstitial.onAdReviewCreativeIdGeneratedEvent = null;
-        Interstitial.onAdHiddenEvent = null;
+        _onInterstitialAdLoadedEventV2 = null;
+        _onInterstitialAdLoadFailedEventV2 = null;
+        _onInterstitialAdDisplayedEventV2 = null;
+        _onInterstitialAdFailedToDisplayEventV2 = null;
+        _onInterstitialAdClickedEventV2 = null;
+        _onInterstitialAdRevenuePaidEvent = null;
+        _onInterstitialAdReviewCreativeIdGeneratedEvent = null;
+        _onInterstitialAdHiddenEventV2 = null;
 
-        AppOpen.onAdLoadedEvent = null;
-        AppOpen.onAdLoadFailedEvent = null;
-        AppOpen.onAdDisplayedEvent = null;
-        AppOpen.onAdDisplayFailedEvent = null;
-        AppOpen.onAdClickedEvent = null;
-        AppOpen.onAdRevenuePaidEvent = null;
-        AppOpen.onAdHiddenEvent = null;
+        _onAppOpenAdLoadedEvent = null;
+        _onAppOpenAdLoadFailedEvent = null;
+        _onAppOpenAdDisplayedEvent = null;
+        _onAppOpenAdFailedToDisplayEvent = null;
+        _onAppOpenAdClickedEvent = null;
+        _onAppOpenAdRevenuePaidEvent = null;
+        _onAppOpenAdHiddenEvent = null;
 
-        Rewarded.onAdLoadedEvent = null;
-        Rewarded.onAdLoadFailedEvent = null;
-        Rewarded.onAdDisplayedEvent = null;
-        Rewarded.onAdDisplayFailedEvent = null;
-        Rewarded.onAdClickedEvent = null;
-        Rewarded.onAdRevenuePaidEvent = null;
-        Rewarded.onAdReviewCreativeIdGeneratedEvent = null;
-        Rewarded.onAdReceivedRewardEvent = null;
-        Rewarded.onAdHiddenEvent = null;
+        _onRewardedAdLoadedEventV2 = null;
+        _onRewardedAdLoadFailedEventV2 = null;
+        _onRewardedAdDisplayedEventV2 = null;
+        _onRewardedAdFailedToDisplayEventV2 = null;
+        _onRewardedAdClickedEventV2 = null;
+        _onRewardedAdRevenuePaidEvent = null;
+        _onRewardedAdReviewCreativeIdGeneratedEvent = null;
+        _onRewardedAdReceivedRewardEventV2 = null;
+        _onRewardedAdHiddenEventV2 = null;
 
-        Banner.onAdLoadedEvent = null;
-        Banner.onAdLoadFailedEvent = null;
-        Banner.onAdClickedEvent = null;
-        Banner.onAdRevenuePaidEvent = null;
-        Banner.onAdReviewCreativeIdGeneratedEvent = null;
-        Banner.onAdExpandedEvent = null;
-        Banner.onAdCollapsedEvent = null;
+        _onBannerAdLoadedEventV2 = null;
+        _onBannerAdLoadFailedEventV2 = null;
+        _onBannerAdClickedEventV2 = null;
+        _onBannerAdRevenuePaidEvent = null;
+        _onBannerAdReviewCreativeIdGeneratedEvent = null;
+        _onBannerAdExpandedEventV2 = null;
+        _onBannerAdCollapsedEventV2 = null;
 
-        MRec.onAdLoadedEvent = null;
-        MRec.onAdLoadFailedEvent = null;
-        MRec.onAdClickedEvent = null;
-        MRec.onAdRevenuePaidEvent = null;
-        MRec.onAdReviewCreativeIdGeneratedEvent = null;
-        MRec.onAdExpandedEvent = null;
-        MRec.onAdCollapsedEvent = null;
+        _onMRecAdLoadedEventV2 = null;
+        _onMRecAdLoadFailedEventV2 = null;
+        _onMRecAdClickedEventV2 = null;
+        _onMRecAdRevenuePaidEvent = null;
+        _onMRecAdReviewCreativeIdGeneratedEvent = null;
+        _onMRecAdExpandedEventV2 = null;
+        _onMRecAdCollapsedEventV2 = null;
 
+        _onBannerAdLoadedEvent = null;
+        _onBannerAdLoadFailedEvent = null;
+        _onBannerAdClickedEvent = null;
+        _onBannerAdExpandedEvent = null;
+        _onBannerAdCollapsedEvent = null;
+
+        _onMRecAdLoadedEvent = null;
+        _onMRecAdLoadFailedEvent = null;
+        _onMRecAdClickedEvent = null;
+        _onMRecAdExpandedEvent = null;
+        _onMRecAdCollapsedEvent = null;
+
+        _onInterstitialAdLoadedEvent = null;
+        _onInterstitialLoadFailedEvent = null;
+        _onInterstitialAdDisplayedEvent = null;
+        _onInterstitialAdFailedToDisplayEvent = null;
+        _onInterstitialAdClickedEvent = null;
+        _onInterstitialAdHiddenEvent = null;
+
+        _onRewardedAdLoadedEvent = null;
+        _onRewardedAdLoadFailedEvent = null;
+        _onRewardedAdDisplayedEvent = null;
+        _onRewardedAdFailedToDisplayEvent = null;
+        _onRewardedAdClickedEvent = null;
+        _onRewardedAdReceivedRewardEvent = null;
+        _onRewardedAdHiddenEvent = null;
     }
 #endif
 }

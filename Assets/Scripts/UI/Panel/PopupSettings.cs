@@ -1,6 +1,7 @@
 using System;
 using Manager;
 using MyGame.SkewerJam.Gameplay;
+using MyGame.SkewerJam.Gameplay.Helpers;
 using Sonat.Enums;
 using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
@@ -22,6 +23,7 @@ public class PopupSettings : PopupSettingsBase
     {
         if (clicked) return;
 
+        clicked = true;
         uiButtonSetting.GoOut(false);
         UIData data = new UIData();
         data.Add("OnConfirm", (Action)ConfirmReplay);
@@ -35,7 +37,6 @@ public class PopupSettings : PopupSettingsBase
 
     private void ConfirmReplay()
     {
-        clicked = true;
         var level = MySonatFramework.userDataService.GetLevel();
         if (level >= GameRemoteConfigValue.levelShowInterReplay)
             SonatSDKAdapter.ShowInterAds("replay", CheckCanReplay);
@@ -117,21 +118,16 @@ public class PopupSettings : PopupSettingsBase
 
     protected override void GoHome()
     {
-        LoadingInstance.Instance.Show();
-
-        SonatUtils.DelayCall(1.5f, () =>
-        {
-            MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Home);
-        });
+        GameplayHelper.GoHome();
     }
 
     public void OpenFanPage()
     {
-        Application.OpenURL("https://www.facebook.com/people/Grill-Sorting-Food-Challenge/61579717830509/#");
+        Application.OpenURL("https://www.facebook.com/groups/1526661221663574");
     }
 
     public void OpenGroup()
     {
-        Application.OpenURL("https://www.facebook.com/groups/1610718010312520");
+        Application.OpenURL("https://www.facebook.com/groups/1526661221663574");
     }
 }

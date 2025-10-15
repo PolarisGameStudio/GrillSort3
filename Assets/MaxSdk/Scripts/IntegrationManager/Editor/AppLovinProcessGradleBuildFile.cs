@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using AppLovinMax.Internal;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -344,32 +343,42 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
 
         private static AppLovinQualityServiceData RetrieveQualityServiceData(string sdkKey)
         {
-            var webRequestConfig = new WebRequestConfig()
-            {
-                JsonString = string.Format("{{\"sdk_key\" : \"{0}\"}}", sdkKey),
-                EndPoint = "https://api2.safedk.com/v1/build/cred",
-                RequestType = WebRequestType.Post,
-            };
+            var postJson = string.Format("{{\"sdk_key\" : \"{0}\"}}", sdkKey);
+            var bodyRaw = Encoding.UTF8.GetBytes(postJson);
+            // Upload handler is automatically disposed when UnityWebRequest is disposed
+            var uploadHandler = new UploadHandlerRaw(bodyRaw);
+            uploadHandler.contentType = "application/json";
 
-            webRequestConfig.Headers.Add("Content-Type", "application/json");
-
-            var maxWebRequest = new MaxWebRequest(webRequestConfig);
-            var webResponse = maxWebRequest.SendSync();
-
-            if (!webResponse.IsSuccess)
+            using (var unityWebRequest = new UnityWebRequest("https://api2.safedk.com/v1/build/cred"))
             {
-                MaxSdkLogger.UserError("Failed to retrieve API Key for SDK Key: " + sdkKey + "with error: " + webResponse.ErrorMessage);
-                return new AppLovinQualityServiceData();
-            }
+                unityWebRequest.method = UnityWebRequest.kHttpVerbPOST;
+                unityWebRequest.uploadHandler = uploadHandler;
+                unityWebRequest.downloadHandler = new DownloadHandlerBuffer();
 
-            try
-            {
-                return JsonUtility.FromJson<AppLovinQualityServiceData>(webResponse.ResponseMessage);
-            }
-            catch (Exception exception)
-            {
-                MaxSdkLogger.UserError("Failed to parse API Key." + exception);
-                return new AppLovinQualityServiceData();
+                var operation = unityWebRequest.SendWebRequest();
+
+                // Wait for the download to complete or the request to timeout.
+                while (!operation.isDone) { }
+
+#if UNITY_2020_1_OR_NEWER
+                if (unityWebRequest.result != UnityWebRequest.Result.Success)
+#else
+                if (unityWebRequest.isNetworkError || unityWebRequest.isHttpError)
+#endif
+                {
+                    MaxSdkLogger.UserError("Failed to retrieve API Key for SDK Key: " + sdkKey + "with error: " + unityWebRequest.error);
+                    return new AppLovinQualityServiceData();
+                }
+
+                try
+                {
+                    return JsonUtility.FromJson<AppLovinQualityServiceData>(unityWebRequest.downloadHandler.text);
+                }
+                catch (Exception exception)
+                {
+                    MaxSdkLogger.UserError("Failed to parse API Key." + exception);
+                    return new AppLovinQualityServiceData();
+                }
             }
         }
 

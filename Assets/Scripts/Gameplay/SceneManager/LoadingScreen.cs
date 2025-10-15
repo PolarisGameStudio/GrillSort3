@@ -4,6 +4,7 @@ using Manager;
 using Sonat;
 using Sonat.AdsModule;
 using Sonat.Enums;
+using SonatFramework.Scripts.Feature.Lives;
 using SonatFramework.Systems.SceneManagement;
 using SonatFramework.Systems.UserData;
 using UnityEngine;
@@ -82,13 +83,13 @@ namespace Gameplay.SceneManager
             GameRemoteConfigValue.LoadData();
 
             int level = MySonatFramework.GetService<UserDataService>().GetLevel();
-            if (level >= GameRemoteConfigValue.levelForceHome)
+            if (level < GameRemoteConfigValue.levelForceHome && MySonatFramework.GetService<LivesService>().CanPlay())
             {
-                MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Home);
+                MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Gameplay_SkewerJam);
             }
             else
             {
-                MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Gameplay_SkewerJam);
+                MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Home);
             }
         }
     }

@@ -59,18 +59,6 @@ namespace MyGame.SkewerJam.Objects
         {
             if (slot.GetGrill() is WaitingGrill waitingGrill)
             {
-                var listEmptyWaitingGrill = ListWaitingGrills.Where(e => e.IsActive && e.GetSlot(0).GetItem() == null).ToList();
-                if (listEmptyWaitingGrill.Count == 1)
-                {
-                    listEmptyWaitingGrill[0].Visual.PlayWarning();
-                    // chặn click
-                    var gameLogicHandler = GameController.Instance.GameLogicHandler;
-                    gameLogicHandler.BlockClick = true;
-                    SonatUtils.DelayCall(1f, () =>
-                    {
-                        gameLogicHandler.BlockClick = false;
-                    }, this);
-                }
                 GameController.Instance.GameLogicHandler.TryCheckLoseGame();
             }
         }

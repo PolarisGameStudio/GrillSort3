@@ -8,7 +8,7 @@
 
 #import "MAUnityAdManager.h"
 
-#define VERSION @"8.4.2"
+#define VERSION @"8.1.0"
 #define NSSTRING(_X) ( (_X != NULL) ? [NSString stringWithCString: _X encoding: NSStringEncodingConversionAllowLossy].al_stringByTrimmingWhitespace : nil)
 
 @interface NSString (ALUtils)
@@ -227,6 +227,13 @@ extern "C"
         [getSdk() showCreativeDebugger];
     }
 
+    int _MaxConsentDialogState()
+    {
+        if ( !_isSdkInitialized ) return ALConsentDialogStateUnknown;
+        
+        return (int) getSdk().configuration.consentDialogState;
+    }
+    
     void _MaxSetUserId(const char *userId)
     {
         getSdk().settings.userIdentifier = NSSTRING(userId);
@@ -293,7 +300,7 @@ extern "C"
         return [ALPrivacySettings isDoNotSellSet];
     }
     
-    void _MaxCreateBanner(const char *adUnitIdentifier, const char *bannerPosition, bool isAdaptive)
+    void _MaxCreateBanner(const char *adUnitIdentifier, const char *bannerPosition)
     {
         if ( !_initializeSdkCalled )
         {
@@ -301,10 +308,10 @@ extern "C"
             return;
         }
         
-        [getAdManager() createBannerWithAdUnitIdentifier: NSSTRING(adUnitIdentifier) atPosition: NSSTRING(bannerPosition) isAdaptive: isAdaptive];
+        [getAdManager() createBannerWithAdUnitIdentifier: NSSTRING(adUnitIdentifier) atPosition: NSSTRING(bannerPosition)];
     }
 
-    void _MaxCreateBannerXY(const char *adUnitIdentifier, const float x, const float y, bool isAdaptive)
+    void _MaxCreateBannerXY(const char *adUnitIdentifier, const float x, const float y)
     {
         if ( !_initializeSdkCalled )
         {
@@ -312,7 +319,7 @@ extern "C"
             return;
         }
         
-        [getAdManager() createBannerWithAdUnitIdentifier: NSSTRING(adUnitIdentifier) x: x y: y isAdaptive: isAdaptive];
+        [getAdManager() createBannerWithAdUnitIdentifier: NSSTRING(adUnitIdentifier) x: x y: y];
     }
     
    void _MaxLoadBanner(const char *adUnitIdentifier)
@@ -964,6 +971,11 @@ extern "C"
     float _MaxScreenDensity()
     {
         return [UIScreen.mainScreen nativeScale];
+    }
+    
+    const char * _MaxGetAdInfo(const char *adUnitIdentifier)
+    {
+        return cStringCopy([getAdManager() adInfoForAdUnitIdentifier: NSSTRING(adUnitIdentifier)]);
     }
     
     const char * _MaxGetAdValue(const char *adUnitIdentifier, const char *key)

@@ -1,15 +1,18 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using Manager;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Scripts.SO.SkewerJam.Gameplay;
 using Sonat.Enums;
+using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems.AudioManagement;
 using SonatFramework.Systems.EventBus;
 using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.InventoryManagement.GameResources;
+using SonatFramework.Systems.SceneManagement;
 using SonatFramework.Systems.UserData;
 using UnityEngine;
 
@@ -266,7 +269,18 @@ namespace MyGame.SkewerJam.Gameplay
         private void NextLevel()
         {
             level = MySonatFramework.userDataService.GetLevel(GameMode.Classic);
-            PlayLevel(level).Forget();
+
+            if (level >= GameRemoteConfigValue.levelForceHome)
+            {
+                SonatSDKAdapter.ShowInterAds("go_home", () =>
+                {
+                    GameplayHelper.GoHome();
+                });
+            }
+            else
+            {
+                PlayLevel(level).Forget();
+            }
         }
 
         public void Replay()

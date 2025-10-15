@@ -108,6 +108,19 @@ namespace MyGame.SkewerJam.Gameplay
             if (CheckEnergy() == false) return false;
             if (BlockClick) return false;
 
+            // var listEmptyWaitingGrill = ListWaitingGrills.Where(e => e.IsActive && e.GetSlot(0).GetItem() == null).ToList();
+            //     if (listEmptyWaitingGrill.Count == 1)
+            //     {
+            //         listEmptyWaitingGrill[0].Visual.PlayWarning();
+            //         // chặn click
+            //         var gameLogicHandler = GameController.Instance.GameLogicHandler;
+            //         gameLogicHandler.BlockClick = true;
+            //         SonatUtils.DelayCall(1f, () =>
+            //         {
+            //             gameLogicHandler.BlockClick = false;
+            //         }, this);
+            //     }
+
             ItemSelected = item;
             var (order, slot) = orderManager.GetDestinationSlot(item);
             if (slot != null)

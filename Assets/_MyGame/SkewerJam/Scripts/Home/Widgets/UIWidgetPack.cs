@@ -19,5 +19,25 @@ public class UIWidgetPack : UIHomeWidget
         }
 
         gameObject.SetActive(active);
+
+        shopService.Instance.OnBuySuccess += OnBuySuccess;
     }
+
+    private void OnDestroy()
+    {
+        shopService.Instance.OnBuySuccess -= OnBuySuccess;
+    }
+
+    private void OnBuySuccess(ShopItemKey shopItemKey)
+    {
+        if (shopItemKey != this.shopItemKey) return;
+
+        if (shopService.Instance.VerifyPack(shopItemKey) == false)
+        {
+            gameObject.SetActive(false);
+        }
+
+    }
+
+
 }

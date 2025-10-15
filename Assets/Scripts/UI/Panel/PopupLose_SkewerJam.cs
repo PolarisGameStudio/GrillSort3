@@ -4,6 +4,7 @@ using Sonat.Enums;
 using SonatFramework.Systems;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems.AudioManagement;
+using SonatFramework.Scripts.Feature.Lives;
 
 public class PopupLose_SkewerJam : Panel
 {
@@ -18,7 +19,14 @@ public class PopupLose_SkewerJam : Panel
     public void OnClickRetry()
     {
         base.Close();
-        GameController.Instance.Replay();
+        if(MySonatFramework.GetService<LivesService>().CanPlay())
+        {
+            GameController.Instance.Replay();
+        }
+        else
+        {
+            GameplayHelper.GoHome();
+        }
     }
 
     public void OnClickHome()
