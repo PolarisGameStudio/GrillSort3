@@ -1,12 +1,122 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using MyGame.UI.PopupVideoBar;
+using SonatFramework.Scripts.Helper;
+using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
+using SonatFramework.Systems;
+using SonatFramework.Systems.InventoryManagement;
+using SonatFramework.Systems.ObjectPooling;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PopupVideoBar : Panel
 {
+    private const string VIDEO_BAR_KEY = "VIDEO_BAR_KEY";
+    [Header("Config")]
+    [SerializeField] private VideoBarConfigSO _config;
+
+    [Header("Progress Bar")]
+    [SerializeField] private Slider _slider;
+    [SerializeField] private Transform _milestoneContainer;
+
+    [Header("Delay")]
+    [SerializeField] private float _delay = 0.3f;
+    [SerializeField] private float _duration = 0.5f;
+    private IntDataPref _currentNum;
+    private IntDataPref _claimedMilestoneNum;
+    private IntDataPref _currentNumVisual;
+
+    private bool _collected;
+    private int _maxNumber;
+
+    private readonly Service<PoolingContainerService> poolingContainer = new();
+
+    private void Reset()
+    {
+        _collected = false;
+    }
+
     public override void Open(UIData uiData)
     {
         base.Open(uiData);
+
+        Reset();
+        LoadData();
+
+        _maxNumber = _config.milestones.Count;
+        poolingContainer.Instance.CleanContainer(_milestoneContainer);
+        for (int i = 0; i < _config.milestones.Count; i++)
+        {
+            var milestone = poolingContainer.Instance.CreateObject<UIMilestone>(_milestoneContainer);
+            milestone.SetData(_config.milestones[i].index + 1, (_config.milestones[i].index + 1) * 1.0f / _maxNumber, _config.milestones[i].rewardData);
+        }
+
+        _slider.value = _currentNumVisual.Value * 1.0f / _maxNumber;
+    }
+
+
+    private void LoadData()
+    {
+        _currentNum = new IntDataPref(VIDEO_BAR_KEY + "_currentNum", 0);
+        _claimedMilestoneNum = new IntDataPref(VIDEO_BAR_KEY + "_claimedMilestoneNum", 0);
+        _currentNumVisual = new IntDataPref(VIDEO_BAR_KEY + "_currentNumVisual", 0);
+    }
+    public void OnClickWatchAds()
+    {
+        if (_collected) return;
+
+        if (SonatSDKAdapter.IsRewardAdsReady())
+        {
+            _collected = true;
+            SonatSDKAdapter.ShowRewardAds(OnWatchedVideo, "x2_coin_win", "x2_coin_win");
+        }
+        else
+        {
+            PopupToast.Cretate("No video available!");
+        }
+    }
+
+    private void OnWatchedVideo()
+    {
+        _currentNum.Value++;
+
+        var nextMildestone = _config.milestones.OrderBy(x => x.index).FirstOrDefault(x => x.index > _claimedMilestoneNum.Value);
+        if (_currentNum.Value == nextMildestone.index)
+        {
+            Claim(nextMildestone);
+        }
+    }
+
+    private void Claim(MilestoneData nextMildestone)
+    {
+        _claimedMilestoneNum.Value = nextMildestone.index;
+        var log = new EarnResourceLogData
+        {
+            spendType = "video_bar",
+            spendId = "video_bar"
+        };
+        MySonatFramework.GetService<InventoryService>().AddReward(nextMildestone.rewardData, log, false);
+
+        UpdateUI(() =>
+        {
+            _collected = false;
+            PanelManager.Instance.OpenPanel<PopupReward>(new UIData().Add(PopupReward.KEY_REWARD, nextMildestone.rewardData));
+        }).Forget();
+    }
+
+    private async UniTask UpdateUI(Action onComplete)
+    {
+        await UniTask.Delay((int)_delay * 1000);
+        var current = _currentNumVisual.Value;
+        var newValue = _currentNum.Value * 1.0f / _maxNumber;
+        await _slider.DOValue(newValue, _duration).From(current);
+        _currentNumVisual.Value = _currentNum.Value;
+        onComplete?.Invoke();
     }
 }

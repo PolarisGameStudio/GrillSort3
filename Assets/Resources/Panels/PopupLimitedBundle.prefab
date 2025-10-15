@@ -184,6 +184,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4154209259962075692, guid: ab7345df0b2ba494991b23e1a4a88a86, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154209259962075692, guid: ab7345df0b2ba494991b23e1a4a88a86, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154209259962075692, guid: ab7345df0b2ba494991b23e1a4a88a86, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3102714325064343639}
+    - target: {fileID: 4154209259962075692, guid: ab7345df0b2ba494991b23e1a4a88a86, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154209259962075692, guid: ab7345df0b2ba494991b23e1a4a88a86, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154209259962075692, guid: ab7345df0b2ba494991b23e1a4a88a86, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SonatFramework.Scripts.UIModule.Panel, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154209259962075692, guid: ab7345df0b2ba494991b23e1a4a88a86, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4457064070736085262, guid: ab7345df0b2ba494991b23e1a4a88a86, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -536,3 +564,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1405925307815568593, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
   m_PrefabInstance: {fileID: 1576961479674794500}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3102714325064343639 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4534403687749284435, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
+  m_PrefabInstance: {fileID: 1576961479674794500}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba857402f48f836498f8837a424c99c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

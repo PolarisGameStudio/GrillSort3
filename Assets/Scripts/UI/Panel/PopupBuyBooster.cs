@@ -8,6 +8,7 @@ using UnityEngine;
 public class PopupBuyBooster : PopupBuyBoosterBase
 {
     [SerializeField] private TMP_Text txtName;
+    [SerializeField] private TMP_Text txtDescription;
 
     public override void Open(UIData uiData)
     {
@@ -17,15 +18,18 @@ public class PopupBuyBooster : PopupBuyBoosterBase
         {
             case GameResource.BoosterAddPlate:
                 txtName.text = "Add Plate";
+                txtDescription.text = "Add one plate";
                 break;
             case GameResource.BoosterSpatula:
                 txtName.text = "Spatula";
+                txtDescription.text = "Finish an order faster";
                 break;
             case GameResource.BoosterShuffle:
-                txtName.text = "Shuffle";
+                txtName.text = "Refresh all items";
                 break;
             case GameResource.BoosterFoodBox:
                 txtName.text = "Food Box";
+                txtDescription.text = "Clear all plates";
                 break;
         }
     }

@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: BoostersConfig_SkewerJam
   m_EditorClassIdentifier: 
   configs:
-  - booster: 101
+  - booster: 102
     levelUnlock: 2
     priceCurrency: 1
-    price: 500
+    price: 600
     defaultValue: 1
     value: 1
-  - booster: 102
-    levelUnlock: 4
+  - booster: 101
+    levelUnlock: 5
     priceCurrency: 1
-    price: 600
+    price: 500
     defaultValue: 1
     value: 1
   - booster: 103
@@ -32,8 +32,8 @@ MonoBehaviour:
     defaultValue: 1
     value: 1
   - booster: 104
-    levelUnlock: 10
+    levelUnlock: 9
     priceCurrency: 1
-    price: 900
+    price: 800
     defaultValue: 1
     value: 1
