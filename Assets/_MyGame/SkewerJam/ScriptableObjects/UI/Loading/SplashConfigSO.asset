@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb4eb74f557b954aa565a1a6f133d64, type: 3}
+  m_Name: SplashConfigSO
+  m_EditorClassIdentifier: 
+  minLoadingTime: 2
+  delayCompleteLoading: 0.25
+  delayCompleteGameplay: 1.25
+  delayCompleteHome: 0.5
+  startSpeed: 0.25
+  loadingSpeed: 0.01
+  endSpeed: 1

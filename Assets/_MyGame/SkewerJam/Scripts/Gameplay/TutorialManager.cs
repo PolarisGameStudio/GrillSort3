@@ -45,10 +45,10 @@ namespace MyGame.SkewerJam.Gameplay
             switch (eventData.level)
             {
                 case 2:
-                    boosterType = GameResource.BoosterAddPlate;
+                    boosterType = GameResource.BoosterSpatula;
                     break;
                 case 5:
-                    boosterType = GameResource.BoosterSpatula;
+                    boosterType = GameResource.BoosterAddPlate;
                     break;
                 case 7:
                     boosterType = GameResource.BoosterShuffle;

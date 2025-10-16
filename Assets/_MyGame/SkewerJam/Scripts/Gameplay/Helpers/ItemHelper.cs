@@ -58,5 +58,12 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             }
             return listItemIds;
         }
+
+        public static bool CheckSelectedItemOnOrder(Item item)
+        {
+            var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
+            var orderItemsDict = orderManager.GetOrderItemsDict();
+            return orderItemsDict.ContainsKey((ItemId)item.id);
+        }
     }
 }

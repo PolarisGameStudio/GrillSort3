@@ -10,6 +10,7 @@ using DG.Tweening;
 using System.Linq;
 using MyGame.SkewerJam.Level;
 using SonatFramework.Scripts.Utils;
+using MyGame.SkewerJam.Gameplay.Helpers;
 
 namespace MyGame.SkewerJam.Objects
 {
@@ -59,11 +60,11 @@ namespace MyGame.SkewerJam.Objects
         {
             if (slot.GetGrill() is WaitingGrill waitingGrill)
             {
-                var gameLogicHandler = GameController.Instance.GameLogicHandler;
-                if (gameLogicHandler.CheckWarningWaitingGrill(true) == true)
-                {
-                    gameLogicHandler.WarningWaitingGrill();
-                }
+                // var gameLogicHandler = GameController.Instance.GameLogicHandler;
+                // if (WaitingGrillHelper.IsWarning == true)
+                // {
+                //     WaitingGrillHelper.Warning();
+                // }
                 GameController.Instance.GameLogicHandler.TryCheckLoseGame();
             }
         }

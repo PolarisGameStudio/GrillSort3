@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using MyGame.SkewerJam.UI.Loading;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.Utils;
@@ -21,7 +22,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
         public static void GoHome()
         {
-            LoadingInstance.Instance.Show();
+            LoadingInstance.Instance.ShowLoading();
             // PanelManager.Instance.OpenPanelByName<PopupLoading>("PopupLoading_SkewerJam");
             SonatUtils.DelayCall(1.5f, () => { MySonatFramework.GetService<SceneService>().SwitchScene(GamePlacement.Home); });
         }

@@ -1,9 +1,9 @@
 using System.Linq;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Manager;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Scripts.SO.SkewerJam.Gameplay;
+using MyGame.SkewerJam.UI.Loading;
 using Sonat.Enums;
 using SonatFramework.Scripts.Helper;
 using SonatFramework.Scripts.SonatSDKAdapterModule;
@@ -12,8 +12,6 @@ using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems.AudioManagement;
 using SonatFramework.Systems.EventBus;
 using SonatFramework.Systems.InventoryManagement;
-using SonatFramework.Systems.InventoryManagement.GameResources;
-using SonatFramework.Systems.SceneManagement;
 using SonatFramework.Systems.UserData;
 using UnityEngine;
 
@@ -94,7 +92,9 @@ namespace MyGame.SkewerJam.Gameplay
             ClearLevel();
 
             MySonatFramework.GetService<UserDataService>().SaveLevel(level, GameMode.Classic);
-            LoadingInstance.Instance.Show();
+
+            LoadingHelper.CheckShowLoadingInGameplay();
+
             Debug.Log("<color=green>[GameController]</color> PlayLevel: " + level);
             SonatUtils.DelayCall(2f, () =>
             {
@@ -115,16 +115,12 @@ namespace MyGame.SkewerJam.Gameplay
             ChangeGameState(GameState.Playing);
             EventBus<LevelStartedEvent>.Raise(new LevelStartedEvent() { level = level, gameMode = GameMode.Classic });
 
-            PlayStartGame().Forget();
-            // if (GameplayHelper.CheckStart() == false)
-            // {
-            //     PanelManager.Instance.OpenPanel<PopupWarningEnergy_SkewerJam>(new UIData().Add("GamePlacement", GamePlacement.Gameplay_SkewerJam));
-            // }
+            LoadingHelper.CompleteLoadingInGameplay(() => PlayStartGame().Forget());
         }
 
         public async UniTask PlayStartGame()
         {
-            await UniTask.Delay(2500);
+            await UniTask.Delay(500);
             foreach (var grill in gameLogicHandler.GrillManager.ListGrills)
             {
                 grill.GrillVisual.OpenGrill();
@@ -193,7 +189,8 @@ namespace MyGame.SkewerJam.Gameplay
             PanelManager.Instance.OpenForget<WinPanel_SkewerJam>(data);
             // NextLevel();
 
-            if( level == 5){
+            if (level == 5)
+            {
                 _checkRewardFreeLives.Value = 1;
             }
         }

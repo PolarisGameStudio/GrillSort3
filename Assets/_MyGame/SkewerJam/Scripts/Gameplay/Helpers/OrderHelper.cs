@@ -73,8 +73,11 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                 currentNumberRescues += 1;
                 Debug.Log("<color=yellow>OrderHelper:</color> Use Rescue");
                 var (rescueItemId, rescueNum) = GetItemOrderToRescue();
-                _isFindOrder = false;
-                return (rescueItemId, rescueNum);
+                if (rescueItemId != ItemId.None)
+                {
+                    _isFindOrder = false;
+                    return (rescueItemId, rescueNum);
+                }
             }
 
             var logicOrderConfig = GetLogicOrderConfig(logicOrderConfigs);
@@ -131,6 +134,12 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             var itemsInWaiting = waitingGrillManager.ListWaitingGrills.Select(e => e.GetSlots()[0].GetItem());
             var items = itemsInWaiting.Where(e => e != null).ToList();
 
+            if (items.Count == 0)
+            {
+                Debug.Log("<color=yellow>OrderHelper:</color> GetItemOrderToRescue: No items in waiting grill");
+                return (ItemId.None, 0);
+            }
+
             var dictItems = items.GroupBy(e => e.id).ToDictionary(e => e.Key, e => e.Count());
             var itemId = dictItems.OrderByDescending(e => e.Value).First().Key;
             var num = dictItems[itemId] > 3 ? 3 : dictItems[itemId];
@@ -152,8 +161,11 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
         private static (ItemId itemId, int num, int step) GetItemOrderBasic(int minStep, GameplayInfo gameplayInfo)
         {
             // NOTE: Ưu tiên lấy theo numSteps, sau đó mới tính đến numItems
-            var dictItems = gameplayInfo.dictNeededSlots;
             var dictNeededSlots = gameplayInfo.dictNeededSlots;
+            if (dictNeededSlots.Count == 0)
+            {
+                return (ItemId.None, 0, 0);
+            }
 
             // Loại các item bị lock
             var idsInLockedGrill = ItemHelper.GetItemIdsInLockedGrill();
@@ -177,6 +189,15 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
         {
             // lấy step nhỏ nhất
             var dictNeededSlots = gameplayInfo.dictNeededSlots;
+            if (dictNeededSlots.Count == 0)
+            {
+                Debug.Log("<color=red>OrderHelper:</color> ForceGetItemOrderBasic: empty dictNeededSlots");
+                // random item in layer 1
+                var itemDict = ItemHelper.GetItemIdDictInGameplay(1);
+                var randomItemId = itemDict.Keys.ToList()[UnityEngine.Random.Range(0, itemDict.Keys.ToList().Count)];
+                return ((ItemId)randomItemId, 1, 1);
+            }
+
             var minStep = dictNeededSlots.Values.Min(e => e.Values.Min());
 
             var randomItemIds = dictNeededSlots.Keys.Where(e => dictNeededSlots[e].ContainsValue(minStep)).ToList();
@@ -280,10 +301,11 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             // duyệt qua layer 0
             foreach (var primaryGrill in grillManager.ListGrills)
             {
+                if (primaryGrill.IsLock) continue;
                 var slots = primaryGrill.GetSlots();
                 if (slots == null) continue;
 
-                var listCurrentItems = slots.Select(e => e.GetItem()).Where(e => e != null).ToList();
+                var listCurrentItems = slots.Select(e => e.GetItem()).Where(e => e != null && e.IsLocked == false).ToList();
                 var dictItems = listCurrentItems.GroupBy(e => (ItemId)e.id).ToDictionary(e => e.Key, e => e.Count());
 
                 foreach (var itemId in dictItems.Keys)
@@ -320,12 +342,13 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             var dictListItemStepInfo = new Dictionary<ItemId, List<(List<Item>, int)>>(); // Danh sách các loại item và step cần cửa nó: itemId/(Item, số step cần cửa nó)
             foreach (var primaryGrill in grillManager.ListGrills)
             {
+                if (primaryGrill.IsLock) continue;
                 var subGrills = primaryGrill.GetSubGrills();
                 if (subGrills == null || subGrills.Count == 0) continue;
                 var slots = subGrills[0].GetSlots();
                 if (slots == null) continue;
 
-                var listCurrentItems = slots.Select(e => e.GetItem()).Where(e => e != null).ToList();
+                var listCurrentItems = slots.Select(e => e.GetItem()).Where(e => e != null && e.IsLocked == false).ToList();
                 var dictItems = listCurrentItems.GroupBy(e => (ItemId)e.id).ToDictionary(e => e.Key, e => e.Count());
                 foreach (var itemId in dictItems.Keys)
                 {
@@ -353,12 +376,13 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             // duyệt lần 2 để tính toán
             foreach (var primaryGrill in grillManager.ListGrills)
             {
+                if (primaryGrill.IsLock) continue;
                 var subGrills = primaryGrill.GetSubGrills();
                 if (subGrills == null || subGrills.Count == 0) continue;
                 var slots = subGrills[0].GetSlots();
                 if (slots == null) continue;
 
-                var listCurrentItems = slots.Select(e => e.GetItem()).Where(e => e != null).ToList();
+                var listCurrentItems = slots.Select(e => e.GetItem()).Where(e => e != null && e.IsLocked == false).ToList();
                 var remainItems = listCurrentItems.Where(e => listIgnoreItems.Contains(e) == false).ToList();
                 var dictItems = remainItems.GroupBy(e => (ItemId)e.id).ToDictionary(e => e.Key, e => e.Count());
 

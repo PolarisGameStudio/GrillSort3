@@ -41,7 +41,6 @@ namespace MyGame.SkewerJam.Gameplay
         public BoosterManager BoosterManager => boosterManager;
 
         public Item ItemSelected { get; set; }
-        public bool BlockClick { get; set; } = false;
 
         #region Event Actions
         public event Action<Item, SlotBase> OnItemStartSwitch;
@@ -75,7 +74,6 @@ namespace MyGame.SkewerJam.Gameplay
             suggestManager.Init();
 
             pumpkin = 0;
-            BlockClick = false;
 
             IsClearAllItems = false;
         }
@@ -94,123 +92,56 @@ namespace MyGame.SkewerJam.Gameplay
             suggestManager.Clear();
         }
 
-        public bool CheckEnergy()
-        {
-            // var energy = MySonatFramework.GetService<InventoryService>().GetResource(GameResource.Energy);
-            // if (energy <= 0 && GameController.Instance.GameState == GameState.Playing)
-            // {
-            //     GameController.Instance.ChangeGameState(GameState.Paused);
-            //     PanelManager.Instance.OpenPanel<PopupWarningEnergy_SkewerJam>(new UIData().Add("GamePlacement", GamePlacement.Gameplay_SkewerJam));
-            //     return false;
-            // }
-            return true;
-        }
-
         #region Select Item
-        public bool warning = false;
         public bool SelectItem(Item item)
         {
-            // Kiểm tra có vị trí hợp lệ ở order không
-            if (CheckEnergy() == false) return false;
-            if (BlockClick) return false;
-
-            if (CheckWarningWaitingGrill() == true)
+            // ItemOnOrder thì không cần chặn
+            if (ItemHelper.CheckSelectedItemOnOrder(item) == false)
             {
-                warning = true;
-                WarningWaitingGrill();
-                return false;
+                // Nếu đang warning và số lần chặn click vẫn còn thì chặn
+                if (WaitingGrillHelper.IsWarning == true && WaitingGrillHelper.CheckWarningCount() == true)
+                {
+                    if (WaitingGrillHelper.Warning() == true)
+                    {
+                        return false;
+                    }
+                }
+
+                WaitingGrillHelper.ResetWarning();
             }
 
-
-
+            // item bay
             ItemSelected = item;
             var (order, slot) = orderManager.GetDestinationSlot(item);
+            bool isSwitchSuccess = false;
             if (slot != null)
             {
-                // var log = new SpendResourceLogData()
-                // {
-                //     earnType = "energy",
-                //     earnId = "energy",
-                //     source = "gameplay"
-                // };
-                // MySonatFramework.GetService<InventoryService>().ReduceResource(GameResource.Pumpkin, 1, log);
-                // EventBus<ReduceItemEvent>.Raise(new ReduceItemEvent() { resource = GameResource.Energy, quantity = 1 });
                 SwitchSlot(slot);
-                return true;
+                isSwitchSuccess = true;
             }
 
             // Kiểm tra còn vị trí ở waiting grill không
             // Khi bay tới đĩa phải kiểm tra xem có order mới không thì nhảy lên ngay
-            var (waitingGrill, waitingGrillSlot) = waitingGrillManager.GetDestinationSlot();
-            if (waitingGrillSlot != null)
+            if (isSwitchSuccess == false)
             {
-                // var log = new SpendResourceLogData()
-                // {
-                //     earnType = "energy",
-                //     earnId = "energy",
-                //     source = "gameplay"
-                // };
-                // MySonatFramework.GetService<InventoryService>().ReduceResource(GameResource.Energy, 1, log);
-                // EventBus<ReduceItemEvent>.Raise(new ReduceItemEvent() { resource = GameResource.Energy, quantity = 1 });
-                SwitchSlot(waitingGrillSlot);
-                return true;
-            }
-
-
-            return false;
-        }
-
-        public bool CheckWarningWaitingGrill(bool force = false)
-        {
-            var listWaitingGrill = waitingGrillManager.ListWaitingGrills;
-            var listEmptyWaitingGrill = listWaitingGrill.Where(e => e.IsActive && e.GetSlot(0).GetItem() == null).ToList();
-            if (force)
-            {
-                if (listEmptyWaitingGrill.Count == 1)
+                var (waitingGrill, waitingGrillSlot) = waitingGrillManager.GetDestinationSlot();
+                if (waitingGrillSlot != null)
                 {
-                    return true;
-                }
-                else
-                {
-                    return false;
+                    SwitchSlot(waitingGrillSlot);
+                    isSwitchSuccess = true;
                 }
             }
 
-            if (warning)
+            if (isSwitchSuccess == true)
             {
-                if (listEmptyWaitingGrill.Count == 1)
+                // sau khi item switch: Xem có cần warning không?
+                if (WaitingGrillHelper.CheckWarning() == true)
                 {
-
-                }
-                else
-                {
-                    warning = false;
-                }
-                return false;
-            }
-            else
-            {
-                if (listEmptyWaitingGrill.Count == 1)
-                {
-                    return true;
+                    WaitingGrillHelper.Warning();
                 }
             }
 
-            return false;
-        }
-
-        public void WarningWaitingGrill()
-        {
-            var listWaitingGrill = waitingGrillManager.ListWaitingGrills;
-            var listEmptyWaitingGrill = listWaitingGrill.Where(e => e.IsActive && e.GetSlot(0).GetItem() == null).ToList();
-            listEmptyWaitingGrill[0].Visual.PlayWarning();
-            // chặn click
-            var gameLogicHandler = GameController.Instance.GameLogicHandler;
-            gameLogicHandler.BlockClick = true;
-            SonatUtils.DelayCall(1f, () =>
-            {
-                gameLogicHandler.BlockClick = false;
-            }, this);
+            return isSwitchSuccess;
         }
 
         private void SwitchSlot(SlotBase slot)
