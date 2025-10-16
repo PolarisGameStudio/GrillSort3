@@ -27,7 +27,7 @@ public class PopupPreWin_SkewerJam : PopupPreWin
     {
         base.Open(uiData);
 
-        var num = GameController.Instance.GameLogicHandler.Pumpkin;
+        // var num = GameController.Instance.GameLogicHandler.Pumpkin;
 
         // MySonatFramework.audioService.PlaySound(AudioId.Pre_win_HLW_sound_Grill_sort);
         Play();

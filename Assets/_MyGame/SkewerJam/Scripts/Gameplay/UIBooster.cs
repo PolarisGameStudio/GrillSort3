@@ -15,7 +15,6 @@ namespace MyGame.SkewerJam.Gameplay.Booster
         public override void ClickBooster()
         {
             if (GameController.Instance.GameState != GameState.Playing) return;
-            if (GameController.Instance.GameLogicHandler.IsClearAllItems) return;
             if (usingBooster) return;
 
             var boosterManager = GameController.Instance.GameLogicHandler.BoosterManager;

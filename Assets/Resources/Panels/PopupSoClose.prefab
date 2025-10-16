@@ -417,6 +417,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2579445848118119355, guid: 4f39129a01289cb4198c01475117218c, type: 3}
+      propertyPath: tweenData.config.curve.m_Curve.Array.data[1].time
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579445848118119355, guid: 4f39129a01289cb4198c01475117218c, type: 3}
+      propertyPath: tweenData.config.curve.m_Curve.Array.data[1].value
+      value: 1.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579445848118119355, guid: 4f39129a01289cb4198c01475117218c, type: 3}
+      propertyPath: tweenData.config.curve.m_Curve.Array.data[2].inSlope
+      value: -0.52601993
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579445848118119355, guid: 4f39129a01289cb4198c01475117218c, type: 3}
+      propertyPath: tweenData.config.curve.m_Curve.Array.data[2].inWeight
+      value: 0.4690266
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579445848118119355, guid: 4f39129a01289cb4198c01475117218c, type: 3}
+      propertyPath: tweenData.config.curve.m_Curve.Array.data[2].outSlope
+      value: -0.52601993
+      objectReference: {fileID: 0}
     - target: {fileID: 3739324636791674845, guid: 4f39129a01289cb4198c01475117218c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1444,7 +1464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4962108537545997379, guid: 13282f0048258d84e9b95d38cadfb0fd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -11
+      value: -37
       objectReference: {fileID: 0}
     - target: {fileID: 4962108537545997379, guid: 13282f0048258d84e9b95d38cadfb0fd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

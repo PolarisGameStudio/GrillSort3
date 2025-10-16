@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb4eb74f557b954aa565a1a6f133d64, type: 3}
   m_Name: SplashConfigSO
   m_EditorClassIdentifier: 
-  minLoadingTime: 2
-  delayCompleteLoading: 0.25
-  delayCompleteGameplay: 1.25
-  delayCompleteHome: 0.5
+  minSliderLoadingTime: 2
+  delayStartSlider: 0.25
   startSpeed: 0.25
   loadingSpeed: 0.01
   endSpeed: 1
+  delayCompleteGameplay: 1.25
+  delayCompleteHome: 0.8

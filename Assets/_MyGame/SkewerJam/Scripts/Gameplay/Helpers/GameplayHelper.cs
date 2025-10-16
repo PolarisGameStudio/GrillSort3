@@ -1,11 +1,7 @@
-using System;
-using Cysharp.Threading.Tasks;
 using MyGame.SkewerJam.UI.Loading;
 using Sonat.Enums;
-using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems.EventBus;
-using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.SceneManagement;
 using UnityEngine;
 
@@ -34,8 +30,6 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                 EventBus<GameStateChangeEvent>.Raise(new GameStateChangeEvent() { gameState = gameState });
             });
         }
-
-        public static bool IsWin { get => PlayerPrefs.GetInt("IsWin_SkewerJam", 1) == 1; set => PlayerPrefs.SetInt("IsWin_SkewerJam", value ? 1 : 0); }
 
         public static Vector3 GetNewWaitingGrillPosition()
         {

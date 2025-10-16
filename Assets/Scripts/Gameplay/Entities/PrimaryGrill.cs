@@ -715,6 +715,8 @@ namespace Gameplay.Entities
         {
             if (layer == 0) return GetCurrentData();
             if (subGrills == null || subGrills.Count == 0) return null;
+
+            if (layer - 1 >= subGrills.Count) return null;
             return subGrills[layer - 1].GetCurrentData();
         }
 

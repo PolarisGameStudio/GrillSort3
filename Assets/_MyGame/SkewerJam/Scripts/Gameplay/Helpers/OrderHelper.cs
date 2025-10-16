@@ -53,12 +53,44 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             stepGap = 0;
         }
 
-        private static bool _isFindOrder = false;
+        private static (ItemId itemId, int num) GetRandomOrder()
+        {
+            var itemDict = ItemHelper.GetItemIdDictInGameplay(-1);
+
+            // trừ đi item đã order
+            var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
+            var orderItemsDict = orderManager.GetOrderItemsDict();
+            foreach (var itemId in orderItemsDict.Keys)
+            {
+                if (itemDict.ContainsKey(itemId) == false)
+                {
+                    Debug.Log("<color=red>OrderHelper:</color> GetRandomOrder: itemDict.ContainsKey(itemId) == false");
+                }
+                itemDict[itemId] -= (orderItemsDict[itemId].maxItems - orderItemsDict[itemId].num);
+                if (itemDict[itemId] == 0)
+                {
+                    itemDict.Remove(itemId);
+                }
+                else if (itemDict[itemId] < 0)
+                {
+                    Debug.LogError("<color=red>OrderHelper:</color> GetRandomOrder: itemDict[itemId] < 0");
+                    return (ItemId.None, 0);
+                }
+            }
+
+            var randomItemId = itemDict.Keys.ToList()[UnityEngine.Random.Range(0, itemDict.Keys.ToList().Count)];
+
+            var num = itemDict[randomItemId] > 3 ? 3 : itemDict[randomItemId];
+
+            Debug.Log("<color=green>OrderHelper:</color> GetRandomOrder: " + randomItemId + " " + num);
+            return ((ItemId)randomItemId, num);
+        }
+
         public static async UniTask<(ItemId itemId, int num)> GetItemOrder(bool isRescue = false)
         {
-            await UniTask.WaitUntil(() => _isFindOrder == false);
+            // return GetRandomOrder();
 
-            _isFindOrder = true;
+
             // return (ItemId.Item_7, 3);
             // kiểm tra có sử dụng rescue không
             // Sử dụng khi còn lại hàng chờ chỉ còn <= 2 khay trống
@@ -75,7 +107,6 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                 var (rescueItemId, rescueNum) = GetItemOrderToRescue();
                 if (rescueItemId != ItemId.None)
                 {
-                    _isFindOrder = false;
                     return (rescueItemId, rescueNum);
                 }
             }
@@ -90,7 +121,6 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                 if (step >= 2 && stepGap <= 0)
                 {
                     stepGap = maxStep2Gap;
-                    _isFindOrder = false;
                     return (itemId, num);
                 }
 
@@ -98,7 +128,6 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                 {
                     stepGap -= 1;
                     stepGap = Mathf.Min(stepGap, maxStep2Gap);
-                    _isFindOrder = false;
                     return (itemId, num);
                 }
             }
@@ -106,7 +135,6 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             stepGap = Mathf.Min(stepGap, maxStep2Gap);
             var (itemId2, num2, step2) = ForceGetItemOrderBasic(gameplayInfo);
             if (step2 >= 2) stepGap = maxStep2Gap;
-            _isFindOrder = false;
             return (itemId2, num2);
 
         }

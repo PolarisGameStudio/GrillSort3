@@ -40,12 +40,18 @@ namespace MyGame.SkewerJam.Gameplay
         public GameViewport GameViewport => gameViewport;
         public GameState GameState => gameState;
         public ComboManager ComboManager => comboManager;
+        public GameResult GameResult => gameResult;
+
+
         // private int level;
         private int level;
         public int Level => level;
         private GameState gameState;
+        private GameResult gameResult;
         private EventBinding<GameStateChangeEvent> gameStateChangeEvent;
         private AudioId bgm;
+
+        private IntDataPref _checkRewardFreeLives = new IntDataPref("check_reward_free_lives");
 
         private void Awake()
         {
@@ -98,7 +104,6 @@ namespace MyGame.SkewerJam.Gameplay
             Debug.Log("<color=green>[GameController]</color> PlayLevel: " + level);
             SonatUtils.DelayCall(2f, () =>
             {
-                // bgm = UnityEngine.Random.Range(0, 2) == 0 ? AudioId.BGM_Ingame_Halloween_Grill_sort : AudioId.BGM_Ingame_Halloween_01_Grill_sort;
                 bgm = AudioId.BGM_Ingame_Summer_Grill3;
                 MySonatFramework.GetService<AudioService>().PlayMusic(bgm);
             }, this);
@@ -120,7 +125,6 @@ namespace MyGame.SkewerJam.Gameplay
 
         public async UniTask PlayStartGame()
         {
-            await UniTask.Delay(500);
             foreach (var grill in gameLogicHandler.GrillManager.ListGrills)
             {
                 grill.GrillVisual.OpenGrill();
@@ -143,6 +147,8 @@ namespace MyGame.SkewerJam.Gameplay
             levelGenerator.Clear();
             gameLogicHandler.Clear();
             comboManager.Clear();
+
+            gameResult = GameResult.None;
         }
 
         #endregion
@@ -152,7 +158,7 @@ namespace MyGame.SkewerJam.Gameplay
             EventBus<GameStateChangeEvent>.Raise(new GameStateChangeEvent() { gameState = newGameState });
         }
 
-        public async UniTaskVoid Win()
+        public void SetWin(bool forcePlayWin = false)
         {
             Debug.Log("<color=green>[GameController]</color> Win");
             if (gameState == GameState.GameOver) return;
@@ -161,14 +167,27 @@ namespace MyGame.SkewerJam.Gameplay
 
             // GameplayStateSaver.Instance.SetStatus(); // không lưu trạng thái
             ChangeGameState(GameState.GameOver);
-            GameplayHelper.IsWin = true;
-            // PopupToast.Cretate("You Win");
 
-            await UniTask.Delay(1000);
-            // // MySonatFramework.audioService.StopMusic();
-            // PopupPreWin popupPreWin = await PanelManager.Instance.OpenPanelAsync<PopupPreWin_SkewerJam>();
-            // await UniTask.Delay((int)(popupPreWin.delay * 1000));
+            gameResult = GameResult.Win;
 
+            if (forcePlayWin)
+            {
+                Win();
+            }
+        }
+
+        public void TryWin()
+        {
+            if (gameResult == GameResult.Win)
+            {
+                gameResult = GameResult.None;
+                Win();
+            }
+        }
+
+        public async UniTaskVoid Win()
+        {
+            await UniTask.Delay(1500);
             gameplayScreen.HideCurrencies();
 
             var log = new EarnResourceLogData()
@@ -194,8 +213,6 @@ namespace MyGame.SkewerJam.Gameplay
                 _checkRewardFreeLives.Value = 1;
             }
         }
-
-        private IntDataPref _checkRewardFreeLives = new IntDataPref("check_reward_free_lives");
 
         public async UniTaskVoid Stuck(StuckType stuckType)
         {
@@ -250,11 +267,6 @@ namespace MyGame.SkewerJam.Gameplay
                         case "play_on_add_trays":
                             var orderManager = GameLogicHandler.OrderManager;
                             orderManager.Unlock(isRescue: true);
-
-                            // // cộng thêm 2 platesvar waitingManager = GameLogicHandler.WaitingGrillManager;
-                            // var waitingManager = GameLogicHandler.WaitingGrillManager;
-                            // await waitingManager.AddPlate();
-                            // await waitingManager.AddPlate();
                             break;
                     }
 
@@ -267,7 +279,6 @@ namespace MyGame.SkewerJam.Gameplay
             MySonatFramework.livesService.ReduceLive(1, "lose");
             EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent() { level = level, gameMode = GameMode.Classic, success = false });
             PanelManager.Instance.OpenPanelByName<PopupLose_SkewerJam>("PopupLose_SkewerJam");
-            GameplayHelper.IsWin = false;
         }
 
         private void NextLevel()
@@ -297,7 +308,7 @@ namespace MyGame.SkewerJam.Gameplay
         {
             if (Input.GetKeyDown(KeyCode.K))
             {
-                Win();
+                SetWin(true);
             }
 
             if (Input.GetKeyDown(KeyCode.L))

@@ -30,6 +30,13 @@ namespace Sonat.Enums
         UsingBooster
     }
 
+    public enum GameResult : byte
+    {
+        None,
+        Win,
+        Lose,
+    }
+
     public enum GamePlacement : byte
     {
         Loading,

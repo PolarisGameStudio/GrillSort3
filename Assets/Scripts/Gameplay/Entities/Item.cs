@@ -47,6 +47,13 @@ namespace Gameplay.Entities
         private TimeBonusVisual timeBonusVisual;
         protected bool isProcessing;
 
+
+        public bool Moving { get; set; }
+
+
+
+
+
         public virtual void SetItemData(ItemData data, SlotBase slot)
         {
             this.data = data;
