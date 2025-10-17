@@ -25,7 +25,7 @@ namespace MyGame.SkewerJam.Objects.Entities
         {
             spriteRenderer.DOKill();
             spriteRenderer.color = Color.white;
-            spriteRenderer.DOColor(warningColor, warningDuration / 2).SetLoops(2, LoopType.Yoyo);
+            spriteRenderer.DOColor(warningColor, warningDuration / 2).SetLoops(4, LoopType.Yoyo);
             MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Slot_Warning_Grill3);
         }
     }

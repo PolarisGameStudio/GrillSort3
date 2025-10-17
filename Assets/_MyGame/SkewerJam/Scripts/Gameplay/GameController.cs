@@ -144,6 +144,8 @@ namespace MyGame.SkewerJam.Gameplay
 
         public void ClearLevel()
         {
+            gameplayScreen.ClearLevel();
+
             levelGenerator.Clear();
             gameLogicHandler.Clear();
             comboManager.Clear();

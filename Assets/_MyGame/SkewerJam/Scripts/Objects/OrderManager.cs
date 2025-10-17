@@ -17,7 +17,6 @@ namespace MyGame.SkewerJam.Objects
 {
     public class OrderManager : MonoBehaviour
     {
-        [SerializeField] private OrderManagerSO orderManagerSO;
         [SerializeField] private OrderEntityConfigSO orderEntityConfigSO;
 
         [Header("Align")]
@@ -26,12 +25,13 @@ namespace MyGame.SkewerJam.Objects
         [SerializeField] private Transform leftStartPos;
 
         private List<OrderData_SkewerJam> _listOrderData = new List<OrderData_SkewerJam>();
+        public List<OrderData_SkewerJam> ListOrderData => _listOrderData;
+
+
         private List<OrderEntity> _listOrders = new List<OrderEntity>();
         private List<OrderEntity> _listOrdersToAlign = new List<OrderEntity>();
 
         private List<Vector3> _listOrderLocalPositions = new List<Vector3>();
-
-        public OrderManagerSO OrderManagerSO => orderManagerSO;
         public List<OrderEntity> ListOrders => _listOrders;
         public Transform LeftStartPos => leftStartPos;
         public Transform RightStartPos => rightStartPos;
@@ -39,14 +39,6 @@ namespace MyGame.SkewerJam.Objects
         #region Init
         public async UniTask Init()
         {
-            // xác định ví trí các order
-            var startPos = -(orderManagerSO.MaxOrder - 1) * distance / 2;
-            for (int i = 0; i < orderManagerSO.MaxOrder; i++)
-            {
-                var orderPos = new Vector3(startPos + distance * i, 0, 0);
-                _listOrderLocalPositions.Add(orderPos);
-            }
-
             // game events
             var gameLogicHandler = GameController.Instance.GameLogicHandler;
 
@@ -137,6 +129,15 @@ namespace MyGame.SkewerJam.Objects
         public async UniTask SetData(List<OrderData_SkewerJam> listOrderData)
         {
             this._listOrderData = listOrderData;
+            // xác định ví trí các order
+            var startPos = -(_listOrderData.Count - 1) * distance / 2;
+
+            _listOrderLocalPositions.Clear();
+            for (int i = 0; i < _listOrderData.Count; i++)
+            {
+                var orderPos = new Vector3(startPos + distance * i, 0, 0);
+                _listOrderLocalPositions.Add(orderPos);
+            }
 
             for (int i = 0; i < _listOrderData.Count; i++)
             {
@@ -210,8 +211,8 @@ namespace MyGame.SkewerJam.Objects
             await UniTask.Delay((int)(orderEntityConfigSO.delayAppearNextOrder * 1000));
 
             MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Box_Appear_Grill3);
+            nextOrder.Visual.OpenGrill(true, false);
             await nextOrder.transform.DOLocalMove(_listOrderLocalPositions[nextOrder.OrderIndex], orderEntityConfigSO.durationMoveIn).SetEase(Ease.OutSine);
-
             GameController.Instance.GameLogicHandler.EndMoveNextOrder(nextOrder);
         }
 
@@ -226,6 +227,10 @@ namespace MyGame.SkewerJam.Objects
                 order.transform.DOLocalMove(_listOrderLocalPositions[order.OrderIndex], 0.3f).SetEase(Ease.OutSine).OnComplete(() =>
                 {
                     GameController.Instance.GameLogicHandler.EndMoveNextOrder(order, true);
+                    if (order.IsActive)
+                    {
+                        order.Visual.OpenGrill(true, true);
+                    }
                 });
                 await UniTask.Delay(200);
             }

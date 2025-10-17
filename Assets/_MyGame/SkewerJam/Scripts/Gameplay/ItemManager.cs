@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using MyGame.SkewerJam.Objects.Entities;
@@ -13,11 +14,13 @@ namespace MyGame.SkewerJam.Gameplay
         public int TotalItems => totalItems;
         public int CurrentItems => currentItems;
 
+        public event Action<int> OnUpdateItems;
 
         public void OnStartCollectItem(OrderEntity orderEntity)
         {
             currentItems -= orderEntity.MaxItems;
             Debug.Log($"OnStartCollectItem: {currentItems}");
+            OnUpdateItems?.Invoke(currentItems);
         }
 
         public async UniTask Init()
@@ -50,6 +53,7 @@ namespace MyGame.SkewerJam.Gameplay
             currentItems = totalItems;
             Debug.Log($"Init: {currentItems}");
             GameController.Instance.GameLogicHandler.OnStartCollectItem += OnStartCollectItem;
+            OnUpdateItems?.Invoke(currentItems);
         }
 
         public void Clear()

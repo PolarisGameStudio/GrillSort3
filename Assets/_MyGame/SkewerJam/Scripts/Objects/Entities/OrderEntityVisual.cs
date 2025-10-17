@@ -36,11 +36,19 @@ namespace MyGame.SkewerJam.Objects.Entities
             bonusLid.gameObject.SetActive(true);
             bonusLid.transform.localScale = Vector3.one;
             bonusLid.SetAlpha(1);
+
+            imageLid.transform.DOKill();
+            imageLid.transform.localPosition = _originalPosition;
+            imageLid.gameObject.SetActive(true);
+            imageLid.transform.localScale = Vector3.one;
+            imageLid.SetAlpha(1);
         }
 
         public void SetActive(bool isActive)
         {
-            imageLid.gameObject.SetActive(false);
+            ResetLid();
+            imageLid.gameObject.SetActive(isActive);
+            bonusLid.gameObject.SetActive(!isActive);
 
             normalOrder.gameObject.SetActive(isActive);
             bonusOrder.gameObject.SetActive(!isActive);
@@ -49,21 +57,27 @@ namespace MyGame.SkewerJam.Objects.Entities
             completeEffect.Stop();
         }
 
-        public virtual void OpenGrill(bool doEffect = true)
+
+        public virtual void OpenGrill(bool isNormal = true, bool doEffect = true)
         {
-            bonusLid.transform.DOKill();
+            var lid = isNormal ? imageLid : bonusLid;
+            var ortherLid = isNormal ? bonusLid : imageLid;
+            ortherLid.transform.DOKill();
+            ortherLid.gameObject.SetActive(false);
+
+            lid.transform.DOKill();
 
             if (doEffect)
             {
-                bonusLid.transform.localScale = Vector3.one;
-                bonusLid.gameObject.SetActive(true);
-                bonusLid.transform.DOLocalMoveY(2.5f, GameDefine.grillLidAnim).From(0.035f).SetEase(Ease.OutQuad);
-                bonusLid.transform.DOScale(0.95f, GameDefine.grillLidAnim);
-                bonusLid.DOFade(0, GameDefine.grillLidAnim).SetEase(Ease.InQuad).OnComplete(() => { bonusLid.gameObject.SetActive(false); });
+                lid.transform.localScale = Vector3.one;
+                lid.gameObject.SetActive(true);
+                lid.transform.DOLocalMoveY(2.5f, GameDefine.grillLidAnim).From(0.035f).SetEase(Ease.OutQuad);
+                // lid.transform.DOScale(0.95f, GameDefine.grillLidAnim);
+                lid.DOFade(0, GameDefine.grillLidAnim).SetEase(Ease.InQuad).OnComplete(() => { lid.gameObject.SetActive(false); });
             }
             else
             {
-                bonusLid.gameObject.SetActive(false);
+                lid.gameObject.SetActive(false);
             }
         }
 
@@ -81,7 +95,7 @@ namespace MyGame.SkewerJam.Objects.Entities
 
             // sound
             var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
-            if (orderManager.ListOrders.Count < orderManager.OrderManagerSO.MaxOrder)
+            if (orderManager.ListOrders.Count < orderManager.ListOrderData.Count)
             {
                 MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Box_Appear_Grill3);
             }

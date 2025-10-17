@@ -259,7 +259,7 @@ namespace MyGame.SkewerJam.Objects.Entities
         public async UniTask PlayUnlock(bool isRescue = false)
         {
             SetActive(true);
-            orderEntityVisual.OpenGrill(true);
+            orderEntityVisual.OpenGrill(false, true);
 
 
             var gameLogicHandler = GameController.Instance.GameLogicHandler;

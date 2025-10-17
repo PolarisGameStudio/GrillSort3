@@ -61,8 +61,6 @@ namespace MyGame.SkewerJam.Level
     {
         public int id;
         public int active;
-        public int currentNumber = 0;
-        public int maxNumber = 0;
     }
 
     [Serializable]
