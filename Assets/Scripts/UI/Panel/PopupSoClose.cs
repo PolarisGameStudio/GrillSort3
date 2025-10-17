@@ -3,6 +3,7 @@ using SonatFramework.Scripts.Feature.Shop.UI;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems.AudioManagement;
 using SonatFramework.Systems.InventoryManagement;
+
 public class PopupSoClose : PopupContinueBase
 {
     public override void OnSetup()
@@ -13,7 +14,6 @@ public class PopupSoClose : PopupContinueBase
     public override void Open(UIData uiData)
     {
         base.Open(uiData);
-
 
         MySonatFramework.GetService<AudioService>().StopMusic();
         MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Lose_OutOfMove_popup_Grill3);
@@ -26,8 +26,8 @@ public class PopupSoClose : PopupContinueBase
         {
             var log = new SpendResourceLogData()
             {
-                earnType = "add_trays",
-                earnId = "revive",
+                earnType = "add_order",
+                earnId = "order",
             };
             inventoryService.Instance.ReduceResource(playOnPrice.resource, playOnPrice.quantity,
                 log);
@@ -47,6 +47,11 @@ public class PopupSoClose : PopupContinueBase
     }
 
     protected override void OnReviveWithAds()
+    {
+        PlayOn("play_on_add_trays");
+    }
+
+    public void OnClickPlayOn()
     {
         PlayOn("play_on_add_trays");
     }

@@ -299,6 +299,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4161238078603760496}
     m_Modifications:
+    - target: {fileID: 7054254502785152807, guid: fc21f0613613f4b47a115922b178d2b1, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7054254502785152807, guid: fc21f0613613f4b47a115922b178d2b1, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7054254502785152807, guid: fc21f0613613f4b47a115922b178d2b1, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6637046151172940825}
+    - target: {fileID: 7054254502785152807, guid: fc21f0613613f4b47a115922b178d2b1, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7054254502785152807, guid: fc21f0613613f4b47a115922b178d2b1, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickPlayOn
+      objectReference: {fileID: 0}
+    - target: {fileID: 7054254502785152807, guid: fc21f0613613f4b47a115922b178d2b1, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PopupSoClose, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7054254502785152807, guid: fc21f0613613f4b47a115922b178d2b1, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7837952547383451923, guid: fc21f0613613f4b47a115922b178d2b1, type: 3}
       propertyPath: m_Name
       value: RescuePack1
@@ -680,6 +708,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 612602355996493152}
     m_Modifications:
+    - target: {fileID: 7054254502785152807, guid: 95338a1e3f7cc8c4daa6f6a45e7c7f29, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7054254502785152807, guid: 95338a1e3f7cc8c4daa6f6a45e7c7f29, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7054254502785152807, guid: 95338a1e3f7cc8c4daa6f6a45e7c7f29, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6637046151172940825}
+    - target: {fileID: 7054254502785152807, guid: 95338a1e3f7cc8c4daa6f6a45e7c7f29, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7054254502785152807, guid: 95338a1e3f7cc8c4daa6f6a45e7c7f29, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickPlayOn
+      objectReference: {fileID: 0}
+    - target: {fileID: 7054254502785152807, guid: 95338a1e3f7cc8c4daa6f6a45e7c7f29, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PopupSoClose, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7054254502785152807, guid: 95338a1e3f7cc8c4daa6f6a45e7c7f29, type: 3}
+      propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7837952547383451923, guid: 95338a1e3f7cc8c4daa6f6a45e7c7f29, type: 3}
       propertyPath: m_Name
       value: RescuePack2

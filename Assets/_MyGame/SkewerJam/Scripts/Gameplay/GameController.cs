@@ -221,11 +221,11 @@ namespace MyGame.SkewerJam.Gameplay
             Debug.Log("<color=red>[GameController]</color> Stuck: " + stuckType);
             if (gameState == GameState.GameOver) return;
 
-            EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent()
+            EventBus<LevelStuckEvent>.Raise(new LevelStuckEvent()
             {
                 level = level,
                 gameMode = GameMode.Classic,
-                success = false
+                cause = stuckType.ToString()
             });
 
             ChangeGameState(GameState.GameOver);
@@ -279,7 +279,7 @@ namespace MyGame.SkewerJam.Gameplay
         public async UniTaskVoid Lose(StuckType stuckType)
         {
             MySonatFramework.livesService.ReduceLive(1, "lose");
-            EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent() { level = level, gameMode = GameMode.Classic, success = false });
+            // EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent() { level = level, gameMode = GameMode.Classic, success = false });
             PanelManager.Instance.OpenPanelByName<PopupLose_SkewerJam>("PopupLose_SkewerJam");
         }
 
@@ -316,6 +316,11 @@ namespace MyGame.SkewerJam.Gameplay
             if (Input.GetKeyDown(KeyCode.L))
             {
                 Stuck(StuckType.OutOfMove);
+            }
+
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                PanelManager.Instance.OpenPanel<CheatPanel>();
             }
         }
 

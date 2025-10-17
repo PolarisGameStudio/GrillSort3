@@ -88,6 +88,11 @@ public class HomeManager : SingletonSimple<HomeManager>
             }, false);
             PanelManager.Instance.OpenPanel<PopupReward>(new UIData().Add(PopupReward.KEY_REWARD, rewardData));
         }
+
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            PanelManager.Instance.OpenPanel<CheatPanel>();
+        }
     }
 #endif
 }

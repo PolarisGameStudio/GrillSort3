@@ -76,6 +76,8 @@ public class PopupSettings : PopupSettingsBase
 
     private void AfterRefillLive()
     {
+        var level = MySonatFramework.userDataService.GetLevel();
+        EventBus<LevelQuitEvent>.Raise(new LevelQuitEvent() { cause = "replay" });
         if (MySonatFramework.livesService.CanPlay())
         {
             Replay();
