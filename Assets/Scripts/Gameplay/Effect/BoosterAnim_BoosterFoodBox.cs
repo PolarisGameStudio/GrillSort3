@@ -6,11 +6,15 @@ using Gameplay.Entities;
 using MyGame.SkewerJam.Gameplay;
 using SonatFramework.Systems;
 using SonatFramework.Systems.ObjectPooling;
+using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BoosterAnim_BoosterFoodBox : EffectPoolBase
 {
+    [Space]
+    [Header("Booster Food Box")]
+    [SerializeField] private SkeletonGraphic skeletonGraphic;
     [SerializeField] private Transform targetObject;
     [SerializeField] private Transform startPos;
     [SerializeField] private Transform centerPos;
@@ -26,23 +30,30 @@ public class BoosterAnim_BoosterFoodBox : EffectPoolBase
     [SerializeField] private Transform itemsContainer;
     [SerializeField] private float delayCollectItems = 0.5f;
     [SerializeField] private float durationItem = 0.5f;
-    [SerializeField] private AnimationCurve itemCurve;
+    [SerializeField] private AnimationCurve itemCurveX;
+    [SerializeField] private AnimationCurve itemCurveY;
     [SerializeField] private float delayItem = 0.1f;
     [SerializeField] private float distanceItem = 100f;
 
     private Service<PoolingContainerService> poolingContainerService = new();
     private List<Transform> listItemPrefab = new();
+
+
     public async UniTask SetData(Vector3 position, List<Item> listItem)
     {
         listItemPrefab.Clear();
+        skeletonGraphic.gameObject.SetActive(false);
         poolingContainerService.Instance.CleanContainer(itemsContainer);
         targetObject.position = startPos.position;
+
+        skeletonGraphic.gameObject.SetActive(true);
+        skeletonGraphic.AnimationState.SetAnimation(0, "In", false);
         await targetObject.DOMove(centerPos.position, durationMove).SetEase(moveInCurve);
 
 
         PlayCollectItems(listItem);
         await UniTask.Delay((int)(duration * 1000));
-
+        skeletonGraphic.AnimationState.SetAnimation(0, "Out", false);
         await targetObject.DOMove(endPos.position, durationMove).SetEase(moveOutCurve);
     }
 
@@ -60,10 +71,10 @@ public class BoosterAnim_BoosterFoodBox : EffectPoolBase
             listItemPrefab.Add(itemPrefab);
 
             GameFactory.Instance.ReturnEntity(item);
-            itemPrefab.DOLocalMove(targetPos, durationItem).SetEase(itemCurve);
+            itemPrefab.DOLocalMoveX(targetPos.x, durationItem).SetEase(itemCurveX);
+            itemPrefab.DOLocalMoveY(targetPos.y, durationItem).SetEase(itemCurveY);
             await UniTask.Delay((int)(delayItem * 1000));
             targetPos -= Vector3.left * distanceItem;
-
         }
     }
 }

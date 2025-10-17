@@ -9,6 +9,7 @@ namespace Sonat.Enums
         BGM_Ingame_Halloween_Grill_sort = 2,
         BGM_Ingame_Halloween_01_Grill_sort,
         BGM_Ingame_Summer_Grill3,
+        BGM_Home_Default_Grill3,
 
 
         Win_HLW_Music_fireworks_Grill_sort = 10,
@@ -26,7 +27,10 @@ namespace Sonat.Enums
 
         Items_Merge_SMode_HLW_Grill_sort = 30,
         Items_Pick_SMode_HLW_Grill_sort,
+        Box_Appear_Grill3,
         Box_Close_Grill3,
+
+        Slot_Warning_Grill3,
 
 
         Obstacle_Chain_01,

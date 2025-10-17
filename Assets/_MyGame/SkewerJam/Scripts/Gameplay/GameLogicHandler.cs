@@ -6,6 +6,7 @@ using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Objects;
 using MyGame.SkewerJam.Objects.Entities;
 using Sonat.Enums;
+using SonatFramework.Systems.SettingsManagement.Vibation;
 using UnityEngine;
 using static MyGame.SkewerJam.Objects.Entities.OrderEntity;
 
@@ -85,8 +86,10 @@ namespace MyGame.SkewerJam.Gameplay
         {
             // ItemOnOrder thì không cần chặn
             // Nếu đang warning và số lần chặn click vẫn còn thì chặn click
-            if (CheckClickAndWarning(item) == true)
+            var checkItemOnOrder = ItemHelper.CheckSelectedItemOnOrder(item);
+            if (checkItemOnOrder == false && CheckClickAndWarning(item) == true)
             {
+                MySonatFramework.GetService<VibrationService>().Vibrate(100);
                 return false;
             }
 
@@ -96,6 +99,7 @@ namespace MyGame.SkewerJam.Gameplay
             var (order, slot) = orderManager.GetDestinationSlot(item);
             if (slot != null)
             {
+                WaitingGrillHelper.ResetWarning();
                 SwitchSlot(item, slot);
                 isSwitchSuccess = true;
             }
@@ -112,7 +116,7 @@ namespace MyGame.SkewerJam.Gameplay
             // sau khi item switch: Xem có cần warning không?
             if (isSwitchSuccess == true)
             {
-                if (ItemHelper.CheckSelectedItemOnOrder(item) == false && WaitingGrillHelper.CheckWarning() == true)
+                if (checkItemOnOrder == false && WaitingGrillHelper.CheckWarning() == true)
                 {
                     WaitingGrillHelper.Warning();
                 }
@@ -127,14 +131,11 @@ namespace MyGame.SkewerJam.Gameplay
 
         private bool CheckClickAndWarning(Item item)
         {
-            if (ItemHelper.CheckSelectedItemOnOrder(item) == false)
+            if (WaitingGrillHelper.IsWarning == true && WaitingGrillHelper.CheckWarningCount() == true)
             {
-                if (WaitingGrillHelper.IsWarning == true && WaitingGrillHelper.CheckWarningCount() == true)
+                if (WaitingGrillHelper.Warning() == true)
                 {
-                    if (WaitingGrillHelper.Warning() == true)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
             WaitingGrillHelper.ResetWarning();
@@ -196,6 +197,7 @@ namespace MyGame.SkewerJam.Gameplay
                     }
                 }
             }
+            WaitingGrillHelper.ResetWarning();
         }
 
         public void TryCheckMatchItem(Item item)
@@ -219,6 +221,7 @@ namespace MyGame.SkewerJam.Gameplay
             {
                 slot.GetItem()?.OnComplete();
             }
+            WaitingGrillHelper.ResetWarning();
         }
 
         public void EndCollectItem(OrderEntity orderEntity)

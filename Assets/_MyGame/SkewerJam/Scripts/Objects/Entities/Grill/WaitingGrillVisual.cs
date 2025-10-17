@@ -1,4 +1,6 @@
 using DG.Tweening;
+using Sonat.Enums;
+using SonatFramework.Systems.AudioManagement;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Objects.Entities
@@ -24,6 +26,7 @@ namespace MyGame.SkewerJam.Objects.Entities
             spriteRenderer.DOKill();
             spriteRenderer.color = Color.white;
             spriteRenderer.DOColor(warningColor, warningDuration / 2).SetLoops(2, LoopType.Yoyo);
+            MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Slot_Warning_Grill3);
         }
     }
 }

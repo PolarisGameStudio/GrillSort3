@@ -1408,6 +1408,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 26
       objectReference: {fileID: 0}
+    - target: {fileID: 6961273614883486320, guid: 27e0671a0d5ef5943af42955b6598b41, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7902322350869440643, guid: 27e0671a0d5ef5943af42955b6598b41, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1840,6 +1844,22 @@ PrefabInstance:
     - target: {fileID: 1928879466790523339, guid: f23db68d19aac9243bfcbf3cae8cf7a0, type: 3}
       propertyPath: m_Name
       value: UIBoosterFoodBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 3504878291614326984, guid: f23db68d19aac9243bfcbf3cae8cf7a0, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 113.7874
+      objectReference: {fileID: 0}
+    - target: {fileID: 3504878291614326984, guid: f23db68d19aac9243bfcbf3cae8cf7a0, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 75.955
+      objectReference: {fileID: 0}
+    - target: {fileID: 3504878291614326984, guid: f23db68d19aac9243bfcbf3cae8cf7a0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 26.63752
+      objectReference: {fileID: 0}
+    - target: {fileID: 8255739292711281433, guid: f23db68d19aac9243bfcbf3cae8cf7a0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9197368665963786730, guid: f23db68d19aac9243bfcbf3cae8cf7a0, type: 3}
       propertyPath: m_Pivot.x
