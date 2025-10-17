@@ -18,12 +18,12 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
             GameController.Instance.GameLogicHandler.OnCollectItem -= onCollectItem;
         }
 
-        public override void RegisterEvents_OnDropItem(Action<Item, bool> onDropItem)
+        public override void RegisterEvents_OnDropItem(Action<Item, bool, bool> onDropItem)
         {
             GameController.Instance.GameLogicHandler.OnItemStartSwitchAndCheck += onDropItem;
         }
 
-        public override void UnregisterEvents_OnDropItem(Action<Item, bool> onDropItem)
+        public override void UnregisterEvents_OnDropItem(Action<Item, bool, bool> onDropItem)
         {
             GameController.Instance.GameLogicHandler.OnItemStartSwitchAndCheck -= onDropItem;
         }

@@ -4,16 +4,11 @@ namespace Manager
     {
         public static int itemCycle;
 
-        public static string ItemSprite(int id)
-        {
-            return $"Assets/Art/Items/{(ItemId)id}.png";
-            //return $"Assets/Art/Items/{id}.png";
-        }
         public static string ItemHLWSprite(ItemId id)
         {
             // if ((int)id <= 23)
             // {
-                return $"Assets/_MyGame/SkewerJam/Arts/Items/{(ItemId)id}.png";
+            return $"Assets/_MyGame/SkewerJam/Arts/Gameplay/Items/{(ItemId)id}.png";
             // }
             // else
             // {
@@ -73,7 +68,7 @@ namespace Manager
         {
             return $"Assets/Art/TeamLogo/logo_{id}.png";
         }
-        
+
         // public static string CardSprite(CardType cardType)
         // {
         //     int album = Int32.Parse(cardType.ToString().Split('_')[1]);
@@ -87,7 +82,7 @@ namespace Manager
         //     return $"Assets/Art/CardCollection/Album/{albumType}.png";
         // }
     }
-    
+
     public enum AlbumType
     {
         Grill = 0,

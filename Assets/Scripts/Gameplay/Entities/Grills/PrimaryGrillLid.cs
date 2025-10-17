@@ -17,7 +17,7 @@ namespace Gameplay.Entities.Grills
             lockState = 1;
             GrillLidData grillLidData = (GrillLidData)grillData;
             itemCondition = grillLidData.itemCondition;
-            iconItem.SetSpriteAsync(PathManager.ItemSprite(itemCondition)).Forget();
+            iconItem.SetSpriteAsync(PathManager.ItemHLWSprite((ItemId)itemCondition)).Forget();
             base.SetData(grillData);
             grillVisual.CloseGrill(false);
             SetLockItems(true);

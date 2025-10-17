@@ -10,8 +10,8 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
 
         public abstract void UnregisterEvents_OnCollectItem(Action<int> onCollectItem);
 
-        public abstract void RegisterEvents_OnDropItem(Action<Item, bool> onDropItem);
+        public abstract void RegisterEvents_OnDropItem(Action<Item, bool, bool> onDropItem);
 
-        public abstract void UnregisterEvents_OnDropItem(Action<Item, bool> onDropItem);
+        public abstract void UnregisterEvents_OnDropItem(Action<Item, bool, bool> onDropItem);
     }
 }

@@ -143,17 +143,17 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
 
         public override async UniTask ProcessExplodeBomb(ItemBombMove itemBombMove)
         {
-            GameController.Instance.ChangeGameState(GameState.Paused);
-            await UniTask.WhenAny(
-                UniTask.WaitUntil(() => GameController.Instance.GameLogicHandler.HasCollectItem == true),
-                UniTask.Delay(1000)
-            );
-            if (GameController.Instance.GameLogicHandler.HasCollectItem)
-            {
-                // chờ thêm để xem có order nào ăn item bomb này không  
-                await UniTask.Delay(4000);
-            }
-            GameController.Instance.ChangeGameState(GameState.Playing);
+            // GameController.Instance.ChangeGameState(GameState.Paused);
+            // await UniTask.WhenAny(
+            //     UniTask.WaitUntil(() => GameController.Instance.GameLogicHandler.HasCollectItem == true),
+            //     UniTask.Delay(1000)
+            // );
+            // if (GameController.Instance.GameLogicHandler.HasCollectItem)
+            // {
+            //     // chờ thêm để xem có order nào ăn item bomb này không  
+            //     await UniTask.Delay(4000);
+            // }
+            // GameController.Instance.ChangeGameState(GameState.Playing);
         }
     }
 }

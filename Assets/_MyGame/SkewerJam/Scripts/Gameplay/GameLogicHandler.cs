@@ -42,7 +42,7 @@ namespace MyGame.SkewerJam.Gameplay
 
         #region Event Actions
         public event Action<Item, SlotBase> OnItemStartSwitch;
-        public event Action<Item, bool> OnItemStartSwitchAndCheck;
+        public event Action<Item, bool, bool> OnItemStartSwitchAndCheck;
 
         public event Action<Item, SlotBase> OnItemEndSwitch;
 
@@ -100,7 +100,7 @@ namespace MyGame.SkewerJam.Gameplay
             if (slot != null)
             {
                 WaitingGrillHelper.ResetWarning();
-                SwitchSlot(item, slot);
+                SwitchSlot(item, slot, false, true);
                 isSwitchSuccess = true;
             }
             else
@@ -108,7 +108,7 @@ namespace MyGame.SkewerJam.Gameplay
                 var (waitingGrill, waitingGrillSlot) = waitingGrillManager.GetDestinationSlot();
                 if (waitingGrillSlot != null)
                 {
-                    SwitchSlot(item, waitingGrillSlot);
+                    SwitchSlot(item, waitingGrillSlot, false, false);
                     isSwitchSuccess = true;
                 }
             }
@@ -142,24 +142,20 @@ namespace MyGame.SkewerJam.Gameplay
             return false;
         }
 
-        private void SwitchSlot(Item item, SlotBase slot, bool fromWaitingGrill = false)
+        private void SwitchSlot(Item item, SlotBase slot, bool fromWaitingGrill, bool toOrder)
         {
             item.Moving = true;
             item.SetLockState(true);
             item.SwitchSlot(slot);
-            OnItemStartSwitchAndCheck?.Invoke(item, true);
+            OnItemStartSwitchAndCheck?.Invoke(item, fromWaitingGrill, toOrder);
             OnItemStartSwitch?.Invoke(item, slot);
 
             TryCheckWinGame().Forget();
         }
 
-
-        private bool hasCollectItem = false;
-        public bool HasCollectItem => hasCollectItem;
         public void ItemMoveSlot(Item item, SlotBase slot)
         {
             item.Moving = false;
-            hasCollectItem = false;
             OnItemEndSwitch?.Invoke(item, slot);
         }
         #endregion
@@ -192,7 +188,7 @@ namespace MyGame.SkewerJam.Gameplay
                     if (item != null && item.id == (int)targetItem && orderSlot != null && item.Moving == false)
                     {
                         // chờ tới khi item rơi hẳn xuống đĩa thì mới lấy
-                        SwitchSlot(item, orderSlot, true);
+                        SwitchSlot(item, orderSlot, true, true);
                         count++;
                     }
                 }
@@ -205,7 +201,7 @@ namespace MyGame.SkewerJam.Gameplay
             var (_, slot) = orderManager.GetDestinationSlot(item);
             if (slot != null)
             {
-                SwitchSlot(item, slot, true);
+                SwitchSlot(item, slot, true, true);
                 return;
             }
         }
@@ -216,7 +212,6 @@ namespace MyGame.SkewerJam.Gameplay
         {
             OnStartCollectItem?.Invoke(orderEntity);
 
-            hasCollectItem = true;
             foreach (var slot in orderEntity.GetSlots())
             {
                 slot.GetItem()?.OnComplete();
@@ -255,7 +250,6 @@ namespace MyGame.SkewerJam.Gameplay
 
         public async UniTask TryCheckLoseGame()
         {
-            Debug.Log("TryCheckLoseGame");
             var stuckType = CheckLoseGame();
             if (stuckType != null)
             {

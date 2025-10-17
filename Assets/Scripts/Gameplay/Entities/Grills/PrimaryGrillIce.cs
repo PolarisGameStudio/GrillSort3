@@ -80,10 +80,10 @@ namespace Gameplay.Entities.Grills
             numStep = 0;
         }
 
-        private void OnItemDropped(Item item, bool changed)
+        private void OnItemDropped(Item item, bool fromWaitingGrill, bool toOrder)
         {
             // if (!changed || !isLock) return;
-            if (!changed || lockState != 1) return;
+            if (fromWaitingGrill == true || lockState != 1) return;
             numStep++;
             success = false;
             if (numStep >= GetIceGrillStep() && currentState < iceState)
@@ -173,7 +173,7 @@ namespace Gameplay.Entities.Grills
             this.numStep = numStep;
             visualIce.ForceSetIceState(currentState);
 
-            if(currentState == 0)
+            if (currentState == 0)
             {
                 UnlockIce();
             }
