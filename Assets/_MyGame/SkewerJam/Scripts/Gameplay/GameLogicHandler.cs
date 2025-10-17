@@ -110,6 +110,9 @@ namespace MyGame.SkewerJam.Gameplay
                 {
                     SwitchSlot(item, waitingGrillSlot, false, false);
                     isSwitchSuccess = true;
+
+
+                    GameController.Instance.GameLogicHandler.TryCheckLoseGame();
                 }
             }
 

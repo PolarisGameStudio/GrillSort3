@@ -1,13 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Gameplay.Entities;
 using Gameplay.Entities.Grills;
-using Gameplay.Entities.Items;
 using Gameplay.Entities.Obstacle;
 using Gameplay.LevelData;
-using Helper;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Level;
 using MyGame.SkewerJam.Objects;
@@ -91,42 +88,42 @@ namespace MyGame.SkewerJam.Gameplay
             levelDataSkewerJam.numberOfWaitingGrill = 5;
 
             // 
-            switch (levelDataSkewerJam.difficulty)
-            {
-                case LevelDifficulty.Normal:
-                    levelDataSkewerJam.rescueCondition = new RescueCondition();
-                    levelDataSkewerJam.rescueCondition.maxNumberRescues = 5;
-                    levelDataSkewerJam.rescueCondition.maxRescueGap = 2;
-                    levelDataSkewerJam.rescueCondition.remainingWaitingGrill = 2;
+            // switch (levelDataSkewerJam.difficulty)
+            // {
+            //     case LevelDifficulty.Normal:
+            levelDataSkewerJam.rescueCondition = new RescueCondition();
+            levelDataSkewerJam.rescueCondition.maxNumberRescues = 5;
+            levelDataSkewerJam.rescueCondition.maxRescueGap = 2;
+            levelDataSkewerJam.rescueCondition.remainingWaitingGrill = 2;
 
-                    levelDataSkewerJam.logicOrderConfigs = new List<LogicOrderConfig>();
-                    levelDataSkewerJam.logicOrderConfigs.Add(new LogicOrderConfig() { region = 1f, minNumberSteps = 0 });
-                    break;
-                    // case LevelDifficulty.Hard:
-                    //     levelDataSkewerJam.rescueCondition = new RescueCondition();
-                    //     levelDataSkewerJam.rescueCondition.maxNumberRescues = 3;
-                    //     levelDataSkewerJam.rescueCondition.maxRescueGap = 2;
-                    //     levelDataSkewerJam.rescueCondition.remainingWaitingGrill = 2;
+            levelDataSkewerJam.logicOrderConfigs = new List<LogicOrderConfig>();
+            levelDataSkewerJam.logicOrderConfigs.Add(new LogicOrderConfig() { region = 1f, minNumberSteps = 0 });
+            //         break;
+            //         // case LevelDifficulty.Hard:
+            //         //     levelDataSkewerJam.rescueCondition = new RescueCondition();
+            //         //     levelDataSkewerJam.rescueCondition.maxNumberRescues = 3;
+            //         //     levelDataSkewerJam.rescueCondition.maxRescueGap = 2;
+            //         //     levelDataSkewerJam.rescueCondition.remainingWaitingGrill = 2;
 
-                    //     levelDataSkewerJam.logicOrderConfigs = new List<LogicOrderConfig>();
-                    //     levelDataSkewerJam.logicOrderConfigs.Add(new LogicOrderConfig() { region = 0.5f, minNumberSteps = 1 });
-                    //     levelDataSkewerJam.logicOrderConfigs.Add(new LogicOrderConfig() { region = 0.8f, minNumberSteps = 2 });
-                    //     levelDataSkewerJam.logicOrderConfigs.Add(new LogicOrderConfig() { region = 1f, minNumberSteps = 0 });
-                    //     break;
-                    // case LevelDifficulty.SuperHard:
-                    //     levelDataSkewerJam.rescueCondition = new RescueCondition();
-                    //     levelDataSkewerJam.rescueCondition.maxNumberRescues = 3;
-                    //     levelDataSkewerJam.rescueCondition.maxRescueGap = 2;
-                    //     levelDataSkewerJam.rescueCondition.remainingWaitingGrill = 1;
+            //         //     levelDataSkewerJam.logicOrderConfigs = new List<LogicOrderConfig>();
+            //         //     levelDataSkewerJam.logicOrderConfigs.Add(new LogicOrderConfig() { region = 0.5f, minNumberSteps = 1 });
+            //         //     levelDataSkewerJam.logicOrderConfigs.Add(new LogicOrderConfig() { region = 0.8f, minNumberSteps = 2 });
+            //         //     levelDataSkewerJam.logicOrderConfigs.Add(new LogicOrderConfig() { region = 1f, minNumberSteps = 0 });
+            //         //     break;
+            //         // case LevelDifficulty.SuperHard:
+            //         //     levelDataSkewerJam.rescueCondition = new RescueCondition();
+            //         //     levelDataSkewerJam.rescueCondition.maxNumberRescues = 3;
+            //         //     levelDataSkewerJam.rescueCondition.maxRescueGap = 2;
+            //         //     levelDataSkewerJam.rescueCondition.remainingWaitingGrill = 1;
 
-                    //     levelDataSkewerJam.logicOrderConfigs = new List<LogicOrderConfig>();
-                    //     levelDataSkewerJam.logicOrderConfigs.Add(new LogicOrderConfig() { region = 0.2f, minNumberSteps = 0 });
-                    //     levelDataSkewerJam.logicOrderConfigs.Add(new LogicOrderConfig() { region = 0.4f, minNumberSteps = 1 });
-                    //     levelDataSkewerJam.logicOrderConfigs.Add(new LogicOrderConfig() { region = 0.6f, minNumberSteps = 0 });
-                    //     levelDataSkewerJam.logicOrderConfigs.Add(new LogicOrderConfig() { region = 0.8f, minNumberSteps = 2 });
-                    //     levelDataSkewerJam.logicOrderConfigs.Add(new LogicOrderConfig() { region = 1f, minNumberSteps = 0 });
-                    //     break;
-            }
+            //         //     levelDataSkewerJam.logicOrderConfigs = new List<LogicOrderConfig>();
+            //         //     levelDataSkewerJam.logicOrderConfigs.Add(new LogicOrderConfig() { region = 0.2f, minNumberSteps = 0 });
+            //         //     levelDataSkewerJam.logicOrderConfigs.Add(new LogicOrderConfig() { region = 0.4f, minNumberSteps = 1 });
+            //         //     levelDataSkewerJam.logicOrderConfigs.Add(new LogicOrderConfig() { region = 0.6f, minNumberSteps = 0 });
+            //         //     levelDataSkewerJam.logicOrderConfigs.Add(new LogicOrderConfig() { region = 0.8f, minNumberSteps = 2 });
+            //         //     levelDataSkewerJam.logicOrderConfigs.Add(new LogicOrderConfig() { region = 1f, minNumberSteps = 0 });
+            //         //     break;
+            // }
 
             // shuffle item
             if (_level > 100)
@@ -182,7 +179,7 @@ namespace MyGame.SkewerJam.Gameplay
 
             if (_level == 1)
             {
-                levelDataSkewerJam.ListOrderData = ValidateListOrder(2, 2);
+                levelDataSkewerJam.ListOrderData = ValidateListOrder(4, 2);
             }
             else
             {
@@ -222,7 +219,12 @@ namespace MyGame.SkewerJam.Gameplay
             switch (grillType)
             {
                 case GrillType.LockAds:
+                case GrillType.Lid:
+
                     return (null, 0);
+                    // case GrillType.Lid:
+                    //     return (GrillType.Normal, 0);
+
             }
 
             return (grillType, slotCount);

@@ -2,18 +2,17 @@ using Cysharp.Threading.Tasks;
 using Sonat.Enums;
 using SonatFramework.Scripts.Helper;
 using SonatFramework.Scripts.UIModule;
-using SonatFramework.Systems;
+using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems.AudioManagement;
 using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.InventoryManagement.GameResources;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HomeManager : SingletonSimple<HomeManager>
 {
-    public UINavigateBarSlide uINavigateBar;
+    [SerializeField] private UINavigateBarSlide uINavigateBar;
+    [SerializeField] private GameObject blockUI;
+    [SerializeField] private float delayBlockUI = 2f;
 
     private bool running = false;
 
@@ -37,6 +36,8 @@ public class HomeManager : SingletonSimple<HomeManager>
         MySonatFramework.GetService<AudioService>().PlayMusic(AudioId.BGM_Home_Default_Grill3);
 
         ClaimRewardFreeLives().Forget();
+        blockUI.SetActive(true);
+        SonatUtils.DelayCall(delayBlockUI, () => { blockUI.SetActive(false); }, this);
     }
 
     private void OnDisable()

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Manager;
@@ -95,6 +96,10 @@ namespace MyGame.SkewerJam.Gameplay
         #region Load level
         public async UniTask PlayLevel(int level, bool force = false)
         {
+            SonatUtils.ExecuteNextFrame(() =>
+            {
+                ChangeGameState(GameState.Loading);
+            }, 2);
             ClearLevel();
 
             MySonatFramework.GetService<UserDataService>().SaveLevel(level, GameMode.Classic);
@@ -110,20 +115,20 @@ namespace MyGame.SkewerJam.Gameplay
 
 
             this.level = level;
-            ChangeGameState(GameState.Loading);
 
             Debug.Log("<color=green>[GameController]</color> PlayLevel: " + level);
             InitLevel();
 
             await levelGenerator.GenerateLevel(level);
-
-            ChangeGameState(GameState.Playing);
             EventBus<LevelStartedEvent>.Raise(new LevelStartedEvent() { level = level, gameMode = GameMode.Classic });
 
-            LoadingHelper.CompleteLoadingInGameplay(() => PlayStartGame().Forget());
+            LoadingHelper.CompleteLoadingInGameplay(() => PlayStartGame(() =>
+            {
+                ChangeGameState(GameState.Playing);
+            }).Forget());
         }
 
-        public async UniTask PlayStartGame()
+        public async UniTask PlayStartGame(Action onComplete = null)
         {
             foreach (var grill in gameLogicHandler.GrillManager.ListGrills)
             {
@@ -132,6 +137,7 @@ namespace MyGame.SkewerJam.Gameplay
 
             await UniTask.Delay(500);
             await gameLogicHandler.OrderManager.PlayAppearOrders();
+            onComplete?.Invoke();
         }
 
         public void InitLevel()
@@ -231,7 +237,7 @@ namespace MyGame.SkewerJam.Gameplay
             ChangeGameState(GameState.GameOver);
 
 
-            await UniTask.Delay(1000);
+            await UniTask.Delay(2000);
             // var showPopupContinue = GameLogicHandler.WaitingGrillManager.ListWaitingGrills.Where(e => e.IsActive == false).Count() > 0;
             if (CanRevive())
             {

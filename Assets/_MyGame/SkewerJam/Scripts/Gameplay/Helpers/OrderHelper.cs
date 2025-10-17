@@ -157,7 +157,11 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
         {
             // ---Tạo order để giải cứu---
             // Item được lấy từ hàng chờ --> Làm giảm số lượng khay trống nhiều nhất
+            // check lại số lượng order nữa
+
             var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
+            var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
+            var orderItemsDict = orderManager.GetOrderItemsDict();
 
             var itemsInWaiting = waitingGrillManager.ListWaitingGrills.Select(e => e.GetSlots()[0].GetItem());
             var items = itemsInWaiting.Where(e => e != null).ToList();
@@ -169,6 +173,18 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             }
 
             var dictItems = items.GroupBy(e => e.id).ToDictionary(e => e.Key, e => e.Count());
+            var dictNeededItems = orderItemsDict.ToDictionary(e => e.Key, e => e.Value.maxItems - e.Value.num);
+            foreach (var id in dictNeededItems.Keys)
+            {
+                if (dictItems.ContainsKey((int)id))
+                {
+                    dictItems[(int)id] -= dictNeededItems[id];
+                    if (dictItems[(int)id] <= 0)
+                    {
+                        dictItems.Remove((int)id);
+                    }
+                }
+            }
             var itemId = dictItems.OrderByDescending(e => e.Value).First().Key;
             var num = dictItems[itemId] > 3 ? 3 : dictItems[itemId];
 

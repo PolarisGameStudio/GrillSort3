@@ -259,6 +259,9 @@ MonoBehaviour:
   onBuySuccess:
     m_PersistentCalls:
       m_Calls: []
+  onBuySuccessAfterPopupReward:
+    m_PersistentCalls:
+      m_Calls: []
   showNoAdsIcon: 1
   noAdsIcon: {fileID: 6004010807493994836}
 --- !u!114 &2364306870187604603
@@ -1129,8 +1132,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "249.000\u20AB"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e13e4bfa3ed5b20408dd981c4a6cca19, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 660e547ab51cb2d4788df0b2b14e970c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1ad186f6383d0f6449e226da1f38334b, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: ef843bea28baeae4e90723f983e3beb0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

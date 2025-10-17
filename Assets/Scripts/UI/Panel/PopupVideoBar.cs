@@ -1,10 +1,12 @@
 using System;
+using System.Collections;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using MyGame.UI.PopupVideoBar;
 using SonatFramework.Scripts.Helper;
 using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
+using SonatFramework.Scripts.UIModule.UIElements;
 using SonatFramework.Systems;
 using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.ObjectPooling;
@@ -21,6 +23,7 @@ public class PopupVideoBar : Panel
     [Header("Progress Bar")]
     [SerializeField] private Slider _slider;
     [SerializeField] private Transform _milestoneContainer;
+    [SerializeField] private UITimeCounter timeCounter;
 
     [Header("Delay")]
     [SerializeField] private float _delay = 0.3f;
@@ -28,12 +31,10 @@ public class PopupVideoBar : Panel
     private IntDataPref _currentNum;
     private IntDataPref _claimedMilestoneNum;
     private IntDataPref _currentNumVisual;
-    private LongDataPref _todayClaimedNum;
+    private LongDataPref _expireTime;
 
     private bool _collected;
     private int _maxNumber;
-
-    private DateTime _today;
 
     private readonly Service<PoolingContainerService> poolingContainer = new();
 
@@ -57,6 +58,17 @@ public class PopupVideoBar : Panel
             milestone.SetData(_config.milestones[i].index + 1, (_config.milestones[i].index + 1) * 1.0f / _maxNumber, _config.milestones[i].rewardData);
         }
 
+
+
+        if (CheckFull())
+        {
+            CheckExpire();
+        }
+        else
+        {
+            timeCounter.gameObject.SetActive(false);
+        }
+
         _slider.value = (_currentNumVisual.Value + 1) * 1.0f / _maxNumber;
     }
 
@@ -67,38 +79,34 @@ public class PopupVideoBar : Panel
         _claimedMilestoneNum = new IntDataPref(VIDEO_BAR_KEY + "_claimedMilestoneNum", -1);
         _currentNumVisual = new IntDataPref(VIDEO_BAR_KEY + "_currentNumVisual", -1);
 
-        _todayClaimedNum = new LongDataPref(VIDEO_BAR_KEY + "_todayClaimedNum");
+        _expireTime = new LongDataPref(VIDEO_BAR_KEY + "_expireTime");
+    }
 
-        if (_todayClaimedNum.Value == 0)
+    private IEnumerator Countdown(long remainTime, Action onComplete = null)
+    {
+        while (remainTime > 0)
         {
-            _today = MySonatFramework.GetService<TimeService>().GetCurrentTime();
+            yield return new WaitForSeconds(1);
+            remainTime--;
         }
-        else
-        {
-            _today = DateTimeOffset.FromUnixTimeSeconds(_todayClaimedNum.Value).DateTime;
-
-            if (_today.Date != MySonatFramework.GetService<TimeService>().GetCurrentTime().Date)
-            {
-                ResetData();
-            }
-        }
+        onComplete?.Invoke();
     }
 
     private void ResetData()
     {
-        _todayClaimedNum.Value = MySonatFramework.GetService<TimeService>().GetUnixTimeSeconds();
-        _today = MySonatFramework.GetService<TimeService>().GetCurrentTime();
-
         _currentNum.Value = 0;
         _claimedMilestoneNum.Value = -1;
         _currentNumVisual.Value = 0;
+
+        timeCounter.gameObject.SetActive(false);
+        _slider.value = (_currentNumVisual.Value + 1) * 1.0f / _maxNumber;
     }
 
     public void OnClickWatchAds()
     {
         if (CheckFull())
         {
-            PopupToast.Cretate("Come back tomorrow");
+            PopupToast.Cretate("Come back later!");
             return;
         }
 
@@ -123,12 +131,33 @@ public class PopupVideoBar : Panel
     {
         _currentNum.Value++;
 
+        if (CheckFull())
+        {
+            _expireTime.Value = MySonatFramework.GetService<TimeService>().GetUnixTimeSeconds() + _config.duration;
+            CheckExpire();
+        }
+
         // var nextMildestone = _config.milestones[_currentNum.Value];
         // if (_currentNum.Value == nextMildestone.index)
         // {
         var currentMilestone = _config.milestones[_currentNum.Value];
         Claim(currentMilestone);
         // }
+    }
+
+    private void CheckExpire()
+    {
+        var remainTime = _expireTime.Value - MySonatFramework.GetService<TimeService>().GetUnixTimeSeconds();
+        if (remainTime > 0)
+        {
+            timeCounter.gameObject.SetActive(true);
+            timeCounter.SetData(remainTime);
+            StartCoroutine(Countdown(remainTime, ResetData));
+        }
+        else
+        {
+            ResetData();
+        }
     }
 
     private void Claim(MilestoneData currentMilestone)

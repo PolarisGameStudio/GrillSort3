@@ -60,7 +60,6 @@ namespace MyGame.SkewerJam.Objects
             if (slot.GetGrill() is WaitingGrill waitingGrill)
             {
                 GameController.Instance.GameLogicHandler.TryCheckMatchItem(item);
-                GameController.Instance.GameLogicHandler.TryCheckLoseGame();
             }
         }
         #endregion
