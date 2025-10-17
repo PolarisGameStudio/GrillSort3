@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class TabHome : UITabBase
 {
+    [Space]
+    [Header("Tab Home")]
     [SerializeField] private HomeWidgetManager homeWidgetManager;
     private bool firstTime = true;
 

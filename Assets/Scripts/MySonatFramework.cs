@@ -23,7 +23,7 @@ public class MySonatFramework : SonatSystem
     public static LivesService livesService;
     public static InventoryService inventoryService;
     public static LevelService levelService;
-    public static CustomTrackingService customTrackingService;
+    public static TrackingService trackingService;
     public static GameplayAnalyticsService gameplayAnalyticsService;
     public static SonatBoosterService sonatBoosterService;
 
@@ -45,7 +45,7 @@ public class MySonatFramework : SonatSystem
         livesService = GetService<LivesService>();
         inventoryService = GetService<InventoryService>();
         levelService = GetService<LevelRemoteService>();
-        customTrackingService = GetService<CustomTrackingService>();
+        trackingService = GetService<TrackingService>();
         gameplayAnalyticsService = GetService<GameplayAnalyticsService>();
         sonatBoosterService = GetService<SonatBoosterService>();
     }
@@ -61,7 +61,7 @@ public class MySonatFramework : SonatSystem
         // }
         // catch (Exception)
         // {
-            return LevelDifficulty.Normal;
+        return LevelDifficulty.Normal;
         // }
     }
 

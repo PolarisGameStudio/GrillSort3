@@ -362,6 +362,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4534403687749284435, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
+      propertyPath: trackingName
+      value: MO:IAP::starter_bundle
+      objectReference: {fileID: 0}
     - target: {fileID: 6009096099012315714, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
       propertyPath: m_Name
       value: PopupStarterBundle

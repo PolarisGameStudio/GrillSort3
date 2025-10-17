@@ -4,10 +4,13 @@ using Manager;
 using Sonat;
 using Sonat.AdsModule;
 using Sonat.Enums;
+using Sonat.TrackingModule;
 using SonatFramework.Scripts.Feature.Lives;
 using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems.AudioManagement;
+using SonatFramework.Systems.EventBus;
 using SonatFramework.Systems.SceneManagement;
+using SonatFramework.Systems.TrackingModule;
 using SonatFramework.Systems.UserData;
 using UnityEngine;
 
@@ -18,6 +21,10 @@ namespace MyGame.SkewerJam.UI.Loading
         [SerializeField] private SplashScreen splashScreen;
         [SerializeField] private LoadingScreen loadingScreen;
         [SerializeField] private LoadingConfigSO configSO;
+
+        [Header("Tracking")]
+        [SerializeField] private string screenName = "Loading";
+        [SerializeField] private string placement = "GP:::app_open";
 
         public LoadingConfigSO Config => configSO;
 
@@ -45,6 +52,10 @@ namespace MyGame.SkewerJam.UI.Loading
             _sonatSdkInited = true;
             SonatAds.needShowAppOpenAds = false;
             GameRemoteConfigValue.LoadData();
+
+            EventBus<UpdateScreenEvent>.Raise(new() { screen = screenName });
+            EventBus<UpdatePlacementEvent>.Raise(new() { placement = placement });
+            MySonatFramework.GetService<TrackingService>().TrackingScreenView();
         }
 
         public bool CheckForceGameplay()

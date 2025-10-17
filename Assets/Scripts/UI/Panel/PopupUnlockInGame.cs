@@ -74,13 +74,13 @@ public class PopupUnlockInGame : Panel
         switch (selectedObjectType)
         {
             case SelectedObjectType.Tray:
-                placement = "LO:::pkr_I_add_order";
+                placement = "GP:::add_order";
                 break;
             case SelectedObjectType.Plate:
-                placement = "LO:::pkr_I_add_slot";
+                placement = "GP:::add_slot";
                 break;
             case SelectedObjectType.OctoChef:
-                placement = "LO:::pkr_I_remove_octochef";
+                placement = "GP:::remove_octochef";
                 break;
             default:
                 placement = base.GetPlacement();
