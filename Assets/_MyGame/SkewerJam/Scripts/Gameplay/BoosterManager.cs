@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SO.Boosters;
 using Sonat.Enums;
 using SonatFramework.Systems.ObjectPooling;
@@ -25,6 +26,7 @@ namespace MyGame.SkewerJam.Gameplay
                 Debug.Log($"{LOG_TAG} SBooster behavior not found: {boosterType}");
             }
 
+            WaitingGrillHelper.ResetWarning();
             await boosterBehavior.UseBooster(position);
         }
 

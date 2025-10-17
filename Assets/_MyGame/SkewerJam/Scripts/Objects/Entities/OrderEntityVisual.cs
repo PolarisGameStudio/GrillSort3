@@ -5,6 +5,7 @@ using Gameplay;
 using MyGame.SkewerJam.Gameplay;
 using Sonat.Enums;
 using SonatFramework.Scripts.Utils;
+using SonatFramework.Systems.AudioManagement;
 using SonatFramework.Systems.SettingsManagement.Vibation;
 using UnityEngine;
 
@@ -66,23 +67,30 @@ namespace MyGame.SkewerJam.Objects.Entities
             }
         }
 
-        public async UniTask PlayComplete(Action onComplete1, Action onComplete2)
+        public async UniTask PlayComplete(Action onComplete)
         {
             imageLid.gameObject.SetActive(true);
             imageLid.transform.localPosition = Vector3.up * orderEntityConfigSO.up;
             await imageLid.transform.DOLocalMove(Vector3.zero, orderEntityConfigSO.durationUp).SetEase(orderEntityConfigSO.downCurve);
             completeEffect.Play();
             MySonatFramework.audioService.PlaySound(AudioId.Box_Close_Grill3);
-            onComplete1?.Invoke();
+            onComplete?.Invoke();
 
             MySonatFramework.GetService<VibrationService>().Vibrate(100);
             await UniTask.Delay((int)(orderEntityConfigSO.delayMoveOut * 1000));
 
-            onComplete2?.Invoke();
+            // sound
+            var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
+            if (orderManager.ListOrders.Count < orderManager.OrderManagerSO.MaxOrder)
+            {
+                MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Box_Appear_Grill3);
+            }
+
             var orderEntity = transform.parent.GetComponent<OrderEntity>();
             var targetPos = orderEntity.transform.localPosition + Vector3.up * orderEntityConfigSO.up;
             await orderEntity.transform.DOLocalMove(targetPos, orderEntityConfigSO.durationDown).SetEase(orderEntityConfigSO.upCurve);
             MyGame.SkewerJam.Gameplay.GameFactory.Instance.ReturnEntity(orderEntity);
+
 
         }
     }

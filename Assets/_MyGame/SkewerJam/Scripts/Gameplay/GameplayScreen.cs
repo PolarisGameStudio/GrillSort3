@@ -1,10 +1,6 @@
-using System;
-using Cysharp.Threading.Tasks;
-using MyGame.SkewerJam.Gameplay.Helpers;
 using SonatFramework.Scripts.UIModule.UIElements;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace MyGame.SkewerJam.Gameplay
 {
@@ -12,18 +8,6 @@ namespace MyGame.SkewerJam.Gameplay
     {
         [SerializeField] private TMP_Text txtLevel;
         [SerializeField] private UICurrency[] currencies;
-
-        // [Header("Cheat")]
-        // [SerializeField] private TMP_InputField inputLevel;
-        // [SerializeField] private TMP_InputField inputStepGap;
-
-        // [SerializeField] private Toggle toggleForward;
-
-        void Start()
-        {
-            // toggleForward.isOn = OrderHelper.forward;
-            // toggleForward.onValueChanged.AddListener(OnClickForward);
-        }
 
         public void InitLevel(int level)
         {
@@ -42,31 +26,5 @@ namespace MyGame.SkewerJam.Gameplay
                 currency.gameObject.SetActive(false);
             }
         }
-
-        // public void OnClickReplay()
-        // {
-        //     GameController.Instance.Replay();
-        // }
-
-        // public void OnClickNextLevel()
-        // {
-        //     if (int.TryParse(inputLevel.text, out int level))
-        //     {
-        //         GameController.Instance.PlayLevel(level, true).Forget();
-        //     }
-        // }
-
-        // public void OnClickStepGap()
-        // {
-        //     if (int.TryParse(inputStepGap.text, out int stepGap))
-        //     {
-        //         OrderHelper.maxStep2Gap = stepGap;
-        //     }
-        // }
-
-        // public void OnClickForward(bool isOn)
-        // {
-        //     OrderHelper.forward = isOn;
-        // }
     }
 }

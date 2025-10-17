@@ -1,8 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using MyGame.UI.PopupVideoBar;
@@ -103,6 +99,7 @@ public class PopupVideoBar : Panel
         if (CheckFull())
         {
             PopupToast.Cretate("Come back tomorrow");
+            return;
         }
 
         if (_collected) return;

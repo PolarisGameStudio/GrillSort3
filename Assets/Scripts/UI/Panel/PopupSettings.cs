@@ -7,6 +7,7 @@ using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems.EventBus;
+using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.SceneManagement;
 using UnityEngine;
 
@@ -37,27 +38,40 @@ public class PopupSettings : PopupSettingsBase
 
     private void ConfirmReplay()
     {
-        var level = MySonatFramework.userDataService.GetLevel();
-        if (level >= GameRemoteConfigValue.levelShowInterReplay)
-            SonatSDKAdapter.ShowInterAds("replay", CheckCanReplay);
+        if (CanReplay())
+        {
+            var level = MySonatFramework.userDataService.GetLevel();
+            if (level >= GameRemoteConfigValue.levelShowInterReplay)
+                SonatSDKAdapter.ShowInterAds("replay", CheckCanReplay);
+            else
+            {
+                CheckCanReplay();
+            }
+        }
         else
         {
-            CheckCanReplay();
+            // PanelManager.Instance.OpenPanel<PopupRefillLives>(new UIData().Add(UIDataKey.CallBackOnClose, (Action)(AfterRefillLive)));
+            PopupToast.Cretate("Not enough lives to replay!");
         }
+    }
+
+    private bool CanReplay()
+    {
+        return MySonatFramework.livesService.isUnlimitedLive.BoolValue || MySonatFramework.GetService<InventoryService>().GetResource(GameResource.Lives) >= 2;
     }
 
     private void CheckCanReplay()
     {
-        if (MySonatFramework.livesService.CanPlay())
-        {
-            MySonatFramework.livesService.ReduceLive(1, "replay");
-            AfterRefillLive();
-        }
-        else
-        {
-            PanelManager.Instance.OpenPanel<PopupRefillLives>(new UIData().Add(UIDataKey.CallBackOnClose, (Action)(AfterRefillLive)));
-            PopupToast.Cretate("No more lives left!");
-        }
+        // if (MySonatFramework.livesService.CanPlay())
+        // {
+        MySonatFramework.livesService.ReduceLive(1, "replay");
+        AfterRefillLive();
+        // }
+        // else
+        // {
+        //     PanelManager.Instance.OpenPanel<PopupRefillLives>(new UIData().Add(UIDataKey.CallBackOnClose, (Action)(AfterRefillLive)));
+        //     PopupToast.Cretate("No more lives left!");
+        // }
     }
 
     private void AfterRefillLive()

@@ -10,6 +10,7 @@ using MyGame.SkewerJam.Gameplay;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
+using SonatFramework.Systems.AudioManagement;
 using UnityEngine;
 using static PopupUnlockInGame;
 
@@ -17,14 +18,22 @@ namespace MyGame.SkewerJam.Objects.Entities
 {
     public class OrderEntity : GrillBase
     {
+        public enum OrderEntityState
+        {
+            Waiting,
+            Ready,
+            Complete,
+        }
         [Header("Order Entity Visual")]
         [SerializeField] private Transform container;
         [SerializeField] private OrderEntityVisual orderEntityVisual;
         private int orderIndex;
         private bool active = false; // đã unlock chưa
-        private bool ready = false; // đã sẵn sàng nhận item chưa
-        private bool moving = false; // đang di chuyển không
-        private bool complete = false; // đã hoàn thành order chưa
+        private OrderEntityState state = OrderEntityState.Waiting;
+
+        // private bool ready = false; // đã sẵn sàng nhận item chưa
+        // private bool moving = false; // đang di chuyển không
+        // private bool complete = false; // đã hoàn thành order chưa
         private int completeCount = 0; // số lượng item đã hoàn thành
 
         private ItemId itemIdTarget = ItemId.None;
@@ -34,13 +43,13 @@ namespace MyGame.SkewerJam.Objects.Entities
         public ItemId ItemIdTarget => itemIdTarget;
         public bool IsActive => active;
         public int OrderIndex => orderIndex;
-        public bool Ready { get => ready; set => ready = value; }
-        public bool Moving { get => moving; set => moving = value; }
-        public bool Complete { get => complete; set => complete = value; }
+        public OrderEntityState State { get => state; set => state = value; }
+        // public bool Ready { get => ready; set => ready = value; }
+        // public bool Moving { get => moving; set => moving = value; }
+        // public bool Complete { get => complete; set => complete = value; }
         public int CompleteCount { get => completeCount; set => completeCount = value; }
 
         #region Implementations
-
         public override EntityType entityType => EntityType.PrimaryGrill;
 
         public OrderEntityVisual Visual => orderEntityVisual;
@@ -80,13 +89,14 @@ namespace MyGame.SkewerJam.Objects.Entities
         {
             SetActive(active);
 
-            ready = false;
-            complete = false;
-            moving = false;
+            state = OrderEntityState.Waiting;
+            // ready = false;
+            // complete = false;
+            // moving = false;
 
             completeCount = 0;
-
             transform.localScale = Vector3.one;
+            itemIdTarget = ItemId.None;
         }
 
         public void SetData(ItemId itemId, int num)
@@ -174,21 +184,21 @@ namespace MyGame.SkewerJam.Objects.Entities
             for (int i = 0; i < maxItems; i++)
             {
                 var slot = slots[i];
-                if (slot.GetItem() == null)// || slot.GetItem().IsSelected == true)
+                if (slot.GetItem() == null)
                 {
                     return false;
                 }
             }
-            return true; // đã bay tới vị trí slot
+            return true;
         }
 
-        public void PlayComplete(Action onComplete1, Action onComplete2)
+        public void PlayComplete(Action onComplete)
         {
             foreach (var slot in slots)
             {
                 slot.GetItem()?.OnComplete();
             }
-            orderEntityVisual.PlayComplete(onComplete1, onComplete2);
+            orderEntityVisual.PlayComplete(onComplete);
         }
 
         public override void OnReturnObj()
@@ -206,7 +216,8 @@ namespace MyGame.SkewerJam.Objects.Entities
             }
             itemIdTarget = ItemId.None;
             orderIndex = 0;
-            ready = false;
+            state = OrderEntityState.Waiting;
+            // ready = false;
 
             orderEntityVisual.ResetLid();
             transform.localScale = Vector3.one;
@@ -217,7 +228,6 @@ namespace MyGame.SkewerJam.Objects.Entities
         {
             // Khi nhả chuột trái
             //  var popup = PanelManager.Instance.GetPanel<PopupUnlock_SkewerJam>();
-            if (GameController.Instance.GameLogicHandler.IsClearAllItems) return;
             if (GameController.Instance.GameState == GameState.Playing && !active && Input.GetMouseButtonUp(0))
             {
                 var hits = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition));

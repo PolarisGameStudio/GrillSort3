@@ -11,6 +11,7 @@ using Gameplay.Entities;
 using MyGame.SkewerJam.Objects.Entities;
 using SonatFramework.Systems.ObjectPooling;
 using SonatFramework.Scripts.UIModule;
+using static MyGame.SkewerJam.Objects.Entities.OrderEntity;
 
 namespace MyGame.SkewerJamSO.Boosters
 {
@@ -31,9 +32,9 @@ namespace MyGame.SkewerJamSO.Boosters
             foreach (var order in listOrders)
             {
                 if (order.IsActive == false) continue;
-                if (order.Complete == true) continue;
+                if (order.State == OrderEntityState.Complete) continue;
 
-                await UniTask.WaitUntil(() => order.Ready == true);
+                await UniTask.WaitUntil(() => order.State == OrderEntityState.Ready);
 
                 var targetItemId = order.ItemIdTarget;
                 var maxItems = order.MaxItems;

@@ -72,10 +72,15 @@ namespace MyGame.SkewerJam.Objects
         {
             foreach (var grill in listGrills)
             {
+                var subGrills = grill.GetSubGrills();
+                if (subGrills != null && subGrills.Count > 0) return false;
+
                 foreach (var slot in grill.GetSlots())
                 {
                     if (slot.GetItem() != null) return false;
                 }
+
+
             }
             return true;
         }

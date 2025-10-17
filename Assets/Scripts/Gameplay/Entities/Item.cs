@@ -47,6 +47,13 @@ namespace Gameplay.Entities
         private TimeBonusVisual timeBonusVisual;
         protected bool isProcessing;
 
+
+        public bool Moving { get; set; }
+
+
+
+
+
         public virtual void SetItemData(ItemData data, SlotBase slot)
         {
             this.data = data;
@@ -85,7 +92,11 @@ namespace Gameplay.Entities
             this.isPrimary = isPrimary;
             boxCollider.enabled = isPrimary;
             visual.SetPrimary(isPrimary);
-            StartCoroutine(IESpawnSmokeEffect());
+
+            if (gameObject.activeInHierarchy)
+            {
+                StartCoroutine(IESpawnSmokeEffect());
+            }
         }
 
         #region Interactive

@@ -31,7 +31,7 @@ namespace Gameplay.Entities.Items
         private bool exploded = false;
         public bool Exploded => exploded;
         public int MoveRemaining => moveRemaining;
-        // private PopupWarningBomb popupWarningBomb;
+        private PopupWarningBomb popupWarningBomb;
 
         public override void SetItemData(ItemData data, SlotBase slot)
         {
@@ -46,22 +46,21 @@ namespace Gameplay.Entities.Items
             {
                 id = data.id;
 
-                if (data is ItemBombData bombData)
-                {
-                    moveRemaining = bombData.moveLimit;
-                    textBombCountdown.text = moveRemaining.ToString();
-                    if (moveRemaining == 0) SkipBomb();
-                }
-                else
+                if (data is not ItemBombData bombData)
                 {
                     bombData = new()
                     {
                         id = data.id,
                         itemType = data.itemType,
-                        // moveLimit = GameRemoteConfigValue.itemBombLimit
+                        moveLimit = GameRemoteConfigValue.itemBombLimit
                     };
                     this.data = bombData;
                 }
+
+                moveRemaining = bombData.moveLimit;
+                textBombCountdown.text = moveRemaining.ToString();
+                if (moveRemaining == 0) SkipBomb();
+
 
                 visual.gameObject.SetActive(true);
                 visual.SetVisual(data);
@@ -88,11 +87,11 @@ namespace Gameplay.Entities.Items
         private void OnDisable()
         {
             itemBehaviorSO.eventSystemSO.UnregisterEvents_OnDropItem(OnItemDropped);
-            // if (popupWarningBomb != null)
-            // {
-            //     popupWarningBomb.FinishWarning();
-            //     popupWarningBomb = null;
-            // }
+            if (popupWarningBomb != null)
+            {
+                popupWarningBomb.FinishWarning();
+                popupWarningBomb = null;
+            }
         }
 
         public void SkipBomb()
@@ -109,9 +108,17 @@ namespace Gameplay.Entities.Items
             base.OnComplete();
         }
 
-        private void OnItemDropped(Item item, bool changed)
+        private void OnItemDropped(Item item, bool fromWaitingGrill, bool toOrder)
         {
-            if (!changed || exploded) return;
+            if (fromWaitingGrill == true || exploded) return;
+
+
+            // di chuyển đúng item là skip luôn
+            if (item == this)
+            {
+                SkipBomb();
+                return;
+            }
 
             ProcessBomb(item).Forget();
         }
@@ -146,26 +153,26 @@ namespace Gameplay.Entities.Items
 
         private void CheckWarningBomb()
         {
-            // if (!exploded && moveRemaining <= 3 && popupWarningBomb == null)
-            // {
-            //     // popupWarningBomb = PanelManager.Instance.OpenPanel<PopupWarningBomb>(new UIData().Add("Bomb", this));
-            // }
+            if (!exploded && moveRemaining <= 3 && popupWarningBomb == null)
+            {
+                popupWarningBomb = PanelManager.Instance.OpenPanel<PopupWarningBomb>(new UIData().Add("Bomb", this));
+            }
         }
 
         private void PreExplodeBomb()
         {
             exploded = true;
-            // if (popupWarningBomb)
-            // {
-            //     popupWarningBomb.FinishWarning();
-            //     popupWarningBomb = null;
-            // }
+            if (popupWarningBomb)
+            {
+                popupWarningBomb.FinishWarning();
+                popupWarningBomb = null;
+            }
 
 
-            // PanelManager.Instance.OpenPanelByName<PopupSkipBomb>("PopupBombExplosive",
-            //     new UIData().Add("Bomb", this).Add("OnSkipBomb", (Action)SkipBomb).Add("OnGiveUp", (Action)ExplodeBomb));
+            PanelManager.Instance.OpenPanelByName<PopupSkipBomb>("PopupBombExplosive",
+                new UIData().Add("Bomb", this).Add("OnSkipBomb", (Action)SkipBomb).Add("OnGiveUp", (Action)ExplodeBomb));
 
-            ExplodeBomb();
+            // ExplodeBomb();
         }
 
         public void ExplodeBomb()

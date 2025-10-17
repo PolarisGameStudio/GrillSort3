@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Gameplay.Entities;
@@ -7,8 +6,9 @@ using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Objects;
 using MyGame.SkewerJam.Objects.Entities;
 using Sonat.Enums;
-using SonatFramework.Scripts.Utils;
+using SonatFramework.Systems.SettingsManagement.Vibation;
 using UnityEngine;
+using static MyGame.SkewerJam.Objects.Entities.OrderEntity;
 
 namespace MyGame.SkewerJam.Gameplay
 {
@@ -40,11 +40,9 @@ namespace MyGame.SkewerJam.Gameplay
 
         public BoosterManager BoosterManager => boosterManager;
 
-        public Item ItemSelected { get; set; }
-
         #region Event Actions
         public event Action<Item, SlotBase> OnItemStartSwitch;
-        public event Action<Item, bool> OnItemStartSwitchSucess;
+        public event Action<Item, bool, bool> OnItemStartSwitchAndCheck;
 
         public event Action<Item, SlotBase> OnItemEndSwitch;
 
@@ -56,10 +54,6 @@ namespace MyGame.SkewerJam.Gameplay
         public event Action<OrderEntity> OnEndCollectItem;
         #endregion
 
-        private int pumpkin = 0;
-        public int Pumpkin => pumpkin;
-
-        public bool IsClearAllItems { get; private set; } = false;
 
 
         public void Init()
@@ -72,15 +66,10 @@ namespace MyGame.SkewerJam.Gameplay
             obstacleManager.Init();
 
             suggestManager.Init();
-
-            pumpkin = 0;
-
-            IsClearAllItems = false;
         }
 
         public void Clear()
         {
-            pumpkin = 0;
             orderManager.Clear();
             waitingGrillManager.Clear();
             grillManager.Clear();
@@ -96,75 +85,77 @@ namespace MyGame.SkewerJam.Gameplay
         public bool SelectItem(Item item)
         {
             // ItemOnOrder thì không cần chặn
-            if (ItemHelper.CheckSelectedItemOnOrder(item) == false)
+            // Nếu đang warning và số lần chặn click vẫn còn thì chặn click
+            var checkItemOnOrder = ItemHelper.CheckSelectedItemOnOrder(item);
+            if (checkItemOnOrder == false && CheckClickAndWarning(item) == true)
             {
-                // Nếu đang warning và số lần chặn click vẫn còn thì chặn
-                if (WaitingGrillHelper.IsWarning == true && WaitingGrillHelper.CheckWarningCount() == true)
-                {
-                    if (WaitingGrillHelper.Warning() == true)
-                    {
-                        return false;
-                    }
-                }
-
-                WaitingGrillHelper.ResetWarning();
+                MySonatFramework.GetService<VibrationService>().Vibrate(100);
+                return false;
             }
 
             // item bay
-            ItemSelected = item;
-            var (order, slot) = orderManager.GetDestinationSlot(item);
             bool isSwitchSuccess = false;
+
+            var (order, slot) = orderManager.GetDestinationSlot(item);
             if (slot != null)
             {
-                SwitchSlot(slot);
+                WaitingGrillHelper.ResetWarning();
+                SwitchSlot(item, slot, false, true);
                 isSwitchSuccess = true;
             }
-
-            // Kiểm tra còn vị trí ở waiting grill không
-            // Khi bay tới đĩa phải kiểm tra xem có order mới không thì nhảy lên ngay
-            if (isSwitchSuccess == false)
+            else
             {
                 var (waitingGrill, waitingGrillSlot) = waitingGrillManager.GetDestinationSlot();
                 if (waitingGrillSlot != null)
                 {
-                    SwitchSlot(waitingGrillSlot);
+                    SwitchSlot(item, waitingGrillSlot, false, false);
                     isSwitchSuccess = true;
                 }
             }
 
+            // sau khi item switch: Xem có cần warning không?
             if (isSwitchSuccess == true)
             {
-                // sau khi item switch: Xem có cần warning không?
-                if (WaitingGrillHelper.CheckWarning() == true)
+                if (checkItemOnOrder == false && WaitingGrillHelper.CheckWarning() == true)
                 {
                     WaitingGrillHelper.Warning();
                 }
             }
 
+            else
+            {
+                Debug.Log("<color=red>GameLogicHandler:</color> SelectItem: isSwitchSuccess == false, item: " + item.id);
+            }
             return isSwitchSuccess;
         }
 
-        private void SwitchSlot(SlotBase slot)
+        private bool CheckClickAndWarning(Item item)
         {
-            if (ItemSelected == null) return;
-
-            ItemSelected.SetLockState(true);
-            ItemSelected.SwitchSlot(slot);
-            OnItemStartSwitchSucess?.Invoke(ItemSelected, true);
-            OnItemStartSwitch?.Invoke(ItemSelected, slot);
-
-            if (grillManager.CheckClearAllItems())
+            if (WaitingGrillHelper.IsWarning == true && WaitingGrillHelper.CheckWarningCount() == true)
             {
-                IsClearAllItems = true;
+                if (WaitingGrillHelper.Warning() == true)
+                {
+                    return true;
+                }
             }
+            WaitingGrillHelper.ResetWarning();
+            return false;
         }
 
+        private void SwitchSlot(Item item, SlotBase slot, bool fromWaitingGrill, bool toOrder)
+        {
+            item.Moving = true;
+            item.SetLockState(true);
+            item.SwitchSlot(slot);
+            OnItemStartSwitchAndCheck?.Invoke(item, fromWaitingGrill, toOrder);
+            OnItemStartSwitch?.Invoke(item, slot);
 
-        private bool hasCollectItem = false;
-        public bool HasCollectItem => hasCollectItem;
+            TryCheckWinGame().Forget();
+        }
+
         public void ItemMoveSlot(Item item, SlotBase slot)
         {
-            hasCollectItem = false;
+            item.Moving = false;
             OnItemEndSwitch?.Invoke(item, slot);
         }
         #endregion
@@ -172,13 +163,12 @@ namespace MyGame.SkewerJam.Gameplay
         #region MoveNextOrder
         public void StartMoveNextOrder(OrderEntity orderEntity)
         {
-            orderEntity.Moving = true;
+            orderEntity.State = OrderEntityState.Waiting;
         }
 
         public void EndMoveNextOrder(OrderEntity orderEntity, bool startLevel = false)
         {
-            orderEntity.Moving = false;
-            orderEntity.Ready = true;
+            orderEntity.State = OrderEntityState.Ready;
 
             if (startLevel == false)
             {
@@ -187,26 +177,33 @@ namespace MyGame.SkewerJam.Gameplay
             }
 
             int count = 0;
-            var listOrders = new List<OrderEntity>(orderManager.ListOrders);
-            foreach (var order in listOrders)
+            if (orderEntity.IsActive == true)
             {
-                if (order.Ready == false || order.IsActive == false) continue;
-                var targetItem = order.ItemIdTarget;
+                var targetItem = orderEntity.ItemIdTarget;
                 foreach (var waitingGrill in waitingGrillManager.ListWaitingGrills)
                 {
                     var slot = waitingGrill.GetSlot(0);
                     var item = slot.GetItem();
-                    var orderSlot = order.GetAvailableSlot();
-                    if (item != null && item.id == (int)targetItem && orderSlot != null)
+                    var orderSlot = orderEntity.GetAvailableSlot();
+                    if (item != null && item.id == (int)targetItem && orderSlot != null && item.Moving == false)
                     {
-                        ItemSelected = item;
-                        SwitchSlot(orderSlot);
+                        // chờ tới khi item rơi hẳn xuống đĩa thì mới lấy
+                        SwitchSlot(item, orderSlot, true, true);
                         count++;
                     }
                 }
             }
+            WaitingGrillHelper.ResetWarning();
+        }
 
-            TryCheckLoseGame().Forget();
+        public void TryCheckMatchItem(Item item)
+        {
+            var (_, slot) = orderManager.GetDestinationSlot(item);
+            if (slot != null)
+            {
+                SwitchSlot(item, slot, true, true);
+                return;
+            }
         }
         #endregion
 
@@ -215,11 +212,11 @@ namespace MyGame.SkewerJam.Gameplay
         {
             OnStartCollectItem?.Invoke(orderEntity);
 
-            hasCollectItem = true;
             foreach (var slot in orderEntity.GetSlots())
             {
                 slot.GetItem()?.OnComplete();
             }
+            WaitingGrillHelper.ResetWarning();
         }
 
         public void EndCollectItem(OrderEntity orderEntity)
@@ -227,7 +224,7 @@ namespace MyGame.SkewerJam.Gameplay
             OnEndCollectItem?.Invoke(orderEntity);
             OnCollectItem?.Invoke((int)orderEntity.ItemIdTarget);
 
-            TryCheckWinGame().Forget();
+            GameController.Instance.TryWin();
         }
         #endregion
 
@@ -237,13 +234,13 @@ namespace MyGame.SkewerJam.Gameplay
         {
             if (CheckWinGame())
             {
-                GameController.Instance.Win();
+                GameController.Instance.SetWin();
             }
         }
+
         public bool CheckWinGame()
         {
             // Win khi clear hết level hết order
-
             if (GameController.Instance.GameState != GameState.Playing && GameController.Instance.GameState != GameState.UsingBooster)
                 return false;
 
@@ -253,7 +250,6 @@ namespace MyGame.SkewerJam.Gameplay
 
         public async UniTask TryCheckLoseGame()
         {
-            Debug.Log("TryCheckLoseGame");
             var stuckType = CheckLoseGame();
             if (stuckType != null)
             {
@@ -271,7 +267,7 @@ namespace MyGame.SkewerJam.Gameplay
             {
                 if (waitingGrill.GetSlots().Where(e => e.isEmpty() && waitingGrill.IsActive).Count() > 0)
                 {
-                    Debug.Log("waitingGrill.GetSlots().Where(e => e.isEmpty() && waitingGrill.IsActive).Count() > 0");
+                    // Debug.Log("waitingGrill.GetSlots().Where(e => e.isEmpty() && waitingGrill.IsActive).Count() > 0");
                     return null;
                 }
             }

@@ -11,5 +11,6 @@ namespace MyGame.SkewerJam.Scripts.SO.SkewerJam.Gameplay
         public ResourceData unlockTrayPrice;
         public ResourceData unlockPlatePrice;
         public ResourceData unlockOctoChefPrice;
+        public ResourceData skipBombPrice;
     }
 }

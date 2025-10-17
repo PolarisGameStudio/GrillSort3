@@ -10,6 +10,7 @@ using MyGame.SkewerJam.Scripts.SO.SkewerJam.Gameplay;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
 using UnityEngine;
+using static PopupUnlockInGame;
 
 namespace MyGame.SkewerJam.Scripts.SO.Behavior
 {
@@ -140,11 +141,11 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
 
         private void OpenPopupUnlock(Action onComplete)
         {
-            //  var uiData = new UIData();
-            // uiData.Add("SelectedObjectType", SelectedObjectType.OctoChef);
-            // uiData.Add("Price", GameController.Instance.GameConfig.unlockOctoChefPrice);
-            // uiData.Add("OnSuccess", onComplete);
-            // PanelManager.Instance.OpenPanelByName<PopupUnlock_SkewerJam>("PopupUnlockOctochef_SkewerJam", uiData);
+            var uiData = new UIData();
+            uiData.Add("SelectedObjectType", SelectedObjectType.OctoChef);
+            uiData.Add("Price", GameController.Instance.GameConfig.unlockOctoChefPrice);
+            uiData.Add("OnSuccess", onComplete);
+            PanelManager.Instance.OpenPanelByName<PopupUnlockInGame>("PopupUnlockOctochef", uiData);
         }
     }
 }

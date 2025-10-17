@@ -5,7 +5,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 {
     public static class WaitingGrillHelper
     {
-        private const int MAX_BLOCK_CLICK_TO_WARNING = 2; // Số lần chặn click sẽ là MAX_BLOCK_CLICK_TO_WARNING -1
+        private const int MAX_BLOCK_CLICK_TO_WARNING = 1; // Số lần chặn click sẽ là MAX_BLOCK_CLICK_TO_WARNING -1
         private const float MAX_WARNING = MAX_BLOCK_CLICK_TO_WARNING + 1;
 
         public static bool IsWarning = false;

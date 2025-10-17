@@ -70,7 +70,7 @@ public class CheatManager : Singleton<CheatManager>
 	}
 	public static void CheatWin()
 	{
-		GameController.Instance.Win();
+		GameController.Instance.SetWin(true);
 	}
 	public static void CheatLose()
 	{

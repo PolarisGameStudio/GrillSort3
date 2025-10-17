@@ -19,7 +19,7 @@ namespace Manager
         public static int numberSpecialItemPerLevel;
         public static int iceGrillStep = 4;
         public static int iceGrillStep_SkewerJam = 6;
-        public static int itemBombLimit;
+        public static int itemBombLimit = 10;
         public static bool popupUnlockTray;
         public static int numberItemCanMergeAfterShuffle = 5;
         public static int levelShowInterLose;

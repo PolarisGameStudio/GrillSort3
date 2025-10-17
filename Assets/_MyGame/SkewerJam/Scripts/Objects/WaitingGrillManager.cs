@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Gameplay.Entities;
 using MyGame.SkewerJam.Gameplay;
-using MyGame.SkewerJam.Gameplay.Utils;
 using MyGame.SkewerJam.Objects.Entities;
 using UnityEngine;
 using DG.Tweening;
 using System.Linq;
 using MyGame.SkewerJam.Level;
-using SonatFramework.Scripts.Utils;
-using MyGame.SkewerJam.Gameplay.Helpers;
+using static MyGame.SkewerJam.Objects.Entities.OrderEntity;
+using Manager;
 
 namespace MyGame.SkewerJam.Objects
 {
@@ -60,11 +59,7 @@ namespace MyGame.SkewerJam.Objects
         {
             if (slot.GetGrill() is WaitingGrill waitingGrill)
             {
-                // var gameLogicHandler = GameController.Instance.GameLogicHandler;
-                // if (WaitingGrillHelper.IsWarning == true)
-                // {
-                //     WaitingGrillHelper.Warning();
-                // }
+                GameController.Instance.GameLogicHandler.TryCheckMatchItem(item);
                 GameController.Instance.GameLogicHandler.TryCheckLoseGame();
             }
         }

@@ -9,6 +9,9 @@ using DG.Tweening;
 using System.Linq;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Level;
+using static MyGame.SkewerJam.Objects.Entities.OrderEntity;
+using SonatFramework.Systems.AudioManagement;
+using Sonat.Enums;
 
 namespace MyGame.SkewerJam.Objects
 {
@@ -28,6 +31,7 @@ namespace MyGame.SkewerJam.Objects
 
         private List<Vector3> _listOrderLocalPositions = new List<Vector3>();
 
+        public OrderManagerSO OrderManagerSO => orderManagerSO;
         public List<OrderEntity> ListOrders => _listOrders;
         public Transform LeftStartPos => leftStartPos;
         public Transform RightStartPos => rightStartPos;
@@ -72,12 +76,15 @@ namespace MyGame.SkewerJam.Objects
 
         private void GameLogicHandler_OnItemStartSwitch(Item item, SlotBase slot)
         {
+            // check ngay hoàn thành order
+            // nếu complete thì tạo ngay next order
             if (slot.GetGrill() is OrderEntity orderEntity)
             {
                 if (orderEntity.CheckComplete())
                 {
+                    orderEntity.State = OrderEntityState.Complete;
+
                     var orderIndex = orderEntity.OrderIndex;
-                    orderEntity.Complete = true;
                     _listOrders.Remove(orderEntity);
 
                     var checkNextOrder = OrderHelper.CheckCreateNextOrder();
@@ -95,8 +102,11 @@ namespace MyGame.SkewerJam.Objects
             if (slot.GetGrill() is OrderEntity orderEntity)
             {
                 orderEntity.CompleteCount++;
-                if (orderEntity.Complete && orderEntity.CompleteCount == orderEntity.MaxItems)
+
+                // kiểm tra order này đã hoàn thành và các item bay đủ tới chưa
+                if (orderEntity.State == OrderEntityState.Complete && orderEntity.CompleteCount == orderEntity.MaxItems)
                 {
+
                     var nextOrder = _listOrders.Where(e => e.OrderIndex == orderEntity.OrderIndex).FirstOrDefault();
                     var checkNextOrder = nextOrder != null;
 
@@ -108,9 +118,6 @@ namespace MyGame.SkewerJam.Objects
                             {
                                 AlignObjects(_listOrdersToAlign).Forget();
                             }
-                        }, () =>
-                        {
-
                         });
 
                     if (nextOrder != null)
@@ -120,10 +127,6 @@ namespace MyGame.SkewerJam.Objects
                     }
 
                     GameController.Instance.GameLogicHandler.StartCollectItem(orderEntity);
-                }
-                else
-                {
-                    GameController.Instance.GameLogicHandler.TryCheckLoseGame();
                 }
             }
 
@@ -195,17 +198,18 @@ namespace MyGame.SkewerJam.Objects
             Debug.Log("<color=yellow>OrderManager:</color> CreateNextOrder: " + itemId + " " + num);
 
             var nextOrder = await CreateActiveNextOrder(itemId, num);
+            nextOrder.SetOrderIndex(orderIndex);
+
             var orderPos = leftStartPos.position;
             orderPos.z = 0;
-
             nextOrder.transform.position = orderPos;
-            nextOrder.SetOrderIndex(orderIndex);
         }
 
         private async UniTask PlayAppearNextOrder(OrderEntity nextOrder)
         {
             await UniTask.Delay((int)(orderEntityConfigSO.delayAppearNextOrder * 1000));
 
+            MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Box_Appear_Grill3);
             await nextOrder.transform.DOLocalMove(_listOrderLocalPositions[nextOrder.OrderIndex], orderEntityConfigSO.durationMoveIn).SetEase(Ease.OutSine);
 
             GameController.Instance.GameLogicHandler.EndMoveNextOrder(nextOrder);
@@ -218,6 +222,7 @@ namespace MyGame.SkewerJam.Objects
                 var order = _listOrders[i];
 
                 GameController.Instance.GameLogicHandler.StartMoveNextOrder(order);
+                MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Box_Appear_Grill3);
                 order.transform.DOLocalMove(_listOrderLocalPositions[order.OrderIndex], 0.3f).SetEase(Ease.OutSine).OnComplete(() =>
                 {
                     GameController.Instance.GameLogicHandler.EndMoveNextOrder(order, true);
@@ -231,7 +236,7 @@ namespace MyGame.SkewerJam.Objects
         {
             foreach (var order in _listOrders)
             {
-                if (order.ItemIdTarget == (ItemId)item.id && order.Ready)
+                if (order.ItemIdTarget == (ItemId)item.id && order.State == OrderEntityState.Ready && order.IsActive == true)
                 {
                     var orderSlot = order.GetAvailableSlot();
                     if (orderSlot != null)
@@ -260,9 +265,9 @@ namespace MyGame.SkewerJam.Objects
             var dict = new Dictionary<ItemId, (int maxItems, int num)>();
             foreach (var order in _listOrders)
             {
-                if (order.IsActive == false) continue;
-
                 var targetItem = order.ItemIdTarget;
+                if (order.IsActive == false || targetItem == ItemId.None) continue;
+
                 if (dict.ContainsKey(targetItem) == false)
                 {
                     dict[targetItem] = (0, 0);

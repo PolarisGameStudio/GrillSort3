@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using MyGame.SkewerJam.Gameplay;
 using MyGame.SkewerJam.Objects.Entities;
 using Sonat.Enums;
 using SonatFramework.Systems.AudioManagement;

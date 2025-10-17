@@ -34,7 +34,7 @@ public class HomeManager : SingletonSimple<HomeManager>
     private void OnEnable()
     {
         running = false;
-        MySonatFramework.GetService<AudioService>().PlayMusic(AudioId.BGM_Ingame_Summer_Grill3);
+        MySonatFramework.GetService<AudioService>().PlayMusic(AudioId.BGM_Home_Default_Grill3);
 
         ClaimRewardFreeLives().Forget();
     }
