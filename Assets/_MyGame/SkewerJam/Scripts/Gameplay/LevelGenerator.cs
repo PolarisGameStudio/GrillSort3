@@ -214,8 +214,6 @@ namespace MyGame.SkewerJam.Gameplay
             {
                 case GrillType.LockAds:
                     return (null, 0);
-                case GrillType.Vending:
-                    return (GrillType.Normal, 1);
             }
 
             return (grillType, slotCount);

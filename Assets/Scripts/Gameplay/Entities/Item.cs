@@ -92,7 +92,11 @@ namespace Gameplay.Entities
             this.isPrimary = isPrimary;
             boxCollider.enabled = isPrimary;
             visual.SetPrimary(isPrimary);
-            StartCoroutine(IESpawnSmokeEffect());
+
+            if (gameObject.activeInHierarchy)
+            {
+                StartCoroutine(IESpawnSmokeEffect());
+            }
         }
 
         #region Interactive

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Gameplay.LevelData;
 using Manager;
@@ -19,7 +20,6 @@ namespace Gameplay.Entities.GrillScripts
         [SerializeField] private Transform progress;
 
         private List<VendingGrillTileInProgress> tiles = new();
-        private readonly Service<PoolingService> poolingService = new();
 
         public override void SetDefaultGrill(GrillData grillData)
         {
@@ -29,27 +29,25 @@ namespace Gameplay.Entities.GrillScripts
             txtNumLayer.text = numLayer.ToString();
             progress.gameObject.SetActive(true);
             tiles.Clear();
+            SpanwTiles(numLayer);
+        }
+
+        private async UniTask SpanwTiles(int numLayer)
+        {
             for (int i = 0; i < numLayer; i++)
             {
-                var tile = poolingService.Instance.Create<VendingGrillTileInProgress>("VendingGrillTileInProgress");
-
+                var grill = GetComponentInParent<GrillBase>();
+                var gameFactory = grill.GrillBaseBehaviorSO.gameFactorySO;
+                var tile = await gameFactory.CreateItem<VendingGrillTileInProgress>("VendingGrillTileInProgress");
                 tile.Setup(i, numLayer, container);
                 tiles.Add(tile);
             }
         }
-
         protected override void SetVisual()
         {
-            // if (GameplayController.instance.levelGenerator.LevelData.levelType is LevelType.Cake or LevelType.Fruit)
-            // {
-            //     stove.SetSpriteAsync(PathManager.TraySprite("Fruit_Single"));
-            //     lid.SetSpriteAsync(PathManager.LidSprite("Fruit_Single"));
-            // }
-            // else
-            // {
-            //     stove.SetSpriteAsync(PathManager.TraySprite("Normal_Single"));
-            //     lid.SetSpriteAsync(PathManager.LidSprite("Normal_Single"));
-            // }
+            var grillBase = GetComponentInParent<GrillBase>();
+            grillBase.GrillBaseBehaviorSO.grillVisualSO.SetGrillBaseVisual(this, stove, lid, stoveType, lidType);
+
         }
 
         // public override void UpdateSubGrill()
@@ -77,7 +75,9 @@ namespace Gameplay.Entities.GrillScripts
 
             tiles[numLayer].transform.DOScale(0, 0.5f).SetEase(Ease.InBack).OnComplete(() =>
             {
-                poolingService.Instance.ReturnObj(tiles[numLayer]);
+                var grill = GetComponentInParent<GrillBase>();
+                var gameFactory = grill.GrillBaseBehaviorSO.gameFactorySO;
+                gameFactory.ReturnEntity(tiles[numLayer]);
                 tiles.RemoveAt(numLayer);
             });
         }
@@ -91,7 +91,9 @@ namespace Gameplay.Entities.GrillScripts
                 if (i >= numLayer)
                     tiles[i].transform.DOScale(0, 0.5f).SetEase(Ease.InBack).OnComplete(() =>
                     {
-                        poolingService.Instance.ReturnObj(tiles[numLayer]);
+                        var grill = GetComponentInParent<GrillBase>();
+                        var gameFactory = grill.GrillBaseBehaviorSO.gameFactorySO;
+                        gameFactory.ReturnEntity(tiles[numLayer]);
                         tiles.RemoveAt(numLayer);
                     });
             }
@@ -104,13 +106,15 @@ namespace Gameplay.Entities.GrillScripts
             {
                 foreach (var tile in tiles)
                 {
-                    poolingService.Instance.ReturnObj(tile);
+                    var grill = GetComponentInParent<GrillBase>();
+                    var gameFactory = grill.GrillBaseBehaviorSO.gameFactorySO;
+                    gameFactory.ReturnEntity(tile);
                 }
             }
 
             tiles.Clear();
         }
-        
+
         public void Unlock()
         {
             progress.gameObject.SetActive(false);

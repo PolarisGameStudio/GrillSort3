@@ -44,7 +44,7 @@ namespace Gameplay.Entities
             {
                 SetLockItems(true);
                 grillVisual.CloseGrill();
-                // SonatUtils.DelayCall(0.5f, grillVisual.CloseGrill, this);
+                // // SonatUtils.DelayCall(0.5f, grillVisual.CloseGrill, this);
                 // GameplayController.OnActionLockGrill?.Invoke(this);
             }
 
@@ -74,7 +74,7 @@ namespace Gameplay.Entities
             {
                 SetLockItems(true);
                 grillVisual.CloseGrill();
-                // SonatUtils.DelayCall(0.5f, grillVisual.CloseGrill, this);
+                //  // SonatUtils.DelayCall(0.5f, grillVisual.CloseGrill, this);
                 // GameplayController.OnActionLockGrill?.Invoke(this);
             }
         }
