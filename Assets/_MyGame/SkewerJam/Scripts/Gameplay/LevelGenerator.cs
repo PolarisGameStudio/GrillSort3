@@ -35,15 +35,11 @@ namespace MyGame.SkewerJam.Gameplay
         public async UniTask GenerateLevel(int level, bool backup = false)
         {
             _level = level;
-            Debug.Log("<color=green>[LevelGenerator]</color> GenerateLevel: " + level);
+            
             _levelData = await levelService.GetLevelData<LevelData_SkewerJam>(level, GameMode.Classic);
             _levelData = ValidateLevelData(_levelData);
 
-            Debug.Log("<color=green>[LevelGenerator]</color> GenerateLevel: " + level);
-            await GameController.Instance.GameLogicHandler.ItemManager.Init();
-
-            var listWaitingGrillIds = Enumerable.Repeat(0, _levelData.numberOfWaitingGrill).ToList();
-            var listOrderData = new List<(int maxNumber, int itemId, int number)>();
+            GameController.Instance.GameLogicHandler.ItemManager.Init();
             await LoadGameObjects(_levelData);
         }
 

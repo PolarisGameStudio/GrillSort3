@@ -265,9 +265,9 @@ namespace MyGame.SkewerJam.Objects.Entities
             var gameLogicHandler = GameController.Instance.GameLogicHandler;
             var orderManager = gameLogicHandler.OrderManager;
 
-            if (OrderHelper.CheckCreateNextOrder())
+            if (orderManager.LogicOrderHandler.CheckCreateNextOrder())
             {
-                var (itemId, num) = await OrderHelper.GetItemOrder(isRescue);
+                var (itemId, num) = await orderManager.LogicOrderHandler.GetItemOrder(isRescue);
                 Debug.Log("<color=red>itemId: " + itemId + ", num: " + num + "</color>");
                 SetTargetItem(itemId, num);
 

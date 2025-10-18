@@ -116,7 +116,6 @@ namespace MyGame.SkewerJam.Gameplay
 
             this.level = level;
 
-            Debug.Log("<color=green>[GameController]</color> PlayLevel: " + level);
             InitLevel();
 
             await levelGenerator.GenerateLevel(level);

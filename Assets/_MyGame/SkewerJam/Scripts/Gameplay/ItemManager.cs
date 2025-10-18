@@ -23,10 +23,8 @@ namespace MyGame.SkewerJam.Gameplay
             OnUpdateItems?.Invoke(currentItems);
         }
 
-        public async UniTask Init()
+        public void Init()
         {
-            // await UniTask.WaitUntil(() => GameController.Instance.LevelGenerator.LevelData != null);
-
             var levelData = GameController.Instance.LevelGenerator.LevelData;
             totalItems = 0;
             currentItems = 0;

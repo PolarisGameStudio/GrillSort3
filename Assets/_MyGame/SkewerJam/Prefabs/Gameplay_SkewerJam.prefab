@@ -96,6 +96,54 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f528b22d5b302134b9e3f251c351823c, type: 2}
   - {fileID: 11400000, guid: dbbfd012acfa42c4d8d196f67acc3b13, type: 2}
   - {fileID: 11400000, guid: 58adab778e83c4f4da0a4c325f1b3dab, type: 2}
+--- !u!1 &2331033934184841407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6510086738803746257}
+  - component: {fileID: 7448317041452728583}
+  m_Layer: 0
+  m_Name: LogicOrderHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6510086738803746257
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2331033934184841407}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 7.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7597675867907486549}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7448317041452728583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2331033934184841407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e1fab5fd28ae444aae1e743de09e114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listLogicOrders:
+  - {fileID: 11400000, guid: bb9922effcd1beb4083e3a145cc542c9, type: 2}
+  - {fileID: 11400000, guid: ee847661638ddc14c9f7002192b888ab, type: 2}
+  maxStep2Gap: 3
 --- !u!1 &2498146512768491254
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,6 +186,8 @@ Transform:
   - {fileID: 7179361291361567834}
   - {fileID: 3568897749058535435}
   - {fileID: 6537488047678377416}
+  - {fileID: 6206710873453940645}
+  - {fileID: 6510086738803746257}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2679455674246098798
@@ -436,11 +486,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47aacd40a856c04ab5454532ae0997b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orderManagerSO: {fileID: 11400000, guid: 4714aeee21a6c2e46a5e011a08033f9f, type: 2}
   orderEntityConfigSO: {fileID: 11400000, guid: 4bbd72f8c973b4b4b983863c2d5a1ed3, type: 2}
   distance: 2.6
   rightStartPos: {fileID: 0}
   leftStartPos: {fileID: 0}
+  logicOrderHandler: {fileID: 7448317041452728583}
 --- !u!1 &6600951101124777704
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,6 +545,37 @@ MonoBehaviour:
   conveyorManager: {fileID: 105119433960544424}
   obstacleManager: {fileID: 7114630774865243566}
   suggestManager: {fileID: 3828940394853202063}
+--- !u!1 &6751671097276636297
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6206710873453940645}
+  m_Layer: 0
+  m_Name: -----Logic---------------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6206710873453940645
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6751671097276636297}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.3732367, y: -16.703283, z: -0.2563523}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7597675867907486549}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7090566216031647539
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,6 +716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comboConfigSO: {fileID: 11400000, guid: 77dbd3e0a89099348846e3a68be9fcd4, type: 2}
+  uiCombo: {fileID: 0}
 --- !u!1 &8647375863644526159
 GameObject:
   m_ObjectHideFlags: 0
