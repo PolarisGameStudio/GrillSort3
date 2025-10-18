@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using MyGame.SkewerJam.Level;
 using MyGame.SkewerJam.Objects.Entities;
 using UnityEngine;
 
@@ -25,7 +26,13 @@ namespace MyGame.SkewerJam.Gameplay
 
         public void Init()
         {
-            var levelData = GameController.Instance.LevelGenerator.LevelData;
+            var levelGenerator = GameController.Instance.LevelGenerator;
+            levelGenerator.OnLoadLevelData += OnLoadLevelData;
+            GameController.Instance.GameLogicHandler.OnStartCollectItem += OnStartCollectItem;
+        }
+
+        private void OnLoadLevelData(LevelData_SkewerJam levelData)
+        {
             totalItems = 0;
             currentItems = 0;
             foreach (var grillData in levelData.grillData)
@@ -50,12 +57,14 @@ namespace MyGame.SkewerJam.Gameplay
 
             currentItems = totalItems;
             Debug.Log($"Init: {currentItems}");
-            GameController.Instance.GameLogicHandler.OnStartCollectItem += OnStartCollectItem;
             OnUpdateItems?.Invoke(currentItems);
         }
 
+
         public void Clear()
         {
+            var levelGenerator = GameController.Instance.LevelGenerator;
+            levelGenerator.OnLoadLevelData -= OnLoadLevelData;
             GameController.Instance.GameLogicHandler.OnStartCollectItem -= OnStartCollectItem;
             totalItems = 0;
             currentItems = 0;

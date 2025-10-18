@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using DG.Tweening.Plugins.Options;
 using Manager;
 using MyGame.SkewerJam.Gameplay.LogicOrder;
+using MyGame.SkewerJam.Gameplay.LogicOrder.Configs;
+using MyGame.SkewerJam.Level;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay.Helpers
@@ -12,19 +15,50 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
     {
         [SerializeField] private List<BaseOrderSO> listLogicOrders;
 
-        // OPTIMIZE: LOGIC ORDER
-        private int rescueGap = 0;
-        private int currentNumberRescues = 0;
-        private int stepGap = 0;
-        public int maxStep2Gap = 3;
+        [Header("Configs")]
+        [SerializeField] private LogicOrderConfigSO logicOrderConfigSO;
+        [SerializeField] private SpecialOrderConfigSO specialOrderConfigSO;
 
+        private SequenceConfigSO selectedSequenceConfig;
 
-        public void Reset()
+        public void Init()
         {
-            rescueGap = 0;
-            currentNumberRescues = 0;
+            foreach (var logicOrder in listLogicOrders)
+            {
+                logicOrder.Init();
+            }
 
-            stepGap = 0;
+            var levelGenerator = GameController.Instance.LevelGenerator;
+            levelGenerator.OnLoadLevelData += OnLoadLevelData;
+        }
+
+        public void Clear()
+        {
+            var levelGenerator = GameController.Instance.LevelGenerator;
+            levelGenerator.OnLoadLevelData -= OnLoadLevelData;
+        }
+
+        private void OnLoadLevelData(LevelData_SkewerJam levelData)
+        {
+            var sequenceIndex = ValidateSequenceIndex(levelData.sequenceLogicOrderIndex);
+            selectedSequenceConfig = logicOrderConfigSO.listSequenceConfigs[sequenceIndex];
+            foreach (var logicOrder in listLogicOrders)
+            {
+                logicOrder.SetLevelData(levelData);
+            }
+        }
+
+        private int ValidateSequenceIndex(int index)
+        {
+            if (index < 0)
+            {
+                return 0;
+            }
+            if (index >= logicOrderConfigSO.listSequenceConfigs.Count)
+            {
+                return logicOrderConfigSO.listSequenceConfigs.Count - 1;
+            }
+            return index;
         }
 
         public bool CheckCreateNextOrder()
@@ -53,9 +87,8 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
         public async UniTask<(ItemId itemId, int num)> GetItemOrder(bool isRescue = false)
         {
+            Debug.Log("<color=purple>LogicOrderHandler:</color> -----GetItemOrder----");
             var forceLogicOrder = listLogicOrders.FirstOrDefault(e => e.ForceUse(isRescue));
-
-            // khoảng gap giữa các lần rescue và giới hạn số lần
             if (forceLogicOrder != null)
             {
                 Debug.Log("<color=blue>OrderHelper:</color> Use " + forceLogicOrder.name + " to rescue");
@@ -68,45 +101,61 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             gameplayInfoForLogicOrder.UpdateState();
             var selectedLogicOrder = ChooseLogicOrder();
             Debug.Log("<color=green>OrderHelper:</color> Use " + selectedLogicOrder.name);
-            return selectedLogicOrder.GetOrder(gameplayInfoForLogicOrder);
 
-            // var (itemId, num, step) = GetItemOrderBasic(logicOrderConfig.minNumberSteps, gameplayInfo);
-            // if (itemId != ItemId.None)
-            // {
-            //     if (rescueGap > 0) rescueGap--;
-            //     if (step >= 2 && stepGap <= 0)
-            //     {
-            //         stepGap = maxStep2Gap;
-            //         return (itemId, num);
-            //     }
-
-            //     if (step < 2)
-            //     {
-            //         stepGap -= 1;
-            //         stepGap = Mathf.Min(stepGap, maxStep2Gap);
-            //         return (itemId, num);
-            //     }
-            // }
-            // stepGap -= 1;
-            // stepGap = Mathf.Min(stepGap, maxStep2Gap);
-            // var (itemId2, num2, step2) = ForceGetItemOrderBasic(gameplayInfo);
-            // if (step2 >= 2) stepGap = maxStep2Gap;
-            // return (itemId2, num2);
-
+            var (itemId, num) = selectedLogicOrder.GetOrder(gameplayInfoForLogicOrder);
+            if (itemId != ItemId.None)
+            {
+                return (itemId, num);
+            }
+            else
+            {
+                Debug.Log("<color=red>OrderHelper:</color> GetItemOrder: No item found");
+                var basicOrder = listLogicOrders.FirstOrDefault(e => e.GetType().Name == nameof(BasicOrderSO));
+                var (i, n, s) = (basicOrder as BasicOrderSO).ForceGetItemOrderBasic(gameplayInfoForLogicOrder);
+                return (i, n);
+            }
         }
 
         private BaseOrderSO ChooseLogicOrder()
         {
             // kiểm tra xem có sử dụng được nó không
-            foreach (var logicOrder in listLogicOrders)
+
+            var phase = GetCurrentPhase();
+
+            var phaseConfig = selectedSequenceConfig.listPhaseConfigs[phase];
+            var idxBO = phaseConfig.indexBO;
+            var idxSO = phaseConfig.indexSO;
+            var specialOrderConfig = specialOrderConfigSO.listSpecialOrderConfigs[idxSO];
+
+            var random = UnityEngine.Random.Range(0f, 1f);
+            Debug.Log("<color=white>LogicOrderHandler:</color> ChooseLogicOrder: " + Mathf.Round(random * 100f) * 0.01f + " >>> " + specialOrderConfig.rateBasicOrder + " - " + specialOrderConfig.rateLockedOrder + " - " + specialOrderConfig.rateBlindedOrder);
+            if (random < specialOrderConfig.rateBasicOrder)
             {
-                if (logicOrder.CanUse())
-                {
-                    return logicOrder;
-                }
+                var basicOrder = listLogicOrders.FirstOrDefault(e => e.GetType().Name == nameof(BasicOrderSO));
+                (basicOrder as BasicOrderSO).SetData(idxBO);
+                return basicOrder;
             }
-            Debug.Log("<color=red>OrderHelper:</color> No logic order can use");
-            return null;
+            else if (random < specialOrderConfig.rateBasicOrder + specialOrderConfig.rateLockedOrder)
+            {
+                return listLogicOrders.FirstOrDefault(e => e.GetType().Name == nameof(LockedOrderSO));
+            }
+            else
+            {
+                return listLogicOrders.FirstOrDefault(e => e.GetType().Name == nameof(BlindedOrderSO));
+            }
+        }
+
+        private int GetCurrentPhase()
+        {
+            var gameLogicHandler = GameController.Instance.GameLogicHandler;
+            var itemManager = gameLogicHandler.ItemManager;
+            var currentItems = itemManager.CurrentItems;
+            var totalItems = itemManager.TotalItems;
+
+            var percentage = (float)(totalItems - currentItems) / totalItems;
+            var phase = selectedSequenceConfig.listPhaseConfigs.Where(e => e.threshold >= percentage).OrderBy(e => e.index).FirstOrDefault();
+            Debug.Log("<color=purple>LogicOrderHandler:</color> GetCurrentPhase: " + phase.index + " - " + Mathf.Round(percentage * 100f) * 0.01f);
+            return phase.index;
         }
     }
 }

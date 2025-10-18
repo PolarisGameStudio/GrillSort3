@@ -142,8 +142,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listLogicOrders:
   - {fileID: 11400000, guid: bb9922effcd1beb4083e3a145cc542c9, type: 2}
+  - {fileID: 11400000, guid: f8caa0907bbd6ba49a5e595707bbe681, type: 2}
+  - {fileID: 11400000, guid: 38eff051946ca8545a3d130c04d54363, type: 2}
   - {fileID: 11400000, guid: ee847661638ddc14c9f7002192b888ab, type: 2}
-  maxStep2Gap: 3
+  logicOrderConfigSO: {fileID: 11400000, guid: 56b2a2fae1cb2944a99298dca011f2e8, type: 2}
+  specialOrderConfigSO: {fileID: 11400000, guid: 9694af8702f074942b85a69514ec9538, type: 2}
 --- !u!1 &2498146512768491254
 GameObject:
   m_ObjectHideFlags: 0

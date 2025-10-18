@@ -1,6 +1,7 @@
 using System.Linq;
 using Manager;
-using MyGame.SkewerJam.Gameplay.Helpers;
+using MyGame.SkewerJam.Gameplay.LogicOrder.Configs;
+using MyGame.SkewerJam.Level;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay.LogicOrder
@@ -8,10 +9,30 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
     [CreateAssetMenu(fileName = "BasicOrderSO", menuName = "MyGame/SkewerJam/Gameplay/LogicOrder/BasicOrderSO")]
     public class BasicOrderSO : BaseOrderSO
     {
+        [SerializeField] private BasicOrderConfigSO basicOrderConfigSO;
+
+        private BO selectedBO;
+
+        public override void Init()
+        {
+
+        }
+
+        public override void SetLevelData(LevelData_SkewerJam levelData)
+        {
+
+        }
+
+        public void SetData(int indexBO)
+        {
+            Debug.Log("<color=white>BasicOrderSO:</color> SetData: " + indexBO);
+            selectedBO = basicOrderConfigSO.listBasicOrderConfigs[indexBO];
+        }
+
         public override (ItemId itemId, int num) GetOrder(GameplayInfoForLogicOrder info)
         {
-            var level = GameController.Instance.Level;
-            var selectedNumStep = level % 4;
+            var selectedNumStep = GetSelectedNumStep();
+            Debug.Log("<color=white>BasicOrderSO:</color> GetOrder: selectedNumStep: " + selectedNumStep);
             var (itemId, num, step) = GetItemOrderBasic(selectedNumStep, info);
 
             if (itemId == ItemId.None)
@@ -23,7 +44,29 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             return (itemId, num);
         }
 
-        private (ItemId itemId, int num, int step) GetItemOrderBasic(int minStep, GameplayInfoForLogicOrder info)
+        private int GetSelectedNumStep()
+        {
+            var random = UnityEngine.Random.Range(0f, 1f);
+            Debug.Log("<color=white>BasicOrderSO:</color> GetSelectedNumStep: " + Mathf.Round(random * 100f) * 0.01f + " >>> " + selectedBO.rateWith0Step + " - " + selectedBO.rateWith1Step + " - " + selectedBO.rateWith2Step + " - " + selectedBO.rateWith3Step);
+            if (random < selectedBO.rateWith0Step)
+            {
+                return 0;
+            }
+            else if (random < selectedBO.rateWith0Step + selectedBO.rateWith1Step)
+            {
+                return 1;
+            }
+            else if (random < selectedBO.rateWith0Step + selectedBO.rateWith1Step + selectedBO.rateWith2Step)
+            {
+                return 2;
+            }
+            else
+            {
+                return 3;
+            }
+        }
+
+        private (ItemId itemId, int num, int step) GetItemOrderBasic(int selectedStep, GameplayInfoForLogicOrder info)
         {
             // NOTE: Ưu tiên lấy theo numSteps, sau đó mới tính đến numItems
             var dictNeededSlots = info.DictNeededSlots;
@@ -35,20 +78,20 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             var itemIds = dictNeededSlots.Keys;
 
             var maxStep = dictNeededSlots.Values.Max(e => e.Values.Max());
-            for (int step = minStep; step <= maxStep; step++)
+            for (int step = selectedStep; step <= maxStep; step++)
             {
                 var randomItemIds = itemIds.Where(e => dictNeededSlots[e].ContainsValue(step)).ToList();
                 if (randomItemIds == null || randomItemIds.Count == 0) continue;
 
                 var (itemId, num, s) = OrderHelper.GetOptimizedRandomItem(randomItemIds, step, info);
-                Debug.Log("<color=white>OrderHelper:</color> GetItemOrderBasic: " + itemId + " " + num + " minStep: " + s);
+                Debug.Log("<color=white>OrderHelper:</color> GetItemOrderBasic: " + itemId + " " + num + " step: " + s);
                 return (itemId, num, s);
             }
 
             return (ItemId.None, 0, 0);
         }
 
-        private (ItemId itemId, int num, int step) ForceGetItemOrderBasic(GameplayInfoForLogicOrder gameplayInfo)
+        public (ItemId itemId, int num, int step) ForceGetItemOrderBasic(GameplayInfoForLogicOrder gameplayInfo)
         {
             var dictNeededSlots = gameplayInfo.DictNeededSlots;
             var minStep = dictNeededSlots.Values.Min(e => e.Values.Min());
