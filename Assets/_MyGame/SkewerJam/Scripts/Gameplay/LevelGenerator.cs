@@ -199,8 +199,6 @@ namespace MyGame.SkewerJam.Gameplay
             switch (grillType)
             {
                 case GrillType.LockAds:
-                case GrillType.Lid:
-
                     return (null, 0);
                     // case GrillType.Lid:
                     //     return (GrillType.Normal, 0);

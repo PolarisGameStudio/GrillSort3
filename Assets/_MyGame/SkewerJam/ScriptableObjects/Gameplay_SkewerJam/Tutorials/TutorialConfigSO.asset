@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68354a4e86b097e4d94e21b28ecaabbc, type: 3}
+  m_Name: TutorialConfigSO
+  m_EditorClassIdentifier: 
+  tutorialDatas:
+  - tutorialType: 1
+    name: Spatula
+    listDescription:
+    - Finish an order!
+  - tutorialType: 2
+    name: Add Plate
+    listDescription:
+    - Add one plate!
+  - tutorialType: 3
+    name: Shuffle
+    listDescription:
+    - Refresh all items!
+  - tutorialType: 4
+    name: Food Box
+    listDescription:
+    - Clear all plates!
+  - tutorialType: 10
+    name: Mini Tray
+    listDescription:
+    - Mini trays only one item!
+  - tutorialType: 11
+    name: Locked Tray
+    listDescription:
+    - Sort items to unlock the tray!
+  - tutorialType: 12
+    name: Lidded Tray
+    listDescription:
+    - Sort the correct items shown on the lid to unlock this tray!
+  - tutorialType: 13
+    name: Vending Tray
+    listDescription:
+    - Once all pickup turns are used, the tray will be locked!
+  - tutorialType: 14
+    name: Lock & Key
+    listDescription:
+    - Sort the items with matching key to unlock the locked tray!
+  - tutorialType: 15
+    name: Ice Lock
+    listDescription:
+    - Sort items to break ice layers. You can move the items once all the ice is
+      cleared!
+    - Fail to sort items within 2 moves, the ice will grow thinker!
+  - tutorialType: 40
+    name: Bomba!
+    listDescription:
+    - Sort the bomb-tagged item within the number of moves shown on the bomb!
+  - tutorialType: 41
+    name: Hidden Item
+    listDescription:
+    - Secret items hide their color until sorted correctly!
+  - tutorialType: 42
+    name: Freeze
+    listDescription:
+    - Frozen items can't be moved. Complete order in the same tray to melt!
+  - tutorialType: 71
+    name: Conveyor
+    listDescription:
+    - Trays on conveyor moves continuously!
+  - tutorialType: 70
+    name: Octochef
+    listDescription:
+    - Octochef moves after each match and blocks the tray it lands on!

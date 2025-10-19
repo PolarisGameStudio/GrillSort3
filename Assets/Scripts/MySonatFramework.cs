@@ -1,6 +1,7 @@
 using Sonat.CustomService;
 using Sonat.Enums;
 using SonatFramework.Scripts.Feature.Lives;
+using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems;
 using SonatFramework.Systems.AudioManagement;
 using SonatFramework.Systems.BoosterManagement;
@@ -69,4 +70,14 @@ public class MySonatFramework : SonatSystem
     {
         return levelService.GetLevelData<Gameplay.LevelData.LevelData>(level, GameMode.Classic).levelType;
     }
+
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            PanelManager.Instance.OpenPanel<CheatPanel>();
+        }
+    }
+#endif
 }

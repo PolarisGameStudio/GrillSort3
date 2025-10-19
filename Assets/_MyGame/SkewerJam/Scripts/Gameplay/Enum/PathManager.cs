@@ -1,34 +1,17 @@
+using MyGame.SkewerJam.Gameplay;
+
 namespace Manager
 {
     public static class PathManager
     {
-        public static int itemCycle;
-
         public static string ItemHLWSprite(ItemId id)
         {
-            // if ((int)id <= 23)
-            // {
             return $"Assets/_MyGame/SkewerJam/Arts/Gameplay/Items/{(ItemId)id}.png";
-            // }
-            // else
-            // {
-            //     return $"Assets/Art/Items/{(ItemId)id}.png";
-            // }
         }
 
-        public static string TraySprite(string type)
+        public static string TutorialSprite(TutorialType tutorialType)
         {
-            return $"Assets/Art/GameplayBundle/Tray_{type}.png";
-        }
-
-        public static string SubTraySprite(string type)
-        {
-            return $"Assets/Art/GameplayBundle/Sub_Tray_{type}.png";
-        }
-
-        public static string LidSprite(string type)
-        {
-            return $"Assets/Art/GameplayBundle/Lid_{type}.png";
+            return $"Assets/_MyGame/SkewerJam/Arts/Gameplay/Tutorials/{tutorialType}.png";
         }
 
         public static bool IsItemOfType5(int itemId)
@@ -53,48 +36,6 @@ namespace Manager
 
             return System.Array.IndexOf(type5ItemIds, (ItemId)itemId) != -1;
         }
-
-        public static string AvatarSprite(int id)
-        {
-            return $"Assets/Art/Avatars/{id}.png";
-        }
-
-        public static string FrameSprite(int id)
-        {
-            return $"Assets/Art/Avatars/Frame/{id}.png";
-        }
-
-        public static string TeamLogoSprite(int id)
-        {
-            return $"Assets/Art/TeamLogo/logo_{id}.png";
-        }
-
-        // public static string CardSprite(CardType cardType)
-        // {
-        //     int album = Int32.Parse(cardType.ToString().Split('_')[1]);
-        //     int item = Int32.Parse(cardType.ToString().Split('_')[2]);
-
-        //     return $"Assets/Art/CardCollection/Card/{album}_{(AlbumType)album}/{((AlbumType)album).ToString().ToLower()}_{item + 1}.png";
-        // }
-
-        // public static string AlbumIcon(MyGame.Modules.CardCollection.AlbumType albumType)
-        // {
-        //     return $"Assets/Art/CardCollection/Album/{albumType}.png";
-        // }
-    }
-
-    public enum AlbumType
-    {
-        Grill = 0,
-        Sea = 1,
-        Fruit = 2,
-        Drink = 3,
-        Cake = 4,
-        Healthy = 5,
-        US = 6,
-        Japan = 7,
-        Kor = 8,
-        Thai = 9,
     }
 
     public enum ItemId : int

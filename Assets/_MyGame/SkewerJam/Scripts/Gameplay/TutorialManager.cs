@@ -1,133 +1,313 @@
-using Cysharp.Threading.Tasks;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Gameplay.LevelData;
-using MyGame.SkewerJam.UI.Tut;
+using MyGame.SkewerJam.Gameplay.Helpers;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
-using SonatFramework.Scripts.Utils;
-using SonatFramework.Systems;
 using SonatFramework.Systems.BoosterManagement;
-using SonatFramework.Systems.EventBus;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay
 {
     public class TutorialManager : MonoBehaviour
     {
-        EventBinding<LevelStartedEvent> eventBinding;
+        [SerializeField] private TutorialConfigSO tutorialConfigSO;
+        [SerializeField] private BoostersConfig boostersConfig;
 
-        private readonly Service<BoosterService> boosterService = new();
 
         private void OnEnable()
         {
-            eventBinding = new EventBinding<LevelStartedEvent>(OnStartLevel);
-            // boosterService.Instance.onUnlockBooster += OnUnlockBooster;
+            GameController.OnPlayTutorial += OnPlayTutorial;
         }
 
         private void OnDisable()
         {
-            EventBus<LevelStartedEvent>.Deregister(eventBinding);
-            // boosterService.Instance.onUnlockBooster -= OnUnlockBooster;
+            GameController.OnPlayTutorial -= OnPlayTutorial;
         }
 
-        private void OnStartLevel(LevelStartedEvent eventData)
+        private void OnPlayTutorial()
         {
-            var tutorialType = CheckTutorial(eventData.level);
+            // tut level 1
+            if (GameController.Instance.Level == 1)
+            {
+                PanelManager.Instance.OpenPanel<PopupTutorialGameplay>();
+                return;
+            }
+
+            var listTutTypes = GetAllTutorialType();
+            if (listTutTypes.Count > 0)
+            {
+                foreach (var tutorialType in listTutTypes)
+                {
+                    var isShow = TryShowTutorial(tutorialType);
+                    if (isShow)
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+
+        private List<TutorialType> GetAllTutorialType()
+        {
+            var listTutorialTypes = new List<TutorialType>();
+
+            // tut booster
+            var tutorialType = CheckTutorialBooster();
             if (tutorialType != TutorialType.None)
             {
-                if (PlayerPrefs.HasKey($"{tutorialType.ToString()}Showed"))
-                {
-                    return;
-                }
-                CheckShowTutObstacle(tutorialType.ToString());
+                listTutorialTypes.Add(tutorialType);
+                return listTutorialTypes;
             }
 
-            GameResource boosterType = GameResource.None;
-            switch (eventData.level)
-            {
-                case 2:
-                    boosterType = GameResource.BoosterSpatula;
-                    break;
-                case 5:
-                    boosterType = GameResource.BoosterAddPlate;
-                    break;
-                case 7:
-                    boosterType = GameResource.BoosterShuffle;
-                    break;
-                case 9:
-                    boosterType = GameResource.BoosterFoodBox;
-                    break;
-            }
-
-            if (boosterType != GameResource.None && !PlayerPrefs.HasKey($"{boosterType.ToString()}Showed"))
-            {
-                PlayerPrefs.SetInt($"{boosterType.ToString()}Showed", 1);
-
-                var uiData = new UIData();
-                uiData.Add("BoosterType", boosterType);
-                SonatUtils.DelayCall(2.75f, () =>
-                {
-                    PanelManager.Instance.OpenPanel<PopupTutBooster>(uiData);
-                }, this);
-            }
-        }
-
-        // private void OnUnlockBooster(GameResource boosterType)
-        // {
-        //     // ShowPopupTutorial<PopupTutBooster>("PopupTut" + boosterType.ToString()).Forget();
-        // }
-
-        private TutorialType CheckTutorial(int level)
-        {
+            // tut obstacle
             var levelData = GameController.Instance.LevelGenerator.LevelData;
+            foreach (var grillData in levelData.grillData)
+            {
+                if (grillData.isLock) listTutorialTypes.Add(TutorialType.PrimaryGrill_Lock);
+
+                var grillType = grillData.grillType.ValidateGrillType();
+                var slotCount = grillData.SlotCount;
+                switch (grillType)
+                {
+                    case GrillType.Lock:
+                        listTutorialTypes.Add(TutorialType.PrimaryGrill_Lock);
+                        break;
+                    case GrillType.Lid:
+                        listTutorialTypes.Add(TutorialType.PrimaryGrill_Lid);
+                        break;
+                    case GrillType.LockAndKey:
+                    case GrillType.LockAndKey2:
+                        listTutorialTypes.Add(TutorialType.PrimaryGrill_LockAndKey);
+                        break;
+                    case GrillType.Ice:
+                        listTutorialTypes.Add(TutorialType.PrimaryGrill_Ice);
+                        break;
+                    case GrillType.Vending:
+                        listTutorialTypes.Add(TutorialType.PrimaryGrill_Vending);
+                        break;
+                    case GrillType.Normal:
+                        if (slotCount == 1)
+                            listTutorialTypes.Add(TutorialType.PrimaryGrill_Single);
+                        break;
+                }
+
+                if (grillData.layer == null) continue;
+                foreach (var itemData in grillData.layer)
+                {
+                    if (itemData.itemData == null) continue;
+                    foreach (var item in itemData.itemData)
+                    {
+                        if (item == null) continue;
+                        if (item.itemType == ItemType.Bomb)
+                        {
+                            listTutorialTypes.Add(TutorialType.Item_Bomb);
+                        }
+                        if (item.itemType == ItemType.Hidden)
+                        {
+                            listTutorialTypes.Add(TutorialType.Item_Hidden);
+                        }
+                        if (item.itemType == ItemType.Ice)
+                        {
+                            listTutorialTypes.Add(TutorialType.Item_Ice);
+                        }
+                    }
+                }
+
+
+            }
+
+
+            // check obstacle
             if (levelData.obstacleData != null)
             {
                 foreach (var obstacleData in levelData.obstacleData)
                 {
                     if (obstacleData.obstacleType == ObstacleType.OctoChef)
                     {
-                        return TutorialType.PopupTutOctochef_SkewerJam;
+                        listTutorialTypes.Add(TutorialType.Obstacle_OctoChef);
                     }
                 }
+            }
+
+
+            if (levelData.conveyorData != null && levelData.conveyorData.Count > 0)
+            {
+                listTutorialTypes.Add(TutorialType.Obstacle_Conveyor);
+            }
+
+            return listTutorialTypes.Distinct().ToList();
+        }
+
+        private TutorialType CheckTutorialBooster()
+        {
+            var level = GameController.Instance.Level;
+            var boosterConfig = boostersConfig.configs.Find(x => x.levelUnlock == level);
+
+            if (boosterConfig != null)
+            {
+                return Enum.Parse<TutorialType>(boosterConfig.booster.ToString());
             }
             return TutorialType.None;
         }
 
-        private void CheckShowTutObstacle(string tutorial)
+        private bool TryShowTutorial(TutorialType tutorialType)
         {
-            PlayerPrefs.SetInt($"{tutorial}Showed", 1);
-            // UIFlowController.isShowedTut = true;
-            // SonatUtils.DelayCall(1f, () => { ShowPopupTutorial<PopupTutNewMode>(tutorial).Forget(); });
-        }
-
-        private async UniTask ShowPopupTutorial<T>(string tutorial) where T : Panel
-        {
-            PanelManager.Instance.OpenPanelByName<T>(tutorial);
-        }
-
-
-        private async UniTask TryOpenPopupStartGameplay()
-        {
-            if (PlayerPrefs.GetInt("ShowPopupStartGameplay_HLW", 0) == 0)
+            if (PlayerPrefs.HasKey($"PopupTutorial_Showed_{tutorialType}"))
             {
-                await UniTask.Delay(1500);
-                PlayerPrefs.SetInt("ShowPopupStartGameplay_HLW", 1);
-                // var popupStart = PanelManager.Instance.OpenPanelByName<PopupStartGameplay_HLW>("PopupStartGameplay_HLW");
-                // await UniTask.WaitUntil(() => popupStart == null || !popupStart.gameObject.activeInHierarchy);
-                // await UniTask.Delay(1500);
-                // var popupTut = PanelManager.Instance.OpenPanelByName<PopupTutNewMode>("PopupTutGameplayHLW");
-                // await UniTask.WaitUntil(() => popupTut == null || !popupTut.gameObject.activeInHierarchy);
-                // GameController.Instance.ChangeGameState(GameState.Playing);
+                return false;
+            }
+
+            PlayerPrefs.SetInt($"PopupTutorial_Showed_{tutorialType}", 1);
+
+            ShowPopupTutorial(tutorialType);
+
+            return true;
+        }
+
+        private void ShowPopupTutorial(TutorialType tutorialType)
+        {
+            switch (tutorialType)
+            {
+                case TutorialType.BoosterSpatula:
+                case TutorialType.BoosterAddPlate:
+                case TutorialType.BoosterShuffle:
+                case TutorialType.BoosterFoodBox:
+                    ShowPopupTutorialBooster(tutorialType);
+                    return;
+
+
+                case TutorialType.PrimaryGrill_Single:
+                case TutorialType.PrimaryGrill_Lock:
+                case TutorialType.PrimaryGrill_Lid:
+                // case TutorialType.PrimaryGrill_LockAndKey:
+                // case TutorialType.PrimaryGrill_Vending:
+                // case TutorialType.PrimaryGrill_Ice:
+                case TutorialType.Item_Bomb:
+                case TutorialType.Item_Hidden:
+                case TutorialType.Item_Ice:
+
+                case TutorialType.Obstacle_OctoChef:
+                    // case TutorialType.Obstacle_Conveyor:
+                    ShowPopupTutorialObstacle(tutorialType);
+                    return;
+
+                // -----------special case-----------
+                case TutorialType.PrimaryGrill_LockAndKey:
+                case TutorialType.PrimaryGrill_Vending:
+                case TutorialType.PrimaryGrill_Ice:
+                    ShowPopupTutorialGroup(tutorialType, $"PopupTutorialGroup_{tutorialType}");
+                    return;
+
+                case TutorialType.Obstacle_Conveyor:
+                    ShowPopupTutorialObstacle(tutorialType, $"PopupTutorialObstacle_{tutorialType}");
+                    return;
+
+                default:
+                    // ShowPopupTutorial(tutorialType);
+                    return;
             }
         }
+
+        private void ShowPopupTutorialBooster(TutorialType tutorialType)
+        {
+
+            var tutorialData = tutorialConfigSO.tutorialDatas.Find(x => x.tutorialType == tutorialType);
+            var boosterType = Enum.Parse<GameResource>(tutorialType.ToString());
+
+            var uiData = new UIData();
+            uiData.Add(PopupTutorial.NAME_KEY, tutorialData.name);
+            uiData.Add(PopupTutorial.DESCRIPTION_KEY, tutorialData.listDescription);
+            uiData.Add(PopupTutorialBooster.GAME_RESOURCE_KEY, boosterType);
+
+            PanelManager.Instance.OpenPanel<PopupTutorialBooster>(uiData);
+        }
+
+        private void ShowPopupTutorialObstacle(TutorialType tutorialType, string popuTutorialName = "PopupTutorialObstacle")
+        {
+            var tutorialData = tutorialConfigSO.tutorialDatas.Find(x => x.tutorialType == tutorialType);
+
+            var uiData = new UIData();
+            uiData.Add(PopupTutorial.NAME_KEY, tutorialData.name);
+            uiData.Add(PopupTutorial.DESCRIPTION_KEY, tutorialData.listDescription);
+            uiData.Add(PopupTutorialObstacle.TUTORIAL_TYPE_KEY, tutorialType);
+
+            PanelManager.Instance.OpenPanelByName<PopupTutorialObstacle>(popuTutorialName, uiData);
+        }
+
+        private void ShowPopupTutorialGroup(TutorialType tutorialType, string popuTutorialName)
+        {
+            var tutorialData = tutorialConfigSO.tutorialDatas.Find(x => x.tutorialType == tutorialType);
+
+            var uiData = new UIData();
+            uiData.Add(PopupTutorial.NAME_KEY, tutorialData.name);
+            uiData.Add(PopupTutorial.DESCRIPTION_KEY, tutorialData.listDescription);
+            uiData.Add(PopupTutorialObstacle.TUTORIAL_TYPE_KEY, tutorialType);
+
+            PanelManager.Instance.OpenPanelByName<PopupTutorialGroup>(popuTutorialName, uiData);
+        }
+
+#if UNITY_EDITOR
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                ShowPopupTutorial(TutorialType.BoosterAddPlate);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                ShowPopupTutorial(TutorialType.PrimaryGrill_Single);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                ShowPopupTutorial(TutorialType.Item_Bomb);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                ShowPopupTutorial(TutorialType.Obstacle_OctoChef);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                ShowPopupTutorial(TutorialType.PrimaryGrill_Ice);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                ShowPopupTutorial(TutorialType.PrimaryGrill_Vending);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                ShowPopupTutorial(TutorialType.PrimaryGrill_LockAndKey);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                ShowPopupTutorial(TutorialType.Obstacle_Conveyor);
+            }
+        }
+#endif
     }
 
     public enum TutorialType
     {
-        None,
-        PopupTutBoosterAddPlate,
-        PopupTutBoosterSpatula,
-        PopupTutBoosterShuffle,
-        PopupTutBoosterFoodBox,
-        PopupTutOctochef_SkewerJam
+        None = 0,
+
+        BoosterSpatula = 1,
+        BoosterAddPlate = 2,
+        BoosterShuffle = 3,
+        BoosterFoodBox = 4,
+
+        PrimaryGrill_Single = 10,
+        PrimaryGrill_Lock = 11,
+        PrimaryGrill_Lid = 12,
+        PrimaryGrill_Vending = 13,
+        PrimaryGrill_LockAndKey = 14,
+        PrimaryGrill_Ice = 15,
+
+        Item_Bomb = 40,
+        Item_Hidden = 41,
+        Item_Ice = 42,
+
+        Obstacle_OctoChef = 70,
+        Obstacle_Conveyor = 71,
     }
 }

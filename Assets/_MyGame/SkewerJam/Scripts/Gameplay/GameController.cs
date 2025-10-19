@@ -54,6 +54,8 @@ namespace MyGame.SkewerJam.Gameplay
 
         private IntDataPref _checkRewardFreeLives = new IntDataPref("check_reward_free_lives");
 
+        public static event Action OnPlayTutorial;
+
         private void Awake()
         {
             Instance = this;
@@ -124,6 +126,8 @@ namespace MyGame.SkewerJam.Gameplay
             LoadingHelper.CompleteLoadingInGameplay(() => PlayStartGame(() =>
             {
                 ChangeGameState(GameState.Playing);
+
+                OnPlayTutorial?.Invoke();
             }).Forget());
         }
 
@@ -313,20 +317,14 @@ namespace MyGame.SkewerJam.Gameplay
 #if UNITY_EDITOR
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                SetWin(true);
-            }
-
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                Stuck(StuckType.OutOfMove);
-            }
-
-            if (Input.GetKeyDown(KeyCode.F1))
-            {
-                PanelManager.Instance.OpenPanel<CheatPanel>();
-            }
+            // if (Input.GetKeyDown(KeyCode.T))
+            // {
+            //     var uiData = new UIData();
+            //     uiData.Add(PopupTutorial.NAME_KEY, "Add Plate");
+            //     uiData.Add(PopupTutorial.DESCRIPTION_KEY, "New booster unlocked!");
+            //     // uiData.Add(PopupTutorial.ICON_PATH_KEY, PathManager.ItemHLWSprite(ItemId.Item_1));
+            //     PanelManager.Instance.OpenPanel<PopupTutorial>(uiData);
+            // }
         }
 
 #endif

@@ -180,8 +180,8 @@ Transform:
   - {fileID: 3656993754480445933}
   - {fileID: 5556033389620933087}
   - {fileID: 1120177808615533912}
-  - {fileID: 4764933475735923921}
   - {fileID: 202172252753773398}
+  - {fileID: 4764933475735923921}
   - {fileID: 1203575786013136779}
   - {fileID: 8124541142911591577}
   - {fileID: 3333203937593100959}
@@ -237,6 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9accf16383cec184caf54497234af618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorialConfigSO: {fileID: 11400000, guid: 4c5a0b91c433e4246b11b7310fad044d, type: 2}
+  boostersConfig: {fileID: 11400000, guid: 1b12a96699062d04b850840fea6332de, type: 2}
 --- !u!1 &3645637025037360275
 GameObject:
   m_ObjectHideFlags: 0

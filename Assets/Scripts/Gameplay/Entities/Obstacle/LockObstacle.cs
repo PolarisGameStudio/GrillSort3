@@ -156,8 +156,7 @@ namespace Gameplay.Entities.Obstacle
             // if (GameRemoteConfigValue.popupUnlockTray)
             // {
             var rewardData = new ResourceData(GameResource.Coin, 500);
-            PanelManager.Instance.OpenPanelByName<PopupUnlockTray>(
-                "PopupUnlockTray",
+            PanelManager.Instance.OpenPanel<PopupUnlockLockedGrill>(
                 new UIData().Add("OnSuccess", (Action)ForceUnlock).Add("Price", rewardData)
                 );
             // }
