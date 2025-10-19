@@ -105,12 +105,28 @@ PrefabInstance:
       value: _SkewerJam_PrimaryGrillLock_3
       objectReference: {fileID: 0}
     - target: {fileID: 5823945062005071239, guid: a550bad09dfa0994c8b780d80339c74a, type: 3}
+      propertyPath: m_Size.x
+      value: 1.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 5823945062005071239, guid: a550bad09dfa0994c8b780d80339c74a, type: 3}
+      propertyPath: m_Size.y
+      value: 1.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 5823945062005071239, guid: a550bad09dfa0994c8b780d80339c74a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b726195490f3e3b4586d90ae8a741893, type: 3}
+    - target: {fileID: 5823945062005071239, guid: a550bad09dfa0994c8b780d80339c74a, type: 3}
       propertyPath: m_SortingLayer
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5823945062005071239, guid: a550bad09dfa0994c8b780d80339c74a, type: 3}
       propertyPath: m_SortingLayerID
       value: 2106788883
+      objectReference: {fileID: 0}
+    - target: {fileID: 5823945062005071239, guid: a550bad09dfa0994c8b780d80339c74a, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6314235689217423742, guid: a550bad09dfa0994c8b780d80339c74a, type: 3}
       propertyPath: m_SortingLayer
@@ -131,7 +147,7 @@ PrefabInstance:
     - target: {fileID: 6449258577307474755, guid: a550bad09dfa0994c8b780d80339c74a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 86f76f812144b5247936e695b1defc72, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7296545479493295665, guid: a550bad09dfa0994c8b780d80339c74a, type: 3}
       propertyPath: m_SortingLayer
       value: 1
@@ -151,7 +167,7 @@ PrefabInstance:
     - target: {fileID: 8439796517304097077, guid: a550bad09dfa0994c8b780d80339c74a, type: 3}
       propertyPath: maskMaterials.materialsOutsideMask.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 86f76f812144b5247936e695b1defc72, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 8439796517304097077, guid: a550bad09dfa0994c8b780d80339c74a, type: 3}
       propertyPath: maskMaterials.materialsMaskDisabled.Array.data[0]
       value: 
