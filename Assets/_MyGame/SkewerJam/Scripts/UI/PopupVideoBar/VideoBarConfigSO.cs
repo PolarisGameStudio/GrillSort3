@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using SonatFramework.Systems.InventoryManagement.GameResources;
 using UnityEngine;
 
-namespace MyGame.UI.PopupVideoBar
+namespace MyGame.SkewerJam.Features.VideoBar
 {
     [CreateAssetMenu(fileName = "VideoBarConfigSO", menuName = "MyGame/SkewerJam/VideoBarConfigSO")]
     public class VideoBarConfigSO : ScriptableObject

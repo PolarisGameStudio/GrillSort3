@@ -12,6 +12,7 @@ namespace MyGame.UI.PopupVideoBar
     public class UIMilestone : MonoBehaviour
     {
         [SerializeField] private TMP_Text txtNumber;
+        [SerializeField] private GameObject completeObj;
         [SerializeField] private Slider slider;
         [SerializeField] private UIRewardGroup rewardGroup;
         [SerializeField] private UIBubbleReward bubbleReward;
@@ -35,6 +36,12 @@ namespace MyGame.UI.PopupVideoBar
                 rewardGroup.gameObject.SetActive(true);
                 bubbleReward.gameObject.SetActive(false);
             }
+        }
+
+        public void SetComplete(bool isComplete)
+        {
+            completeObj.SetActive(isComplete);
+            txtNumber.gameObject.SetActive(!isComplete);
         }
     }
 }
