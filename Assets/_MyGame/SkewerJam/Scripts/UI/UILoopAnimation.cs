@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using SonatFramework.Scripts.Utils;
 using Spine.Unity;
 using UnityEngine;

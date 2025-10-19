@@ -11,11 +11,17 @@ public class UICurrencyStarInGame : UICurrency
     [Header("UIcurrencyStarInGame")]
     [SerializeField] private bool forceValue = false;
     [SerializeField] private bool isMiss = false;
+
     private readonly Service<StarChestService> starChestService = new();
     private EventBinding<LevelStartedEvent> levelStartedEvent;
     public override void OnEnable()
     {
         base.OnEnable();
+        if (!starChestService.Instance.Config.active)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
 
         levelStartedEvent = new EventBinding<LevelStartedEvent>(OnLevelStarted);
 
