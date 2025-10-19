@@ -135,7 +135,7 @@ namespace MyGame.SkewerJam.Gameplay
         {
             foreach (var grill in gameLogicHandler.GrillManager.ListGrills)
             {
-                grill.GrillVisual.OpenGrill();
+                grill.OpenGrillWhenStart();
             }
 
             await UniTask.Delay(500);

@@ -77,9 +77,9 @@ namespace Gameplay.Entities
         }
 
 
-        public virtual void OpenGrill()
+        public virtual void OpenGrillWhenStart()
         {
-            SonatUtils.DelayCall(0.75f, () => grillVisual.OpenGrill(), this);
+            grillVisual.OpenGrill();
         }
 
         protected virtual async UniTask SetSubGrills()
@@ -627,7 +627,7 @@ namespace Gameplay.Entities
         public virtual void Unlock()
         {
             SetLockItems(false);
-            OpenGrill();
+            OpenGrillWhenStart();
 
             // GameplayController.OnActionUnlockGrill?.Invoke(this);
         }

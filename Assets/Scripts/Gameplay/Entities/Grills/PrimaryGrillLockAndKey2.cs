@@ -24,7 +24,7 @@ namespace Gameplay.Entities.Grills
             SetLockItems(true);
         }
 
-        public override void OpenGrill()
+        public override void OpenGrillWhenStart()
         {
         }
 

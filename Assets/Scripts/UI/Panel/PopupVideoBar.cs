@@ -94,9 +94,9 @@ public class PopupVideoBar : Panel
 
     private void ResetData()
     {
-        _currentNum.Value = 0;
+        _currentNum.Value = -1;
         _claimedMilestoneNum.Value = -1;
-        _currentNumVisual.Value = 0;
+        _currentNumVisual.Value = -1;
 
         timeCounter.gameObject.SetActive(false);
         _slider.value = (_currentNumVisual.Value + 1) * 1.0f / _maxNumber;

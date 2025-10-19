@@ -17,13 +17,13 @@ namespace Gameplay.Entities.Grills
             lockState = 1;
             GrillLidData grillLidData = (GrillLidData)grillData;
             itemCondition = grillLidData.itemCondition;
-            iconItem.SetSpriteAsync(PathManager.ItemHLWSprite((ItemId)itemCondition)).Forget();
+            iconItem.SetSpriteAsync(PathManager.ItemSprite((ItemId)itemCondition)).Forget();
             base.SetData(grillData);
             grillVisual.CloseGrill(false);
             SetLockItems(true);
         }
 
-        public override void OpenGrill()
+        public override void OpenGrillWhenStart()
         {
         }
 

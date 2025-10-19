@@ -14,7 +14,7 @@ namespace Gameplay.Entities.Items
 
         public override void UpdateVisual()
         {
-            spriteRenderer.SetSpriteAsync(PathManager.ItemHLWSprite((ItemId)id)).Forget();
+            spriteRenderer.SetSpriteAsync(PathManager.ItemSprite((ItemId)id)).Forget();
             spriteRenderer.material = GameResourceReference.Instance.hiddenMaterial;
             hidden.gameObject.SetActive(true);
         }

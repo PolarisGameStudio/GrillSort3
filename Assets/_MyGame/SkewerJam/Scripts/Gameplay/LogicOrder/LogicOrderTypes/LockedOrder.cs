@@ -38,6 +38,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             // cần đảm bảo đúng số lượng item order về cuối ván nữa
 
             var lockedItems = ItemHelper.GetItemIdsInLockedGrillInLayer1();
+            if(lockedItems.Count == 0) return (ItemId.None, 0);
             var (itemId, num, step) = OrderHelper.GetOptimizedRandomSpecialItem(lockedItems, gameplayInfo);
             Debug.Log("<color=magenta>OrderHelper:</color> GetOrder Locked: " + itemId + " " + num + " step: " + step);
             return (itemId, num);

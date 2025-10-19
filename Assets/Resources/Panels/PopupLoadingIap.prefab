@@ -225,9 +225,7 @@ GameObject:
   - component: {fileID: 4241706244065264514}
   - component: {fileID: 563080281904037667}
   - component: {fileID: 2336145437319343481}
-  - component: {fileID: 6012838928623684559}
-  - component: {fileID: 5709415590995316041}
-  - component: {fileID: 1734815099944678606}
+  - component: {fileID: 7150353975133403130}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -351,7 +349,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &6012838928623684559
+--- !u!114 &7150353975133403130
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -360,62 +358,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8709974028331846211}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49c3ef34f31e1de4287be565dd28de4a, type: 3}
+  m_Script: {fileID: 11500000, guid: 782ddde7d90bc4143935e84cfef674af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  txtContent: {fileID: 2336145437319343481}
---- !u!114 &5709415590995316041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8709974028331846211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mTerm: 
-  mTermSecondary: TextMeshPro Material Outline DarkBlue
-  PrimaryTermModifier: 0
-  SecondaryTermModifier: 0
-  TermPrefix: 
-  TermSuffix: 
-  LocalizeOnAwake: 1
-  IgnoreRTL: 0
-  MaxCharactersInRTL: 0
-  IgnoreNumbersInRTL: 1
-  CorrectAlignmentForRTL: 1
-  AddSpacesToJoinedLanguages: 0
-  AllowLocalizedParameters: 1
-  AllowParameters: 1
-  TranslatedObjects: []
-  LocalizeEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  AlwaysForceLocalize: 0
-  LocalizeCallBack:
-    Target: {fileID: 0}
-    MethodName: 
-  mGUI_ShowReferences: 0
-  mGUI_ShowTems: 1
-  mGUI_ShowCallback: 0
-  mLocalizeTarget: {fileID: 0}
-  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
---- !u!114 &1734815099944678606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8709974028331846211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9586cfd190ca384a8dd72aa92c86152, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Params:
-  - Name: VALUE
-    Value: 1
-  _IsGlobalManager: 0
+  delayBetweenTexts: 0.5

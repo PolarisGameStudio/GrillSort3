@@ -77,12 +77,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6901707863001855240, guid: 66d0d6c52a366dc4ba242d0a232b88be, type: 3}
+      propertyPath: m_Size.y
+      value: 2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6901707863001855240, guid: 66d0d6c52a366dc4ba242d0a232b88be, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9cae7854789dce644946d24dbe7fe224, type: 3}
+    - target: {fileID: 6901707863001855240, guid: 66d0d6c52a366dc4ba242d0a232b88be, type: 3}
       propertyPath: m_SortingLayer
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6901707863001855240, guid: 66d0d6c52a366dc4ba242d0a232b88be, type: 3}
       propertyPath: m_SortingLayerID
       value: 2106788883
+      objectReference: {fileID: 0}
+    - target: {fileID: 6901707863001855240, guid: 66d0d6c52a366dc4ba242d0a232b88be, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6968559428607538250, guid: 66d0d6c52a366dc4ba242d0a232b88be, type: 3}
       propertyPath: m_LocalScale.x

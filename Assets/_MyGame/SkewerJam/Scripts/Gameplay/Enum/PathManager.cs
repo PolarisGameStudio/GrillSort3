@@ -4,7 +4,7 @@ namespace Manager
 {
     public static class PathManager
     {
-        public static string ItemHLWSprite(ItemId id)
+        public static string ItemSprite(ItemId id)
         {
             return $"Assets/_MyGame/SkewerJam/Arts/Gameplay/Items/{(ItemId)id}.png";
         }

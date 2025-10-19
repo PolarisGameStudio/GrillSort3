@@ -10,7 +10,7 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
     {
         public override void SetVisual(SpriteRenderer spriteRenderer, int id, bool isPrimary)
         {
-            spriteRenderer.SetSpriteAsync(PathManager.ItemHLWSprite((ItemId)id)).Forget();
+            spriteRenderer.SetSpriteAsync(PathManager.ItemSprite((ItemId)id)).Forget();
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Gameplay.Entities.Grills
             SetSlotCollider(false);
         }
 
-        public override void OpenGrill()
+        public override void OpenGrillWhenStart()
         {
         }
 

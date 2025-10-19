@@ -3,6 +3,7 @@ using System.Linq;
 using Gameplay.Entities;
 using Manager;
 using MyGame.SkewerJam.Gameplay.Helpers;
+using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay.LogicOrder
 {
@@ -44,6 +45,11 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                     }
                 }
             }
+
+            if(itemIdsList.Count == 0) {
+                Debug.LogWarning("<color=red>OrderHelper:</color> GetOptimizedRandomItem: itemIdsList.Count == 0");
+                return (ItemId.None, 0, 0);
+            }
             var randomId = itemIdsList[UnityEngine.Random.Range(0, itemIdsList.Count)];
             return ((ItemId)randomId, maxNum, step);
         }
@@ -70,6 +76,11 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                         listRandomItemIds.Add(itemId);
                     }
                 }
+            }
+
+            if(listRandomItemIds.Count == 0) {
+                Debug.LogWarning("<color=red>OrderHelper:</color> GetOptimizedRandomSpecialItem: listRandomItemIds.Count == 0");
+                return (ItemId.None, 0, 0);
             }
             var randomItemId = listRandomItemIds[UnityEngine.Random.Range(0, listRandomItemIds.Count)];
             var dictNumAndStep = dictNeededSlots[randomItemId];
