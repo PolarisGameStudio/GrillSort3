@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.Linq;
 using Manager;
+using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Gameplay.LogicOrder.Configs;
 using MyGame.SkewerJam.Level;
 using UnityEngine;
@@ -12,7 +14,10 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
         [SerializeField] private BasicOrderConfigSO basicOrderConfigSO;
 
         private BO selectedBO;
+        private int minNum = 1;
 
+
+        public override LogicOrderType LogicOrderType => LogicOrderType.Basic;
         public override void Init()
         {
 
@@ -27,6 +32,11 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
         {
             Debug.Log("<color=white>BasicOrderSO:</color> SetData: " + indexBO);
             selectedBO = basicOrderConfigSO.listBasicOrderConfigs[indexBO];
+        }
+
+        public void SetMinNum(int minNum)
+        {
+            this.minNum = minNum;
         }
 
         public override (ItemId itemId, int num) GetOrder(GameplayInfoForLogicOrder info)
@@ -81,9 +91,20 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             for (int step = selectedStep; step <= maxStep; step++)
             {
                 var randomItemIds = itemIds.Where(e => dictNeededSlots[e].ContainsValue(step)).ToList();
-                if (randomItemIds == null || randomItemIds.Count == 0) continue;
+                var randomItemIdsWithMinNum = new List<ItemId>();
+                foreach (var id in randomItemIds)
+                {
+                    foreach (var numItems in dictNeededSlots[id].Keys)
+                    {
+                        if (numItems >= minNum && dictNeededSlots[id][numItems] == step)
+                        {
+                            randomItemIdsWithMinNum.Add(id);
+                        }
+                    }
+                }
+                if (randomItemIdsWithMinNum == null || randomItemIdsWithMinNum.Count == 0) continue;
 
-                var (itemId, num, s) = OrderHelper.GetOptimizedRandomItem(randomItemIds, step, info);
+                var (itemId, num, s) = OrderHelper.GetOptimizedRandomItem(randomItemIdsWithMinNum, step, info, minNum);
                 Debug.Log("<color=white>OrderHelper:</color> GetItemOrderBasic: " + itemId + " " + num + " step: " + s);
                 return (itemId, num, s);
             }

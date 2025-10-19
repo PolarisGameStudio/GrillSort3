@@ -22,7 +22,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             return orderItemsDict.ToDictionary(e => e.Key, e => e.Value.maxItems - e.Value.num);
         }
 
-        public static (ItemId itemId, int num, int step) GetOptimizedRandomItem(List<ItemId> randomItemIds, int step, GameplayInfoForLogicOrder info)
+        public static (ItemId itemId, int num, int step) GetOptimizedRandomItem(List<ItemId> randomItemIds, int step, GameplayInfoForLogicOrder info, int minNum = 1)
         {
             var dictNeededSlots = info.DictNeededSlots;
             var maxNum = 0;
@@ -31,6 +31,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             {
                 foreach (var num in dictNeededSlots[itemId].Keys.Where(e => dictNeededSlots[itemId][e] == step))
                 {
+                    if (num < minNum) continue;
                     if (num > maxNum)
                     {
                         maxNum = num;

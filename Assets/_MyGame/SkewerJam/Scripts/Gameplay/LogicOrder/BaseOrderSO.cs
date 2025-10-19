@@ -1,4 +1,5 @@
 using Manager;
+using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Level;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 {
     public abstract class BaseOrderSO : ScriptableObject
     {
+        public abstract LogicOrderType LogicOrderType { get; }
         public abstract void Init();
         public abstract void SetLevelData(LevelData_SkewerJam levelData);
 

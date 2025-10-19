@@ -10,6 +10,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
     [CreateAssetMenu(fileName = "LockedOrderSO", menuName = "MyGame/SkewerJam/Gameplay/LogicOrder/LockedOrderSO")]
     public class LockedOrderSO : BaseOrderSO
     {
+        public override LogicOrderType LogicOrderType => LogicOrderType.Locked;
         public override void Init()
         {
 

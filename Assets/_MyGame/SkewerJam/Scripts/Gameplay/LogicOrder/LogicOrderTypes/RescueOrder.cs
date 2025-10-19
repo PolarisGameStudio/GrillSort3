@@ -1,5 +1,6 @@
 using System.Linq;
 using Manager;
+using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Level;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -13,6 +14,8 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
         private int gap = 0;
         private int numberRescues = 0;
 
+
+        public override LogicOrderType LogicOrderType => LogicOrderType.Rescue;
         public override void Init()
         {
             gap = 0;
@@ -100,7 +103,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             if (gap != 0)
             {
                 gap += 1;
-                if (gap >= rescueCondition.maxRescueGap)
+                if (gap > rescueCondition.maxRescueGap)
                 {
                     gap = 0;
                 }
@@ -118,6 +121,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                 if (isRescue == true || (gap == 0 && itemsInWaitingGrill.Count >= (numWaitingGrill - rescueCondition.remainingWaitingGrillCondition)))
                 {
                     numberRescues += 1;
+                    gap += 1;
                     return true;
                 }
             }

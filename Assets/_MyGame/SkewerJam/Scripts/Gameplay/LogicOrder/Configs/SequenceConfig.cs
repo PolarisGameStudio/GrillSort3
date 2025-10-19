@@ -33,5 +33,6 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder.Configs
         public float threshold;
         public int indexBO;
         public int indexSO;
+        public int minNum = 1;
     }
 }

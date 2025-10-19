@@ -14,22 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listPhaseConfigs:
   - index: 0
-    threshold: 0
+    threshold: 0.16
     indexBO: 0
     indexSO: 0
-  - index: 0
-    threshold: 0.2
+    minNum: 2
+  - index: 1
+    threshold: 0.32
     indexBO: 1
     indexSO: 4
-  - index: 0
-    threshold: 0.4
+    minNum: 2
+  - index: 2
+    threshold: 0.48
     indexBO: 1
     indexSO: 1
-  - index: 0
-    threshold: 0.6
+    minNum: 2
+  - index: 3
+    threshold: 0.64
     indexBO: 1
     indexSO: 1
-  - index: 0
+    minNum: 2
+  - index: 4
     threshold: 0.8
     indexBO: 1
     indexSO: 1
+    minNum: 2
+  - index: 5
+    threshold: 1
+    indexBO: 1
+    indexSO: 1
+    minNum: 1

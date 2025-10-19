@@ -91,7 +91,19 @@ namespace MyGame.SkewerJam.Gameplay
             // {
             //     case LevelDifficulty.Normal:
             levelDataSkewerJam.rescueCondition = new RescueCondition();
-            levelDataSkewerJam.sequenceLogicOrderIndex = 0;
+
+            switch (levelDataSkewerJam.difficulty)
+            {
+                case LevelDifficulty.Normal:
+                    levelDataSkewerJam.sequenceLogicOrderIndex = 0;
+                    break;
+                case LevelDifficulty.Hard:
+                    levelDataSkewerJam.sequenceLogicOrderIndex = 1;
+                    break;
+                case LevelDifficulty.SuperHard:
+                    levelDataSkewerJam.sequenceLogicOrderIndex = 2;
+                    break;
+            }
 
             // shuffle item
             if (_level > 100)
@@ -147,7 +159,7 @@ namespace MyGame.SkewerJam.Gameplay
 
             if (_level == 1)
             {
-                levelDataSkewerJam.ListOrderData = ValidateListOrder(4, 2);
+                levelDataSkewerJam.ListOrderData = ValidateListOrder(2, 2);
             }
             else
             {

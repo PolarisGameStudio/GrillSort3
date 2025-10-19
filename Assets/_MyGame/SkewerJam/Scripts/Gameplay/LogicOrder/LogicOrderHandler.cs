@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
-using DG.Tweening.Plugins.Options;
 using Manager;
 using MyGame.SkewerJam.Gameplay.LogicOrder;
 using MyGame.SkewerJam.Gameplay.LogicOrder.Configs;
@@ -85,7 +83,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             return false;
         }
 
-        public async UniTask<(ItemId itemId, int num)> GetItemOrder(bool isRescue = false)
+        public async UniTask<(ItemId itemId, int num, LogicOrderType logicOrderType)> GetItemOrder(bool isRescue = false)
         {
             Debug.Log("<color=purple>LogicOrderHandler:</color> -----GetItemOrder----");
             var forceLogicOrder = listLogicOrders.FirstOrDefault(e => e.ForceUse(isRescue));
@@ -93,7 +91,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             {
                 Debug.Log("<color=blue>OrderHelper:</color> Use " + forceLogicOrder.name + " to rescue");
                 var (rescueItemId, rescueNum) = forceLogicOrder.GetOrder();
-                return (rescueItemId, rescueNum);
+                return (rescueItemId, rescueNum, LogicOrderType.Rescue);
             }
 
             // lấy order info mỗi layer (2 layer đầu) --> OPTIMIZE: giảm tính toán
@@ -105,44 +103,63 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             var (itemId, num) = selectedLogicOrder.GetOrder(gameplayInfoForLogicOrder);
             if (itemId != ItemId.None)
             {
-                return (itemId, num);
+                return (itemId, num, selectedLogicOrder.LogicOrderType);
             }
             else
             {
                 Debug.Log("<color=red>OrderHelper:</color> GetItemOrder: No item found");
-                var basicOrder = listLogicOrders.FirstOrDefault(e => e.GetType().Name == nameof(BasicOrderSO));
+                var basicOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Basic);
                 var (i, n, s) = (basicOrder as BasicOrderSO).ForceGetItemOrderBasic(gameplayInfoForLogicOrder);
-                return (i, n);
+                return (i, n, LogicOrderType.Basic);
             }
         }
 
         private BaseOrderSO ChooseLogicOrder()
         {
-            // kiểm tra xem có sử dụng được nó không
-
+            // - Cùng 1 thời điểm, luôn tồn tại 1 Basic Order
             var phase = GetCurrentPhase();
 
             var phaseConfig = selectedSequenceConfig.listPhaseConfigs[phase];
             var idxBO = phaseConfig.indexBO;
             var idxSO = phaseConfig.indexSO;
+            var minNum = phaseConfig.minNum;
             var specialOrderConfig = specialOrderConfigSO.listSpecialOrderConfigs[idxSO];
 
-            var random = UnityEngine.Random.Range(0f, 1f);
-            Debug.Log("<color=white>LogicOrderHandler:</color> ChooseLogicOrder: " + Mathf.Round(random * 100f) * 0.01f + " >>> " + specialOrderConfig.rateBasicOrder + " - " + specialOrderConfig.rateLockedOrder + " - " + specialOrderConfig.rateBlindedOrder);
-            if (random < specialOrderConfig.rateBasicOrder)
+            if (CheckExistBasicOrder())
             {
-                var basicOrder = listLogicOrders.FirstOrDefault(e => e.GetType().Name == nameof(BasicOrderSO));
-                (basicOrder as BasicOrderSO).SetData(idxBO);
-                return basicOrder;
+                var random = UnityEngine.Random.Range(0f, 1f);
+                Debug.Log("<color=white>LogicOrderHandler:</color> ChooseLogicOrder: " + Mathf.Round(random * 100f) * 0.01f + " >>> " + specialOrderConfig.rateBasicOrder + " - " + specialOrderConfig.rateLockedOrder + " - " + specialOrderConfig.rateBlindedOrder);
+                if (random < specialOrderConfig.rateBasicOrder)
+                {
+                    var basicOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Basic);
+                    var basicOrderSO = basicOrder as BasicOrderSO;
+                    basicOrderSO.SetData(idxBO);
+                    basicOrderSO.SetMinNum(minNum);
+                    return basicOrder;
+                }
+                else if (random < specialOrderConfig.rateBasicOrder + specialOrderConfig.rateLockedOrder)
+                {
+                    var lockedOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Locked);
+                    if (lockedOrder.CanUse()) return lockedOrder;
+                }
+                else
+                {
+                    var blindedOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Blinded);
+                    if (blindedOrder.CanUse()) return blindedOrder;
+                }
             }
-            else if (random < specialOrderConfig.rateBasicOrder + specialOrderConfig.rateLockedOrder)
-            {
-                return listLogicOrders.FirstOrDefault(e => e.GetType().Name == nameof(LockedOrderSO));
-            }
-            else
-            {
-                return listLogicOrders.FirstOrDefault(e => e.GetType().Name == nameof(BlindedOrderSO));
-            }
+
+            var order = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Basic);
+            var orderSO = order as BasicOrderSO;
+            orderSO.SetData(idxBO);
+            orderSO.SetMinNum(minNum);
+            return order;
+
+        }
+
+        private bool CheckExistBasicOrder()
+        {
+            return listLogicOrders.Any(e => e.LogicOrderType == LogicOrderType.Basic);
         }
 
         private int GetCurrentPhase()
@@ -157,5 +174,15 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             Debug.Log("<color=purple>LogicOrderHandler:</color> GetCurrentPhase: " + phase.index + " - " + Mathf.Round(percentage * 100f) * 0.01f);
             return phase.index;
         }
+    }
+
+    public enum LogicOrderType
+    {
+        None,
+        Basic,
+        Locked,
+        Blinded,
+        Rescue,
+        Random
     }
 }
