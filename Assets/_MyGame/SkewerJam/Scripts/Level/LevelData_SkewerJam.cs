@@ -15,9 +15,10 @@ namespace MyGame.SkewerJam.Level
 
         // logic order rescue
         public RescueCondition rescueCondition;
+        public int sequenceLogicOrderIndex;
 
-        // logic order basic
-        public List<LogicOrderConfig> logicOrderConfigs;
+        // // logic order basic
+        // public List<LogicOrderConfig> logicOrderConfigs;
 
         public LevelData_SkewerJam CloneSkewerJam()
         {
@@ -43,7 +44,7 @@ namespace MyGame.SkewerJam.Level
                 numberOfOrder = this.numberOfOrder,
 
                 rescueCondition = this.rescueCondition,
-                logicOrderConfigs = this.logicOrderConfigs,
+                // logicOrderConfigs = this.logicOrderConfigs,
             };
             return levelDataSkewerJam;
         }
@@ -66,16 +67,17 @@ namespace MyGame.SkewerJam.Level
     [Serializable]
     public class RescueCondition
     {
-        public int maxNumberRescues;
-        public int maxRescueGap;
-        public int remainingWaitingGrill;
+        public int maxNumberRescues = 5;
+        public int maxRescueGap = 2;
+        public int remainingWaitingGrillCondition = 2;
     }
 
     [Serializable]
     public class LogicOrderConfig
     {
         [Range(0, 1)]
-        public float region;
-        public int minNumberSteps;
+        public float threshold;
+        public int indexBO;
+        public int indexSO;
     }
 }

@@ -1,6 +1,7 @@
 using System.Linq;
 using Manager;
 using MyGame.SkewerJam.Gameplay.Helpers;
+using MyGame.SkewerJam.Level;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay.LogicOrder
@@ -8,6 +9,16 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
     [CreateAssetMenu(fileName = "RandomOrderSO", menuName = "MyGame/SkewerJam/Gameplay/LogicOrder/RandomOrderSO")]
     public class RandomOrderSO : BaseOrderSO
     {
+        public override LogicOrderType LogicOrderType => LogicOrderType.Random;
+        public override void Init()
+        {
+
+        }
+
+        public override void SetLevelData(LevelData_SkewerJam levelData)
+        {
+        }
+
         public override (ItemId itemId, int num) GetOrder(GameplayInfoForLogicOrder gameplayInfo = null)
         {
             var itemDict = ItemHelper.GetItemIdDictInGameplay(-1);

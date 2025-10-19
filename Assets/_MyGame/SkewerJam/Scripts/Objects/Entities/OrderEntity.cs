@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Gameplay.BoosteeManagement;
@@ -10,7 +9,6 @@ using MyGame.SkewerJam.Gameplay;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
-using SonatFramework.Systems.AudioManagement;
 using UnityEngine;
 using static PopupUnlockInGame;
 
@@ -38,7 +36,11 @@ namespace MyGame.SkewerJam.Objects.Entities
 
         private ItemId itemIdTarget = ItemId.None;
         private int maxItems = 0;
+        private LogicOrderType logicOrderType = LogicOrderType.None;
+
+
         public int MaxItems => maxItems;
+        public LogicOrderType LogicOrderType => logicOrderType;
 
         public ItemId ItemIdTarget => itemIdTarget;
         public bool IsActive => active;
@@ -99,9 +101,9 @@ namespace MyGame.SkewerJam.Objects.Entities
             itemIdTarget = ItemId.None;
         }
 
-        public void SetData(ItemId itemId, int num)
+        public void SetData(ItemId itemId, int num, LogicOrderType logicOrderType)
         {
-            SetTargetItem(itemId, num);
+            SetTargetItem(itemId, num, logicOrderType);
         }
 
         public void SetActive(bool active)
@@ -115,10 +117,11 @@ namespace MyGame.SkewerJam.Objects.Entities
             orderIndex = index;
         }
 
-        public void SetTargetItem(ItemId itemId, int num)
+        public void SetTargetItem(ItemId itemId, int num, LogicOrderType logicOrderType)
         {
             itemIdTarget = itemId;
             maxItems = num;
+            this.logicOrderType = logicOrderType;
             checkCreateItemFaded = false;
             ShowTargetItem().Forget();
         }
@@ -267,10 +270,9 @@ namespace MyGame.SkewerJam.Objects.Entities
 
             if (orderManager.LogicOrderHandler.CheckCreateNextOrder())
             {
-                var (itemId, num) = await orderManager.LogicOrderHandler.GetItemOrder(isRescue);
+                var (itemId, num, logicOrderType) = await orderManager.LogicOrderHandler.GetItemOrder(isRescue);
                 Debug.Log("<color=red>itemId: " + itemId + ", num: " + num + "</color>");
-                SetTargetItem(itemId, num);
-
+                SetTargetItem(itemId, num, logicOrderType);
                 var orderPos = orderManager.LeftStartPos.position;
                 orderPos.z = 0;
                 container.position = orderPos;

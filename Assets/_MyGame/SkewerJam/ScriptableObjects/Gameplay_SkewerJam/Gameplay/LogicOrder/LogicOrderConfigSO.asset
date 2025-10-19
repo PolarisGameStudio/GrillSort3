@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14a186d7217847144b120c3a2af0c32b, type: 3}
+  m_Name: LogicOrderConfigSO
+  m_EditorClassIdentifier: 
+  listSequenceConfigs:
+  - {fileID: 11400000, guid: 276110380e656b6438fbcb3bc5d0bd98, type: 2}
+  - {fileID: 11400000, guid: a2b0be49049a69e46a535071724f58f5, type: 2}
+  - {fileID: 11400000, guid: a101a231d111c9147bb74bbe2c203667, type: 2}

@@ -1,5 +1,8 @@
 using System.Linq;
 using Manager;
+using MyGame.SkewerJam.Gameplay.Helpers;
+using MyGame.SkewerJam.Level;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay.LogicOrder
@@ -7,6 +10,23 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
     [CreateAssetMenu(fileName = "RescueOrderSO", menuName = "MyGame/SkewerJam/Gameplay/LogicOrder/RescueOrderSO")]
     public class RescueOrderSO : BaseOrderSO
     {
+        [SerializeField, ReadOnly] private RescueCondition rescueCondition;
+        private int gap = 0;
+        private int numberRescues = 0;
+
+
+        public override LogicOrderType LogicOrderType => LogicOrderType.Rescue;
+        public override void Init()
+        {
+            gap = 0;
+            numberRescues = 0;
+        }
+
+        public override void SetLevelData(LevelData_SkewerJam levelData)
+        {
+            rescueCondition = levelData.rescueCondition;
+        }
+
         public override (ItemId itemId, int num) GetOrder(GameplayInfoForLogicOrder gameplayInfo = null)
         {
             // ---Tạo order để giải cứu---
@@ -80,14 +100,30 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
         public override bool ForceUse(bool isRescue = false)
         {
+            if (gap != 0)
+            {
+                gap += 1;
+                if (gap > rescueCondition.maxRescueGap)
+                {
+                    gap = 0;
+                }
+            }
+
             if (CanUse())
             {
-                var itemsInWaitingGrill = OrderHelper.GetItemsInWaitingGrill();
-                if (itemsInWaitingGrill.Count >= 3)
+                if (numberRescues >= rescueCondition.maxNumberRescues)
                 {
+                    return false;
+                }
+                var numWaitingGrill = GameController.Instance.GameLogicHandler.WaitingGrillManager.ListWaitingGrills.Count(e => e.IsActive);
+                var itemsInWaitingGrill = OrderHelper.GetItemsInWaitingGrill();
+
+                if (isRescue == true || (gap == 0 && itemsInWaitingGrill.Count >= (numWaitingGrill - rescueCondition.remainingWaitingGrillCondition)))
+                {
+                    numberRescues += 1;
+                    gap += 1;
                     return true;
                 }
-                return isRescue;
             }
             return false;
         }

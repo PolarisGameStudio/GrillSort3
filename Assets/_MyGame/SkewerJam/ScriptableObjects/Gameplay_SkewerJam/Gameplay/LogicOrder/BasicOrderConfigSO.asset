@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 775ded7dde1bb424e8ff3e4f4139ee8c, type: 3}
+  m_Name: BasicOrderConfigSO
+  m_EditorClassIdentifier: 
+  listBasicOrderConfigs:
+  - index: 0
+    rateWith0Step: 1
+    rateWith1Step: 0
+    rateWith2Step: 0
+    rateWith3Step: 0
+  - index: 1
+    rateWith0Step: 0.9
+    rateWith1Step: 0.1
+    rateWith2Step: 0
+    rateWith3Step: 0
+  - index: 2
+    rateWith0Step: 0.8
+    rateWith1Step: 0.2
+    rateWith2Step: 0
+    rateWith3Step: 0
+  - index: 3
+    rateWith0Step: 0.7
+    rateWith1Step: 0.3
+    rateWith2Step: 0
+    rateWith3Step: 0
+  - index: 4
+    rateWith0Step: 0.6
+    rateWith1Step: 0.4
+    rateWith2Step: 0
+    rateWith3Step: 0
+  - index: 5
+    rateWith0Step: 0.9
+    rateWith1Step: 0.05
+    rateWith2Step: 0.05
+    rateWith3Step: 0
+  - index: 6
+    rateWith0Step: 0.8
+    rateWith1Step: 0.15
+    rateWith2Step: 0.05
+    rateWith3Step: 0
+  - index: 7
+    rateWith0Step: 0.7
+    rateWith1Step: 0.2
+    rateWith2Step: 0.1
+    rateWith3Step: 0
+  - index: 8
+    rateWith0Step: 0.8
+    rateWith1Step: 0.1
+    rateWith2Step: 0.05
+    rateWith3Step: 0.05
+  - index: 9
+    rateWith0Step: 0.7
+    rateWith1Step: 0.15
+    rateWith2Step: 0.1
+    rateWith3Step: 0.05
+  - index: 10
+    rateWith0Step: 0.5
+    rateWith1Step: 0.3
+    rateWith2Step: 0.15
+    rateWith3Step: 0.05

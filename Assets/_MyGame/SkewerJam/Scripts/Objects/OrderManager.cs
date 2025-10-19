@@ -54,7 +54,7 @@ namespace MyGame.SkewerJam.Objects
             gameLogicHandler.OnItemStartSwitch += GameLogicHandler_OnItemStartSwitch;
             gameLogicHandler.OnItemEndSwitch += GameLogicHandler_OnItemEndSwitch;
 
-            LogicOrderHandler.Reset();
+            logicOrderHandler.Init();
         }
 
         public void Clear()
@@ -70,6 +70,8 @@ namespace MyGame.SkewerJam.Objects
             }
             _listOrders.Clear();
             _listOrdersToAlign.Clear();
+
+            logicOrderHandler.Clear();
         }
 
         private void GameLogicHandler_OnItemStartSwitch(Item item, SlotBase slot)
@@ -85,7 +87,7 @@ namespace MyGame.SkewerJam.Objects
                     var orderIndex = orderEntity.OrderIndex;
                     _listOrders.Remove(orderEntity);
 
-                    var checkNextOrder = LogicOrderHandler.CheckCreateNextOrder();
+                    var checkNextOrder = logicOrderHandler.CheckCreateNextOrder();
                     if (checkNextOrder)
                     {
                         CreateNextOrder(orderIndex).Forget();
@@ -149,8 +151,8 @@ namespace MyGame.SkewerJam.Objects
             {
                 if (_listOrderData[i].active == 1)
                 {
-                    var (itemId, num) = await LogicOrderHandler.GetItemOrder();
-                    var orderEntity = await CreateActiveNextOrder(itemId, num);
+                    var (itemId, num, logicOrderType) = await logicOrderHandler.GetItemOrder();
+                    var orderEntity = await CreateActiveNextOrder(itemId, num, logicOrderType);
                     orderEntity.SetOrderIndex(i);
                 }
                 else
@@ -177,11 +179,11 @@ namespace MyGame.SkewerJam.Objects
         }
         #endregion
 
-        public async UniTask<OrderEntity> CreateActiveNextOrder(ItemId itemId, int num)
+        public async UniTask<OrderEntity> CreateActiveNextOrder(ItemId itemId, int num, LogicOrderType logicOrderType)
         {
             var orderEntity = await GameFactory.Instance.CreateEntityAsync<OrderEntity>("OrderEntity", transform);
             orderEntity.Init(true);
-            orderEntity.SetData(itemId, num);
+            orderEntity.SetData(itemId, num, logicOrderType);
 
             _listOrders.Add(orderEntity);
 
@@ -200,9 +202,9 @@ namespace MyGame.SkewerJam.Objects
 
         private async UniTask CreateNextOrder(int orderIndex)
         {
-            var (itemId, num) = await LogicOrderHandler.GetItemOrder();
+            var (itemId, num, logicOrderType) = await logicOrderHandler.GetItemOrder();
 
-            var nextOrder = await CreateActiveNextOrder(itemId, num);
+            var nextOrder = await CreateActiveNextOrder(itemId, num, logicOrderType);
             nextOrder.SetOrderIndex(orderIndex);
 
             var orderPos = leftStartPos.position;

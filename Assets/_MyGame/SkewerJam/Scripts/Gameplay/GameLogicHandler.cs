@@ -61,6 +61,7 @@ namespace MyGame.SkewerJam.Gameplay
             grillManager.Init();
             waitingGrillManager.Init();
             orderManager.Init();
+            itemManager.Init();
 
             conveyorManager.Init();
             obstacleManager.Init();

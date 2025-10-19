@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Gameplay.Entities;
+using Gameplay.LevelData;
 using Manager;
 
 namespace MyGame.SkewerJam.Gameplay.Helpers
@@ -27,7 +28,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             return listItemIds.GroupBy(e => e).ToDictionary(e => e.Key, e => e.Count());
         }
 
-        public static List<ItemId> GetItemIdsInLockedGrill()
+        public static List<ItemId> GetItemIdsInLockedGrillInLayer1()
         {
             var grillManager = GameController.Instance.GameLogicHandler.GrillManager;
             var listItemIds = new List<ItemId>();
@@ -59,11 +60,49 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             return listItemIds;
         }
 
+        public static List<ItemId> GetItemIdsInBlindedGrill()
+        {
+            var grillManager = GameController.Instance.GameLogicHandler.GrillManager;
+            var listItemIds = new List<ItemId>();
+            foreach (var grill in grillManager.ListGrills)
+            {
+                if (grill.grillType == GrillType.Vending)
+                {
+                    var subGrills = grill.GetSubGrills();
+                    if (subGrills != null && subGrills.Count > 0)
+                    {
+                        var firstSubGrill = subGrills[0];
+                        foreach (var slot in firstSubGrill.GetSlots())
+                        {
+                            var item = slot.GetItem();
+                            if (item != null)
+                            {
+                                listItemIds.Add((ItemId)item.id);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var slot in grill.GetSlots())
+                    {
+                        var item = slot.GetItem();
+                        if (item != null && item.itemType == ItemType.Hidden)
+                        {
+                            listItemIds.Add((ItemId)item.id);
+                        }
+                    }
+                }
+            }
+            return listItemIds;
+        }
+
         public static bool CheckSelectedItemOnOrder(Item item)
         {
             var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
             var orderItemsDict = orderManager.GetOrderItemsDict();
             return orderItemsDict.ContainsKey((ItemId)item.id);
         }
+
     }
 }
