@@ -1,6 +1,6 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using MyGame.SkewerJam.Features.VideoBar;
 using MyGame.UI.PopupVideoBar;
@@ -34,6 +34,7 @@ public class PopupVideoBar : Panel
     private readonly Service<VideoBarService> videoBarService = new();
     private readonly Service<PoolingContainerService> poolingContainer = new();
 
+    private Coroutine coroutine;
     private void Reset()
     {
         _collected = false;
@@ -57,17 +58,24 @@ public class PopupVideoBar : Panel
             _milestoneList.Add(milestone);
         }
 
-        UpdateUI(() => { }).Forget();
+        timeCounter.gameObject.SetActive(true);
+        timeCounter.SetData(videoBarService.Instance.GetRemainingTime() + 1, () => // cộng thêm 1s cho chắc là service đã reset
+        {
+            Close();
+        });
+
+        if (coroutine != null) StopCoroutine(coroutine);
+        coroutine = StartCoroutine(UpdateUI(() => { }));
 
         videoBarService.Instance.OnClaimReward += OnClaimReward;
-        videoBarService.Instance.OnResetData += ResetData;
+        // videoBarService.Instance.OnResetData += ResetData;
     }
 
     public override void Close()
     {
         base.Close();
         videoBarService.Instance.OnClaimReward -= OnClaimReward;
-        videoBarService.Instance.OnResetData -= ResetData;
+        // videoBarService.Instance.OnResetData -= ResetData;
     }
 
     private void LoadData()
@@ -82,18 +90,18 @@ public class PopupVideoBar : Panel
 
     private void OnClaimReward(MilestoneData milestoneData)
     {
-        UpdateUI(() =>
+        if (coroutine != null) StopCoroutine(coroutine);
+        coroutine = StartCoroutine(UpdateUI(() =>
         {
             _collected = false;
             PanelManager.Instance.OpenPanel<PopupReward>(new UIData().Add(PopupReward.KEY_REWARD, milestoneData.rewardData));
-        }).Forget();
+        }));
     }
 
     private void ResetData()
     {
         _currentVisualIndex.Value = -1;
 
-        timeCounter.gameObject.SetActive(false);
         var config = videoBarService.Instance.Config;
         _slider.value = (_currentVisualIndex.Value + 1) * 1.0f / config.milestones.Count;
         foreach (var milestone in _milestoneList)
@@ -127,33 +135,21 @@ public class PopupVideoBar : Panel
         videoBarService.Instance.OnWatchedVideo();
     }
 
-    private async UniTask UpdateUI(Action onComplete)
+    private IEnumerator UpdateUI(Action onComplete)
     {
-        var full = videoBarService.Instance.CheckFull();
-        if (full)
-        {
-            timeCounter.gameObject.SetActive(true);
-            timeCounter.SetData(videoBarService.Instance.GetRemainingTime(), () =>
-            {
-                Close();
-            });
-        }
-        else
-        {
-            timeCounter.gameObject.SetActive(false);
-        }
-
         for (int i = 0; i < videoBarService.Instance.Config.milestones.Count; i++)
         {
             var milestoneObj = _milestoneList[i];
             milestoneObj.SetComplete(videoBarService.Instance.CurrentIndex >= i);
         }
-        await UniTask.Delay((int)_delay * 1000);
+        yield return new WaitForSeconds(_delay);
         var current = (_currentVisualIndex.Value + 1) * 1.0f / videoBarService.Instance.Config.milestones.Count;
 
         var currentIndex = videoBarService.Instance.CurrentIndex;
         var newValue = (currentIndex + 1) * 1.0f / videoBarService.Instance.Config.milestones.Count;
-        await _slider.DOValue(newValue, _duration).From(current);
+        _slider.DOValue(newValue, _duration).From(current);
+
+        yield return new WaitForSeconds(_duration);
         _currentVisualIndex.Value = currentIndex;
         onComplete?.Invoke();
     }

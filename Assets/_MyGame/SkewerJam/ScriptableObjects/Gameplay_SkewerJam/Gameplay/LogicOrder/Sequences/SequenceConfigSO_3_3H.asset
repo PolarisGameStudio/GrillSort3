@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f923a9ae62a109c4d9eaca485956c3af, type: 3}
-  m_Name: SequenceConfigSO
+  m_Name: SequenceConfigSO_3_3H
   m_EditorClassIdentifier: 
   listPhaseConfigs:
   - index: 0
@@ -20,26 +20,26 @@ MonoBehaviour:
     minNum: 2
   - index: 1
     threshold: 0.32
-    indexBO: 1
-    indexSO: 4
+    indexBO: 7
+    indexSO: 1
     minNum: 2
   - index: 2
     threshold: 0.48
-    indexBO: 1
-    indexSO: 1
+    indexBO: 0
+    indexSO: 4
     minNum: 2
   - index: 3
     threshold: 0.64
-    indexBO: 1
-    indexSO: 1
+    indexBO: 10
+    indexSO: 4
     minNum: 2
   - index: 4
     threshold: 0.8
-    indexBO: 1
-    indexSO: 1
-    minNum: 2
+    indexBO: 2
+    indexSO: 5
+    minNum: 1
   - index: 5
     threshold: 1
-    indexBO: 1
+    indexBO: 0
     indexSO: 1
     minNum: 1

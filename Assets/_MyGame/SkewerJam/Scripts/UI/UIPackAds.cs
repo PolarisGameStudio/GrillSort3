@@ -13,11 +13,11 @@ public class UIPackAds : MonoBehaviour
 {
     [SerializeField] private UnityEvent onWatchedAds;
 
-    private LongDataPref _lastWatchedAdsTime;
+    // private LongDataPref _lastWatchedAdsTime;
 
     private void Awake()
     {
-        _lastWatchedAdsTime = new LongDataPref("last_watched_ads_time");
+        // _lastWatchedAdsTime = new LongDataPref("last_watched_ads_time");
     }
 
     public void OnClickWatchAds()
@@ -35,13 +35,14 @@ public class UIPackAds : MonoBehaviour
 
     private bool CheckCanWatchAds()
     {
-        return _lastWatchedAdsTime.Value == 0
-        || MySonatFramework.GetService<TimeService>().GetCurrentTime().Date != DateTimeOffset.FromUnixTimeSeconds(_lastWatchedAdsTime.Value).Date;
+        return true;
+        // return _lastWatchedAdsTime.Value == 0
+        // || MySonatFramework.GetService<TimeService>().GetCurrentTime().Date != DateTimeOffset.FromUnixTimeSeconds(_lastWatchedAdsTime.Value).Date;
     }
 
     private void OnWatchedAds()
     {
-        _lastWatchedAdsTime.Value = MySonatFramework.GetService<TimeService>().GetUnixTimeSeconds();
+        // _lastWatchedAdsTime.Value = MySonatFramework.GetService<TimeService>().GetUnixTimeSeconds();
         // TODO: Implement watched ads
         var reward = new RewardData();
         reward.AddReward(new ResourceData(GameResource.Coin, 30));

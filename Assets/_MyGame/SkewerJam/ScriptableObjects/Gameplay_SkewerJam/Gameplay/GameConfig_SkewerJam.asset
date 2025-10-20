@@ -23,11 +23,23 @@ MonoBehaviour:
   - levelDifficulty: 1
     reward:
       resource: 1
-      quantity: 15
+      quantity: 10
   - levelDifficulty: 2
     reward:
       resource: 1
-      quantity: 25
+      quantity: 10
+  - levelDifficulty: 3
+    reward:
+      resource: 1
+      quantity: 10
+  - levelDifficulty: 4
+    reward:
+      resource: 1
+      quantity: 10
+  - levelDifficulty: 5
+    reward:
+      resource: 1
+      quantity: 10
   unlockTrayPrice:
     resource: 1
     quantity: 500

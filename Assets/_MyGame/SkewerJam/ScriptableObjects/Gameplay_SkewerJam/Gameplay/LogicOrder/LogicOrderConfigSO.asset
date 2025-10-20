@@ -13,6 +13,68 @@ MonoBehaviour:
   m_Name: LogicOrderConfigSO
   m_EditorClassIdentifier: 
   listSequenceConfigs:
-  - {fileID: 11400000, guid: 276110380e656b6438fbcb3bc5d0bd98, type: 2}
-  - {fileID: 11400000, guid: a2b0be49049a69e46a535071724f58f5, type: 2}
-  - {fileID: 11400000, guid: a101a231d111c9147bb74bbe2c203667, type: 2}
+  - difficultyAndSequences:
+    - difficulty: 0
+      sequence: {fileID: 11400000, guid: 276110380e656b6438fbcb3bc5d0bd98, type: 2}
+    - difficulty: 1
+      sequence: {fileID: 11400000, guid: 276110380e656b6438fbcb3bc5d0bd98, type: 2}
+    - difficulty: 2
+      sequence: {fileID: 11400000, guid: 276110380e656b6438fbcb3bc5d0bd98, type: 2}
+    - difficulty: 3
+      sequence: {fileID: 11400000, guid: 276110380e656b6438fbcb3bc5d0bd98, type: 2}
+    - difficulty: 4
+      sequence: {fileID: 11400000, guid: a2b0be49049a69e46a535071724f58f5, type: 2}
+    - difficulty: 5
+      sequence: {fileID: 11400000, guid: a2b0be49049a69e46a535071724f58f5, type: 2}
+  - difficultyAndSequences:
+    - difficulty: 0
+      sequence: {fileID: 11400000, guid: a101a231d111c9147bb74bbe2c203667, type: 2}
+    - difficulty: 1
+      sequence: {fileID: 11400000, guid: a101a231d111c9147bb74bbe2c203667, type: 2}
+    - difficulty: 2
+      sequence: {fileID: 11400000, guid: ac0e2284ee3b3b540a09b3cd3dfea030, type: 2}
+    - difficulty: 3
+      sequence: {fileID: 11400000, guid: ac0e2284ee3b3b540a09b3cd3dfea030, type: 2}
+    - difficulty: 4
+      sequence: {fileID: 11400000, guid: 747a58ea82fc4c949be462b91eb1a62e, type: 2}
+    - difficulty: 5
+      sequence: {fileID: 11400000, guid: 747a58ea82fc4c949be462b91eb1a62e, type: 2}
+  - difficultyAndSequences:
+    - difficulty: 0
+      sequence: {fileID: 11400000, guid: 09da3fc674b069840a111099ccb200ed, type: 2}
+    - difficulty: 1
+      sequence: {fileID: 11400000, guid: 09da3fc674b069840a111099ccb200ed, type: 2}
+    - difficulty: 2
+      sequence: {fileID: 11400000, guid: 0a4b9a5baed4fb04bbb3d9258a6572c6, type: 2}
+    - difficulty: 3
+      sequence: {fileID: 11400000, guid: 0a4b9a5baed4fb04bbb3d9258a6572c6, type: 2}
+    - difficulty: 4
+      sequence: {fileID: 11400000, guid: 144044fe175d24b47b750606cf39b5e7, type: 2}
+    - difficulty: 5
+      sequence: {fileID: 11400000, guid: 144044fe175d24b47b750606cf39b5e7, type: 2}
+  - difficultyAndSequences:
+    - difficulty: 0
+      sequence: {fileID: 11400000, guid: f965fa867bac5604d8355152a161c3c9, type: 2}
+    - difficulty: 1
+      sequence: {fileID: 11400000, guid: f965fa867bac5604d8355152a161c3c9, type: 2}
+    - difficulty: 2
+      sequence: {fileID: 11400000, guid: 52614507a230bf44094a06d66ce77b2f, type: 2}
+    - difficulty: 3
+      sequence: {fileID: 11400000, guid: 52614507a230bf44094a06d66ce77b2f, type: 2}
+    - difficulty: 4
+      sequence: {fileID: 11400000, guid: 44b61e0f46d95394ebb08a030e441d18, type: 2}
+    - difficulty: 5
+      sequence: {fileID: 11400000, guid: 44b61e0f46d95394ebb08a030e441d18, type: 2}
+  - difficultyAndSequences:
+    - difficulty: 0
+      sequence: {fileID: 11400000, guid: 1640b4099bb45224fb72860f65b34311, type: 2}
+    - difficulty: 1
+      sequence: {fileID: 11400000, guid: 1640b4099bb45224fb72860f65b34311, type: 2}
+    - difficulty: 2
+      sequence: {fileID: 11400000, guid: 903fee1e6f4fbf44fb315386ff2520dc, type: 2}
+    - difficulty: 3
+      sequence: {fileID: 11400000, guid: 903fee1e6f4fbf44fb315386ff2520dc, type: 2}
+    - difficulty: 4
+      sequence: {fileID: 11400000, guid: d2ec77c9527e9ab45b6a2f88d678bcf6, type: 2}
+    - difficulty: 5
+      sequence: {fileID: 11400000, guid: d2ec77c9527e9ab45b6a2f88d678bcf6, type: 2}

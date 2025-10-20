@@ -28,10 +28,7 @@ namespace MyGame.SkewerJam.Features.VideoBar
         {
             LoadData();
 
-            if (CheckFull())
-            {
-                CheckExpire();
-            }
+            CheckExpire();
         }
 
 
@@ -57,13 +54,16 @@ namespace MyGame.SkewerJam.Features.VideoBar
         {
             _currentIndex.Value = -1;
             _claimedMilestoneIndex.Value = -1;
+            SetExpireTime();
 
             OnResetData?.Invoke();
         }
 
         private void SetExpireTime()
         {
-            _expireTime.Value = MySonatFramework.GetService<TimeService>().GetUnixTimeSeconds() + _config.duration;
+            var now = MySonatFramework.GetService<TimeService>().GetCurrentTime();
+            var nextDay = now.Date.AddDays(1);
+            _expireTime.Value = ((DateTimeOffset)nextDay).ToUnixTimeSeconds();
             CheckExpire();
         }
 
@@ -79,12 +79,8 @@ namespace MyGame.SkewerJam.Features.VideoBar
 
         public void OnWatchedVideo()
         {
+            if (CheckFull()) return;
             _currentIndex.Value++;
-
-            if (CheckFull())
-            {
-                SetExpireTime();
-            }
 
             var currentMilestone = _config.milestones[_currentIndex.Value];
             _claimedMilestoneIndex.Value = currentMilestone.index;

@@ -5,6 +5,7 @@ using Manager;
 using MyGame.SkewerJam.Gameplay.LogicOrder;
 using MyGame.SkewerJam.Gameplay.LogicOrder.Configs;
 using MyGame.SkewerJam.Level;
+using Sonat.Enums;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay.Helpers
@@ -38,25 +39,12 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
         private void OnLoadLevelData(LevelData_SkewerJam levelData)
         {
-            var sequenceIndex = ValidateSequenceIndex(levelData.sequenceLogicOrderIndex);
-            selectedSequenceConfig = logicOrderConfigSO.listSequenceConfigs[sequenceIndex];
+            // var sequenceIndex = ValidateSequenceIndex(levelData.sequenceLogicOrderIndex, levelData.difficulty);
+            selectedSequenceConfig = logicOrderConfigSO.GetSequenceConfigSO(levelData.sequenceLogicOrderIndex, levelData.difficulty);
             foreach (var logicOrder in listLogicOrders)
             {
                 logicOrder.SetLevelData(levelData);
             }
-        }
-
-        private int ValidateSequenceIndex(int index)
-        {
-            if (index < 0)
-            {
-                return 0;
-            }
-            if (index >= logicOrderConfigSO.listSequenceConfigs.Count)
-            {
-                return logicOrderConfigSO.listSequenceConfigs.Count - 1;
-            }
-            return index;
         }
 
         public bool CheckCreateNextOrder()

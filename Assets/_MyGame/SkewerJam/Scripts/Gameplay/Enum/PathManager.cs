@@ -11,7 +11,7 @@ namespace Manager
 
         public static string TutorialSprite(TutorialType tutorialType)
         {
-            return $"Assets/_MyGame/SkewerJam/Arts/Gameplay/Tutorials/{tutorialType}.png";
+            return $"Assets/_MyGame/SkewerJam/Arts/Tutorials/{tutorialType}.png";
         }
 
         public static bool IsItemOfType5(int itemId)

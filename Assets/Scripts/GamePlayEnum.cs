@@ -8,9 +8,12 @@ namespace Sonat.Enums
 
     public enum LevelDifficulty : byte
     {
-        Normal,
-        Hard,
-        SuperHard
+        Easy1,
+        Easy2,
+        Medium1,
+        Medium2,
+        Hard1,
+        Hard2
     }
 
     public enum LevelType : byte

@@ -9,7 +9,7 @@ namespace Gameplay.LevelData
 {
     public class LevelData : SonatFramework.Systems.LevelManagement.LevelData
     {
-        public LevelDifficulty difficulty = LevelDifficulty.Normal;
+        public LevelDifficulty difficulty = LevelDifficulty.Easy1;
         public LevelType levelType = LevelType.Food;
         public ushort time;
         public List<GrillData> grillData;

@@ -126,7 +126,7 @@ namespace MyGame.SkewerJam.Gameplay
                 {
                     if (obstacleData.obstacleType == ObstacleType.OctoChef)
                     {
-                        listTutorialTypes.Add(TutorialType.Obstacle_OctoChef);
+                        listTutorialTypes.Add(TutorialType.Obstacle_Octochef_1);
                     }
                 }
             }
@@ -188,7 +188,7 @@ namespace MyGame.SkewerJam.Gameplay
                 case TutorialType.Item_Hidden:
                 case TutorialType.Item_Ice:
 
-                case TutorialType.Obstacle_OctoChef:
+                case TutorialType.Obstacle_Octochef_1:
                     // case TutorialType.Obstacle_Conveyor:
                     ShowPopupTutorialObstacle(tutorialType);
                     return;
@@ -265,7 +265,7 @@ namespace MyGame.SkewerJam.Gameplay
         //     }
         //     if (Input.GetKeyDown(KeyCode.Alpha4))
         //     {
-        //         ShowPopupTutorial(TutorialType.Obstacle_OctoChef);
+        //         ShowPopupTutorial(TutorialType.Obstacle_Octochef_1);
         //     }
         //     if (Input.GetKeyDown(KeyCode.Alpha5))
         //     {
@@ -307,7 +307,7 @@ namespace MyGame.SkewerJam.Gameplay
         Item_Hidden = 41,
         Item_Ice = 42,
 
-        Obstacle_OctoChef = 70,
+        Obstacle_Octochef_1 = 70,
         Obstacle_Conveyor = 71,
     }
 }

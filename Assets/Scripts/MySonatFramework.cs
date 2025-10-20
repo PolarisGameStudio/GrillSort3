@@ -62,7 +62,7 @@ public class MySonatFramework : SonatSystem
         // }
         // catch (Exception)
         // {
-        return LevelDifficulty.Normal;
+        return LevelDifficulty.Easy1;
         // }
     }
 

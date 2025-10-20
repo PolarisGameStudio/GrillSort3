@@ -86,24 +86,7 @@ namespace MyGame.SkewerJam.Gameplay
             var levelDataSkewerJam = levelData.CloneSkewerJam();
             levelDataSkewerJam.numberOfWaitingGrill = 5;
 
-            // 
-            // switch (levelDataSkewerJam.difficulty)
-            // {
-            //     case LevelDifficulty.Normal:
             levelDataSkewerJam.rescueCondition = new RescueCondition();
-
-            switch (levelDataSkewerJam.difficulty)
-            {
-                case LevelDifficulty.Normal:
-                    levelDataSkewerJam.sequenceLogicOrderIndex = 0;
-                    break;
-                case LevelDifficulty.Hard:
-                    levelDataSkewerJam.sequenceLogicOrderIndex = 1;
-                    break;
-                case LevelDifficulty.SuperHard:
-                    levelDataSkewerJam.sequenceLogicOrderIndex = 2;
-                    break;
-            }
 
             // shuffle item
             if (_level > 100)

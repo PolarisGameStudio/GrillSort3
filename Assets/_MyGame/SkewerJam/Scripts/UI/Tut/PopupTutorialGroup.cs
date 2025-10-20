@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.Utils;
@@ -13,6 +14,7 @@ public class PopupTutorialGroup : PopupTutorialObstacle
     [SerializeField] private List<ListObjectsInState> listGameObjectsState;
 
     private int stateIndex = 0;
+    private Coroutine coroutine;
 
     public override void Open(UIData uiData)
     {
@@ -20,10 +22,19 @@ public class PopupTutorialGroup : PopupTutorialObstacle
 
 
         SwitchState(0);
-        SonatUtils.DelayCall(delaySwitchState, () =>
-        {
-            SwitchState(stateIndex + 1);
-        }, this);
+        WaitNextState();
+    }
+
+    private void WaitNextState()
+    {
+        if (coroutine != null) StopCoroutine(coroutine);
+        coroutine = StartCoroutine(NextState());
+    }
+
+    private IEnumerator NextState()
+    {
+        yield return new WaitForSeconds(delaySwitchState);
+        SwitchState(stateIndex + 1);
     }
 
     public override void OnClickClose()
@@ -44,6 +55,8 @@ public class PopupTutorialGroup : PopupTutorialObstacle
 
     private void SwitchState(int stateIndex)
     {
+        if (stateIndex >= listGameObjectsState.Count) return;
+
         this.stateIndex = stateIndex;
         foreach (var state in listGameObjectsState)
         {
@@ -63,6 +76,8 @@ public class PopupTutorialGroup : PopupTutorialObstacle
         {
             canClickClose = true;
         }, this);
+
+        WaitNextState();
     }
 
     [Serializable]
