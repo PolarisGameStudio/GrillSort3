@@ -6,6 +6,7 @@ using DG.Tweening;
 using Gameplay.BoosteeManagement;
 using Gameplay.Entities.GrillScripts;
 using Gameplay.LevelData;
+using MyGame.SkewerJam.Gameplay.Helpers;
 using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems.SettingsManagement.Vibation;
 using UnityEngine;
@@ -384,7 +385,7 @@ namespace Gameplay.Entities
 
                 SonatUtils.DelayCall(GameDefine.itemScaleIntro + 0.2f, () =>
                 {
-                    if (grillType != GrillType.Vending) grillVisual.OpenGrill();
+                    if (CanShuffle()) grillVisual.OpenGrill();
                     CheckSubGrills();
                     CheckComplete();
                     SonatUtils.DelayCall(GameDefine.itemScaleIntro, CheckEmpty, this);

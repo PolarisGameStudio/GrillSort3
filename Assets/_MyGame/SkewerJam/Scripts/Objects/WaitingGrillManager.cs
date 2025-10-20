@@ -10,6 +10,7 @@ using System.Linq;
 using MyGame.SkewerJam.Level;
 using static MyGame.SkewerJam.Objects.Entities.OrderEntity;
 using Manager;
+using SonatFramework.Scripts.Utils;
 
 namespace MyGame.SkewerJam.Objects
 {
@@ -59,8 +60,14 @@ namespace MyGame.SkewerJam.Objects
         {
             if (slot.GetGrill() is WaitingGrill waitingGrill)
             {
-                GameController.Instance.GameLogicHandler.TryCheckMatchItem(item);
+                OnItemEndSwitch(item).Forget();
             }
+        }
+
+        private async UniTask OnItemEndSwitch(Item item)
+        {
+            await GameController.Instance.GameLogicHandler.TryCheckMatchItem(item);
+            GameController.Instance.GameLogicHandler.TryCheckLoseGame();
         }
         #endregion
 

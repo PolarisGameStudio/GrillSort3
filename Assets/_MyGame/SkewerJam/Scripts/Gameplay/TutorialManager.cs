@@ -249,41 +249,41 @@ namespace MyGame.SkewerJam.Gameplay
         }
 
 #if UNITY_EDITOR
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                ShowPopupTutorial(TutorialType.BoosterAddPlate);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                ShowPopupTutorial(TutorialType.PrimaryGrill_Single);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                ShowPopupTutorial(TutorialType.Item_Bomb);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                ShowPopupTutorial(TutorialType.Obstacle_OctoChef);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                ShowPopupTutorial(TutorialType.PrimaryGrill_Ice);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha6))
-            {
-                ShowPopupTutorial(TutorialType.PrimaryGrill_Vending);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha7))
-            {
-                ShowPopupTutorial(TutorialType.PrimaryGrill_LockAndKey);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha8))
-            {
-                ShowPopupTutorial(TutorialType.Obstacle_Conveyor);
-            }
-        }
+        // private void Update()
+        // {
+        //     if (Input.GetKeyDown(KeyCode.Alpha1))
+        //     {
+        //         ShowPopupTutorial(TutorialType.BoosterAddPlate);
+        //     }
+        //     if (Input.GetKeyDown(KeyCode.Alpha2))
+        //     {
+        //         ShowPopupTutorial(TutorialType.PrimaryGrill_Single);
+        //     }
+        //     if (Input.GetKeyDown(KeyCode.Alpha3))
+        //     {
+        //         ShowPopupTutorial(TutorialType.Item_Bomb);
+        //     }
+        //     if (Input.GetKeyDown(KeyCode.Alpha4))
+        //     {
+        //         ShowPopupTutorial(TutorialType.Obstacle_OctoChef);
+        //     }
+        //     if (Input.GetKeyDown(KeyCode.Alpha5))
+        //     {
+        //         ShowPopupTutorial(TutorialType.PrimaryGrill_Ice);
+        //     }
+        //     if (Input.GetKeyDown(KeyCode.Alpha6))
+        //     {
+        //         ShowPopupTutorial(TutorialType.PrimaryGrill_Vending);
+        //     }
+        //     if (Input.GetKeyDown(KeyCode.Alpha7))
+        //     {
+        //         ShowPopupTutorial(TutorialType.PrimaryGrill_LockAndKey);
+        //     }
+        //     if (Input.GetKeyDown(KeyCode.Alpha8))
+        //     {
+        //         ShowPopupTutorial(TutorialType.Obstacle_Conveyor);
+        //     }
+        // }
 #endif
     }
 

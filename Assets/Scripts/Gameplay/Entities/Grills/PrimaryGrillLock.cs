@@ -29,6 +29,12 @@ namespace Gameplay.Entities.Grills
             lockObstacle.ForceUnlock();
         }
 
+        public override bool CanShuffle()
+        {
+            if (IsLock) return false;
+            return true;
+        }
+
         public override ShuffleLayerData GetShuffleLayerData()
         {
             if (IsLock)

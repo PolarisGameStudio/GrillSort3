@@ -42,8 +42,12 @@ namespace MyGame.SkewerJamSO.Boosters
             var dictGrill2ListLayerData = new Dictionary<PrimaryGrill, List<LayerData>>();
             foreach (var primaryGrill in primaryGrills)
             {
+                // primary layer
+                if (primaryGrill.CanShuffle() == false) continue;
                 listItemDatasIn2Layer.AddRange(primaryGrill.GetCurrentData().itemData);
                 countItemInLayer0 += primaryGrill.GetCurrentData().itemData.Count(item => item != null);
+
+                // sublayer 0
                 if (primaryGrill.GetSubGrills() != null && primaryGrill.GetSubGrills().Count > 0)
                 {
                     listItemDatasIn2Layer.AddRange(primaryGrill.GetSubGrills()[0].GetCurrentData().itemData);
@@ -71,6 +75,8 @@ namespace MyGame.SkewerJamSO.Boosters
             // swap với các subgrill
             foreach (var primaryGrill in primaryGrills)
             {
+                if (primaryGrill.CanShuffle() == false) continue;
+
                 if (dictItemOrderDatas.Count == 0) break;
 
                 if (primaryGrill.GetSubGrills() == null || primaryGrill.GetSubGrills().Count == 0) continue;
@@ -124,7 +130,7 @@ namespace MyGame.SkewerJamSO.Boosters
                 }
             }
 
-            // shuffle 2 layer đầu
+            // TODO: -----------------------shuffle 2 layer đầu-----------------------------------------------------------------------------------
             listItemInOrder.Shuffle();
             listItemNotInOrder.Shuffle();
             var itemInLayer0 = new List<ItemData>(listItemInOrder);
@@ -134,6 +140,8 @@ namespace MyGame.SkewerJamSO.Boosters
 
             foreach (var primaryGrill in primaryGrills)
             {
+                if (primaryGrill.CanShuffle() == false) continue;
+
                 var layerData = primaryGrill.GetCurrentData();
                 var newLayerData = new LayerData(layerData.itemData.Length);
                 for (int i = 0; i < layerData.itemData.Length; i++)
@@ -155,6 +163,8 @@ namespace MyGame.SkewerJamSO.Boosters
             // shuffle các subgrill
             foreach (var primaryGrill in primaryGrills)
             {
+                if (primaryGrill.CanShuffle() == false) continue;
+
                 var subGrills = primaryGrill.GetSubGrills();
                 if (subGrills == null || subGrills.Count == 0) continue;
 
@@ -184,7 +194,7 @@ namespace MyGame.SkewerJamSO.Boosters
         protected override async UniTask PlayBoosterAnim(Vector3 position)
         {
             var boosterAnim = await MySonatFramework.GetService<PoolingServiceAsync>().CreateAsync<BoosterAnim>(
-                "BoosterAnimShuffle", 
+                "BoosterAnimShuffle",
                 PanelManager.Instance.transform);
             // boosterAnim.SetBooster(boosterType);
             // boosterAnim.SetData(position);

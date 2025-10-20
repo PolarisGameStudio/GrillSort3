@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Gameplay.Entities;
 using Gameplay.LevelData;
 using Manager;
 
@@ -99,6 +100,11 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             }
 
             return dict;
+        }
+
+        public static bool CanShuffle(PrimaryGrill primaryGrill)
+        {
+            return primaryGrill.CanShuffle();
         }
     }
 }

@@ -101,6 +101,12 @@ namespace Gameplay.Entities.Grills
             return grillBaseBehaviorSO.GetIceGrillStep();
         }
 
+        public override bool CanShuffle()
+        {
+            if (IsLock) return false;
+            return true;
+        }
+
         public override ShuffleLayerData GetShuffleLayerData()
         {
             if (IsLock)

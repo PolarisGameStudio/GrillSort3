@@ -490,5 +490,9 @@ namespace Gameplay.Entities
         {
             this.isProcessing = isProcessing;
         }
+
+        public virtual void MoveToOrder(){
+            
+        }
     }
 }

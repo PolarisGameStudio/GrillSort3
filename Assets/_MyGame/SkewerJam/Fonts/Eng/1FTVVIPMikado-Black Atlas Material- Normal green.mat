@@ -25,7 +25,12 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _FaceDilate: 0.05
+    - _ScaleRatioB: 0.6354167
+    - _ScaleRatioC: 0.31770834
+    - _UnderlayDilate: 1
+    - _UnderlayOffsetY: -1
     m_Colors:
     - _OutlineColor: {r: 0.003921569, g: 0.45490196, b: 0.011764706, a: 1}
     - _UnderlayColor: {r: 0.002124689, g: 0.45641106, b: 0.011612245, a: 1}

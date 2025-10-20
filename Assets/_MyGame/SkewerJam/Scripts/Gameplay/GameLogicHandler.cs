@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Gameplay.Entities;
@@ -54,7 +55,8 @@ namespace MyGame.SkewerJam.Gameplay
         public event Action<OrderEntity> OnEndCollectItem;
         #endregion
 
-
+        private bool _blockUIWhenEnd = false;
+        public bool BlockUIWhenEnd => _blockUIWhenEnd;
 
         public void Init()
         {
@@ -67,6 +69,9 @@ namespace MyGame.SkewerJam.Gameplay
             obstacleManager.Init();
 
             suggestManager.Init();
+
+            ResetCoroutine();
+            _blockUIWhenEnd = false;
         }
 
         public void Clear()
@@ -80,6 +85,8 @@ namespace MyGame.SkewerJam.Gameplay
             obstacleManager.Clear();
 
             suggestManager.Clear();
+
+            ResetCoroutine();
         }
 
         #region Select Item
@@ -111,9 +118,6 @@ namespace MyGame.SkewerJam.Gameplay
                 {
                     SwitchSlot(item, waitingGrillSlot, false, false);
                     isSwitchSuccess = true;
-
-
-                    GameController.Instance.GameLogicHandler.TryCheckLoseGame();
                 }
             }
 
@@ -154,7 +158,16 @@ namespace MyGame.SkewerJam.Gameplay
             OnItemStartSwitchAndCheck?.Invoke(item, fromWaitingGrill, toOrder);
             OnItemStartSwitch?.Invoke(item, slot);
 
-            TryCheckWinGame().Forget();
+            if (grillManager.CheckClearAllItems())
+            {
+                _blockUIWhenEnd = true;
+                TryCheckWinGame().Forget();
+            }
+
+            if (toOrder == true)
+            {
+                item.MoveToOrder();
+            }
         }
 
         public void ItemMoveSlot(Item item, SlotBase slot)
@@ -170,10 +183,9 @@ namespace MyGame.SkewerJam.Gameplay
             orderEntity.State = OrderEntityState.Waiting;
         }
 
-        public void EndMoveNextOrder(OrderEntity orderEntity, bool startLevel = false)
+        public async UniTask EndMoveNextOrder(OrderEntity orderEntity, bool startLevel = false)
         {
             orderEntity.State = OrderEntityState.Ready;
-
             if (startLevel == false)
             {
                 OnAppearNextOrder?.Invoke(orderEntity);
@@ -184,6 +196,7 @@ namespace MyGame.SkewerJam.Gameplay
             if (orderEntity.IsActive == true)
             {
                 var targetItem = orderEntity.ItemIdTarget;
+                await UniTask.WaitUntil(() => GameController.Instance.GameState == GameState.Playing);
                 foreach (var waitingGrill in waitingGrillManager.ListWaitingGrills)
                 {
                     var slot = waitingGrill.GetSlot(0);
@@ -200,11 +213,12 @@ namespace MyGame.SkewerJam.Gameplay
             WaitingGrillHelper.ResetWarning();
         }
 
-        public void TryCheckMatchItem(Item item)
+        public async UniTask TryCheckMatchItem(Item item)
         {
             var (_, slot) = orderManager.GetDestinationSlot(item);
             if (slot != null)
             {
+                await UniTask.WaitUntil(() => GameController.Instance.GameState == GameState.Playing);
                 SwitchSlot(item, slot, true, true);
                 return;
             }
@@ -252,8 +266,37 @@ namespace MyGame.SkewerJam.Gameplay
             return false;
         }
 
-        public async UniTask TryCheckLoseGame()
+
+        private Coroutine _coroutineTryCheckLoseGame;
+
+        public void TryCheckLoseGame()
         {
+            ResetCoroutine();
+            _coroutineTryCheckLoseGame = StartCoroutine(IETryCheckLoseGame());
+        }
+
+        private void ResetCoroutine()
+        {
+            if (_coroutineTryCheckLoseGame != null)
+            {
+                StopCoroutine(_coroutineTryCheckLoseGame);
+            }
+        }
+
+        private IEnumerator IETryCheckLoseGame()
+        {
+            // check lose khi:
+            // - order tĩnh: không có order nào đang di chuyển vào
+            // - waiting grill tĩnh: không còn item nào nhảy lên đĩa
+            yield return new WaitUntil(() =>
+            {
+                return orderManager.ListOrders.Where(e => e.State == OrderEntityState.Waiting && e.IsActive).Count() == 0;
+            });
+            yield return new WaitForEndOfFrame();
+            yield return new WaitUntil(() =>
+            {
+                return GameController.Instance.GameState == GameState.Playing;
+            });
             var stuckType = CheckLoseGame();
             if (stuckType != null)
             {

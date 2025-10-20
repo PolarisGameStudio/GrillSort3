@@ -314,6 +314,11 @@ namespace MyGame.SkewerJam.Gameplay
             PlayLevel(level).Forget();
         }
 
+        public bool CheckBlockUI()
+        {
+            return gameState != GameState.Playing || gameLogicHandler.BlockUIWhenEnd;
+        }
+
 #if UNITY_EDITOR
         private void Update()
         {

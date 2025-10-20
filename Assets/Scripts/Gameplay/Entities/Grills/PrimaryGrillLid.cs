@@ -27,6 +27,12 @@ namespace Gameplay.Entities.Grills
         {
         }
 
+        public override bool CanShuffle()
+        {
+            if (IsLock) return false;
+            return true;
+        }
+
         public override ShuffleLayerData GetShuffleLayerData()
         {
             if (IsLock)

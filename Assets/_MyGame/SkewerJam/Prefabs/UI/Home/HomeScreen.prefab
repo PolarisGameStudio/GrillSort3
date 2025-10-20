@@ -1787,6 +1787,7 @@ GameObject:
   - component: {fileID: 7149078341494665193}
   - component: {fileID: 4630182907678091351}
   - component: {fileID: 8636379025834834114}
+  - component: {fileID: 2313523386232415363}
   m_Layer: 5
   m_Name: BtnJoinUs
   m_TagString: Untagged
@@ -1910,6 +1911,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2313523386232415363}
+        m_TargetAssemblyTypeName: MyGame.SkewerJam.UI.Home.Settings.UIButtonJoinUs,
+          Assembly-CSharp
+        m_MethodName: OnClickHiddenWarning
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4630182907678091351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1939,11 +1953,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioTracks: 1
-  audioId: 8
+  audioId: 1
   volume: 1
   audioService:
     referenceType: 1
     reference: {fileID: 0}
+--- !u!114 &2313523386232415363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2163066117090104781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6afa802d8bd000040ad313646a2105d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  warningObj: {fileID: 5995600332336906490}
 --- !u!1 &2431421148094144150
 GameObject:
   m_ObjectHideFlags: 0

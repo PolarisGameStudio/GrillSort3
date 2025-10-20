@@ -186,6 +186,7 @@ namespace MyGame.SkewerJam.Objects
             orderEntity.SetData(itemId, num, logicOrderType);
 
             _listOrders.Add(orderEntity);
+            GameController.Instance.GameLogicHandler.StartMoveNextOrder(orderEntity);
 
             return orderEntity;
         }
@@ -196,6 +197,8 @@ namespace MyGame.SkewerJam.Objects
             orderEntity.Init(false);
 
             _listOrders.Add(orderEntity);
+
+            GameController.Instance.GameLogicHandler.StartMoveNextOrder(orderEntity);
 
             return orderEntity;
         }
@@ -210,6 +213,8 @@ namespace MyGame.SkewerJam.Objects
             var orderPos = leftStartPos.position;
             orderPos.z = 0;
             nextOrder.transform.position = orderPos;
+
+            GameController.Instance.GameLogicHandler.StartMoveNextOrder(nextOrder);
         }
 
         private async UniTask PlayAppearNextOrder(OrderEntity nextOrder)
@@ -227,16 +232,14 @@ namespace MyGame.SkewerJam.Objects
             for (int i = 0; i < _listOrders.Count; i++)
             {
                 var order = _listOrders[i];
-
-                GameController.Instance.GameLogicHandler.StartMoveNextOrder(order);
                 MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Box_Appear_Grill3);
                 order.transform.DOLocalMove(_listOrderLocalPositions[order.OrderIndex], 0.3f).SetEase(Ease.OutSine).OnComplete(() =>
                 {
-                    GameController.Instance.GameLogicHandler.EndMoveNextOrder(order, true);
                     if (order.IsActive)
                     {
                         order.Visual.OpenGrill(true, true);
                     }
+                    GameController.Instance.GameLogicHandler.EndMoveNextOrder(order, true);
                 });
                 await UniTask.Delay(200);
             }

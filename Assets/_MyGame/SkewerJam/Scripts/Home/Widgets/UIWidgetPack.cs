@@ -23,6 +23,16 @@ public class UIWidgetPack : UIHomeWidget
         shopService.Instance.OnBuySuccess += OnBuySuccess;
     }
 
+    public override void OnFocus()
+    {
+        base.OnFocus();
+        if (shopService.Instance.VerifyPack(shopItemKey) == false)
+        {
+            active = false;
+        }
+        gameObject.SetActive(active);
+    }
+
     private void OnDestroy()
     {
         shopService.Instance.OnBuySuccess -= OnBuySuccess;

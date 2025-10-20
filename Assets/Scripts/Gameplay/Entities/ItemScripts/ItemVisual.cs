@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Gameplay.LevelData;
 using MyGame.SkewerJam.Scripts.SO.Behavior;
 using UnityEngine;
@@ -81,7 +82,7 @@ namespace Gameplay.Entities.ItemScripts
             SetMaterial(GameResourceReference.Instance.itemMaterials[0]);
         }
 
-        protected virtual void SetMaterial(Material material)
+        public virtual void SetMaterial(Material material)
         {
             spriteRenderer.material = material;
         }

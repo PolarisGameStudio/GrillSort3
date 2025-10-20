@@ -231,7 +231,7 @@ namespace MyGame.SkewerJam.Objects.Entities
         {
             // Khi nhả chuột trái
             //  var popup = PanelManager.Instance.GetPanel<PopupUnlock_SkewerJam>();
-            if (GameController.Instance.GameState == GameState.Playing && !active && Input.GetMouseButtonUp(0))
+            if (GameController.Instance.CheckBlockUI() == false && !active && Input.GetMouseButtonUp(0))
             {
                 var hits = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition));
                 foreach (var hit in hits)
@@ -276,6 +276,8 @@ namespace MyGame.SkewerJam.Objects.Entities
                 var orderPos = orderManager.LeftStartPos.position;
                 orderPos.z = 0;
                 container.position = orderPos;
+
+                gameLogicHandler.StartMoveNextOrder(this);
                 container.DOLocalMove(Vector3.zero, 0.5f).SetEase(Ease.OutSine).OnComplete(() =>
                 {
                     gameLogicHandler.EndMoveNextOrder(this);

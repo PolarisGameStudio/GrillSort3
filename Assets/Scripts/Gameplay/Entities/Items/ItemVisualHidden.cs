@@ -19,7 +19,7 @@ namespace Gameplay.Entities.Items
             hidden.gameObject.SetActive(true);
         }
 
-        protected override void SetMaterial(Material material)
+        public override void SetMaterial(Material material)
         {
         }
 
@@ -38,6 +38,16 @@ namespace Gameplay.Entities.Items
                     hidden.maskInteraction = SpriteMaskInteraction.None;
                     break;
             }
+        }
+
+        public void Show(){
+            spriteRenderer.material = GameResourceReference.Instance.itemMaterials[0];
+            hidden.gameObject.SetActive(false);
+        }
+
+        public void Hide(){
+            spriteRenderer.material = GameResourceReference.Instance.hiddenMaterial;
+            hidden.gameObject.SetActive(true);
         }
     }
 }

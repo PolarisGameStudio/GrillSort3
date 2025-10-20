@@ -96,6 +96,10 @@ public class PopupVideoBar : Panel
         timeCounter.gameObject.SetActive(false);
         var config = videoBarService.Instance.Config;
         _slider.value = (_currentVisualIndex.Value + 1) * 1.0f / config.milestones.Count;
+        foreach (var milestone in _milestoneList)
+        {
+            milestone.SetComplete(false);
+        }
     }
 
     public void OnClickWatchAds()
@@ -129,13 +133,16 @@ public class PopupVideoBar : Panel
         if (full)
         {
             timeCounter.gameObject.SetActive(true);
-            timeCounter.SetData(videoBarService.Instance.GetRemainingTime());
+            timeCounter.SetData(videoBarService.Instance.GetRemainingTime(), () =>
+            {
+                Close();
+            });
         }
         else
         {
             timeCounter.gameObject.SetActive(false);
         }
-        
+
         for (int i = 0; i < videoBarService.Instance.Config.milestones.Count; i++)
         {
             var milestoneObj = _milestoneList[i];

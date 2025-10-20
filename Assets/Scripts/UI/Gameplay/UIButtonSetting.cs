@@ -49,7 +49,7 @@ public class UIButtonSetting : MonoBehaviour
     {
         if (isActive) return;
 
-        if (GameController.Instance.GameState != GameState.Playing) return;
+        if (GameController.Instance.CheckBlockUI()) return;
 
         KillAllTweens();
         GameplayHelper.OnClose_ChangeGameState(GameState.Paused);

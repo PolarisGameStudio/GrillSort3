@@ -19,6 +19,11 @@ namespace Gameplay.Entities
             lockState = 0;
         }
 
+        public override bool CanShuffle()
+        {
+            return false;
+        }
+
         public override ShuffleLayerData GetShuffleLayerData()
         {
             return null;
