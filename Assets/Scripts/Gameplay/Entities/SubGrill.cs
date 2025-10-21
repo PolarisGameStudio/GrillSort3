@@ -259,10 +259,46 @@ namespace Gameplay.Entities
             base.SetMaskVisible(state);
             visual.maskInteraction = state ? SpriteMaskInteraction.VisibleOutsideMask : SpriteMaskInteraction.None;
         }
-        
+
         public override bool CheckItemWithId(int id)
         {
             return showed ? slots.Any(slot => slot.GetItem() != null && slot.GetItem().id == id) : layerData.itemData.Any(t => t == null || t.id == id);
+        }
+
+        public override void OnSlotUpdated(SlotBase slot)
+        {
+            base.OnSlotUpdated(slot);
+            if (slot.isEmpty())
+            {
+                SonatUtils.ExecuteNextFrame(CheckEmpty);
+            }
+        }
+
+        public virtual void CheckEmpty()
+        {
+            foreach (var slot in slots)
+            {
+                if (!slot.isEmpty()) return;
+            }
+
+            UpdateSubGrills();
+        }
+
+        protected virtual void UpdateSubGrills()
+        {
+            var subGrills = primaryGrill.GetSubGrills();
+            var idx = subGrills.IndexOf(this);
+
+            primaryGrill.RemoveSubGrill(this);
+            visual.DOFade(0, 0.5f).SetDelay(0.5f).OnComplete(() => { GameFactory.ReturnEntity(this); });
+
+            if (idx == 0)
+            {
+                if (primaryGrill.SubGrillsCount() > 0)
+                {
+                    primaryGrill.GetSubGrills()[0].Show();
+                }
+            }
         }
     }
 }
