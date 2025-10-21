@@ -44,6 +44,7 @@ namespace MyGame.SkewerJam.Level
                 numberOfOrder = this.numberOfOrder,
 
                 rescueCondition = this.rescueCondition,
+                sequenceLogicOrderIndex = this.sequenceLogicOrderIndex,
                 // logicOrderConfigs = this.logicOrderConfigs,
             };
             return levelDataSkewerJam;

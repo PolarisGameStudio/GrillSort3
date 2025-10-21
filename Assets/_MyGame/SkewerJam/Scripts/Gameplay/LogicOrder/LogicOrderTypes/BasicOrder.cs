@@ -30,7 +30,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
         public void SetData(int indexBO)
         {
-            Debug.Log("<color=white>BasicOrderSO:</color> SetData: " + indexBO);
+            Debug.Log("<color=white>BasicOrderSO:</color> SetIndexBO: " + indexBO);
             selectedBO = basicOrderConfigSO.listBasicOrderConfigs[indexBO];
         }
 

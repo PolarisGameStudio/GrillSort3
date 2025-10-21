@@ -40,6 +40,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
         private void OnLoadLevelData(LevelData_SkewerJam levelData)
         {
             // var sequenceIndex = ValidateSequenceIndex(levelData.sequenceLogicOrderIndex, levelData.difficulty);
+            Debug.Log("<color=purple>LogicOrderHandler:</color> OnLoadLevelData: " + levelData.sequenceLogicOrderIndex + " - " + levelData.difficulty);
             selectedSequenceConfig = logicOrderConfigSO.GetSequenceConfigSO(levelData.sequenceLogicOrderIndex, levelData.difficulty);
             foreach (var logicOrder in listLogicOrders)
             {

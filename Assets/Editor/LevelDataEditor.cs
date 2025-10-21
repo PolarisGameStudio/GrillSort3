@@ -70,23 +70,40 @@ namespace MyGame.Editor.LevelData
             string[] headers = GetValues(lines[0]); // dòng đầu tiên là tên cột
 
             // 3. Map CSV vào LevelData
-            for (int i = 0; i < levels.Count; i++)
+            for (int i = 0; i < lines.Length; i++)
             {
-                var values = GetValues(lines[i]);
-                var lData = levels[i];
-                var seq = values[0];
-                var difficulty = values[1];
-                Debug.Log($"Level {lData.level} " + seq + "- " + difficulty);
-                // lData.difficulty = GetLevelDifficulty(difficulty);
-                lData.sequenceLogicOrderIndex = GetSequenceIndex(seq);
+                var level = i + 1;
+                var lData = levels.Find(l => l.level == level);
+                if (lData != null)
+                {
+                    var values = GetValues(lines[i]);
+                    var seq = values[0];
+                    var difficulty = values[1];
+                    Debug.Log($"Level {lData.level} " + seq + "- " + difficulty);
+                    lData.difficulty = GetLevelDifficulty(difficulty);
+                    lData.sequenceLogicOrderIndex = GetSequenceIndex(seq);
+                }
+                else{
+                    Debug.LogError($"Level {level} not found");
+                }
             }
+            // for (int i = 0; i < levels.Count; i++)
+            // {
+            //     var values = GetValues(lines[i]);
+            //     var lData = levels[i];
+            //     var seq = values[0];
+            //     var difficulty = values[1];
+            //     Debug.Log($"Level {lData.level} " + seq + "- " + difficulty);
+            //     lData.difficulty = GetLevelDifficulty(difficulty);
+            //     lData.sequenceLogicOrderIndex = GetSequenceIndex(seq);
+            // }
 
             // 4. Ghi lại JSON
             int idx = 0;
             foreach (string file in jsonFiles)
             {
                 LevelData_SkewerJam l = levels[idx];
-                
+
                 string newJson = JsonConvert.SerializeObject(l, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
                 File.WriteAllText(file, newJson);
                 idx += 1;

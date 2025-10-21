@@ -88,6 +88,21 @@ namespace MyGame.SkewerJam.Gameplay
 
             levelDataSkewerJam.rescueCondition = new RescueCondition();
 
+            // bộ level cũ
+            // if ((int)levelDataSkewerJam.difficulty == 0)
+            // {
+            //     levelDataSkewerJam.difficulty = LevelDifficulty.Easy1;
+            // }
+            // if ((int)levelDataSkewerJam.difficulty == 1)
+            // {
+            //     levelDataSkewerJam.difficulty = LevelDifficulty.Medium1;
+            // }
+            // if ((int)levelDataSkewerJam.difficulty == 2)
+            // {
+            //     levelDataSkewerJam.difficulty = LevelDifficulty.Hard1;
+            // }
+
+
             // shuffle item
             if (_level > 100)
             {
