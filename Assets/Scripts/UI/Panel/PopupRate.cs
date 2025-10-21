@@ -50,7 +50,7 @@ public class PopupRate : Panel
         if (starSelected >= 1)
         {
 #if UNITY_ANDROID
-            Application.OpenURL("https://play.google.com/store/apps/details?id=com.grill.sorting.food.match.puzzle&pcampaignid=web_share");
+            Application.OpenURL("https://play.google.com/store/apps/details?id=com.skewer.roasted.grill.cooking.sort.jam&pcampaignid=web_share");
 #elif UNITY_IOS
             Application.OpenURL($"https://apps.apple.com/us/app/id{SonatSdkManager.Settings.appID_IOS}");
 #endif
