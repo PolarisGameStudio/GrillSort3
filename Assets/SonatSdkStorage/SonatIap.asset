@@ -1,0 +1,138 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19fb200aef52af9469f455f0220d5502, type: 3}
+  m_Name: SonatIap
+  m_EditorClassIdentifier: 
+  StoreProductDescriptors:
+  - key: 0
+    active: 1
+    storeProductId: grillsort3.noads
+    storeProductId_ios: 
+    price: 0.99
+    productType: 0
+  - key: 1
+    active: 1
+    storeProductId: grillsort3.noadsjustfun
+    storeProductId_ios: 
+    price: 1.99
+    productType: 0
+  - key: 2
+    active: 1
+    storeProductId: skewer.sorting.pack.gold_1
+    storeProductId_ios: 
+    price: 1.99
+    productType: 0
+  - key: 3
+    active: 1
+    storeProductId: skewer.sorting.pack.gold_2
+    storeProductId_ios: 
+    price: 7.99
+    productType: 0
+  - key: 4
+    active: 1
+    storeProductId: skewer.sorting.pack.gold_3
+    storeProductId_ios: 
+    price: 15.99
+    productType: 0
+  - key: 5
+    active: 1
+    storeProductId: skewer.sorting.pack.gold_4
+    storeProductId_ios: 
+    price: 29.99
+    productType: 0
+  - key: 6
+    active: 1
+    storeProductId: skewer.sorting.pack.gold_5
+    storeProductId_ios: 
+    price: 59.99
+    productType: 0
+  - key: 7
+    active: 1
+    storeProductId: skewer.sorting.pack.gold_6
+    storeProductId_ios: 
+    price: 99.99
+    productType: 0
+  - key: 10
+    active: 1
+    storeProductId: skewer.sorting.pack.starter_bundle
+    storeProductId_ios: 
+    price: 2.99
+    productType: 0
+  - key: 11
+    active: 1
+    storeProductId: skewer.sorting.pack.mini_bundle
+    storeProductId_ios: 
+    price: 9.99
+    productType: 0
+  - key: 12
+    active: 1
+    storeProductId: skewer.sorting.pack.limited_bundle
+    storeProductId_ios: 
+    price: 9.99
+    productType: 1
+  - key: 13
+    active: 1
+    storeProductId: skewer.sorting.pack.large_bundle
+    storeProductId_ios: 
+    price: 18.99
+    productType: 0
+  - key: 14
+    active: 1
+    storeProductId: skewer.sorting.pack.ultra_bundle
+    storeProductId_ios: 
+    price: 37.99
+    productType: 1
+  - key: 15
+    active: 1
+    storeProductId: skewer.sorting.pack.giant_bundle
+    storeProductId_ios: 
+    price: 79.99
+    productType: 1
+  - key: 16
+    active: 1
+    storeProductId: skewer.sorting.pack.legendary_bundle
+    storeProductId_ios: 
+    price: 99.99
+    productType: 1
+  - key: 20
+    active: 1
+    storeProductId: skewer.sorting.pack.rescue_pack_1
+    storeProductId_ios: 
+    price: 3.99
+    productType: 0
+  - key: 21
+    active: 1
+    storeProductId: skewer.sorting.pack.rescue_pack_2
+    storeProductId_ios: 
+    price: 15.99
+    productType: 0
+  - key: 30
+    active: 1
+    storeProductId: skewer.sorting.pack.daily_deal_1
+    storeProductId_ios: 
+    price: 9.99
+    productType: 0
+  - key: 31
+    active: 1
+    storeProductId: skewer.sorting.pack.daily_deal_2
+    storeProductId_ios: 
+    price: 15.99
+    productType: 0
+  - key: 32
+    active: 1
+    storeProductId: skewer.sorting.pack.daily_deal_3
+    storeProductId_ios: 
+    price: 19.99
+    productType: 0
+  autoRestore: 0
+  timeWaitStore: 10
+  verifyUrl: https://us-central1-sonat-arm-358507.cloudfunctions.net/verify_inapp_purchase

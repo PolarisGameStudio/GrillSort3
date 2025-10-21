@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60dc7b1cd66b61b4b84a6f41bed26ca7, type: 3}
+  m_Name: MaxMediation
+  m_EditorClassIdentifier: 
+  androidConfig:
+    appId: 
+    adUnitIds:
+    - placement: 0
+      id: a7355c28c72bcf39
+      adType: 0
+    - placement: 1
+      id: a3f78511ff270062
+      adType: 1
+  iosConfig:
+    appId: 
+    adUnitIds: []
+  testConfig:
+    appId: 
+    adUnitIds: []
+  usingAps: 1
+  amazonConfig:
+    appId: 9b024756-31b7-4f13-9695-e0412b464576
+    adUnitIds:
+    - placement: 0
+      id: 8936e22a-b0ad-4f20-b821-ac16c2891b5f
+      adType: 8
+    - placement: 0
+      id: 9ddf309b-3027-4de5-afe6-11f90522b348
+      adType: 0
+    - placement: 1
+      id: 2f624c79-1990-4242-b46d-d0515d6dacd4
+      adType: 1
+  showDebugger: 0
+  sdkKey: e6udsink9DPhP8w-pg8EQUTuAQodpcy05ORhzPm7fMh3W-8q_Pia-zcvtxw6dylzw9ISl6oqid8CQsgzi7QrHg

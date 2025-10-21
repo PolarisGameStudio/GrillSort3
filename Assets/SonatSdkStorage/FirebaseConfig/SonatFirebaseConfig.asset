@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c6e43169ff81fb469d944c7b6a317a4, type: 3}
+  m_Name: SonatFirebaseConfig
+  m_EditorClassIdentifier: 
+  completeLevelsLogs: '[1-30],[40-100%10]'
+  completeRewardAdsLogs: '[1-15]'
+  paidAdImpressionLogs: 1,[5-50%5]
+  levelsLogAfIaaIap: 4,6,10,15,20,30,40,50
+  defaultConfigs: []
