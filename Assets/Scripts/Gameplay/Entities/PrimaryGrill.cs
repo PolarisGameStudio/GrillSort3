@@ -340,6 +340,11 @@ namespace Gameplay.Entities
             return subGrills;
         }
 
+        public virtual void RemoveSubGrill(SubGrill subGrill)
+        {
+            subGrills.Remove(subGrill);
+        }
+
         public virtual int SubGrillsCount()
         {
             if (subGrills == null) return 0;

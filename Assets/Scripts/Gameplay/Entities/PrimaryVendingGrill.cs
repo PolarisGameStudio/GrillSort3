@@ -56,6 +56,20 @@ namespace Gameplay.Entities
             base.UpdateSubGrills();
         }
 
+        public override void RemoveSubGrill(SubGrill subGrill)
+        {
+            base.RemoveSubGrill(subGrill);
+            numLayer = subGrills.Count + 1;
+            grillVendingVisual.SetLayer(numLayer);
+            if (numLayer == 0)
+            {
+                SetLockItems(true);
+                grillVisual.CloseGrill();
+                // // SonatUtils.DelayCall(0.5f, grillVisual.CloseGrill, this);
+                // GameplayController.OnActionLockGrill?.Invoke(this);
+            }
+        }
+
         protected override async UniTask<SubGrill> CreateSubGrill(int layer)
         {
             Vector3 pos = subContainer.position + Vector3.up * layer * 0.035f + Vector3.back * layer * 0.03f + subOffset;
