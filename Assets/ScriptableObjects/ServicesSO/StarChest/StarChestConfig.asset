@@ -12,8 +12,177 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c345736b410f20498eb28005d0a79b9, type: 3}
   m_Name: StarChestConfig
   m_EditorClassIdentifier: 
+  active: 1
   starByCombo: 01000000010000000100000002000000020000000200000003000000030000000300000004000000
   starChests:
-  - starRequire: 700
+  - starRequire: 500
     reward:
-      resourceDatas: []
+      resourceDatas:
+      - resource: 102
+        quantity: 1
+      - resource: 1
+        quantity: 20
+  - starRequire: 500
+    reward:
+      resourceDatas:
+      - resource: 103
+        quantity: 1
+      - resource: 1
+        quantity: 20
+  - starRequire: 750
+    reward:
+      resourceDatas:
+      - resource: 1
+        quantity: 100
+  - starRequire: 750
+    reward:
+      resourceDatas:
+      - resource: 104
+        quantity: 1
+      - resource: 1
+        quantity: 20
+  - starRequire: 750
+    reward:
+      resourceDatas:
+      - resource: 102
+        quantity: 1
+      - resource: 1
+        quantity: 20
+  - starRequire: 750
+    reward:
+      resourceDatas:
+      - resource: 1
+        quantity: 100
+  - starRequire: 750
+    reward:
+      resourceDatas:
+      - resource: 101
+        quantity: 1
+      - resource: 1
+        quantity: 20
+  - starRequire: 1000
+    reward:
+      resourceDatas:
+      - resource: 103
+        quantity: 1
+      - resource: 1
+        quantity: 20
+  - starRequire: 1000
+    reward:
+      resourceDatas:
+      - resource: 1
+        quantity: 100
+  - starRequire: 1000
+    reward:
+      resourceDatas:
+      - resource: 104
+        quantity: 1
+      - resource: 1
+        quantity: 20
+  - starRequire: 1000
+    reward:
+      resourceDatas:
+      - resource: 102
+        quantity: 1
+      - resource: 1
+        quantity: 20
+  - starRequire: 1000
+    reward:
+      resourceDatas:
+      - resource: 1
+        quantity: 100
+  - starRequire: 1000
+    reward:
+      resourceDatas:
+      - resource: 101
+        quantity: 1
+      - resource: 1
+        quantity: 20
+  - starRequire: 1500
+    reward:
+      resourceDatas:
+      - resource: 103
+        quantity: 1
+      - resource: 1
+        quantity: 20
+  - starRequire: 1500
+    reward:
+      resourceDatas:
+      - resource: 1
+        quantity: 100
+  - starRequire: 1500
+    reward:
+      resourceDatas:
+      - resource: 102
+        quantity: 1
+      - resource: 1
+        quantity: 20
+  - starRequire: 1500
+    reward:
+      resourceDatas:
+      - resource: 104
+        quantity: 1
+      - resource: 1
+        quantity: 20
+  - starRequire: 1500
+    reward:
+      resourceDatas:
+      - resource: 1
+        quantity: 100
+  - starRequire: 1500
+    reward:
+      resourceDatas:
+      - resource: 101
+        quantity: 1
+      - resource: 1
+        quantity: 20
+  - starRequire: 1500
+    reward:
+      resourceDatas:
+      - resource: 103
+        quantity: 1
+      - resource: 1
+        quantity: 20
+  - starRequire: 1500
+    reward:
+      resourceDatas:
+      - resource: 1
+        quantity: 100
+  - starRequire: 1500
+    reward:
+      resourceDatas:
+      - resource: 101
+        quantity: 1
+      - resource: 1
+        quantity: 20
+  - starRequire: 1500
+    reward:
+      resourceDatas:
+      - resource: 104
+        quantity: 1
+      - resource: 1
+        quantity: 20
+  - starRequire: 1500
+    reward:
+      resourceDatas:
+      - resource: 1
+        quantity: 100
+  - starRequire: 1500
+    reward:
+      resourceDatas:
+      - resource: 102
+        quantity: 1
+      - resource: 1
+        quantity: 20
+  - starRequire: 1500
+    reward:
+      resourceDatas:
+      - resource: 103
+        quantity: 1
+      - resource: 1
+        quantity: 20
+  - starRequire: 1500
+    reward:
+      resourceDatas:
+      - resource: 1
+        quantity: 100

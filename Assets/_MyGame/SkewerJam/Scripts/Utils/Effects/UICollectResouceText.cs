@@ -15,6 +15,7 @@ namespace SkewerJam.Utils.Effects
         [SerializeField] protected float delayMove;
         [SerializeField] protected float duration;
         [SerializeField] protected float height;
+        [SerializeField] protected bool returnPool = true;
 
         private Vector3 startPosition;
         private Vector3 targetPosition;
@@ -51,7 +52,12 @@ namespace SkewerJam.Utils.Effects
         private void Remove()
         {
             // gameObject.SetActive(false);
-            SonatSystem.GetService<PoolingServiceAsync>().ReturnObj(this);
+            if(returnPool){
+                SonatSystem.GetService<PoolingServiceAsync>().ReturnObj(this);
+            }
+            else{
+                gameObject.SetActive(false);
+            }
         }
 
         public void OnReturnObj()

@@ -268,6 +268,10 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 37.1
       objectReference: {fileID: 0}
+    - target: {fileID: 7988893489618640641, guid: 69fe0222623a4314f980b09bc78d84fd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8013511812672948398, guid: 69fe0222623a4314f980b09bc78d84fd, type: 3}
       propertyPath: panelOpenName
       value: PopupVideoBar
@@ -282,8 +286,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6985397596905353192, guid: 69fe0222623a4314f980b09bc78d84fd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7308533413803294462}
+      addedObject: {fileID: 4055729651691207844}
   m_SourcePrefab: {fileID: 100100000, guid: 69fe0222623a4314f980b09bc78d84fd, type: 3}
+--- !u!1 &4960201111551162026 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7988893489618640641, guid: 69fe0222623a4314f980b09bc78d84fd, type: 3}
+  m_PrefabInstance: {fileID: 3028790511107795371}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5329571214155452254 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7205227394805098229, guid: 69fe0222623a4314f980b09bc78d84fd, type: 3}
@@ -294,7 +303,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6985397596905353192, guid: 69fe0222623a4314f980b09bc78d84fd, type: 3}
   m_PrefabInstance: {fileID: 3028790511107795371}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7308533413803294462
+--- !u!114 &4055729651691207844
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -303,10 +312,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5402475631509128771}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02dfb3a2a6b262e41b26280cf9cd3522, type: 3}
+  m_Script: {fileID: 11500000, guid: 507aec5e14a47314881638bb21ad878b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   forceOpen: 0
   active: 1
-  levelShow: 0
-  DayShow: 0
+  levelShow: 5
+  DayShow: 3
+  iconWarning: {fileID: 4960201111551162026}
