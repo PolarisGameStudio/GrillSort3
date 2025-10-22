@@ -9,24 +9,50 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
     public class GameplayInfoForLogicOrder
     {
         private Dictionary<ItemId, Dictionary<int, int>> _dictNeededSlots;
+        private Dictionary<ItemId, Dictionary<int, int>> _dictDeltaSlots;
+
         public Dictionary<ItemId, Dictionary<int, int>> DictNeededSlots => _dictNeededSlots;
+        public Dictionary<ItemId, Dictionary<int, int>> DictDeltaSlots => _dictDeltaSlots;
 
         public void UpdateState()
         {
             // đã loại các item và grill bị lock
             _dictNeededSlots = GetDictNeededSlots();
+            _dictDeltaSlots = GetDictDeltaSlots(_dictNeededSlots);
         }
 
         private Dictionary<ItemId, Dictionary<int, int>> GetDictNeededSlots()
         {
             // dynamic programming
+            // neededSlot = số slot cần để ăn được order (numItems của itemId)
+            // deltaSlot = lượng slot thay đổi để có thể ăn được order (numItems của itemId)
             var dp = new Dictionary<ItemId, Dictionary<int, int>>(); // itemId/numItems/neededSlot
 
             // Tính toán order: Sẽ luôn chọn item tối ưu giúp clear order
             var neededItemsForCurrentOrder = OrderHelper.GetNeededItemsForCurrentOrder();
             CalculateOnWaitingGrill(ref dp, ref neededItemsForCurrentOrder);
             CalculateOnGrill(ref dp, ref neededItemsForCurrentOrder);
+            return dp;
+        }
 
+        private Dictionary<ItemId, Dictionary<int, int>> GetDictDeltaSlots(Dictionary<ItemId, Dictionary<int, int>> dictNeededSlots)
+        {
+            var dp = new Dictionary<ItemId, Dictionary<int, int>>(dictNeededSlots); // itemId/numItems/deltaSlot
+
+            var listWaitingItems = OrderHelper.GetItemsInWaitingGrill();
+            var dictWaitingItems = listWaitingItems.GroupBy(e => e.id).ToDictionary(e => e.Key, e => e.Count());
+            foreach (var itemId in dictWaitingItems.Keys)
+            {
+                if (dp.ContainsKey((ItemId)itemId))
+                {
+                    var listNumItems = dictNeededSlots[(ItemId)itemId].Keys.ToList();
+                    foreach (var numItems in listNumItems)
+                    {
+                        var neededSlot = dp[(ItemId)itemId][numItems];
+                        dp[(ItemId)itemId][numItems] = neededSlot - dictWaitingItems[itemId];
+                    }
+                }
+            }
             return dp;
         }
 

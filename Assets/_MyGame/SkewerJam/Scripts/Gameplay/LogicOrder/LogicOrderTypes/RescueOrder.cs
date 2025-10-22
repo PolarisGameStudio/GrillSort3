@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Manager;
 using MyGame.SkewerJam.Gameplay.Helpers;
@@ -29,42 +30,87 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
         public override (ItemId itemId, int num) GetOrder(GameplayInfoForLogicOrder gameplayInfo = null)
         {
-            // ---Tạo order để giải cứu---
-            // Item được lấy từ hàng chờ --> Làm giảm số lượng khay trống nhiều nhất
-            // check lại số lượng order nữa
+            // Sửa lại: Ưu tiên Rescue (-1) slot. Nếu không có mới rescue (-2) và (-3) Slot
+            // Rescue nên là Order từ 2 item trở lên, tránh rescue ra 1 item clear đi luôn. Nếu quét không có Order 2 item thì mới ra Order 1 item
 
-            var items = OrderHelper.GetItemsInWaitingGrill();
-            if (items.Count == 0)
-            {
-                Debug.Log("<color=yellow>OrderHelper:</color> GetItemOrderToRescue: No items in waiting grill");
-                return (ItemId.None, 0);
-            }
+            // deltaSlot < 0 ==> rescus
+            // numItems > 2 ==> 
 
-            var dictItems = items.GroupBy(e => e.id).ToDictionary(e => e.Key, e => e.Count());
-            var dictNeededItems = OrderHelper.GetNeededItemsForCurrentOrder();
-            foreach (var id in dictNeededItems.Keys)
+            var dictDeltaSlots = gameplayInfo.DictDeltaSlots;
+            var listAllRescues = new List<(ItemId itemId, int numItems, int deltaSlot)>();
+            // duyệt qua numItems >= 2 trước
+            foreach (var itemId in dictDeltaSlots.Keys)
             {
-                if (dictItems.ContainsKey((int)id))
+                foreach (var numItems in dictDeltaSlots[itemId].Keys)
                 {
-                    dictItems[(int)id] -= dictNeededItems[id];
-                    if (dictItems[(int)id] <= 0)
+                    if (dictDeltaSlots[itemId][numItems] < 0)
                     {
-                        dictItems.Remove((int)id);
+                        listAllRescues.Add((itemId, numItems, dictDeltaSlots[itemId][numItems]));
                     }
                 }
             }
 
-            if (dictItems.Count == 0)
+            List<(ItemId itemId, int numItems, int deltaSlot)> filteredRescues = new List<(ItemId itemId, int numItems, int deltaSlot)>();
+            for (int i = -1; i >= -3; i--)
             {
-                Debug.Log("<color=yellow>OrderHelper:</color> GetItemOrderToRescue: No items to rescue");
-                return (ItemId.None, 0);
+                filteredRescues = listAllRescues.Where(e => e.deltaSlot == i && e.numItems >= 2).ToList();
+                if (filteredRescues.Count() > 0)
+                {
+                    var random = UnityEngine.Random.Range(0, filteredRescues.Count());
+                    var rescue = filteredRescues.ElementAt(random);
+                    return (rescue.itemId, rescue.numItems);
+                }
             }
 
-            var itemId = dictItems.OrderByDescending(e => e.Value).First().Key;
-            var num = dictItems[itemId] > 3 ? 3 : dictItems[itemId];
+            var rand = UnityEngine.Random.Range(0, listAllRescues.Count());
+            var rc = listAllRescues.ElementAt(rand);
+            return (rc.itemId, rc.numItems);
 
-            Debug.Log("<color=blue>OrderHelper:</color> GetItemOrderToRescue: " + itemId + " " + num);
-            return ((ItemId)itemId, num);
+
+            // // ---Tạo order để giải cứu---
+            // // Item được lấy từ hàng chờ --> Làm giảm số lượng khay trống nhiều nhất
+            // // check lại số lượng order nữa
+
+            // var items = OrderHelper.GetItemsInWaitingGrill();
+            // if (items.Count == 0)
+            // {
+            //     Debug.Log("<color=yellow>OrderHelper:</color> GetItemOrderToRescue: No items in waiting grill");
+            //     return (ItemId.None, 0);
+            // }
+
+            // var dictItems = items.GroupBy(e => e.id).ToDictionary(e => e.Key, e => e.Count());
+            // var dictNeededItems = OrderHelper.GetNeededItemsForCurrentOrder();
+            // foreach (var id in dictNeededItems.Keys)
+            // {
+            //     if (dictItems.ContainsKey((int)id))
+            //     {
+            //         dictItems[(int)id] -= dictNeededItems[id];
+            //         if (dictItems[(int)id] <= 0)
+            //         {
+            //             dictItems.Remove((int)id);
+            //         }
+            //     }
+            // }
+
+            // if (dictItems.Count == 0)
+            // {
+            //     Debug.Log("<color=yellow>OrderHelper:</color> GetItemOrderToRescue: No items to rescue");
+            //     return (ItemId.None, 0);
+            // }
+
+
+            // // chọn rescue
+            // // Sửa lại: Ưu tiên Rescue (-1) slot. Nếu không có mới rescue (-2) và (-3) Slot
+            // var dictNeededItemsGameplay = gameplayInfo.DictNeededSlots;
+            // foreach (var id in dictItems.Keys)
+            // {
+
+            // }
+            // var itemId = dictItems.OrderByDescending(e => e.Value).First().Key;
+            // var num = dictItems[itemId] > 3 ? 3 : dictItems[itemId];
+
+            // Debug.Log("<color=blue>OrderHelper:</color> GetItemOrderToRescue: " + itemId + " " + num);
+            // return ((ItemId)itemId, num);
         }
 
         public override bool CanUse(GameplayInfoForLogicOrder gameplayInfo = null)
@@ -120,9 +166,14 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
                 if (isRescue == true || (gap == 0 && itemsInWaitingGrill.Count >= (numWaitingGrill - rescueCondition.remainingWaitingGrillCondition)))
                 {
-                    numberRescues += 1;
-                    gap += 1;
-                    return true;
+                    var random = UnityEngine.Random.Range(0, 1.0f);
+                    Debug.Log("<color=blue>OrderHelper:</color> Random to rescue: " + Mathf.Round(random * 100f) * 0.01f + " >>> " + rescueCondition.rateRescue);
+                    if (random < rescueCondition.rateRescue)
+                    {
+                        numberRescues += 1;
+                        gap += 1;
+                        return true;
+                    }
                 }
             }
             return false;

@@ -86,7 +86,7 @@ namespace MyGame.SkewerJam.Gameplay
             var levelDataSkewerJam = levelData.CloneSkewerJam();
             levelDataSkewerJam.numberOfWaitingGrill = 5;
 
-            levelDataSkewerJam.rescueCondition = new RescueCondition();
+            levelDataSkewerJam.rescueCondition = new RescueCondition(_level, levelDataSkewerJam.difficulty);
 
             // bộ level cũ
             // if ((int)levelDataSkewerJam.difficulty == 0)
