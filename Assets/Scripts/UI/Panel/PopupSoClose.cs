@@ -1,3 +1,4 @@
+using Manager;
 using Sonat.Enums;
 using SonatFramework.Scripts.Feature.Shop.UI;
 using SonatFramework.Scripts.UIModule;
@@ -14,6 +15,12 @@ public class PopupSoClose : PopupContinueBase
     public override void Open(UIData uiData)
     {
         base.Open(uiData);
+
+        if (playOnWithAdsBtn != null && playOnWithAdsBtn.activeSelf)
+        {
+            var activeProgressLose = GameRemoteConfigValue.activeProgressLose;
+            playOnWithAdsBtn.SetActive(activeProgressLose == false);
+        }
 
         MySonatFramework.GetService<AudioService>().StopMusic();
         MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Lose_OutOfMove_popup_Grill3);
@@ -51,8 +58,8 @@ public class PopupSoClose : PopupContinueBase
         PlayOn("play_on_add_trays");
     }
 
-    public void OnClickPlayOn()
+    public void OnClickPlayOn(string by = "play_on_add_trays")
     {
-        PlayOn("play_on_add_trays");
+        PlayOn(by);
     }
 }

@@ -1,14 +1,11 @@
 using System;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Gameplay;
 using Gameplay.BoosteeManagement;
 using Gameplay.Entities;
 using Gameplay.LevelData;
-using MyGame.SkewerJam.Gameplay;
-using Sonat.Enums;
-using SonatFramework.Scripts.UIModule;
+using SonatFramework.Systems.SettingsManagement.Vibation;
 using UnityEngine;
-using static PopupUnlockInGame;
 
 namespace MyGame.SkewerJam.Objects.Entities
 {
@@ -120,6 +117,22 @@ namespace MyGame.SkewerJam.Objects.Entities
         public void SetId(int id)
         {
             this.id = id;
+        }
+
+        public void ClearItem()
+        {
+            var item = GetSlot(0).GetItem();
+
+            if (item != null)
+            {
+                transform.DOShakePosition(0.5f, 0.1f, 25, 90).SetDelay(0.5f);
+                item.transform.DOScale(0, 75f).SetEase(Ease.InBack).OnComplete(() =>
+                {
+                    GetSlot(0).SetItem(null);
+                    MySonatFramework.GetService<VibrationService>().Vibrate(50);
+                    GameFactory.ReturnEntity(item);
+                }).SetDelay(1f);
+            }
         }
     }
 

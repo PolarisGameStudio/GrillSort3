@@ -173,5 +173,17 @@ namespace MyGame.SkewerJam.Objects
             }
             return list;
         }
+
+        public bool ClearOnePlate()
+        {
+            var count = listWaitingGrills.Count;
+            if (count > 0 && listWaitingGrills[count - 1].GetSlot(0).GetItem() != null)
+            {
+                var waitingGrill = listWaitingGrills[count - 1];
+                waitingGrill.ClearItem();
+                return true;
+            }
+            return false;
+        }
     }
 }

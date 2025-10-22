@@ -27,9 +27,13 @@ namespace MyGame.SkewerJamSO.Boosters
             return (true, "");
         }
 
-        public override async UniTask UseBooster(Vector3 position)
+        public override async UniTask UseBooster(Vector3 position, bool isForce = false)
         {
-            await PlayBoosterAnim(position);
+            if (isForce == false)
+            {
+                await PlayBoosterAnim(position);
+            }
+
             await UniTask.Delay((int)(delay * 1000));
             var gameLogicHanlder = GameController.Instance.GameLogicHandler;
             var waitingManager = gameLogicHanlder.WaitingGrillManager;

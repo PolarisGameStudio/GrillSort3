@@ -18,8 +18,10 @@ namespace MyGame.SkewerJam.Gameplay
         {
             return boosterBehaviors.FirstOrDefault(e => e.boosterType == boosterType);
         }
-        public async UniTask UseBooster(GameResource boosterType, Vector3 position)
+
+        public async UniTask UseBooster(GameResource boosterType, Vector3 position, bool isForce = false)
         {
+            GameController.Instance.ChangeGameState(GameState.UsingBooster);
             var boosterBehavior = GetBoosterBehavior(boosterType);
             if (boosterBehavior == null)
             {
@@ -27,7 +29,9 @@ namespace MyGame.SkewerJam.Gameplay
             }
 
             WaitingGrillHelper.ResetWarning();
-            await boosterBehavior.UseBooster(position);
+            await boosterBehavior.UseBooster(position, isForce);
+
+            GameController.Instance.ChangeGameState(GameState.Playing);
         }
 
         public (bool canUse, string reason) CanUseBooster(GameResource boosterType)

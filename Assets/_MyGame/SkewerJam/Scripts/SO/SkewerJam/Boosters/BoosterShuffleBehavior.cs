@@ -21,9 +21,13 @@ namespace MyGame.SkewerJamSO.Boosters
 
         [SerializeField] private float delay = 2f;
 
-        public override async UniTask UseBooster(Vector3 position)
+        public override async UniTask UseBooster(Vector3 position, bool isForce = false)
         {
-            await PlayBoosterAnim(position);
+            if (isForce == false)
+            {
+                await PlayBoosterAnim(position);
+            }
+
             Debug.Log("<color=yellow>BoosterShuffleBehaviorSO: </color> UseBooster Shuffle");
             // shuffle cho tất cả các item order lên layer 1
             // tạo cảm giác shuffle layer 1 và 2
