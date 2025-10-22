@@ -15,6 +15,7 @@ public class ProgressLoseController : MonoBehaviour
     private const string PROGRESS_LOSE_KEY = "PROGRESS_LOSE_KEY";
 
     private readonly Service<GameplayAnalyticsService> gameplayAnalytics = new();
+    private IntDataPref level;
     private IntDataPref currentLevelStartCount;
     private IntDataPref count;
 
@@ -49,22 +50,37 @@ public class ProgressLoseController : MonoBehaviour
 
     private void LoadData()
     {
+        level = new IntDataPref(PROGRESS_LOSE_KEY + "_level");
         currentLevelStartCount = new IntDataPref(PROGRESS_LOSE_KEY + "_currentLevelStartCount");
         count = new IntDataPref(PROGRESS_LOSE_KEY + "_count");
 
-        var level = MySonatFramework.userDataService.GetLevel();
-        active = GameRemoteConfigValue.activeProgressLose && level >= SonatSDKAdapter.GetRemoteInt(PROGRESS_LOSE_KEY + "_level_start_feature", levelStartFeature);
+        var currentLevel = MySonatFramework.userDataService.GetLevel();
+        active = GameRemoteConfigValue.activeProgressLose && currentLevel >= SonatSDKAdapter.GetRemoteInt(PROGRESS_LOSE_KEY + "_level_start_feature", levelStartFeature);
         maxCount = SonatSDKAdapter.GetRemoteInt(PROGRESS_LOSE_KEY + "_max_count_revive", maxCount);
+    }
+
+    public bool CheckActive()
+    {
+        LoadData();
+        // update UI
+        if (count.Value >= maxCount)
+        {
+            return false;
+        }
+        var currentLevel = MySonatFramework.userDataService.GetLevel();
+        return GameRemoteConfigValue.activeProgressLose && currentLevel >= SonatSDKAdapter.GetRemoteInt(PROGRESS_LOSE_KEY + "_level_start_feature", levelStartFeature);
     }
 
     private bool CheckReset()
     {
         // bắt đầu level mới hoặc chơi lại
-        return gameplayAnalytics.Instance.levelPlayData.startCount != currentLevelStartCount.Value;
+        var currentLevel = MySonatFramework.userDataService.GetLevel();
+        return level.Value != currentLevel || gameplayAnalytics.Instance.levelPlayData.startCount != currentLevelStartCount.Value;
     }
 
     private void Reset()
     {
+        level.Value = MySonatFramework.userDataService.GetLevel();
         currentLevelStartCount.Value = gameplayAnalytics.Instance.levelPlayData.startCount;
         count.Value = 0;
     }

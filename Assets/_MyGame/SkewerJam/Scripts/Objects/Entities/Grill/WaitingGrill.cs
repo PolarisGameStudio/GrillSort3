@@ -126,7 +126,7 @@ namespace MyGame.SkewerJam.Objects.Entities
             if (item != null)
             {
                 transform.DOShakePosition(0.5f, 0.1f, 25, 90).SetDelay(0.5f);
-                item.transform.DOScale(0, 75f).SetEase(Ease.InBack).OnComplete(() =>
+                item.transform.DOScale(0, 0.75f).SetEase(Ease.InBack).OnComplete(() =>
                 {
                     GetSlot(0).SetItem(null);
                     MySonatFramework.GetService<VibrationService>().Vibrate(50);

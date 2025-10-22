@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using Gameplay.Entities.Items;
+using MyGame.SkewerJam.Gameplay;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.Utils;
 using UnityEngine;
@@ -26,6 +27,7 @@ public class PopupWarningBomb : Panel
 
     public void SkipClick()
     {
+        if (GameController.Instance.CheckBlockUI()) return;
         if (!clickAvailable) return;
         PanelManager.Instance.OpenPanel<PopupSkipBomb>(new UIData().Add("Bomb", itemBomb).Add("OnSkipBomb", (Action)OnSkipBomb));
     }

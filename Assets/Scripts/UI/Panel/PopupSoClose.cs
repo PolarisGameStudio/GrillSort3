@@ -4,17 +4,33 @@ using SonatFramework.Scripts.Feature.Shop.UI;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems.AudioManagement;
 using SonatFramework.Systems.InventoryManagement;
+using UnityEngine;
 
 public class PopupSoClose : PopupContinueBase
 {
+    [Header("PopupSoClose")]
+    [SerializeField] private RectTransform panel;
+    [SerializeField] private RectTransform pos1;
+    [SerializeField] private RectTransform pos2;
+    [SerializeField] private ProgressLoseController progressLose;
     public override void OnSetup()
     {
         base.OnSetup();
+
     }
 
     public override void Open(UIData uiData)
     {
         base.Open(uiData);
+
+        if (progressLose.CheckActive())
+        {
+            panel.anchoredPosition = pos1.anchoredPosition;
+        }
+        else
+        {
+            panel.anchoredPosition = pos2.anchoredPosition;
+        }
 
         if (playOnWithAdsBtn != null && playOnWithAdsBtn.activeSelf)
         {
