@@ -10,12 +10,13 @@ namespace MyGame.SO.Boosters
     public abstract class BaseBoosterBehaviorSO : ScriptableObject
     {
         public abstract GameResource boosterType { get; }
-        public abstract UniTask UseBooster(Vector3 position);
+        public abstract UniTask UseBooster(Vector3 position, bool isForce = false);
 
         public virtual (bool canUse, string reason) CanUseBooster()
         {
             return (true, "");
         }
+
 
         protected virtual async UniTask PlayBoosterAnim(Vector3 position)
         {

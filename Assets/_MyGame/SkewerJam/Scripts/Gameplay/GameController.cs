@@ -261,14 +261,15 @@ namespace MyGame.SkewerJam.Gameplay
 
         private bool CanRevive()
         {
-            return GameLogicHandler.OrderManager.ListOrders.Where(e => e.IsActive == false).Count() > 0;
+            return true;
+            // return GameLogicHandler.OrderManager.ListOrders.Where(e => e.IsActive == false).Count() > 0;
         }
 
         private async UniTaskVoid Revive(StuckType stuckType, string by, object[] objectParams = null)
         {
             ChangeGameState(GameState.Playing);
             MySonatFramework.GetService<AudioService>().PlayMusic(bgm);
-            EventBus<LevelStartedEvent>.Raise(new LevelStartedEvent() { level = level, gameMode = GameMode.Classic });
+            EventBus<LevelContinueEvent>.Raise(new LevelContinueEvent() { by = by });
             await UniTask.Delay(1000);
             switch (stuckType)
             {
@@ -276,8 +277,25 @@ namespace MyGame.SkewerJam.Gameplay
                     switch (by)
                     {
                         case "play_on_add_trays":
-                            var orderManager = GameLogicHandler.OrderManager;
-                            orderManager.Unlock(isRescue: true);
+                            if (GameLogicHandler.OrderManager.ListOrders.Where(e => e.IsActive == false).Count() > 0)
+                            {
+                                var orderManager = GameLogicHandler.OrderManager;
+                                orderManager.Unlock(isRescue: true);
+                            }
+                            else
+                            {
+                                // Sử dụng spatula
+                                var boosterManager = GameLogicHandler.BoosterManager;
+                                boosterManager.UseBooster(GameResource.BoosterSpatula, Vector3.zero, true).Forget();
+                            }
+                            break;
+                        case "play_on_clear_one_plate":
+                            var waitingGrillManager = GameLogicHandler.WaitingGrillManager;
+                            var success = waitingGrillManager.ClearOnePlate();
+                            if (success == false)
+                            {
+                                Lose(stuckType).Forget();
+                            }
                             break;
                     }
 

@@ -23,9 +23,13 @@ namespace MyGame.SkewerJamSO.Boosters
         [SerializeField] private float delayBetweenItems = 0.3f;
         [SerializeField] private float delay = 2f;
 
-        public override async UniTask UseBooster(Vector3 position)
+        public override async UniTask UseBooster(Vector3 position, bool isForce = false)
         {
-            await PlayBoosterAnim(position);
+            if (isForce == false)
+            {
+                await PlayBoosterAnim(position);
+            }
+
             var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
             var listOrders = new List<OrderEntity>(orderManager.ListOrders);
             Debug.Log($"BoosterSpatulaBehaviorSO: UseBooster: {listOrders.Count}");
