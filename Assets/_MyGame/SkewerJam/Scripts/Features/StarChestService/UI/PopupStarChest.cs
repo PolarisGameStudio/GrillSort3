@@ -23,7 +23,7 @@ public class PopupStarChest : Panel
 
     [Header("Anim")]
     [SerializeField] private float delayAnim = 0.5f;
-    [SerializeField] private float durationAnim = 1f;
+    [SerializeField] private float maxDurationAnim = 1f;
 
     private readonly Service<StarChestService> starChestService = new();
     private IntDataPref _starView;
@@ -46,7 +46,7 @@ public class PopupStarChest : Panel
     {
         var star = MySonatFramework.GetService<InventoryService>().GetResource(GameResource.Star);
         var maxStar = starChestService.Instance.GetRequiredStar();
-        if (_starView.Value >= star) _starView.Value = 0;
+        if (_starView.Value > star) _starView.Value = 0;
 
         btnClaim.interactable = false;
         btnPlay.interactable = false;
@@ -58,22 +58,20 @@ public class PopupStarChest : Panel
 
         if (star != _starView.Value)
         {
-            yield return new WaitForSeconds((int)(delayAnim * 1000));
+            yield return new WaitForSeconds(delayAnim);
 
+            var fromValue = _starView.Value;
             var endValue = Mathf.Min(star, maxStar);
-            DOTween.To(() => _starView.Value, x => _starView.Value = x, endValue, durationAnim).SetEase(Ease.OutQuad).OnComplete(() =>
+
+            var duration = Mathf.Max(0.75f, (endValue - fromValue) * 1.0f / maxStar * maxDurationAnim);
+            DOTween.To(() => fromValue, x => fromValue = x, endValue, duration).SetEase(Ease.OutQuad).OnUpdate(() =>
             {
-                txtProgress.text = $"{_starView.Value}/ {maxStar}";
-                progressBar.value = _starView.Value * 1.0f / maxStar;
+                txtProgress.text = $"{fromValue}/ {maxStar}";
+                progressBar.value = fromValue * 1.0f / maxStar;
             }).OnComplete(() =>
             {
                 btnClaim.interactable = true;
                 btnPlay.interactable = true;
-
-                // if (CheckComplete())
-                // {
-
-                // }
             });
             _starView.Value = star;
         }
@@ -97,8 +95,9 @@ public class PopupStarChest : Panel
         PanelManager.Instance.OpenPanel<PopupRewardChest>(uiData);
 
         // logic
-        // starChestService.Instance.NextStarChest();
+        starChestService.Instance.NextStarChest();
         StartCoroutine(UpdateView());
+        // Close();
     }
 
     private bool CheckComplete()

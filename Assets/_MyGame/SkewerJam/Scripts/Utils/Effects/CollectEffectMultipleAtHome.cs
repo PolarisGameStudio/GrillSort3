@@ -10,21 +10,15 @@ namespace SkewerJam.Utils.Effects
 {
     public class CollectEffectMultipleAtHome : SonatCollectEffect
     {
-        public string collectEffectName = "UICollectResouceEffectAtHome";
+        public string collectEffectName = "UICollectEffectMultipleAtHome";
         public int maxCount = 5;
-        public float radiusX = 1f;
-        public float radiusY = 0.25f;
+        public float radiusX = 0.25f;
+        public float radiusY = 0.2f;
         public float delaySpawn = 0.1f;
-        public bool isShowText = true;
+        public bool isShowText = false;
 
         public override void Collect(GameResource resource, int quantity, Vector3 startPos, Vector3 endPos, Action callback)
         {
-            if (isShowText)
-            {
-                var text = SonatSystem.GetService<PoolingServiceAsync>().CreateAsync<UICollectResouceText>("UICollectResouceText", PanelManager.Instance.transform,
-                        resource, quantity, startPos);
-
-            }
             callback = null;
             float timeSpawn = 0;
             for (int i = 0; i < Mathf.Min(maxCount, quantity); i++)
@@ -39,6 +33,12 @@ namespace SkewerJam.Utils.Effects
                             callback = null;
                         });
                 timeSpawn += delaySpawn;
+            }
+            if (isShowText)
+            {
+                var text = SonatSystem.GetService<PoolingServiceAsync>().CreateAsync<UICollectResouceText>("UICollectResouceText", PanelManager.Instance.transform,
+                        resource, quantity, startPos);
+
             }
         }
     }

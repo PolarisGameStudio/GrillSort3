@@ -70,26 +70,6 @@ public class HomeManager : SingletonSimple<HomeManager>
 #if UNITY_EDITOR
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            var rewardData = new RewardData();
-            rewardData.AddReward(new ResourceData(GameResource.Coin, 1000));
-            rewardData.AddReward(new ResourceData(GameResource.Lives, 900));
-            rewardData.AddReward(new ResourceData(GameResource.BoosterAddPlate, UnityEngine.Random.Range(1, 10)));
-            rewardData.AddReward(new ResourceData(GameResource.BoosterSpatula, UnityEngine.Random.Range(1, 10)));
-            rewardData.AddReward(new ResourceData(GameResource.BoosterShuffle, UnityEngine.Random.Range(1, 10)));
-            rewardData.AddReward(new ResourceData(GameResource.BoosterFoodBox, UnityEngine.Random.Range(1, 10)));
-
-            MySonatFramework.GetService<InventoryService>().AddReward(rewardData, new EarnResourceLogData
-            {
-                spendType = "test",
-                spendId = "test",
-                isFirstBuy = false,
-                source = "non_iap"
-            }, false);
-            PanelManager.Instance.OpenPanel<PopupReward>(new UIData().Add(PopupReward.KEY_REWARD, rewardData));
-        }
-
         if (Input.GetKeyDown(KeyCode.F1))
         {
             PanelManager.Instance.OpenPanel<CheatPanel>();

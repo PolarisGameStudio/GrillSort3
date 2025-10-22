@@ -112,7 +112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3537536229460981672
 RectTransform:
   m_ObjectHideFlags: 0
@@ -650,7 +650,7 @@ MonoBehaviour:
   m_text: 2354/500
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1ad186f6383d0f6449e226da1f38334b, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: ef843bea28baeae4e90723f983e3beb0, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: ac358283be767e04b96ad82246a64035, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1625,7 +1625,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2299557091917656541
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2061,6 +2061,22 @@ PrefabInstance:
       value: -0.48000336
       objectReference: {fileID: 0}
     - target: {fileID: 4659125601337161290, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4659125601337161290, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4659125601337161290, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4659125601337161290, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4659125601337161290, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -2367,7 +2383,7 @@ MonoBehaviour:
   btnClaim: {fileID: 2240329722707904373}
   btnPlay: {fileID: 3004356036684347094}
   delayAnim: 0.5
-  durationAnim: 1
+  maxDurationAnim: 3
 --- !u!224 &6933815756405768971 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 657749128111801239, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
