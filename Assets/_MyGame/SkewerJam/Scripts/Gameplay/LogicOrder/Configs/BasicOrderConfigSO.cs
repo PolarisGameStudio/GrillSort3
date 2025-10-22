@@ -9,6 +9,8 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder.Configs
     public class BasicOrderConfigSO : ScriptableObject
     {
         public List<BO> listBasicOrderConfigs;
+        public float rateIndependencyOrder = 0.75f;
+
 #if UNITY_EDITOR
         public void OnValidate()
         {

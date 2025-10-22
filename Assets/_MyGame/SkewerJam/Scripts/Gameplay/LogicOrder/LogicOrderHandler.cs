@@ -74,18 +74,20 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
         public async UniTask<(ItemId itemId, int num, LogicOrderType logicOrderType)> GetItemOrder(bool isRescue = false)
         {
+            var gameplayInfoForLogicOrder = new GameplayInfoForLogicOrder();
+            gameplayInfoForLogicOrder.UpdateState();
+
+
             Debug.Log("<color=purple>LogicOrderHandler:</color> -----GetItemOrder----");
             var forceLogicOrder = listLogicOrders.FirstOrDefault(e => e.ForceUse(isRescue));
             if (forceLogicOrder != null)
             {
                 Debug.Log("<color=blue>OrderHelper:</color> Use " + forceLogicOrder.name + " to rescue");
-                var (rescueItemId, rescueNum) = forceLogicOrder.GetOrder();
+                var (rescueItemId, rescueNum) = forceLogicOrder.GetOrder(gameplayInfoForLogicOrder);
                 return (rescueItemId, rescueNum, LogicOrderType.Rescue);
             }
 
             // lấy order info mỗi layer (2 layer đầu) --> OPTIMIZE: giảm tính toán
-            var gameplayInfoForLogicOrder = new GameplayInfoForLogicOrder();
-            gameplayInfoForLogicOrder.UpdateState();
             var selectedLogicOrder = ChooseLogicOrder();
             Debug.Log("<color=green>OrderHelper:</color> Use " + selectedLogicOrder.name);
 
