@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7498f5389cb0bee4fb1e94a0ef72feb3
+guid: fe79c46266365564a8e4959dee3c4180
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -94,7 +94,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
+    buildTarget: iPhone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -107,7 +107,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: iPhone
+    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Paper _ 4x4_0
+      name: Confetti_03_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 96
-        width: 32
-        height: 32
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,41 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f70c65bc603e85a46bcb837c2c5b6b69
-      internalID: 2105394649
+      spriteID: 0bdc52c68c1aa394dbacf5b46f214c99
+      internalID: -1308573097
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Paper _ 4x4_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 426fc381e5b59544c8437e74d82ddee9
-      internalID: -468711749
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Paper _ 4x4_2
+      name: Confetti_03_1
       rect:
         serializedVersion: 2
         x: 64
-        y: 96
-        width: 32
-        height: 32
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6e17f5273e30b64db85f3831b1d3dba
-      internalID: -739371088
+      spriteID: a2ced7f45559bd449889aa1d4d5da9ae
+      internalID: -1376309554
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Paper _ 4x4_3
+      name: Confetti_03_2
       rect:
         serializedVersion: 2
-        x: 96
-        y: 96
-        width: 32
-        height: 32
+        x: 128
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +179,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c16db73d54e68c4cb1379691bbbbd37
-      internalID: -783843702
+      spriteID: 18f7f515a516ad647911e3d690ba8ccb
+      internalID: 1551343173
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Paper _ 4x4_4
+      name: Confetti_03_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d680db628500d04e82c7fd72433ec7e
+      internalID: -576180259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Confetti_03_4
       rect:
         serializedVersion: 2
         x: 0
         y: 64
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,41 +221,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b1ff4fef1205334e8f3866d5727893b
-      internalID: 738436443
+      spriteID: a4f5b72fee84a4c4585e9e047ff19868
+      internalID: -960128750
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Paper _ 4x4_5
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 45869110c4e1b704380ae5ce34437b12
-      internalID: -1217058772
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Paper _ 4x4_6
+      name: Confetti_03_5
       rect:
         serializedVersion: 2
         x: 64
         y: 64
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,20 +242,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d17afba9d8aeca46942df218a9e1933
-      internalID: 149440974
+      spriteID: fb4f0543b8156294e9e64e486c68e9e3
+      internalID: -1190392376
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Paper _ 4x4_7
+      name: Confetti_03_6
       rect:
         serializedVersion: 2
-        x: 96
+        x: 128
         y: 64
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,20 +263,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97ed02393922ddd4085e819fe0d3cd20
-      internalID: -814518744
+      spriteID: b20a9d0ff50097e41a4a639826764e29
+      internalID: -1801632321
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Paper _ 4x4_8
+      name: Confetti_03_7
       rect:
         serializedVersion: 2
-        x: 0
-        y: 32
-        width: 32
-        height: 32
+        x: 192
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -305,83 +284,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e135e2f32a9feb4e88192a910c234dd
-      internalID: 1905015296
+      spriteID: dabbe1ab208fd47449ac521077723018
+      internalID: -1882044440
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Paper _ 4x4_9
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 012082c0b9c183e4682b79d6e0ad39a4
-      internalID: -1797024325
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Paper _ 4x4_10
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 72816641bbc8ef14fa90332f4f88115a
-      internalID: -1807065897
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Paper _ 4x4_11
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a82041da16e73c841990493a8108ab64
-      internalID: -2028097530
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Paper _ 4x4_12
+      name: Confetti_03_8
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -389,41 +305,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 715ffc00780928c4e94249a2c01e6bfe
-      internalID: 1264961078
+      spriteID: d7b7af18e46523948ab90839051d2d31
+      internalID: 1942639479
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Paper _ 4x4_13
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4347e211459b5da4684a371ae5b6a596
-      internalID: 1796314208
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Paper _ 4x4_14
+      name: Confetti_03_9
       rect:
         serializedVersion: 2
         x: 64
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -431,20 +326,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e757022683c2fa4ebabe7154ac998b4
-      internalID: 1890392121
+      spriteID: 296ade073110aaf4295fed5a970219fa
+      internalID: 585940530
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Paper _ 4x4_15
+      name: Confetti_03_10
       rect:
         serializedVersion: 2
-        x: 96
+        x: 128
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -452,8 +347,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db2db668dc04ea148b3ff4e8bca92b16
-      internalID: -301153657
+      spriteID: 0391718fe948016439fec7d2b1ab68b1
+      internalID: 1794165594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Confetti_03_11
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16e64f1dcd6ac81478ddb03b33e70aac
+      internalID: 1317684865
       vertices: []
       indices: 
       edges: []
@@ -469,22 +385,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Paper _ 4x4_0: 2105394649
-      Paper _ 4x4_1: -468711749
-      Paper _ 4x4_10: -1807065897
-      Paper _ 4x4_11: -2028097530
-      Paper _ 4x4_12: 1264961078
-      Paper _ 4x4_13: 1796314208
-      Paper _ 4x4_14: 1890392121
-      Paper _ 4x4_15: -301153657
-      Paper _ 4x4_2: -739371088
-      Paper _ 4x4_3: -783843702
-      Paper _ 4x4_4: 738436443
-      Paper _ 4x4_5: -1217058772
-      Paper _ 4x4_6: 149440974
-      Paper _ 4x4_7: -814518744
-      Paper _ 4x4_8: 1905015296
-      Paper _ 4x4_9: -1797024325
+      Confetti_03_0: -1308573097
+      Confetti_03_1: -1376309554
+      Confetti_03_10: 1794165594
+      Confetti_03_11: 1317684865
+      Confetti_03_2: 1551343173
+      Confetti_03_3: -576180259
+      Confetti_03_4: -960128750
+      Confetti_03_5: -1190392376
+      Confetti_03_6: -1801632321
+      Confetti_03_7: -1882044440
+      Confetti_03_8: 1942639479
+      Confetti_03_9: 585940530
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
