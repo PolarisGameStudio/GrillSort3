@@ -53,6 +53,7 @@ namespace MyGame.SkewerJam.Gameplay
         private GameState gameState;
         private GameResult gameResult;
         private EventBinding<GameStateChangeEvent> gameStateChangeEvent;
+        private EventBinding<PanelUpdatedEvent> onPanelsUpdatedEvent;
         private AudioId bgm;
 
         private IntDataPref _checkRewardFreeLives = new IntDataPref("check_reward_free_lives");
@@ -68,10 +69,10 @@ namespace MyGame.SkewerJam.Gameplay
         {
             Initialize();
             PlayLevel(level).Forget();
-            // PanelManager.Instance.OnPanelsUpdated += OnPanelsUpdated;
+            onPanelsUpdatedEvent = new EventBinding<PanelUpdatedEvent>(OnPanelsUpdated);
         }
 
-        private void OnPanelsUpdated(bool isOpen)
+        private void OnPanelsUpdated(PanelUpdatedEvent eventData)
         {
             if (PanelManager.Instance.HasAnyPopupPauseGame())
             {
@@ -79,11 +80,10 @@ namespace MyGame.SkewerJam.Gameplay
             }
         }
 
-        // void OnDestroy()
-        // {
-        //     if (PanelManager.Instance != null)
-        //         PanelManager.Instance.OnPanelsUpdated -= OnPanelsUpdated;
-        // }
+        void OnDestroy()
+        {
+            EventBus<PanelUpdatedEvent>.Deregister(onPanelsUpdatedEvent);
+        }
 
         private void Initialize()
         {
