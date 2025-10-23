@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using Gameplay.Entities;
 using MyGame.SkewerJam.Level;
 using MyGame.SkewerJam.Objects.Entities;
 using UnityEngine;
@@ -24,11 +25,26 @@ namespace MyGame.SkewerJam.Gameplay
             OnUpdateItems?.Invoke(currentItems);
         }
 
+        public void OnItemEndSwitch(Item item, SlotBase slot)
+        {
+            if (slot.GetGrill() is OrderEntity orderEntity)
+            {
+                currentItems -= 1;
+                Debug.Log($"OnItemEndSwitch: {currentItems}");
+                OnUpdateItems?.Invoke(currentItems);
+            }
+            else
+            {
+            }
+
+        }
+
         public void Init()
         {
             var levelGenerator = GameController.Instance.LevelGenerator;
             levelGenerator.OnLoadLevelData += OnLoadLevelData;
-            GameController.Instance.GameLogicHandler.OnStartCollectItem += OnStartCollectItem;
+            // GameController.Instance.GameLogicHandler.OnStartCollectItem += OnStartCollectItem;
+            GameController.Instance.GameLogicHandler.OnItemEndSwitch += OnItemEndSwitch;
         }
 
         private void OnLoadLevelData(LevelData_SkewerJam levelData)
@@ -65,7 +81,8 @@ namespace MyGame.SkewerJam.Gameplay
         {
             var levelGenerator = GameController.Instance.LevelGenerator;
             levelGenerator.OnLoadLevelData -= OnLoadLevelData;
-            GameController.Instance.GameLogicHandler.OnStartCollectItem -= OnStartCollectItem;
+            // GameController.Instance.GameLogicHandler.OnStartCollectItem -= OnStartCollectItem;
+            GameController.Instance.GameLogicHandler.OnItemEndSwitch -= OnItemEndSwitch;
             totalItems = 0;
             currentItems = 0;
         }

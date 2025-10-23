@@ -1,8 +1,9 @@
+using Sonat.Data;
 using Sonat.Enums;
+using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems.AudioManagement;
-using SonatFramework.Systems.InventoryManagement;
 using UnityEngine;
 
 public class WinPanel_SkewerJam : WinPanelBase
@@ -22,6 +23,17 @@ public class WinPanel_SkewerJam : WinPanelBase
             SonatUtils.DelayCall(delaySoundFireworks, () =>
             {
                 MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Win_Music_sfx_Grill3);
+            }, this);
+        }
+
+
+        var levelStartRate = SonatSDKAdapter.GetRemoteInt("POPUP_RATE_level_start", 3);
+        var level = MySonatFramework.userDataService.GetLevel();
+        if (level - 1 == levelStartRate)
+        {
+            SonatUtils.DelayCall(1f, () =>
+            {
+                PanelManager.Instance.OpenPanel<PopupRate>();
             }, this);
         }
     }

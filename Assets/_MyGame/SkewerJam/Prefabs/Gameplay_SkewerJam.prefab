@@ -125,7 +125,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 7.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1570055599705455299}
   m_Father: {fileID: 7597675867907486549}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7448317041452728583
@@ -145,6 +146,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f8caa0907bbd6ba49a5e595707bbe681, type: 2}
   - {fileID: 11400000, guid: 38eff051946ca8545a3d130c04d54363, type: 2}
   - {fileID: 11400000, guid: ee847661638ddc14c9f7002192b888ab, type: 2}
+  dynamicLogicOrder: {fileID: 2925579517589253965}
   logicOrderConfigSO: {fileID: 11400000, guid: 56b2a2fae1cb2944a99298dca011f2e8, type: 2}
   specialOrderConfigSO: {fileID: 11400000, guid: 23741b372f350a44c85765ecd755151a, type: 2}
 --- !u!1 &2498146512768491254
@@ -402,6 +404,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7597675867907486549}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5110500744943294784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1570055599705455299}
+  - component: {fileID: 2925579517589253965}
+  m_Layer: 0
+  m_Name: DynamicLogicOrder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1570055599705455299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5110500744943294784}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6510086738803746257}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2925579517589253965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5110500744943294784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8390449b748cff24489cb17552d7641c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dynamicLogicOrderConfigSO: {fileID: 11400000, guid: 77ce926bacd0d06449a456eb6820f74d, type: 2}
 --- !u!1 &5953330118700691436
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,6 +678,7 @@ MonoBehaviour:
   gameplayScreen: {fileID: 0}
   gameViewport: {fileID: 0}
   gameConfig: {fileID: 11400000, guid: a204b9400f0887b4d824ef9cf8117eb9, type: 2}
+  delaySoundIngame: 3.5
 --- !u!1 &7688289745139123716
 GameObject:
   m_ObjectHideFlags: 0

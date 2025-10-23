@@ -13,12 +13,14 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
     public class LogicOrderHandler : MonoBehaviour
     {
         [SerializeField] private List<BaseOrderSO> listLogicOrders;
+        [SerializeField] private DynamicLogicOrder dynamicLogicOrder;
 
         [Header("Configs")]
         [SerializeField] private LogicOrderConfigSO logicOrderConfigSO;
         [SerializeField] private SpecialOrderConfigSO specialOrderConfigSO;
 
         private SequenceConfigSO selectedSequenceConfig;
+        private int startCount { get => PlayerPrefs.GetInt("StartCount", 0); set => PlayerPrefs.SetInt("StartCount", value); }
 
         public void Init()
         {
@@ -29,12 +31,15 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
             var levelGenerator = GameController.Instance.LevelGenerator;
             levelGenerator.OnLoadLevelData += OnLoadLevelData;
+
+            // dynamicLogicOrder.Init();
         }
 
         public void Clear()
         {
             var levelGenerator = GameController.Instance.LevelGenerator;
             levelGenerator.OnLoadLevelData -= OnLoadLevelData;
+            // dynamicLogicOrder.Clear();
         }
 
         private void OnLoadLevelData(LevelData_SkewerJam levelData)
@@ -120,16 +125,18 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
         private BaseOrderSO ChooseLogicOrder()
         {
-            // - Cùng 1 thời điểm, luôn tồn tại 1 Basic Order
             var phase = GetCurrentPhase();
 
             var phaseConfig = selectedSequenceConfig.listPhaseConfigs[phase];
-            var idxBO = phaseConfig.indexBO;
-            var idxSO = phaseConfig.indexSO;
+            var (idxBO, idxSO) = dynamicLogicOrder.GetDynamicIndex(phaseConfig.indexBO, phaseConfig.indexSO);
+
+            Debug.Log("<color=white>LogicOrderHandler:</color> Dynamic Index: " + idxBO + " - " + idxSO + "<<< " + phaseConfig.indexBO + " - " + phaseConfig.indexSO);
+
             var minNum = phaseConfig.minNum;
             var specialOrderConfig = specialOrderConfigSO.listSpecialOrderConfigs[idxSO];
 
-            if (CheckExistBasicOrder())
+            // - Cùng 1 thời điểm, luôn tồn tại 1 Basic Order
+            if (CheckExistBasicOrder() == true)
             {
                 var random = UnityEngine.Random.Range(0f, 1f);
                 Debug.Log("<color=white>LogicOrderHandler:</color> ChooseLogicOrder: " + Mathf.Round(random * 100f) * 0.01f + " >>> " + specialOrderConfig.rateBasicOrder + " - " + specialOrderConfig.rateLockedOrder + " - " + specialOrderConfig.rateBlindedOrder);

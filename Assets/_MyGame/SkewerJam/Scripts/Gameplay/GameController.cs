@@ -36,7 +36,7 @@ namespace MyGame.SkewerJam.Gameplay
         public GameplayConfig_SkewerJam GameConfig => gameConfig;
 
         [Header("SEA")]
-        [SerializeField] private float delaySoundIngame = 4f;
+        [SerializeField] private float delaySoundIngame = 3.5f;
 
 
         public LevelGenerator LevelGenerator => levelGenerator;
@@ -243,7 +243,7 @@ namespace MyGame.SkewerJam.Gameplay
             ChangeGameState(GameState.GameOver);
 
 
-            await UniTask.Delay(2000);
+            await UniTask.Delay(1000);
             // var showPopupContinue = GameLogicHandler.WaitingGrillManager.ListWaitingGrills.Where(e => e.IsActive == false).Count() > 0;
             if (CanRevive())
             {
@@ -312,7 +312,7 @@ namespace MyGame.SkewerJam.Gameplay
         public async UniTaskVoid Lose(StuckType stuckType)
         {
             MySonatFramework.livesService.ReduceLive(1, "lose");
-            // EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent() { level = level, gameMode = GameMode.Classic, success = false });
+            EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent() { level = level, gameMode = GameMode.Classic, success = false });
             PanelManager.Instance.OpenPanelByName<PopupLose_SkewerJam>("PopupLose_SkewerJam");
         }
 

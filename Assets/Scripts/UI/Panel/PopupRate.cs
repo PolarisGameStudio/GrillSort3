@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sonat;
+using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
 using UnityEngine;
 using UnityEngine.UI;
@@ -47,17 +48,33 @@ public class PopupRate : Panel
 
     public void RateClick()
     {
-        if (starSelected >= 1)
+        var levelStartRate = SonatSDKAdapter.GetRemoteInt("POPUP_RATE_level_start", 3);
+        var level = MySonatFramework.userDataService.GetLevel();
+        if (level - 1 == levelStartRate)
         {
 #if UNITY_ANDROID
             Application.OpenURL("https://play.google.com/store/apps/details?id=com.skewer.roasted.grill.cooking.sort.jam&pcampaignid=web_share");
 #elif UNITY_IOS
             Application.OpenURL($"https://apps.apple.com/us/app/id{SonatSdkManager.Settings.appID_IOS}");
 #endif
+            Close();
+            PopupToast.Cretate("Thank you for your rating!");
         }
-        Close();
+        else
+        {
+            if (starSelected >= 1)
+            {
+#if UNITY_ANDROID
+                Application.OpenURL("https://play.google.com/store/apps/details?id=com.skewer.roasted.grill.cooking.sort.jam&pcampaignid=web_share");
+#elif UNITY_IOS
+            Application.OpenURL($"https://apps.apple.com/us/app/id{SonatSdkManager.Settings.appID_IOS}");
+#endif
+            }
+            Close();
 
-        PopupToast.Cretate("Thank you for your rating!");
+            PopupToast.Cretate("Thank you for your rating!");
+        }
+
     }
 
 

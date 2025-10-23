@@ -104,7 +104,7 @@ public class PopupSettings : PopupSettingsBase
         var level = MySonatFramework.userDataService.GetLevel();
         // string cause = GameplayController.instance.levelGenerator.CheckOutOfMove() ? "back_home_ out_of_move" : "back_home";
         EventBus<LevelQuitEvent>.Raise(new LevelQuitEvent() { cause = "back_home" });
-        EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent() { gameMode = GameMode.Classic, level = level, success = false });
+        // EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent() { gameMode = GameMode.Classic, level = level, success = false });
         MySonatFramework.livesService.ReduceLive(1, "back_home");
         if (level >= GameRemoteConfigValue.levelShowInterLose)
         {

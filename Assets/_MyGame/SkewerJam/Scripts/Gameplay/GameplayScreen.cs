@@ -46,7 +46,7 @@ namespace MyGame.SkewerJam.Gameplay
             var totalItems = GameController.Instance.GameLogicHandler.ItemManager.TotalItems;
 
             _totalItemsTween?.Kill();
-            _totalItemsTween = DOTween.To(() => _fromValue, x => _fromValue = x, totalItems - currentItems, 0.2f).SetEase(Ease.InOutSine).OnUpdate(() =>
+            _totalItemsTween = DOTween.To(() => _fromValue, x => _fromValue = x, totalItems - currentItems, 0.1f).SetEase(Ease.InOutSine).OnUpdate(() =>
             {
                 txtTotalItems.text = $"{_fromValue}/{totalItems}";
             });
