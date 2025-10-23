@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using MyGame.SkewerJam.Utils;
 using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems.ObjectPooling;
 using UnityEngine;
@@ -70,7 +71,7 @@ public class UIBoosterMagicKeyEffect : MonoBehaviour, IPoolingObject
 
     public void Setup()
     {
-        key.GetComponent<Canvas>().sortingLayerName = "UI_Top";
+        key.GetComponent<Canvas>().sortingLayerName = LayerManager.TopUI;
         key.GetComponent<Canvas>().sortingOrder = 51;
     }
 }

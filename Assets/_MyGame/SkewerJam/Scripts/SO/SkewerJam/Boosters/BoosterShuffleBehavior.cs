@@ -21,7 +21,7 @@ namespace MyGame.SkewerJamSO.Boosters
 
         [SerializeField] private float delay = 2f;
 
-        public override async UniTask UseBooster(Vector3 position, bool isForce = false)
+        public override async UniTask<bool> UseBooster(Vector3 position, bool isForce = false)
         {
             if (isForce == false)
             {
@@ -193,6 +193,12 @@ namespace MyGame.SkewerJamSO.Boosters
 
             MySonatFramework.GetService<VibrationService>().Vibrate(50);
             await UniTask.Delay(2000);
+            return true;
+        }
+
+        public override async UniTask<bool> ForceUseBooster()
+        {
+            return false;
         }
 
         protected override async UniTask PlayBoosterAnim(Vector3 position)

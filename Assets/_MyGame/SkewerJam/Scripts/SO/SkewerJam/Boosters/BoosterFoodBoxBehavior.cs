@@ -29,7 +29,7 @@ namespace MyGame.SkewerJamSO.Boosters
             return (true, "");
         }
 
-        public override async UniTask UseBooster(Vector3 position, bool isForce = false)
+        public override async UniTask<bool> UseBooster(Vector3 position, bool isForce = false)
         {
             var gameLogicHandler = GameController.Instance.GameLogicHandler;
             var waitingGrillManager = gameLogicHandler.WaitingGrillManager;
@@ -57,6 +57,12 @@ namespace MyGame.SkewerJamSO.Boosters
                 PanelManager.Instance.transform);
             await boosterAnim.SetData(position, listItem);
             await GameController.Instance.GameLogicHandler.TryCheckWinGame();
+            return true;
+        }
+
+        public override async UniTask<bool> ForceUseBooster()
+        {
+            return false;
         }
 
         public async UniTask PlayBoosterAnim(Vector3 position)

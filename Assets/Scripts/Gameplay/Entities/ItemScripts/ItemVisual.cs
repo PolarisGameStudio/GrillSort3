@@ -2,6 +2,7 @@
 using DG.Tweening;
 using Gameplay.LevelData;
 using MyGame.SkewerJam.Scripts.SO.Behavior;
+using MyGame.SkewerJam.Utils;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -145,14 +146,14 @@ namespace Gameplay.Entities.ItemScripts
         public void Highlight()
         {
             //OnSelected();
-            sortingGroup.sortingLayerName = "UI_Top";
+            sortingGroup.sortingLayerName = LayerManager.TopUI;
             sortingGroup.sortingOrder = 51;
         }
 
         public void UnHighlight()
         {
             //OnDeselected();
-            sortingGroup.sortingLayerName = "Object";
+            sortingGroup.sortingLayerName = LayerManager.Object;
             sortingGroup.sortingOrder = 1;
         }
 

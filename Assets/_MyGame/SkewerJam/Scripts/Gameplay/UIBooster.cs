@@ -68,8 +68,13 @@ namespace MyGame.SkewerJam.Gameplay.Booster
         private async UniTask UseBoosterAsync(GameResource boosterType)
         {
             var gameLogicHanlder = GameController.Instance.GameLogicHandler;
-            await gameLogicHanlder.BoosterManager.UseBooster(boosterType, transform.position);
-            OnUseBoosterSuccess();
+            var success = await gameLogicHanlder.BoosterManager.UseBooster(boosterType, transform.position);
+
+            usingBooster = false;
+            if (success)
+            {
+                OnUseBoosterSuccess();
+            }
         }
     }
 }

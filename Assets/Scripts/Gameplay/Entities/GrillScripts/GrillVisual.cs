@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using Gameplay.LevelData;
 using MyGame.SkewerJam.Scripts.SO.Behavior;
+using MyGame.SkewerJam.Utils;
 using SonatFramework.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -114,7 +115,7 @@ namespace Gameplay.Entities.GrillScripts
             if (sortingGroup != null)
             {
                 sortingGroup.enabled = true;
-                sortingGroup.sortingLayerName = "UI_Top";
+                sortingGroup.sortingLayerName = LayerManager.TopUI;
             }
         }
 
@@ -124,7 +125,7 @@ namespace Gameplay.Entities.GrillScripts
             if (sortingGroup != null)
             {
                 sortingGroup.enabled = false;
-                sortingGroup.sortingLayerName = "Object";
+                sortingGroup.sortingLayerName = LayerManager.Object;
             }
         }
 

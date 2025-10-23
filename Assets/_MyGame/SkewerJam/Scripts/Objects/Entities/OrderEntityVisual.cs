@@ -3,11 +3,13 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Gameplay;
 using MyGame.SkewerJam.Gameplay;
+using MyGame.SkewerJam.Utils;
 using Sonat.Enums;
 using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems.AudioManagement;
 using SonatFramework.Systems.SettingsManagement.Vibation;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace MyGame.SkewerJam.Objects.Entities
 {
@@ -18,6 +20,8 @@ namespace MyGame.SkewerJam.Objects.Entities
         [SerializeField] private SpriteRenderer bonusLid;
 
         [SerializeField] private SpriteRenderer imageLid;
+        [SerializeField] private SortingGroup sortingGroup;
+
         [SerializeField] private OrderEntityConfigSO orderEntityConfigSO;
 
         [Header("Animation & Effect")]
@@ -55,6 +59,7 @@ namespace MyGame.SkewerJam.Objects.Entities
 
             //init
             completeEffect.Stop();
+            UnHighlight();
         }
 
 
@@ -106,6 +111,18 @@ namespace MyGame.SkewerJam.Objects.Entities
             MyGame.SkewerJam.Gameplay.GameFactory.Instance.ReturnEntity(orderEntity);
 
 
+        }
+
+        public void Highlight()
+        {
+            sortingGroup.enabled = true;
+            sortingGroup.sortingLayerName = LayerManager.TopUI;
+            sortingGroup.sortingOrder = 100;
+        }
+
+        public void UnHighlight()
+        {
+            sortingGroup.enabled = false;
         }
     }
 }

@@ -289,7 +289,7 @@ namespace MyGame.SkewerJam.Gameplay
                             {
                                 // Sử dụng spatula
                                 var boosterManager = GameLogicHandler.BoosterManager;
-                                boosterManager.UseBooster(GameResource.BoosterSpatula, Vector3.zero, true).Forget();
+                                boosterManager.ForceUseBooster(GameResource.BoosterSpatula).Forget();
 
                                 // order tiếp theo cũng phải là rescue
                                 gameLogicHandler.OrderManager.IsForceRescue = true;
@@ -346,14 +346,10 @@ namespace MyGame.SkewerJam.Gameplay
 #if UNITY_EDITOR
         private void Update()
         {
-            // if (Input.GetKeyDown(KeyCode.T))
-            // {
-            //     var uiData = new UIData();
-            //     uiData.Add(PopupTutorial.NAME_KEY, "Add Plate");
-            //     uiData.Add(PopupTutorial.DESCRIPTION_KEY, "New booster unlocked!");
-            //     // uiData.Add(PopupTutorial.ICON_PATH_KEY, PathManager.ItemHLWSprite(ItemId.Item_1));
-            //     PanelManager.Instance.OpenPanel<PopupTutorial>(uiData);
-            // }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                PanelManager.Instance.OpenPanel<PopupHightlightGameplay>();
+            }
         }
 
 #endif

@@ -27,7 +27,7 @@ namespace MyGame.SkewerJamSO.Boosters
             return (true, "");
         }
 
-        public override async UniTask UseBooster(Vector3 position, bool isForce = false)
+        public override async UniTask<bool> UseBooster(Vector3 position, bool isForce = false)
         {
             if (isForce == false)
             {
@@ -39,6 +39,12 @@ namespace MyGame.SkewerJamSO.Boosters
             var waitingManager = gameLogicHanlder.WaitingGrillManager;
             await waitingManager.AddPlate();
             MySonatFramework.GetService<VibrationService>().Vibrate(50);
+            return true;
+        }
+
+        public override async UniTask<bool> ForceUseBooster()
+        {
+            return false;
         }
 
         protected override async UniTask PlayBoosterAnim(Vector3 position)

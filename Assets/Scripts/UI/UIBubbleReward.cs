@@ -1,3 +1,4 @@
+using MyGame.SkewerJam.Utils;
 using SonatFramework.Scripts.UIModule.UIElements;
 using SonatFramework.Systems.InventoryManagement.GameResources;
 using UnityEngine;
@@ -13,7 +14,7 @@ public class UIBubbleReward : MonoBehaviour
         if (gameObject.TryGetComponent<Canvas>(out var canvas))
         {
             canvas.overrideSorting = true;
-            canvas.sortingLayerName = "TopUI";
+            canvas.sortingLayerName = LayerManager.TopUI;
             canvas.sortingOrder = 100;
         }
     }
@@ -45,7 +46,7 @@ public class UIBubbleReward : MonoBehaviour
         if (gameObject.TryGetComponent<Canvas>(out var canvas))
         {
             canvas.overrideSorting = true;
-            canvas.sortingLayerName = "TopUI";
+            canvas.sortingLayerName = LayerManager.TopUI;
             canvas.sortingOrder = 100;
         }
     }
@@ -56,7 +57,7 @@ public class UIBubbleReward : MonoBehaviour
         if (gameObject.TryGetComponent<Canvas>(out var canvas))
         {
             canvas.overrideSorting = false;
-            canvas.sortingLayerName = "UI";
+            canvas.sortingLayerName = LayerManager.UI;
             canvas.sortingOrder = 0;
         }
     }

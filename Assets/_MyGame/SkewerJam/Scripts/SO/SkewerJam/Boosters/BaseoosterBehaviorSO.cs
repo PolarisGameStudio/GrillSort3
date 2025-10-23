@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
@@ -10,7 +11,8 @@ namespace MyGame.SO.Boosters
     public abstract class BaseBoosterBehaviorSO : ScriptableObject
     {
         public abstract GameResource boosterType { get; }
-        public abstract UniTask UseBooster(Vector3 position, bool isForce = false);
+        public abstract UniTask<bool> UseBooster(Vector3 position, bool isForce = false);
+        public abstract UniTask<bool> ForceUseBooster();
 
         public virtual (bool canUse, string reason) CanUseBooster()
         {

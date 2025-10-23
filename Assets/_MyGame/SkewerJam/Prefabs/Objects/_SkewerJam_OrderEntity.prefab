@@ -736,6 +736,7 @@ MonoBehaviour:
   bonusOrder: {fileID: 1125885913620427144}
   bonusLid: {fileID: 7739431563095292296}
   imageLid: {fileID: 8743122369111296896}
+  sortingGroup: {fileID: 6218821164166547221}
   orderEntityConfigSO: {fileID: 11400000, guid: 4bbd72f8c973b4b4b983863c2d5a1ed3, type: 2}
   completeEffect: {fileID: 6812902907169691508}
 --- !u!1 &7289701570189489940
@@ -833,6 +834,7 @@ GameObject:
   - component: {fileID: 5110749570527007456}
   - component: {fileID: 537756147304205532}
   - component: {fileID: 7429767339450009959}
+  - component: {fileID: 6218821164166547221}
   m_Layer: 6
   m_Name: _SkewerJam_OrderEntity
   m_TagString: Untagged
@@ -924,6 +926,18 @@ MonoBehaviour:
   grillBaseBehaviorSO: {fileID: 11400000, guid: f3b4a62a6d32c40409dbb5fd2e0b3f1d, type: 2}
   container: {fileID: 902497266282683419}
   orderEntityVisual: {fileID: 4470209005309076854}
+--- !u!210 &6218821164166547221
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7592061314963657562}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &9077373731549059655
 GameObject:
   m_ObjectHideFlags: 0

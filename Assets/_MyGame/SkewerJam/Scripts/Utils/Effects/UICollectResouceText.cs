@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using MyGame.SkewerJam.Utils;
 using Sonat.Enums;
 using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems;
@@ -34,7 +35,7 @@ namespace SkewerJam.Utils.Effects
             if (TryGetComponent<Canvas>(out Canvas canvas))
             {
                 canvas.overrideSorting = true;
-                canvas.sortingLayerName = "UI_Top";
+                canvas.sortingLayerName = LayerManager.TopUI;
                 canvas.sortingOrder = 1000;
             }
             DOEffect();

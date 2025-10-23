@@ -19,7 +19,7 @@ namespace MyGame.SkewerJam.Gameplay
             return boosterBehaviors.FirstOrDefault(e => e.boosterType == boosterType);
         }
 
-        public async UniTask UseBooster(GameResource boosterType, Vector3 position, bool isForce = false)
+        public async UniTask<bool> UseBooster(GameResource boosterType, Vector3 position)
         {
             GameController.Instance.ChangeGameState(GameState.UsingBooster);
             var boosterBehavior = GetBoosterBehavior(boosterType);
@@ -29,9 +29,26 @@ namespace MyGame.SkewerJam.Gameplay
             }
 
             WaitingGrillHelper.ResetWarning();
-            await boosterBehavior.UseBooster(position, isForce);
+            var success = await boosterBehavior.UseBooster(position);
 
             GameController.Instance.ChangeGameState(GameState.Playing);
+            return success;
+        }
+
+        public async UniTask<bool> ForceUseBooster(GameResource boosterType)
+        {
+            GameController.Instance.ChangeGameState(GameState.UsingBooster);
+            var boosterBehavior = GetBoosterBehavior(boosterType);
+            if (boosterBehavior == null)
+            {
+                Debug.Log($"{LOG_TAG} SBooster behavior not found: {boosterType}");
+            }
+
+            WaitingGrillHelper.ResetWarning();
+            var success = await boosterBehavior.ForceUseBooster();
+
+            GameController.Instance.ChangeGameState(GameState.Playing);
+            return success;
         }
 
         public (bool canUse, string reason) CanUseBooster(GameResource boosterType)
