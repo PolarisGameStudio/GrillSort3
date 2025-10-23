@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using MyGame.SkewerJam.Features.VideoBar;
+using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems;
+using SonatFramework.Systems.EventBus;
 using UnityEngine;
 
 public class WidgetVideoBar : UIHomeWidget

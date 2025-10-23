@@ -68,10 +68,10 @@ namespace MyGame.SkewerJam.Gameplay
         {
             Initialize();
             PlayLevel(level).Forget();
-            PanelManager.Instance.OnPanelsUpdated += OnPanelsUpdated;
+            // PanelManager.Instance.OnPanelsUpdated += OnPanelsUpdated;
         }
 
-        private void OnPanelsUpdated()
+        private void OnPanelsUpdated(bool isOpen)
         {
             if (PanelManager.Instance.HasAnyPopupPauseGame())
             {
@@ -79,11 +79,11 @@ namespace MyGame.SkewerJam.Gameplay
             }
         }
 
-        void OnDestroy()
-        {
-            if (PanelManager.Instance != null)
-                PanelManager.Instance.OnPanelsUpdated -= OnPanelsUpdated;
-        }
+        // void OnDestroy()
+        // {
+        //     if (PanelManager.Instance != null)
+        //         PanelManager.Instance.OnPanelsUpdated -= OnPanelsUpdated;
+        // }
 
         private void Initialize()
         {

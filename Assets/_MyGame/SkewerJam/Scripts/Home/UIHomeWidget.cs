@@ -1,6 +1,8 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using SonatFramework.Systems.EventBus;
+using SonatFramework.Scripts.UIModule;
 
 public class UIHomeWidget : MonoBehaviour, IHomeProcess
 {
@@ -10,9 +12,28 @@ public class UIHomeWidget : MonoBehaviour, IHomeProcess
     [SerializeField, BoxGroup("Show Condition")] private int levelShow = 5;
     [SerializeField, BoxGroup("Show Condition")] private int DayShow = 3;
 
+    private EventBinding<PanelUpdatedEvent> onPanelsUpdatedEvent;
+
     public virtual void Setup()
     {
+        onPanelsUpdatedEvent = new EventBinding<PanelUpdatedEvent>(OnPanelsUpdated);
+    }
 
+    private void OnDestroy()
+    {
+        EventBus<PanelUpdatedEvent>.Deregister(onPanelsUpdatedEvent);
+    }
+
+    private void OnPanelsUpdated(PanelUpdatedEvent eventData)
+    {
+        if (eventData.isOpen == false)
+        {
+            OnFocus();
+        }
+        else
+        {
+            OnLoseFocus();
+        }
     }
 
     public virtual void OnFocus()

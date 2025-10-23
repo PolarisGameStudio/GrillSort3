@@ -23,18 +23,12 @@ public class WidgetStarChest : UIHomeWidget
         {
             gameObject.SetActive(true);
             UpdateUI();
-            starChestService.Instance.OnNextMilestone += UpdateUI;
         }
         else
         {
             gameObject.SetActive(false);
         }
 
-    }
-
-    private void OnDestroy()
-    {
-        starChestService.Instance.OnNextMilestone -= UpdateUI;
     }
 
     public override void OnFocus()

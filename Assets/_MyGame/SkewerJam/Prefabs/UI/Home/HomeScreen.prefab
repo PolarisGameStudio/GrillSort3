@@ -1638,6 +1638,7 @@ MonoBehaviour:
   uINavigateBar: {fileID: 5813071603495819665}
   blockUI: {fileID: 8463760208693339182}
   delayBlockUI: 2
+  delaySoundHome: 0.5
 --- !u!1 &2043824961652901777
 GameObject:
   m_ObjectHideFlags: 0
@@ -2354,6 +2355,7 @@ MonoBehaviour:
   trackingName: 
   openTween: []
   closeTween: []
+  blockGeneralCurrency: 0
   homeBtn: {fileID: 0}
   restoreBtn: {fileID: 0}
   txtVersion: {fileID: 0}
@@ -9257,6 +9259,18 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 46.45
       objectReference: {fileID: 0}
+    - target: {fileID: 680461460153470255, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
+      propertyPath: isGeneralCurrency
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 680461460153470255, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
+      propertyPath: blockGeneralCurrency
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 680461460153470255, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
+      propertyPath: blockCollectEffectWhenPanelOpen
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1473931887448620233, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -9384,6 +9398,18 @@ PrefabInstance:
     - target: {fileID: 8629476453662860408, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
       propertyPath: blockClick
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8629476453662860408, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
+      propertyPath: isGeneralCurrency
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8629476453662860408, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
+      propertyPath: blockGeneralCurrency
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8629476453662860408, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
+      propertyPath: blockCollectEffectWhenPanelOpen
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5433598967629418006, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}

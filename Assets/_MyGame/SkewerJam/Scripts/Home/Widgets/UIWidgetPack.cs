@@ -19,8 +19,6 @@ public class UIWidgetPack : UIHomeWidget
         }
 
         gameObject.SetActive(active);
-
-        shopService.Instance.OnBuySuccess += OnBuySuccess;
     }
 
     public override void OnFocus()
@@ -31,22 +29,6 @@ public class UIWidgetPack : UIHomeWidget
             active = false;
         }
         gameObject.SetActive(active);
-    }
-
-    private void OnDestroy()
-    {
-        shopService.Instance.OnBuySuccess -= OnBuySuccess;
-    }
-
-    private void OnBuySuccess(ShopItemKey shopItemKey)
-    {
-        if (shopItemKey != this.shopItemKey) return;
-
-        if (shopService.Instance.VerifyPack(shopItemKey) == false)
-        {
-            gameObject.SetActive(false);
-        }
-
     }
 
 
