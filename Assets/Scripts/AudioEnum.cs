@@ -6,10 +6,11 @@ namespace Sonat.Enums
         None = 0,
         ButtonClick = 1,
 
-        BGM_Ingame_Halloween_Grill_sort = 2,
-        BGM_Ingame_Halloween_01_Grill_sort,
-        BGM_Ingame_Summer_Grill3,
-        BGM_Home_Default_Grill3,
+        BGM_Ingame_Casual = 2,
+        BGM_Ingame_Relaxing = 3,
+        BGM_Ingame_Summer_Grill3 = 4,
+        BGM_Home_Default_Grill3 = 5,
+        BGM_Loading_scene_Summer_Grill3 = 6,
 
 
         Win_HLW_Music_fireworks_Grill_sort = 10,
@@ -59,7 +60,14 @@ namespace Sonat.Enums
         Obstacle_Chain_03 = 69,
 
         Obstacle_Locknkey_Turning_Grill_sort = 70,
-        Obstacle_Locknkey_Open_Grill_sort
+        Obstacle_Locknkey_Open_Grill_sort,
+
+        Booster_Spatula_Appear_Grill3 = 200,
+        Booster_AddTray_Grill3 = 201,
+        Booster_Shuffle_Grill3 = 202,
+        Booster_FoodTray_Appear_Grill3 = 203,
+        Booster_FoodTray_Fill_tray_Grill3 = 204,
+        Booster_Out_Grill3 = 205,
     }
 }
 #endif

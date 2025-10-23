@@ -35,6 +35,9 @@ namespace MyGame.SkewerJam.Gameplay
         private GameplayConfig_SkewerJam gameConfig;
         public GameplayConfig_SkewerJam GameConfig => gameConfig;
 
+        [Header("SEA")]
+        [SerializeField] private float delaySoundIngame = 4f;
+
 
         public LevelGenerator LevelGenerator => levelGenerator;
         public GameLogicHandler GameLogicHandler => gameLogicHandler;
@@ -109,9 +112,9 @@ namespace MyGame.SkewerJam.Gameplay
             LoadingHelper.CheckShowLoadingInGameplay();
 
             Debug.Log("<color=green>[GameController]</color> PlayLevel: " + level);
-            SonatUtils.DelayCall(2f, () =>
+            SonatUtils.DelayCall(delaySoundIngame, () =>
             {
-                bgm = AudioId.BGM_Ingame_Summer_Grill3;
+                bgm = GameplayHelper.GetBGMIngame();
                 MySonatFramework.GetService<AudioService>().PlayMusic(bgm);
             }, this);
 

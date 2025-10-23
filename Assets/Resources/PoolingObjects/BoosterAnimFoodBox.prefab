@@ -329,7 +329,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 73.74456, y: 50.06659}
+  m_AnchoredPosition: {x: 73.744545, y: 50.06659}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &92039369721025408
@@ -697,7 +697,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5877110442070802176}
-  m_LocalRotation: {x: 0, y: 0, z: 0.0047467947, w: 0.99998873}
+  m_LocalRotation: {x: 0, y: 0, z: -0.09376119, w: 0.99559474}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_ConstrainProportionsScale: 0
@@ -710,7 +710,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.0936875, y: -32.854126}
+  m_AnchoredPosition: {x: -586.1399, y: -115.29346}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7000940892239467516
@@ -1042,6 +1042,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   delayItem: 0.1
   distanceItem: 60
+  delaySoundAppear: 0.5
+  delaySoundOut: 0.25
 --- !u!1 &6739230729875575996
 GameObject:
   m_ObjectHideFlags: 0

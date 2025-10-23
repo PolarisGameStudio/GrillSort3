@@ -22,6 +22,9 @@ namespace MyGame.SkewerJam.UI.Loading
         [SerializeField] private LoadingScreen loadingScreen;
         [SerializeField] private LoadingConfigSO configSO;
 
+        [Header("SEA")]
+        [SerializeField] private float delaySound;
+
         [Header("Tracking")]
         [SerializeField] private string screenName = "Loading";
         [SerializeField] private string placement = "GP:::app_open";
@@ -96,6 +99,11 @@ namespace MyGame.SkewerJam.UI.Loading
             {
                 MySonatFramework.GetService<AudioService>().StopMusic();
             }
+
+            SonatUtils.DelayCall(delaySound, (System.Action)(() =>
+            {
+                MySonatFramework.GetService<AudioService>().PlaySound((AudioId)AudioId.BGM_Loading_scene_Summer_Grill3);
+            }), this);
         }
 
         public void HideLoading()

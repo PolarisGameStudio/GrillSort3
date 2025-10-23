@@ -13,6 +13,7 @@ public class HomeManager : SingletonSimple<HomeManager>
     [SerializeField] private UINavigateBarSlide uINavigateBar;
     [SerializeField] private GameObject blockUI;
     [SerializeField] private float delayBlockUI = 2f;
+    [SerializeField] private float delaySoundHome = 0.5f;
 
     private bool running = false;
 
@@ -33,7 +34,10 @@ public class HomeManager : SingletonSimple<HomeManager>
     private void OnEnable()
     {
         running = false;
-        MySonatFramework.GetService<AudioService>().PlayMusic(AudioId.BGM_Home_Default_Grill3);
+        SonatUtils.DelayCall(delaySoundHome, () =>
+        {
+            MySonatFramework.GetService<AudioService>().PlayMusic(AudioId.BGM_Home_Default_Grill3);
+        }, this);
 
         ClaimRewardFreeLives().Forget();
         blockUI.SetActive(true);

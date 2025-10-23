@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using MyGame.SkewerJam.UI.Loading;
 using Sonat.Enums;
 using SonatFramework.Scripts.Utils;
@@ -41,6 +42,16 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             var count = waitingGrillManager.ListWaitingGrills.Count + 1;
             var start = waitingGrillManager.transform.position - distance * (count - 1) / 2;
             return start + distance * (count - 1);
+        }
+
+        public static AudioId GetBGMIngame()
+        {
+            var listBGMIngame = new List<AudioId>() {
+                AudioId.BGM_Ingame_Casual,
+                AudioId.BGM_Ingame_Relaxing ,
+                AudioId.BGM_Ingame_Summer_Grill3,
+            };
+            return listBGMIngame[Random.Range(0, listBGMIngame.Count)];
         }
     }
 }

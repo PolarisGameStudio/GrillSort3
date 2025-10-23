@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 3937148291258350116}
   - component: {fileID: 4996421642800493683}
   - component: {fileID: 3502931200610470379}
+  - component: {fileID: 6148941746211495018}
   m_Layer: 0
   m_Name: BoosterAnimAddPlate
   m_TagString: Untagged
@@ -510,6 +511,20 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   playOnAwake: 1
+--- !u!114 &6148941746211495018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6719153787309464702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675d9ec93fe1c3045bc7012a9a6147d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioId: 201
+  delay: 0
 --- !u!1001 &3292952566801542583
 PrefabInstance:
   m_ObjectHideFlags: 0

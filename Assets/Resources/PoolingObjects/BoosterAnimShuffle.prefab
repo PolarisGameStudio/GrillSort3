@@ -549,6 +549,7 @@ GameObject:
   - component: {fileID: 6097536726022920975}
   - component: {fileID: 5385197839731577865}
   - component: {fileID: 1162436877551467520}
+  - component: {fileID: 4683912876858735289}
   m_Layer: 0
   m_Name: BoosterAnimShuffle
   m_TagString: Untagged
@@ -679,6 +680,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  isShake: 1
   shakeDelay: 0.75
   shakeDuration: 1
   shakeStrength: 25
@@ -733,6 +735,20 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   playOnAwake: 1
+--- !u!114 &4683912876858735289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6719153787309464702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675d9ec93fe1c3045bc7012a9a6147d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioId: 202
+  delay: 0
 --- !u!1 &8219536962184482392
 GameObject:
   m_ObjectHideFlags: 0

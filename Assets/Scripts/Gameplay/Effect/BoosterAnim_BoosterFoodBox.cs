@@ -4,7 +4,10 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Gameplay.Entities;
 using MyGame.SkewerJam.Gameplay;
+using Sonat.Enums;
+using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems;
+using SonatFramework.Systems.AudioManagement;
 using SonatFramework.Systems.ObjectPooling;
 using Spine.Unity;
 using UnityEngine;
@@ -35,12 +38,18 @@ public class BoosterAnim_BoosterFoodBox : EffectPoolBase
     [SerializeField] private float delayItem = 0.1f;
     [SerializeField] private float distanceItem = 100f;
 
+    [Header("SEA")]
+    [SerializeField] private float delaySoundAppear = 0.5f;
+    [SerializeField] private float delaySoundOut = 0.25f;
+
     private Service<PoolingContainerService> poolingContainerService = new();
     private List<Transform> listItemPrefab = new();
 
 
     public async UniTask SetData(Vector3 position, List<Item> listItem)
     {
+        MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Booster_FoodTray_Appear_Grill3);
+
         listItemPrefab.Clear();
         skeletonGraphic.gameObject.SetActive(false);
         poolingContainerService.Instance.CleanContainer(itemsContainer);
@@ -54,6 +63,11 @@ public class BoosterAnim_BoosterFoodBox : EffectPoolBase
         PlayCollectItems(listItem);
         await UniTask.Delay((int)(duration * 1000));
         skeletonGraphic.AnimationState.SetAnimation(0, "Out", false);
+
+        SonatUtils.DelayCall(delaySoundOut, () =>
+        {
+            MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Booster_Out_Grill3);
+        }, this);
         await targetObject.DOMove(endPos.position, durationMove).SetEase(moveOutCurve);
     }
 
@@ -72,7 +86,10 @@ public class BoosterAnim_BoosterFoodBox : EffectPoolBase
 
             GameFactory.Instance.ReturnEntity(item);
             itemPrefab.DOLocalMoveX(targetPos.x, durationItem).SetEase(itemCurveX);
-            itemPrefab.DOLocalMoveY(targetPos.y, durationItem).SetEase(itemCurveY);
+            itemPrefab.DOLocalMoveY(targetPos.y, durationItem).SetEase(itemCurveY).OnComplete(() =>
+            {
+                MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Booster_FoodTray_Fill_tray_Grill3);
+            });
             await UniTask.Delay((int)(delayItem * 1000));
             targetPos -= Vector3.left * distanceItem;
         }
