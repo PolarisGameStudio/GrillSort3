@@ -744,7 +744,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ver 0.0.2
+  m_text: Ver 0.0.3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e13e4bfa3ed5b20408dd981c4a6cca19, type: 2}
   m_sharedMaterial: {fileID: -4516441159803420151, guid: e13e4bfa3ed5b20408dd981c4a6cca19, type: 2}
@@ -9096,7 +9096,15 @@ PrefabInstance:
     m_TransformParent: {fileID: 4432996908386430039}
     m_Modifications:
     - target: {fileID: 963903815582880989, guid: 867d7d91afb747c4492467ae17c8db5f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 963903815582880989, guid: 867d7d91afb747c4492467ae17c8db5f, type: 3}
       propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1878600032926028442, guid: 867d7d91afb747c4492467ae17c8db5f, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1878600032926028442, guid: 867d7d91afb747c4492467ae17c8db5f, type: 3}
@@ -11210,6 +11218,10 @@ PrefabInstance:
       propertyPath: onBuySuccess.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2091469548881379305, guid: b85d897c7951c3a4d99ff4720dfe35e1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2113557683113041259, guid: b85d897c7951c3a4d99ff4720dfe35e1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -13017,6 +13029,10 @@ PrefabInstance:
     - target: {fileID: 9056750930108666053, guid: b85d897c7951c3a4d99ff4720dfe35e1, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9077330413136312219, guid: b85d897c7951c3a4d99ff4720dfe35e1, type: 3}
+      propertyPath: m_Color.a
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9104604772616375444, guid: b85d897c7951c3a4d99ff4720dfe35e1, type: 3}
       propertyPath: m_AnchorMax.y

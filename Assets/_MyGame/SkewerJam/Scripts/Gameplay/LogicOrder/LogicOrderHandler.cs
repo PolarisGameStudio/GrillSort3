@@ -84,8 +84,21 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             {
                 Debug.Log("<color=blue>OrderHelper:</color> Use " + forceLogicOrder.name + " to rescue");
                 var (rescueItemId, rescueNum) = forceLogicOrder.GetOrder(gameplayInfoForLogicOrder);
-                return (rescueItemId, rescueNum, LogicOrderType.Rescue);
+                if (rescueItemId == ItemId.None)
+                {
+                    return (rescueItemId, rescueNum, LogicOrderType.Rescue);
+                }
+                else
+                {
+                    Debug.Log("<color=red>OrderHelper:</color> GetItemOrder: No rescue item found, use basic order");
+                    var basicOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Basic);
+                    var (i, n, s) = (basicOrder as BasicOrderSO).ForceGetItemOrderBasic(gameplayInfoForLogicOrder);
+                    return (i, n, LogicOrderType.Basic);
+                }
             }
+
+            var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
+            orderManager.IsForceRescue = false;
 
             // lấy order info mỗi layer (2 layer đầu) --> OPTIMIZE: giảm tính toán
             var selectedLogicOrder = ChooseLogicOrder();

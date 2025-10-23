@@ -43,7 +43,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             {
                 foreach (var numItems in dictDeltaSlots[itemId].Keys)
                 {
-                    if (dictDeltaSlots[itemId][numItems] < 0)
+                    if (dictDeltaSlots[itemId][numItems] <= 0)
                     {
                         listAllRescues.Add((itemId, numItems, dictDeltaSlots[itemId][numItems]));
                     }
@@ -62,9 +62,17 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                 }
             }
 
-            var rand = UnityEngine.Random.Range(0, listAllRescues.Count());
-            var rc = listAllRescues.ElementAt(rand);
-            return (rc.itemId, rc.numItems);
+            if (listAllRescues.Count() > 0)
+            {
+                var rand = UnityEngine.Random.Range(0, listAllRescues.Count());
+                var rc = listAllRescues.ElementAt(rand);
+                return (rc.itemId, rc.numItems);
+            }
+            else
+            {
+                return (ItemId.None, 0);
+            }
+
 
 
             // // ---Tạo order để giải cứu---
@@ -146,6 +154,13 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
         public override bool ForceUse(bool isRescue = false)
         {
+            var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
+            if (orderManager.IsForceRescue == true)
+            {
+                return true;
+            }
+
+
             if (gap != 0)
             {
                 gap += 1;

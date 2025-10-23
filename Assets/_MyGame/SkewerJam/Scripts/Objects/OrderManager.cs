@@ -42,6 +42,8 @@ namespace MyGame.SkewerJam.Objects
         public Transform LeftStartPos => leftStartPos;
         public Transform RightStartPos => rightStartPos;
 
+        public bool IsForceRescue { get; set; }
+
         #region Init
         public async UniTask Init()
         {
@@ -334,6 +336,7 @@ namespace MyGame.SkewerJam.Objects
                 orderEntity = _listOrders.Where(e => e.IsActive == false).FirstOrDefault();
                 if (orderEntity == null) return;
             }
+            IsForceRescue = isRescue;
             orderEntity.PlayUnlock(isRescue);
         }
     }

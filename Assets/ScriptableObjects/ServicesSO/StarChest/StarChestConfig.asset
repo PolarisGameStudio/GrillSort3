@@ -12,9 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c345736b410f20498eb28005d0a79b9, type: 3}
   m_Name: StarChestConfig
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   starByCombo: 01000000010000000100000002000000020000000200000003000000030000000300000004000000
   starChests:
+  - starRequire: 500
+    reward:
+      resourceDatas:
+      - resource: 1
+        quantity: 100
   - starRequire: 500
     reward:
       resourceDatas:

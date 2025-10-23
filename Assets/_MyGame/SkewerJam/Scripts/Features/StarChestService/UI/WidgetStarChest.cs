@@ -22,35 +22,30 @@ public class WidgetStarChest : UIHomeWidget
         if (starChestService.Instance.Config.active)
         {
             gameObject.SetActive(true);
-        }
-
-        var star = MySonatFramework.GetService<InventoryService>().GetResource(GameResource.Star);
-        if (star >= starChestService.Instance.GetRequiredStar())
-        {
-            iconWarning.SetActive(true);
+            UpdateUI();
+            starChestService.Instance.OnNextMilestone += UpdateUI;
         }
         else
         {
-            iconWarning.SetActive(false);
+            gameObject.SetActive(false);
         }
+
+    }
+
+    private void OnDestroy()
+    {
+        starChestService.Instance.OnNextMilestone -= UpdateUI;
     }
 
     public override void OnFocus()
     {
         base.OnFocus();
-        var star = MySonatFramework.GetService<InventoryService>().GetResource(GameResource.Star);
-        if (star >= starChestService.Instance.GetRequiredStar())
-        {
-            iconWarning.SetActive(true);
-        }
-        else
-        {
-            iconWarning.SetActive(false);
-        }
+        UpdateUI();
     }
 
     public override async UniTask<bool> ProcessTask()
     {
+        if (starChestService.Instance.Config.active == false) return false;
         OnCollectStar();
         return false;
     }
@@ -74,6 +69,19 @@ public class WidgetStarChest : UIHomeWidget
                     collectEffect = new CollectEffectMultipleAtHome()
                 });
             });
+        }
+    }
+
+    private void UpdateUI()
+    {
+        var star = MySonatFramework.GetService<InventoryService>().GetResource(GameResource.Star);
+        if (star >= starChestService.Instance.GetRequiredStar())
+        {
+            iconWarning.SetActive(true);
+        }
+        else
+        {
+            iconWarning.SetActive(false);
         }
     }
 

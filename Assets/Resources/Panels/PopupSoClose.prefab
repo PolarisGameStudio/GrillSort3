@@ -2070,29 +2070,37 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1247568644149923611, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1597894709701701239, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 303
+      objectReference: {fileID: 0}
     - target: {fileID: 1733856432658911757, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1733856432658911757, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1733856432658911757, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1733856432658911757, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 122.5
       objectReference: {fileID: 0}
     - target: {fileID: 1733856432658911757, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 157
       objectReference: {fileID: 0}
     - target: {fileID: 1733856432658911757, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 2050261920097048879, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
       propertyPath: onBuySuccessAfterPopupReward.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -2124,27 +2132,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3643613623753694489, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3643613623753694489, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3643613623753694489, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 3643613623753694489, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 122.5
       objectReference: {fileID: 0}
     - target: {fileID: 3643613623753694489, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -57
       objectReference: {fileID: 0}
     - target: {fileID: 3643613623753694489, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 5149644976817072803, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2687,10 +2695,10 @@ PrefabInstance:
       addedObject: {fileID: 3069620711977314090}
     - targetCorrespondingSourceObject: {fileID: 9141805345166389359, guid: b3886f02809de454383b21112b46a072, type: 3}
       insertIndex: 3
-      addedObject: {fileID: 7178214223596195071}
-    - targetCorrespondingSourceObject: {fileID: 9141805345166389359, guid: b3886f02809de454383b21112b46a072, type: 3}
-      insertIndex: 4
       addedObject: {fileID: 7888634378323121870}
+    - targetCorrespondingSourceObject: {fileID: 9141805345166389359, guid: b3886f02809de454383b21112b46a072, type: 3}
+      insertIndex: 5
+      addedObject: {fileID: 7178214223596195071}
     - targetCorrespondingSourceObject: {fileID: 1127697567099834356, guid: b3886f02809de454383b21112b46a072, type: 3}
       insertIndex: 1
       addedObject: {fileID: 6791019750965727312}

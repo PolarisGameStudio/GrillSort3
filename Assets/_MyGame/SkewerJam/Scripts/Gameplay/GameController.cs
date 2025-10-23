@@ -287,6 +287,9 @@ namespace MyGame.SkewerJam.Gameplay
                                 // Sử dụng spatula
                                 var boosterManager = GameLogicHandler.BoosterManager;
                                 boosterManager.UseBooster(GameResource.BoosterSpatula, Vector3.zero, true).Forget();
+
+                                // order tiếp theo cũng phải là rescue
+                                gameLogicHandler.OrderManager.IsForceRescue = true;
                             }
                             break;
                         case "play_on_clear_one_plate":
