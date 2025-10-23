@@ -2593,6 +2593,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   closeTween: []
+  blockGeneralCurrency: 0
   layouts:
   - selectedObjectType: 0
     gameObject: {fileID: 4110013106791000691}
@@ -2769,6 +2770,10 @@ PrefabInstance:
     - target: {fileID: 8629476453662860408, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
       propertyPath: blockClick
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8629476453662860408, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
+      propertyPath: isGeneralCurrency
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
