@@ -109,7 +109,11 @@ namespace Gameplay.Entities
         {
             isProcess = false;
             grillVisual.UpdateSubGrill();
-            if (subGrills == null || subGrills.Count == 0) return;
+            if (subGrills == null || subGrills.Count == 0)
+            {
+                grillVisual.CloseGrill();
+                return;
+            }
             subGrills[0].MoveUpPrimary();
             subGrills.RemoveAt(0);
             if (subGrills.Count > 0)

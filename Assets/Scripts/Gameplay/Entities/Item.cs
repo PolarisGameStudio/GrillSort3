@@ -3,11 +3,13 @@ using System.Collections;
 using DG.Tweening;
 using Gameplay.Entities.ItemScripts;
 using Gameplay.LevelData;
+using MyGame.SkewerJam.Gameplay;
 using MyGame.SkewerJam.Scripts.SO;
 using PrototypeTest;
 using Sonat.Enums;
 using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems;
+using SonatFramework.Systems.AudioManagement;
 using SonatFramework.Systems.ObjectPooling;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -330,15 +332,33 @@ namespace Gameplay.Entities
         }
 
 
+        private static bool playSoundSizzle = false;
         private IEnumerator IESpawnSmokeEffect()
         {
             while (gameObject.activeInHierarchy)
             {
-                float time = Random.Range(3f, 8f);
+                float time = Random.Range(6f, 10f);
                 yield return new WaitForSeconds(time);
-                int rand = Random.Range(0, 3);
-                if (rand == 0)
-                    SonatSystem.GetService<PoolingServiceAsync>().CreateAsync<EffectPoolBase>("FoodSmoke", transform.position, transform);
+                if (GameController.Instance.GameState == GameState.Playing)
+                {
+                    int rand = Random.Range(0, 3);
+                    if (rand == 0)
+                    {
+                        SonatSystem.GetService<PoolingServiceAsync>().CreateAsync<EffectPoolBase>("FoodSmoke", transform.position, transform);
+                        int sizzleRand = Random.Range(0, 4);
+
+                        if (playSoundSizzle == false)
+                        {
+                            playSoundSizzle = true;
+                            MySonatFramework.GetService<AudioService>().PlaySound((AudioId)((int)AudioId.Sizzle_01_Grill3 + sizzleRand));
+                            SonatUtils.DelayCall(10f, () =>
+                            {
+                                playSoundSizzle = false;
+                            });
+                        }
+                    }
+                }
+
             }
         }
 

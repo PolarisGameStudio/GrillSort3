@@ -67,7 +67,9 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
                 var gameLogicHandler = GameController.Instance.GameLogicHandler;
                 var switchSuccess = gameLogicHandler.SelectItem(item);
                 // MySonatFramework.GetService<VibrationService>().Vibrate(50);
-                MySonatFramework.audioService.PlaySound(AudioId.Items_Pick_SMode_HLW_Grill_sort);
+
+                var rand = Random.Range(0, 4);
+                MySonatFramework.audioService.PlaySound((AudioId)((int)AudioId.Items_Pick_01_Grill3 + rand));
                 if (switchSuccess == false)
                 {
                     item.transform.DOKill();

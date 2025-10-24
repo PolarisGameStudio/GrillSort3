@@ -54,6 +54,7 @@ public class PopupSoClose : PopupContinueBase
             };
             inventoryService.Instance.ReduceResource(playOnPrice.resource, playOnPrice.quantity,
                 log);
+            MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Btn_Lose_coin_use_Grill3);
             PlayOn("play_on_add_trays");
         }
         else

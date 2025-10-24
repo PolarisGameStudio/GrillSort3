@@ -23,6 +23,8 @@ namespace Sonat.Enums
         Lose_HLW_Music_Grill_sort = 20,
         Lose_OutOfMove_popup_Grill3,
         Lose_Giveup_Grill3,
+        Btn_Lose_coin_use_Grill3,
+
 
 
 
@@ -31,7 +33,6 @@ namespace Sonat.Enums
         Box_Appear_Grill3,
         Box_Close_Grill3,
         Slot_Warning_Grill3,
-
 
         Items_Merge_combo_1 = 40,
         Items_Merge_combo_2,
@@ -61,6 +62,17 @@ namespace Sonat.Enums
 
         Obstacle_Locknkey_Turning_Grill_sort = 70,
         Obstacle_Locknkey_Open_Grill_sort,
+
+
+        Items_Pick_01_Grill3 = 100,
+        Items_Pick_02_Grill3,
+        Items_Pick_03_Grill3,
+        Items_Pick_04_Grill3,
+
+        Sizzle_01_Grill3 = 120,
+        Sizzle_02_Grill3,
+        Sizzle_03_Grill3,
+        Sizzle_04_Grill3,
 
         Booster_Spatula_Appear_Grill3 = 200,
         Booster_AddTray_Grill3 = 201,
