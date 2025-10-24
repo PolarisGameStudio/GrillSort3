@@ -18,11 +18,24 @@ namespace MyGame.SkewerJam.Gameplay
 
         public event Action<int> OnUpdateItems;
 
-        public void OnStartCollectItem(OrderEntity orderEntity)
+        public void Init()
         {
-            currentItems -= orderEntity.MaxItems;
-            Debug.Log($"OnStartCollectItem: {currentItems}");
-            OnUpdateItems?.Invoke(currentItems);
+            var levelGenerator = GameController.Instance.LevelGenerator;
+            levelGenerator.OnLoadLevelData += OnLoadLevelData;
+            // GameController.Instance.GameLogicHandler.OnStartCollectItem += OnStartCollectItem;
+            GameController.Instance.GameLogicHandler.OnItemEndSwitch += OnItemEndSwitch;
+            GameController.Instance.GameLogicHandler.WaitingGrillManager.OnClearItem += OnClearItem;
+        }
+
+        public void Clear()
+        {
+            var levelGenerator = GameController.Instance.LevelGenerator;
+            levelGenerator.OnLoadLevelData -= OnLoadLevelData;
+            // GameController.Instance.GameLogicHandler.OnStartCollectItem -= OnStartCollectItem;
+            GameController.Instance.GameLogicHandler.OnItemEndSwitch -= OnItemEndSwitch;
+            GameController.Instance.GameLogicHandler.WaitingGrillManager.OnClearItem -= OnClearItem;
+            totalItems = 0;
+            currentItems = 0;
         }
 
         public void OnItemEndSwitch(Item item, SlotBase slot)
@@ -38,13 +51,11 @@ namespace MyGame.SkewerJam.Gameplay
             }
 
         }
-
-        public void Init()
+        private void OnClearItem(WaitingGrill waitingGrill)
         {
-            var levelGenerator = GameController.Instance.LevelGenerator;
-            levelGenerator.OnLoadLevelData += OnLoadLevelData;
-            // GameController.Instance.GameLogicHandler.OnStartCollectItem += OnStartCollectItem;
-            GameController.Instance.GameLogicHandler.OnItemEndSwitch += OnItemEndSwitch;
+            currentItems -= 1;
+            Debug.Log($"OnClearItem: {currentItems}");
+            OnUpdateItems?.Invoke(currentItems);
         }
 
         private void OnLoadLevelData(LevelData_SkewerJam levelData)
@@ -74,17 +85,6 @@ namespace MyGame.SkewerJam.Gameplay
             currentItems = totalItems;
             Debug.Log($"Init: {currentItems}");
             OnUpdateItems?.Invoke(currentItems);
-        }
-
-
-        public void Clear()
-        {
-            var levelGenerator = GameController.Instance.LevelGenerator;
-            levelGenerator.OnLoadLevelData -= OnLoadLevelData;
-            // GameController.Instance.GameLogicHandler.OnStartCollectItem -= OnStartCollectItem;
-            GameController.Instance.GameLogicHandler.OnItemEndSwitch -= OnItemEndSwitch;
-            totalItems = 0;
-            currentItems = 0;
         }
     }
 }

@@ -337,8 +337,8 @@ namespace Gameplay.Entities
                 float time = Random.Range(3f, 8f);
                 yield return new WaitForSeconds(time);
                 int rand = Random.Range(0, 3);
-                // if (rand == 0)
-                //     SonatSystem.GetService<PoolingService>().Create<EffectPoolBase>("FoodSmoke", transform.position, transform);
+                if (rand == 0)
+                    SonatSystem.GetService<PoolingServiceAsync>().CreateAsync<EffectPoolBase>("FoodSmoke", transform.position, transform);
             }
         }
 
@@ -491,8 +491,9 @@ namespace Gameplay.Entities
             this.isProcessing = isProcessing;
         }
 
-        public virtual void MoveToOrder(){
-            
+        public virtual void MoveToOrder()
+        {
+
         }
     }
 }

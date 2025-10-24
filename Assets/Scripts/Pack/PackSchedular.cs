@@ -171,7 +171,7 @@ namespace MyGame.SkewerJam.Pack
 
         private IEnumerator DisplayPack(int remainingTime)
         {
-            yield return new WaitForSeconds(remainingTime);
+            yield return new WaitForSeconds(remainingTime + 1);
 
             _expiredTime.Value = 0;
             HidePack();

@@ -25,7 +25,7 @@ namespace MyGame.SkewerJam.Objects
         private List<WaitingGrill> listWaitingGrills = new List<WaitingGrill>();
 
         public List<WaitingGrill> ListWaitingGrills => listWaitingGrills;
-
+        public event Action<WaitingGrill> OnClearItem;
         void Start()
         {
             foreach (Transform child in transform)
@@ -181,6 +181,7 @@ namespace MyGame.SkewerJam.Objects
             {
                 var waitingGrill = listWaitingGrills[count - 1];
                 waitingGrill.ClearItem();
+                OnClearItem?.Invoke(waitingGrill);
                 return true;
             }
             return false;

@@ -7,6 +7,7 @@ using UnityEngine;
 public class EffectPoolBase : MonoBehaviour, IPoolingObject
 {
     public float timeLive = 0;
+    [SerializeField] private bool returnPool = false;
 
     public virtual void Setup()
     {
@@ -25,7 +26,14 @@ public class EffectPoolBase : MonoBehaviour, IPoolingObject
 
     public void Destroy()
     {
-        gameObject.SetActive(false);
+        if (returnPool)
+        {
+            SonatSystem.GetService<PoolingServiceAsync>().ReturnObj(this);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
         // SonatSystem.GetService<PoolingServiceAsync>().ReturnObj(this);
     }
 }

@@ -169,8 +169,10 @@ public class PopupReward : Panel
                 rewardItem.GetComponent<CanvasGroup>().alpha = 0;
             }
 
+            var quantity = resource.resource == GameResource.Lives ? 1 : resource.quantity;
+
             SonatCollectEffect collectEffect;
-            if (resource.quantity > 10)
+            if (quantity > 10)
             {
                 collectEffect = new CollectEffectMultiple()
                 {
@@ -184,11 +186,12 @@ public class PopupReward : Panel
                     radius = 0.2f
                 };
             }
+
             EventBus<AddItemEvent>.Raise(new AddItemEvent()
             {
                 position = rewardItem != null ? rewardItem.transform.position : Vector3.zero,
                 resource = resource.resource,
-                quantity = resource.quantity,
+                quantity = quantity,
                 collectEffect = collectEffect
             });
 

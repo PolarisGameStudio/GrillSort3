@@ -90,6 +90,9 @@ namespace MyGame.SkewerJam.Objects.Entities
         {
             imageLid.gameObject.SetActive(true);
             imageLid.transform.localPosition = Vector3.up * orderEntityConfigSO.up;
+            imageLid.transform.localScale = Vector3.one;
+            imageLid.SetAlpha(1);
+
             await imageLid.transform.DOLocalMove(Vector3.zero, orderEntityConfigSO.durationUp).SetEase(orderEntityConfigSO.downCurve);
             completeEffect.Play();
             MySonatFramework.audioService.PlaySound(AudioId.Box_Close_Grill3);
