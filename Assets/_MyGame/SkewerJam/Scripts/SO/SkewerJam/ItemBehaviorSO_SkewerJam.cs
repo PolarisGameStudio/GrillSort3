@@ -103,20 +103,17 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
             item.Visual.OnDeselected();
             item.Visual.SetSortingOrder(1, LayerManager.TopUI);
 
-            var discY = Mathf.Abs(item.transform.localPosition.y);
             var seq = DOTween.Sequence();
-            if (itemAnimConfig.useSpeed)
+
+            var distance = item.transform.position - slot.transform.position;
+            var duration = itemAnimConfig.GetMoveDuration(distance.magnitude);
+            seq.Join(item.transform.DOLocalMoveX(0, duration).SetEase(itemAnimConfig.GetMoveCurveX(distance.x)));
+            seq.Join(item.transform.DOLocalMoveY(0, duration).SetEase(itemAnimConfig.GetMoveCurveY(distance.y)));
+
+            seq.Join(item.transform.DOScale(itemAnimConfig.scaleDown, duration)).OnComplete(() =>
             {
-                seq.Join(item.transform.DOLocalMoveX(0, itemAnimConfig.speed).SetSpeedBased(itemAnimConfig.useSpeed).SetEase(itemAnimConfig.curveX));
-                seq.Join(item.transform.DOLocalMoveY(0, itemAnimConfig.speed).SetSpeedBased(itemAnimConfig.useSpeed).SetEase(itemAnimConfig.curveY));
-                //Ease.OutBack, itemAnimConfig.defaultOutBackOvershoot + (itemAnimConfig.defaultOutBackLimit / discY))
-            }
-            else
-            {
-                seq.Join(item.transform.DOLocalMoveX(0, itemAnimConfig.durationMove).SetEase(itemAnimConfig.curveX));
-                seq.Join(item.transform.DOLocalMoveY(0, itemAnimConfig.durationMove).SetEase(itemAnimConfig.curveY));
-            }
-            seq.Join(item.transform.DOScale(itemAnimConfig.scaleDown, itemAnimConfig.durationMove));
+                GameController.Instance.GameLogicHandler.ItemMoveToSlot(item, slot);
+            });
             seq.Append(item.transform.DOScale(Vector3.one, itemAnimConfig.scaleDuration));
 
             var currentItem = item;

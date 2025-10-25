@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Scripts.SO.Configs
@@ -7,12 +8,26 @@ namespace MyGame.SkewerJam.Scripts.SO.Configs
     {
         public Vector3 scaleDown = new Vector3(0.8f, 1.1f, 1f);
         public float scaleDuration = 0.05f;
-        public bool useSpeed = false;
-        public float durationMove = 0.4f;
-        public float speed = 1f;
-        public AnimationCurve curveX = AnimationCurve.Linear(0, 0, 1, 1);
-        public AnimationCurve curveY = AnimationCurve.Linear(0, 0, 1, 1);
-        public float defaultOutBackLimit = 1.5f;
-        public float defaultOutBackOvershoot = 2f;
+        public float speed = 0.8f;
+        public float minDuration = 0.5f;
+        public float thresholdX = 0.1f;
+        public float thresholdY = 0.1f;
+        public AnimationCurve[] curveX;
+        public AnimationCurve[] curveY;
+
+        public float GetMoveDuration(float distance)
+        {
+            return Mathf.Max(distance / speed, minDuration);
+        }
+
+        public AnimationCurve GetMoveCurveX(float distanceX)
+        {
+            return curveX[Mathf.Abs(distanceX) > thresholdX ? 1 : 0];
+        }
+
+        public AnimationCurve GetMoveCurveY(float distanceY)
+        {
+            return curveY[Mathf.Abs(distanceY) > thresholdY ? 1 : 0];
+        }
     }
 }
