@@ -45,6 +45,7 @@ namespace MyGame.SkewerJam.Gameplay
         public GameState GameState => gameState;
         public ComboManager ComboManager => comboManager;
         public GameResult GameResult => gameResult;
+        public GameplayScreen GameplayScreen => gameplayScreen;
 
 
         // private int level;

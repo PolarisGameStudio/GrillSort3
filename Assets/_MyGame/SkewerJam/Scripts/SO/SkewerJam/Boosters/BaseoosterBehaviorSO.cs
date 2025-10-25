@@ -29,5 +29,8 @@ namespace MyGame.SO.Boosters
             boosterAnim.SetData(position);
             await UniTask.Delay(2000);
         }
+
+        public abstract bool CheckSuggest();
+
     }
 }

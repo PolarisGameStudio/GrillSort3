@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
@@ -12,6 +13,9 @@ namespace MyGame.SkewerJam.Gameplay.Booster
 {
     public class UIBooster : UIBoosterBase
     {
+        [Header("UIBooster")]
+        [SerializeField] private GameObject suggestObj;
+
         public override void ClickBooster()
         {
             if (GameController.Instance.CheckBlockUI()) return;
@@ -75,6 +79,11 @@ namespace MyGame.SkewerJam.Gameplay.Booster
             {
                 OnUseBoosterSuccess();
             }
+        }
+
+        public void SetSuggest(bool suggest)
+        {
+            suggestObj.SetActive(suggest);
         }
     }
 }

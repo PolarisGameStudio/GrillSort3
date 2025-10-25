@@ -1,6 +1,7 @@
-using System;
 using System.Collections;
-using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using DG.Tweening.Plugins.Options;
 using Gameplay.Entities;
 using Manager;
 using Sonat.Enums;
@@ -10,67 +11,114 @@ namespace MyGame.SkewerJam.Gameplay
 {
     public class SuggestManager : MonoBehaviour
     {
-        [SerializeField] private float waitSuggestTime = 10f;
+        [SerializeField] private float waitSuggestTime = 15f;
 
-        private Item suggestItem;
+        private List<Item> suggestItems = new List<Item>();
 
         public void Init()
         {
-            // StartCoroutine(StartWaitSuggests());
+            StartCoroutine(StartWaitSuggests());
 
-            // var gameLogicHandler = GameController.Instance.GameLogicHandler;
-            // gameLogicHandler.OnItemMoveSlot += OnItemMoveSlot;
+            var gameLogicHandler = GameController.Instance.GameLogicHandler;
+            gameLogicHandler.OnItemEndSwitch += OnItemEndSwitch;
         }
-
-        // private void OnItemMoveSlot(Item item, SlotBase slot)
-        // {
-        //     ClearSuggestItem();
-        // }
-
-        // public IEnumerator StartWaitSuggests()
-        // {
-        //     yield return new WaitForSeconds(waitSuggestTime);
-        //     yield return new WaitUntil(() => GameController.Instance.GameState == GameState.Playing && suggestItem == null);
-        //     var item = GetSuggestItem();
-        //     if (item != null)
-        //     {
-        //         suggestItem = item;
-        //         item.SetSuggest(true);
-        //     }
-        // }
-
-        // public Item GetSuggestItem()
-        // {
-        //     var gameLogicHandler = GameController.Instance.GameLogicHandler;
-
-        //     var orderItemsDict = gameLogicHandler.OrderManager.GetOrderItemsDict();
-        //     var listItemsInGrillManager = gameLogicHandler.GrillManager.GetItemsWithLayer(1);
-
-        //     foreach (var (itemId, (maxItems, num)) in orderItemsDict)
-        //     {
-        //         var item = listItemsInGrillManager.Find(e => (ItemId)e.id == itemId);
-        //         if (item != null)
-        //         {
-        //             return item;
-        //         }
-        //     }
-        //     return null;
-        // }
-
-        // public void ClearSuggestItem()
-        // {
-        //     Clear();
-        //     StartCoroutine(StartWaitSuggests());
-        // }
 
         public void Clear()
         {
-            // StopAllCoroutines();
-            // if (suggestItem != null)
+            ClearSuggestItems();
+            ClearSuggestBoosters();
+        }
+
+        #region Suggest items
+        private void OnItemEndSwitch(Item item, SlotBase slot)
+        {
+            Clear();
+            CheckSuggestBoosters();
+        }
+
+        public IEnumerator StartWaitSuggests()
+        {
+            yield return new WaitForSeconds(waitSuggestTime);
+            yield return new WaitUntil(() => GameController.Instance.GameState == GameState.Playing && suggestItems.Count == 0);
+            var items = GetSuggestItems();
+            if (items.Count > 0)
+            {
+                foreach (var item in items)
+                {
+                    item.SetSuggest(true);
+                    suggestItems.Add(item);
+                }
+            }
+        }
+
+        public List<Item> GetSuggestItems()
+        {
+            var gameLogicHandler = GameController.Instance.GameLogicHandler;
+
+            var orderItemsDict = gameLogicHandler.OrderManager.GetOrderItemsDict();
+            var listItemsInGrillManager = gameLogicHandler.GrillManager.GetItemsWithLayer(1);
+
+            var listItemsBackup = new List<Item>();
+            foreach (var (itemId, (maxItems, num)) in orderItemsDict)
+            {
+                var items = listItemsInGrillManager.FindAll(e => (ItemId)e.id == itemId);
+                if (items.Count >= (maxItems - num))
+                {
+                    return items.Take(maxItems - num).ToList();
+                }
+                if (listItemsBackup.Count == 0 && items.Count > 0)
+                {
+                    listItemsBackup = items;
+                }
+            }
+            return listItemsBackup;
+        }
+
+        private void ClearSuggestItems()
+        {
+            StopAllCoroutines();
+            if (suggestItems.Count > 0)
+            {
+                foreach (var item in suggestItems)
+                {
+                    item.SetSuggest(false);
+                }
+                suggestItems.Clear();
+            }
+        }
+        #endregion
+
+        #region Suggest boosters
+        private void CheckSuggestBoosters()
+        {
+            var gameLogicHandler = GameController.Instance.GameLogicHandler;
+            var boosterManager = gameLogicHandler.BoosterManager;
+            var boosterType = boosterManager.CheckSuggestBoosters();
+            ClearSuggestBoosters();
+            if (boosterType != GameResource.None)
+            {
+                var gameplayScreen = GameController.Instance.GameplayScreen;
+                var uiBooster = gameplayScreen.GetUIBooster(boosterType);
+                uiBooster.SetSuggest(true);
+            }
+            // var boosters = gameLogicHandler.BoosterManager.GetBoosters();
+            // if (boosters.Count > 0)
             // {
-            //     suggestItem.SetSuggest(false);
-            //     suggestItem = null;
+            //     foreach (var booster in boosters)
+            //     {
+            //         booster.SetSuggest(true);
+            //     }
             // }
         }
+
+        private void ClearSuggestBoosters()
+        {
+            var gameplayScreen = GameController.Instance.GameplayScreen;
+            foreach (var uiBooster in gameplayScreen.UiBoosters)
+            {
+                uiBooster.SetSuggest(false);
+            }
+        }
+        #endregion
     }
 }

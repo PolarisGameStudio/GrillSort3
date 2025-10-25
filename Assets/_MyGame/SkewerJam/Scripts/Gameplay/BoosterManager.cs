@@ -58,5 +58,17 @@ namespace MyGame.SkewerJam.Gameplay
             var boosterBehavior = GetBoosterBehavior(boosterType);
             return boosterBehavior.CanUseBooster();
         }
+
+        public GameResource CheckSuggestBoosters()
+        {
+            foreach (var boosterBehavior in boosterBehaviors)
+            {
+                if (boosterBehavior.CheckSuggest())
+                {
+                    return boosterBehavior.boosterType;
+                }
+            }
+            return GameResource.None;
+        }
     }
 }

@@ -21,6 +21,7 @@ namespace MyGame.SkewerJamSO.Boosters
         [SerializeField] private AnimationCurve scaleEase = AnimationCurve.EaseInOut(0, 0, 1, 1);
         [SerializeField] private float delay = 0.5f;
 
+#region Behavior
         public override (bool canUse, string reason) CanUseBooster()
         {
             var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
@@ -65,9 +66,11 @@ namespace MyGame.SkewerJamSO.Boosters
             return false;
         }
 
-        public async UniTask PlayBoosterAnim(Vector3 position)
-        {
+        #endregion
 
+        public override bool CheckSuggest()
+        {
+            return false;
         }
     }
 }

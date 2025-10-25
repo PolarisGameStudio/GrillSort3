@@ -27,6 +27,7 @@ namespace MyGame.SkewerJamSO.Boosters
         private bool finished = false;
         private bool sucess = false;
 
+        #region Behavior
         public override async UniTask<bool> UseBooster(Vector3 position, bool isForce = false)
         {
             finished = false;
@@ -189,6 +190,12 @@ namespace MyGame.SkewerJamSO.Boosters
             // boosterAnim.SetBooster(boosterType);
             // boosterAnim.SetData(position);
             await UniTask.Delay((int)(delay * 1000));
+        }
+        #endregion
+
+        public override bool CheckSuggest()
+        {
+            return false;
         }
     }
 }

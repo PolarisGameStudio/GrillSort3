@@ -20,6 +20,7 @@ namespace MyGame.SkewerJamSO.Boosters
         [SerializeField] private float delay = 2f;
         public override GameResource boosterType => GameResource.BoosterAddPlate;
 
+        #region Behavior
         public override (bool canUse, string reason) CanUseBooster()
         {
             var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
@@ -57,6 +58,13 @@ namespace MyGame.SkewerJamSO.Boosters
             boosterAnim.SetTargetPosition(targetPosition);
             boosterAnim.SetData(position);
 
+        }
+
+        #endregion
+
+        public override bool CheckSuggest()
+        {
+            return true;
         }
     }
 }

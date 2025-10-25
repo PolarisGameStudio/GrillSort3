@@ -21,6 +21,7 @@ namespace MyGame.SkewerJamSO.Boosters
 
         [SerializeField] private float delay = 2f;
 
+#region Behavior
         public override async UniTask<bool> UseBooster(Vector3 position, bool isForce = false)
         {
             if (isForce == false)
@@ -209,6 +210,12 @@ namespace MyGame.SkewerJamSO.Boosters
             // boosterAnim.SetBooster(boosterType);
             // boosterAnim.SetData(position);
             await UniTask.Delay((int)(delay * 1000));
+        }
+        #endregion
+
+        public override bool CheckSuggest()
+        {
+            return false;
         }
     }
 }
