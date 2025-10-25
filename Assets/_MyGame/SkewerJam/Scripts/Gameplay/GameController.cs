@@ -243,7 +243,7 @@ namespace MyGame.SkewerJam.Gameplay
             ChangeGameState(GameState.GameOver);
 
 
-            await UniTask.Delay(1000);
+            await UniTask.Delay(500);
             // var showPopupContinue = GameLogicHandler.WaitingGrillManager.ListWaitingGrills.Where(e => e.IsActive == false).Count() > 0;
             if (CanRevive())
             {

@@ -5,6 +5,7 @@ using Manager;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using Sonat.Enums;
 using SonatFramework.Scripts.Feature.Shop.UI;
+using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems;
 using SonatFramework.Systems.InventoryManagement;
@@ -111,9 +112,16 @@ public class PopupUnlockInGame : Panel
 
         if (txtPrice) txtPrice.text = price.quantity.ToString();
 
-        // var level = MySonatFramework.userDataService.GetLevel();
-        // if (rwdButton) rwdButton.SetActive(level >= GameRemoteConfigValue.showRewardAdsLevel);
-        rwdButton.SetActive(false);
+        if (selectedObjectType == SelectedObjectType.Tray)
+        {
+            var level = MySonatFramework.userDataService.GetLevel();
+            if (rwdButton) rwdButton.SetActive(level >= GameRemoteConfigValue.showRewardAdsLevelAddOrder);
+        }
+        else
+        {
+            if (rwdButton) rwdButton.SetActive(false);
+
+        }
     }
 
     private void HideAllLayouts()
@@ -151,8 +159,8 @@ public class PopupUnlockInGame : Panel
     {
         var itemType = selectedObjectType == SelectedObjectType.Tray ? "rwd_add_order" : selectedObjectType == SelectedObjectType.Plate ? "rwd_add_slot" : "rwd_remove_octochef";
         var itemId = selectedObjectType == SelectedObjectType.Tray ? "HLW_Add_Order" : selectedObjectType == SelectedObjectType.Plate ? "HLW_Add_Slot" : "HLW_Remove_OctoChef";
-        // SonatSDKAdapter.ShowRewardAds(OnWatchedAds, itemType, itemId);
-        OnWatchedAds();
+        SonatSDKAdapter.ShowRewardAds(OnWatchedAds, itemType, itemId);
+        // OnWatchedAds();
     }
 
     private void OnWatchedAds()

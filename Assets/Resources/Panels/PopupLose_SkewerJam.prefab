@@ -1008,7 +1008,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7447717253273912842
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2074,6 +2074,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   closeTween: []
+  blockGeneralCurrency: 0
 --- !u!1 &8618834239215227615
 GameObject:
   m_ObjectHideFlags: 0

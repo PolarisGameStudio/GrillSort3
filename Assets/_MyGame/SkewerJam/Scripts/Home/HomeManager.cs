@@ -58,7 +58,7 @@ public class HomeManager : SingletonSimple<HomeManager>
         {
             checkRewardFreeLives.Value = 0;
             var rewardData = new RewardData();
-            rewardData.AddReward(new ResourceData(GameResource.Lives, 900));
+            rewardData.AddReward(new ResourceData(GameResource.Lives, 1800));
             MySonatFramework.GetService<InventoryService>().AddReward(rewardData, new EarnResourceLogData
             {
                 spendType = "reward_free_lives",

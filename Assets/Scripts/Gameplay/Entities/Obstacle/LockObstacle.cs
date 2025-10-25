@@ -155,7 +155,7 @@ namespace Gameplay.Entities.Obstacle
             if (isClicked || blockClick) return;
             // if (GameRemoteConfigValue.popupUnlockTray)
             // {
-            var rewardData = new ResourceData(GameResource.Coin, 500);
+            var rewardData = GameController.Instance.GameConfig.unlockLockObstaclePrice;
             PanelManager.Instance.OpenPanel<PopupUnlockLockedGrill>(
                 new UIData().Add("OnSuccess", (Action)ForceUnlock).Add("Price", rewardData)
                 );

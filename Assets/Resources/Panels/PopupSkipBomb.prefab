@@ -195,7 +195,7 @@ PrefabInstance:
     - target: {fileID: 6659841476006072537, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 6a5c9a9bff7d6ec408d90ef35f4aa345, type: 2}
+      objectReference: {fileID: 3583879164573703614, guid: 1ad186f6383d0f6449e226da1f38334b, type: 2}
     - target: {fileID: 6693080085290027414, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -432,6 +432,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   closeTween: []
+  blockGeneralCurrency: 0
   txtBomb: {fileID: 302796154756219583}
   txtPrice: {fileID: 7436148632257814533}
   buyWithAdsBtn: {fileID: 3446566369764164740}

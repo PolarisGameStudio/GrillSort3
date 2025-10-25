@@ -12,6 +12,7 @@ namespace Gameplay.Entities.GrillScripts
     {
         [SerializeField] protected SpriteRenderer stove;
         [SerializeField] protected SpriteRenderer lid;
+        [SerializeField] protected SpriteRenderer lidSoldOut;
         [SerializeField] protected SortingGroup sortingGroup;
         [SerializeField] protected string lidType;
         [SerializeField] protected string stoveType;
@@ -29,10 +30,11 @@ namespace Gameplay.Entities.GrillScripts
             SetVisual();
             lid.gameObject.SetActive(true);
             lid.transform.localPosition = new Vector3(0, defaultLidPos, 0);
-            lid.transform.localScale = Vector3.one;
+            // lid.transform.localScale = Vector3.one;
             lid.SetAlpha(1);
 
             UnHighlightGrill();
+            lidSoldOut.gameObject.SetActive(false);
         }
 
 
@@ -49,10 +51,10 @@ namespace Gameplay.Entities.GrillScripts
 
             if (doEffect)
             {
-                lid.transform.localScale = Vector3.one;
+                // lid.transform.localScale = Vector3.one;
                 lid.gameObject.SetActive(true);
                 lid.transform.DOLocalMoveY(2.5f, GameDefine.grillLidAnim).From(defaultLidPos).SetEase(Ease.OutQuad);
-                lid.transform.DOScale(0.95f, GameDefine.grillLidAnim);
+                // lid.transform.DOScale(0.95f, GameDefine.grillLidAnim);
                 lid.DOFade(0, GameDefine.grillLidAnim).SetEase(Ease.InQuad).OnComplete(() => { lid.gameObject.SetActive(false); });
             }
             else
@@ -61,24 +63,29 @@ namespace Gameplay.Entities.GrillScripts
             }
         }
 
-        public virtual void CloseGrill(bool doEffect = true)
+        public virtual void CloseGrill(bool doEffect = true, bool isSoldOut = false)
         {
-            lid.transform.DOKill();
-            lid.gameObject.SetActive(true);
+            var selectedLid = isSoldOut ? lidSoldOut : lid;
+            var otherLid = isSoldOut ? lid : lidSoldOut;
+            otherLid.transform.DOKill();
+            otherLid.gameObject.SetActive(false);
+
+            selectedLid.transform.DOKill();
+            selectedLid.gameObject.SetActive(true);
             if (doEffect)
             {
-                lid.transform.localScale = Vector3.one * 0.95f;
-                lid.transform.localPosition = new Vector3(0, 2.5f, 0);
-                lid.SetAlpha(0);
-                lid.transform.DOScale(1, GameDefine.grillLidAnim);
-                lid.transform.DOLocalMoveY(defaultLidPos, GameDefine.grillLidAnim).SetEase(Ease.InQuad);
-                lid.DOFade(1, GameDefine.grillLidAnim).SetEase(Ease.OutQuad);
+                // selectedLid.transform.localScale = Vector3.one * 0.95f;
+                selectedLid.transform.localPosition = new Vector3(0, 2.5f, 0);
+                selectedLid.DOFade(0, 0);
+                // selectedLid.transform.DOScale(1, GameDefine.grillLidAnim);
+                selectedLid.transform.DOLocalMoveY(defaultLidPos, GameDefine.grillLidAnim).SetEase(Ease.InQuad);
+                selectedLid.DOFade(1, GameDefine.grillLidAnim).SetEase(Ease.OutQuad);
             }
             else
             {
-                lid.transform.localScale = Vector3.one;
-                lid.transform.SetLocalPositionY(defaultLidPos);
-                lid.SetAlpha(1);
+                // selectedLid.transform.localScale = Vector3.one;
+                selectedLid.transform.SetLocalPositionY(defaultLidPos);
+                selectedLid.DOFade(1, 0);
             }
         }
 

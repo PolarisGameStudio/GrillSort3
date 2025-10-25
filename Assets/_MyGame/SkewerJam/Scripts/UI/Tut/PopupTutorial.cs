@@ -1,5 +1,6 @@
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Utils;
+using Sonat.AdsModule;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.UIModule.UIElements;
@@ -21,6 +22,7 @@ public abstract class PopupTutorial : Panel
     [SerializeField] private float delayClose = 10;
 
     protected bool canClickClose = false;
+    protected bool clicked = false;
 
     public override void Open(UIData uiData)
     {
@@ -48,6 +50,7 @@ public abstract class PopupTutorial : Panel
         SonatUtils.DelayCall(delayClose, Close, this);
 
         canClickClose = false;
+        clicked = false;
         SonatUtils.DelayCall(delayClickClose, () =>
         {
             canClickClose = true;
@@ -56,8 +59,9 @@ public abstract class PopupTutorial : Panel
 
     public virtual void OnClickClose()
     {
-        if (canClickClose)
+        if (canClickClose && clicked == false)
         {
+            clicked = true;
             Close();
         }
     }

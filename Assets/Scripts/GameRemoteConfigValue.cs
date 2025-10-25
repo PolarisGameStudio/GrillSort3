@@ -42,12 +42,12 @@ namespace Manager
         public static LevelReplayData levelReplayData;
 
 
-        public static int showRewardAdsLevel;
+        public static int showRewardAdsLevelAddOrder;
         public static bool activeProgressLose;
 
         public static void LoadData()
         {
-            showRewardAdsLevel = SonatSDKAdapter.GetRemoteInt("show_reward_ads_level", 9999);
+            showRewardAdsLevelAddOrder = SonatSDKAdapter.GetRemoteInt("show_reward_ads_level_add_order", 9999);
             levelForceHome = SonatSDKAdapter.GetRemoteInt("level_force_home", 6);
 
             levelShowInterLose = SonatSDKAdapter.GetRemoteInt("level_show_inter_lose", 3);

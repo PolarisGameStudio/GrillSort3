@@ -157,8 +157,9 @@ namespace Gameplay.Entities.ItemScripts
             sortingGroup.sortingOrder = 1;
         }
 
-        public void SetSortingOrder(int sortingOrder)
+        public void SetSortingOrder(int sortingOrder, string sortingLayerName = LayerManager.Object)
         {
+            sortingGroup.sortingLayerName = sortingLayerName;
             sortingGroup.sortingOrder = sortingOrder;
         }
     }

@@ -10,6 +10,7 @@ using Gameplay.LevelData;
 using Cysharp.Threading.Tasks;
 using SonatFramework.Scripts.Utils;
 using MyGame.SkewerJam.Scripts.SO.Configs;
+using MyGame.SkewerJam.Utils;
 
 namespace MyGame.SkewerJam.Scripts.SO.Behavior
 {
@@ -45,7 +46,7 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
 
             selectedItem = item;
             item.DOKill();
-            item.transform.DOScale(itemAnimConfig.scaleDown, itemAnimConfig.scaleDuration);
+            // item.transform.DOScale(itemAnimConfig.scaleDown, itemAnimConfig.scaleDuration);
         }
 
         public override void OnMouseExit(Item item)
@@ -55,7 +56,7 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
                 selectedItem = null;
             }
             item.DOKill();
-            item.transform.DOScale(Vector3.one, itemAnimConfig.scaleDuration);
+            // item.transform.DOScale(Vector3.one, itemAnimConfig.scaleDuration);
         }
 
         public override void OnMouseUp(Item item)
@@ -73,7 +74,7 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
                 if (switchSuccess == false)
                 {
                     item.transform.DOKill();
-                    item.transform.DOScale(Vector3.one, itemAnimConfig.scaleDuration);
+                    // item.transform.DOScale(Vector3.one, itemAnimConfig.scaleDuration);
                 }
             }
             else
@@ -81,7 +82,7 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
                 if (selectedItem != null)
                 {
                     selectedItem.transform.DOKill();
-                    selectedItem.transform.DOScale(Vector3.one, itemAnimConfig.scaleDuration);
+                    // selectedItem.transform.DOScale(Vector3.one, itemAnimConfig.scaleDuration);
                 }
             }
             selectedItem = null;
@@ -100,20 +101,22 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
             item.SetSelected(true);
             slot.AddItem(item);
             item.Visual.OnDeselected();
-            item.Visual.SetSortingOrder(1);
+            item.Visual.SetSortingOrder(1, LayerManager.TopUI);
 
+            var discY = Mathf.Abs(item.transform.localPosition.y);
             var seq = DOTween.Sequence();
             if (itemAnimConfig.useSpeed)
             {
                 seq.Join(item.transform.DOLocalMoveX(0, itemAnimConfig.speed).SetSpeedBased(itemAnimConfig.useSpeed).SetEase(itemAnimConfig.curveX));
                 seq.Join(item.transform.DOLocalMoveY(0, itemAnimConfig.speed).SetSpeedBased(itemAnimConfig.useSpeed).SetEase(itemAnimConfig.curveY));
+                //Ease.OutBack, itemAnimConfig.defaultOutBackOvershoot + (itemAnimConfig.defaultOutBackLimit / discY))
             }
             else
             {
                 seq.Join(item.transform.DOLocalMoveX(0, itemAnimConfig.durationMove).SetEase(itemAnimConfig.curveX));
                 seq.Join(item.transform.DOLocalMoveY(0, itemAnimConfig.durationMove).SetEase(itemAnimConfig.curveY));
             }
-            seq.Append(item.transform.DOScale(itemAnimConfig.scaleDown, itemAnimConfig.scaleDuration));
+            seq.Join(item.transform.DOScale(itemAnimConfig.scaleDown, itemAnimConfig.durationMove));
             seq.Append(item.transform.DOScale(Vector3.one, itemAnimConfig.scaleDuration));
 
             var currentItem = item;

@@ -100,12 +100,25 @@ namespace Gameplay.Entities.Items
             itemBehaviorSO.eventSystemSO.UnregisterEvents_OnDropItem(OnItemDropped);
             exploded = true;
             ((ItemBombData)data).moveLimit = 0;
+
+            if (popupWarningBomb)
+            {
+                popupWarningBomb.FinishWarning();
+                popupWarningBomb = null;
+            }
         }
 
         public override void OnComplete()
         {
             exploded = true;
             base.OnComplete();
+
+            if (popupWarningBomb)
+            {
+                popupWarningBomb.FinishWarning();
+                popupWarningBomb = null;
+            }
+
         }
 
         private void OnItemDropped(Item item, bool fromWaitingGrill, bool toOrder)

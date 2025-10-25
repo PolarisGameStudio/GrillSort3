@@ -12,5 +12,7 @@ namespace MyGame.SkewerJam.Scripts.SO.Configs
         public float speed = 1f;
         public AnimationCurve curveX = AnimationCurve.Linear(0, 0, 1, 1);
         public AnimationCurve curveY = AnimationCurve.Linear(0, 0, 1, 1);
+        public float defaultOutBackLimit = 1.5f;
+        public float defaultOutBackOvershoot = 2f;
     }
 }

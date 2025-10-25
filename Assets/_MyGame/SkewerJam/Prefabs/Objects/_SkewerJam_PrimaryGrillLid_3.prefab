@@ -221,6 +221,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5900540394955758834, guid: 7c6ec7c1d4c5dd348a1784dc3b327bdc, type: 3}
+      propertyPath: lidSoldOut
+      value: 
+      objectReference: {fileID: 5697907295439534389}
     - target: {fileID: 7592061314963657562, guid: 7c6ec7c1d4c5dd348a1784dc3b327bdc, type: 3}
       propertyPath: m_Name
       value: _SkewerJam_PrimaryGrillLid_3
@@ -317,6 +321,11 @@ Transform:
 --- !u!4 &4265063222251761510 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5461928747496140652, guid: 7c6ec7c1d4c5dd348a1784dc3b327bdc, type: 3}
+  m_PrefabInstance: {fileID: 8141425273190367242}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &5697907295439534389 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4606953005506492735, guid: 7c6ec7c1d4c5dd348a1784dc3b327bdc, type: 3}
   m_PrefabInstance: {fileID: 8141425273190367242}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &6007451684810671181 stripped

@@ -2,6 +2,7 @@ using System;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using Sonat.Enums;
 using SonatFramework.Scripts.Feature.Shop.UI;
+using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems;
 using SonatFramework.Systems.InventoryManagement;
@@ -125,8 +126,8 @@ public class PopupUnlockLockedGrill : Panel
     {
         var itemType = "rwd_add_order";
         var itemId = "HLW_Add_Order";
-        // SonatSDKAdapter.ShowRewardAds(OnWatchedAds, itemType, itemId);
-        OnWatchedAds();
+        SonatSDKAdapter.ShowRewardAds(OnWatchedAds, itemType, itemId);
+        // OnWatchedAds();
     }
 
     private void OnWatchedAds()

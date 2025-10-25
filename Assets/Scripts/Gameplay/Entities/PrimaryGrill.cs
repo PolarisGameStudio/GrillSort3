@@ -111,7 +111,7 @@ namespace Gameplay.Entities
             grillVisual.UpdateSubGrill();
             if (subGrills == null || subGrills.Count == 0)
             {
-                grillVisual.CloseGrill();
+                grillVisual.CloseGrill(true, true);
                 return;
             }
             subGrills[0].MoveUpPrimary();
@@ -366,6 +366,9 @@ namespace Gameplay.Entities
         public virtual bool CanShuffle()
         {
             if (IsLock) return false;
+
+            if (slots.All(slot => slot.GetItem() == null)) return false;
+
             foreach (var slot in slots)
             {
                 var item = slot.GetItem();

@@ -61,6 +61,7 @@ namespace MyGame.SkewerJam.Objects
             if (slot.GetGrill() is WaitingGrill waitingGrill)
             {
                 OnItemEndSwitch(item).Forget();
+                waitingGrill.Visual.PlayShake();
             }
         }
 

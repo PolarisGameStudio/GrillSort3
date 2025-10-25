@@ -20,12 +20,30 @@ MonoBehaviour:
     rate1: 0.19999999
     rate2: 0
   - difficulty: 1
+    itemThreshold: 0.33333334
+    grillThreshold: 0.5
+    rate0: 0.8
+    rate1: 0.19999999
+    rate2: 0
+  - difficulty: 2
     itemThreshold: 0.5
     grillThreshold: 0.5
     rate0: 0.7
     rate1: 0.3
     rate2: 0
-  - difficulty: 2
+  - difficulty: 3
+    itemThreshold: 0.5
+    grillThreshold: 0.5
+    rate0: 0.7
+    rate1: 0.3
+    rate2: 0
+  - difficulty: 4
+    itemThreshold: 0.6666667
+    grillThreshold: 0.5
+    rate0: 0.6
+    rate1: 0.3
+    rate2: 0.099999964
+  - difficulty: 5
     itemThreshold: 0.6666667
     grillThreshold: 0.5
     rate0: 0.6
