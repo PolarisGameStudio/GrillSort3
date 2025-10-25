@@ -41,20 +41,20 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
         public override (ItemId itemId, int num) GetOrder(GameplayInfoForLogicOrder info)
         {
-            var selectedNumStep = GetSelectedNumStep();
-            Debug.Log("<color=white>BasicOrderSO:</color> GetOrder: selectedNumStep: " + selectedNumStep);
-            var (itemId, num, step) = GetItemOrderBasic(selectedNumStep, info);
+            var selectedDeltaSlot = GetSelectedDeltaSlot();
+            Debug.Log("<color=white>BasicOrderSO:</color> GetOrder: selectedDeltaSlot: " + selectedDeltaSlot);
+            var (itemId, num, deltaSlot) = GetItemOrderBasic(selectedDeltaSlot, info);
 
             if (itemId == ItemId.None)
             {
                 Debug.Log("<color=yellow>OrderHelper:</color> GetItemOrderBasic: No item found");
-                (itemId, num, step) = ForceGetItemOrderBasic(info);
+                (itemId, num, deltaSlot) = ForceGetItemOrderBasic(info);
                 return (itemId, num);
             }
             return (itemId, num);
         }
 
-        private int GetSelectedNumStep()
+        private int GetSelectedDeltaSlot()
         {
             var random = UnityEngine.Random.Range(0f, 1f);
             Debug.Log("<color=white>BasicOrderSO:</color> GetSelectedNumStep: " + Mathf.Round(random * 100f) * 0.01f + " >>> " + selectedBO.rateWith0Step + " - " + selectedBO.rateWith1Step + " - " + selectedBO.rateWith2Step + " - " + selectedBO.rateWith3Step);
@@ -76,27 +76,27 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             }
         }
 
-        private (ItemId itemId, int num, int step) GetItemOrderBasic(int selectedStep, GameplayInfoForLogicOrder info)
+        private (ItemId itemId, int num, int deltaSlot) GetItemOrderBasic(int selectedDeltaSlot, GameplayInfoForLogicOrder info)
         {
             // NOTE: Ưu tiên lấy theo numSteps, sau đó mới tính đến numItems
-            var dictNeededSlots = info.DictNeededSlots;
-            if (dictNeededSlots.Count == 0)
+            var dictDeltaSlots = info.DictDeltaSlots;
+            if (dictDeltaSlots.Count == 0)
             {
                 return (ItemId.None, 0, 0);
             }
 
-            var itemIds = dictNeededSlots.Keys;
+            var itemIds = dictDeltaSlots.Keys;
 
-            var maxStep = dictNeededSlots.Values.Max(e => e.Values.Max());
-            for (int step = selectedStep; step <= maxStep; step++)
+            var maxDeltaSlot = dictDeltaSlots.Values.Max(e => e.Values.Max());
+            for (int deltaSlot = selectedDeltaSlot; deltaSlot <= maxDeltaSlot; deltaSlot++)
             {
-                var randomItemIds = itemIds.Where(e => dictNeededSlots[e].ContainsValue(step)).ToList();
+                var randomItemIds = itemIds.Where(e => dictDeltaSlots[e].ContainsValue(deltaSlot)).ToList();
                 var randomItemIdsWithMinNum = new List<ItemId>();
                 foreach (var id in randomItemIds)
                 {
-                    foreach (var numItems in dictNeededSlots[id].Keys)
+                    foreach (var numItems in dictDeltaSlots[id].Keys)
                     {
-                        if (numItems >= minNum && dictNeededSlots[id][numItems] == step)
+                        if (numItems >= minNum && dictDeltaSlots[id][numItems] == deltaSlot)
                         {
                             randomItemIdsWithMinNum.Add(id);
                         }
@@ -104,7 +104,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                 }
                 if (randomItemIdsWithMinNum == null || randomItemIdsWithMinNum.Count == 0) continue;
 
-                var (itemId, num, s) = OrderHelper.GetOptimizedRandomItem(randomItemIdsWithMinNum, step, info, minNum);
+                var (itemId, num, s) = OrderHelper.GetOptimizedRandomItem(randomItemIdsWithMinNum, deltaSlot, info, minNum);
                 Debug.Log("<color=white>OrderHelper:</color> GetItemOrderBasic: " + itemId + " " + num + " step: " + s);
                 return (itemId, num, s);
             }
@@ -112,16 +112,15 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             return (ItemId.None, 0, 0);
         }
 
-        public (ItemId itemId, int num, int step) ForceGetItemOrderBasic(GameplayInfoForLogicOrder gameplayInfo)
+        public (ItemId itemId, int num, int deltaSlot) ForceGetItemOrderBasic(GameplayInfoForLogicOrder gameplayInfo)
         {
-            var dictNeededSlots = gameplayInfo.DictNeededSlots;
-            var minStep = dictNeededSlots.Values.Min(e => e.Values.Min());
+            var dictDeltaSlots = gameplayInfo.DictDeltaSlots;
+            var minDeltaSlot = dictDeltaSlots.Values.Min(e => e.Values.Min());
 
-            var randomItemIds = dictNeededSlots.Keys.Where(e => dictNeededSlots[e].ContainsValue(minStep)).ToList();
-            var (itemId, num, step) = OrderHelper.GetOptimizedRandomItem(randomItemIds, minStep, gameplayInfo);
-            Debug.Log("<color=yellow>OrderHelper:</color> ForceGetItemOrderBasic: " + itemId + " " + num + " minStep: " + step);
-            return (itemId, num, step);
+            var randomItemIds = dictDeltaSlots.Keys.Where(e => dictDeltaSlots[e].ContainsValue(minDeltaSlot)).ToList();
+            var (itemId, num, deltaSlot) = OrderHelper.GetOptimizedRandomItem(randomItemIds, minDeltaSlot, gameplayInfo);
+            Debug.Log("<color=yellow>OrderHelper:</color> ForceGetItemOrderBasic: " + itemId + " " + num + " minDeltaSlot: " + deltaSlot);
+            return (itemId, num, deltaSlot);
         }
-
     }
 }

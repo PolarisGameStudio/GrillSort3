@@ -45,6 +45,7 @@ namespace MyGame.SkewerJam.Gameplay
         public event Action<Item, SlotBase> OnItemStartSwitch;
         public event Action<Item, bool, bool> OnItemStartSwitchAndCheck;
 
+        public event Action<Item, SlotBase> OnItemMoveToSlot;
         public event Action<Item, SlotBase> OnItemEndSwitch;
 
 
@@ -170,7 +171,12 @@ namespace MyGame.SkewerJam.Gameplay
             }
         }
 
-        public void ItemMoveSlot(Item item, SlotBase slot)
+        public void ItemMoveToSlot(Item item, SlotBase slot)
+        {
+            OnItemMoveToSlot?.Invoke(item, slot);
+        }
+
+        public void EndSwitchSlot(Item item, SlotBase slot)
         {
             item.Moving = false;
             OnItemEndSwitch?.Invoke(item, slot);

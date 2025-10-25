@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2538233cb218b764a9c631c3cb9f7c4a, type: 3}
-  m_Name: OrderManagerSO
+  m_Script: {fileID: 11500000, guid: 5c4ce4a96f4626246bf6503c6179717e, type: 3}
+  m_Name: OrderEntityVisualConfigSO
   m_EditorClassIdentifier: 
-  MaxOrder: 4
-  DefaultNumberOfReadyOrder: 2
+  scaleValue: {x: 1.1, y: 0.9}
+  scaleDuration: 0.125

@@ -6,6 +6,9 @@ namespace MyGame.SkewerJam.Gameplay
     [CreateAssetMenu(fileName = "OrderEntityConfigSO", menuName = "MyGame/SkewerJam/OrderConfigs/OrderEntityConfigSO")]
     public class OrderEntityConfigSO : ScriptableObject
     {
+        [Header("Start")]
+        public float durationMoveInStart;
+
         [Header("Appear")]
         public float delayAppearNextOrder;
         public float durationMoveIn;

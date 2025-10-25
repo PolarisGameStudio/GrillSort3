@@ -58,23 +58,17 @@ namespace Gameplay.Entities.ItemScripts
             transform.DOScale(1.1f, 0.15f).SetId("ItemScale");
             SetMaterial(GameResourceReference.Instance.itemMaterials[1]);
             //spriteRenderer.sortingOrder = 100;
-            sortingGroup.sortingOrder = 1;
+            SetSortingOrder(LayerManager.Object, 2);
             // tempVisibleState = isConveyorState;
             // SetVisibleMaskState(true);
         }
 
         public void OnBeginDrag()
         {
-            sortingGroup.sortingOrder = 100;
+            SetSortingOrder(LayerManager.Object, 100);
             tempVisibleState = isConveyorState;
             SetVisibleMaskState(false);
         }
-
-        // public void SetNormalLayer()
-        // {
-        //     sortingGroup.sortingOrder = 1;
-        //     SetVisibleMaskState(tempVisibleState);
-        // }
 
         public void OnDeselected()
         {
@@ -93,7 +87,7 @@ namespace Gameplay.Entities.ItemScripts
 
         public virtual void OnIntoSlot()
         {
-            sortingGroup.sortingOrder = 1;
+            SetSortingOrder(LayerManager.Object, 2);
             SetVisibleMaskState(item.Slot != null && item.Slot.isOnConveyor);
         }
 
@@ -139,25 +133,11 @@ namespace Gameplay.Entities.ItemScripts
             EndSuggest();
             transform.DOKill();
             transform.localScale = Vector3.one;
-            sortingGroup.sortingOrder = 1;
+            SetSortingOrder(LayerManager.Object, 2);
             SetVisibleMaskState(false);
         }
 
-        public void Highlight()
-        {
-            //OnSelected();
-            sortingGroup.sortingLayerName = LayerManager.TopUI;
-            sortingGroup.sortingOrder = 51;
-        }
-
-        public void UnHighlight()
-        {
-            //OnDeselected();
-            sortingGroup.sortingLayerName = LayerManager.Object;
-            sortingGroup.sortingOrder = 1;
-        }
-
-        public void SetSortingOrder(int sortingOrder, string sortingLayerName = LayerManager.Object)
+        public void SetSortingOrder(string sortingLayerName, int sortingOrder)
         {
             sortingGroup.sortingLayerName = sortingLayerName;
             sortingGroup.sortingOrder = sortingOrder;

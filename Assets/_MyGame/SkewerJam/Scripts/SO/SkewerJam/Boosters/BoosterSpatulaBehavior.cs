@@ -12,6 +12,7 @@ using SonatFramework.Systems.ObjectPooling;
 using SonatFramework.Scripts.UIModule;
 using static MyGame.SkewerJam.Objects.Entities.OrderEntity;
 using System;
+using MyGame.SkewerJam.Utils;
 
 namespace MyGame.SkewerJamSO.Boosters
 {
@@ -91,11 +92,11 @@ namespace MyGame.SkewerJamSO.Boosters
                 {
                     if (highlight)
                     {
-                        order.Visual.Highlight();
+                        order.Visual.SetSortingGroup(true, LayerManager.TopUI, 100);
                     }
                     else
                     {
-                        order.Visual.UnHighlight();
+                        order.Visual.SetSortingGroup(false);
                     }
                 }
             }

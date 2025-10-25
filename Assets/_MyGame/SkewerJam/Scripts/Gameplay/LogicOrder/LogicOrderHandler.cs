@@ -89,7 +89,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             {
                 Debug.Log("<color=blue>OrderHelper:</color> Use " + forceLogicOrder.name + " to rescue");
                 var (rescueItemId, rescueNum) = forceLogicOrder.GetOrder(gameplayInfoForLogicOrder);
-                if (rescueItemId == ItemId.None)
+                if (rescueItemId != ItemId.None)
                 {
                     return (rescueItemId, rescueNum, LogicOrderType.Rescue);
                 }

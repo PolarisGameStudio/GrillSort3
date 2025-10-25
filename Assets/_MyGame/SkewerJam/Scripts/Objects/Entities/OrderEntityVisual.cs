@@ -28,6 +28,8 @@ namespace MyGame.SkewerJam.Objects.Entities
         [SerializeField] private ParticleSystem completeEffect;
         private Vector3 _originalPosition;
 
+        [SerializeField] private OrderEntityVisualConfigSO orderEntityVisualConfigSO;
+
         private void Start()
         {
             _originalPosition = bonusLid.transform.localPosition;
@@ -59,7 +61,7 @@ namespace MyGame.SkewerJam.Objects.Entities
 
             //init
             completeEffect.Stop();
-            UnHighlight();
+            SetSortingGroup(false);
         }
 
 
@@ -95,6 +97,9 @@ namespace MyGame.SkewerJam.Objects.Entities
 
             await imageLid.transform.DOLocalMove(Vector3.zero, orderEntityConfigSO.durationUp).SetEase(orderEntityConfigSO.downCurve);
             completeEffect.Play();
+
+            PlayEntityShake().Forget();
+
             MySonatFramework.audioService.PlaySound(AudioId.Box_Close_Grill3);
             onComplete?.Invoke();
 
@@ -116,16 +121,22 @@ namespace MyGame.SkewerJam.Objects.Entities
 
         }
 
-        public void Highlight()
+        public async UniTask PlayEntityShake()
         {
-            sortingGroup.enabled = true;
-            sortingGroup.sortingLayerName = LayerManager.TopUI;
-            sortingGroup.sortingOrder = 100;
+            var orderEntity = transform.parent;
+            await orderEntity.DOScale(orderEntityVisualConfigSO.scaleValue, orderEntityVisualConfigSO.scaleDuration);
+
+            var scaleValue2 = new Vector2(orderEntityVisualConfigSO.scaleValue.y, orderEntityVisualConfigSO.scaleValue.x);
+            await orderEntity.DOScale(scaleValue2, orderEntityVisualConfigSO.scaleDuration * 2);
+
+            await orderEntity.DOScale(Vector3.one, orderEntityVisualConfigSO.scaleDuration);
         }
 
-        public void UnHighlight()
+        public void SetSortingGroup(bool enabled, string sortingLayerName = LayerManager.Object, int sortingOrder = 1)
         {
-            sortingGroup.enabled = false;
+            sortingGroup.enabled = enabled;
+            sortingGroup.sortingLayerName = sortingLayerName;
+            sortingGroup.sortingOrder = sortingOrder;
         }
     }
 }

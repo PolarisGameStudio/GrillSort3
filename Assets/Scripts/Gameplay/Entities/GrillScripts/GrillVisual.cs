@@ -1,6 +1,5 @@
 ﻿using DG.Tweening;
 using Gameplay.LevelData;
-using MyGame.SkewerJam.Scripts.SO.Behavior;
 using MyGame.SkewerJam.Utils;
 using SonatFramework.Scripts.Utils;
 using UnityEngine;

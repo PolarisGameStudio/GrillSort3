@@ -12,6 +12,7 @@ using MyGame.SkewerJam.Level;
 using static MyGame.SkewerJam.Objects.Entities.OrderEntity;
 using SonatFramework.Systems.AudioManagement;
 using Sonat.Enums;
+using MyGame.SkewerJam.Utils;
 
 namespace MyGame.SkewerJam.Objects
 {
@@ -225,7 +226,9 @@ namespace MyGame.SkewerJam.Objects
 
             MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Box_Appear_Grill3);
             nextOrder.Visual.OpenGrill(true, false);
+            nextOrder.Visual.SetSortingGroup(true, LayerManager.Default, -1);
             await nextOrder.transform.DOLocalMove(_listOrderLocalPositions[nextOrder.OrderIndex], orderEntityConfigSO.durationMoveIn).SetEase(Ease.OutSine);
+            nextOrder.Visual.SetSortingGroup(false);
             GameController.Instance.GameLogicHandler.EndMoveNextOrder(nextOrder);
         }
 
@@ -235,7 +238,7 @@ namespace MyGame.SkewerJam.Objects
             {
                 var order = _listOrders[i];
                 MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Box_Appear_Grill3);
-                order.transform.DOLocalMove(_listOrderLocalPositions[order.OrderIndex], 0.3f).SetEase(Ease.OutSine).OnComplete(() =>
+                order.transform.DOLocalMove(_listOrderLocalPositions[order.OrderIndex], orderEntityConfigSO.durationMoveInStart).SetEase(Ease.OutSine).OnComplete(() =>
                 {
                     if (order.IsActive)
                     {

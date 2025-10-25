@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ItemAnimationConfigSO_SkewerJam
   m_EditorClassIdentifier: 
   scaleDown: {x: 1.2, y: 0.8, z: 1}
-  scaleDuration: 0.08
-  speed: 25
-  minDuration: 0.5
+  scaleDuration: 0.1
+  speed: 27.5
+  minDuration: 0.4
   thresholdX: 5
   thresholdY: 6
   curveX:
@@ -110,22 +110,22 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.11708646
     - serializedVersion: 3
-      time: 0.7953878
-      value: 1.0560551
-      inSlope: 0.9591585
-      outSlope: 0.9591585
+      time: 0.75
+      value: 1.05
+      inSlope: 1.0240355
+      outSlope: 1.0240355
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.3206849
+      outWeight: 0.28495574
     - serializedVersion: 3
       time: 1
       value: 1.0024643
-      inSlope: -2.4176881
-      outSlope: -2.4176881
+      inSlope: -2.5023177
+      outSlope: -2.5023177
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.20760202
+      inWeight: 0.21625204
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

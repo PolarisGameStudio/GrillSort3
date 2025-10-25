@@ -5,6 +5,7 @@ using Gameplay.Entities.ItemScripts;
 using Gameplay.LevelData;
 using MyGame.SkewerJam.Gameplay;
 using MyGame.SkewerJam.Scripts.SO;
+using MyGame.SkewerJam.Utils;
 using PrototypeTest;
 using Sonat.Enums;
 using SonatFramework.Scripts.Utils;
@@ -337,8 +338,11 @@ namespace Gameplay.Entities
         {
             while (gameObject.activeInHierarchy)
             {
-                float time = Random.Range(6f, 10f);
+                float time = Random.Range(4f, 8f);
                 yield return new WaitForSeconds(time);
+
+                if (slot.GetGrill() is not PrimaryGrill) break;
+
                 if (GameController.Instance.GameState == GameState.Playing)
                 {
                     int rand = Random.Range(0, 3);
@@ -452,12 +456,12 @@ namespace Gameplay.Entities
 
         public void Highlight()
         {
-            visual.Highlight();
+            visual.SetSortingOrder(LayerManager.TopUI, 51);
         }
 
         public void UnHighlight()
         {
-            visual.UnHighlight();
+            visual.SetSortingOrder(LayerManager.Object, 1);
         }
 
         public virtual ItemData GetCurrentItemData()

@@ -23,14 +23,14 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             return orderItemsDict.ToDictionary(e => e.Key, e => e.Value.maxItems - e.Value.num);
         }
 
-        public static (ItemId itemId, int num, int step) GetOptimizedRandomItem(List<ItemId> randomItemIds, int step, GameplayInfoForLogicOrder info, int minNum = 1)
+        public static (ItemId itemId, int num, int step) GetOptimizedRandomItem(List<ItemId> randomItemIds, int deltaSlot, GameplayInfoForLogicOrder info, int minNum = 1)
         {
-            var dictNeededSlots = info.DictNeededSlots;
+            var dictDeltaSlots = info.DictDeltaSlots;
             var maxNum = 0;
             var itemIdsList = new List<ItemId>();
             foreach (var itemId in randomItemIds)
             {
-                foreach (var num in dictNeededSlots[itemId].Keys.Where(e => dictNeededSlots[itemId][e] == step))
+                foreach (var num in dictDeltaSlots[itemId].Keys.Where(e => dictDeltaSlots[itemId][e] == deltaSlot))
                 {
                     if (num < minNum) continue;
                     if (num > maxNum)
@@ -51,7 +51,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                 return (ItemId.None, 0, 0);
             }
             var randomId = itemIdsList[UnityEngine.Random.Range(0, itemIdsList.Count)];
-            return ((ItemId)randomId, maxNum, step);
+            return ((ItemId)randomId, maxNum, deltaSlot);
         }
 
         public static (ItemId itemId, int num, int step) GetOptimizedRandomSpecialItem(List<ItemId> randomItemIds, GameplayInfoForLogicOrder info)

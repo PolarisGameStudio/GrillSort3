@@ -4,9 +4,6 @@ using UnityEngine;
 using DG.Tweening;
 using Sonat.Enums;
 using Gameplay.Entities.Items;
-using Sirenix.OdinInspector;
-using SonatFramework.Systems.SettingsManagement.Vibation;
-using Gameplay.LevelData;
 using Cysharp.Threading.Tasks;
 using SonatFramework.Scripts.Utils;
 using MyGame.SkewerJam.Scripts.SO.Configs;
@@ -101,7 +98,7 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
             item.SetSelected(true);
             slot.AddItem(item);
             item.Visual.OnDeselected();
-            item.Visual.SetSortingOrder(1, LayerManager.TopUI);
+            item.Visual.SetSortingOrder(LayerManager.TopUI, 1);
 
             var seq = DOTween.Sequence();
 
@@ -110,10 +107,10 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
             seq.Join(item.transform.DOLocalMoveX(0, duration).SetEase(itemAnimConfig.GetMoveCurveX(distance.x)));
             seq.Join(item.transform.DOLocalMoveY(0, duration).SetEase(itemAnimConfig.GetMoveCurveY(distance.y)));
 
-            seq.Join(item.transform.DOScale(itemAnimConfig.scaleDown, duration)).OnComplete(() =>
+            seq.Join(item.transform.DOScale(itemAnimConfig.scaleDown, duration).OnComplete(() =>
             {
                 GameController.Instance.GameLogicHandler.ItemMoveToSlot(item, slot);
-            });
+            }));
             seq.Append(item.transform.DOScale(Vector3.one, itemAnimConfig.scaleDuration));
 
             var currentItem = item;
@@ -121,9 +118,9 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
             {
                 currentItem.SetSelected(false);
                 currentItem.OnDropToSlot(slot);
-                currentItem.Visual.SetSortingOrder(0);
+                currentItem.Visual.SetSortingOrder(LayerManager.Object, 2);
                 // MySonatFramework.GetService<VibrationService>().Vibrate(50);
-                GameController.Instance.GameLogicHandler.ItemMoveSlot(currentItem, slot);
+                GameController.Instance.GameLogicHandler.EndSwitchSlot(currentItem, slot);
 
                 foreach (Transform child in slot.Container)
                 {

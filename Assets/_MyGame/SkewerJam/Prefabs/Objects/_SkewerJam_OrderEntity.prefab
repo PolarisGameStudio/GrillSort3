@@ -739,6 +739,7 @@ MonoBehaviour:
   sortingGroup: {fileID: 6218821164166547221}
   orderEntityConfigSO: {fileID: 11400000, guid: 4bbd72f8c973b4b4b983863c2d5a1ed3, type: 2}
   completeEffect: {fileID: 6812902907169691508}
+  orderEntityVisualConfigSO: {fileID: 11400000, guid: e06a0157acfc336488b067caa756364a, type: 2}
 --- !u!1 &7289701570189489940
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,8 +935,8 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7592061314963657562}
   m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2106788883
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_SortAtRoot: 0
 --- !u!1 &9077373731549059655
