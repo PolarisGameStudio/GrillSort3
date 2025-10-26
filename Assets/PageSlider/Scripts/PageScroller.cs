@@ -216,7 +216,7 @@ namespace TS.PageSlider
         /// is required based on drag distance and direction, and triggers the animation if necessary.
         /// </summary>
         /// <param name="page">The index of the target page to scroll to.</param>
-        private void ScrollToPage(int page)
+        public void ScrollToPage(int page)
         {
             // Calculate the target normalized position for the scroll rect based on the target page index.
             _targetNormalizedPosition = GetTargetPagePosition(page);

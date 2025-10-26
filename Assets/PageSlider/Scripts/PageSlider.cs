@@ -102,6 +102,11 @@ namespace TS.PageSlider
             _scroller.SetPage(_startPageIndex);
         }
 
+        public void ScrollToPage(int index)
+        {
+            _scroller.ScrollToPage(index);
+        }
+
 
         /// <summary>
         /// Adds a new page to the PageSlider. 
