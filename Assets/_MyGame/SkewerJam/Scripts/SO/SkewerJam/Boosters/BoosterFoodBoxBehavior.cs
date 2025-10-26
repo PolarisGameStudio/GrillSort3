@@ -21,7 +21,7 @@ namespace MyGame.SkewerJamSO.Boosters
         [SerializeField] private AnimationCurve scaleEase = AnimationCurve.EaseInOut(0, 0, 1, 1);
         [SerializeField] private float delay = 0.5f;
 
-#region Behavior
+        #region Behavior
         public override (bool canUse, string reason) CanUseBooster()
         {
             var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
@@ -70,7 +70,7 @@ namespace MyGame.SkewerJamSO.Boosters
 
         public override bool CheckSuggest()
         {
-            return false;
+            return true;
         }
     }
 }

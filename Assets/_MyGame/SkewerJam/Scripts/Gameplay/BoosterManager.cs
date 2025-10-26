@@ -1,9 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SO.Boosters;
 using Sonat.Enums;
+using SonatFramework.Systems.BoosterManagement;
+using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.ObjectPooling;
 using UnityEngine;
 
@@ -13,6 +16,8 @@ namespace MyGame.SkewerJam.Gameplay
     {
         private const string LOG_TAG = "<color=yellow>BoosterLogicHandler: </color>";
         [SerializeField] private BaseBoosterBehaviorSO[] boosterBehaviors;
+
+        public event Action<GameResource> OnUseBooster;
 
         public BaseBoosterBehaviorSO GetBoosterBehavior(GameResource boosterType)
         {
@@ -29,6 +34,7 @@ namespace MyGame.SkewerJam.Gameplay
             }
 
             WaitingGrillHelper.ResetWarning();
+            OnUseBooster?.Invoke(boosterType);
             var success = await boosterBehavior.UseBooster(position);
 
             GameController.Instance.ChangeGameState(GameState.Playing);
@@ -59,16 +65,29 @@ namespace MyGame.SkewerJam.Gameplay
             return boosterBehavior.CanUseBooster();
         }
 
-        public GameResource CheckSuggestBoosters()
+        public List<GameResource> GetSuggestBoosters()
         {
+            var suggestBoosterTypes = new List<GameResource>();
             foreach (var boosterBehavior in boosterBehaviors)
             {
-                if (boosterBehavior.CheckSuggest())
+                var checkUnlock = MySonatFramework.GetService<BoosterService>().IsBoosterUnlock(boosterBehavior.boosterType);
+                if (checkUnlock && boosterBehavior.CanUseBooster().canUse && boosterBehavior.CheckSuggest())
                 {
-                    return boosterBehavior.boosterType;
+                    suggestBoosterTypes.Add(boosterBehavior.boosterType);
                 }
             }
-            return GameResource.None;
+
+            var suggestBoosterTypes2 = new List<GameResource>();
+            foreach (var boosterType in suggestBoosterTypes)
+            {
+                var quantity = MySonatFramework.GetService<InventoryService>().GetResource(boosterType);
+                if (quantity > 0)
+                {
+                    suggestBoosterTypes2.Add(boosterType);
+                }
+            }
+
+            return suggestBoosterTypes2.Count > 0 ? suggestBoosterTypes2 : suggestBoosterTypes;
         }
     }
 }

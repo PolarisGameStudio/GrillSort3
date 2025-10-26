@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using Manager;
 using MyGame.SkewerJam.Gameplay;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SO.Boosters;
@@ -64,7 +65,58 @@ namespace MyGame.SkewerJamSO.Boosters
 
         public override bool CheckSuggest()
         {
-            return true;
+            // nếu chỉ còn 1 plate trống
+            var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
+            var currentMaxPlate = waitingGrillManager.ListWaitingGrills.Count();
+            var noEmtpyPlate = waitingGrillManager.ListWaitingGrills.Where(e => e.GetSlot(0).GetItem() != null).Count();
+            var remainingPlate = currentMaxPlate - noEmtpyPlate;
+
+            // nếu ăn order hiện tại cần thêm 1 slot nữa có thể ăn
+            var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
+            var dictOrderItems = orderManager.GetOrderItemsDict();
+            var grills = GameController.Instance.GameLogicHandler.GrillManager.ListGrills;
+
+            // quét layer1
+            foreach (var grill in grills)
+            {
+                if (grill.IsLock) continue;
+                var slots = grill.GetSlots();
+                foreach (var slot in slots)
+                {
+                    if (slot.GetItem() == null) continue;
+                    var item = slot.GetItem();
+                    if (item.IsLocked) continue;
+                    if (dictOrderItems.ContainsKey((ItemId)item.id))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            // quét layer2
+            foreach (var grill in grills)
+            {
+                if (grill.IsLock) continue;
+                var subGrills = grill.GetSubGrills();
+                if (subGrills == null || subGrills.Count == 0) continue;
+
+                var slotsInPrimaryGrill = grill.GetSlots();
+                var numSlotsInPrimaryGrill = slotsInPrimaryGrill.Count(e => e.GetItem() != null);
+                if (numSlotsInPrimaryGrill > remainingPlate) continue;
+
+                var slots = subGrills[0].GetSlots();
+                foreach (var slot in slots)
+                {
+                    if (slot.GetItem() == null) continue;
+                    var item = slot.GetItem();
+                    if (item.IsLocked) continue;
+                    if (dictOrderItems.ContainsKey((ItemId)item.id))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }

@@ -215,7 +215,7 @@ namespace MyGame.SkewerJamSO.Boosters
 
         public override bool CheckSuggest()
         {
-            return false;
+            return true;
         }
     }
 }

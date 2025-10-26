@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using DG.Tweening.Plugins.Options;
 using Gameplay.Entities;
 using Manager;
+using MyGame.SkewerJam.Gameplay.Configs;
 using Sonat.Enums;
 using UnityEngine;
 
@@ -11,16 +11,15 @@ namespace MyGame.SkewerJam.Gameplay
 {
     public class SuggestManager : MonoBehaviour
     {
-        [SerializeField] private float waitSuggestTime = 15f;
+        [SerializeField] private SuggestManagerConfigSO suggestManagerConfigSO;
 
         private List<Item> suggestItems = new List<Item>();
 
         public void Init()
         {
-            StartCoroutine(StartWaitSuggests());
-
             var gameLogicHandler = GameController.Instance.GameLogicHandler;
             gameLogicHandler.OnItemEndSwitch += OnItemEndSwitch;
+            gameLogicHandler.BoosterManager.OnUseBooster += OnUseBooster;
         }
 
         public void Clear()
@@ -29,16 +28,24 @@ namespace MyGame.SkewerJam.Gameplay
             ClearSuggestBoosters();
         }
 
-        #region Suggest items
         private void OnItemEndSwitch(Item item, SlotBase slot)
         {
             Clear();
-            CheckSuggestBoosters();
+            StartCoroutine(StartWaitSuggests());
+            StartCoroutine(StartSuggestBoosters());
         }
 
+        private void OnUseBooster(GameResource boosterType)
+        {
+            Clear();
+            StartCoroutine(StartWaitSuggests());
+            StartCoroutine(StartSuggestBoosters());
+        }
+
+        #region Suggest items
         public IEnumerator StartWaitSuggests()
         {
-            yield return new WaitForSeconds(waitSuggestTime);
+            yield return new WaitForSeconds(suggestManagerConfigSO.waitSuggestItemsTime);
             yield return new WaitUntil(() => GameController.Instance.GameState == GameState.Playing && suggestItems.Count == 0);
             var items = GetSuggestItems();
             if (items.Count > 0)
@@ -89,26 +96,27 @@ namespace MyGame.SkewerJam.Gameplay
         #endregion
 
         #region Suggest boosters
-        private void CheckSuggestBoosters()
+        private IEnumerator StartSuggestBoosters()
         {
+            // không còn ăn được item nào
+            yield return new WaitForSeconds(suggestManagerConfigSO.waitSuggestBoostersTime);
+            if (CheckMatchItems())
+            {
+                yield break;
+            }
+
             var gameLogicHandler = GameController.Instance.GameLogicHandler;
             var boosterManager = gameLogicHandler.BoosterManager;
-            var boosterType = boosterManager.CheckSuggestBoosters();
-            ClearSuggestBoosters();
-            if (boosterType != GameResource.None)
+            var boosterTypes = boosterManager.GetSuggestBoosters();
+
+            if (boosterTypes.Count > 0)
             {
+                var rand = Random.Range(0, boosterTypes.Count);
+                var boosterType = boosterTypes[rand];
                 var gameplayScreen = GameController.Instance.GameplayScreen;
                 var uiBooster = gameplayScreen.GetUIBooster(boosterType);
                 uiBooster.SetSuggest(true);
             }
-            // var boosters = gameLogicHandler.BoosterManager.GetBoosters();
-            // if (boosters.Count > 0)
-            // {
-            //     foreach (var booster in boosters)
-            //     {
-            //         booster.SetSuggest(true);
-            //     }
-            // }
         }
 
         private void ClearSuggestBoosters()
@@ -118,6 +126,20 @@ namespace MyGame.SkewerJam.Gameplay
             {
                 uiBooster.SetSuggest(false);
             }
+        }
+
+        private bool CheckMatchItems()
+        {
+            var gameLogicHandler = GameController.Instance.GameLogicHandler;
+
+            var orderItemsDict = gameLogicHandler.OrderManager.GetOrderItemsDict();
+            var listItemsInGrillManager = gameLogicHandler.GrillManager.GetItemsWithLayer(1);
+
+            foreach (var item in listItemsInGrillManager)
+            {
+                if (orderItemsDict.ContainsKey((ItemId)item.id)) return true;
+            }
+            return false;
         }
         #endregion
     }
