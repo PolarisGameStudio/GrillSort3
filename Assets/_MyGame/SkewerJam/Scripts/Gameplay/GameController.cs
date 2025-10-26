@@ -25,6 +25,7 @@ namespace MyGame.SkewerJam.Gameplay
         [SerializeField] private LevelGenerator levelGenerator;
         [SerializeField] private GameLogicHandler gameLogicHandler;
         [SerializeField] private ComboManager comboManager;
+        [SerializeField] private TutorialManager tutorialManager;
 
         [Header("UI")]
         [SerializeField] private GameplayScreen gameplayScreen;
@@ -153,6 +154,8 @@ namespace MyGame.SkewerJam.Gameplay
             levelGenerator.Init();
             gameLogicHandler.Init();
             comboManager.Initialize();
+
+            tutorialManager.Init();
         }
 
         public void ClearLevel()
@@ -163,6 +166,7 @@ namespace MyGame.SkewerJam.Gameplay
             gameLogicHandler.Clear();
             comboManager.Clear();
 
+            tutorialManager.Clear();
             gameResult = GameResult.None;
         }
 
@@ -341,7 +345,8 @@ namespace MyGame.SkewerJam.Gameplay
 
         public bool CheckBlockUI()
         {
-            return gameState != GameState.Playing || gameLogicHandler.BlockUIWhenEnd;
+            var boosterManager = GameLogicHandler.BoosterManager;
+            return gameState != GameState.Playing || gameLogicHandler.BlockUIWhenEnd || boosterManager.IsForceUseBooster();
         }
 
 #if UNITY_EDITOR

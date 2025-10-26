@@ -32,5 +32,9 @@ namespace MyGame.SO.Boosters
 
         public abstract bool CheckSuggest();
 
+        public virtual async UniTask PrepareForceBooster()
+        {
+            await UniTask.Delay(1000);
+        }
     }
 }

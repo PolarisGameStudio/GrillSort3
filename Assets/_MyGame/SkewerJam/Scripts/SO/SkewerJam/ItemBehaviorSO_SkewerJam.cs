@@ -38,7 +38,7 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
             || item.IsMoveToPrimary == true
             || item.IsSelected
             || item.IsLocked
-            || GameController.Instance.GameState != GameState.Playing
+            || GameController.Instance.CheckBlockUI()
             || item.Slot.GetGrill().IsLock) return;
 
             selectedItem = item;

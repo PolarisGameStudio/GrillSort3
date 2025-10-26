@@ -1,11 +1,14 @@
 using System;
-using System.Linq;
+using MyGame.SkewerJam.Gameplay;
+using MyGame.SkewerJam.Gameplay.Booster;
 using MyGame.SkewerJam.Objects.Entities;
 using MyGame.SkewerJam.Utils;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
 using TMPro;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
+using static MyGame.SkewerJam.Objects.Entities.OrderEntity;
 
 public class PopupHightlightGameplay : Panel
 {
@@ -13,19 +16,14 @@ public class PopupHightlightGameplay : Panel
     public const string ON_CLOSE = "OnClose";
     public const string ON_SELECT_ITEM = "OnSelectItem";
 
-    [Serializable]
-    public class BoosterAndObject
-    {
-        public GameResource boosterType;
-        public GameObject objectToHighlight;
-    }
-    [SerializeField] private BoosterAndObject[] boosterAndObjects;
     [SerializeField] private Canvas bgCanvas;
-    [SerializeField] private Canvas guideCanvas;
-    [SerializeField] private TMP_Text contentText;
+    [SerializeField] private RectTransform handSuggest;
 
     private Action onClose;
     private Action<OrderEntity> onSelectItem;
+
+    private GameResource boosterType;
+    private UIBooster uiBooster;
 
     public override void Open(UIData data)
     {
@@ -33,10 +31,9 @@ public class PopupHightlightGameplay : Panel
         bgCanvas.sortingLayerName = LayerManager.TopUI;
         bgCanvas.sortingOrder = 50;
 
-        guideCanvas.sortingLayerName = LayerManager.TopUI;
-        guideCanvas.sortingOrder = 51;
+        // guideCanvas.sortingLayerName = LayerManager.TopUI;
+        // guideCanvas.sortingOrder = 51;
 
-        HideAllObjects();
         if (data != null)
         {
             onClose = data.TryGet<Action>(ON_CLOSE, out var action) ? action : null;
@@ -44,21 +41,29 @@ public class PopupHightlightGameplay : Panel
 
             if (data.TryGet<GameResource>(BOOSTER_KEY, out var boosterType))
             {
-                var boosterAndObject = boosterAndObjects.FirstOrDefault(e => e.boosterType == boosterType);
-                if (boosterAndObject != null)
+                this.boosterType = boosterType;
+                uiBooster = GameController.Instance.GameplayScreen.GetUIBooster(boosterType);
+                if (uiBooster != null)
                 {
-                    boosterAndObject.objectToHighlight.SetActive(true);
+                    uiBooster.SetSortingOrder(true, LayerManager.TopUI, 51);
                 }
             }
         }
+
+        var boosterManager = GameController.Instance.GameLogicHandler.BoosterManager;
+        if (boosterManager.IsForceUseBooster(boosterType))
+        {
+            ShowSuggest(true);
+        }
+        else
+        {
+            ShowSuggest(false);
+        }
     }
 
-    private void HideAllObjects()
+    private void ShowSuggest(bool show)
     {
-        foreach (var boosterAndObject in boosterAndObjects)
-        {
-            boosterAndObject.objectToHighlight.SetActive(false);
-        }
+        handSuggest.gameObject.SetActive(show);
     }
 
     private void Update()
@@ -72,8 +77,9 @@ public class PopupHightlightGameplay : Panel
                 {
                     if (hit.transform.TryGetComponent<OrderEntity>(out var order))
                     {
-                        onSelectItem?.Invoke(order);
-                        base.Close();
+                        if (order.IsActive == false || order.State == OrderEntityState.Complete) continue;
+
+                        UseSuccess(order);
                         break;
                     }
                 }
@@ -81,9 +87,26 @@ public class PopupHightlightGameplay : Panel
         }
     }
 
+    private void UseSuccess(OrderEntity order)
+    {
+        onSelectItem?.Invoke(order);
+
+        Close();
+    }
+
+    public void OnClickClose()
+    {
+        var boosterManager = GameController.Instance.GameLogicHandler.BoosterManager;
+        if (boosterManager.IsForceUseBooster(boosterType))
+        {
+            return;
+        }
+        onClose?.Invoke();
+        Close();
+    }
+
     public override void Close()
     {
-        onClose?.Invoke();
         base.Close();
     }
 }

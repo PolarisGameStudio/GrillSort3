@@ -42,7 +42,7 @@ namespace MyGame.SkewerJamSO.Boosters
             uiData.Add(PopupHightlightGameplay.BOOSTER_KEY, boosterType);
             uiData.Add(PopupHightlightGameplay.ON_CLOSE, new Action(ClosePopupHightlightGameplay));
             uiData.Add(PopupHightlightGameplay.ON_SELECT_ITEM, new Action<OrderEntity>(OnSelectItem));
-            var popupHightlightGameplay = PanelManager.Instance.OpenPanel<PopupHightlightGameplay>(uiData);
+            var popupHightlightGameplay = PanelManager.Instance.OpenPanelByName<PopupHightlightGameplay>("PopupHightlightGameplay_BoosterSpatula", uiData);
 
             await UniTask.WaitUntil(() => finished);
 
@@ -65,15 +65,7 @@ namespace MyGame.SkewerJamSO.Boosters
 
         private void OnSelectItem(OrderEntity order)
         {
-            if (order.IsActive == false || order.State == OrderEntityState.Complete)
-            {
-                finished = true;
-                sucess = false;
-            }
-            else
-            {
-                CompleteOrder(order).Forget();
-            }
+            CompleteOrder(order).Forget();
         }
 
         private void ClosePopupHightlightGameplay()
@@ -105,6 +97,7 @@ namespace MyGame.SkewerJamSO.Boosters
 
         private async UniTask CompleteOrder(OrderEntity order, bool isForce = false)
         {
+            HighlightOrders(false);
             if (isForce == false)
             {
                 await PlayBoosterAnim(order.transform.position);

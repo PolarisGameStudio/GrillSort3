@@ -9,12 +9,12 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 {
     public static class ItemHelper
     {
-        public static Dictionary<ItemId, int> GetItemIdDictInGameplay(int layer, bool ignoreLock = false)
+        public static Dictionary<ItemId, int> GetItemIdDictInGameplay(int numLayer, bool ignoreLock = false)
         {
             var grillManager = GameController.Instance.GameLogicHandler.GrillManager;
             var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
 
-            var listItemIds = GrillHelper.GetItemIdListWithLayer(layer, ignoreLock);
+            var listItemIds = GrillHelper.GetItemIdListWithLayer(numLayer, ignoreLock);
             foreach (var waitingGrill in waitingGrillManager.ListWaitingGrills)
             {
                 var slot = waitingGrill.GetSlots()[0];

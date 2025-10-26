@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using Gameplay.LevelData;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using Sonat.Enums;
@@ -16,14 +17,29 @@ namespace MyGame.SkewerJam.Gameplay
         [SerializeField] private BoostersConfig boostersConfig;
 
 
-        private void OnEnable()
+        public void Init()
         {
             GameController.OnPlayTutorial += OnPlayTutorial;
+
+            var gameLogicHandler = GameController.Instance.GameLogicHandler;
+            gameLogicHandler.BoosterManager.OnUseBooster += OnUseBooster;
         }
 
-        private void OnDisable()
+        public void Clear()
         {
             GameController.OnPlayTutorial -= OnPlayTutorial;
+
+            var gameLogicHandler = GameController.Instance.GameLogicHandler;
+            gameLogicHandler.BoosterManager.OnUseBooster -= OnUseBooster;
+        }
+
+        private void OnUseBooster(GameResource boosterType)
+        {
+            var popupForceBooster = PanelManager.Instance.GetPanel<PopupForceBooster>();
+            if (popupForceBooster != null)
+            {
+                PanelManager.Instance.ClosePanel<PopupForceBooster>();
+            }
         }
 
         private void OnPlayTutorial()
@@ -210,9 +226,8 @@ namespace MyGame.SkewerJam.Gameplay
             }
         }
 
-        private void ShowPopupTutorialBooster(TutorialType tutorialType)
+        private async UniTask ShowPopupTutorialBooster(TutorialType tutorialType)
         {
-
             var tutorialData = tutorialConfigSO.tutorialDatas.Find(x => x.tutorialType == tutorialType);
             var boosterType = Enum.Parse<GameResource>(tutorialType.ToString());
 
@@ -221,7 +236,19 @@ namespace MyGame.SkewerJam.Gameplay
             uiData.Add(PopupTutorial.DESCRIPTION_KEY, tutorialData.listDescription);
             uiData.Add(PopupTutorialBooster.GAME_RESOURCE_KEY, boosterType);
 
-            PanelManager.Instance.OpenPanel<PopupTutorialBooster>(uiData);
+            var popup = PanelManager.Instance.OpenPanel<PopupTutorialBooster>(uiData);
+            await UniTask.WaitUntil(() => popup == null || popup.gameObject.activeSelf == false);
+
+            var boosterManager = GameController.Instance.GameLogicHandler.BoosterManager;
+            boosterManager.SetForceUseBooster(boosterType);
+
+            await boosterManager.PrepareForceBooster(boosterType);
+            
+
+
+            var uiDataForceBooster = new UIData();
+            uiDataForceBooster.Add(PopupForceBooster.BOOSTER_TYPE_KEY, boosterType);
+            var popupForceBooster = PanelManager.Instance.OpenPanel<PopupForceBooster>(uiDataForceBooster);
         }
 
         private void ShowPopupTutorialObstacle(TutorialType tutorialType, string popuTutorialName = "PopupTutorialObstacle")

@@ -1,27 +1,30 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using MyGame.SkewerJam.Utils;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems.BoosterManagement;
-using SonatFramework.Systems.ObjectPooling;
 using SonatFramework.Templates.UI.ScriptBase;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay.Booster
 {
+    [RequireComponent(typeof(Canvas))]
     public class UIBooster : UIBoosterBase
     {
         [Header("UIBooster")]
+        [SerializeField] private Canvas canvas;
         [SerializeField] private GameObject suggestObj;
 
         public override void ClickBooster()
         {
-            if (GameController.Instance.CheckBlockUI()) return;
+            var boosterManager = GameController.Instance.GameLogicHandler.BoosterManager;
+            if (GameController.Instance.CheckBlockUI())
+            {
+                if (boosterManager.IsForceUseBooster(boosterType) == false) return;
+            }
+
             if (usingBooster) return;
 
-            var boosterManager = GameController.Instance.GameLogicHandler.BoosterManager;
             if (boosterService.Instance.CanUseBooster(boosterType))
             {
                 var (canUse, reason) = boosterManager.CanUseBooster(boosterType);
@@ -81,9 +84,36 @@ namespace MyGame.SkewerJam.Gameplay.Booster
             }
         }
 
+        public override void OnUseBoosterSuccess()
+        {
+            base.OnUseBoosterSuccess();
+
+            var boosterManager = GameController.Instance.GameLogicHandler.BoosterManager;
+            boosterManager.SetForceUseBooster(GameResource.None);
+
+            SetSortingOrder(false);
+
+        }
+
         public void SetSuggest(bool suggest)
         {
             suggestObj.SetActive(suggest);
+        }
+
+        public void SetSortingOrder(bool enable, string sortingLayerName = LayerManager.UI, int sortingOrder = 0)
+        {
+            if (enable)
+            {
+                canvas.overrideSorting = true;
+                canvas.sortingLayerName = sortingLayerName;
+                canvas.sortingOrder = sortingOrder;
+                SetSuggest(true);
+            }
+            else
+            {
+                canvas.overrideSorting = false;
+                SetSuggest(false);
+            }
         }
     }
 }

@@ -69,6 +69,7 @@ namespace MyGame.SkewerJam.Gameplay
             conveyorManager.Init();
             obstacleManager.Init();
 
+            boosterManager.Init();
             suggestManager.Init();
 
             ResetCoroutine();
@@ -85,6 +86,7 @@ namespace MyGame.SkewerJam.Gameplay
             conveyorManager.Clear();
             obstacleManager.Clear();
 
+            boosterManager.Clear();
             suggestManager.Clear();
 
             ResetCoroutine();

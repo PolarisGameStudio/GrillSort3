@@ -7,7 +7,6 @@ using MyGame.SO.Boosters;
 using Sonat.Enums;
 using SonatFramework.Systems.BoosterManagement;
 using SonatFramework.Systems.InventoryManagement;
-using SonatFramework.Systems.ObjectPooling;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay
@@ -19,6 +18,20 @@ namespace MyGame.SkewerJam.Gameplay
 
         public event Action<GameResource> OnUseBooster;
 
+        private GameResource _forceUseBoosterType = GameResource.None;
+
+
+        public void Init()
+        {
+            _forceUseBoosterType = GameResource.None;
+        }
+
+        public void Clear()
+        {
+
+        }
+
+        #region Booster Behavior
         public BaseBoosterBehaviorSO GetBoosterBehavior(GameResource boosterType)
         {
             return boosterBehaviors.FirstOrDefault(e => e.boosterType == boosterType);
@@ -64,7 +77,9 @@ namespace MyGame.SkewerJam.Gameplay
             var boosterBehavior = GetBoosterBehavior(boosterType);
             return boosterBehavior.CanUseBooster();
         }
+        #endregion
 
+        #region Suggest Booster
         public List<GameResource> GetSuggestBoosters()
         {
             var suggestBoosterTypes = new List<GameResource>();
@@ -89,5 +104,33 @@ namespace MyGame.SkewerJam.Gameplay
 
             return suggestBoosterTypes2.Count > 0 ? suggestBoosterTypes2 : suggestBoosterTypes;
         }
+        #endregion
+
+        #region Force Use Booster
+        public void SetForceUseBooster(GameResource boosterType)
+        {
+            _forceUseBoosterType = boosterType;
+        }
+
+        public bool IsForceUseBooster(GameResource boosterType = GameResource.None)
+        {
+            if (boosterType == GameResource.None)
+            {
+                return _forceUseBoosterType != GameResource.None;
+            }
+            return _forceUseBoosterType == boosterType;
+        }
+
+        public async UniTask PrepareForceBooster(GameResource boosterType)
+        {
+            var boosterBehavior = GetBoosterBehavior(boosterType);
+            if (boosterBehavior == null)
+            {
+                Debug.Log($"{LOG_TAG} SBooster behavior not found: {boosterType}");
+            }
+
+            await boosterBehavior.PrepareForceBooster();
+        }
     }
+    #endregion
 }

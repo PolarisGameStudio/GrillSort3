@@ -1,10 +1,7 @@
-using MyGame.SkewerJam.Gameplay;
 using Sonat.Enums;
-using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.UIModule.SpriteService;
 using SonatFramework.Systems.BoosterManagement;
 using SonatFramework.Systems.EventBus;
-using SonatFramework.Systems.ObjectPooling;
 
 public class PopupTutorialBooster : PopupTutorial
 {

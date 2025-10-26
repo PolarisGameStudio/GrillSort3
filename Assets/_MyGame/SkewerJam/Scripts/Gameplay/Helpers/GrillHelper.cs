@@ -31,7 +31,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             }
         }
 
-        public static List<ItemId> GetItemIdListWithLayer(int layer, bool ignoreLock = false)
+        public static List<ItemId> GetItemIdListWithLayer(int numLayer, bool ignoreLock = false)
         {
             var listGrills = GameController.Instance.GameLogicHandler.GrillManager.ListGrills;
             var listItemIds = new List<ItemId>();
@@ -54,7 +54,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                 int currentLayer = 2;
                 foreach (var subLayer in subLayerData)
                 {
-                    if (layer != -1 && currentLayer > layer) break;
+                    if (numLayer != -1 && currentLayer > numLayer) break;
 
                     currentLayer++;
                     if (subLayer?.layerData?.itemData == null) continue;

@@ -188,15 +188,48 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 751863728801035922, guid: adf16fe1dcd282e4bba7700714cf428e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 751863728801035922, guid: adf16fe1dcd282e4bba7700714cf428e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 751863728801035922, guid: adf16fe1dcd282e4bba7700714cf428e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1317496859320017476, guid: adf16fe1dcd282e4bba7700714cf428e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120667930829413213, guid: adf16fe1dcd282e4bba7700714cf428e, type: 3}
+      propertyPath: blastEffect
+      value: 
+      objectReference: {fileID: 4042906109843201123}
+    - target: {fileID: 4187252634287595557, guid: adf16fe1dcd282e4bba7700714cf428e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5678292376346294785, guid: adf16fe1dcd282e4bba7700714cf428e, type: 3}
       propertyPath: m_Name
       value: UICurrencyCoin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7557780903652416722, guid: adf16fe1dcd282e4bba7700714cf428e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adf16fe1dcd282e4bba7700714cf428e, type: 3}
+--- !u!198 &4042906109843201123 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8572262228801594182, guid: adf16fe1dcd282e4bba7700714cf428e, type: 3}
+  m_PrefabInstance: {fileID: 5687345646328250149}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5604051763818473132 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 227455801744120201, guid: adf16fe1dcd282e4bba7700714cf428e, type: 3}

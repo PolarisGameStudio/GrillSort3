@@ -29,7 +29,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             SonatUtils.ExecuteNextFrame(() =>
             {
                 EventBus<GameStateChangeEvent>.Raise(new GameStateChangeEvent() { gameState = gameState });
-            });
+            }, GetFrameDelayChangeState());
         }
 
         public static Vector3 GetNewWaitingGrillPosition()
@@ -52,6 +52,11 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                 AudioId.BGM_Ingame_Summer_Grill3,
             };
             return listBGMIngame[Random.Range(0, listBGMIngame.Count)];
+        }
+
+        public static int GetFrameDelayChangeState()
+        {
+            return 1;
         }
     }
 }

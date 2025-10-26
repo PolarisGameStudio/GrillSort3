@@ -8,6 +8,8 @@ using SonatFramework.Systems.ObjectPooling;
 using SonatFramework.Scripts.UIModule;
 using Gameplay.Entities;
 using System.Collections.Generic;
+using MyGame.SkewerJam.Gameplay.Helpers;
+using Manager;
 
 namespace MyGame.SkewerJamSO.Boosters
 {
@@ -20,6 +22,10 @@ namespace MyGame.SkewerJamSO.Boosters
         [SerializeField] private float scaleDuration = 0.3f;
         [SerializeField] private AnimationCurve scaleEase = AnimationCurve.EaseInOut(0, 0, 1, 1);
         [SerializeField] private float delay = 0.5f;
+
+        [Header("Prepare Force Booster")]
+        [SerializeField] private float delayBetweenItemsForPrepareForceBooster = 0.2f;
+        [SerializeField] private float delayForPrepareForceBooster = 1.5f;
 
         #region Behavior
         public override (bool canUse, string reason) CanUseBooster()
@@ -71,6 +77,51 @@ namespace MyGame.SkewerJamSO.Boosters
         public override bool CheckSuggest()
         {
             return true;
+        }
+
+        public override async UniTask PrepareForceBooster()
+        {
+            await UniTask.Delay(1000);
+
+            var listSelectedItems = SelectItemsForForceBooster();
+            foreach (var item in listSelectedItems)
+            {
+                GameController.Instance.GameLogicHandler.SelectItem(item);
+                await UniTask.Delay((int)(delayBetweenItemsForPrepareForceBooster * 1000));
+            }
+            await UniTask.Delay((int)(delayForPrepareForceBooster * 1000));
+        }
+
+        private List<Item> SelectItemsForForceBooster()
+        {
+            var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
+            var dictOrder = orderManager.GetOrderItemsDict();
+
+            // lấy item từ theo layer từ 0 -> ...
+            var listSelectedItems = new List<Item>();
+            var grillManager = GameController.Instance.GameLogicHandler.GrillManager;
+            var listGrills = grillManager.ListGrills;
+
+            foreach (var grill in listGrills)
+            {
+                if (grill.IsLock) continue;
+
+                foreach (var slot in grill.GetSlots())
+                {
+                    var item = slot.GetItem();
+                    if (item == null) continue;
+                    if (item.IsLocked) continue;
+
+                    if (dictOrder.ContainsKey((ItemId)item.id)) continue;
+
+                    listSelectedItems.Add(item);
+                }
+            }
+
+            //lấy random 4 item
+            var random = new System.Random();
+            var randomItems = listSelectedItems.OrderBy(x => random.Next()).Take(4).ToList();
+            return randomItems;
         }
     }
 }

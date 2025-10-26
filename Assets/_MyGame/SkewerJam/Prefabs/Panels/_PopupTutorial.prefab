@@ -176,7 +176,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -125}
+  m_AnchoredPosition: {x: 0, y: -80}
   m_SizeDelta: {x: 1080, y: 227.0492}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4139933315929148
@@ -234,12 +234,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 87.7
+  m_fontSize: 80
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 87.7
+  m_fontSizeMax: 80
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1252,12 +1252,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
+  m_fontSize: 65
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 80
+  m_fontSizeMax: 65
   m_fontStyle: 4
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1430,9 +1430,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5497141952711239132}
     m_Modifications:
+    - target: {fileID: 2267683189109818233, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
+      propertyPath: m_fontSize
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 2267683189109818233, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 125
+      objectReference: {fileID: 0}
     - target: {fileID: 2722110780565629150, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
       propertyPath: m_Name
       value: TxtName
+      objectReference: {fileID: 0}
+    - target: {fileID: 4572605952750673445, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
+      propertyPath: m_fontSize
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 4572605952750673445, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172381818977553712, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
+      propertyPath: m_fontSize
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172381818977553712, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: 8394826223844972066, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
       propertyPath: m_Pivot.x
