@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95f5d194446686b47987fc35b6931511, type: 3}
   m_Name: OrderManagerAnimConfigSO
   m_EditorClassIdentifier: 
-  delayAppearNextOrder: 0.7
+  durationMoveInStart: 0.5
+  delayAppearNextOrder: 0.9
   durationMoveIn: 0.5
   up: 6
-  durationDown: 0.3
+  durationDown: 0.2
   durationUp: 0.4
   delayMoveOut: 0.6
   downCurve:
@@ -66,4 +67,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  durationAlignOrders: 0.5
+  durationAlignOrders: 1
