@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 115, y: 115}
+  m_SizeDelta: {x: 145, y: 145}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6360701852475123212
 CanvasRenderer:
@@ -143,6 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 4755559550987040898}
   txtQuantity: {fileID: 0}
+  format: x{0}
   spriteAtlasService:
     referenceType: 1
     reference: {fileID: 0}
@@ -219,6 +220,7 @@ MonoBehaviour:
   duration: 0.6
   speed: 0
   rotate: 0
+  returnPool: 1
   timeMoveOut: 0.15
   timeDelay: 0.25
   random: 1
