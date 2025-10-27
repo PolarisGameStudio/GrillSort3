@@ -5,6 +5,7 @@ using Gameplay.Entities;
 using Manager;
 using MyGame.SkewerJam.Gameplay.Configs;
 using Sonat.Enums;
+using SonatFramework.Systems.EventBus;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay
@@ -14,12 +15,16 @@ namespace MyGame.SkewerJam.Gameplay
         [SerializeField] private SuggestManagerConfigSO suggestManagerConfigSO;
 
         private List<Item> suggestItems = new List<Item>();
+        private EventBinding<LevelEndedEvent> levelEndedEvent;
+        private EventBinding<LevelQuitEvent> levelQuitEvent;
+        private EventBinding<LevelStuckEvent> levelStuckEvent;
 
         public void Init()
         {
             var gameLogicHandler = GameController.Instance.GameLogicHandler;
             gameLogicHandler.OnItemEndSwitch += OnItemEndSwitch;
             gameLogicHandler.BoosterManager.OnUseBooster += OnUseBooster;
+
         }
 
         public void Clear()
@@ -27,6 +32,8 @@ namespace MyGame.SkewerJam.Gameplay
             ClearSuggestItems();
             ClearSuggestBoosters();
         }
+
+
 
         private void OnItemEndSwitch(Item item, SlotBase slot)
         {
@@ -68,7 +75,7 @@ namespace MyGame.SkewerJam.Gameplay
             var listItemsBackup = new List<Item>();
             foreach (var (itemId, (maxItems, num)) in orderItemsDict)
             {
-                var items = listItemsInGrillManager.FindAll(e => (ItemId)e.id == itemId);
+                var items = listItemsInGrillManager.FindAll(e => e.CheckLock() == false && (ItemId)e.id == itemId);
                 if (items.Count >= (maxItems - num))
                 {
                     return items.Take(maxItems - num).ToList();

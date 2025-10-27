@@ -4,6 +4,10 @@ using UnityEngine.Events;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
+using Cysharp.Threading.Tasks;
+
+
 
 
 #endregion
@@ -63,6 +67,11 @@ namespace TS.PageSlider
 
         private PageScroller _scroller;
 
+        public int GetCurrentPage() => _scroller.CurrentPage;
+
+        private float originalSize;
+        private bool isChangingFullScreenWidth = false;
+
         #endregion
 
         private void Awake()
@@ -75,20 +84,25 @@ namespace TS.PageSlider
             }
         }
 
-        private void OnClickChangeFullScreenWidth()
+        private async UniTask OnClickChangeFullScreenWidth()
         {
+            isChangingFullScreenWidth = true;
+            await UniTask.DelayFrame(1);
+
+            originalSize = Screen.width * 1.0f / Screen.height;
             foreach (var page in _pages)
             {
                 var rectTransform = page.GetComponent<RectTransform>();
                 if (rectTransform)
                 {
                     rectTransform.sizeDelta = new Vector2(_scroller.Rect.size.x, rectTransform.sizeDelta.y);
-
                 }
             }
             var content = _scroller.GetComponent<RectTransform>();
             if (content != null)
                 LayoutRebuilder.ForceRebuildLayoutImmediate(content);
+
+            isChangingFullScreenWidth = false;
         }
 
         private IEnumerator Start()
@@ -106,6 +120,17 @@ namespace TS.PageSlider
         {
             _scroller.ScrollToPage(index);
         }
+
+        // private void Update()
+        // {
+        //     if (fullScreenWidth)
+        //     {
+        //         if (isChangingFullScreenWidth == false && (originalSize != Screen.width * 1.0f / Screen.height))
+        //         {
+        //             OnClickChangeFullScreenWidth().Forget();
+        //         }
+        //     }
+        // }
 
 
         /// <summary>

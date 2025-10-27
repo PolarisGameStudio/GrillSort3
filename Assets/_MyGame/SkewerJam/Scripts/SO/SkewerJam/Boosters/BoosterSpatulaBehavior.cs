@@ -70,6 +70,11 @@ namespace MyGame.SkewerJamSO.Boosters
 
         private void ClosePopupHightlightGameplay()
         {
+            var uiBooster = GameController.Instance.GameplayScreen.GetUIBooster(boosterType);
+            if (uiBooster != null)
+            {
+                uiBooster.SetSortingOrder(false);
+            }
             finished = true;
             sucess = false;
         }

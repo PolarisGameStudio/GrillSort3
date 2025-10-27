@@ -46,6 +46,18 @@ namespace TS.PageSlider
         public UnityEvent<int, int> OnPageChangeEnded;
 
         /// <summary>
+        /// Event triggered when a page change begins.
+        /// </summary>
+        [Tooltip("Event triggered when a page change begins")]
+        public UnityEvent OnBeginDragEvent;
+
+        /// <summary>
+        /// Event triggered when a page is scrolled to.
+        /// </summary>
+        [Tooltip("Event triggered when a page is scrolled to")]
+        public UnityEvent<int> OnScrollToPage;
+
+        /// <summary>
         /// Gets the rectangle of the ScrollRect component used for scrolling.
         /// </summary>
         public Rect Rect
@@ -69,12 +81,12 @@ namespace TS.PageSlider
         {
             get
             {
-#if UNITY_EDITOR
+                // #if UNITY_EDITOR
                 if (_scrollRect == null)
                 {
                     _scrollRect = FindScrollRect();
                 }
-#endif
+                // #endif
                 return _scrollRect.content;
             }
         }
@@ -83,6 +95,8 @@ namespace TS.PageSlider
 
         private int _currentPage; // Index of the currently active page.
         private int _targetPage; // Index of the target page during a page change animation.
+
+        public int CurrentPage => _currentPage;
 
         private float _startNormalizedPosition; // Normalized position of the scroll bar when drag begins.
         private float _targetNormalizedPosition; // Normalized position of the scroll bar for the target page.
@@ -141,6 +155,7 @@ namespace TS.PageSlider
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            OnBeginDragEvent?.Invoke();
             // Store the starting normalized position of the scroll bar.
             _startNormalizedPosition = _scrollRect.horizontalNormalizedPosition;
 
@@ -233,6 +248,8 @@ namespace TS.PageSlider
             {
                 OnPageChangeStarted?.Invoke(_currentPage, _targetPage);
             }
+
+            OnScrollToPage?.Invoke(page);
         }
 
         /// <summary>

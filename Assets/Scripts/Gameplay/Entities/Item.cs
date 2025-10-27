@@ -519,5 +519,10 @@ namespace Gameplay.Entities
         {
 
         }
+
+        public bool CheckLock()
+        {
+            return IsLocked || slot.GetGrill().IsLock;
+        }
     }
 }

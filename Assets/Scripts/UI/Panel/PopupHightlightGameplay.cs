@@ -80,10 +80,11 @@ public class PopupHightlightGameplay : Panel
                         if (order.IsActive == false || order.State == OrderEntityState.Complete) continue;
 
                         UseSuccess(order);
-                        break;
+                        return;
                     }
                 }
             }
+            OnClickClose();
         }
     }
 
