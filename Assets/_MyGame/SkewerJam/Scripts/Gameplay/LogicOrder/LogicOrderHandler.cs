@@ -19,8 +19,11 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
         [SerializeField] private LogicOrderConfigSO logicOrderConfigSO;
         [SerializeField] private SpecialOrderConfigSO specialOrderConfigSO;
 
+
+        public bool IsForceRescue { get; private set; }
+        public ForceRescueData ForceRescueData => _forceRescueData;
+        private ForceRescueData _forceRescueData = new ForceRescueData();
         private SequenceConfigSO selectedSequenceConfig;
-        private int startCount { get => PlayerPrefs.GetInt("StartCount", 0); set => PlayerPrefs.SetInt("StartCount", value); }
 
         public void Init()
         {
@@ -103,7 +106,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             }
 
             var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
-            orderManager.IsForceRescue = false;
+            IsForceRescue = false;
 
             // lấy order info mỗi layer (2 layer đầu) --> OPTIMIZE: giảm tính toán
             var selectedLogicOrder = ChooseLogicOrder();
@@ -185,6 +188,19 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             Debug.Log("<color=purple>LogicOrderHandler:</color> GetCurrentPhase: " + phase.index + " - " + Mathf.Round(percentage * 100f) * 0.01f);
             return phase.index;
         }
+
+        public void SetForceRescue(bool isForceRescue, int deltaSlot = -1)
+        {
+            IsForceRescue = isForceRescue;
+            if (isForceRescue == true)
+            {
+                _forceRescueData.deltaSlot = deltaSlot;
+            }
+            else
+            {
+                _forceRescueData.deltaSlot = -1;
+            }
+        }
     }
 
     public enum LogicOrderType
@@ -195,5 +211,10 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
         Blinded,
         Rescue,
         Random
+    }
+
+    public class ForceRescueData
+    {
+        public int deltaSlot = -1;
     }
 }

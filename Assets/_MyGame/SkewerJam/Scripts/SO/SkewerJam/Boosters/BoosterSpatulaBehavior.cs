@@ -195,5 +195,13 @@ namespace MyGame.SkewerJamSO.Boosters
         {
             return true;
         }
+
+        public override async UniTask PostUseBooster()
+        {
+            // order tiếp theo cũng phải là rescue
+            var gameLogicHandler = GameController.Instance.GameLogicHandler;
+            var orderManager = gameLogicHandler.OrderManager;
+            orderManager.LogicOrderHandler.SetForceRescue(true);
+        }
     }
 }

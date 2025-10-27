@@ -35,10 +35,10 @@ namespace MyGame.SkewerJam.Gameplay
 
         private void OnUseBooster(GameResource boosterType)
         {
-            var popupForceBooster = PanelManager.Instance.GetPanel<PopupForceBooster>();
+            var popupForceBooster = PanelManager.Instance.GetPanel<PopupTutorialForceBooster>();
             if (popupForceBooster != null)
             {
-                PanelManager.Instance.ClosePanel<PopupForceBooster>();
+                PanelManager.Instance.ClosePanel<PopupTutorialForceBooster>();
             }
         }
 
@@ -242,13 +242,12 @@ namespace MyGame.SkewerJam.Gameplay
             var boosterManager = GameController.Instance.GameLogicHandler.BoosterManager;
             boosterManager.SetForceUseBooster(boosterType);
 
-            await boosterManager.PrepareForceBooster(boosterType);
-            
+            await boosterManager.PrepareTutorialBooster(boosterType);
 
 
             var uiDataForceBooster = new UIData();
-            uiDataForceBooster.Add(PopupForceBooster.BOOSTER_TYPE_KEY, boosterType);
-            var popupForceBooster = PanelManager.Instance.OpenPanel<PopupForceBooster>(uiDataForceBooster);
+            uiDataForceBooster.Add(PopupTutorialForceBooster.BOOSTER_TYPE_KEY, boosterType);
+            var popupForceBooster = PanelManager.Instance.OpenPanel<PopupTutorialForceBooster>(uiDataForceBooster);
         }
 
         private void ShowPopupTutorialObstacle(TutorialType tutorialType, string popuTutorialName = "PopupTutorialObstacle")

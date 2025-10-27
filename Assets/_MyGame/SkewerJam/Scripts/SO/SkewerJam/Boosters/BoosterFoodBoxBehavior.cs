@@ -79,7 +79,7 @@ namespace MyGame.SkewerJamSO.Boosters
             return true;
         }
 
-        public override async UniTask PrepareForceBooster()
+        public override async UniTask PrepareTutorialBooster()
         {
             await UniTask.Delay(1000);
 

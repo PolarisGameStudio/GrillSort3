@@ -51,7 +51,11 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             }
 
             List<(ItemId itemId, int numItems, int deltaSlot)> filteredRescues = new List<(ItemId itemId, int numItems, int deltaSlot)>();
-            for (int i = -1; i >= -3; i--)
+
+            var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
+            var logicOrderHandler = orderManager.LogicOrderHandler;
+            var startDeltaSlot = logicOrderHandler.ForceRescueData.deltaSlot;
+            for (int i = startDeltaSlot; i >= -3; i--)
             {
                 filteredRescues = listAllRescues.Where(e => e.deltaSlot == i && e.numItems >= 2).ToList();
                 if (filteredRescues.Count() > 0)
@@ -72,53 +76,6 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             {
                 return (ItemId.None, 0);
             }
-
-
-
-            // // ---Tạo order để giải cứu---
-            // // Item được lấy từ hàng chờ --> Làm giảm số lượng khay trống nhiều nhất
-            // // check lại số lượng order nữa
-
-            // var items = OrderHelper.GetItemsInWaitingGrill();
-            // if (items.Count == 0)
-            // {
-            //     Debug.Log("<color=yellow>OrderHelper:</color> GetItemOrderToRescue: No items in waiting grill");
-            //     return (ItemId.None, 0);
-            // }
-
-            // var dictItems = items.GroupBy(e => e.id).ToDictionary(e => e.Key, e => e.Count());
-            // var dictNeededItems = OrderHelper.GetNeededItemsForCurrentOrder();
-            // foreach (var id in dictNeededItems.Keys)
-            // {
-            //     if (dictItems.ContainsKey((int)id))
-            //     {
-            //         dictItems[(int)id] -= dictNeededItems[id];
-            //         if (dictItems[(int)id] <= 0)
-            //         {
-            //             dictItems.Remove((int)id);
-            //         }
-            //     }
-            // }
-
-            // if (dictItems.Count == 0)
-            // {
-            //     Debug.Log("<color=yellow>OrderHelper:</color> GetItemOrderToRescue: No items to rescue");
-            //     return (ItemId.None, 0);
-            // }
-
-
-            // // chọn rescue
-            // // Sửa lại: Ưu tiên Rescue (-1) slot. Nếu không có mới rescue (-2) và (-3) Slot
-            // var dictNeededItemsGameplay = gameplayInfo.DictNeededSlots;
-            // foreach (var id in dictItems.Keys)
-            // {
-
-            // }
-            // var itemId = dictItems.OrderByDescending(e => e.Value).First().Key;
-            // var num = dictItems[itemId] > 3 ? 3 : dictItems[itemId];
-
-            // Debug.Log("<color=blue>OrderHelper:</color> GetItemOrderToRescue: " + itemId + " " + num);
-            // return ((ItemId)itemId, num);
         }
 
         public override bool CanUse(GameplayInfoForLogicOrder gameplayInfo = null)
@@ -155,7 +112,8 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
         public override bool ForceUse(bool isRescue = false)
         {
             var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
-            if (orderManager.IsForceRescue == true)
+            var logicOrderHandler = orderManager.LogicOrderHandler;
+            if (logicOrderHandler.IsForceRescue == true)
             {
                 return true;
             }

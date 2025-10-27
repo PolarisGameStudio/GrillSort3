@@ -12,7 +12,7 @@ public class ProgressLoseController : MonoBehaviour
     [SerializeField] UnityEvent onRevive;
     [SerializeField] TMP_Text txtCount;
 
-    private const string PROGRESS_LOSE_KEY = "PROGRESS_LOSE_KEY";
+    public const string PROGRESS_LOSE_KEY = "PROGRESS_LOSE_KEY";
 
     private readonly Service<GameplayAnalyticsService> gameplayAnalytics = new();
     private IntDataPref level;
@@ -20,8 +20,10 @@ public class ProgressLoseController : MonoBehaviour
     private IntDataPref count;
 
     private bool active = true;
-    private int maxCount = 3;
+    private static int maxCount = 3;
     private int levelStartFeature = 5;
+
+    public static int MaxCount => maxCount;
 
     private void OnEnable()
     {

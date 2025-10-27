@@ -19,6 +19,16 @@ namespace MyGame.SO.Boosters
             return (true, "");
         }
 
+        public virtual async UniTask PrepareTutorialBooster()
+        {
+            await UniTask.Delay(1000);
+        }
+
+        public virtual async UniTask PostUseBooster()
+        {
+            return;
+        }
+
 
         protected virtual async UniTask PlayBoosterAnim(Vector3 position)
         {
@@ -31,10 +41,5 @@ namespace MyGame.SO.Boosters
         }
 
         public abstract bool CheckSuggest();
-
-        public virtual async UniTask PrepareForceBooster()
-        {
-            await UniTask.Delay(1000);
-        }
     }
 }

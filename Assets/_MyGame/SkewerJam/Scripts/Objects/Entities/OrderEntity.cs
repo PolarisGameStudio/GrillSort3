@@ -9,6 +9,7 @@ using MyGame.SkewerJam.Gameplay;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
+using SonatFramework.Scripts.Utils;
 using UnityEngine;
 using static PopupUnlockInGame;
 
@@ -277,6 +278,7 @@ namespace MyGame.SkewerJam.Objects.Entities
                 orderPos.z = 0;
                 container.position = orderPos;
 
+                await UniTask.Delay(300);
                 gameLogicHandler.StartMoveNextOrder(this);
                 container.DOLocalMove(Vector3.zero, 0.5f).SetEase(Ease.OutSine).OnComplete(() =>
                 {

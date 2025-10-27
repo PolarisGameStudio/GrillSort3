@@ -49,6 +49,10 @@ namespace MyGame.SkewerJam.Gameplay
             WaitingGrillHelper.ResetWarning();
             OnUseBooster?.Invoke(boosterType);
             var success = await boosterBehavior.UseBooster(position);
+            if (success)
+            {
+                await boosterBehavior.PostUseBooster();
+            }
 
             GameController.Instance.ChangeGameState(GameState.Playing);
             return success;
@@ -65,6 +69,10 @@ namespace MyGame.SkewerJam.Gameplay
 
             WaitingGrillHelper.ResetWarning();
             var success = await boosterBehavior.ForceUseBooster();
+            if (success)
+            {
+                await boosterBehavior.PostUseBooster();
+            }
 
             GameController.Instance.ChangeGameState(GameState.Playing);
             return success;
@@ -121,7 +129,7 @@ namespace MyGame.SkewerJam.Gameplay
             return _forceUseBoosterType == boosterType;
         }
 
-        public async UniTask PrepareForceBooster(GameResource boosterType)
+        public async UniTask PrepareTutorialBooster(GameResource boosterType)
         {
             var boosterBehavior = GetBoosterBehavior(boosterType);
             if (boosterBehavior == null)
@@ -129,7 +137,7 @@ namespace MyGame.SkewerJam.Gameplay
                 Debug.Log($"{LOG_TAG} SBooster behavior not found: {boosterType}");
             }
 
-            await boosterBehavior.PrepareForceBooster();
+            await boosterBehavior.PrepareTutorialBooster();
         }
     }
     #endregion

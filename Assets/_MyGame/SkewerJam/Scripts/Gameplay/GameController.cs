@@ -279,6 +279,8 @@ namespace MyGame.SkewerJam.Gameplay
             MySonatFramework.GetService<AudioService>().PlayMusic(bgm);
             EventBus<LevelContinueEvent>.Raise(new LevelContinueEvent() { by = by });
             await UniTask.Delay(1000);
+
+            var orderManager = GameLogicHandler.OrderManager;
             switch (stuckType)
             {
                 case StuckType.OutOfMove:
@@ -287,7 +289,6 @@ namespace MyGame.SkewerJam.Gameplay
                         case "play_on_add_trays":
                             if (GameLogicHandler.OrderManager.ListOrders.Where(e => e.IsActive == false).Count() > 0)
                             {
-                                var orderManager = GameLogicHandler.OrderManager;
                                 orderManager.Unlock(isRescue: true);
                             }
                             else
@@ -295,18 +296,25 @@ namespace MyGame.SkewerJam.Gameplay
                                 // Sử dụng spatula
                                 var boosterManager = GameLogicHandler.BoosterManager;
                                 boosterManager.ForceUseBooster(GameResource.BoosterSpatula).Forget();
-
-                                // order tiếp theo cũng phải là rescue
-                                gameLogicHandler.OrderManager.IsForceRescue = true;
                             }
                             break;
                         case "play_on_clear_one_plate":
                             var waitingGrillManager = GameLogicHandler.WaitingGrillManager;
                             var success = waitingGrillManager.ClearOnePlate();
+
+
+                            var progressLoseCount = new IntDataPref(ProgressLoseController.PROGRESS_LOSE_KEY + "_count");
+
+                            if (progressLoseCount.Value >= ProgressLoseController.MaxCount)
+                            {
+                                orderManager.LogicOrderHandler.SetForceRescue(true, -2);
+                            }
+
                             if (success == false)
                             {
                                 Lose(stuckType).Forget();
                             }
+
                             break;
                     }
 
