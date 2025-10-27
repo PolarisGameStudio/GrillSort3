@@ -122,7 +122,7 @@ namespace MyGame.SkewerJam.Gameplay
                 var boosterType = boosterTypes[rand];
                 var gameplayScreen = GameController.Instance.GameplayScreen;
                 var uiBooster = gameplayScreen.GetUIBooster(boosterType);
-                uiBooster.SetSuggest(true);
+                uiBooster.SetSuggest(true, true);
             }
         }
 
@@ -144,6 +144,7 @@ namespace MyGame.SkewerJam.Gameplay
 
             foreach (var item in listItemsInGrillManager)
             {
+                if (item.CheckLock()) continue;
                 if (orderItemsDict.ContainsKey((ItemId)item.id)) return true;
             }
             return false;

@@ -35,6 +35,8 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             var levelGenerator = GameController.Instance.LevelGenerator;
             levelGenerator.OnLoadLevelData += OnLoadLevelData;
 
+            SetForceRescue(false, -1);
+
             // dynamicLogicOrder.Init();
         }
 
@@ -42,6 +44,8 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
         {
             var levelGenerator = GameController.Instance.LevelGenerator;
             levelGenerator.OnLoadLevelData -= OnLoadLevelData;
+
+            SetForceRescue(false, -1);
             // dynamicLogicOrder.Clear();
         }
 

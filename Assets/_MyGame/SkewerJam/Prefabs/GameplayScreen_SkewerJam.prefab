@@ -1412,7 +1412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2498084240726555041, guid: 27e0671a0d5ef5943af42955b6598b41, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 26
+      value: 4.9
       objectReference: {fileID: 0}
     - target: {fileID: 6961273614883486320, guid: 27e0671a0d5ef5943af42955b6598b41, type: 3}
       propertyPath: m_IsActive
@@ -1836,6 +1836,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6350930970556384083, guid: ea3e3b4d480af7843833b2f6a6343ba2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 5.3
+      objectReference: {fileID: 0}
     - target: {fileID: 8233740700419895888, guid: ea3e3b4d480af7843833b2f6a6343ba2, type: 3}
       propertyPath: m_Name
       value: UIBoosterSpatula
@@ -1883,7 +1887,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3504878291614326984, guid: f23db68d19aac9243bfcbf3cae8cf7a0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 26.63752
+      value: 4.8
       objectReference: {fileID: 0}
     - target: {fileID: 8255739292711281433, guid: f23db68d19aac9243bfcbf3cae8cf7a0, type: 3}
       propertyPath: m_IsActive
@@ -2079,8 +2083,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6281044055571284843, guid: 31d3f3ef704e8b8478aabbcda677684c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281044055571284843, guid: 31d3f3ef704e8b8478aabbcda677684c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 32
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 9029107922090177128, guid: 31d3f3ef704e8b8478aabbcda677684c, type: 3}
       propertyPath: m_Name

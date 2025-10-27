@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using MyGame.SkewerJam.Utils;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
@@ -14,6 +15,7 @@ namespace MyGame.SkewerJam.Gameplay.Booster
         [Header("UIBooster")]
         [SerializeField] private Canvas canvas;
         [SerializeField] private GameObject suggestObj;
+        [SerializeField] private Transform suggestTransform;
 
         public override void ClickBooster()
         {
@@ -95,9 +97,28 @@ namespace MyGame.SkewerJam.Gameplay.Booster
 
         }
 
-        public void SetSuggest(bool suggest)
+        private Sequence suggestionSequence;
+        public void SetSuggest(bool suggest, bool shake = false)
         {
             suggestObj.SetActive(suggest);
+
+            if (shake)
+            {
+                suggestTransform.DOKill();
+                suggestionSequence = DOTween.Sequence()
+                    .Append(suggestTransform.DOShakePosition(0.125f, Vector3.right * 2f, randomness: 0).SetEase(Ease.InOutCubic).SetLoops(4, LoopType.Yoyo))
+                    .AppendInterval(3f)
+                    .SetLoops(-1, LoopType.Restart);
+            }
+            else
+            {
+                if (suggestionSequence != null)
+                {
+                    suggestionSequence.Kill();
+                    suggestionSequence = null;
+                }
+                suggestTransform.localPosition = Vector3.zero;
+            }
         }
 
         public void SetSortingOrder(bool enable, string sortingLayerName = LayerManager.UI, int sortingOrder = 0)
