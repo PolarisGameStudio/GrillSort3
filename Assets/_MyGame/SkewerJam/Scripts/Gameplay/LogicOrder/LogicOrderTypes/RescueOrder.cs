@@ -53,9 +53,14 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             List<(ItemId itemId, int numItems, int deltaSlot)> filteredRescues = new List<(ItemId itemId, int numItems, int deltaSlot)>();
 
             var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
+
+            var start = -1;
             var logicOrderHandler = orderManager.LogicOrderHandler;
-            var startDeltaSlot = logicOrderHandler.ForceRescueData.deltaSlot;
-            for (int i = startDeltaSlot; i >= -3; i--)
+            if (logicOrderHandler.IsForceRescue == true)
+            {
+                start = logicOrderHandler.ForceRescueData.deltaSlot;
+            }
+            for (int i = start; i >= -3; i--)
             {
                 filteredRescues = listAllRescues.Where(e => e.deltaSlot == i && e.numItems >= 2).ToList();
                 if (filteredRescues.Count() > 0)

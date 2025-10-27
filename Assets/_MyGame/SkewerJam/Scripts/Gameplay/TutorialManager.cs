@@ -228,6 +228,7 @@ namespace MyGame.SkewerJam.Gameplay
 
         private async UniTask ShowPopupTutorialBooster(TutorialType tutorialType)
         {
+            GameController.Instance.SetBlockUI(true);
             var tutorialData = tutorialConfigSO.tutorialDatas.Find(x => x.tutorialType == tutorialType);
             var boosterType = Enum.Parse<GameResource>(tutorialType.ToString());
 
@@ -239,15 +240,16 @@ namespace MyGame.SkewerJam.Gameplay
             var popup = PanelManager.Instance.OpenPanel<PopupTutorialBooster>(uiData);
             await UniTask.WaitUntil(() => popup == null || popup.gameObject.activeSelf == false);
 
-            var boosterManager = GameController.Instance.GameLogicHandler.BoosterManager;
-            boosterManager.SetForceUseBooster(boosterType);
 
+            var boosterManager = GameController.Instance.GameLogicHandler.BoosterManager;
             await boosterManager.PrepareTutorialBooster(boosterType);
 
 
             var uiDataForceBooster = new UIData();
             uiDataForceBooster.Add(PopupTutorialForceBooster.BOOSTER_TYPE_KEY, boosterType);
             var popupForceBooster = PanelManager.Instance.OpenPanel<PopupTutorialForceBooster>(uiDataForceBooster);
+            boosterManager.SetForceUseBooster(boosterType);
+            GameController.Instance.SetBlockUI(false);
         }
 
         private void ShowPopupTutorialObstacle(TutorialType tutorialType, string popuTutorialName = "PopupTutorialObstacle")

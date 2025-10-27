@@ -156,6 +156,8 @@ namespace MyGame.SkewerJam.Gameplay
             comboManager.Initialize();
 
             tutorialManager.Init();
+
+            SetBlockUI(false);
         }
 
         public void ClearLevel()
@@ -351,10 +353,15 @@ namespace MyGame.SkewerJam.Gameplay
             PlayLevel(level).Forget();
         }
 
+        private bool _blockUI = false;
+        public void SetBlockUI(bool block)
+        {
+            _blockUI = block;
+        }
         public bool CheckBlockUI()
         {
             var boosterManager = GameLogicHandler.BoosterManager;
-            return gameState != GameState.Playing || gameLogicHandler.BlockUIWhenEnd || boosterManager.IsForceUseBooster();
+            return gameState != GameState.Playing || gameLogicHandler.BlockUIWhenEnd || boosterManager.IsForceUseBooster() || _blockUI;
         }
 
 #if UNITY_EDITOR

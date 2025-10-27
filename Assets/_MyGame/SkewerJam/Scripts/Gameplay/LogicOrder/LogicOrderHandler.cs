@@ -98,6 +98,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                 var (rescueItemId, rescueNum) = forceLogicOrder.GetOrder(gameplayInfoForLogicOrder);
                 if (rescueItemId != ItemId.None)
                 {
+                    SetForceRescue(false, -1);
                     return (rescueItemId, rescueNum, LogicOrderType.Rescue);
                 }
                 else
@@ -110,7 +111,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             }
 
             var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
-            IsForceRescue = false;
+            SetForceRescue(false, -1);
 
             // lấy order info mỗi layer (2 layer đầu) --> OPTIMIZE: giảm tính toán
             var selectedLogicOrder = ChooseLogicOrder();

@@ -98,7 +98,7 @@ namespace MyGame.SkewerJam.Objects.Entities
             await imageLid.transform.DOLocalMove(Vector3.zero, orderEntityConfigSO.durationUp).SetEase(orderEntityConfigSO.downCurve);
             completeEffect.Play();
 
-            PlayEntityShake().Forget();
+            // PlayEntityShake().Forget();
 
             MySonatFramework.audioService.PlaySound(AudioId.Box_Close_Grill3);
             onComplete?.Invoke();

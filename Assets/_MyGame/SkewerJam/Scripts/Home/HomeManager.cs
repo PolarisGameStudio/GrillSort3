@@ -52,7 +52,6 @@ public class HomeManager : SingletonSimple<HomeManager>
 
     private async UniTask ClaimRewardFreeLives()
     {
-
         var checkRewardFreeLives = new IntDataPref("check_reward_free_lives");
         if (checkRewardFreeLives.Value == 1)
         {

@@ -105,13 +105,13 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
             var distance = item.transform.position - slot.transform.position;
             var duration = itemAnimConfig.GetMoveDuration(distance.magnitude);
             seq.Join(item.transform.DOLocalMoveX(0, duration).SetEase(itemAnimConfig.GetMoveCurveX(distance.x)));
-            seq.Join(item.transform.DOLocalMoveY(0, duration).SetEase(itemAnimConfig.GetMoveCurveY(distance.y)));
-
-            seq.Join(item.transform.DOScale(itemAnimConfig.scaleDown, duration).OnComplete(() =>
+            seq.Join(item.transform.DOLocalMoveY(0, duration).SetEase(itemAnimConfig.GetMoveCurveY(distance.y))).OnComplete(() =>
             {
                 GameController.Instance.GameLogicHandler.ItemMoveToSlot(item, slot);
-            }));
-            seq.Append(item.transform.DOScale(Vector3.one, itemAnimConfig.scaleDuration));
+            });
+
+            // seq.Join(item.transform.DOScale(itemAnimConfig.scaleDown, duration));
+            seq.Join(item.transform.DOScale(Vector3.one, duration));
 
             var currentItem = item;
             seq.OnComplete(() =>
