@@ -21,14 +21,12 @@ public class NoInternet : SingletonSimple<NoInternet>
 
     private void Start()
     {
-        panel.Close();
         new EventBinding<LevelStartedEvent>(OnLevelStart);
 
+        new EventBinding<UpdateScreenEvent>(OnUpdateScreen);
         // Nếu đang ở Home thì check ngay
         if (forceInternetOnlyHome)
         {
-            new EventBinding<UpdateScreenEvent>(OnUpdateScreen);
-
             if (CheckAdditionalConditions())
             {
                 CheckConnectInternet();

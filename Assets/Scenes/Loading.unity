@@ -636,13 +636,45 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2101299750}
-    - target: {fileID: 384682383781274708, guid: ba222ab24c516cd4f83518b627bb744b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClosePanel
+    - target: {fileID: 2347741859590626774, guid: ba222ab24c516cd4f83518b627bb744b, type: 3}
+      propertyPath: openTween.Array.size
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 384682383781274708, guid: ba222ab24c516cd4f83518b627bb744b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: NoInternet, Assembly-CSharp
+    - target: {fileID: 2347741859590626774, guid: ba222ab24c516cd4f83518b627bb744b, type: 3}
+      propertyPath: openTween.Array.data[0].config.to
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2347741859590626774, guid: ba222ab24c516cd4f83518b627bb744b, type: 3}
+      propertyPath: openTween.Array.data[0].config.curve.m_PreInfinity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2347741859590626774, guid: ba222ab24c516cd4f83518b627bb744b, type: 3}
+      propertyPath: openTween.Array.data[0].config.curve.m_PostInfinity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2347741859590626774, guid: ba222ab24c516cd4f83518b627bb744b, type: 3}
+      propertyPath: openTween.Array.data[0].config.curve.m_RotationOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2347741859590626774, guid: ba222ab24c516cd4f83518b627bb744b, type: 3}
+      propertyPath: openTween.Array.data[0].config.curve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2347741859590626774, guid: ba222ab24c516cd4f83518b627bb744b, type: 3}
+      propertyPath: openTween.Array.data[0].config.curve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2347741859590626774, guid: ba222ab24c516cd4f83518b627bb744b, type: 3}
+      propertyPath: openTween.Array.data[0].config.curve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2347741859590626774, guid: ba222ab24c516cd4f83518b627bb744b, type: 3}
+      propertyPath: openTween.Array.data[0].config.curve.m_Curve.Array.data[1].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2347741859590626774, guid: ba222ab24c516cd4f83518b627bb744b, type: 3}
+      propertyPath: openTween.Array.data[0].config.curve.m_Curve.Array.data[0].outSlope
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3507146480624493347, guid: ba222ab24c516cd4f83518b627bb744b, type: 3}
       propertyPath: m_AnchorMax.y
