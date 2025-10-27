@@ -1,9 +1,10 @@
+using System;
 using MyGame.SkewerJam.Gameplay;
+using Sonat;
 using Sonat.Enums;
 using SonatFramework.Scripts.Feature.Lives;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems;
-using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.SceneManagement;
 using UnityEngine;
 
