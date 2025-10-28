@@ -20,6 +20,7 @@ namespace MyGame.SkewerJamSO.Boosters
         [SerializeField] private int maxPlate = 10;
         [SerializeField] private float delay = 2f;
         public override GameResource boosterType => GameResource.BoosterAddPlate;
+        public int MaxPlate => maxPlate;
 
         #region Behavior
         public override (bool canUse, string reason) CanUseBooster()
@@ -41,6 +42,8 @@ namespace MyGame.SkewerJamSO.Boosters
             var waitingManager = gameLogicHanlder.WaitingGrillManager;
             await waitingManager.AddPlate();
             MySonatFramework.GetService<VibrationService>().Vibrate(50);
+
+            WaitingGrillHelper.ResetWarning();
             return true;
         }
 
@@ -55,7 +58,7 @@ namespace MyGame.SkewerJamSO.Boosters
                 "BoosterAnimAddPlate",
                 PanelManager.Instance.transform);
 
-            var targetPosition = GameplayHelper.GetNewWaitingGrillPosition();
+            var targetPosition = GameplayHelper.GetNewWaitingGrillPosition(maxPlate);
             boosterAnim.SetTargetPosition(targetPosition);
             boosterAnim.SetData(position);
 

@@ -1,11 +1,15 @@
 using System;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Gameplay;
 using Gameplay.BoosteeManagement;
 using Gameplay.Entities;
 using Gameplay.LevelData;
+using MyGame.SkewerJam.Gameplay;
+using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems.SettingsManagement.Vibation;
 using UnityEngine;
+using static PopupUnlockInGame;
 
 namespace MyGame.SkewerJam.Objects.Entities
 {
@@ -59,60 +63,60 @@ namespace MyGame.SkewerJam.Objects.Entities
             waitingGrillVisual.SetActive(isActive);
         }
 
-        // #region Interactions
-        // private void Update()
-        // {
-        //     // var popup = PanelManager.Instance.GetPanel<PopupUnlock_SkewerJam>();
-        //     if (GameController.Instance.GameState == GameState.Playing && isActive == false && Input.GetMouseButtonDown(0))
-        //     {
-        //         var hits = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        //         foreach (var hit in hits)
-        //         {
-        //             if (hit.gameObject == gameObject)
-        //             {
-        //                 OpenPopupUnlock();
-        //                 break;
-        //             }
-        //         }
-        //     }
-        // }
+        #region Interactions
+        private void Update()
+        {
+            // var popup = PanelManager.Instance.GetPanel<PopupUnlock_SkewerJam>();
+            if (GameController.Instance.CheckBlockUI() == false && isActive == false && Input.GetMouseButtonDown(0))
+            {
+                var hits = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                foreach (var hit in hits)
+                {
+                    if (hit.gameObject == gameObject)
+                    {
+                        OpenPopupUnlock();
+                        break;
+                    }
+                }
+            }
+        }
 
 
-        // private void OpenPopupUnlock()
-        // {
-        //     var uiData = new UIData();
-        //     uiData.Add("SelectedObjectType", SelectedObjectType.Plate);
-        //     uiData.Add("Price", GameController.Instance.GameConfig.unlockPlatePrice);
-        //     uiData.Add("OnSuccess", (Action)(() =>
-        //     {
-        //         var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
-        //         waitingGrillManager.Unlock();
-        //     }));
-        //     PanelManager.Instance.OpenPanel<PopupUnlockInGame>(uiData);
-        // }
-        // #endregion
+        private void OpenPopupUnlock()
+        {
+            var uiData = new UIData();
+            uiData.Add("SelectedObjectType", SelectedObjectType.Plate);
+            uiData.Add("Price", GameController.Instance.GameConfig.unlockPlatePrice);
+            uiData.Add("OnSuccess", (Action)(() =>
+            {
+                var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
+                waitingGrillManager.Unlock(this);
+            }));
+            PanelManager.Instance.OpenPanel<PopupUnlockInGame>(uiData);
+        }
+        #endregion
 
-        // public async UniTask PlayUnlock(bool addLockedWaitingGrill = true)
-        // {
-        //     SetActive(true);
+        public async UniTask PlayUnlock(bool addLockedWaitingGrill = true)
+        {
+            SetActive(true);
 
-        //     var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
-        //     if (addLockedWaitingGrill)
-        //     {
-        //         var lockedWaitingGrill = await waitingGrillManager.AddLockedWaitingGrill();
-        //         lockedWaitingGrill.transform.localScale = Vector3.zero;
-        //         await waitingGrillManager.AlignObjects(() =>
-        //         {
-        //             lockedWaitingGrill.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutSine);
-        //         });
-        //     }
-        //     else
-        //     {
-        //         await waitingGrillManager.AlignObjects(() =>
-        //         {
-        //         });
-        //     }
-        // }
+            var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
+            if (addLockedWaitingGrill)
+            {
+                var lockedWaitingGrill = await waitingGrillManager.AddWaitingGrill(false);
+                lockedWaitingGrill.transform.localScale = Vector3.zero;
+                await waitingGrillManager.AlignObjects(() =>
+                {
+                    lockedWaitingGrill.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutSine);
+                });
+            }
+            else
+            {
+                await waitingGrillManager.AlignObjects(() =>
+                {
+                });
+            }
+        }
 
         public void SetId(int id)
         {
@@ -130,7 +134,7 @@ namespace MyGame.SkewerJam.Objects.Entities
                 {
                     GetSlot(0).SetItem(null);
                     MySonatFramework.GetService<VibrationService>().Vibrate(50);
-                    GameFactory.ReturnEntity(item);
+                    MyGame.SkewerJam.Gameplay.GameFactory.Instance.ReturnEntity(item);
                 }).SetDelay(1f);
             }
         }

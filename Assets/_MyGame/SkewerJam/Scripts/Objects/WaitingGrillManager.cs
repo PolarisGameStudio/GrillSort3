@@ -8,9 +8,8 @@ using UnityEngine;
 using DG.Tweening;
 using System.Linq;
 using MyGame.SkewerJam.Level;
-using static MyGame.SkewerJam.Objects.Entities.OrderEntity;
-using Manager;
-using SonatFramework.Scripts.Utils;
+using MyGame.SkewerJamSO.Boosters;
+using MyGame.SkewerJam.Gameplay.Helpers;
 
 namespace MyGame.SkewerJam.Objects
 {
@@ -18,9 +17,9 @@ namespace MyGame.SkewerJam.Objects
     {
         private const int WAITING_GRILL_ID_OFFSET = 1000;
 
-        [SerializeField] private int maxWaitingGrills = 10;
         [SerializeField] private Transform centerRefPoint;
         [SerializeField] private float distance = 1.2f;
+        [SerializeField] private BoosterAddPlateBehaviorSO boosterAddPlateBehaviorSO;
 
         private List<WaitingGrill> listWaitingGrills = new List<WaitingGrill>();
 
@@ -85,11 +84,17 @@ namespace MyGame.SkewerJam.Objects
         {
             for (int i = 0; i < listWaitingGrillData.Count; i++)
             {
-                var waitingGrill = await AddWaitingGrill(true);
-                waitingGrill.SetId(WAITING_GRILL_ID_OFFSET + i);
+                if (listWaitingGrillData[i].active == 1)
+                {
+                    var waitingGrill = await AddWaitingGrill(true);
+                    waitingGrill.SetId(WAITING_GRILL_ID_OFFSET + i);
+                }
+                else
+                {
+                    var waitingGrill = await AddWaitingGrill(false);
+                    waitingGrill.SetId(WAITING_GRILL_ID_OFFSET + i);
+                }
             }
-
-            // await AddLockedWaitingGrill();
             await AlignObjects(() => { });
         }
 
@@ -119,14 +124,59 @@ namespace MyGame.SkewerJam.Objects
 
         public async UniTask AlignObjects(Action callback)
         {
+            // ignore: thì tất cả đi về 1 hướng
+            // no ignore: chỉ có active đi về 1 hướng
             var start = -(transform.childCount - 1) * distance / 2;
             var listLocalTargetPositions = new List<Vector3>();
             for (int i = 0; i < transform.childCount; i++)
             {
-                listLocalTargetPositions.Add(new Vector3(start + distance * i, 0, 0));
-
                 var waitingGrill = transform.GetChild(i).GetComponent<WaitingGrill>();
+                listLocalTargetPositions.Add(new Vector3(start + distance * i, 0, 0));
                 waitingGrill.transform.DOLocalMove(listLocalTargetPositions[i], 0.1f).SetEase(Ease.OutSine);
+                await UniTask.Delay(75);
+            }
+
+            callback?.Invoke();
+        }
+
+        public async UniTask AlignObjects2(Action callback)
+        {
+            // ignore: thì tất cả đi về 1 hướng
+            // no ignore: chỉ có active đi về 1 hướng
+            var start = -(transform.childCount - 1) * distance / 2;
+            var count = transform.childCount;
+
+            foreach (Transform child in transform)
+            {
+                if (child.TryGetComponent<WaitingGrill>(out WaitingGrill w) && w.IsActive == false)
+                {
+                    w.transform.SetSiblingIndex(count - 1);
+                    break;
+                }
+            }
+
+            WaitingGrill lockedWaitingGrill = null;
+            for (int i = 0; i < count; i++)
+            {
+                var waitingGrill = transform.GetChild(i).GetComponent<WaitingGrill>();
+
+                if (waitingGrill.IsActive == false)
+                {
+                    lockedWaitingGrill = waitingGrill;
+                    var lastTargetPosition = new Vector3(start + distance * (count - 1), 0, 0);
+                    lockedWaitingGrill.transform.DOLocalMove(lastTargetPosition, 0.1f).SetEase(Ease.OutSine);
+                }
+                else
+                {
+                    if (i == count - 1)
+                    {
+                        await UniTask.Delay(75);
+                    }
+                    var targetPosition = new Vector3(start + distance * i, 0, 0);
+                    waitingGrill.transform.DOLocalMove(targetPosition, 0.1f).SetEase(Ease.OutSine);
+                }
+
+                if (i == count - 2) continue;
                 await UniTask.Delay(75);
             }
 
@@ -143,12 +193,18 @@ namespace MyGame.SkewerJam.Objects
             var waitingGrill = await AddWaitingGrill(true);
             waitingGrill.transform.localScale = Vector3.zero;
             var targetScale = listWaitingGrills[0].transform.localScale;
-            await AlignObjects(() =>
+            await AlignObjects2(() =>
             {
                 waitingGrill.transform.DOScale(targetScale, 0.3f).SetEase(Ease.OutSine);
             });
 
             await UniTask.Delay(500);
+        }
+
+        private void RemoveWaitingGrill(WaitingGrill waitingGrill)
+        {
+            listWaitingGrills.Remove(waitingGrill);
+            GameFactory.Instance.ReturnEntity(waitingGrill);
         }
 
         public bool CheckClearAllItems()
@@ -186,7 +242,7 @@ namespace MyGame.SkewerJam.Objects
 
         public bool ClearOnePlate()
         {
-            var count = listWaitingGrills.Count;
+            var count = listWaitingGrills.Count(e => e.IsActive);
             if (count > 0 && listWaitingGrills[count - 1].GetSlot(0).GetItem() != null)
             {
                 var waitingGrill = listWaitingGrills[count - 1];
@@ -195,6 +251,24 @@ namespace MyGame.SkewerJam.Objects
                 return true;
             }
             return false;
+        }
+
+        public async UniTask Unlock(WaitingGrill waitingGrill)
+        {
+            GameController.Instance.SetBlockUI(true);
+            if (listWaitingGrills.Count(e => e.IsActive) + 1 < boosterAddPlateBehaviorSO.MaxPlate)
+            {
+                await boosterAddPlateBehaviorSO.UseBooster(waitingGrill.transform.position);
+                // waitingGrill.PlayUnlock(true);
+            }
+            else
+            {
+                // waitingGrill.PlayUnlock(false);
+                var lockedWaitingGrill = listWaitingGrills.Where(e => e.IsActive == false).FirstOrDefault();
+                RemoveWaitingGrill(lockedWaitingGrill);
+                await boosterAddPlateBehaviorSO.UseBooster(waitingGrill.transform.position);
+            }
+            GameController.Instance.SetBlockUI(false);
         }
     }
 }

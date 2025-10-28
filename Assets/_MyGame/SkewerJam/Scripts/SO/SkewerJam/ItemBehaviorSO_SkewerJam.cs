@@ -111,7 +111,10 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
             });
 
             // seq.Join(item.transform.DOScale(itemAnimConfig.scaleDown, duration));
-            seq.Join(item.transform.DOScale(Vector3.one, duration));
+            seq.Join(item.transform.DOScale(Vector3.one, duration).OnComplete(() =>
+            {
+                GameController.Instance.GameLogicHandler.ItemMoveToSlot(item, slot);
+            }));
 
             var currentItem = item;
             seq.OnComplete(() =>

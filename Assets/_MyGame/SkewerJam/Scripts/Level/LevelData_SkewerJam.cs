@@ -56,7 +56,8 @@ namespace MyGame.SkewerJam.Level
     [Serializable]
     public class WaitingGrillData
     {
-        public List<GrillData> grillData;
+        public int id;
+        public int active;
     }
 
     [Serializable]

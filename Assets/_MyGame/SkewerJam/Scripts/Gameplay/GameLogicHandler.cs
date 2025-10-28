@@ -167,10 +167,11 @@ namespace MyGame.SkewerJam.Gameplay
                 TryCheckWinGame().Forget();
             }
 
-            if (toOrder == true)
-            {
-                item.MoveToOrder();
-            }
+            // if (toOrder == true)
+            // {
+            // để cho hidden hiện luôn
+            item.MoveToOrder();
+            // }
         }
 
         public void ItemMoveToSlot(Item item, SlotBase slot)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using MyGame.SkewerJam.UI.Loading;
 using Sonat.Enums;
 using SonatFramework.Scripts.Utils;
@@ -32,16 +33,25 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             }, GetFrameDelayChangeState());
         }
 
-        public static Vector3 GetNewWaitingGrillPosition()
+        public static Vector3 GetNewWaitingGrillPosition(int maxWaitingGrill)
         {
             var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
             var waitingGrill = waitingGrillManager.ListWaitingGrills[0];
             var waitingGrill1 = waitingGrillManager.ListWaitingGrills[1];
 
             var distance = waitingGrill1.transform.position - waitingGrill.transform.position;
-            var count = waitingGrillManager.ListWaitingGrills.Count + 1;
-            var start = waitingGrillManager.transform.position - distance * (count - 1) / 2;
-            return start + distance * (count - 1);
+            var count = waitingGrillManager.ListWaitingGrills.Count;
+            var countActive = waitingGrillManager.ListWaitingGrills.Count(e => e.IsActive);
+            var start = waitingGrillManager.transform.position - distance * count / 2;
+
+            if (countActive + 1 >= maxWaitingGrill)
+            {
+                return start + distance * count;
+            }
+            else
+            {
+                return start + distance * countActive;
+            }
         }
 
         public static AudioId GetBGMIngame()

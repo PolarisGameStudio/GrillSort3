@@ -152,7 +152,7 @@ namespace MyGame.SkewerJam.Gameplay
             }
 
 
-            levelDataSkewerJam.ListWaitingGrillData = ValidateListWaitingGrill(5);
+            levelDataSkewerJam.ListWaitingGrillData = ValidateListWaitingGrill(5, 1);
 
 
             if (_level == 1)
@@ -217,9 +217,18 @@ namespace MyGame.SkewerJam.Gameplay
             await waitingSlotManager.SetData(listWaitingGrillData);
         }
 
-        private List<WaitingGrillData> ValidateListWaitingGrill(int numberOfWaitingGrill)
+        private List<WaitingGrillData> ValidateListWaitingGrill(int numberOfWaitingGrill, int numLockedWaitingGrill)
         {
-            return Enumerable.Repeat(new WaitingGrillData(), numberOfWaitingGrill).ToList();
+            var listWaitingGrillData = new List<WaitingGrillData>();
+            for (int i = 0; i < numberOfWaitingGrill; i++)
+            {
+                listWaitingGrillData.Add(new WaitingGrillData() { id = i, active = 1 });
+            }
+            for (int i = 0; i < numLockedWaitingGrill; i++)
+            {
+                listWaitingGrillData.Add(new WaitingGrillData() { id = i, active = 0 });
+            }
+            return listWaitingGrillData;
         }
 
         private async UniTask CreateOrder(List<OrderData_SkewerJam> listOrderData, OrderManager orderManager)

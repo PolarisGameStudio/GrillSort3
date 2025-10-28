@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d182e6d1845c6904fa821f4a96401f41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWaitingGrills: 10
   centerRefPoint: {fileID: 0}
   distance: 1.2
+  boosterAddPlateBehaviorSO: {fileID: 11400000, guid: e4095af2a0005d246bd7a23542091188, type: 2}
 --- !u!1 &2331033934184841407
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +191,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialConfigSO: {fileID: 11400000, guid: 4c5a0b91c433e4246b11b7310fad044d, type: 2}
-  boostersConfig: {fileID: 11400000, guid: 1b12a96699062d04b850840fea6332de, type: 2}
 --- !u!1 &3645637025037360275
 GameObject:
   m_ObjectHideFlags: 0
