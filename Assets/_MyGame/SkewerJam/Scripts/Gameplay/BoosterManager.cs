@@ -14,12 +14,10 @@ namespace MyGame.SkewerJam.Gameplay
     public class BoosterManager : MonoBehaviour
     {
         private const string LOG_TAG = "<color=yellow>BoosterLogicHandler: </color>";
-        [SerializeField] private BaseBoosterBehaviorSO[] boosterBehaviors;
-
         public event Action<GameResource> OnUseBooster;
 
         private GameResource _forceUseBoosterType = GameResource.None;
-
+        private List<BaseBoosterBehaviorSO> listBoosterBehaviors => MySonatFramework.GetService<SonatBoosterService>().BoostersConfig.boosterBehaviors.ToList();
 
         public void Init()
         {
@@ -34,7 +32,7 @@ namespace MyGame.SkewerJam.Gameplay
         #region Booster Behavior
         public BaseBoosterBehaviorSO GetBoosterBehavior(GameResource boosterType)
         {
-            return boosterBehaviors.FirstOrDefault(e => e.boosterType == boosterType);
+            return listBoosterBehaviors.FirstOrDefault(e => e.boosterType == boosterType);
         }
 
         public async UniTask<bool> UseBooster(GameResource boosterType, Vector3 position)
@@ -91,7 +89,7 @@ namespace MyGame.SkewerJam.Gameplay
         public List<GameResource> GetSuggestBoosters()
         {
             var suggestBoosterTypes = new List<GameResource>();
-            foreach (var boosterBehavior in boosterBehaviors)
+            foreach (var boosterBehavior in listBoosterBehaviors)
             {
                 var checkUnlock = MySonatFramework.GetService<BoosterService>().IsBoosterUnlock(boosterBehavior.boosterType);
                 if (checkUnlock && boosterBehavior.CanUseBooster().canUse && boosterBehavior.CheckSuggest())

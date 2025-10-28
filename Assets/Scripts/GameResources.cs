@@ -14,6 +14,7 @@ namespace Sonat.Enums
         BoosterSpatula,
         BoosterShuffle,
         BoosterFoodBox,
+        BoosterUndo,
         MAX = Byte.MaxValue, // 255
     }
 

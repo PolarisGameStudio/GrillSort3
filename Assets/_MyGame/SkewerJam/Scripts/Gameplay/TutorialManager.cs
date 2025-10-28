@@ -6,6 +6,7 @@ using Gameplay.LevelData;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
+using SonatFramework.Systems;
 using SonatFramework.Systems.BoosterManagement;
 using UnityEngine;
 
@@ -14,7 +15,8 @@ namespace MyGame.SkewerJam.Gameplay
     public class TutorialManager : MonoBehaviour
     {
         [SerializeField] private TutorialConfigSO tutorialConfigSO;
-        [SerializeField] private BoostersConfig boostersConfig;
+
+        private Service<SonatBoosterService> boosterService = new();
 
 
         public void Init()
@@ -159,7 +161,7 @@ namespace MyGame.SkewerJam.Gameplay
         private TutorialType CheckTutorialBooster()
         {
             var level = GameController.Instance.Level;
-            var boosterConfig = boostersConfig.configs.Find(x => x.levelUnlock == level);
+            var boosterConfig = boosterService.Instance.BoostersConfig.configs.Find(x => x.levelUnlock == level);
 
             if (boosterConfig != null)
             {
@@ -190,6 +192,7 @@ namespace MyGame.SkewerJam.Gameplay
                 case TutorialType.BoosterAddPlate:
                 case TutorialType.BoosterShuffle:
                 case TutorialType.BoosterFoodBox:
+                case TutorialType.BoosterUndo:
                     ShowPopupTutorialBooster(tutorialType);
                     return;
 
@@ -323,6 +326,7 @@ namespace MyGame.SkewerJam.Gameplay
         BoosterAddPlate = 2,
         BoosterShuffle = 3,
         BoosterFoodBox = 4,
+        BoosterUndo = 5,
 
         PrimaryGrill_Single = 10,
         PrimaryGrill_Lock = 11,

@@ -19,7 +19,7 @@ MonoBehaviour:
     price: 600
     defaultValue: 3
     value: 3
-  - booster: 101
+  - booster: 105
     levelUnlock: 5
     priceCurrency: 1
     price: 500
@@ -37,3 +37,8 @@ MonoBehaviour:
     price: 800
     defaultValue: 3
     value: 3
+  boosterBehaviors:
+  - {fileID: 11400000, guid: 58adab778e83c4f4da0a4c325f1b3dab, type: 2}
+  - {fileID: 11400000, guid: 041379410ed829446b2aa920015909d0, type: 2}
+  - {fileID: 11400000, guid: dbbfd012acfa42c4d8d196f67acc3b13, type: 2}
+  - {fileID: 11400000, guid: f528b22d5b302134b9e3f251c351823c, type: 2}

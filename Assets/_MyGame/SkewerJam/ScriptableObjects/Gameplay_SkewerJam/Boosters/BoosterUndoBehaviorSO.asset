@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3b142e7d7240584886f574aedad8d62, type: 3}
-  m_Name: CheckInternetService
+  m_Script: {fileID: 11500000, guid: 4c48b434a5703ff4e849e6aa0d3f27ef, type: 3}
+  m_Name: BoosterUndoBehaviorSO
   m_EditorClassIdentifier: 
-  checkInterval: 30
-  forceInternet: 1
-  popupNoInternetName: PopupNoInternet
-  onlyCheckAtHome: 1
