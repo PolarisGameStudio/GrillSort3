@@ -4,6 +4,7 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using Gameplay.Entities;
 using MyGame.SkewerJam.Gameplay.Helpers;
+using MyGame.SkewerJam.Gameplay.Utils.CommandPattern;
 using MyGame.SkewerJam.Objects;
 using MyGame.SkewerJam.Objects.Entities;
 using Sonat.Enums;
@@ -31,6 +32,7 @@ namespace MyGame.SkewerJam.Gameplay
 
         [Header("Utils")]
         [SerializeField] private SuggestManager suggestManager;
+        [SerializeField] private CommandInvoker commandInvoker;
 
         public OrderManager OrderManager => orderManager;
         public WaitingGrillManager WaitingGrillManager => waitingGrillManager;
@@ -40,6 +42,7 @@ namespace MyGame.SkewerJam.Gameplay
         public ItemManager ItemManager => itemManager;
 
         public BoosterManager BoosterManager => boosterManager;
+        public CommandInvoker CommandInvoker => commandInvoker;
 
         #region Event Actions
         public event Action<Item, SlotBase> OnItemStartSwitch;
