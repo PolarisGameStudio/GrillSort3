@@ -21,6 +21,8 @@ namespace Gameplay.Entities.GrillScripts
 
         private List<VendingGrillTileInProgress> tiles = new();
 
+        private int maxNumLayer = 0;
+
         public override void SetDefaultGrill(GrillData grillData)
         {
             base.SetDefaultGrill(grillData);
@@ -30,6 +32,8 @@ namespace Gameplay.Entities.GrillScripts
             progress.gameObject.SetActive(true);
             tiles.Clear();
             SpanwTiles(numLayer);
+
+            maxNumLayer = numLayer;
         }
 
         private async UniTask SpanwTiles(int numLayer)
@@ -82,9 +86,17 @@ namespace Gameplay.Entities.GrillScripts
             });
         }
 
-        public void SetLayer(int numLayer)
+        public async UniTask SetLayer(int numLayer)
         {
             txtNumLayer.text = numLayer.ToString();
+            while (numLayer - 1 >= tiles.Count)
+            {
+                var grill = GetComponentInParent<GrillBase>();
+                var gameFactory = grill.GrillBaseBehaviorSO.gameFactorySO;
+                var tile = await gameFactory.CreateItem<VendingGrillTileInProgress>("VendingGrillTileInProgress");
+                tile.Setup(tiles.Count, maxNumLayer, container);
+                tiles.Add(tile);
+            }
 
             for (int i = 0; i < tiles.Count; i++)
             {

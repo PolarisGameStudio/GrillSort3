@@ -105,16 +105,10 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
             var distance = item.transform.position - slot.transform.position;
             var duration = itemAnimConfig.GetMoveDuration(distance.magnitude);
             seq.Join(item.transform.DOLocalMoveX(0, duration).SetEase(itemAnimConfig.GetMoveCurveX(distance.x)));
-            seq.Join(item.transform.DOLocalMoveY(0, duration).SetEase(itemAnimConfig.GetMoveCurveY(distance.y))).OnComplete(() =>
-            {
-                GameController.Instance.GameLogicHandler.ItemMoveToSlot(item, slot);
-            });
+            seq.Join(item.transform.DOLocalMoveY(0, duration).SetEase(itemAnimConfig.GetMoveCurveY(distance.y)));
 
             // seq.Join(item.transform.DOScale(itemAnimConfig.scaleDown, duration));
-            seq.Join(item.transform.DOScale(Vector3.one, duration).OnComplete(() =>
-            {
-                GameController.Instance.GameLogicHandler.ItemMoveToSlot(item, slot);
-            }));
+            seq.Join(item.transform.DOScale(Vector3.one, duration));
 
             var currentItem = item;
             seq.OnComplete(() =>
@@ -134,6 +128,51 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
                 }
             });
         }
+
+        public override void UndoSwitchSlot(Item item, SlotBase slot)
+        {
+            item.transform.DOKill();
+            if (item.Slot != null)
+            {
+                item.Slot.ItemOut();
+            }
+
+            item.SetSlot(slot);
+            item.SetSelected(true);
+            slot.AddItem(item);
+            item.Visual.OnDeselected();
+            item.Visual.SetSortingOrder(LayerManager.TopUI, 1);
+
+            var seq = DOTween.Sequence();
+
+            var distance = item.transform.position - slot.transform.position;
+            var duration = itemAnimConfig.GetMoveDuration(distance.magnitude);
+            seq.Join(item.transform.DOLocalMoveX(0, duration).SetEase(itemAnimConfig.GetMoveCurveX_Undo(distance.x)));
+            seq.Join(item.transform.DOLocalMoveY(0, duration).SetEase(itemAnimConfig.GetMoveCurveY_Undo(distance.y)));
+
+            // seq.Join(item.transform.DOScale(itemAnimConfig.scaleDown, duration));
+            seq.Join(item.transform.DOScale(Vector3.one, duration));
+
+            var currentItem = item;
+            seq.OnComplete(() =>
+            {
+                currentItem.SetSelected(false);
+                currentItem.OnDropToSlot(slot);
+                currentItem.Visual.SetSortingOrder(LayerManager.Object, 2);
+                // MySonatFramework.GetService<VibrationService>().Vibrate(50);
+                // GameController.Instance.GameLogicHandler.EndSwitchSlot(currentItem, slot);
+
+                foreach (Transform child in slot.Container)
+                {
+                    if (child.gameObject != currentItem.gameObject)
+                    {
+                        GameFactory.Instance.ReturnEntity(child.GetComponent<Item>());
+                    }
+                }
+            });
+        }
+
+
 
         public override void OnExplodeBomb(ItemBombMove itemBombMove)
         {

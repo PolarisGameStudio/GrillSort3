@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Gameplay.LevelData;
@@ -130,6 +131,10 @@ namespace Gameplay.Entities.Items
             if (item == this)
             {
                 SkipBomb();
+
+                var gameLogicHandler = GameController.Instance.GameLogicHandler;
+                gameLogicHandler.CommandInvoker.RemoveCommands(new List<Item> { this });
+
                 return;
             }
 

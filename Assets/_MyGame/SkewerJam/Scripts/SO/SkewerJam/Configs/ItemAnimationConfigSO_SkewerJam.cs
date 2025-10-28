@@ -15,6 +15,9 @@ namespace MyGame.SkewerJam.Scripts.SO.Configs
         public AnimationCurve[] curveX;
         public AnimationCurve[] curveY;
 
+        public AnimationCurve[] curveX_Undo;
+        public AnimationCurve[] curveY_Undo;
+
         public float GetMoveDuration(float distance)
         {
             return Mathf.Max(distance / speed, minDuration);
@@ -28,6 +31,16 @@ namespace MyGame.SkewerJam.Scripts.SO.Configs
         public AnimationCurve GetMoveCurveY(float distanceY)
         {
             return curveY[Mathf.Abs(distanceY) > thresholdY ? 1 : 0];
+        }
+
+        public AnimationCurve GetMoveCurveX_Undo(float distanceX)
+        {
+            return curveX_Undo[Mathf.Abs(distanceX) > thresholdX ? 1 : 0];
+        }
+
+        public AnimationCurve GetMoveCurveY_Undo(float distanceY)
+        {
+            return curveY_Undo[Mathf.Abs(distanceY) > thresholdY ? 1 : 0];
         }
     }
 }

@@ -13,8 +13,9 @@ using static MyGame.SkewerJam.Objects.Entities.OrderEntity;
 using SonatFramework.Systems.AudioManagement;
 using Sonat.Enums;
 using MyGame.SkewerJam.Utils;
+using System;
 
-namespace MyGame.SkewerJam.Objects
+namespace MyGame.SkewerJam.Gameplay.Objects
 {
     public class OrderManager : MonoBehaviour
     {
@@ -93,6 +94,11 @@ namespace MyGame.SkewerJam.Objects
                     {
                         CreateNextOrder(orderIndex).Forget();
                     }
+
+                    // xóa các command liên quan tới order này
+                    var items = orderEntity.GetSlots().Select(s => s.GetItem()).Where(i => i != null).ToList();
+                    var gameLogicHandler = GameController.Instance.GameLogicHandler;
+                    gameLogicHandler.CommandInvoker.RemoveCommands(items);
                 }
             }
         }
@@ -105,7 +111,7 @@ namespace MyGame.SkewerJam.Objects
                 orderEntity.CompleteCount++;
 
                 // kiểm tra order này đã hoàn thành và các item bay đủ tới chưa
-                if (orderEntity.State == OrderEntityState.Complete && orderEntity.CompleteCount == orderEntity.MaxItems)
+                if (orderEntity.State == OrderEntityState.Complete && orderEntity.CompleteCount >= orderEntity.MaxItems)
                 {
 
                     var nextOrder = _listOrders.Where(e => e.OrderIndex == orderEntity.OrderIndex).FirstOrDefault();
@@ -339,6 +345,12 @@ namespace MyGame.SkewerJam.Objects
             }
             logicOrderHandler.SetForceRescue(isRescue, -2);
             orderEntity.PlayUnlock(isRescue);
+        }
+
+        public void Undo(OrderEntity orderEntity, SlotBase targetSlot)
+        {
+            orderEntity.ShowTargetItemOnSlot(targetSlot);
+            orderEntity.CompleteCount--;
         }
     }
 }

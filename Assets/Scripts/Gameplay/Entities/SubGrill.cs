@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Gameplay.BoosteeManagement;
 using Gameplay.Entities.Grills;
+using Gameplay.Entities.GrillScripts;
 using Gameplay.LevelData;
 using Manager;
 using Sonat.Enums;
@@ -22,6 +24,8 @@ namespace Gameplay.Entities
         [SerializeField] private string grillVisualName;
 
         public override EntityType entityType => EntityType.SubGrill;
+
+        public SpriteRenderer Visual => visual;
 
         public void SetData(PrimaryGrill grill, LayerData layerData, int index)
         {
@@ -73,6 +77,12 @@ namespace Gameplay.Entities
         public void Show()
         {
             SetLayer(layerData);
+        }
+
+        public void Hide()
+        {
+            ClearGrill();
+            showed = false;
         }
 
         public LayerData GetCurrentData()
@@ -278,7 +288,7 @@ namespace Gameplay.Entities
         {
             foreach (var slot in slots)
             {
-                if (!slot.isEmpty()) return;
+                if (slot.GetItem() != null) return;
             }
 
             UpdateSubGrills();
@@ -299,6 +309,11 @@ namespace Gameplay.Entities
                     primaryGrill.GetSubGrills()[0].Show();
                 }
             }
+        }
+
+        public void AddFromPrimary(Item item, int i, int itemIndex)
+        {
+            grillBaseBehaviorSO.OnAddToSub(this, item, i, itemIndex);
         }
     }
 }

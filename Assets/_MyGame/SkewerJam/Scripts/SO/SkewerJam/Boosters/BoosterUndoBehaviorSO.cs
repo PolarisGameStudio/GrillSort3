@@ -22,41 +22,40 @@ namespace MyGame.SkewerJamSO.Boosters
         #region Behavior
         public override (bool canUse, string reason) CanUseBooster()
         {
-            return (true, "");
+            var gameLogicHandler = GameController.Instance.GameLogicHandler;
+            var commandInvoker = gameLogicHandler.CommandInvoker;
+            if (commandInvoker.CanUndo())
+            {
+                return (true, "");
+            }
+            else
+            {
+                return (false, "Undo is not available");
+            }
+
         }
 
         public override async UniTask<bool> UseBooster(Vector3 position, bool isForce = false)
         {
-            // if (isForce == false)
-            // {
-            //     await PlayBoosterAnim(position);
-            // }
+            if (isForce == false)
+            {
+                await PlayBoosterAnim(position);
+            }
 
             // await UniTask.Delay((int)(delay * 1000));
-            // var gameLogicHanlder = GameController.Instance.GameLogicHandler;
-            // var waitingManager = gameLogicHanlder.WaitingGrillManager;
-            // await waitingManager.AddPlate();
-            // MySonatFramework.GetService<VibrationService>().Vibrate(50);
-            PopupToast.Cretate("Undo!!!");
-            await UniTask.Delay(2000);
+
+            MySonatFramework.GetService<VibrationService>().Vibrate(50);
+            var gameLogicHandler = GameController.Instance.GameLogicHandler;
+            gameLogicHandler.CommandInvoker.UndoCommand();
+
+            await UniTask.Delay(500);
+
             return true;
         }
 
         public override async UniTask<bool> ForceUseBooster()
         {
             return false;
-        }
-
-        protected override async UniTask PlayBoosterAnim(Vector3 position)
-        {
-            // var boosterAnim = await MySonatFramework.GetService<PoolingServiceAsync>().CreateAsync<BoosterAnim_BoosterAddPlate>(
-            //     "BoosterAnimAddPlate",
-            //     PanelManager.Instance.transform);
-
-            // var targetPosition = GameplayHelper.GetNewWaitingGrillPosition();
-            // boosterAnim.SetTargetPosition(targetPosition);
-            // boosterAnim.SetData(position);
-
         }
 
         #endregion
@@ -71,6 +70,18 @@ namespace MyGame.SkewerJamSO.Boosters
             // var gameLogicHandler = GameController.Instance.GameLogicHandler;
             // var orderManager = gameLogicHandler.OrderManager;
             // orderManager.LogicOrderHandler.SetForceRescue(true);
+        }
+
+        public override async UniTask PrepareTutorialBooster()
+        {
+            await UniTask.Delay(1000);
+
+            var listSelectedItems = ItemHelper.SelectItemsForForceBooster(1);
+            foreach (var item in listSelectedItems)
+            {
+                GameController.Instance.GameLogicHandler.SelectItem(item);
+            }
+            await UniTask.Delay((int)(1000));
         }
     }
 }

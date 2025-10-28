@@ -44,21 +44,27 @@ namespace Gameplay.Entities.GrillScripts
             grillVisualSO.SetGrillBaseVisual(this, stove, lid, stoveType, lidType);
         }
 
-        public virtual void OpenGrill(bool doEffect = true)
+        public virtual void OpenGrill(bool doEffect = true, bool isSoldOut = false)
         {
-            lid.transform.DOKill();
+            var selectedLid = isSoldOut ? lidSoldOut : lid;
+            var otherLid = isSoldOut ? lid : lidSoldOut;
 
+            otherLid.transform.DOKill();
+            otherLid.gameObject.SetActive(false);
+
+            selectedLid.transform.DOKill();
+            selectedLid.gameObject.SetActive(true);
             if (doEffect)
             {
                 // lid.transform.localScale = Vector3.one;
-                lid.gameObject.SetActive(true);
-                lid.transform.DOLocalMoveY(2.5f, GameDefine.grillLidAnim).From(defaultLidPos).SetEase(Ease.OutQuad);
+                selectedLid.gameObject.SetActive(true);
+                selectedLid.transform.DOLocalMoveY(2.5f, GameDefine.grillLidAnim).From(defaultLidPos).SetEase(Ease.OutQuad);
                 // lid.transform.DOScale(0.95f, GameDefine.grillLidAnim);
-                lid.DOFade(0, GameDefine.grillLidAnim).SetEase(Ease.InQuad).OnComplete(() => { lid.gameObject.SetActive(false); });
+                selectedLid.DOFade(0, GameDefine.grillLidAnim).SetEase(Ease.InQuad).OnComplete(() => { selectedLid.gameObject.SetActive(false); });
             }
             else
             {
-                lid.gameObject.SetActive(false);
+                selectedLid.gameObject.SetActive(false);
             }
         }
 

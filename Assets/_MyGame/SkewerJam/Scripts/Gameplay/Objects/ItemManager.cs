@@ -6,7 +6,7 @@ using MyGame.SkewerJam.Level;
 using MyGame.SkewerJam.Objects.Entities;
 using UnityEngine;
 
-namespace MyGame.SkewerJam.Gameplay
+namespace MyGame.SkewerJam.Gameplay.Objects
 {
     public class ItemManager : MonoBehaviour
     {

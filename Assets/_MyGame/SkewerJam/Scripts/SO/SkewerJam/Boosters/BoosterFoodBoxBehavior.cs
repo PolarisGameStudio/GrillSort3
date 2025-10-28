@@ -83,45 +83,13 @@ namespace MyGame.SkewerJamSO.Boosters
         {
             await UniTask.Delay(1000);
 
-            var listSelectedItems = SelectItemsForForceBooster();
+            var listSelectedItems = ItemHelper.SelectItemsForForceBooster(4);
             foreach (var item in listSelectedItems)
             {
                 GameController.Instance.GameLogicHandler.SelectItem(item);
                 await UniTask.Delay((int)(delayBetweenItemsForPrepareForceBooster * 1000));
             }
             await UniTask.Delay((int)(delayForPrepareForceBooster * 1000));
-        }
-
-        private List<Item> SelectItemsForForceBooster()
-        {
-            var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
-            var dictOrder = orderManager.GetOrderItemsDict();
-
-            // lấy item từ theo layer từ 0 -> ...
-            var listSelectedItems = new List<Item>();
-            var grillManager = GameController.Instance.GameLogicHandler.GrillManager;
-            var listGrills = grillManager.ListGrills;
-
-            foreach (var grill in listGrills)
-            {
-                if (grill.IsLock) continue;
-
-                foreach (var slot in grill.GetSlots())
-                {
-                    var item = slot.GetItem();
-                    if (item == null) continue;
-                    if (item.IsLocked) continue;
-
-                    if (dictOrder.ContainsKey((ItemId)item.id)) continue;
-
-                    listSelectedItems.Add(item);
-                }
-            }
-
-            //lấy random 4 item
-            var random = new System.Random();
-            var randomItems = listSelectedItems.OrderBy(x => random.Next()).Take(4).ToList();
-            return randomItems;
         }
     }
 }

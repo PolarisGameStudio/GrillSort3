@@ -50,7 +50,7 @@ public class StarChestEditor : CSVImporter
 
             if (lives > 0) rewardData.AddReward(new ResourceData(GameResource.Lives, lives));
             if (spatula > 0) rewardData.AddReward(new ResourceData(GameResource.BoosterSpatula, spatula));
-            if (addPlate > 0) rewardData.AddReward(new ResourceData(GameResource.BoosterAddPlate, addPlate));
+            if (addPlate > 0) rewardData.AddReward(new ResourceData(GameResource.BoosterUndo, addPlate));
             if (shuffle > 0) rewardData.AddReward(new ResourceData(GameResource.BoosterShuffle, shuffle));
             if (foodBox > 0) rewardData.AddReward(new ResourceData(GameResource.BoosterFoodBox, foodBox));
             if (coin > 0) rewardData.AddReward(new ResourceData(GameResource.Coin, coin));

@@ -10,11 +10,11 @@ namespace Sonat.Enums
         LivesService_SingleLive,
         Star,
 
-        BoosterAddPlate = 101,
+        BoosterUndo = 101,
         BoosterSpatula,
         BoosterShuffle,
         BoosterFoodBox,
-        BoosterUndo,
+        BoosterUndo_Test,
         MAX = Byte.MaxValue, // 255
     }
 
@@ -35,7 +35,7 @@ namespace Sonat.Enums
                 case GameResource.Coin:
                 case GameResource.Lives:
                     return GameResourceType.Currency;
-                case GameResource.BoosterAddPlate:
+                case GameResource.BoosterUndo:
                 case GameResource.BoosterSpatula:
                 case GameResource.BoosterShuffle:
                 case GameResource.BoosterFoodBox:

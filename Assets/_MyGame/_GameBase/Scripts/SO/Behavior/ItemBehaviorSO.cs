@@ -19,6 +19,7 @@ namespace MyGame.SkewerJam.Scripts.SO
         public abstract void OnMouseExit(Item item);
 
         public abstract void SwitchSlot(Item item, SlotBase slot);
+        public abstract void UndoSwitchSlot(Item item, SlotBase slot);
 
         public abstract void OnExplodeBomb(ItemBombMove itemBombMove);
 

@@ -36,5 +36,10 @@ namespace MyGame.SkewerJam.Scripts.SO.Behavior
         {
             item.MoveToPrimary(primaryGrill.GetSlot(slotIndex), index);
         }
+
+        public override void OnAddToSub(SubGrill subGrill, Item item, int slotIndex, int index)
+        {
+            item.MoveToSub(subGrill.GetSlot(slotIndex), index);
+        }
     }
 }

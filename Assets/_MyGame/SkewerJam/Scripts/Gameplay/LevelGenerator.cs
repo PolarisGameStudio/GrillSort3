@@ -7,6 +7,7 @@ using Gameplay.Entities.Grills;
 using Gameplay.Entities.Obstacle;
 using Gameplay.LevelData;
 using MyGame.SkewerJam.Gameplay.Helpers;
+using MyGame.SkewerJam.Gameplay.Objects;
 using MyGame.SkewerJam.Level;
 using MyGame.SkewerJam.Objects;
 using Sonat.Enums;

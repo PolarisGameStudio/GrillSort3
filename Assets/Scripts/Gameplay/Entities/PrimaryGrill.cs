@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Facebook.Unity;
 using Gameplay.BoosteeManagement;
 using Gameplay.Entities.GrillScripts;
 using Gameplay.LevelData;
@@ -123,6 +124,59 @@ namespace Gameplay.Entities
 
             if (IsLock)
                 SetLockItems(IsLock);
+        }
+
+        public virtual async UniTask UndoUpdateSubGrills(GrillData preGrillData)
+        {
+            var currentGrillData = GetGrillData();
+
+            var isClosed = currentGrillData.layer.Count == 0 || slots.All(slot => slot.isEmpty());
+            if (currentGrillData.layer.Count != preGrillData.layer.Count || isClosed)
+            {
+                // ẩn subgrill hiện tại
+                if (subGrills != null && subGrills.Count > 0)
+                    subGrills[0].Hide();
+
+                if (isClosed)
+                {
+                    grillVisual.OpenGrill(true, true);
+                }
+                else
+                {
+                    // tạo subgrill mới để undo
+                    var subDataToUndo = currentGrillData.layer[0];
+                    await CreateSubGrillToUndo(subDataToUndo);
+                }
+
+            }
+        }
+
+        protected virtual async UniTask CreateSubGrillToUndo(LayerData subDataToUndo)
+        {
+            int layer = subGrills.Count;
+            var subGrill = await CreateSubGrill(layer);
+            subGrill.SetData(this, subDataToUndo, layer);
+            // subGrill.Show();
+            subGrills.Insert(0, subGrill);
+
+            await subGrill.Visual.DOFade(1, 0.15f).From(0);
+            // ClearGrill();
+            MoveDownSubGrill();
+        }
+
+        private void MoveDownSubGrill()
+        {
+            var subGrill = subGrills[0];
+            int itemIndex = 0;
+            for (int i = 0; i < slots.Length; i++)
+            {
+                var item = slots[i].GetItem();
+                if (item != null)
+                {
+                    subGrill.AddFromPrimary(item, i, itemIndex);
+                    itemIndex++;
+                }
+            }
         }
 
         public virtual void ClearGrill()

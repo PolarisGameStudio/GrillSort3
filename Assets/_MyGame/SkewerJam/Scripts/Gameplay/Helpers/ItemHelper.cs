@@ -104,5 +104,37 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             return orderItemsDict.ContainsKey((ItemId)item.id);
         }
 
+        public static List<Item> SelectItemsForForceBooster(int numItems)
+        {
+            var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
+            var dictOrder = orderManager.GetOrderItemsDict();
+
+            // lấy item từ theo layer từ 0 -> ...
+            var listSelectedItems = new List<Item>();
+            var grillManager = GameController.Instance.GameLogicHandler.GrillManager;
+            var listGrills = grillManager.ListGrills;
+
+            foreach (var grill in listGrills)
+            {
+                if (grill.IsLock) continue;
+
+                foreach (var slot in grill.GetSlots())
+                {
+                    var item = slot.GetItem();
+                    if (item == null) continue;
+                    if (item.IsLocked) continue;
+
+                    if (dictOrder.ContainsKey((ItemId)item.id)) continue;
+
+                    listSelectedItems.Add(item);
+                }
+            }
+
+            //lấy random 4 item
+            var random = new System.Random();
+            var randomItems = listSelectedItems.OrderBy(x => random.Next()).Take(numItems).ToList();
+            return randomItems;
+        }
+
     }
 }

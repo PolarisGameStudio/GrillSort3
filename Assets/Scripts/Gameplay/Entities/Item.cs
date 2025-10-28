@@ -282,6 +282,11 @@ namespace Gameplay.Entities
             itemBehaviorSO.SwitchSlot(this, slot);
         }
 
+        public void UndoSwitchSlot(SlotBase slot)
+        {
+            itemBehaviorSO.UndoSwitchSlot(this, slot);
+        }
+
         private bool isMoveToPrimary = false;
         public bool IsMoveToPrimary => isMoveToPrimary;
         public void MoveToPrimary(SlotBase slot, int index)
@@ -308,6 +313,45 @@ namespace Gameplay.Entities
             }, this);
         }
 
+        public void MoveToSub(SlotBase slot, int index)
+        {
+            isMoveToPrimary = false;
+            SetPrimary(false);
+            visual.UpdateVisual();
+
+            // slot này sẽ luôn trống để undo 
+            // FIX BUG: item out -> check empty
+            // if (this.slot != null)
+            // {
+            //     this.slot.ItemOut();
+            // }
+
+            this.slot = slot;
+            slot.AddItem(this);
+            SetIsOnConveyor(this.slot.isOnConveyor);
+
+            visual.SetSortingOrder(LayerManager.Object, 100);
+            float delay = 0.1f * index;
+
+            if (gameObject.activeInHierarchy)
+            {
+                SonatUtils.DelayCall(delay, () =>
+                    {
+                        transform.DOKill();
+                        transform.DOScale(0.55f, GameDefine.itemMovePrimaryDuration).SetEase(Ease.InBack);
+                        transform.DOLocalMove(Vector3.zero, GameDefine.itemMovePrimaryDuration).SetEase(Ease.OutSine).OnComplete(OnIntoSlot);
+                        transform.DOLocalRotate(Vector3.zero, GameDefine.itemMovePrimaryDuration).SetEase(Ease.Linear);
+                    }, this);
+            }
+            else
+            {
+                transform.DOKill();
+                transform.DOScale(0.55f, GameDefine.itemMovePrimaryDuration).SetEase(Ease.InBack);
+                transform.DOLocalMove(Vector3.zero, GameDefine.itemMovePrimaryDuration).SetEase(Ease.OutSine).OnComplete(OnIntoSlot);
+                transform.DOLocalRotate(Vector3.zero, GameDefine.itemMovePrimaryDuration).SetEase(Ease.Linear);
+            }
+        }
+
         public virtual void OnDropToSlot(SlotBase slot)
         {
             OnIntoSlot();
@@ -324,6 +368,7 @@ namespace Gameplay.Entities
             isMoveToPrimary = false;
             visual.OnIntoSlot();
             slot.OnItemIntoSlot();
+            visual.SetSortingOrder(LayerManager.Object, 2);
         }
 
         public virtual void SetLockState(bool lockState)

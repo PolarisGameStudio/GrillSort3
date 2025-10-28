@@ -3,7 +3,9 @@ using System.Collections;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Gameplay.Entities;
+using MyGame.SkewerJam.Gameplay.Command;
 using MyGame.SkewerJam.Gameplay.Helpers;
+using MyGame.SkewerJam.Gameplay.Objects;
 using MyGame.SkewerJam.Gameplay.Utils.CommandPattern;
 using MyGame.SkewerJam.Objects;
 using MyGame.SkewerJam.Objects.Entities;
@@ -75,6 +77,8 @@ namespace MyGame.SkewerJam.Gameplay
             boosterManager.Init();
             suggestManager.Init();
 
+            commandInvoker.Init();
+
             ResetCoroutine();
             _blockUIWhenEnd = false;
         }
@@ -91,6 +95,8 @@ namespace MyGame.SkewerJam.Gameplay
 
             boosterManager.Clear();
             suggestManager.Clear();
+
+            commandInvoker.Clear();
 
             ResetCoroutine();
         }
@@ -114,7 +120,8 @@ namespace MyGame.SkewerJam.Gameplay
             if (slot != null)
             {
                 WaitingGrillHelper.ResetWarning();
-                SwitchSlot(item, slot, false, true);
+
+                CreateCommand(item, slot);
                 isSwitchSuccess = true;
             }
             else
@@ -122,7 +129,7 @@ namespace MyGame.SkewerJam.Gameplay
                 var (waitingGrill, waitingGrillSlot) = waitingGrillManager.GetDestinationSlot();
                 if (waitingGrillSlot != null)
                 {
-                    SwitchSlot(item, waitingGrillSlot, false, false);
+                    CreateCommand(item, waitingGrillSlot);
                     isSwitchSuccess = true;
                 }
             }
@@ -143,6 +150,11 @@ namespace MyGame.SkewerJam.Gameplay
             return isSwitchSuccess;
         }
 
+        private void CreateCommand(Item item, SlotBase slot)
+        {
+            commandInvoker.ExecuteCommand(new SelectItemCommand(item, slot));
+        }
+
         private bool CheckClickAndWarning(Item item)
         {
             if (WaitingGrillHelper.IsWarning == true && WaitingGrillHelper.CheckWarningCount() == true)
@@ -156,8 +168,11 @@ namespace MyGame.SkewerJam.Gameplay
             return false;
         }
 
-        private void SwitchSlot(Item item, SlotBase slot, bool fromWaitingGrill, bool toOrder)
+        public void SwitchSlot(Item item, SlotBase slot)
         {
+            bool fromWaitingGrill = item.Slot.GetGrill() is WaitingGrill;
+            bool toOrder = slot.GetGrill() is OrderEntity;
+
             item.Moving = true;
             item.SetLockState(true);
             item.SwitchSlot(slot);
@@ -176,7 +191,7 @@ namespace MyGame.SkewerJam.Gameplay
             item.MoveToOrder();
             // }
         }
-
+        
         public void ItemMoveToSlot(Item item, SlotBase slot)
         {
             OnItemMoveToSlot?.Invoke(item, slot);
@@ -185,6 +200,7 @@ namespace MyGame.SkewerJam.Gameplay
         public void EndSwitchSlot(Item item, SlotBase slot)
         {
             item.Moving = false;
+            ItemMoveToSlot(item, slot);
             OnItemEndSwitch?.Invoke(item, slot);
         }
         #endregion
@@ -217,7 +233,7 @@ namespace MyGame.SkewerJam.Gameplay
                     if (item != null && item.id == (int)targetItem && orderSlot != null && item.Moving == false)
                     {
                         // chờ tới khi item rơi hẳn xuống đĩa thì mới lấy
-                        SwitchSlot(item, orderSlot, true, true);
+                        SwitchSlot(item, orderSlot);
                         count++;
                     }
                 }
@@ -231,7 +247,7 @@ namespace MyGame.SkewerJam.Gameplay
             if (slot != null)
             {
                 await UniTask.WaitUntil(() => GameController.Instance.GameState == GameState.Playing);
-                SwitchSlot(item, slot, true, true);
+                SwitchSlot(item, slot);
                 return;
             }
         }

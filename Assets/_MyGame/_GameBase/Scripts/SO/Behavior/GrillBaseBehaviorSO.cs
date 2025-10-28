@@ -23,5 +23,6 @@ namespace SkewerJam.SO.Behavior
         public abstract GameState GetGameState();
 
         public abstract void OnAddFromSub(PrimaryGrill primaryGrill, Item item, int slotIndex, int index);
+        public abstract void OnAddToSub(SubGrill subGrill, Item item, int slotIndex, int index);
     }
 }

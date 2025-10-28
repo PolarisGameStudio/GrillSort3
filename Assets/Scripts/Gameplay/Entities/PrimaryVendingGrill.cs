@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using Gameplay.BoosteeManagement;
 using Gameplay.Entities.GrillScripts;
@@ -102,6 +103,33 @@ namespace Gameplay.Entities
         {
             base.Unlock();
             grillVendingVisual.Unlock();
+        }
+
+        public override async UniTask UndoUpdateSubGrills(GrillData preGrillData)
+        {
+            var currentGrillData = GetGrillData();
+
+            var isClosed = currentGrillData.layer.Count == 0 || slots.All(slot => slot.isEmpty());
+            if (currentGrillData.layer.Count != preGrillData.layer.Count || isClosed)
+            {
+                // ẩn subgrill hiện tại
+                if (subGrills != null && subGrills.Count > 0)
+                    subGrills[0].Hide();
+
+                if (isClosed)
+                {
+                    grillVendingVisual.OpenGrill(true, true);
+                }
+                else
+                {
+                    // tạo subgrill mới để undo
+                    var subDataToUndo = currentGrillData.layer[0];
+                    await CreateSubGrillToUndo(subDataToUndo);
+                }
+                numLayer = subGrills.Count + 1;
+                grillVendingVisual.SetLayer(numLayer);
+
+            }
         }
     }
 }

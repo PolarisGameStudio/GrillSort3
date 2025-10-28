@@ -140,21 +140,7 @@ namespace MyGame.SkewerJam.Objects.Entities
                 }
                 else
                 {
-                    var itemData = new ItemData()
-                    {
-                        itemType = ItemType.Normal,
-                        id = (int)itemIdTarget,
-                    };
-                    var item = await GrillBaseBehaviorSO.gameFactorySO.CreateItem<Item>($"ItemFaded");
-                    item.SetPrimary(entityType == EntityType.PrimaryGrill);
-                    item.SetItemData(itemData, slots[i]);
-                    item.SetIsOnConveyor(isOnConveyor);
-                    item.SetLockState(true);
-
-                    slots[i].ClearItem();
-                    slots[i].SetItem(item); // căn đúng vị trí
-
-                    slots[i].SetItem(null); // không tồn tại trong slot
+                    ShowTargetItemOnSlot(slots[i]).Forget();
                 }
             }
             checkCreateItemFaded = true;
@@ -167,6 +153,25 @@ namespace MyGame.SkewerJam.Objects.Entities
             //     var slot = slots[i];
             //     slot.transform.localPosition = new Vector3(startPos + dist * i, 0, 0);
             // }
+        }
+
+        public async UniTask ShowTargetItemOnSlot(SlotBase slot)
+        {
+            var itemData = new ItemData()
+            {
+                itemType = ItemType.Normal,
+                id = (int)itemIdTarget,
+            };
+            var item = await GrillBaseBehaviorSO.gameFactorySO.CreateItem<Item>($"ItemFaded");
+            item.SetPrimary(entityType == EntityType.PrimaryGrill);
+            item.SetItemData(itemData, slot);
+            item.SetIsOnConveyor(isOnConveyor);
+            item.SetLockState(true);
+
+            slot.ClearItem();
+            slot.SetItem(item); // căn đúng vị trí
+
+            slot.SetItem(null); // không tồn tại trong slot
         }
 
         public SlotBase GetAvailableSlot()

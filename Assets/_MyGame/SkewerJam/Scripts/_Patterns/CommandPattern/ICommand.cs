@@ -1,6 +1,6 @@
 namespace MyGame.SkewerJam.Gameplay.Utils.CommandPattern
 {
-    public interface ICommand
+    public interface IPatternCommand
     {
         void Execute();
         void Undo();
