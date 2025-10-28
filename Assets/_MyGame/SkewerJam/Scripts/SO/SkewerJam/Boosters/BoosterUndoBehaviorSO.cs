@@ -67,9 +67,8 @@ namespace MyGame.SkewerJamSO.Boosters
 
         public override async UniTask PostUseBooster()
         {
-            // var gameLogicHandler = GameController.Instance.GameLogicHandler;
-            // var orderManager = gameLogicHandler.OrderManager;
-            // orderManager.LogicOrderHandler.SetForceRescue(true);
+            var gameLogicHandler = GameController.Instance.GameLogicHandler;
+            gameLogicHandler.CommandInvoker.ResetStack();
         }
 
         public override async UniTask PrepareTutorialBooster()

@@ -1,3 +1,4 @@
+using System;
 using Sonat.CustomService;
 using Sonat.Enums;
 using SonatFramework.Scripts.Feature.CheckInternet;
@@ -30,6 +31,9 @@ public class MySonatFramework : SonatSystem
     public static GameplayAnalyticsService gameplayAnalyticsService;
     public static SonatBoosterService sonatBoosterService;
     public static CheckInternetService checkInternetService;
+
+    public static event Action<bool> OnNoAdsUpdate;
+
     private void Start()
     {
         Application.targetFrameRate = 80;
@@ -81,6 +85,26 @@ public class MySonatFramework : SonatSystem
             return true;
         }
         return false;
+    }
+
+    public static void TryShowBanner()
+    {
+        if (SonatSDKAdapter.IsNoads())
+        {
+            SonatSDKAdapter.SetBanner(false);
+        }
+        else
+        {
+            SonatSDKAdapter.SetBanner(true);
+        }
+    }
+
+    public static void SetNoAds(bool value)
+    {
+        SonatSDKAdapter.SetNoAds(true);
+        SonatSDKAdapter.SetBanner(false);
+
+        OnNoAdsUpdate?.Invoke(value);
     }
 
 #if UNITY_EDITOR

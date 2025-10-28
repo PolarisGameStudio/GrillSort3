@@ -198,6 +198,7 @@ namespace MyGame.SkewerJamSO.Boosters
 
         public override async UniTask PostUseBooster()
         {
+            await base.PostUseBooster();
             // order tiếp theo cũng phải là rescue
             var gameLogicHandler = GameController.Instance.GameLogicHandler;
             var orderManager = gameLogicHandler.OrderManager;

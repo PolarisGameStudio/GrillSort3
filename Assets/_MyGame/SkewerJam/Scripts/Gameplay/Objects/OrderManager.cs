@@ -98,7 +98,7 @@ namespace MyGame.SkewerJam.Gameplay.Objects
                     // xóa các command liên quan tới order này
                     var items = orderEntity.GetSlots().Select(s => s.GetItem()).Where(i => i != null).ToList();
                     var gameLogicHandler = GameController.Instance.GameLogicHandler;
-                    gameLogicHandler.CommandInvoker.RemoveCommands(items);
+                    gameLogicHandler.CommandInvoker.ResetStack();
                 }
             }
         }

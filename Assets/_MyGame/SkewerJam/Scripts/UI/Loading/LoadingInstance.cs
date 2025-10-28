@@ -6,6 +6,7 @@ using Sonat.AdsModule;
 using Sonat.Enums;
 using Sonat.TrackingModule;
 using SonatFramework.Scripts.Feature.Lives;
+using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems.AudioManagement;
 using SonatFramework.Systems.EventBus;

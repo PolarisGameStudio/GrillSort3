@@ -124,6 +124,7 @@ namespace MyGame.SkewerJamSO.Boosters
 
         public override async UniTask PostUseBooster()
         {
+            await base.PostUseBooster();
             var gameLogicHandler = GameController.Instance.GameLogicHandler;
             var orderManager = gameLogicHandler.OrderManager;
             orderManager.LogicOrderHandler.SetForceRescue(true);

@@ -92,6 +92,8 @@ namespace MyGame.SkewerJam.Gameplay
             gameViewport.Init();
             level = MySonatFramework.userDataService.GetLevel(GameMode.Classic);
             gameStateChangeEvent = new EventBinding<GameStateChangeEvent>(OnGameStateChangedEvent);
+
+            MySonatFramework.TryShowBanner();
         }
 
         private void OnGameStateChangedEvent(GameStateChangeEvent @event)

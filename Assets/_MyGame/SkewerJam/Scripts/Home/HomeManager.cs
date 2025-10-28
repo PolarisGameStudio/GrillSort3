@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Sonat.Enums;
 using SonatFramework.Scripts.Helper;
+using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems.AudioManagement;
@@ -42,6 +43,8 @@ public class HomeManager : SingletonSimple<HomeManager>
         ClaimRewardFreeLives().Forget();
         blockUI.SetActive(true);
         SonatUtils.DelayCall(delayBlockUI, () => { blockUI.SetActive(false); }, this);
+
+        SonatSDKAdapter.SetBanner(false);
     }
 
     private void OnDisable()

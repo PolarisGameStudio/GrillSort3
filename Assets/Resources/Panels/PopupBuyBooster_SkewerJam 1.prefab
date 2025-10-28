@@ -88,6 +88,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2742449232004555767, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2864184892360895147, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
       propertyPath: m_Name
       value: UICurrencyManager
@@ -134,6 +138,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5604051763818473132, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675797901248306529, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426690850092064512, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
+      propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8621388085127207883, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
@@ -198,6 +210,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 393699781657886915, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 54
+      objectReference: {fileID: 0}
     - target: {fileID: 421235810949555111, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -208,11 +224,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1426589005505369490, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1056.5796
+      value: 1176.594
       objectReference: {fileID: 0}
     - target: {fileID: 1426589005505369490, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -4.9158
+      value: -64.923004
       objectReference: {fileID: 0}
     - target: {fileID: 1553673191579588081, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -232,7 +248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1912769391028483679, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 436
+      value: 507
       objectReference: {fileID: 0}
     - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_text
@@ -269,7 +285,7 @@ PrefabInstance:
     - target: {fileID: 2956704467941102775, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: f1e225213e9095b4fb07b0be4c6593a2, type: 3}
+      objectReference: {fileID: 21300000, guid: 7b87a634e7a9aec429c7eb917810950d, type: 3}
     - target: {fileID: 3024772504927878453, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_SizeDelta.x
       value: 354.669
@@ -328,7 +344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6009096099012315714, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_Name
-      value: PopupBuyBooster_SkewerJam
+      value: PopupBuyBooster_SkewerJam 1
       objectReference: {fileID: 0}
     - target: {fileID: 6029476427327543003, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -356,7 +372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6904591697738208182, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7229686310672274824, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_AnchoredPosition.x
