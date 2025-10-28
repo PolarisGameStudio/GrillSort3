@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using MyGame.SkewerJam.Features.VideoBar;
 using MyGame.UI.PopupVideoBar;
+using SonatFramework.Scripts.Feature.CheckInternet;
 using SonatFramework.Scripts.Helper;
 using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
@@ -33,7 +34,7 @@ public class PopupVideoBar : Panel
 
     private readonly Service<VideoBarService> videoBarService = new();
     private readonly Service<PoolingContainerService> poolingContainer = new();
-
+    private readonly Service<CheckInternetService> checkInternetService = new();
     private Coroutine coroutine;
     private void Reset()
     {
@@ -119,7 +120,8 @@ public class PopupVideoBar : Panel
         }
 
         if (_collected) return;
-        if (SonatSDKAdapter.IsRewardAdsReady())
+
+        if (MySonatFramework.IsRewardAdsReady())
         {
             _collected = true;
             SonatSDKAdapter.ShowRewardAds(OnWatchedVideo, "x2_coin_win", "x2_coin_win");

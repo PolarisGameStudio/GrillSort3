@@ -29,12 +29,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 6911f88ba78b1a94db5ba8c93f6f480b, type: 3}
     - target: {fileID: 1553673191579588081, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2347741859590626774}
+    - target: {fileID: 1553673191579588081, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClosePanel
+      value: Close
       objectReference: {fileID: 0}
     - target: {fileID: 1553673191579588081, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: NoInternet, Assembly-CSharp
+      value: SonatFramework.Scripts.UIModule.Panel, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1615552444419329273, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_IsActive
@@ -126,7 +130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6009096099012315714, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_Name
-      value: PopupInternet
+      value: PopupNoInternet
       objectReference: {fileID: 0}
     - target: {fileID: 6009096099012315714, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_IsActive
@@ -273,7 +277,7 @@ MonoBehaviour:
   keepCached: 0
   pauseGame: 0
   ignoreTracking: 0
-  trackingName: 
+  trackingName: H:::no_internet
   openTween:
   - target: {fileID: 7928407479362044362}
     configSO: {fileID: 11400000, guid: f5deaa398b128a447889a074544bf531, type: 2}

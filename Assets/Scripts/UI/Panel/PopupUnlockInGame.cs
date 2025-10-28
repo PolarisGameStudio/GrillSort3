@@ -41,6 +41,8 @@ public class PopupUnlockInGame : Panel
     private Action onSuccess;
     private ResourceData price;
 
+    private bool _isClicked = false;
+
     private readonly Service<InventoryService> inventoryService = new();
     // private CheckRemoteByLevelCounterHLW checkRemoteByLevelCounter;
 
@@ -51,7 +53,10 @@ public class PopupUnlockInGame : Panel
         GetData(uiData);
         // checkRemoteByLevelCounter = new CheckRemoteByLevelCounterHLW("by_level_show_rwd_booster_pkr", 9999);
         UpdateLayout();
+
+        _isClicked = false;
     }
+
     private void GetData(UIData uiData)
     {
         if (uiData.TryGet("SelectedObjectType", out selectedObjectType))
@@ -134,8 +139,12 @@ public class PopupUnlockInGame : Panel
 
     public void OnClickUseCoin()
     {
+        if (_isClicked) return;
+
+
         if (inventoryService.Instance.CanReduce(price.resource, price.quantity))
         {
+            _isClicked = true;
             var earnType = selectedObjectType == SelectedObjectType.Tray ? "add_order" : selectedObjectType == SelectedObjectType.Plate ? "add_slot" : "remove_octochef";
             var earnId = selectedObjectType == SelectedObjectType.Tray ? "HLW_Add_Order" : selectedObjectType == SelectedObjectType.Plate ? "HLW_Add_Slot" : "HLW_Remove_OctoChef";
             var log = new SpendResourceLogData()
@@ -157,9 +166,15 @@ public class PopupUnlockInGame : Panel
 
     public void OnClickWatchAds()
     {
+        if (_isClicked) return;
         var itemType = selectedObjectType == SelectedObjectType.Tray ? "rwd_add_order" : selectedObjectType == SelectedObjectType.Plate ? "rwd_add_slot" : "rwd_remove_octochef";
         var itemId = selectedObjectType == SelectedObjectType.Tray ? "HLW_Add_Order" : selectedObjectType == SelectedObjectType.Plate ? "HLW_Add_Slot" : "HLW_Remove_OctoChef";
-        SonatSDKAdapter.ShowRewardAds(OnWatchedAds, itemType, itemId);
+
+        if (MySonatFramework.IsRewardAdsReady())
+        {
+            _isClicked = true;
+            SonatSDKAdapter.ShowRewardAds(OnWatchedAds, itemType, itemId);
+        }
         // OnWatchedAds();
     }
 

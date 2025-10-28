@@ -1,6 +1,8 @@
 using Sonat.CustomService;
 using Sonat.Enums;
+using SonatFramework.Scripts.Feature.CheckInternet;
 using SonatFramework.Scripts.Feature.Lives;
+using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems;
 using SonatFramework.Systems.AudioManagement;
@@ -27,7 +29,7 @@ public class MySonatFramework : SonatSystem
     public static TrackingService trackingService;
     public static GameplayAnalyticsService gameplayAnalyticsService;
     public static SonatBoosterService sonatBoosterService;
-
+    public static CheckInternetService checkInternetService;
     private void Start()
     {
         Application.targetFrameRate = 80;
@@ -49,6 +51,7 @@ public class MySonatFramework : SonatSystem
         trackingService = GetService<TrackingService>();
         gameplayAnalyticsService = GetService<GameplayAnalyticsService>();
         sonatBoosterService = GetService<SonatBoosterService>();
+        checkInternetService = GetService<CheckInternetService>();
     }
 
     public static LevelDifficulty GetLevelDifficulty(int level)
@@ -69,6 +72,15 @@ public class MySonatFramework : SonatSystem
     public static LevelType GetLevelType(int level)
     {
         return levelService.GetLevelData<Gameplay.LevelData.LevelData>(level, GameMode.Classic).levelType;
+    }
+
+    public static bool IsRewardAdsReady()
+    {
+        if (checkInternetService.TryCheckInternet() && SonatSDKAdapter.IsRewardAdsReady())
+        {
+            return true;
+        }
+        return false;
     }
 
 #if UNITY_EDITOR

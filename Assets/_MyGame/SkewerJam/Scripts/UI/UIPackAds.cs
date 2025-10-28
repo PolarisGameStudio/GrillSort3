@@ -1,11 +1,11 @@
 using System;
 using Sonat.Enums;
-using SonatFramework.Scripts.Helper;
+using SonatFramework.Scripts.Feature.CheckInternet;
 using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
+using SonatFramework.Systems;
 using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.InventoryManagement.GameResources;
-using SonatFramework.Systems.TimeManagement;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,6 +13,7 @@ public class UIPackAds : MonoBehaviour
 {
     [SerializeField] private UnityEvent onWatchedAds;
 
+    private readonly Service<CheckInternetService> checkInternetService = new();
     // private LongDataPref _lastWatchedAdsTime;
 
     private void Awake()
@@ -22,6 +23,11 @@ public class UIPackAds : MonoBehaviour
 
     public void OnClickWatchAds()
     {
+        if (!checkInternetService.Instance.TryCheckInternet())
+        {
+            return;
+        }
+
         if (CheckCanWatchAds())
         {
             SonatSDKAdapter.ShowRewardAds(OnWatchedAds, "x2_coin_win", "x2_coin_win");
