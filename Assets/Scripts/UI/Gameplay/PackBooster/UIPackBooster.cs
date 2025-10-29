@@ -36,16 +36,16 @@ namespace Scripts.UI.Gameplay.PackBooster
             rewardGroup.SetData(rewardData);
             txtPrice.text = price.quantity.ToString();
 
-            if (canUseAds)
-            {
-                var level = MySonatFramework.GetService<UserDataService>().GetLevel();
-                btnBuyWithAds.gameObject.SetActive(level >= GameRemoteConfigValue.showRewardAdsLevelAddPackBooster);
-                btnBuy.gameObject.SetActive(level < GameRemoteConfigValue.showRewardAdsLevelAddPackBooster);
-            }
-            else{
-                btnBuyWithAds.gameObject.SetActive(false);
-                btnBuy.gameObject.SetActive(true);
-            }
+            // if (canUseAds)
+            // {
+            //     var level = MySonatFramework.GetService<UserDataService>().GetLevel();
+            //     btnBuyWithAds.gameObject.SetActive(level >= GameRemoteConfigValue.showRewardAdsLevelAddPackBooster);
+            //     btnBuy.gameObject.SetActive(level < GameRemoteConfigValue.showRewardAdsLevelAddPackBooster);
+            // }
+            // else{
+            btnBuyWithAds.gameObject.SetActive(false);
+            btnBuy.gameObject.SetActive(true);
+            // }
         }
 
         public void OnBuyClick()
