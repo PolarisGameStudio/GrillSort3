@@ -48,6 +48,7 @@ namespace Manager
         public static int levelStartShowPopupBuyBooster2;
         public static bool activeProgressLose;
         public static int levelStartShowBanner;
+        public static int levelShowRwdBooster;
 
         public static void LoadData()
         {
@@ -63,6 +64,7 @@ namespace Manager
 
             activeProgressLose = SonatSDKAdapter.GetRemoteBool("active_progress_lose", true);
             levelStartShowBanner = SonatSDKAdapter.GetRemoteInt("level_start_show_banner", 9999);
+            levelShowRwdBooster = SonatSDKAdapter.GetRemoteInt("level_show_rwd_booster", 1);
             levelStartShowPopupBuyBooster2 = SonatSDKAdapter.GetRemoteInt("level_start_show_popup_buy_booster2", 9999);
 
 
