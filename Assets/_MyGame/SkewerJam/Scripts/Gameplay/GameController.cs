@@ -61,7 +61,7 @@ namespace MyGame.SkewerJam.Gameplay
         private IntDataPref _checkRewardFreeLives = new IntDataPref("check_reward_free_lives");
 
         public static event Action OnPlayTutorial;
-
+        public static event Action OnInitLevel;
         private void Awake()
         {
             Instance = this;
@@ -152,6 +152,9 @@ namespace MyGame.SkewerJam.Gameplay
 
         public void InitLevel()
         {
+            OnInitLevel?.Invoke();
+
+            gameViewport.InitLevel();
             gameplayScreen.InitLevel(level);
             levelGenerator.Init();
             gameLogicHandler.Init();

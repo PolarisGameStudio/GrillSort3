@@ -28,10 +28,10 @@ namespace SkewerJam.UI.Elements
 
         public void PlayClick()
         {
-            if (!checkInternetService.Instance.TryCheckInternet())
-            {
-                return;
-            }
+            // if (!checkInternetService.Instance.TryCheckInternet())
+            // {
+            //     return;
+            // }
 
             if (livesService.Instance.CanPlay())
             {

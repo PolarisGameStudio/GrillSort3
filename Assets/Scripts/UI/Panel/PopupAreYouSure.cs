@@ -6,7 +6,7 @@ using SonatFramework.Scripts.UIModule;
 
 public class PopupAreYouSure : Panel
 {
-    private Action onConfirm;
+    private Action<Action> onConfirm;
     public override void Open(UIData uiData)
     {
         base.Open(uiData);
@@ -30,7 +30,10 @@ public class PopupAreYouSure : Panel
 
     public void OnRetryClick()
     {
-        Close();
-        onConfirm?.Invoke();
+        onConfirm?.Invoke(() =>
+        {
+
+            Close();
+        });
     }
 }

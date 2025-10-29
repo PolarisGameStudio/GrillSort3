@@ -1,3 +1,4 @@
+
 using Cysharp.Threading.Tasks;
 using Gameplay.LevelData;
 using UnityEngine;
@@ -35,6 +36,27 @@ namespace MyGame.SkewerJam.Gameplay
 
             orgCameraPosition = mainCamera.transform.position;
 
+            UpdatePerfectBounds();
+            perfectCamSize = mainCamera.orthographicSize;
+
+            float screenRatio = Screen.width / (float)Screen.height;
+            if (screenRatio < 9f / 16)
+            {
+                minCamSize = 12f;
+            }
+            else
+            {
+                minCamSize = 10f;
+            }
+        }
+
+        public void InitLevel()
+        {
+            UpdatePerfectBounds();
+        }
+
+        private void UpdatePerfectBounds()
+        {
             topPosition = topRefPoint.position;
             bottomPosition = bottomRefPoint.position;
 
@@ -47,17 +69,6 @@ namespace MyGame.SkewerJam.Gameplay
             Vector3 center = gameViewportBounds.center;
             center.y = (topPosition.y + bottomPosition.y) / 2;
             perfectBounds = new Bounds(center, boundSize);
-            perfectCamSize = mainCamera.orthographicSize;
-
-            float screenRatio = Screen.width / (float)Screen.height;
-            if (screenRatio < 9f / 16)
-            {
-                minCamSize = 12f;
-            }
-            else
-            {
-                minCamSize = 10f;
-            }
         }
 
         public void CalculateGameViewportBounds()

@@ -27,7 +27,7 @@ public class PopupSettings : PopupSettingsBase
         clicked = true;
         uiButtonSetting.GoOut(false);
         UIData data = new UIData();
-        data.Add("OnConfirm", (Action)ConfirmReplay);
+        data.Add("OnConfirm", (Action<Action>)ConfirmReplay);
         PanelManager.Instance.OpenPanel<PopupAreYouSure>(data);
     }
 
@@ -36,7 +36,7 @@ public class PopupSettings : PopupSettingsBase
         GameController.Instance.Replay();
     }
 
-    private void ConfirmReplay()
+    private void ConfirmReplay(Action onConfirm)
     {
         if (CanReplay())
         {
@@ -45,13 +45,14 @@ public class PopupSettings : PopupSettingsBase
                 SonatSDKAdapter.ShowInterAds("replay", CheckCanReplay);
             else
             {
+                onConfirm?.Invoke();
                 CheckCanReplay();
             }
         }
         else
         {
-            // PanelManager.Instance.OpenPanel<PopupRefillLives>(new UIData().Add(UIDataKey.CallBackOnClose, (Action)(AfterRefillLive)));
-            PopupToast.Cretate("Not enough lives to replay!");
+            PanelManager.Instance.OpenPanel<PopupRefillLives>();
+            // PopupToast.Cretate("Not enough lives to replay!");
         }
     }
 

@@ -10,21 +10,19 @@ namespace MyGame.SkewerJam.Gameplay.Utils
         [SerializeField] private RectTransform posNoAds;
         [SerializeField] private RectTransform posAds;
 
-        private EventBinding<LevelStartedEvent> onLevelStartedEvent;
-
         private void OnEnable()
         {
-            onLevelStartedEvent = new EventBinding<LevelStartedEvent>(OnLevelStarted);
+            GameController.OnInitLevel += OnInitLevel;
             MySonatFramework.OnNoAdsUpdate += OnNoAdsUpdate;
             OnNoAdsUpdate(SonatSDKAdapter.IsNoads());
         }
         private void OnDisable()
         {
             MySonatFramework.OnNoAdsUpdate -= OnNoAdsUpdate;
-            EventBus<LevelStartedEvent>.Deregister(onLevelStartedEvent);
+            GameController.OnInitLevel -= OnInitLevel;
         }
 
-        private void OnLevelStarted(LevelStartedEvent eventData)
+        private void OnInitLevel()
         {
             OnNoAdsUpdate(SonatSDKAdapter.IsNoads());
         }
