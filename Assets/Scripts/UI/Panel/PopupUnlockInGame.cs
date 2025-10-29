@@ -122,10 +122,14 @@ public class PopupUnlockInGame : Panel
             var level = MySonatFramework.userDataService.GetLevel();
             if (rwdButton) rwdButton.SetActive(level >= GameRemoteConfigValue.showRewardAdsLevelAddOrder);
         }
+        else if (selectedObjectType == SelectedObjectType.Plate)
+        {
+            var level = MySonatFramework.userDataService.GetLevel();
+            if (rwdButton) rwdButton.SetActive(level >= GameRemoteConfigValue.showRewardAdsLevelAddPlate);
+        }
         else
         {
             if (rwdButton) rwdButton.SetActive(false);
-
         }
     }
 

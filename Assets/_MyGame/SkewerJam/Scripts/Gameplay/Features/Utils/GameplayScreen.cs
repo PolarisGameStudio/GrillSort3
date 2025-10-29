@@ -3,6 +3,7 @@ using System.Linq;
 using DG.Tweening;
 using MyGame.SkewerJam.Gameplay.Booster;
 using Sonat.Enums;
+using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule.UIElements;
 using TMPro;
 using UnityEngine;

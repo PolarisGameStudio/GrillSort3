@@ -319,12 +319,10 @@ namespace Gameplay.Entities
             SetPrimary(false);
             visual.UpdateVisual();
 
-            // slot này sẽ luôn trống để undo 
-            // FIX BUG: item out -> check empty
-            // if (this.slot != null)
-            // {
-            //     this.slot.ItemOut();
-            // }
+            if (this.slot != null)
+            {
+                this.slot.ItemOutNoUpdate();
+            }
 
             this.slot = slot;
             slot.AddItem(this);

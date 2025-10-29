@@ -10,7 +10,7 @@ namespace MyGame.SkewerJam.Features.BannerController
         private void OnEnable()
         {
             MySonatFramework.OnNoAdsUpdate += OnNoAdsUpdate;
-            if (SonatSDKAdapter.IsNoads())
+            if (MySonatFramework.IsShowBanner() == false)
             {
                 gameObject.SetActive(false);
             }

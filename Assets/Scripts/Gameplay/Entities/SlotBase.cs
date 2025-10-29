@@ -75,6 +75,11 @@ public abstract class SlotBase : MonoBehaviour
         grill.OnSlotUpdated(this);
     }
 
+    public void ItemOutNoUpdate()
+    {
+        this.item = null;
+    }
+
     public bool isEmpty()
     {
         return item == null || !item.gameObject.activeInHierarchy;

@@ -1,4 +1,5 @@
 using System;
+using Manager;
 using Sonat.CustomService;
 using Sonat.Enums;
 using SonatFramework.Scripts.Feature.CheckInternet;
@@ -89,7 +90,7 @@ public class MySonatFramework : SonatSystem
 
     public static void TryShowBanner()
     {
-        if (SonatSDKAdapter.IsNoads())
+        if (IsShowBanner() == false)
         {
             SonatSDKAdapter.SetBanner(false);
         }
@@ -105,6 +106,19 @@ public class MySonatFramework : SonatSystem
         SonatSDKAdapter.SetBanner(false);
 
         OnNoAdsUpdate?.Invoke(value);
+    }
+
+    public static bool IsShowBanner()
+    {
+        var level = userDataService.GetLevel();
+        if (level >= GameRemoteConfigValue.levelStartShowBanner && SonatSDKAdapter.IsNoads() == false)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 #if UNITY_EDITOR
