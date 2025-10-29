@@ -52,7 +52,7 @@ namespace MyGame.SkewerJam.Gameplay
 
         public void InitLevel()
         {
-            UpdatePerfectBounds();
+            // UpdatePerfectBounds();
         }
 
         private void UpdatePerfectBounds()
