@@ -43,7 +43,6 @@ public class WinPanel_SkewerJam : WinPanelBase
             }, this);
         }
 
-#if UNITY_IOS
         var levelStartRate = SonatSDKAdapter.GetRemoteInt("POPUP_RATE_level_start", 3);
         var level = MySonatFramework.userDataService.GetLevel();
         if (level - 1 == levelStartRate)
@@ -53,7 +52,6 @@ public class WinPanel_SkewerJam : WinPanelBase
                 PanelManager.Instance.OpenPanel<PopupRate>();
             }, this);
         }
-#endif
     }
 
     public override void OnClaimClick()
