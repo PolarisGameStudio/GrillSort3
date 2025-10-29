@@ -10,38 +10,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8bf1fc38040f2314d96f9189c6748825, type: 3}
-  m_Name: VideoBarConfigSO
+  m_Name: VideoBarConfigSOInShop
   m_EditorClassIdentifier: 
   milestones:
   - index: 0
-    numberAds: 1
     rewardData:
       resourceDatas:
       - resource: 1
-        quantity: 20
+        quantity: 100
+    duration: 0
   - index: 1
-    numberAds: 1
     rewardData:
       resourceDatas:
       - resource: 1
-        quantity: 30
+        quantity: 150
+    duration: 5
   - index: 2
-    numberAds: 2
     rewardData:
       resourceDatas:
       - resource: 1
-        quantity: 40
+        quantity: 200
+    duration: 10
   - index: 3
-    numberAds: 2
     rewardData:
       resourceDatas:
       - resource: 1
-        quantity: 50
+        quantity: 250
+    duration: 15
   - index: 4
-    numberAds: 2
     rewardData:
       resourceDatas:
       - resource: 1
-        quantity: 50
-      - resource: 2
-        quantity: 1200
+        quantity: 500
+    duration: 20

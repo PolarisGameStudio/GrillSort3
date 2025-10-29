@@ -42,4 +42,125 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 041379410ed829446b2aa920015909d0, type: 2}
   - {fileID: 11400000, guid: dbbfd012acfa42c4d8d196f67acc3b13, type: 2}
   - {fileID: 11400000, guid: f528b22d5b302134b9e3f251c351823c, type: 2}
+  boosterPackConfigs:
+  - booster: 102
+    pack:
+    - rewardData:
+        resourceDatas:
+        - resource: 102
+          quantity: 1
+      price:
+        resource: 1
+        quantity: 600
+    - rewardData:
+        resourceDatas:
+        - resource: 102
+          quantity: 3
+      price:
+        resource: 1
+        quantity: 1300
+    - rewardData:
+        resourceDatas:
+        - resource: 102
+          quantity: 5
+      price:
+        resource: 1
+        quantity: 2000
+    - rewardData:
+        resourceDatas:
+        - resource: 102
+          quantity: 10
+      price:
+        resource: 1
+        quantity: 3300
+  - booster: 101
+    pack:
+    - rewardData:
+        resourceDatas:
+        - resource: 101
+          quantity: 1
+      price:
+        resource: 1
+        quantity: 500
+    - rewardData:
+        resourceDatas:
+        - resource: 101
+          quantity: 3
+      price:
+        resource: 1
+        quantity: 1100
+    - rewardData:
+        resourceDatas:
+        - resource: 101
+          quantity: 5
+      price:
+        resource: 1
+        quantity: 1700
+    - rewardData:
+        resourceDatas:
+        - resource: 101
+          quantity: 10
+      price:
+        resource: 1
+        quantity: 2800
+  - booster: 103
+    pack:
+    - rewardData:
+        resourceDatas:
+        - resource: 103
+          quantity: 1
+      price:
+        resource: 1
+        quantity: 700
+    - rewardData:
+        resourceDatas:
+        - resource: 103
+          quantity: 3
+      price:
+        resource: 1
+        quantity: 1500
+    - rewardData:
+        resourceDatas:
+        - resource: 103
+          quantity: 5
+      price:
+        resource: 1
+        quantity: 2300
+    - rewardData:
+        resourceDatas:
+        - resource: 103
+          quantity: 10
+      price:
+        resource: 1
+        quantity: 3900
+  - booster: 104
+    pack:
+    - rewardData:
+        resourceDatas:
+        - resource: 104
+          quantity: 1
+      price:
+        resource: 1
+        quantity: 800
+    - rewardData:
+        resourceDatas:
+        - resource: 104
+          quantity: 3
+      price:
+        resource: 1
+        quantity: 1700
+    - rewardData:
+        resourceDatas:
+        - resource: 104
+          quantity: 5
+      price:
+        resource: 1
+        quantity: 2600
+    - rewardData:
+        resourceDatas:
+        - resource: 104
+          quantity: 10
+      price:
+        resource: 1
+        quantity: 4400
   popupBuyBoosterConfigSO: {fileID: 11400000, guid: 9438e148734a2e04889377ce8c0f0042, type: 2}

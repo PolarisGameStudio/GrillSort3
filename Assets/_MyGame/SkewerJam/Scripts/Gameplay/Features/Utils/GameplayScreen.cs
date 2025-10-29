@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using DG.Tweening;
+using MyGame.SkewerJam.Features.BannerController;
 using MyGame.SkewerJam.Gameplay.Booster;
 using Sonat.Enums;
 using SonatFramework.Scripts.SonatSDKAdapterModule;
@@ -17,6 +18,7 @@ namespace MyGame.SkewerJam.Gameplay
         [SerializeField] private UICurrency[] currencies;
 
         [SerializeField] private UIBooster[] uiBoosters;
+        [SerializeField] private BannerController bannerController;
 
         public UIBooster[] UiBoosters => uiBoosters;
 
@@ -35,6 +37,9 @@ namespace MyGame.SkewerJam.Gameplay
             var itemManager = GameController.Instance.GameLogicHandler.ItemManager;
             _fromValue = 0;
             itemManager.OnUpdateItems += UpdateTotalItems;
+
+            bannerController.gameObject.SetActive(MySonatFramework.IsShowBanner());
+
         }
 
         public void ClearLevel()

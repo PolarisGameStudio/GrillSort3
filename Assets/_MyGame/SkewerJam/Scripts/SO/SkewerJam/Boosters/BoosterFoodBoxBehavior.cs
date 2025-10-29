@@ -91,5 +91,16 @@ namespace MyGame.SkewerJamSO.Boosters
             }
             await UniTask.Delay((int)(delayForPrepareForceBooster * 1000));
         }
+
+        public override async UniTask PostUseBooster()
+        {
+            await base.PostUseBooster();
+
+            var uiBooster = GameController.Instance.GameplayScreen.UiBoosters.FirstOrDefault(e => e.boosterType == GameResource.BoosterFoodBox);
+            if (uiBooster != null)
+            {
+                uiBooster.EnableActiveButton(false);
+            }
+        }
     }
 }

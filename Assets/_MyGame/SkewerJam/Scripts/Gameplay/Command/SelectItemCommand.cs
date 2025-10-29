@@ -22,7 +22,10 @@ namespace MyGame.SkewerJam.Gameplay.Command
             _sourceSlot = item.Slot;
 
             var grill = _sourceSlot.GetGrill() as PrimaryGrill;
-            _preGrillData = grill.GetGrillData();
+            if (grill != null)
+            {
+                _preGrillData = grill.GetGrillData();
+            }
         }
         public void Execute()
         {
@@ -46,6 +49,8 @@ namespace MyGame.SkewerJam.Gameplay.Command
 
             // nếu item đang ở order thì hiện lại target mờ cho order
             TryUndoOrder();
+            var gameLogicHandler = GameController.Instance.GameLogicHandler;
+            gameLogicHandler.UndoSwitchSlot(_item, _sourceSlot);
         }
 
         private void TryUndoOrder()

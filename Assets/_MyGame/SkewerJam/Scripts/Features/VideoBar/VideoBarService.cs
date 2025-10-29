@@ -8,10 +8,10 @@ using UnityEngine;
 
 namespace MyGame.SkewerJam.Features.VideoBar
 {
-    [CreateAssetMenu(fileName = "VideoBarService", menuName = "MyGame/SkewerJam/Features/VideoBarService")]
-    public class VideoBarService : SonatServiceSo, IServiceInitialize
+    public abstract class VideoBarService : SonatServiceSo, IServiceInitialize
     {
-        private const string VIDEO_BAR_KEY = "VIDEO_BAR_KEY";
+        protected abstract string VIDEO_BAR_KEY { get; }
+
         [Header("Config")]
         [SerializeField] private VideoBarConfigSO _config;
 
@@ -21,8 +21,9 @@ namespace MyGame.SkewerJam.Features.VideoBar
         public int CurrentIndex => _currentIndex.Value;
 
         private IntDataPref _currentIndex;
-        private IntDataPref _claimedMilestoneIndex;
+        // private IntDataPref _claimedMilestoneIndex;
         private LongDataPref _expireTime;
+        private LongDataPref _nextWatchTime;
 
         public void Initialize()
         {
@@ -35,9 +36,10 @@ namespace MyGame.SkewerJam.Features.VideoBar
         private void LoadData()
         {
             _currentIndex = new IntDataPref(VIDEO_BAR_KEY + "_currentNum", -1);
-            _claimedMilestoneIndex = new IntDataPref(VIDEO_BAR_KEY + "_claimedMilestoneNum", -1);
+            // _claimedMilestoneIndex = new IntDataPref(VIDEO_BAR_KEY + "_claimedMilestoneNum", -1);
 
             _expireTime = new LongDataPref(VIDEO_BAR_KEY + "_expireTime");
+            _nextWatchTime = new LongDataPref(VIDEO_BAR_KEY + "_nextWatchTime");
         }
 
         private async UniTask Countdown(long remainTime, Action onComplete = null)
@@ -53,7 +55,8 @@ namespace MyGame.SkewerJam.Features.VideoBar
         private void ResetData()
         {
             _currentIndex.Value = -1;
-            _claimedMilestoneIndex.Value = -1;
+            // _claimedMilestoneIndex.Value = -1;
+            _nextWatchTime.Value = 0;
             SetExpireTime();
 
             OnResetData?.Invoke();
@@ -79,18 +82,29 @@ namespace MyGame.SkewerJam.Features.VideoBar
 
         public void OnWatchedVideo()
         {
-            if (CheckFull()) return;
+            if (CanWatchAds() == false) return;
             _currentIndex.Value++;
 
             var currentMilestone = _config.milestones[_currentIndex.Value];
-            _claimedMilestoneIndex.Value = currentMilestone.index;
+            // _claimedMilestoneIndex.Value = currentMilestone.index;
             var log = new EarnResourceLogData
             {
                 spendType = "video_bar",
                 spendId = "video_bar"
             };
             MySonatFramework.GetService<InventoryService>().AddReward(currentMilestone.rewardData, log, false);
+
+            if (CheckFull() == false)
+            {
+                UpdateNextWatchTime();
+            }
             OnClaimReward?.Invoke(currentMilestone);
+        }
+
+        private void UpdateNextWatchTime()
+        {
+            var now = MySonatFramework.GetService<TimeService>().GetCurrentTime();
+            _nextWatchTime.Value = ((DateTimeOffset)now.AddSeconds(_config.milestones[_currentIndex.Value + 1].duration)).ToUnixTimeSeconds();
         }
 
         private void CheckExpire()
@@ -104,6 +118,16 @@ namespace MyGame.SkewerJam.Features.VideoBar
             {
                 ResetData();
             }
+        }
+
+        public long GetNextWatchTime()
+        {
+            return _nextWatchTime.Value - MySonatFramework.GetService<TimeService>().GetUnixTimeSeconds();
+        }
+
+        public bool CanWatchAds()
+        {
+            return GetNextWatchTime() <= 0 && CheckFull() == false;
         }
     }
 }

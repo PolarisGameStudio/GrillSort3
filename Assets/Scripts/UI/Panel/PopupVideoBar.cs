@@ -32,7 +32,7 @@ public class PopupVideoBar : Panel
     private bool _collected;
     private List<UIMilestone> _milestoneList = new List<UIMilestone>();
 
-    private readonly Service<VideoBarService> videoBarService = new();
+    private readonly Service<VideoBarServiceAtHome> videoBarServiceAtHome = new();
     private readonly Service<PoolingContainerService> poolingContainer = new();
     private readonly Service<CheckInternetService> checkInternetService = new();
     private Coroutine coroutine;
@@ -47,10 +47,10 @@ public class PopupVideoBar : Panel
 
         Reset();
         LoadData();
-        _slider.value = (_currentVisualIndex.Value + 1) * 1.0f / videoBarService.Instance.Config.milestones.Count;
+        _slider.value = (_currentVisualIndex.Value + 1) * 1.0f / videoBarServiceAtHome.Instance.Config.milestones.Count;
 
         poolingContainer.Instance.CleanContainer(_milestoneContainer);
-        var config = videoBarService.Instance.Config;
+        var config = videoBarServiceAtHome.Instance.Config;
         _milestoneList.Clear();
         for (int i = 0; i < config.milestones.Count; i++)
         {
@@ -60,7 +60,7 @@ public class PopupVideoBar : Panel
         }
 
         timeCounter.gameObject.SetActive(true);
-        timeCounter.SetData(videoBarService.Instance.GetRemainingTime() + 1, () => // cộng thêm 1s cho chắc là service đã reset
+        timeCounter.SetData(videoBarServiceAtHome.Instance.GetRemainingTime() + 1, () => // cộng thêm 1s cho chắc là service đã reset
         {
             Close();
         });
@@ -68,14 +68,14 @@ public class PopupVideoBar : Panel
         if (coroutine != null) StopCoroutine(coroutine);
         coroutine = StartCoroutine(UpdateUI(() => { }));
 
-        videoBarService.Instance.OnClaimReward += OnClaimReward;
+        videoBarServiceAtHome.Instance.OnClaimReward += OnClaimReward;
         // videoBarService.Instance.OnResetData += ResetData;
     }
 
     public override void Close()
     {
         base.Close();
-        videoBarService.Instance.OnClaimReward -= OnClaimReward;
+        videoBarServiceAtHome.Instance.OnClaimReward -= OnClaimReward;
         // videoBarService.Instance.OnResetData -= ResetData;
     }
 
@@ -83,7 +83,7 @@ public class PopupVideoBar : Panel
     {
         _currentVisualIndex = new IntDataPref(VIDEO_BAR_KEY + "_currentNumVisual", -1);
 
-        if (_currentVisualIndex.Value > videoBarService.Instance.CurrentIndex)
+        if (_currentVisualIndex.Value > videoBarServiceAtHome.Instance.CurrentIndex)
         {
             _currentVisualIndex.Value = -1;
         }
@@ -103,7 +103,7 @@ public class PopupVideoBar : Panel
     {
         _currentVisualIndex.Value = -1;
 
-        var config = videoBarService.Instance.Config;
+        var config = videoBarServiceAtHome.Instance.Config;
         _slider.value = (_currentVisualIndex.Value + 1) * 1.0f / config.milestones.Count;
         foreach (var milestone in _milestoneList)
         {
@@ -113,7 +113,7 @@ public class PopupVideoBar : Panel
 
     public void OnClickWatchAds()
     {
-        if (videoBarService.Instance.CheckFull())
+        if (videoBarServiceAtHome.Instance.CanWatchAds() == false)
         {
             PopupToast.Cretate("Come back later!");
             return;
@@ -124,7 +124,7 @@ public class PopupVideoBar : Panel
         if (MySonatFramework.IsRewardAdsReady())
         {
             _collected = true;
-            SonatSDKAdapter.ShowRewardAds(OnWatchedVideo, "x2_coin_win", "x2_coin_win");
+            SonatSDKAdapter.ShowRewardAds(OnWatchedVideo, "free_coin_in_video_bar", "free_coin_in_video_bar");
         }
         else
         {
@@ -134,21 +134,21 @@ public class PopupVideoBar : Panel
 
     private void OnWatchedVideo()
     {
-        videoBarService.Instance.OnWatchedVideo();
+        videoBarServiceAtHome.Instance.OnWatchedVideo();
     }
 
     private IEnumerator UpdateUI(Action onComplete)
     {
-        for (int i = 0; i < videoBarService.Instance.Config.milestones.Count; i++)
+        for (int i = 0; i < videoBarServiceAtHome.Instance.Config.milestones.Count; i++)
         {
             var milestoneObj = _milestoneList[i];
-            milestoneObj.SetComplete(videoBarService.Instance.CurrentIndex >= i);
+            milestoneObj.SetComplete(videoBarServiceAtHome.Instance.CurrentIndex >= i);
         }
         yield return new WaitForSeconds(_delay);
-        var current = (_currentVisualIndex.Value + 1) * 1.0f / videoBarService.Instance.Config.milestones.Count;
+        var current = (_currentVisualIndex.Value + 1) * 1.0f / videoBarServiceAtHome.Instance.Config.milestones.Count;
 
-        var currentIndex = videoBarService.Instance.CurrentIndex;
-        var newValue = (currentIndex + 1) * 1.0f / videoBarService.Instance.Config.milestones.Count;
+        var currentIndex = videoBarServiceAtHome.Instance.CurrentIndex;
+        var newValue = (currentIndex + 1) * 1.0f / videoBarServiceAtHome.Instance.Config.milestones.Count;
         _slider.DOValue(newValue, _duration).From(current);
 
         yield return new WaitForSeconds(_duration);

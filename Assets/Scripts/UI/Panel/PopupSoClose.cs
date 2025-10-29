@@ -1,6 +1,7 @@
 using Manager;
 using Sonat.Enums;
 using SonatFramework.Scripts.Feature.Shop.UI;
+using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems.AudioManagement;
 using SonatFramework.Systems.InventoryManagement;
@@ -41,6 +42,8 @@ public class PopupSoClose : PopupContinueBase
         MySonatFramework.GetService<AudioService>().StopMusic();
         MySonatFramework.GetService<AudioService>().PlaySound(AudioId.Lose_OutOfMove_popup_Grill3);
 
+        SonatSDKAdapter.SetBanner(false);
+
     }
 
     public virtual void PlayOnWithCoinClick()
@@ -78,5 +81,11 @@ public class PopupSoClose : PopupContinueBase
     public void OnClickPlayOn(string by = "play_on_add_trays")
     {
         PlayOn(by);
+    }
+
+    public override void Close()
+    {
+        base.Close();
+        MySonatFramework.TryShowBanner();
     }
 }

@@ -1,66 +1,129 @@
 using System;
+using MyGame.SkewerJam.Features.VideoBar;
 using Sonat.Enums;
-using SonatFramework.Scripts.Feature.CheckInternet;
 using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
+using SonatFramework.Scripts.UIModule.UIElements;
 using SonatFramework.Systems;
 using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.InventoryManagement.GameResources;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class UIPackAds : MonoBehaviour
 {
+    [SerializeField] private Button btnWatchAds;
+    [SerializeField] private Button btnTime;
+    [SerializeField] private UITimeCounter timeCounter;
+    [SerializeField] private UIRewardItem uiRewardItem;
+
     [SerializeField] private UnityEvent onWatchedAds;
 
-    private readonly Service<CheckInternetService> checkInternetService = new();
-    // private LongDataPref _lastWatchedAdsTime;
+    private readonly Service<VideoBarServiceInShop> videoBarServiceInShop = new();
 
-    private void Awake()
+    private bool _collected;
+
+    void OnEnable()
     {
-        // _lastWatchedAdsTime = new LongDataPref("last_watched_ads_time");
+        videoBarServiceInShop.Instance.OnClaimReward += OnClaimReward;
+        videoBarServiceInShop.Instance.OnResetData += OnResetData;
+        UpdateUI();
+    }
+
+    void OnDisable()
+    {
+        videoBarServiceInShop.Instance.OnClaimReward -= OnClaimReward;
+        videoBarServiceInShop.Instance.OnResetData -= OnResetData;
+    }
+
+    public void OnClickTime()
+    {
+        PopupToast.Cretate("Come back later!");
+        return;
     }
 
     public void OnClickWatchAds()
     {
-        if (!checkInternetService.Instance.TryCheckInternet())
+        if (videoBarServiceInShop.Instance.CanWatchAds() == false)
         {
+            PopupToast.Cretate("Come back later!");
             return;
         }
 
-        if (CheckCanWatchAds())
-        {
-            SonatSDKAdapter.ShowRewardAds(OnWatchedAds, "x2_coin_win", "x2_coin_win");
+        if (_collected) return;
 
+        if (MySonatFramework.IsRewardAdsReady())
+        {
+            _collected = true;
+            SonatSDKAdapter.ShowRewardAds(OnWatchedVideo, "free_coin_in_shop", "free_coin_in_shop");
         }
         else
         {
-            PopupToast.Cretate("Come back tomorrow");
+            PopupToast.Cretate("No video available!");
         }
     }
 
-    private bool CheckCanWatchAds()
+    private void OnWatchedVideo()
     {
-        return true;
-        // return _lastWatchedAdsTime.Value == 0
-        // || MySonatFramework.GetService<TimeService>().GetCurrentTime().Date != DateTimeOffset.FromUnixTimeSeconds(_lastWatchedAdsTime.Value).Date;
+        videoBarServiceInShop.Instance.OnWatchedVideo();
     }
 
-    private void OnWatchedAds()
+    private void OnResetData()
     {
-        // _lastWatchedAdsTime.Value = MySonatFramework.GetService<TimeService>().GetUnixTimeSeconds();
-        // TODO: Implement watched ads
-        var reward = new RewardData();
-        reward.AddReward(new ResourceData(GameResource.Coin, 30));
-        var log = new EarnResourceLogData()
-        {
-            spendType = "rwd_ads_free",
-            spendId = "rwd_ads_free",
-            source = "non_iap"
-        };
-        MySonatFramework.GetService<InventoryService>().AddReward(reward, log, false);
+        UpdateUI();
+    }
 
+    private void OnClaimReward(MilestoneData milestoneData)
+    {
         onWatchedAds?.Invoke();
-        PanelManager.Instance.OpenPanel<PopupReward>(new UIData().Add(PopupReward.KEY_REWARD, reward));
+        UpdateUI(() =>
+        {
+            _collected = false;
+            PanelManager.Instance.OpenPanel<PopupReward>(new UIData().Add(PopupReward.KEY_REWARD, milestoneData.rewardData));
+        });
+    }
+
+    private void UpdateUI(Action onComplete = null)
+    {
+        _collected = false;
+
+        if (videoBarServiceInShop.Instance.CheckFull() == false)
+        {
+            var currentIndex = videoBarServiceInShop.Instance.CurrentIndex;
+            var rewardData = videoBarServiceInShop.Instance.Config.milestones[currentIndex + 1].rewardData;
+            uiRewardItem.Init(rewardData.resourceDatas[0].resource, rewardData.resourceDatas[0].quantity);
+
+            if (videoBarServiceInShop.Instance.CanWatchAds())
+            {
+                btnWatchAds.gameObject.SetActive(true);
+                btnTime.gameObject.SetActive(false);
+            }
+            else
+            {
+                btnWatchAds.gameObject.SetActive(false);
+                btnTime.gameObject.SetActive(true);
+                timeCounter.SetData(videoBarServiceInShop.Instance.GetNextWatchTime(), () =>
+                {
+                    UpdateUI();
+                });
+            }
+        }
+        else
+        {
+            var milestones = videoBarServiceInShop.Instance.Config.milestones;
+            var rewardData = milestones[milestones.Count - 1].rewardData;
+            uiRewardItem.Init(rewardData.resourceDatas[0].resource, rewardData.resourceDatas[0].quantity);
+
+            btnWatchAds.gameObject.SetActive(false);
+            btnTime.gameObject.SetActive(true);
+
+            var remainTime = videoBarServiceInShop.Instance.GetRemainingTime() + 1;
+            if (remainTime > 0)
+            {
+                timeCounter.SetData(remainTime);
+            }
+        }
+        onComplete?.Invoke();
     }
 }

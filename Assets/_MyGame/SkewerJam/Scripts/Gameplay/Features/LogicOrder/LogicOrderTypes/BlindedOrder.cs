@@ -12,7 +12,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
         private int gap = 0;
 
-    public override LogicOrderType LogicOrderType => LogicOrderType.Blinded;
+        public override LogicOrderType LogicOrderType => LogicOrderType.Blinded;
         public override void Init()
         {
             gap = 0;

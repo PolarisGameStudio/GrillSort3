@@ -92,8 +92,6 @@ namespace MyGame.SkewerJam.Gameplay
             gameViewport.Init();
             level = MySonatFramework.userDataService.GetLevel(GameMode.Classic);
             gameStateChangeEvent = new EventBinding<GameStateChangeEvent>(OnGameStateChangedEvent);
-
-            MySonatFramework.TryShowBanner();
         }
 
         private void OnGameStateChangedEvent(GameStateChangeEvent @event)
@@ -127,8 +125,10 @@ namespace MyGame.SkewerJam.Gameplay
 
             InitLevel();
 
+
             await levelGenerator.GenerateLevel(level);
             EventBus<LevelStartedEvent>.Raise(new LevelStartedEvent() { level = level, gameMode = GameMode.Classic });
+            MySonatFramework.TryShowBanner();
 
             LoadingHelper.CompleteLoadingInGameplay(() => PlayStartGame(() =>
             {
@@ -241,7 +241,7 @@ namespace MyGame.SkewerJam.Gameplay
         {
             Debug.Log("<color=red>[GameController]</color> Stuck: " + stuckType);
             if (gameState == GameState.GameOver) return;
-
+            gameState = GameState.GameOver;
             EventBus<LevelStuckEvent>.Raise(new LevelStuckEvent()
             {
                 level = level,
@@ -284,6 +284,7 @@ namespace MyGame.SkewerJam.Gameplay
             EventBus<LevelContinueEvent>.Raise(new LevelContinueEvent() { by = by });
             await UniTask.Delay(1000);
 
+            gameLogicHandler.CommandInvoker.ResetStack();
             var orderManager = GameLogicHandler.OrderManager;
             switch (stuckType)
             {

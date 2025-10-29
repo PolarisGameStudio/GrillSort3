@@ -106,6 +106,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                     Debug.Log("<color=red>OrderHelper:</color> GetItemOrder: No rescue item found, use basic order");
                     var basicOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Basic);
                     var (i, n, s) = (basicOrder as BasicOrderSO).ForceGetItemOrderBasic(gameplayInfoForLogicOrder);
+                    SetForceRescue(false, -1);
                     return (i, n, LogicOrderType.Basic);
                 }
             }
@@ -146,25 +147,31 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             // - Cùng 1 thời điểm, luôn tồn tại 1 Basic Order
             if (CheckExistBasicOrder() == true)
             {
-                var random = UnityEngine.Random.Range(0f, 1f);
-                Debug.Log("<color=white>LogicOrderHandler:</color> ChooseLogicOrder: " + Mathf.Round(random * 100f) * 0.01f + " >>> " + specialOrderConfig.rateBasicOrder + " - " + specialOrderConfig.rateLockedOrder + " - " + specialOrderConfig.rateBlindedOrder);
-                if (random < specialOrderConfig.rateBasicOrder)
+                var logicOrderType = specialOrderConfig.GetLogicOrderType();
+                switch (logicOrderType)
                 {
-                    var basicOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Basic);
-                    var basicOrderSO = basicOrder as BasicOrderSO;
-                    basicOrderSO.SetData(idxBO);
-                    basicOrderSO.SetMinNum(minNum);
-                    return basicOrder;
-                }
-                else if (random < specialOrderConfig.rateBasicOrder + specialOrderConfig.rateLockedOrder)
-                {
-                    var lockedOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Locked);
-                    if (lockedOrder.CanUse()) return lockedOrder;
-                }
-                else
-                {
-                    var blindedOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Blinded);
-                    if (blindedOrder.CanUse()) return blindedOrder;
+                    case LogicOrderType.Basic:
+                        var basicOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Basic);
+                        var basicOrderSO = basicOrder as BasicOrderSO;
+                        basicOrderSO.SetData(idxBO);
+                        basicOrderSO.SetMinNum(minNum);
+                        return basicOrder;
+                    case LogicOrderType.Locked:
+                        var lockedOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Locked);
+                        if (lockedOrder.CanUse()) return lockedOrder;
+                        break;
+                    case LogicOrderType.Blinded:
+                        var blindedOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Blinded);
+                        if (blindedOrder.CanUse()) return blindedOrder;
+                        break;
+                    case LogicOrderType.Tricky1:
+                        var tricky1Order = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Tricky1);
+                        if (tricky1Order.CanUse()) return tricky1Order;
+                        break;
+                    case LogicOrderType.Tricky2:
+                        var tricky2Order = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Tricky2);
+                        if (tricky2Order.CanUse()) return tricky2Order;
+                        break;
                 }
             }
 
@@ -215,7 +222,9 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
         Locked,
         Blinded,
         Rescue,
-        Random
+        Random,
+        Tricky1,
+        Tricky2
     }
 
     public class ForceRescueData

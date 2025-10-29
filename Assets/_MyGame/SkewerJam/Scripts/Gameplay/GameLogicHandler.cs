@@ -49,7 +49,7 @@ namespace MyGame.SkewerJam.Gameplay
         #region Event Actions
         public event Action<Item, SlotBase> OnItemStartSwitch;
         public event Action<Item, bool, bool> OnItemStartSwitchAndCheck;
-
+        public event Action<Item, SlotBase> OnItemStartSwitchUndo;
         public event Action<Item, SlotBase> OnItemMoveToSlot;
         public event Action<Item, SlotBase> OnItemEndSwitch;
 
@@ -191,7 +191,7 @@ namespace MyGame.SkewerJam.Gameplay
             item.MoveToOrder();
             // }
         }
-        
+
         public void ItemMoveToSlot(Item item, SlotBase slot)
         {
             OnItemMoveToSlot?.Invoke(item, slot);
@@ -371,6 +371,11 @@ namespace MyGame.SkewerJam.Gameplay
 
             // else continue
             return StuckType.OutOfMove;
+        }
+
+        public void UndoSwitchSlot(Item item, SlotBase sourceSlot)
+        {
+            OnItemStartSwitchUndo?.Invoke(item, sourceSlot);
         }
         #endregion
     }

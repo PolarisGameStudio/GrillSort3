@@ -15,6 +15,7 @@ namespace MyGame.SkewerJam.Gameplay.Booster
     public class UIBooster : UIBoosterBase
     {
         [Header("UIBooster")]
+        [SerializeField] private CanvasGroup canvasGroup;
         [SerializeField] private Canvas canvas;
         [SerializeField] private GameObject suggestObj;
         [SerializeField] private Transform suggestTransform;
@@ -145,6 +146,14 @@ namespace MyGame.SkewerJam.Gameplay.Booster
             {
                 canvas.overrideSorting = false;
                 SetSuggest(false);
+            }
+        }
+
+        public void EnableActiveButton(bool enable)
+        {
+            if (unlocked)
+            {
+                canvasGroup.alpha = enable ? 1 : 0.7f;
             }
         }
     }

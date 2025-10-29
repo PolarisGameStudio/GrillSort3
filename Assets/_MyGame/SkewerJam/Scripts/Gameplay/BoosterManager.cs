@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using Gameplay.Entities;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SO.Boosters;
 using Sonat.Enums;
@@ -19,14 +20,62 @@ namespace MyGame.SkewerJam.Gameplay
         private GameResource _forceUseBoosterType = GameResource.None;
         private List<BaseBoosterBehaviorSO> listBoosterBehaviors => MySonatFramework.GetService<SonatBoosterService>().BoostersConfig.boosterBehaviors.ToList();
 
+        private void OnItemStartSwitch(Item item, SlotBase slot)
+        {
+            var uiBooster = GameController.Instance.GameplayScreen.UiBoosters.FirstOrDefault(e => e.boosterType == GameResource.BoosterFoodBox);
+            if (uiBooster != null)
+            {
+                uiBooster.EnableActiveButton(WaitingGrillHelper.CheckAllEmpty() == false);
+            }
+        }
+        private void OnResetStack()
+        {
+            var uiBooster = GameController.Instance.GameplayScreen.UiBoosters.FirstOrDefault(e => e.boosterType == GameResource.BoosterUndo);
+            if (uiBooster != null)
+            {
+                uiBooster.EnableActiveButton(false);
+            }
+        }
+
+        private void OnAddCommand()
+        {
+            var uiBooster = GameController.Instance.GameplayScreen.UiBoosters.FirstOrDefault(e => e.boosterType == GameResource.BoosterUndo);
+            if (uiBooster != null)
+            {
+                uiBooster.EnableActiveButton(true);
+            }
+        }
+
         public void Init()
         {
             _forceUseBoosterType = GameResource.None;
+
+            var uiBooster = GameController.Instance.GameplayScreen.UiBoosters.FirstOrDefault(e => e.boosterType == GameResource.BoosterFoodBox);
+            var uiBoosterUndo = GameController.Instance.GameplayScreen.UiBoosters.FirstOrDefault(e => e.boosterType == GameResource.BoosterUndo);
+            if (uiBooster != null)
+            {
+                uiBooster.EnableActiveButton(false);
+            }
+
+            if (uiBoosterUndo != null)
+            {
+                uiBoosterUndo.EnableActiveButton(false);
+            }
+
+            var gameLogicHandler = GameController.Instance.GameLogicHandler;
+            gameLogicHandler.CommandInvoker.OnResetStack += OnResetStack;
+            gameLogicHandler.CommandInvoker.OnAddCommand += OnAddCommand;
+            gameLogicHandler.OnItemStartSwitch += OnItemStartSwitch;
+            gameLogicHandler.OnItemStartSwitchUndo += OnItemStartSwitch;
         }
 
         public void Clear()
         {
-
+            var gameLogicHandler = GameController.Instance.GameLogicHandler;
+            gameLogicHandler.CommandInvoker.OnResetStack -= OnResetStack;
+            gameLogicHandler.CommandInvoker.OnAddCommand -= OnAddCommand;
+            gameLogicHandler.OnItemStartSwitch -= OnItemStartSwitch;
+            gameLogicHandler.OnItemStartSwitchUndo -= OnItemStartSwitch;
         }
 
         #region Booster Behavior

@@ -131,7 +131,7 @@ namespace Gameplay.Entities
             var currentGrillData = GetGrillData();
 
             var isClosed = currentGrillData.layer.Count == 0 || slots.All(slot => slot.isEmpty());
-            if (currentGrillData.layer.Count != preGrillData.layer.Count || isClosed)
+            if (preGrillData != null && currentGrillData.layer.Count != preGrillData.layer.Count || isClosed)
             {
                 // ẩn subgrill hiện tại
                 if (subGrills != null && subGrills.Count > 0)

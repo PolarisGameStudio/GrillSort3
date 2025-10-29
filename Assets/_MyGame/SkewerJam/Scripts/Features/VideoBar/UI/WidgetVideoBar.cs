@@ -10,28 +10,24 @@ public class WidgetVideoBar : UIHomeWidget
 {
     [SerializeField] private GameObject iconWarning;
 
-    private readonly Service<VideoBarService> videoBarService = new();
+    private readonly Service<VideoBarServiceAtHome> videoBarServiceAtHome = new();
+
     public override void Setup()
     {
         base.Setup();
 
-        iconWarning.SetActive(CheckActive());
+        iconWarning.SetActive(videoBarServiceAtHome.Instance.CheckFull() == false);
     }
 
     public override void OnFocus()
     {
         base.OnFocus();
-        iconWarning.SetActive(CheckActive());
+        iconWarning.SetActive(videoBarServiceAtHome.Instance.CheckFull() == false);
     }
 
     public override void OnLoseFocus()
     {
         base.OnLoseFocus();
-    }
-
-    private bool CheckActive()
-    {
-        return videoBarService.Instance.CheckFull() == false;
     }
 
 }

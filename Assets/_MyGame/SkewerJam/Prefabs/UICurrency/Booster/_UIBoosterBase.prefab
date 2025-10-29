@@ -860,6 +860,7 @@ GameObject:
   - component: {fileID: 1418702346738759265}
   - component: {fileID: 2826237414977887722}
   - component: {fileID: 1983319523366103671}
+  - component: {fileID: 3341071221838863016}
   m_Layer: 5
   m_Name: _UIBoosterBase
   m_TagString: Untagged
@@ -1037,6 +1038,7 @@ MonoBehaviour:
   txtQuantity: {fileID: 7415037117351441075}
   txtLevelUnlock: {fileID: 2476992554413736317}
   priceObj: {fileID: 4223791450677843332}
+  canvasGroup: {fileID: 3341071221838863016}
   canvas: {fileID: 2826237414977887722}
   suggestObj: {fileID: 3832442337265788469}
   suggestTransform: {fileID: 569142715074580526}
@@ -1080,6 +1082,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 119
+--- !u!225 &3341071221838863016
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7927538229994712621}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8017148683527017205
 GameObject:
   m_ObjectHideFlags: 0

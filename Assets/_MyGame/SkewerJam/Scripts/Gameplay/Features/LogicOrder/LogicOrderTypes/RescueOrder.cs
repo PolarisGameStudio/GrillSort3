@@ -67,6 +67,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                 {
                     var random = UnityEngine.Random.Range(0, filteredRescues.Count());
                     var rescue = filteredRescues.ElementAt(random);
+                    gap = 1;
                     return (rescue.itemId, rescue.numItems);
                 }
             }
@@ -75,6 +76,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             {
                 var rand = UnityEngine.Random.Range(0, listAllRescues.Count());
                 var rc = listAllRescues.ElementAt(rand);
+                gap = 1;
                 return (rc.itemId, rc.numItems);
             }
             else

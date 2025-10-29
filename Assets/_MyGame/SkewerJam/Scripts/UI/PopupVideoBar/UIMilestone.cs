@@ -16,6 +16,7 @@ namespace MyGame.UI.PopupVideoBar
         [SerializeField] private Slider slider;
         [SerializeField] private UIRewardGroup rewardGroup;
         [SerializeField] private UIBubbleReward bubbleReward;
+        [SerializeField] private GameObject warningObj;
 
 
         public void SetData(int number, float valueSlider, RewardData rewardData)
@@ -42,6 +43,11 @@ namespace MyGame.UI.PopupVideoBar
         {
             completeObj.SetActive(isComplete);
             txtNumber.gameObject.SetActive(!isComplete);
+
+            if (warningObj != null)
+            {
+                warningObj.SetActive(!isComplete);
+            }
         }
     }
 }

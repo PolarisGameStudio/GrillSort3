@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Gameplay.Entities;
 using MyGame.SkewerJam.Gameplay.Command;
-using MyGame.SkewerJam.Objects.Entities;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay.Utils.CommandPattern
@@ -11,7 +10,8 @@ namespace MyGame.SkewerJam.Gameplay.Utils.CommandPattern
     public class CommandInvoker : MonoBehaviour
     {
         private Stack<IPatternCommand> undoStack = new Stack<IPatternCommand>();
-
+        public event Action OnResetStack;
+        public event Action OnAddCommand;
         public void Init()
         {
             ResetStack();
@@ -24,6 +24,7 @@ namespace MyGame.SkewerJam.Gameplay.Utils.CommandPattern
 
         public void ExecuteCommand(IPatternCommand command)
         {
+            OnAddCommand?.Invoke();
             undoStack.Push(command);
             command.Execute();
         }
@@ -33,6 +34,10 @@ namespace MyGame.SkewerJam.Gameplay.Utils.CommandPattern
             if (undoStack.Count > 0)
             {
                 IPatternCommand activeCommand = undoStack.Pop();
+                if (undoStack.Count == 0)
+                {
+                    OnResetStack?.Invoke();
+                }
                 activeCommand.Undo();
             }
         }
@@ -46,6 +51,7 @@ namespace MyGame.SkewerJam.Gameplay.Utils.CommandPattern
         public void ResetStack()
         {
             undoStack.Clear();
+            OnResetStack?.Invoke();
         }
 
         public void RemoveCommands(List<Item> listItems)
@@ -73,6 +79,11 @@ namespace MyGame.SkewerJam.Gameplay.Utils.CommandPattern
             while (tempStack.Count > 0)
             {
                 undoStack.Push(tempStack.Pop());
+            }
+
+            if (undoStack.Count == 0)
+            {
+                OnResetStack?.Invoke();
             }
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using MyGame.SkewerJam.Objects;
 
@@ -43,6 +44,12 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
         {
             IsWarning = false;
             _countWarning = 0;
+        }
+
+        public static bool CheckAllEmpty()
+        {
+            var listWaitingGrill = waitingGrillManager.ListWaitingGrills;
+            return listWaitingGrill.All(e => e.GetSlots().Where(s => s.GetItem() != null).Count() == 0);
         }
     }
 }

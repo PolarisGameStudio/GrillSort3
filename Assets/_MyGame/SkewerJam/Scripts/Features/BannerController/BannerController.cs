@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using SonatFramework.Scripts.SonatSDKAdapterModule;
+using SonatFramework.Systems.EventBus;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Features.BannerController
 {
     public class BannerController : MonoBehaviour
     {
+        private EventBinding<LevelStartedEvent> onLevelStartedEvent;
         private void OnEnable()
         {
             MySonatFramework.OnNoAdsUpdate += OnNoAdsUpdate;

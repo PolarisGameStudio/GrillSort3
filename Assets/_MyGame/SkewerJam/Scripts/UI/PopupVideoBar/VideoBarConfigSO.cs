@@ -10,7 +10,7 @@ namespace MyGame.SkewerJam.Features.VideoBar
     public class VideoBarConfigSO : ScriptableObject
     {
         public List<MilestoneData> milestones;
-        public int duration = 43200; // 12 hours
+        // public int duration = 43200; // 12 hours
 
 #if UNITY_EDITOR
         private void OnValidate()
@@ -27,7 +27,8 @@ namespace MyGame.SkewerJam.Features.VideoBar
     public class MilestoneData
     {
         [ReadOnly] public int index;
-        public int numberAds;
+        // public int numberAds;
         public RewardData rewardData;
+        public int duration;
     }
 }

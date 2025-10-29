@@ -102,6 +102,9 @@ namespace MyGame.SkewerJamSO.Boosters
 
         private async UniTask CompleteOrder(OrderEntity order, bool isForce = false)
         {
+            var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
+            orderManager.LogicOrderHandler.SetForceRescue(true);
+
             HighlightOrders(false);
             if (isForce == false)
             {
@@ -194,15 +197,6 @@ namespace MyGame.SkewerJamSO.Boosters
         public override bool CheckSuggest()
         {
             return true;
-        }
-
-        public override async UniTask PostUseBooster()
-        {
-            await base.PostUseBooster();
-            // order tiếp theo cũng phải là rescue
-            var gameLogicHandler = GameController.Instance.GameLogicHandler;
-            var orderManager = gameLogicHandler.OrderManager;
-            orderManager.LogicOrderHandler.SetForceRescue(true);
         }
     }
 }
