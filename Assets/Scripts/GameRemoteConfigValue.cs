@@ -44,7 +44,8 @@ namespace Manager
 
         public static int showRewardAdsLevelAddOrder;
         public static int showRewardAdsLevelAddPlate;
-        public static int showRewardAdsLevelAddBooster;
+        public static int showRewardAdsLevelAddPackBooster;
+        public static int levelStartShowPopupBuyBooster2;
         public static bool activeProgressLose;
         public static int levelStartShowBanner;
 
@@ -52,6 +53,7 @@ namespace Manager
         {
             showRewardAdsLevelAddOrder = SonatSDKAdapter.GetRemoteInt("show_reward_ads_level_add_order", 9999);
             showRewardAdsLevelAddPlate = SonatSDKAdapter.GetRemoteInt("show_reward_ads_level_add_plate", 9999);
+            showRewardAdsLevelAddPackBooster = SonatSDKAdapter.GetRemoteInt("show_reward_ads_level_add_pack_booster", 9999);
 
             levelForceHome = SonatSDKAdapter.GetRemoteInt("level_force_home", 6);
 
@@ -61,6 +63,7 @@ namespace Manager
 
             activeProgressLose = SonatSDKAdapter.GetRemoteBool("active_progress_lose", true);
             levelStartShowBanner = SonatSDKAdapter.GetRemoteInt("level_start_show_banner", 9999);
+            levelStartShowPopupBuyBooster2 = SonatSDKAdapter.GetRemoteInt("level_start_show_popup_buy_booster2", 9999);
 
 
             countLoseToShowOffer = SonatSDKAdapter.GetRemoteInt("count_lose_to_show_offer", 0);

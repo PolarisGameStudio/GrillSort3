@@ -195,7 +195,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.12, y: 2.01}
+  m_Size: {x: 4.34, y: 2.79}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -229,6 +229,22 @@ PrefabInstance:
       propertyPath: grillBaseBehaviorSO
       value: 
       objectReference: {fileID: 11400000, guid: f3b4a62a6d32c40409dbb5fd2e0b3f1d, type: 2}
+    - target: {fileID: 1185856185958898397, guid: a550bad09dfa0994c8b780d80339c74a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1185856185958898397, guid: a550bad09dfa0994c8b780d80339c74a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1185856185958898397, guid: a550bad09dfa0994c8b780d80339c74a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1185856185958898397, guid: a550bad09dfa0994c8b780d80339c74a, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2059631286252751556, guid: a550bad09dfa0994c8b780d80339c74a, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -331,6 +347,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5823945062005071239, guid: a550bad09dfa0994c8b780d80339c74a, type: 3}
       propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160642689886991295, guid: a550bad09dfa0994c8b780d80339c74a, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6314235689217423742, guid: a550bad09dfa0994c8b780d80339c74a, type: 3}

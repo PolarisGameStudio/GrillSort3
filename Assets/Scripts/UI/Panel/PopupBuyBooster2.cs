@@ -1,5 +1,6 @@
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Scripts.SO.UIConfig;
+using Scripts.UI.Gameplay.PackBooster;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems;
@@ -8,53 +9,19 @@ using SonatFramework.Templates.UI.ScriptBase;
 using TMPro;
 using UnityEngine;
 
-public class PopupBuyBooster2 : PopupBuyBoosterBase
+public class PopupBuyBooster2 : PopupBuyBooster
 {
-    [SerializeField] private TMP_Text txtName;
-    [SerializeField] private TMP_Text txtDescription;
-
+    [Header("PopupBuyBooster2")]
+    [SerializeField] private UIPackBooster[] packBoosters;
 
     public override void Open(UIData uiData)
     {
         base.Open(uiData);
 
-        var popupBuyBoosterConfigSO = (boosterService.Instance as SonatBoosterService).BoostersConfig.popupBuyBoosterConfigSO;
-        var (title, description) = popupBuyBoosterConfigSO.GetBoosterConfig(boosterConfig.booster);
-
-        txtName.text = title;
-        txtDescription.text = description;
-
-        // switch (boosterConfig.booster)
-        // {
-        //     case GameResource.BoosterUndo:
-        //         txtName.text = "Add Plate";
-        //         txtDescription.text = "Add one plate";
-        //         break;
-        //     case GameResource.BoosterSpatula:
-        //         txtName.text = "Spatula";
-        //         txtDescription.text = "Finish an order faster";
-        //         break;
-        //     case GameResource.BoosterShuffle:
-        //         txtName.text = "Shuffle";
-        //         txtDescription.text = "Shuffle all items";
-        //         break;
-        //     case GameResource.BoosterFoodBox:
-        //         txtName.text = "Food Box";
-        //         txtDescription.text = "Clear all plates";
-        //         break;
-        //     case GameResource.BoosterUndo_Test:
-        //         txtName.text = "Undo";
-        //         txtDescription.text = "Made a mistake? Undo your last move.";
-        //         break;
-        // }
+        for (int i = 0; i < packBoosters.Length; i++)
+        {
+            var config = (boosterService.Instance as SonatBoosterService).BoostersConfig.boosterPackConfigs.Find(x => x.booster == boosterConfig.booster);
+            packBoosters[i].SetData(config.pack[i].rewardData, config.pack[i].price, i == 0);
+        }
     }
-
-    public override void Close()
-    {
-        base.Close();
-
-        GameplayHelper.OnClose_ChangeGameState(GameState.Playing);
-    }
-
-    
 }

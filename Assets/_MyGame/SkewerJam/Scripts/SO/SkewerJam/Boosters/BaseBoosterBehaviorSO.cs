@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using MyGame.SkewerJam.Gameplay;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems.ObjectPooling;
@@ -26,7 +27,8 @@ namespace MyGame.SO.Boosters
 
         public virtual async UniTask PostUseBooster()
         {
-            return;
+            var gameLogicHandler = GameController.Instance.GameLogicHandler;
+            gameLogicHandler.CommandInvoker.ResetStack();
         }
 
 

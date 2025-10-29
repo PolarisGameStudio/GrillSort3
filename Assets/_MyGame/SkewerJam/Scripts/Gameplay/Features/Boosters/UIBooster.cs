@@ -1,9 +1,11 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Manager;
 using MyGame.SkewerJam.Utils;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems.BoosterManagement;
+using SonatFramework.Systems.UserData;
 using SonatFramework.Templates.UI.ScriptBase;
 using UnityEngine;
 
@@ -55,7 +57,16 @@ namespace MyGame.SkewerJam.Gameplay.Booster
         {
             UIData uiData = new UIData();
             uiData.Add("booster_config", config);
-            PanelManager.Instance.OpenPanelByName<PopupBuyBoosterBase>("PopupBuyBooster_SkewerJam", uiData);
+
+            var level = MySonatFramework.GetService<UserDataService>().GetLevel();
+            if (level >= GameRemoteConfigValue.levelStartShowPopupBuyBooster2)
+            {
+                PanelManager.Instance.OpenPanelByName<PopupBuyBoosterBase>("PopupBuyBooster2", uiData);
+            }
+            else
+            {
+                PanelManager.Instance.OpenPanelByName<PopupBuyBoosterBase>("PopupBuyBooster_SkewerJam", uiData);
+            }
         }
 
         protected override void BoosterLockFeedback()

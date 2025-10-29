@@ -21,7 +21,7 @@ public class BoosterAnim : EffectPoolBase
     [SerializeField] protected AnimationCurve scaleCurve;
 
     [Header("Shake")]
-    [SerializeField, ShowIf("isShake")] protected bool isShake = true;
+    [SerializeField] protected bool isShake = true;
     [SerializeField, ShowIf("isShake")] protected float shakeDelay = 0.75f;
     [SerializeField, ShowIf("isShake")] protected float shakeDuration = 0.5f;
     [SerializeField, ShowIf("isShake")] protected float shakeStrength = 0.5f;
