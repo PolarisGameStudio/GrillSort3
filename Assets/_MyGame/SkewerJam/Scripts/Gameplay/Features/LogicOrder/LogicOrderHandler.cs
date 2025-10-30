@@ -64,7 +64,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
         {
             var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
 
-            var dictAllItemIds = ItemHelper.GetItemIdDictInGameplay(-1, true);
+            var dictAllItemIds = ItemHelper.GetItemIdDictInGameplay(-1);
             var orderItemsDict = orderManager.GetOrderItemsDict();
 
             // số item còn lại <= số item còn lại tạo order

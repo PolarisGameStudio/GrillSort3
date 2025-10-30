@@ -62,6 +62,7 @@ namespace MyGame.SkewerJamSO.Boosters
 
         public override bool CheckSuggest()
         {
+            // chỉ gợi ý undo khi mà có thể undo
             return true;
         }
 

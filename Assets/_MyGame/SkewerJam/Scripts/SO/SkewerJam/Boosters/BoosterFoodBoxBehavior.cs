@@ -76,6 +76,7 @@ namespace MyGame.SkewerJamSO.Boosters
 
         public override bool CheckSuggest()
         {
+            // chỉ gợi ý food box khi mà có waiting grill không trống
             return true;
         }
 

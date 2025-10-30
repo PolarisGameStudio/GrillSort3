@@ -40,30 +40,48 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             {
                 if (ignoreLock == true && primaryGrill.IsLock) continue;
 
-                var shuffleLayerData = primaryGrill.GetShuffleLayerData();
-                if (shuffleLayerData?.layerData?.itemData == null) continue;
-                foreach (var itemData in shuffleLayerData.layerData.itemData)
+                var layerData = primaryGrill.GetCurrentData();
+                if (layerData?.itemData == null) continue;
+                foreach (var itemData in layerData.itemData)
                 {
                     if (itemData is not { id: > 0 }) continue;
                     listItemIds.Add((ItemId)itemData.id);
                 }
 
-                var subLayerData = primaryGrill.GetSubsShuffleLayerData();
-                if (subLayerData?.Count == 0) continue;
+                if (primaryGrill.GetSubGrills() == null || primaryGrill.GetSubGrills().Count == 0) continue;
+
+
 
                 int currentLayer = 2;
-                foreach (var subLayer in subLayerData)
+                foreach (var subGrill in primaryGrill.GetSubGrills())
                 {
                     if (numLayer != -1 && currentLayer > numLayer) break;
-
                     currentLayer++;
-                    if (subLayer?.layerData?.itemData == null) continue;
-                    foreach (var itemData in subLayer.layerData.itemData)
+
+                    var subLayerData = subGrill.GetCurrentData();
+                    if (subLayerData?.itemData == null) continue;
+                    foreach (var itemData in subLayerData.itemData)
                     {
                         if (itemData is not { id: > 0 }) continue;
                         listItemIds.Add((ItemId)itemData.id);
                     }
                 }
+
+                // var subLayerData = primaryGrill.GetLayerData();
+                // if (subLayerData?.Count == 0) continue;
+
+                // foreach (var subLayer in subLayerData)
+                // {
+                //     if (numLayer != -1 && currentLayer > numLayer) break;
+
+                //     currentLayer++;
+                //     if (subLayer?.layerData?.itemData == null) continue;
+                //     foreach (var itemData in subLayer.layerData.itemData)
+                //     {
+                //         if (itemData is not { id: > 0 }) continue;
+                //         listItemIds.Add((ItemId)itemData.id);
+                //     }
+                // }
             }
             return listItemIds;
         }

@@ -215,6 +215,7 @@ namespace MyGame.SkewerJamSO.Boosters
 
         public override bool CheckSuggest()
         {
+            // chỉ gợi ý shuffle khi mà có grill có thể shuffle
             return true;
         }
     }
