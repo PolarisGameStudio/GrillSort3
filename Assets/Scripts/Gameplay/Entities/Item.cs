@@ -289,7 +289,7 @@ namespace Gameplay.Entities
 
         private bool isMoveToPrimary = false;
         public bool IsMoveToPrimary => isMoveToPrimary;
-        public void MoveToPrimary(SlotBase slot, int index)
+        public virtual void MoveToPrimary(SlotBase slot, int index)
         {
             isMoveToPrimary = true;
             SetPrimary(true);
@@ -313,7 +313,7 @@ namespace Gameplay.Entities
             }, this);
         }
 
-        public void MoveToSub(SlotBase slot, int index)
+        public virtual void MoveToSub(SlotBase slot, int index)
         {
             isMoveToPrimary = false;
             SetPrimary(false);

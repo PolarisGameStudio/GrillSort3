@@ -280,14 +280,15 @@ namespace Gameplay.LevelData
     public enum ItemType : byte
     {
         Normal = 0,
-        Hidden,
-        Special,
-        Bomb,
-        Ice,
-        Key,
-        Key2,
-        KeyArea,
-        Coin
+        Hidden = 1,
+        Special = 2,
+        Bomb = 3,
+        Ice = 4,
+        Key = 5,
+        Key2 = 6,
+        KeyArea = 7,
+        Coin = 8,
+        Wrapped = 9
     }
 
     public enum MoveType : byte
