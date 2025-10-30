@@ -297,16 +297,16 @@ namespace Gameplay.Entities
 
         public virtual void CheckComplete()
         {
-            if (SlotCount == 1) return;
-            int id = 0;
-            foreach (var slot in slots)
-            {
-                if (slot.isEmpty()) return;
-                if (id == 0) id = slot.GetItem().id;
-                else if (id != slot.GetItem().id) return;
-            }
+            // if (SlotCount == 1) return;
+            // int id = 0;
+            // foreach (var slot in slots)
+            // {
+            //     if (slot.isEmpty()) return;
+            //     if (id == 0) id = slot.GetItem().id;
+            //     else if (id != slot.GetItem().id) return;
+            // }
 
-            OnComplete();
+            // OnComplete();
         }
 
         protected virtual void OnComplete()
