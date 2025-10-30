@@ -42,7 +42,11 @@ public class PopupSettings : PopupSettingsBase
         {
             var level = MySonatFramework.userDataService.GetLevel();
             if (level >= GameRemoteConfigValue.levelShowInterReplay)
-                SonatSDKAdapter.ShowInterAds("replay", CheckCanReplay);
+                SonatSDKAdapter.ShowInterAds("replay", () =>
+                {
+                    onConfirm?.Invoke();
+                    CheckCanReplay();
+                });
             else
             {
                 onConfirm?.Invoke();
@@ -81,6 +85,7 @@ public class PopupSettings : PopupSettingsBase
         EventBus<LevelQuitEvent>.Raise(new LevelQuitEvent() { cause = "replay" });
         if (MySonatFramework.livesService.CanPlay())
         {
+
             Replay();
         }
         else

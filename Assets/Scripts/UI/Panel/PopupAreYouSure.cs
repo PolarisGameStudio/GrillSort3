@@ -32,7 +32,6 @@ public class PopupAreYouSure : Panel
     {
         onConfirm?.Invoke(() =>
         {
-
             Close();
         });
     }
