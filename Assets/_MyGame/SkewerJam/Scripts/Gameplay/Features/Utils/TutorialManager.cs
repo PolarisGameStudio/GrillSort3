@@ -130,6 +130,10 @@ namespace MyGame.SkewerJam.Gameplay
                         {
                             listTutorialTypes.Add(TutorialType.Item_Ice);
                         }
+                        if (item.itemType == ItemType.Wrapped)
+                        {
+                            listTutorialTypes.Add(TutorialType.Item_Wrapped);
+                        }
                     }
                 }
 
@@ -206,6 +210,7 @@ namespace MyGame.SkewerJam.Gameplay
                 case TutorialType.Item_Bomb:
                 case TutorialType.Item_Hidden:
                 case TutorialType.Item_Ice:
+                case TutorialType.Item_Wrapped:
 
                 case TutorialType.Obstacle_Octochef_1:
                     // case TutorialType.Obstacle_Conveyor:
@@ -338,6 +343,7 @@ namespace MyGame.SkewerJam.Gameplay
         Item_Bomb = 40,
         Item_Hidden = 41,
         Item_Ice = 42,
+        Item_Wrapped = 43,
 
         Obstacle_Octochef_1 = 70,
         Obstacle_Conveyor = 71,
