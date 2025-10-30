@@ -225,4 +225,29 @@ public class ConveyorController : EntityBase, IPoolingObject
         StopAllCoroutines();
         paused = false;
     }
+
+    private void OnMouseDown()
+    {
+        Debug.Log("OnMouseDown");
+        if (GameController.Instance.CheckBlockUI() == false && moving)
+        {
+            MultipleSpeed(2);
+        }
+    }
+
+    private void OnMouseUp()
+    {
+        Debug.Log("OnMouseUp");
+        if (moving)
+        {
+            MultipleSpeed(1);
+        }
+    }
+
+    private void MultipleSpeed(float multiplier = 1)
+    {
+        conveySpeed = direction * conveyData.speed * multiplier;
+        visualSpeed = visualRatio * conveySpeed;
+        materialVisual.SetVector("_UVScrollSpeed", visualSpeed);
+    }
 }
