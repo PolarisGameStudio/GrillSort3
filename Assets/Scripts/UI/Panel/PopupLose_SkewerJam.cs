@@ -24,7 +24,7 @@ public class PopupLose_SkewerJam : Panel
         var level = MySonatFramework.userDataService.GetLevel();
         if (MySonatFramework.GetService<LivesService>().CanPlay())
         {
-            if (level >= GameRemoteConfigValue.levelShowInterReplay)
+            if (level >= GameRemoteConfigValue.levelShowInterLose)
             {
                 SonatSDKAdapter.ShowInterAds("Lose_Retry", () =>
                 {
@@ -38,7 +38,7 @@ public class PopupLose_SkewerJam : Panel
         }
         else
         {
-            if (level >= GameRemoteConfigValue.levelShowInterGoHome)
+            if (level >= GameRemoteConfigValue.levelShowInterLose)
             {
                 SonatSDKAdapter.ShowInterAds("Lose_GoHome", () =>
                 {
@@ -56,7 +56,7 @@ public class PopupLose_SkewerJam : Panel
     {
         base.Close();
         var level = MySonatFramework.userDataService.GetLevel();
-        if (level >= GameRemoteConfigValue.levelShowInterGoHome)
+        if (level >= GameRemoteConfigValue.levelShowInterLose)
         {
             SonatSDKAdapter.ShowInterAds("Lose_GoHome", () =>
             {

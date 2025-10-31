@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Linq;
+﻿using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Gameplay.BoosteeManagement;
 using Gameplay.Entities.Grills;
-using Gameplay.Entities.GrillScripts;
 using Gameplay.LevelData;
-using Manager;
-using Sonat.Enums;
 using SonatFramework.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -286,10 +281,24 @@ namespace Gameplay.Entities
 
         public virtual void CheckEmpty()
         {
-            foreach (var slot in slots)
+            if (showed)
             {
-                if (slot.GetItem() != null) return;
+                foreach (var slot in slots)
+                {
+                    if (slot.GetItem() != null) return;
+                }
             }
+            else
+            {
+                if (layerData != null && layerData.itemData != null)
+                {
+                    foreach (var itemData in layerData.itemData)
+                    {
+                        if (itemData != null && itemData.id != 0) return;
+                    }
+                }
+            }
+
 
             UpdateSubGrills();
         }
@@ -314,6 +323,11 @@ namespace Gameplay.Entities
         public void AddFromPrimary(Item item, int i, int itemIndex)
         {
             grillBaseBehaviorSO.OnAddToSub(this, item, i, itemIndex);
+        }
+
+        public void SetLayerData(LayerData layerData)
+        {
+            this.layerData = layerData;
         }
     }
 }

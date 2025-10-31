@@ -155,6 +155,12 @@ namespace MyGame.SkewerJamSO.Boosters
             var grillManager = GameController.Instance.GameLogicHandler.GrillManager;
             var listGrills = grillManager.ListGrills;
 
+            num = GetCurrentNumItem(targetItemId, num);
+            if (num == 0)
+            {
+                Debug.Log($"<color=red>BoosterSpatulaBehaviorSO:</color> FindItems: Không có item {targetItemId} trong game");
+                return listItems;
+            }
             var layer = 0;
             while (listItems.Count < num)
             {
@@ -166,13 +172,31 @@ namespace MyGame.SkewerJamSO.Boosters
                     var slotIdx = 0;
                     foreach (var itemData in layerData.itemData)
                     {
-                        if ((ItemId)itemData.id == targetItemId)
+                        if (itemData == null || itemData.id == 0)
                         {
-                            var item = await grill.GetItem(layer, slotIdx);
-                            listItems.Add(item);
-                            if (listItems.Count == num) return listItems;
-                        }
 
+                        }
+                        else
+                        {
+                            if ((ItemId)itemData.id == targetItemId)
+                            {
+                                var item = await grill.GetItem(layer, slotIdx);
+                                if (item == null)
+                                {
+                                    Debug.Log($"<color=red>BoosterSpatulaBehaviorSO:</color> FindItems: Không tìm thấy item {targetItemId} ở layer {layer} slot {slotIdx}");
+                                    continue;
+                                }
+                                listItems.Add(item);
+
+                                if (layer >= 1)
+                                {
+                                    // xóa data ở sublayer đó
+                                    layerData.itemData[slotIdx] = null;
+                                    grill.GetSubGrills()[layer - 1].SetLayerData(layerData);
+                                }
+                                if (listItems.Count == num) return listItems;
+                            }
+                        }
                         slotIdx++;
                     }
                 }
@@ -180,7 +204,43 @@ namespace MyGame.SkewerJamSO.Boosters
                 layer++;
             }
 
-            return null;
+            return listItems;
+        }
+
+        private int GetCurrentNumItem(ItemId targetItemId, int num)
+        {
+            var grillManager = GameController.Instance.GameLogicHandler.GrillManager;
+            var listGrills = grillManager.ListGrills;
+            var currentNum = 0;
+            foreach (var grill in listGrills)
+            {
+                var currentData = grill.GetLayerData(0);
+                if (currentData == null) continue;
+                foreach (var itemData in currentData.itemData)
+                {
+                    if (itemData != null && itemData.id == (int)targetItemId)
+                    {
+                        currentNum++;
+                        if (currentNum >= num) return currentNum;
+                    }
+                }
+
+                foreach (var subGrill in grill.GetSubGrills())
+                {
+                    var subLayerData = subGrill.GetCurrentData();
+                    if (subLayerData == null) continue;
+                    foreach (var itemData in subLayerData.itemData)
+                    {
+                        if (itemData != null && itemData.id == (int)targetItemId)
+                        {
+                            currentNum++;
+                            if (currentNum >= num) return currentNum;
+                        }
+                    }
+                }
+
+            }
+            return currentNum;
         }
 
         protected override async UniTask PlayBoosterAnim(Vector3 position)

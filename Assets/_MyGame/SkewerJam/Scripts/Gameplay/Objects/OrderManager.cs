@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using MyGame.SkewerJam.Objects.Entities;
 using UnityEngine;
-using MyGame.SkewerJam.Gameplay;
 using Gameplay.Entities;
 using Cysharp.Threading.Tasks;
 using Manager;

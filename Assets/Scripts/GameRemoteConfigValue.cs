@@ -24,7 +24,7 @@ namespace Manager
         public static int numberItemCanMergeAfterShuffle = 5;
         public static int levelShowInterGoHome;
         public static int levelShowInterReplay;
-
+        public static int levelShowInterLose;
 
         public static bool localizeJapan;
         public static int countLoseToShowOffer;
@@ -61,7 +61,7 @@ namespace Manager
 
             levelShowInterReplay = SonatSDKAdapter.GetRemoteInt("level_show_inter_replay", 9999);
             levelShowInterGoHome = SonatSDKAdapter.GetRemoteInt("level_show_inter_go_home", 9999);
-
+            levelShowInterLose = SonatSDKAdapter.GetRemoteInt("level_show_inter_lose", 9999);
 
             activeProgressLose = SonatSDKAdapter.GetRemoteBool("active_progress_lose", true);
             levelStartShowBanner = SonatSDKAdapter.GetRemoteInt("level_start_show_banner", 9999);

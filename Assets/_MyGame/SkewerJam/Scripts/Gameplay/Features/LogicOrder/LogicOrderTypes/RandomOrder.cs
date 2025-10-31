@@ -28,14 +28,13 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             var orderItemsDict = orderManager.GetOrderItemsDict();
             foreach (var itemId in orderItemsDict.Keys)
             {
-                if (itemDict.ContainsKey(itemId) == false)
+                if (itemDict.ContainsKey(itemId))
                 {
-                    Debug.Log("<color=red>OrderHelper:</color> GetRandomOrder: itemDict.ContainsKey(itemId) == false");
-                }
-                itemDict[itemId] -= (orderItemsDict[itemId].maxItems - orderItemsDict[itemId].num);
-                if (itemDict[itemId] <= 0)
-                {
-                    itemDict.Remove(itemId);
+                    itemDict[itemId] -= (orderItemsDict[itemId].maxItems - orderItemsDict[itemId].num);
+                    if (itemDict[itemId] <= 0)
+                    {
+                        itemDict.Remove(itemId);
+                    }
                 }
             }
 

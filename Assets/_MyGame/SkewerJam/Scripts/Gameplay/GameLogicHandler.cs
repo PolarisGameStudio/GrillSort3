@@ -104,6 +104,10 @@ namespace MyGame.SkewerJam.Gameplay
         #region Select Item
         public bool SelectItem(Item item)
         {
+            if (item == null)
+            {
+                return false;
+            }
             // ItemOnOrder thì không cần chặn
             // Nếu đang warning và số lần chặn click vẫn còn thì chặn click
             var checkItemOnOrder = ItemHelper.CheckSelectedItemOnOrder(item);

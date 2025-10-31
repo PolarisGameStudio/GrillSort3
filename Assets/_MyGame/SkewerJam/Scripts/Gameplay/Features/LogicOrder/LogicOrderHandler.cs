@@ -187,7 +187,12 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
         private bool CheckExistBasicOrder()
         {
-            return listLogicOrders.Any(e => e.LogicOrderType == LogicOrderType.Basic);
+            var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
+            foreach (var order in orderManager.ListOrders)
+            {
+                if (order.LogicOrderType == LogicOrderType.Basic || order.LogicOrderType == LogicOrderType.Random) return true;
+            }
+            return false;
         }
 
         private int GetCurrentPhase()

@@ -49,7 +49,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             var itemIdsInLayer1 = ItemHelper.GetItemIdDictInGameplay(1, true);
 
             // không gọi vào blind chưa key trên order và layer 1
-            blindedItems = blindedItems.Where(e => itemIdsInLayer1.ContainsKey(e) == false || dictOrder.ContainsKey(e)).ToList();
+            blindedItems = blindedItems.Where(e => itemIdsInLayer1.ContainsKey(e) == false || dictOrder.ContainsKey(e) == false).ToList();
 
             if (blindedItems.Count == 0) return (ItemId.None, 0);
             Debug.Log("<color=orange>OrderHelper:</color> GetOrder Blinded: " + blindedItems[UnityEngine.Random.Range(0, blindedItems.Count)] + " " + 1);
