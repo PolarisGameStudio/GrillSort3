@@ -1,6 +1,8 @@
+using Sonat.Enums;
 using SonatFramework.Scripts.Feature.Shop.UI;
 using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
+using SonatFramework.Systems.SceneManagement;
 
 public class ShopPanel : ShopPanelBase
 {
@@ -14,6 +16,10 @@ public class ShopPanel : ShopPanelBase
     public override void Close()
     {
         base.Close();
-        MySonatFramework.TryShowBanner();
+
+        if (MySonatFramework.GetService<SonatSceneService>().GetCurrentGamePlacement() == GamePlacement.Gameplay_SkewerJam)
+        {
+            MySonatFramework.TryShowBanner();
+        }
     }
 }
