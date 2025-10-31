@@ -115,6 +115,11 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
         public (ItemId itemId, int num, int deltaSlot) ForceGetItemOrderBasic(GameplayInfoForLogicOrder gameplayInfo)
         {
             var dictDeltaSlots = gameplayInfo.DictDeltaSlots;
+            if (dictDeltaSlots.Count == 0)
+            {
+                Debug.Log("<color=red>OrderHelper:</color> ForceGetItemOrderBasic: dictDeltaSlots.Count == 0");
+                return (ItemId.None, 0, 0);
+            }
             var minDeltaSlot = dictDeltaSlots.Values.Min(e => e.Values.Min());
 
             var randomItemIds = dictDeltaSlots.Keys.Where(e => dictDeltaSlots[e].ContainsValue(minDeltaSlot)).ToList();

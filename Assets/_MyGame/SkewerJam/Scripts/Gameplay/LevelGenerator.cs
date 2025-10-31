@@ -105,7 +105,8 @@ namespace MyGame.SkewerJam.Gameplay
 
 
             // shuffle item
-            if (_level > 100)
+            var sonatLevelServiceAsync = levelService as SonatLevelServiceAsync;
+            if (_level > (sonatLevelServiceAsync.GameModeLevels.FirstOrDefault(e => e.mode == GameMode.Classic)?.level ?? 0))
             {
                 var itemIds = new HashSet<int>();
                 foreach (var grillData in levelDataSkewerJam.grillData)

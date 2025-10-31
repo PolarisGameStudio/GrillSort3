@@ -567,5 +567,10 @@ namespace Gameplay.Entities
         {
             return IsLocked || slot.GetGrill().IsLock;
         }
+
+        public virtual void OnEndSwitch()
+        {
+            
+        }
     }
 }

@@ -40,6 +40,7 @@ namespace MyGame.SkewerJam.Gameplay.Objects
 
         public void OnItemEndSwitch(Item item, SlotBase slot)
         {
+            item.OnEndSwitch();
             if (slot.GetGrill() is OrderEntity orderEntity)
             {
                 currentItems -= 1;

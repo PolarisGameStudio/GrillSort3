@@ -107,11 +107,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                 }
                 else
                 {
-                    Debug.Log("<color=red>OrderHelper:</color> GetItemOrder: No rescue item found, use basic order");
-                    var basicOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Basic);
-                    var (i, n, s) = (basicOrder as BasicOrderSO).ForceGetItemOrderBasic(gameplayInfoForLogicOrder);
-                    SetForceRescue(false, -1);
-                    return (i, n, LogicOrderType.Basic);
+                    return ForceGetItemOrder(gameplayInfoForLogicOrder);
                 }
             }
 
@@ -129,19 +125,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             }
             else
             {
-                Debug.Log("<color=red>OrderHelper:</color> GetItemOrder: No item found");
-                var basicOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Basic);
-                var (i, n, s) = (basicOrder as BasicOrderSO).ForceGetItemOrderBasic(gameplayInfoForLogicOrder);
-                if (i != ItemId.None)
-                {
-                    return (i, n, LogicOrderType.Basic);
-                }
-                else
-                {
-                    var randomOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Random);
-                    var (randomItemId, randomNum) = randomOrder.GetOrder(gameplayInfoForLogicOrder);
-                    return (randomItemId, randomNum, LogicOrderType.Random);
-                }
+                return ForceGetItemOrder(gameplayInfoForLogicOrder);
             }
         }
 
@@ -238,6 +222,23 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             var itemManager = GameController.Instance.GameLogicHandler.ItemManager;
             var currentItems = itemManager.CurrentItems;
             return currentItems < 10f;
+        }
+
+        private (ItemId itemId, int num, LogicOrderType logicOrderType) ForceGetItemOrder(GameplayInfoForLogicOrder gameplayInfoForLogicOrder)
+        {
+            Debug.Log("<color=red>OrderHelper:</color> ForceGetItemOrder");
+            var basicOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Basic);
+            var (i, n, s) = (basicOrder as BasicOrderSO).ForceGetItemOrderBasic(gameplayInfoForLogicOrder);
+            if (i != ItemId.None)
+            {
+                return (i, n, LogicOrderType.Basic);
+            }
+            else
+            {
+                var randomOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Random);
+                var (randomItemId, randomNum) = randomOrder.GetOrder(gameplayInfoForLogicOrder);
+                return (randomItemId, randomNum, LogicOrderType.Random);
+            }
         }
     }
 

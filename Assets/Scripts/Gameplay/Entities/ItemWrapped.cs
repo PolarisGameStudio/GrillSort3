@@ -65,5 +65,11 @@ public class ItemWrapped : Item
         wrappedSprite.DOKill();
         wrappedSprite.color = new Color(wrappedSprite.color.r, wrappedSprite.color.g, wrappedSprite.color.b, 1);
     }
+
+    public override void OnEndSwitch()
+    {
+        base.OnEndSwitch();
+        UnWrappedItem();
+    }
 }
 

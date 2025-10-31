@@ -21,7 +21,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
         public override (ItemId itemId, int num) GetOrder(GameplayInfoForLogicOrder gameplayInfo = null)
         {
-            var itemDict = ItemHelper.GetItemIdDictInGameplay(-1, true);
+            var itemDict = ItemHelper.GetItemIdDictInGameplay(-1);
 
             // trừ đi item đã order
             var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
@@ -41,7 +41,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
 
             // ưu tiên lấy order 2, 3 trước và item ở layer 1
-            var itemsInLayer1 = ItemHelper.GetItemIdDictInGameplay(1, true);
+            var itemsInLayer1 = ItemHelper.GetItemIdDictInGameplay(1);
             var filteredItemDict = itemDict.Where(e => e.Value >= 2 && itemsInLayer1.ContainsKey(e.Key) == true).ToList();
             if (filteredItemDict.Count > 0)
             {
