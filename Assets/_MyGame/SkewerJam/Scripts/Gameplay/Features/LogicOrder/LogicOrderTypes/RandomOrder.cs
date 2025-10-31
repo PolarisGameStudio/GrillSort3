@@ -21,7 +21,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
         public override (ItemId itemId, int num) GetOrder(GameplayInfoForLogicOrder gameplayInfo = null)
         {
-            var itemDict = ItemHelper.GetItemIdDictInGameplay(-1);
+            var itemDict = ItemHelper.GetItemIdDictInGameplay(-1, true);
 
             // trừ đi item đã order
             var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
@@ -33,23 +33,28 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                     Debug.Log("<color=red>OrderHelper:</color> GetRandomOrder: itemDict.ContainsKey(itemId) == false");
                 }
                 itemDict[itemId] -= (orderItemsDict[itemId].maxItems - orderItemsDict[itemId].num);
-                if (itemDict[itemId] == 0)
+                if (itemDict[itemId] <= 0)
                 {
                     itemDict.Remove(itemId);
                 }
-                else if (itemDict[itemId] < 0)
-                {
-                    Debug.LogError("<color=red>OrderHelper:</color> GetRandomOrder: itemDict[itemId] < 0");
-                    return (ItemId.None, 0);
-                }
+            }
+
+
+            // ưu tiên lấy order 2, 3 trước và item ở layer 1
+            var itemsInLayer1 = ItemHelper.GetItemIdDictInGameplay(1, true);
+            var filteredItemDict = itemDict.Where(e => e.Value >= 2 && itemsInLayer1.ContainsKey(e.Key) == true).ToList();
+            if (filteredItemDict.Count > 0)
+            {
+                var rand = filteredItemDict[UnityEngine.Random.Range(0, filteredItemDict.Count)].Key;
+                var num = itemDict[rand] > 3 ? 3 : itemDict[rand];
+                Debug.Log("<color=green>OrderHelper:</color> GetRandomOrder: " + rand + " " + num);
+                return ((ItemId)rand, num);
             }
 
             var randomItemId = itemDict.Keys.ToList()[UnityEngine.Random.Range(0, itemDict.Keys.ToList().Count)];
-
-            var num = itemDict[randomItemId] > 3 ? 3 : itemDict[randomItemId];
-
-            Debug.Log("<color=green>OrderHelper:</color> GetRandomOrder: " + randomItemId + " " + num);
-            return ((ItemId)randomItemId, num);
+            var number = itemDict[randomItemId] > 3 ? 3 : itemDict[randomItemId];
+            Debug.Log("<color=green>OrderHelper:</color> GetRandomOrder: " + randomItemId + " " + number);
+            return ((ItemId)randomItemId, number);
         }
     }
 }

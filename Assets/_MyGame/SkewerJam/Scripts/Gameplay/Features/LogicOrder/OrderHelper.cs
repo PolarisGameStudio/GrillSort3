@@ -46,7 +46,8 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                 }
             }
 
-            if(itemIdsList.Count == 0) {
+            if (itemIdsList.Count == 0)
+            {
                 Debug.LogWarning("<color=red>OrderHelper:</color> GetOptimizedRandomItem: itemIdsList.Count == 0");
                 return (ItemId.None, 0, 0);
             }
@@ -54,7 +55,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             return ((ItemId)randomId, maxNum, deltaSlot);
         }
 
-        public static (ItemId itemId, int num, int step) GetOptimizedRandomSpecialItem(List<ItemId> randomItemIds, GameplayInfoForLogicOrder info)
+        public static (ItemId itemId, int num, int step) GetOptimizedRandomLockedOrder(List<ItemId> randomItemIds, GameplayInfoForLogicOrder info)
         {
             var dictNeededSlots = info.DictNeededSlots;
             var listRandomItemIds = new List<ItemId>();
@@ -78,7 +79,8 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                 }
             }
 
-            if(listRandomItemIds.Count == 0) {
+            if (listRandomItemIds.Count == 0)
+            {
                 Debug.LogWarning("<color=red>OrderHelper:</color> GetOptimizedRandomSpecialItem: listRandomItemIds.Count == 0");
                 return (ItemId.None, 0, 0);
             }

@@ -22,9 +22,10 @@ namespace Manager
         public static int itemBombLimit = 10;
         public static bool popupUnlockTray;
         public static int numberItemCanMergeAfterShuffle = 5;
-        public static int levelShowInterLose;
-        public static int levelShowInterWin;
+        public static int levelShowInterGoHome;
         public static int levelShowInterReplay;
+
+
         public static bool localizeJapan;
         public static int countLoseToShowOffer;
         public static bool noCharacter;
@@ -58,8 +59,8 @@ namespace Manager
 
             levelForceHome = SonatSDKAdapter.GetRemoteInt("level_force_home", 6);
 
-            levelShowInterLose = SonatSDKAdapter.GetRemoteInt("level_show_inter_lose", 3);
-            levelShowInterReplay = SonatSDKAdapter.GetRemoteInt("level_show_inter_replay", 3);
+            levelShowInterReplay = SonatSDKAdapter.GetRemoteInt("level_show_inter_replay", 9999);
+            levelShowInterGoHome = SonatSDKAdapter.GetRemoteInt("level_show_inter_go_home", 9999);
 
 
             activeProgressLose = SonatSDKAdapter.GetRemoteBool("active_progress_lose", true);

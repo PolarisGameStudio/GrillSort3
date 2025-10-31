@@ -216,7 +216,52 @@ namespace MyGame.SkewerJamSO.Boosters
         public override bool CheckSuggest()
         {
             // chỉ gợi ý shuffle khi mà có grill có thể shuffle
-            return true;
+            // suggest shuffle khi grill shuffle có chưa item trên order
+            var grillManager = GameController.Instance.GameLogicHandler.GrillManager;
+            var filteredGrills = grillManager.ListGrills.Where(e => e.CanShuffle()).ToList();
+
+            var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
+            var dictOrderItems = orderManager.GetOrderItemsDict();
+
+            foreach (var grill in filteredGrills)
+            {
+                var layerData = grill.GetCurrentData();
+                foreach (var item in layerData.itemData)
+                {
+                    if (item != null && dictOrderItems.ContainsKey((ItemId)item.id))
+                    {
+                        var orderItem = dictOrderItems[(ItemId)item.id];
+                        orderItem.num++;
+                        dictOrderItems[(ItemId)item.id] = orderItem;
+
+                        if (orderItem.num >= orderItem.maxItems)
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+                var subGrills = grill.GetSubGrills();
+                if (subGrills != null && subGrills.Count > 0)
+                {
+                    var subLayerData = subGrills[0].GetCurrentData();
+                    foreach (var item in subLayerData.itemData)
+                    {
+                        if (item != null && dictOrderItems.ContainsKey((ItemId)item.id))
+                        {
+                            var orderItem = dictOrderItems[(ItemId)item.id];
+                            orderItem.num++;
+                            dictOrderItems[(ItemId)item.id] = orderItem;
+
+                            if (orderItem.num >= orderItem.maxItems)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
         }
     }
 }

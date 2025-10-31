@@ -63,12 +63,13 @@ namespace MyGame.SkewerJamSO.Boosters
         public override bool CheckSuggest()
         {
             // chỉ gợi ý undo khi mà có thể undo
-            return true;
+            var canUndo = CanUseBooster().canUse;
+            return canUndo;
         }
 
         public override async UniTask PostUseBooster()
         {
-            
+
         }
 
         public override async UniTask PrepareTutorialBooster()

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Gameplay.BoosteeManagement;
@@ -41,6 +42,7 @@ namespace MyGame.SkewerJam.Objects.Entities
 
 
         public int MaxItems => maxItems;
+        public int CurrentItems => slots.Count(e => e.GetItem() != null);
         public LogicOrderType LogicOrderType => logicOrderType;
 
         public ItemId ItemIdTarget => itemIdTarget;

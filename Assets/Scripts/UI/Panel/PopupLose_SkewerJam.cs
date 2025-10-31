@@ -5,6 +5,8 @@ using SonatFramework.Systems;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems.AudioManagement;
 using SonatFramework.Scripts.Feature.Lives;
+using Manager;
+using SonatFramework.Scripts.SonatSDKAdapterModule;
 
 public class PopupLose_SkewerJam : Panel
 {
@@ -19,19 +21,51 @@ public class PopupLose_SkewerJam : Panel
     public void OnClickRetry()
     {
         base.Close();
-        if(MySonatFramework.GetService<LivesService>().CanPlay())
+        var level = MySonatFramework.userDataService.GetLevel();
+        if (MySonatFramework.GetService<LivesService>().CanPlay())
         {
-            GameController.Instance.Replay();
+            if (level >= GameRemoteConfigValue.levelShowInterReplay)
+            {
+                SonatSDKAdapter.ShowInterAds("Lose_Retry", () =>
+                {
+                    GameController.Instance.Replay();
+                });
+            }
+            else
+            {
+                GameController.Instance.Replay();
+            }
         }
         else
         {
-            GameplayHelper.GoHome();
+            if (level >= GameRemoteConfigValue.levelShowInterGoHome)
+            {
+                SonatSDKAdapter.ShowInterAds("Lose_GoHome", () =>
+                {
+                    GameplayHelper.GoHome();
+                });
+            }
+            else
+            {
+                GameplayHelper.GoHome();
+            }
         }
     }
 
     public void OnClickHome()
     {
         base.Close();
-        GameplayHelper.GoHome();
+        var level = MySonatFramework.userDataService.GetLevel();
+        if (level >= GameRemoteConfigValue.levelShowInterGoHome)
+        {
+            SonatSDKAdapter.ShowInterAds("Lose_GoHome", () =>
+            {
+                GameplayHelper.GoHome();
+            });
+        }
+        else
+        {
+            GameplayHelper.GoHome();
+        }
     }
 }

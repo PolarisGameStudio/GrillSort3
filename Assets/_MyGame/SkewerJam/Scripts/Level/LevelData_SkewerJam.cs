@@ -101,12 +101,12 @@ namespace MyGame.SkewerJam.Level
                         rateRescue = 0.5f;
                         break;
                     case LevelDifficulty.Hard1:
-                        maxNumberRescues = 2;
-                        rateRescue = 0.4f;
+                        maxNumberRescues = 3;
+                        rateRescue = 0.3f;
                         break;
                     case LevelDifficulty.Hard2:
-                        maxNumberRescues = 1;
-                        rateRescue = 0.3f;
+                        maxNumberRescues = 2;
+                        rateRescue = 0.2f;
                         break;
                 }
             }
@@ -131,12 +131,12 @@ namespace MyGame.SkewerJam.Level
                         rateRescue = 0.5f;
                         break;
                     case LevelDifficulty.Hard1:
-                        maxNumberRescues = 1;
-                        rateRescue = 0.4f;
+                        maxNumberRescues = 2;
+                        rateRescue = 0.3f;
                         break;
                     case LevelDifficulty.Hard2:
-                        maxNumberRescues = 0;
-                        rateRescue = 0.3f;
+                        maxNumberRescues = 1;
+                        rateRescue = 0.2f;
                         break;
                 }
             }

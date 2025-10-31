@@ -112,7 +112,7 @@ public class PopupSettings : PopupSettingsBase
         EventBus<LevelQuitEvent>.Raise(new LevelQuitEvent() { cause = "back_home" });
         // EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent() { gameMode = GameMode.Classic, level = level, success = false });
         MySonatFramework.livesService.ReduceLive(1, "back_home");
-        if (level >= GameRemoteConfigValue.levelShowInterLose)
+        if (level >= GameRemoteConfigValue.levelShowInterGoHome)
         {
             SonatSDKAdapter.ShowInterAds("BackHome", GoHome);
         }

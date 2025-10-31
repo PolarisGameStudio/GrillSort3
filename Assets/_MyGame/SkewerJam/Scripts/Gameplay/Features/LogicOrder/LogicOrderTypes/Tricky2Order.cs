@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Gameplay.Entities;
 using Manager;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Level;
@@ -29,6 +30,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             var listItemOnlyLayer2 = new List<ItemId>();
             foreach (var grill in grills)
             {
+                if (grill is PrimaryVendingGrill) continue; // tricky order né vending
                 var layer2Data = grill.GetLayerData(1);
                 if (layer2Data != null && layer2Data.itemData != null && layer2Data.itemData.Length > 0)
                 {

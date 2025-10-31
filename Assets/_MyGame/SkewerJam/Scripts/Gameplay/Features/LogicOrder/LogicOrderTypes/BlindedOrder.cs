@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Manager;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Level;
@@ -40,12 +42,19 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             }
 
             // lấy ra item Id giống với item bị lock mà có số step nhỏ nhất và tối ưu số num
+            var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
+            var dictOrder = orderManager.GetOrderItemsDict();
+
             var blindedItems = ItemHelper.GetItemIdsInBlindedGrill();
-            var randomItemId = blindedItems[UnityEngine.Random.Range(0, blindedItems.Count)];
-            // var (itemId, num, step) = OrderHelper.GetOptimizedRandomSpecialItem(blindedItems, gameplayInfo);
-            Debug.Log("<color=orange>OrderHelper:</color> GetOrder Blinded: " + randomItemId + " " + 1);
+            var itemIdsInLayer1 = ItemHelper.GetItemIdDictInGameplay(1, true);
+
+            // không gọi vào blind chưa key trên order và layer 1
+            blindedItems = blindedItems.Where(e => itemIdsInLayer1.ContainsKey(e) == false || dictOrder.ContainsKey(e)).ToList();
+
+            if (blindedItems.Count == 0) return (ItemId.None, 0);
+            Debug.Log("<color=orange>OrderHelper:</color> GetOrder Blinded: " + blindedItems[UnityEngine.Random.Range(0, blindedItems.Count)] + " " + 1);
             gap += 1;
-            return (randomItemId, 1);
+            return (blindedItems[UnityEngine.Random.Range(0, blindedItems.Count)], 1);
         }
 
         public override bool ForceUse(bool isRescue = false)

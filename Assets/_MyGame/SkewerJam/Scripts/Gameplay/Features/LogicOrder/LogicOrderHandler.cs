@@ -86,6 +86,10 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
         public async UniTask<(ItemId itemId, int num, LogicOrderType logicOrderType)> GetItemOrder(bool isRescue = false)
         {
+            // ưu tiện chọn theo logic được chọn
+            // otherwise chọn theo basic order
+            // otherwise chọn theo force basic order
+            // otherwise chọn theo random order
             var gameplayInfoForLogicOrder = new GameplayInfoForLogicOrder();
             gameplayInfoForLogicOrder.UpdateState();
 
@@ -128,12 +132,26 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                 Debug.Log("<color=red>OrderHelper:</color> GetItemOrder: No item found");
                 var basicOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Basic);
                 var (i, n, s) = (basicOrder as BasicOrderSO).ForceGetItemOrderBasic(gameplayInfoForLogicOrder);
-                return (i, n, LogicOrderType.Basic);
+                if (i != ItemId.None)
+                {
+                    return (i, n, LogicOrderType.Basic);
+                }
+                else
+                {
+                    var randomOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Random);
+                    var (randomItemId, randomNum) = randomOrder.GetOrder(gameplayInfoForLogicOrder);
+                    return (randomItemId, randomNum, LogicOrderType.Random);
+                }
             }
         }
 
         private BaseOrderSO ChooseLogicOrder()
         {
+            if (CheckChooseRandomOrder() == true)
+            {
+                return listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Random);
+            }
+
             var phase = GetCurrentPhase();
 
             var phaseConfig = selectedSequenceConfig.listPhaseConfigs[phase];
@@ -212,6 +230,14 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             {
                 _forceRescueData.deltaSlot = -1;
             }
+        }
+
+        private bool CheckChooseRandomOrder()
+        {
+            // khi mà có nhỏ hơn 5 order ở layer 1
+            var itemManager = GameController.Instance.GameLogicHandler.ItemManager;
+            var currentItems = itemManager.CurrentItems;
+            return currentItems < 10f;
         }
     }
 

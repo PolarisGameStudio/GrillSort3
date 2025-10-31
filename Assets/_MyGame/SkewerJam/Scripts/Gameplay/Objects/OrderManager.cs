@@ -257,6 +257,7 @@ namespace MyGame.SkewerJam.Gameplay.Objects
         #region Functions
         public (OrderEntity order, SlotBase slot) GetDestinationSlot(Item item)
         {
+            var options = new List<(OrderEntity order, SlotBase slot)>();
             foreach (var order in _listOrders)
             {
                 if (order.ItemIdTarget == (ItemId)item.id && order.State == OrderEntityState.Ready && order.IsActive == true)
@@ -264,11 +265,18 @@ namespace MyGame.SkewerJam.Gameplay.Objects
                     var orderSlot = order.GetAvailableSlot();
                     if (orderSlot != null)
                     {
-                        return (order, orderSlot);
+                        options.Add((order, orderSlot));
+                        // return (order, orderSlot);
                     }
                 }
             }
-            return (null, null);
+
+            if (options.Count == 0)
+            {
+                return (null, null);
+            }
+            var selectedOption = options.OrderBy(e => e.order.MaxItems - e.order.CurrentItems).FirstOrDefault();
+            return selectedOption;
         }
 
         public List<ItemId> GetTargetItemIds()
