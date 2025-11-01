@@ -20,7 +20,8 @@ namespace MyGame.Modules.CardCollection
 
         public string GetCardSpritePath()
         {
-            return $"{cardNamePath}/{(int)type}.png";
+            var albumType = Enum.Parse<AlbumType>("Album_" + type.ToString().Split('_')[1]);
+            return $"{cardNamePath}/{albumType.ToString().ToLower()}/{type.ToString().ToLower()}.png";
         }
         //#if UNITY_EDITOR
         //        private void OnValidate()

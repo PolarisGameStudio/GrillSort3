@@ -31,7 +31,7 @@ namespace MyGame.Modules.CardCollection
 
         public string GetAlbumSpritePath()
         {
-            return $"{albumNamePath}/{(int)type}.png";
+            return $"{albumNamePath}/{type.ToString().ToLower()}.png";
         }
 
         //#if UNITY_EDITOR

@@ -42,7 +42,7 @@ namespace MyGame.Modules.CardCollection
         private ListDataPref<int> _newCardData;
         private ListDataPref<int> _completedAlbumTypes;
         private IntDataPref _cardStar;
-        private IntDataPref _isUnlocked;
+        // private IntDataPref _isUnlocked;
         private IntDataPref _cardStarExchangeIndex;
         private IntDataPref _isCompleteCardCollection;
         private LongDataPref _expireTime;
@@ -79,7 +79,7 @@ namespace MyGame.Modules.CardCollection
 
         private void LoadData()
         {
-            _isUnlocked = new IntDataPref($"{DATA_KEY}_isUnlocked", 0);
+            // _isUnlocked = new IntDataPref($"{DATA_KEY}_isUnlocked", 1);
 
             // collected cards
             _collectedCardsData = new ListDataPref<int>($"{DATA_KEY}_collectedCards");
@@ -143,7 +143,8 @@ namespace MyGame.Modules.CardCollection
 
         public bool IsUnlocked()
         {
-            return _isUnlocked.Value == 1;
+            return true;
+            // return _isUnlocked.Value == 1;
         }
 
         public bool CanUnlock()
@@ -154,7 +155,7 @@ namespace MyGame.Modules.CardCollection
 
         public void Unlock()
         {
-            _isUnlocked.Value = 1;
+            // _isUnlocked.Value = 1;
             ResetData();
             CheckExpire().Forget();
         }

@@ -1,7 +1,5 @@
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using I2.Loc;
-using Manager;
 using Sirenix.OdinInspector;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.UIModule.UIElements;
@@ -44,8 +42,8 @@ namespace MyGame.Modules.CardCollection
             albumConfig = cardCollectionService.Instance.GetAlbumConfig(albumType);
 
             //albumName.text = albumConfig.albumName;
-            albumName.GetComponent<Localize>().SetTerm(albumConfig.albumName);
-            albumName.SetMaterial(albumConfig.color);
+            // albumName.GetComponent<Localize>().SetTerm(albumConfig.albumName);
+            // albumName.SetMaterial(albumConfig.color);
 
             //albumImage.sprite = albumConfig.albumIcon;
             albumImage.SetSpriteAsync(albumConfig.GetAlbumSpritePath()).Forget();
