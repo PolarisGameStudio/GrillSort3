@@ -15,6 +15,10 @@ namespace Sonat.Enums
         BoosterShuffle,
         BoosterFoodBox,
         BoosterAddPlate,
+
+        Card_Randomx1 = 120,
+        Card_Randomx2 = 121,
+        Card_Randomx3 = 122,
         MAX = Byte.MaxValue, // 255
     }
 

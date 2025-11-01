@@ -1,4 +1,7 @@
+using System;
+using MyGame.Modules.CardCollection;
 using MyGame.SkewerJam.Gameplay;
+using Sonat.Enums;
 
 namespace Manager
 {

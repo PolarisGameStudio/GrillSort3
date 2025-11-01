@@ -53,6 +53,7 @@ namespace Sonat.Enums
         Home,
         Shop,
         Settings,
+        CardCollection,
         Leaderboard,
     }
 
