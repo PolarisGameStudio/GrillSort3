@@ -101,9 +101,16 @@ namespace TS.PageSlider
                     rectTransform.sizeDelta = new Vector2(_scroller.Rect.size.x, rectTransform.sizeDelta.y);
                 }
             }
+            Canvas.ForceUpdateCanvases();
             var content = _scroller.GetComponent<RectTransform>();
             if (content != null)
                 LayoutRebuilder.ForceRebuildLayoutImmediate(content);
+
+            var contentScrollRect = _scroller.ScrollRect.content;
+            if (contentScrollRect != null)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(contentScrollRect);
+            }
 
             isChangingFullScreenWidth = false;
         }
@@ -116,6 +123,7 @@ namespace TS.PageSlider
             yield return new WaitForEndOfFrame();
 
             if (_startPageIndex == 0) yield break;
+            yield return new WaitUntil(() => isChangingFullScreenWidth == false);
             _scroller.SetPage(_startPageIndex);
         }
 

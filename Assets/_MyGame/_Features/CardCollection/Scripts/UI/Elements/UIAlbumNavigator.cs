@@ -13,7 +13,6 @@ public class UIAlbumNavigator : MonoBehaviour
     [SerializeField] private CustomPageSlider pageSlider;
     [SerializeField] private TMP_Text txtAlbumIndex;
     [SerializeField] private UIDetailAlbum[] detailAlbums;
-    [SerializeField] private float delaySetupDetailAlbums = 0.1f;
     private readonly Service<CardCollectionService> _cardCollectionService = new();
 
     private int maxAlbum => _cardCollectionService.Instance.config.albums.Count;
@@ -35,11 +34,7 @@ public class UIAlbumNavigator : MonoBehaviour
         currentIndex = (int)albumType;
         txtAlbumIndex.text = $"{currentIndex + 1}/{maxAlbum}";
 
-// tránh lỗi page slider lúc đầu
-        detailAlbums[0].Setup((AlbumType)currentIndex);
-        await UniTask.Delay((int)(delaySetupDetailAlbums * 1000));
         SetupDetailAlbums();
-        pageSlider.SetImmediatePage(1);
     }
 
     private void SetupDetailAlbums()
@@ -60,7 +55,6 @@ public class UIAlbumNavigator : MonoBehaviour
 
     public void OnPageChanged(PageContainer page)
     {
-        Debug.Log($"UIAlbumNavigator: OnPageChanged {page.name}");
         if (page.TryGetComponent<UIDetailAlbum>(out var detailAlbum))
         {
             currentIndex = (int)detailAlbum.AlbumType;

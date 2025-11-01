@@ -106,6 +106,8 @@ namespace TS.PageSlider
 
         #endregion
 
+        public ScrollRect ScrollRect => _scrollRect;
+
         private void Awake()
         {
             _scrollRect = FindScrollRect();
