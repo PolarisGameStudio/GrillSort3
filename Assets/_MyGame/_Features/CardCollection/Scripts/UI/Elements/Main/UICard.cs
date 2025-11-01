@@ -48,9 +48,9 @@ namespace MyGame.Modules.CardCollection
         {
             this.cardType = cardType;
 
-            cardImage.SetSpriteAsync(_cardConfig.GetCardSpritePath()).Forget();
 
             _cardConfig = _cardCollectionService.Instance.GetCardConfig(cardType);
+            cardImage.SetSpriteAsync(_cardConfig.GetCardSpritePath()).Forget();
 
             //txtMainName.text = _cardConfig.cardName;
 
@@ -58,9 +58,9 @@ namespace MyGame.Modules.CardCollection
 
             //await UniTask.Yield();
 
-            txtMainName.GetComponent<I2.Loc.Localize>().SetTerm(_cardConfig.cardName);
+            // txtMainName.GetComponent<I2.Loc.Localize>().SetTerm(_cardConfig.cardName);
 
-            txtMainName.SetMaterial(_cardConfig.textColorIndex);
+            // txtMainName.SetMaterial(_cardConfig.textColorIndex);
 
             //txtNameOnBack.text = _cardConfig.cardName;
 

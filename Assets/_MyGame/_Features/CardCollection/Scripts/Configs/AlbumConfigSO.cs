@@ -15,25 +15,33 @@ namespace MyGame.Modules.CardCollection
         public List<CardType> cards;
 
         [Space]
-        [Header("Album Background")]
-        //public Sprite albumIcon;
-        public Sprite albumBorder;
-        public Sprite albumBackground;
-        public Sprite albumExit;
-
-        [Space]
         [Header("Text Color")]
         public TextColorType color;
 
         [Space]
         [Header("Path")]
-        public string albumNamePath;
+        public string albumNamePath = "Assets/_MyGame/_Features/CardCollection/Arts/Albums";
+
+        [Space]
+        [Header("Background Popup")]
+        public string backgroundPopupPath = "Assets/_MyGame/_Features/CardCollection/Arts/BackgroundPopup";
 
         public string GetAlbumSpritePath()
         {
             return $"{albumNamePath}/{type.ToString().ToLower()}.png";
         }
 
+#region Background Popup
+        public string GetAlbumBackgroundSpritePath()
+        {
+            return $"{backgroundPopupPath}/{type.ToString().ToLower()}_board.png";
+        }
+
+        public string GetAlbumBorderSpritePath()
+        {
+            return $"{backgroundPopupPath}/{type.ToString().ToLower()}_bg.png";
+        }
+#endregion
         //#if UNITY_EDITOR
         //        private void OnValidate()
         //        {

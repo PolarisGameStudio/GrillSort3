@@ -54,6 +54,7 @@ namespace TS.PageSlider
 
         [SerializeField] private bool fullScreenWidth = true;
 
+
         [Header("Events")]
 
         /// <summary>
@@ -67,7 +68,7 @@ namespace TS.PageSlider
         /// </summary>
         public Rect Rect { get { return ((RectTransform)transform).rect; } }
 
-        private PageScroller _scroller;
+        protected PageScroller _scroller;
 
         public int GetCurrentPage() => _scroller.CurrentPage;
 

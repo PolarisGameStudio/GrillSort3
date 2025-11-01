@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,13 +8,13 @@ namespace MyGame.Modules.CardCollection
     {
         [SerializeField] private Image backgroundImage;
         [SerializeField] private Image borderImage;
-        [SerializeField] private Image exitImage;
+        // [SerializeField] private Image exitImage;
 
-        public void Setup(AlbumConfigSO albumConfig)
+        public async UniTask Setup(AlbumConfigSO albumConfig)
         {
-            backgroundImage.sprite = albumConfig.albumBackground;
-            borderImage.sprite = albumConfig.albumBorder;
-            exitImage.sprite = albumConfig.albumExit;
+            backgroundImage.SetSpriteAsync(albumConfig.GetAlbumBackgroundSpritePath()).Forget();
+            borderImage.SetSpriteAsync(albumConfig.GetAlbumBorderSpritePath()).Forget();
+            // exitImage.sprite = albumConfig.albumExit;
         }
     }
 }

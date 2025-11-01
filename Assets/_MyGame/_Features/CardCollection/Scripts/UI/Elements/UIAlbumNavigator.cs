@@ -1,3 +1,6 @@
+using System;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using MyGame.Modules.CardCollection;
 using SkewerJam.Utils.PageSliderPack;
 using SonatFramework.Systems;
@@ -10,6 +13,7 @@ public class UIAlbumNavigator : MonoBehaviour
     [SerializeField] private CustomPageSlider pageSlider;
     [SerializeField] private TMP_Text txtAlbumIndex;
     [SerializeField] private UIDetailAlbum[] detailAlbums;
+    [SerializeField] private float delaySetupDetailAlbums = 0.1f;
     private readonly Service<CardCollectionService> _cardCollectionService = new();
 
     private int maxAlbum => _cardCollectionService.Instance.config.albums.Count;
@@ -25,13 +29,17 @@ public class UIAlbumNavigator : MonoBehaviour
         pageSlider.OnPageChanged.RemoveListener(OnPageChanged);
     }
 
-    public void Setup(AlbumType albumType)
+    public async UniTask Setup(AlbumType albumType)
     {
         //Debug.Log($"anhnt: albumType {albumType}");
         currentIndex = (int)albumType;
         txtAlbumIndex.text = $"{currentIndex + 1}/{maxAlbum}";
 
+// tránh lỗi page slider lúc đầu
+        detailAlbums[0].Setup((AlbumType)currentIndex);
+        await UniTask.Delay((int)(delaySetupDetailAlbums * 1000));
         SetupDetailAlbums();
+        pageSlider.SetImmediatePage(1);
     }
 
     private void SetupDetailAlbums()
@@ -52,18 +60,14 @@ public class UIAlbumNavigator : MonoBehaviour
 
     public void OnPageChanged(PageContainer page)
     {
+        Debug.Log($"UIAlbumNavigator: OnPageChanged {page.name}");
         if (page.TryGetComponent<UIDetailAlbum>(out var detailAlbum))
         {
             currentIndex = (int)detailAlbum.AlbumType;
             txtAlbumIndex.text = $"{currentIndex + 1}/{maxAlbum}";
 
             SetupDetailAlbums();
-            pageSlider.SetPage(1);
-        }
-        else
-        {
-            //Debug.Log($"anhnt: loi page {page.name}");
-
+            pageSlider.SetImmediatePage(1);
         }
     }
 

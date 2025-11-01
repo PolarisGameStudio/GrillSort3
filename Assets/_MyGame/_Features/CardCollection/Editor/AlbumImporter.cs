@@ -108,25 +108,25 @@ namespace MyGame.Modules.CardCollection
                 Debug.LogError("Số lượng albumConfigs và sprites không khớp!");
                 return;
             }
-            for (int i = 0; i < albumConfigs.Count; i++)
-            {
-                switch (albumImageType)
-                {
-                    case AlbumImageType.AlbumIcon:
-                        //albumConfigs[i].albumIcon = sprites[i];
-                        break;
-                    case AlbumImageType.AlbumBorder:
-                        albumConfigs[i].albumBorder = sprites[i];
-                        break;
-                    case AlbumImageType.AlbumBackground:
-                        albumConfigs[i].albumBackground = sprites[i];
-                        break;
-                    case AlbumImageType.AlbumExit:
-                        albumConfigs[i].albumExit = sprites[i];
-                        break;
-                }
-                EditorUtility.SetDirty(albumConfigs[i]);
-            }
+            // for (int i = 0; i < albumConfigs.Count; i++)
+            // {
+            //     switch (albumImageType)
+            //     {
+            //         case AlbumImageType.AlbumIcon:
+            //             //albumConfigs[i].albumIcon = sprites[i];
+            //             break;
+            //         case AlbumImageType.AlbumBorder:
+            //             albumConfigs[i].albumBorder = sprites[i];
+            //             break;
+            //         case AlbumImageType.AlbumBackground:
+            //             albumConfigs[i].albumBackground = sprites[i];
+            //             break;
+            //         // case AlbumImageType.AlbumExit:
+            //         //     albumConfigs[i].albumExit = sprites[i];
+            //         //     break;
+            //     }
+            //     EditorUtility.SetDirty(albumConfigs[i]);
+            // }
             AssetDatabase.SaveAssets();
             Debug.Log("<color=green>Import Sprites to AlbumConfigs success</color>");
 

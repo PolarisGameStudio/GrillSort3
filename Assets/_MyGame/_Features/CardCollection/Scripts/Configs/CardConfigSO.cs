@@ -16,7 +16,7 @@ namespace MyGame.Modules.CardCollection
 
         [Space]
         [Header("Path")]
-        public string cardNamePath;
+        public string cardNamePath = "Assets/_MyGame/_Features/CardCollection/Arts/Cards";
 
         public string GetCardSpritePath()
         {
