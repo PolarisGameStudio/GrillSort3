@@ -59,7 +59,7 @@ namespace MyGame.Modules.CardCollection
             foreach (var cardObj in cards)
             {
                 var cardType = cardObj.CardType;
-                cardCollectionService.Instance.RemoveNewCard(cardType);
+                MySonatFramework.GetService<CardCollectionService>().CardSubmodule.RemoveNewCard(cardType);
             }
         }
     }

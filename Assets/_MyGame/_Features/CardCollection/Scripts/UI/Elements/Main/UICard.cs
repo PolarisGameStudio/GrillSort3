@@ -49,7 +49,7 @@ namespace MyGame.Modules.CardCollection
             this.cardType = cardType;
 
 
-            _cardConfig = _cardCollectionService.Instance.GetCardConfig(cardType);
+            _cardConfig = _cardCollectionService.Instance.config.GetCardConfig(cardType);
             cardImage.SetSpriteAsync(_cardConfig.GetCardSpritePath()).Forget();
 
             //txtMainName.text = _cardConfig.cardName;
@@ -92,8 +92,8 @@ namespace MyGame.Modules.CardCollection
 
         public void UpdateData()
         {
-            var isNew = _cardCollectionService.Instance.IsNewCardButNotSeen(cardType);
-            var numCard = _cardCollectionService.Instance.GetNumCard(cardType);
+            var isNew = _cardCollectionService.Instance.CardSubmodule.IsNewCardButNotSeen(cardType);
+            var numCard = _cardCollectionService.Instance.CardSubmodule.GetNumCard(cardType);
             txtNumCard.text = numCard.ToString();
 
             // check Active
@@ -105,6 +105,7 @@ namespace MyGame.Modules.CardCollection
 
         private void SetEnable(bool isEnable)
         {
+            isEnable = true;
             enableObj.SetActive(isEnable);
             disableObj.SetActive(!isEnable);
 

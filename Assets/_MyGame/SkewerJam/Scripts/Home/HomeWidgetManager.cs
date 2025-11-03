@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Manager;
+using SonatFramework.Systems.EventBus;
 using UnityEngine;
 
 public class HomeWidgetManager : MonoBehaviour
@@ -40,6 +41,7 @@ public class HomeWidgetManager : MonoBehaviour
     {
         BlockUI();
         await UniTask.Delay(delayProcess);
+        EventBus<HomeProcessEvent>.Raise(new HomeProcessEvent());
         int popupCount = 0;
         foreach (var widget in widgets)
         {

@@ -12,6 +12,9 @@ namespace MyGame.Modules.CardCollection
         public AlbumType type;
         public string albumName;
         public RewardData reward;
+
+        [Space]
+        [Header("Cards")]
         public List<CardType> cards;
 
         [Space]
@@ -31,7 +34,7 @@ namespace MyGame.Modules.CardCollection
             return $"{albumNamePath}/{type.ToString().ToLower()}.png";
         }
 
-#region Background Popup
+        #region Background Popup
         public string GetAlbumBackgroundSpritePath()
         {
             return $"{backgroundPopupPath}/{type.ToString().ToLower()}_board.png";
@@ -41,7 +44,7 @@ namespace MyGame.Modules.CardCollection
         {
             return $"{backgroundPopupPath}/{type.ToString().ToLower()}_bg.png";
         }
-#endregion
+        #endregion
         //#if UNITY_EDITOR
         //        private void OnValidate()
         //        {

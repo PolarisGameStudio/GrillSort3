@@ -32,13 +32,13 @@ public class CardNotificationBadge : MonoBehaviour
     {
         if (isAllAlbum)
         {
-            var numCard = _cardCollectionService.Instance.GetNewCardCount();
+            var numCard = _cardCollectionService.Instance.GetNumberNewCardInAlbum();
             txtCount.text = numCard.ToString();
             gameObject.SetActive(numCard > 0);
         }
         else
         {
-            var numCard = _cardCollectionService.Instance.GetNewCardCount(albumType);
+            var numCard = _cardCollectionService.Instance.GetNumberNewCardInAlbum(albumType);
             txtCount.text = numCard.ToString();
             gameObject.SetActive(numCard > 0);
         }

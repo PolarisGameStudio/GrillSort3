@@ -138,7 +138,7 @@ namespace MyGame.Modules.CardCollection
                 card.Setup(cardType);
 
                 // Mỗi phần tử list là 1 thẻ duy nhất ⇒ numCard luôn = 1
-                card.SetData(1, _cardCollectionService.Instance.IsNewCard(cardType));
+                card.SetData(1, _cardCollectionService.Instance.CardSubmodule.IsNewCard(cardType));
                 uiCards.Add(card);
 
                 // Xử lý UICardStar (ẩn mặc định)
@@ -149,7 +149,7 @@ namespace MyGame.Modules.CardCollection
                 uiCardStars.Add(cardStar);
 
                 // Add vào collection (1 thẻ)
-                _cardCollectionService.Instance.AddCard(cardType, 1);
+                _cardCollectionService.Instance.CardSubmodule.AddCard(cardType, 1);
             }
 
         }
@@ -276,7 +276,7 @@ namespace MyGame.Modules.CardCollection
 
                 effectStar.PlayEffect();
 
-                _cardCollectionService.Instance.AddCardStar(star.GetQuantity());
+                _cardCollectionService.Instance.StarSubmodule.AddCardStar(star.GetQuantity());
                 star.Resset();
                 SonatUtils.DelayCall(0.25f, () =>
                 {

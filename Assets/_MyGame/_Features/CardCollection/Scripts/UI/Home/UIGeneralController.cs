@@ -10,28 +10,39 @@ namespace MyGame.Modules.CardCollection.Home
     {
         [Header("Info")]
         [SerializeField] private Slider cardSlider;
+        [SerializeField] private UIBubbleReward bubbleReward;
         [SerializeField] private GameObject tickObj;
         [SerializeField] private TMP_Text txtTotalCard;
         [SerializeField] private UIRewardGroup rewardGroup;
         [SerializeField] private UITimeCounter timeCounter;
 
         private readonly Service<CardCollectionService> _cardCollectionService = new();
+        private bool _isInit = false;
 
         private void OnEnable()
         {
-            var reward = _cardCollectionService.Instance.config.rewardInSeason;
-            rewardGroup.SetData(reward);
+            if (_isInit == false)
+            {
+                _isInit = true;
+                var reward = _cardCollectionService.Instance.config.rewardInSeason;
+                rewardGroup.SetData(reward);
+                bubbleReward.SetReward(reward);
+            }
+
+            UpdateData();
         }
 
         private void OnDisable()
         {
 
         }
+
         public void UpdateData()
         {
             var totalCard = _cardCollectionService.Instance.TotalCard;
             var maxCard = _cardCollectionService.Instance.config.GetNumCard();
 
+            bubbleReward.gameObject.SetActive(totalCard < maxCard);
             tickObj.SetActive(totalCard >= maxCard);
             cardSlider.value = totalCard * 1.0f / maxCard;
             txtTotalCard.text = $"{totalCard}/{maxCard}";

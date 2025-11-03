@@ -38,7 +38,7 @@ public class PopupCard : Panel
         card.UpdateData();
         PlayAppearAnimation();
 
-        _cardCollectionService.Instance.RemoveNewCard(cardType);
+        _cardCollectionService.Instance.CardSubmodule.RemoveNewCard(cardType);
     }
 
     private void PlayAppearAnimation()

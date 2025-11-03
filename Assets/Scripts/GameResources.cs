@@ -44,6 +44,10 @@ namespace Sonat.Enums
                 case GameResource.BoosterShuffle:
                 case GameResource.BoosterFoodBox:
                     return GameResourceType.Booster;
+                case GameResource.Card_Randomx1:
+                case GameResource.Card_Randomx2:
+                case GameResource.Card_Randomx3:
+                    return GameResourceType.Card;
             }
 
             return GameResourceType.None;

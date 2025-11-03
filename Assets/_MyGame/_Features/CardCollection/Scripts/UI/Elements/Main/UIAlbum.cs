@@ -27,6 +27,8 @@ namespace MyGame.Modules.CardCollection
         [SerializeField] private GameObject completedObj;
         [SerializeField] private GameObject notCompletedObj;
 
+        // [Header("Bubble")]
+        // [SerializeField] private UIBubbleReward bubbleReward;
         // [Header("Status")]
         // [SerializeField] private GameObject fullObj;
         // [SerializeField] private GameObject lockObj;
@@ -39,7 +41,7 @@ namespace MyGame.Modules.CardCollection
         public virtual void Setup(AlbumType albumType)
         {
             this.albumType = albumType;
-            albumConfig = cardCollectionService.Instance.GetAlbumConfig(albumType);
+            albumConfig = cardCollectionService.Instance.config.GetAlbumConfig(albumType);
 
             //albumName.text = albumConfig.albumName;
             // albumName.GetComponent<Localize>().SetTerm(albumConfig.albumName);
@@ -50,6 +52,8 @@ namespace MyGame.Modules.CardCollection
             // set reward
             var reward = albumConfig.reward.resourceDatas[0];
             rewardItem.Init(reward.resource, reward.quantity);
+
+            // bubbleReward.SetReward(albumConfig.reward);
 
             if (cardNotificationBadge)
             {
@@ -70,7 +74,7 @@ namespace MyGame.Modules.CardCollection
 
         public virtual void UpdateData()
         {
-            var numCard = cardCollectionService.Instance.GetNumCardInAlbum(albumType);
+            var numCard = cardCollectionService.Instance.GetNumberCollectedCardInAlbum(albumType);
             var totalCard = albumConfig.cards.Count;
             SetData(numCard, totalCard);
         }

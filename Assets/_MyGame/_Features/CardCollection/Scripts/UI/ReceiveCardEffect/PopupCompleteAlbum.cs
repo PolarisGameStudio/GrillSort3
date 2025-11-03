@@ -38,7 +38,7 @@ namespace MyGame.Modules.CardCollection
             {
                 album.Setup(albumType);
 
-                var albumConfig = cardCollectionService.Instance.GetAlbumConfig(albumType);
+                var albumConfig = cardCollectionService.Instance.config.GetAlbumConfig(albumType);
                 var reward = albumConfig.reward.resourceDatas[0];
                 rewardItem.Init(reward.resource, reward.quantity);
 
@@ -57,7 +57,7 @@ namespace MyGame.Modules.CardCollection
         public void OnClickClaim()
         {
             Close();
-            var albumConfig = cardCollectionService.Instance.GetAlbumConfig(albumType);
+            var albumConfig = cardCollectionService.Instance.config.GetAlbumConfig(albumType);
             var reward = albumConfig.reward;
 
             var logData = new EarnResourceLogData
