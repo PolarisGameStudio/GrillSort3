@@ -124,6 +124,8 @@ namespace MyGame.SkewerJamSO.Boosters
                 gameLogicHandler.SelectItem(item);
                 await UniTask.Delay((int)(delayBetweenItems * 1000));
             }
+
+            await UniTask.Delay((int)(1000));
             sucess = true;
             finished = true;
         }
