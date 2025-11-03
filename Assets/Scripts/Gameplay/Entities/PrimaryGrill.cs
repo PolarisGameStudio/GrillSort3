@@ -478,7 +478,7 @@ namespace Gameplay.Entities
                 if (subGrill.IsEmpty())
                 {
                     if (index == 0) updateFirst = true;
-                    subGrill.ForceClearGrill();
+                    subGrill.PlayClearGrill();
                     subGrills.Remove(subGrill);
                 }
                 else

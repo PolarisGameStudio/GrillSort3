@@ -48,7 +48,8 @@ namespace Gameplay.Entities
                 }
             }
 
-            visual.DOFade(0, 0.5f).SetDelay(0.5f).OnComplete(() => { GameFactory.ReturnEntity(this); });
+            
+            PlayClearGrill();
             //MoveNextItem(0);
         }
         // private void MoveNextItem(int index)
@@ -137,7 +138,7 @@ namespace Gameplay.Entities
             };
         }
 
-        public void ForceClearGrill()
+        public void PlayClearGrill()
         {
             visual.DOFade(0, 0.5f).SetDelay(0.5f).OnComplete(() => { GameFactory.ReturnEntity(this); });
         }
@@ -309,7 +310,7 @@ namespace Gameplay.Entities
             var idx = subGrills.IndexOf(this);
 
             primaryGrill.RemoveSubGrill(this);
-            visual.DOFade(0, 0.5f).SetDelay(0.5f).OnComplete(() => { GameFactory.ReturnEntity(this); });
+            PlayClearGrill();
 
             if (idx == 0)
             {

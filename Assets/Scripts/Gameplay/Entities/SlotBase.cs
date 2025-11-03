@@ -59,6 +59,11 @@ public abstract class SlotBase : MonoBehaviour
             slotBaseBehaviorSO.gameFactorySO.ReturnEntity(item);
             this.item = null;
         }
+
+        if (container.TryGetComponent<Item>(out var itemRemove))
+        {
+            slotBaseBehaviorSO.gameFactorySO.ReturnEntity(itemRemove);
+        }
     }
 
 

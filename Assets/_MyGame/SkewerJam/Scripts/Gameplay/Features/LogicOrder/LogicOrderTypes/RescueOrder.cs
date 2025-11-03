@@ -43,7 +43,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             {
                 foreach (var numItems in dictDeltaSlots[itemId].Keys)
                 {
-                    if (dictDeltaSlots[itemId][numItems] <= 0)
+                    if (dictDeltaSlots[itemId][numItems] < 0)
                     {
                         listAllRescues.Add((itemId, numItems, dictDeltaSlots[itemId][numItems]));
                     }

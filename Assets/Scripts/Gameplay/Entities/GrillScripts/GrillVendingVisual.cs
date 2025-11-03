@@ -77,6 +77,7 @@ namespace Gameplay.Entities.GrillScripts
         {
             txtNumLayer.text = numLayer.ToString();
 
+            if (numLayer >= tiles.Count) return;
             tiles[numLayer].transform.DOScale(0, 0.5f).SetEase(Ease.InBack).OnComplete(() =>
             {
                 var grill = GetComponentInParent<GrillBase>();
