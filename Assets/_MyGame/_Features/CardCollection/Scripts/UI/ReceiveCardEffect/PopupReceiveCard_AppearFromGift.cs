@@ -27,7 +27,7 @@ public class PopupReceiveCard_AppearFromGift : PopupReceiveCardBase
         // sau đó bắn lần lượt ra
         for (int i = 0; i < uiCards.Count; i++)
         {
-            var root = targetRoots[i];
+            var root = listTargetRoots[i];
             uiCards[i].transform.SetParent(root);
             PlayEachCardAnimation(uiCards[i]);
             await UniTask.Delay(100);

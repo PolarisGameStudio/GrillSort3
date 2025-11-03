@@ -141,6 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   albumType: 0
   albumName: {fileID: 1828136482528177441}
+  isAlbumImage: 1
   albumImage: {fileID: 3565081628270302727}
   rewardItem: {fileID: 8013028116093885718}
   slider: {fileID: 181738214418180514}
@@ -938,6 +939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   albumType: 0
   albumName: {fileID: 2471169605710134700}
+  isAlbumImage: 1
   albumImage: {fileID: 751033521548330634}
   rewardItem: {fileID: 6063671687514181019}
   slider: {fileID: 4147861614447327535}
@@ -1609,6 +1611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   albumType: 0
   albumName: {fileID: 5722264843572622984}
+  isAlbumImage: 1
   albumImage: {fileID: 7444167770441158062}
   rewardItem: {fileID: 4108610394407454399}
   slider: {fileID: 6103186796669989387}
@@ -2384,10 +2387,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8212221648095363826, guid: 47cb4bdae19c5f14ab15fb18a0d81009, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8283766071872974232, guid: 47cb4bdae19c5f14ab15fb18a0d81009, type: 3}
-      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8669103995019082467, guid: 47cb4bdae19c5f14ab15fb18a0d81009, type: 3}
@@ -3275,10 +3274,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8212221648095363826, guid: 47cb4bdae19c5f14ab15fb18a0d81009, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8283766071872974232, guid: 47cb4bdae19c5f14ab15fb18a0d81009, type: 3}
-      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8669103995019082467, guid: 47cb4bdae19c5f14ab15fb18a0d81009, type: 3}
@@ -4456,10 +4451,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8212221648095363826, guid: 47cb4bdae19c5f14ab15fb18a0d81009, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8283766071872974232, guid: 47cb4bdae19c5f14ab15fb18a0d81009, type: 3}
-      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8669103995019082467, guid: 47cb4bdae19c5f14ab15fb18a0d81009, type: 3}

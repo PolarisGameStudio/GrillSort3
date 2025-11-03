@@ -2,7 +2,7 @@ namespace MyGame.Modules.CardCollection
 {
     public static class UIHelper
     {
-        public static (int row, int col) GetGridSize(int numCard, int maxRow, int maxCol)
+        public static (int row, int col) GetGridSize(int numCard)
         {
             switch (numCard)
             {
@@ -19,7 +19,7 @@ namespace MyGame.Modules.CardCollection
                 case 6:
                     return (2, 3);
             }
-            return (maxRow, maxCol);
+            return (2, 3);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using SonatFramework.Scripts.Helper;
 using SonatFramework.Systems.TimeManagement;
@@ -45,7 +46,7 @@ namespace MyGame.Modules
                 var remainTime = GetRemainTime();
                 if (remainTime > 0)
                 {
-                    await UniTask.Delay((long)remainTime * 1000);
+                    await UniTask.Delay(TimeSpan.FromSeconds(remainTime));
                 }
             }
 

@@ -38,7 +38,7 @@ namespace MyGame.Modules.CardCollection
             {
                 star = 3;
             }
- 
+
             // if (star == 0)
             // {
             //     var randomType = UnityEngine.Random.Range(0, (int)CardType.MAX);
@@ -74,7 +74,20 @@ namespace MyGame.Modules.CardCollection
             return cardList;
         }
 
-        public static int GetNumStarReward(CardType cardType)
+        public static List<CardType> GetCardReward(ResourceData resourceData)
+        {
+            var listCard = new List<CardType>();
+            var packType = resourceData.resource;
+            int quantity = GetNumCardInPack(packType);
+            for (int i = 0; i < quantity; i++)
+            {
+                var randomCardType = GetRandomCardType();
+                listCard.Add(randomCardType);
+            }
+            return listCard;
+        }
+
+        public static int GetNumberStarOfCard(CardType cardType)
         {
             var config = MySonatFramework.GetService<CardCollectionService>().config;
             var cardConfig = config.cards.FirstOrDefault(e => e.type == cardType);

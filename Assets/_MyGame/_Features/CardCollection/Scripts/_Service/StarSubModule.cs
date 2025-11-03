@@ -20,12 +20,18 @@ namespace MyGame.Modules.CardCollection
 
         public int NumberStar => _cardStar.Value;
 
+        public event Action<int> OnStarCountChanged;
+
+        private int _numStarView = 0;
+
         public void LoadData()
         {
             _cardStarExchangeIndex = new IntDataPref($"{DATA_KEY}_cardStarExchangeIndex", -1);
             _isCompleteCardCollection = new IntDataPref($"{DATA_KEY}_isCompleteCardCollection", 0);
             _numCompleteCardCollection = new IntDataPref($"{DATA_KEY}_numCompleteCardCollection", _isCompleteCardCollection.BoolValue ? 1 : 0);
             _cardStar = new IntDataPref($"{DATA_KEY}_cardStar", 0);
+
+            _numStarView = _cardStar.Value;
         }
 
         public void SaveData()
@@ -84,6 +90,11 @@ namespace MyGame.Modules.CardCollection
             UIData uiData = new UIData();
             uiData.Add(PopupReward.REWARD_KEY, reward);
             PanelManager.Instance.OpenPanel<PopupReward>(uiData);
+        }
+
+        public void AddCardStarView(int numStar)
+        {
+            OnStarCountChanged?.Invoke(numStar);
         }
     }
 }

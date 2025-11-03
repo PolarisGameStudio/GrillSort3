@@ -255,7 +255,6 @@ GameObject:
   - component: {fileID: 1975240531812505573}
   - component: {fileID: 7271401430366178219}
   - component: {fileID: 4654703067295506654}
-  - component: {fileID: 7781892292329040232}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -280,7 +279,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.8, y: 21.2044}
-  m_SizeDelta: {x: 135.38, y: 0}
+  m_SizeDelta: {x: 135.38, y: 135.38}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1975240531812505573
 CanvasRenderer:
@@ -334,20 +333,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   image: {fileID: 0}
---- !u!114 &7781892292329040232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 753578535070089075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AspectMode: 1
-  m_AspectRatio: 1
 --- !u!1 &766240984376102586
 GameObject:
   m_ObjectHideFlags: 0
@@ -1132,8 +1117,8 @@ MonoBehaviour:
   slider: {fileID: 320888053906326143}
   txtNumCard: {fileID: 6965236320389304451}
   cardNotificationBadge: {fileID: 0}
-  completedObj: {fileID: 0}
-  notCompletedObj: {fileID: 0}
+  completedObj: {fileID: 423744904167297554}
+  notCompletedObj: {fileID: 1296600868327289298}
   container: {fileID: 7092982165360208356}
   albumBackground: {fileID: 8310417916884234366}
 --- !u!1 &4626375603411679321
@@ -2872,6 +2857,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7092982165360208356}
     m_Modifications:
+    - target: {fileID: 1320949535671810768, guid: 02abd58adcd7c2741bd439df34c890d1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1320949535671810768, guid: 02abd58adcd7c2741bd439df34c890d1, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1320949535671810768, guid: 02abd58adcd7c2741bd439df34c890d1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1320949535671810768, guid: 02abd58adcd7c2741bd439df34c890d1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1938134053939314044, guid: 02abd58adcd7c2741bd439df34c890d1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2955,6 +2956,38 @@ PrefabInstance:
     - target: {fileID: 2968246077305288242, guid: 02abd58adcd7c2741bd439df34c890d1, type: 3}
       propertyPath: m_Name
       value: UICard_InAlbum
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946060296963304349, guid: 02abd58adcd7c2741bd439df34c890d1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946060296963304349, guid: 02abd58adcd7c2741bd439df34c890d1, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946060296963304349, guid: 02abd58adcd7c2741bd439df34c890d1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946060296963304349, guid: 02abd58adcd7c2741bd439df34c890d1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4433774369191161448, guid: 02abd58adcd7c2741bd439df34c890d1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4433774369191161448, guid: 02abd58adcd7c2741bd439df34c890d1, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4433774369191161448, guid: 02abd58adcd7c2741bd439df34c890d1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4433774369191161448, guid: 02abd58adcd7c2741bd439df34c890d1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

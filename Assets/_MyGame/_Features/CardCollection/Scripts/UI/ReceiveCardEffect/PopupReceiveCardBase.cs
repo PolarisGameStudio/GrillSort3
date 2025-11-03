@@ -1,12 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Sonat.Enums;
+using MyGame.Modules.CardCollection.Home;
+using MyGame.Modules.CardCollection.ReceiveCardEffect.Configs;
 using SonatFramework.Scripts.UIModule;
-using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems;
-using SonatFramework.Systems.InventoryManagement.GameResources;
 using SonatFramework.Systems.ObjectPooling;
 using TMPro;
 using UnityEngine;
@@ -17,104 +17,56 @@ namespace MyGame.Modules.CardCollection
 
     public abstract class PopupReceiveCardBase : Panel
     {
-        public const string REWARD_DATA_KEY = "RewardData";
-        [SerializeField] private RectTransform widgetCardBox;
-        [SerializeField] private Transform targetStarPos;
+        public const string CARD_REWARD_KEY = "RewardData";
+        [SerializeField] private UIWidgetCardStar uiWidgetCardStar;
         [SerializeField] private Button btnClaim;
-        [SerializeField] private TMP_Text txtStar;
 
         [Header("Appear Cards")]
-        [SerializeField] private Transform container;
-        [SerializeField] private int maxRow = 2;
-        [SerializeField] private int maxCol = 3;
-
+        [SerializeField] private Transform verContainer;
 
         [Header("Animation")]
-        [SerializeField] private string collectEffectName = "CollectResourceMultipleStar_Card";
-        [SerializeField] private int xGiftTarget = -200;
-        [SerializeField] private float durationSwitchStar = 0.1f;
-        [SerializeField] private float delayBeforeBoxIn = 0.3f;
-        [SerializeField] private float delayBeforeBoxOut = 0.3f;
-        [SerializeField] private float durationMoveToBox = 0.5f;
-        [SerializeField] private float delayBeforeHideCard = 0.3f;
-        [SerializeField] private float delayBeforeFlyStar = 0.3f;
-        [SerializeField] private float delayBetweenFlyStar = 0.1f;
-        [SerializeField] private float starScaleDown = 0.4f;
+        [SerializeField] private PopupReceiveCardBaseConfigSO baseConfigSO;
 
-        [Space(10)]
-
-        private readonly Service<PoolingContainerService> _poolingContainerService = new();
         private readonly Service<CardCollectionService> _cardCollectionService = new();
+        private readonly Service<PoolingContainerService> _poolingContainerService = new();
 
-        protected RewardData rewardData;
+        protected List<CardType> cardList;
         protected List<UICard> uiCards = new();
-        protected List<Transform> targetRoots = new();
-        protected List<Transform> rootParents = new();
-        protected List<UICardStar> uiCardStars = new();
+        protected List<Transform> listTargetRoots = new();
+        protected List<Transform> listHorContainers = new();
+        // protected List<UICardStar> listUICardStars = new();
 
 
 
         protected bool isCompleteAppearCard = false;
         protected bool isCollected = false;
 
+        #region setup
         public override void Open(UIData uiData)
         {
             base.Open(uiData);
-            rewardData = uiData.Get<RewardData>(REWARD_DATA_KEY);
+            cardList = uiData.Get<List<CardType>>(CARD_REWARD_KEY);
             SetupCards();
 
             PlayAppearAnimation().Forget();
-            widgetCardBox.anchoredPosition = new Vector2(0, widgetCardBox.anchoredPosition.y);
             isCompleteAppearCard = false;
             isCollected = false;
-
-            UpdateTextStar();
         }
 
-        public void UpdateTextStar()
-        {
-            var starModule = _cardCollectionService.Instance.StarSubmodule;
-            txtStar.text = starModule.NumberStar.ToString();
-        }
-
-        protected abstract UniTask PlayAppearAnimation();
-
-
-        #region setup
         private void SetupCards()
         {
-            foreach (Transform child in container)
+            foreach (Transform horContainer in verContainer)
             {
-                _poolingContainerService.Instance.CleanContainer(child);
+                _poolingContainerService.Instance.CleanContainer(horContainer);
             }
-            _poolingContainerService.Instance.CleanContainer(container);
+            _poolingContainerService.Instance.CleanContainer(verContainer);
 
             uiCards.Clear();
-            targetRoots.Clear();
-            rootParents.Clear();
-            uiCardStars.Clear();
+            listTargetRoots.Clear();
+            listHorContainers.Clear();
+            // listUICardStars.Clear();
 
-            foreach (var item in rewardData.resourceDatas)
-            {
-                Debug.Log($"[RewardData] resource enum = {item.resource}, int = {(int)item.resource}, type = {GameResourceHelper.ResourceType(item.resource)}");
-            }
-
-            var cardList = CardPackHelper.GetCardReward(rewardData);
-
-            // Tổng số card
-            int totalCards = cardList.Count;
-
-            // Loại unique
-            int uniqueTypes = cardList.Distinct().Count();
-
-            // Log đẹp
-            Debug.Log($"[ReceiveCardEffect] Pack: {uniqueTypes} unique types, total {totalCards} cards.");
-            foreach (var card in cardList)
-            {
-                Debug.Log($"  - {card}");
-            }
-
-            var size = UIHelper.GetGridSize(cardList.Count, maxRow, maxCol);
+            var size = UIHelper.GetGridSize(cardList.Count);
 
             int count = 0;
             foreach (var cardType in cardList)
@@ -124,37 +76,31 @@ namespace MyGame.Modules.CardCollection
                 count++;
 
                 // Tạo parent row nếu chưa có
-                if (rootParents.Count <= row)
+                if (listHorContainers.Count <= row)
                 {
-                    var rootParent = _poolingContainerService.Instance.CreateObject<Transform>(container);
-                    rootParents.Add(rootParent);
+                    var horContainer = _poolingContainerService.Instance.CreateObject<Transform>(verContainer);
+                    listHorContainers.Add(horContainer);
                 }
 
                 // Tạo card container trong row
-                var root = _poolingContainerService.Instance.CreateObject<Transform>(rootParents[row]);
-                targetRoots.Add(root);
+                var root = _poolingContainerService.Instance.CreateObject<Transform>(listHorContainers[row]);
+                listTargetRoots.Add(root);
 
                 // Lấy component UICard
                 var card = root.GetComponentInChildren<UICard>();
                 card.Setup(cardType);
 
                 // Mỗi phần tử list là 1 thẻ duy nhất ⇒ numCard luôn = 1
-                card.SetData(1, _cardCollectionService.Instance.CardSubmodule.IsNewCard(cardType));
+                var inventoryModule = _cardCollectionService.Instance.CardInventoryModule;
+                var isNewCard = inventoryModule.IsNewCard(cardType);
+                card.SetData(1, isNewCard);
                 uiCards.Add(card);
-
-                // Xử lý UICardStar (ẩn mặc định)
-                var cardStar = root.GetComponentInChildren<UICardStar>();
-                var numStar = CardPackHelper.GetNumStarReward(cardType);
-                cardStar.gameObject.SetActive(false);
-                cardStar.SetData(numStar);
-                uiCardStars.Add(cardStar);
-
-                // Add vào collection (1 thẻ)
-                _cardCollectionService.Instance.CardSubmodule.AddCard(cardType, 1);
             }
 
         }
         #endregion
+
+        protected abstract UniTask PlayAppearAnimation();
 
         #region Claim
         public void OnClickClaim()
@@ -166,45 +112,32 @@ namespace MyGame.Modules.CardCollection
             btnClaim.gameObject.SetActive(false);
         }
 
-
-        private List<UICardStar> _activeCardStars = new();
-
-        // BUG: hard code sửa anim/efx
         private async UniTask PlayCollect()
         {
-            _activeCardStars.Clear();
-
             // MySonatFramework.audioService.PlaySound(AudioId.Card_Disappear_Grill_sort);
             // biến card dư thành star
-            await ExchangeCardEffect();
+            await PlayExchangeCardToStar();
 
             // widget xuất hiện và star bay vào
             if (CheckOldCard())
             {
-                await UniTask.Delay((int)(delayBeforeBoxIn * 1000));
-                await widgetCardBox.DOAnchorPosX(xGiftTarget, durationMoveToBox).SetEase(Ease.OutBack);
-                await UniTask.Delay((int)(delayBeforeFlyStar * 1000));
+                await UniTask.Delay((int)(baseConfigSO.delayBeforeWidgetMoveIn * 1000));
+                uiWidgetCardStar.PlayAppearAnimation();
 
+                await UniTask.Delay((int)(baseConfigSO.delayBeforeHideNewCard * 1000f));
                 // new card (card còn lại) biến mất
                 DisplayCardDisappear();
-
-                // sau đó mới fly star
-                foreach (var star in _activeCardStars)
-                {
-                    FlyToWidgetEffect(star).Forget();
-                    await UniTask.Delay((int)(delayBetweenFlyStar * 1000));
-                }
-                await UniTask.Delay((int)(delayBeforeHideCard * 1000));
             }
             else
             {
                 DisplayCardDisappear();
-                await UniTask.Delay((int)(delayBeforeHideCard * 1000));
             }
 
-            await UniTask.Delay((int)(delayBeforeBoxOut * 1000));
-            await widgetCardBox.DOAnchorPosX(0, durationMoveToBox).SetEase(Ease.OutBack);
-            Close();
+            await UniTask.Delay((int)(baseConfigSO.delayBeforeWidgetMoveOut * 1000));
+            uiWidgetCardStar.PlayDisappearAnimation(() =>
+            {
+                Close();
+            });
         }
 
         private void DisplayCardDisappear()
@@ -213,7 +146,7 @@ namespace MyGame.Modules.CardCollection
             {
                 if (card.IsNew)
                 {
-                    card.transform.DOScale(0, durationSwitchStar).SetEase(Ease.InBack).OnComplete(() =>
+                    card.transform.DOScale(0, baseConfigSO.scaleDownCardDuration).From(1).SetEase(Ease.InBack).OnComplete(() =>
                     {
                         card.PlayParticleDisappear();
                     });
@@ -226,65 +159,30 @@ namespace MyGame.Modules.CardCollection
             return uiCards.Any(card => card.IsNew == false);
         }
 
-        private async UniTask ExchangeCardEffect()
+        private async UniTask PlayExchangeCardToStar()
         {
+            var delayMove = baseConfigSO.delayBeforeFirstFlyStar;
             for (int i = 0; i < uiCards.Count; i++)
             {
                 var card = uiCards[i];
-                var star = uiCardStars[i];
-
                 if (card.IsNew == false)
                 {
-                    //card bị ẩn
-                    SwitchStar(card, star);
-                    _activeCardStars.Add(star);
+                    card.transform.DOScale(0, baseConfigSO.scaleDownCardDuration).From(1).SetEase(Ease.InBack);
+
+                    var collectEffect = await SonatSystem.GetService<PoolingServiceAsync>().CreateAsync<UICollectMultiple>(
+                        "CollectResourceMultipleStar_Card",
+                        PanelManager.Instance.transform,
+                        CardPackHelper.GetNumberStarOfCard(card.CardType),
+                        card.transform.position,
+                        uiWidgetCardStar.transform,
+                        (Action)(() =>
+                        {
+                            uiWidgetCardStar.PlayParticle();
+                        }),
+                        delayMove);
+                    delayMove += baseConfigSO.delayBetweenFlyStar;
                 }
             }
-        }
-
-        private void SwitchStar(UICard card, UICardStar star)
-        {
-            star.transform.position = card.transform.position;
-            star.gameObject.SetActive(true);
-            card.transform.DOScale(0, durationSwitchStar).SetEase(Ease.InBack);
-            star.transform.DOScale(1, durationSwitchStar).SetEase(Ease.OutBack).From(0).SetDelay(durationSwitchStar);
-        }
-
-        private async UniTask FlyToWidgetEffect(UICardStar star)
-        {
-            var startPos = star.transform.position;
-            startPos.z = 0;
-
-            var targetPos = targetStarPos.position;
-            targetPos.z = 0;
-
-            var effectStar = await SonatSystem.GetService<PoolingServiceAsync>().CreateAsync<UICollectEffectItemMultiple>(
-                                "CollectResourceMultipleStar_Card",
-                                PanelManager.Instance.transform,
-                                GameResource.None,
-                                star.GetQuantity(),
-                                startPos,
-                                startPos,
-                                targetPos,
-                                null,
-                                1f,
-                                starScaleDown
-                           );
-
-            star.Hide(() =>
-            {
-                // MySonatFramework.audioService.PlaySound(AudioId.Items_Fly_Whoosh);
-
-                effectStar.PlayEffect();
-
-                _cardCollectionService.Instance.StarSubmodule.AddCardStar(star.GetQuantity());
-                star.Resset();
-                SonatUtils.DelayCall(0.25f, () =>
-                {
-                    // MySonatFramework.audioService.PlaySound(AudioId.Stars_Fill_Grill_sort);
-                    UpdateTextStar();
-                });
-            });
         }
         #endregion
     }

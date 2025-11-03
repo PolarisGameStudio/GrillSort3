@@ -39,8 +39,8 @@ namespace MyGame.Modules.CardCollection.Home
 
         public void UpdateData()
         {
-            var cardModule = _cardCollectionService.Instance.CardSubmodule;
-            var totalCard = cardModule.TotalCard;
+            var inventoryModule = _cardCollectionService.Instance.CardInventoryModule;
+            var totalCard = inventoryModule.GetTotalCards();
             var maxCard = _cardCollectionService.Instance.config.GetNumCard();
 
             bubbleReward.gameObject.SetActive(totalCard < maxCard);

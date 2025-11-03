@@ -653,7 +653,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &928916154953782765
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1234,7 +1234,17 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5133309416097649664, guid: 35f698ff4890b664bac2791186e5a02e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6467861347243445018, guid: 35f698ff4890b664bac2791186e5a02e, type: 3}
+      propertyPath: materialSO
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 616263060936433688, guid: 35f698ff4890b664bac2791186e5a02e, type: 3}
+    - {fileID: 1426512611957313298, guid: 35f698ff4890b664bac2791186e5a02e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

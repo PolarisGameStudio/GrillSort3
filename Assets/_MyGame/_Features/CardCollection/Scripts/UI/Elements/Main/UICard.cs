@@ -12,7 +12,7 @@ namespace MyGame.Modules.CardCollection
     public class UICard : MonoBehaviour
     {
         [SerializeField, ReadOnly] private CardType cardType;
-        [SerializeField, ReadOnly] private int numCard;
+        // [SerializeField, ReadOnly] private int numCard;
         [SerializeField] private TMP_Text txtMainName;
         [SerializeField] private TMP_Text txtNameOnBack;
         [SerializeField] private TMP_Text txtNumCard;
@@ -36,7 +36,7 @@ namespace MyGame.Modules.CardCollection
         private CardConfigSO _cardConfig;
 
         public CardType CardType => cardType;
-        public int NumCard => numCard;
+        // public int NumCard => numCard;
         public bool IsNew => _isNew;
 
         private bool _isNew = false;
@@ -71,7 +71,7 @@ namespace MyGame.Modules.CardCollection
         public void SetData(int quantity, bool isNew)
         {
             _isNew = isNew;
-            numCard = quantity;
+            // numCard = quantity;
 
             tagNew.SetActive(isNew);
             txtNumCard.text = quantity.ToString();
@@ -81,12 +81,14 @@ namespace MyGame.Modules.CardCollection
 
         public void UpdateData()
         {
-            var isNew = _cardCollectionService.Instance.CardSubmodule.IsNewCardButNotSeen(cardType);
-            var numCard = _cardCollectionService.Instance.CardSubmodule.GetNumCard(cardType);
-            txtNumCard.text = numCard.ToString();
+            var inventoryModule = _cardCollectionService.Instance.CardInventoryModule;
+            var isNew = inventoryModule.IsNewCard(cardType);
+            // var numCard = _cardCollectionService.Instance.CardSubmodule.GetNumCard(cardType);
+            // txtNumCard.text = numCard.ToString();
 
             // check Active
-            isEnable = numCard > 0;
+            // isEnable = numCard > 0;
+            isEnable = inventoryModule.CheckExistCollectedCard(cardType);
             SetEnable(isEnable);
 
             tagNew.SetActive(isEnable && isNew);

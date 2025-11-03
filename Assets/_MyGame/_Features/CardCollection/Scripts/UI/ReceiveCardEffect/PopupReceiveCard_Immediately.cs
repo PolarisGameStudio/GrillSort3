@@ -9,10 +9,7 @@ namespace MyGame.Modules.CardCollection.Animation
         [Header("Immediately")]
         [SerializeField] private PackAnimation packAnim;
         [SerializeField] private ParticleSystem psAppear;
-        [SerializeField] private bool forceHideAnim = true;
-        [SerializeField] private float animLifeTime = 2f;
-        [SerializeField] private float delayAppearPs = 0.5f;
-        [SerializeField] private float delayBeforePlayCardParticle = 1f;
+        [SerializeField] private PopupReceiveCardImmediatelyConfigSO configSO;
 
         protected override async UniTask PlayAppearAnimation()
         {
@@ -22,25 +19,27 @@ namespace MyGame.Modules.CardCollection.Animation
                 uiCards[i].gameObject.SetActive(false);
             }
 
-
             var packIndex = CardPackHelper.GetPackIndex(uiCards.Count);
             packAnim.Play(packIndex, false, () =>
             {
-                SonatUtils.DelayCall(delayAppearPs, () =>
+                // play particle
+                SonatUtils.DelayCall(configSO.delayAppearPs, () =>
                 {
                     psAppear.Play();
                 });
+
+                // hiện các thẻ
                 for (int i = 0; i < uiCards.Count; i++)
                 {
                     uiCards[i].gameObject.SetActive(true);
                     isCompleteAppearCard = true;
                     int idx = i;
-                    SonatUtils.DelayCall(delayBeforePlayCardParticle, () =>
+                    SonatUtils.DelayCall(configSO.delayBeforePlayCardParticle, () =>
                     {
                         uiCards[idx].PlayParticle();
                     });
                 }
-            }, animLifeTime, forceHideAnim);
+            }, configSO.animLifeTime, configSO.forceHideAnim);
         }
     }
 }

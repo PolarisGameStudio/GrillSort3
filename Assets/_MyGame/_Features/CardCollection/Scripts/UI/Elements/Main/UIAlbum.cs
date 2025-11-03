@@ -78,7 +78,8 @@ namespace MyGame.Modules.CardCollection
 
         public virtual void UpdateData()
         {
-            var numCard = cardCollectionService.Instance.GetNumberCollectedCardInAlbum(albumType);
+            var inventoryModule = cardCollectionService.Instance.CardInventoryModule;
+            var numCard = inventoryModule.GetNumberCollectedCardInAlbum(albumType);
             var totalCard = albumConfig.cards.Count;
             SetData(numCard, totalCard);
         }

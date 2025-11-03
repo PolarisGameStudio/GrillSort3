@@ -30,15 +30,16 @@ public class CardNotificationBadge : MonoBehaviour
 
     public void UpdateData()
     {
+        var cardInventoryModule = _cardCollectionService.Instance.CardInventoryModule;
         if (isAllAlbum)
         {
-            var numCard = _cardCollectionService.Instance.GetNumberNewCardInAlbum();
+            var numCard = cardInventoryModule.GetTotalNewCards();
             txtCount.text = numCard.ToString();
             gameObject.SetActive(numCard > 0);
         }
         else
         {
-            var numCard = _cardCollectionService.Instance.GetNumberNewCardInAlbum(albumType);
+            var numCard = cardInventoryModule.GetNumberNewCardInAlbum(albumType);
             txtCount.text = numCard.ToString();
             gameObject.SetActive(numCard > 0);
         }
