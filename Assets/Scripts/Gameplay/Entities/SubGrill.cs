@@ -330,5 +330,10 @@ namespace Gameplay.Entities
         {
             this.layerData = layerData;
         }
+
+        public void SetShowed(bool showed)
+        {
+            this.showed = showed;
+        }
     }
 }

@@ -177,6 +177,7 @@ namespace Gameplay.Entities
                     itemIndex++;
                 }
             }
+            subGrill.SetShowed(true);
         }
 
         public virtual void ClearGrill()
