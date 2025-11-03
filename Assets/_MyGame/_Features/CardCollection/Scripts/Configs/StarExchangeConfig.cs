@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace MyGame.Modules.CardCollection
 {
-    [CreateAssetMenu(fileName = "StarExchangeConfig", menuName = "Sonat Configs/CardCollection/StarExchangeConfig")]
+    [CreateAssetMenu(fileName = "StarExchangeConfig", menuName = "MyGame/SkewerJam/Features/CardCollection/StarExchangeConfig")]
     public class StarExchangeConfig : ScriptableObject
     {
         [SerializeField]

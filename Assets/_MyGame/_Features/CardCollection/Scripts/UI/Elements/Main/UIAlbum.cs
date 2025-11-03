@@ -15,7 +15,8 @@ namespace MyGame.Modules.CardCollection
         [Header("Config")]
         [SerializeField, ReadOnly] private AlbumType albumType;
         [SerializeField] private TMP_Text albumName;
-        [SerializeField] private Image albumImage;
+        [SerializeField] private bool isAlbumImage = true;
+        [SerializeField, ShowIf("isAlbumImage")] private Image albumImage;
         [SerializeField] private UIRewardItem rewardItem;
 
         [Header("Data")]
@@ -43,12 +44,15 @@ namespace MyGame.Modules.CardCollection
             this.albumType = albumType;
             albumConfig = cardCollectionService.Instance.config.GetAlbumConfig(albumType);
 
-            //albumName.text = albumConfig.albumName;
+            albumName.text = albumConfig.albumName;
             // albumName.GetComponent<Localize>().SetTerm(albumConfig.albumName);
             // albumName.SetMaterial(albumConfig.color);
 
             //albumImage.sprite = albumConfig.albumIcon;
-            albumImage.SetSpriteAsync(albumConfig.GetAlbumSpritePath()).Forget();
+            if (isAlbumImage)
+            {
+                albumImage.SetSpriteAsync(albumConfig.GetAlbumSpritePath()).Forget();
+            }
             // set reward
             var reward = albumConfig.reward.resourceDatas[0];
             rewardItem.Init(reward.resource, reward.quantity);

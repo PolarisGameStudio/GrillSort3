@@ -73,7 +73,8 @@ namespace MyGame.Modules.CardCollection
 
         public void UpdateTextStar()
         {
-            txtStar.text = _cardCollectionService.Instance.CardStar.ToString();
+            var starModule = _cardCollectionService.Instance.StarSubmodule;
+            txtStar.text = starModule.NumberStar.ToString();
         }
 
         protected abstract UniTask PlayAppearAnimation();

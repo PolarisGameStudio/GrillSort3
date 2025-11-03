@@ -69,7 +69,7 @@ public class HomeManager : SingletonSimple<HomeManager>
                 source = "non_iap"
             }, false);
             await UniTask.Delay(2000);
-            PanelManager.Instance.OpenPanel<PopupReward>(new UIData().Add(PopupReward.KEY_REWARD, rewardData));
+            PanelManager.Instance.OpenPanel<PopupReward>(new UIData().Add(PopupReward.REWARD_KEY, rewardData));
         }
     }
 

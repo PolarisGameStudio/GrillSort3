@@ -9,6 +9,10 @@ using UnityEngine;
 
 public class PopupCard : Panel
 {
+    public const string CARD_TYPE_KEY = "cardType";
+    public const string POSITION_KEY = "position";
+    public const string ON_COMPLETE_CLOSE_KEY = "onCompleteClose";
+
     [SerializeField] private UICard card;
     [SerializeField] private float scaleUp = 2;
     [SerializeField] private float durationScaleUp = 0.5f;
@@ -31,9 +35,9 @@ public class PopupCard : Panel
     {
         base.Open(uiData);
 
-        cardType = uiData.Get<CardType>("cardType");
-        startPos = uiData.Get<Vector3>("position");
-        onCompleteClose = uiData.Get<Action>("onCompleteClose");
+        cardType = uiData.Get<CardType>(CARD_TYPE_KEY);
+        startPos = uiData.Get<Vector3>(POSITION_KEY);
+        onCompleteClose = uiData.Get<Action>(ON_COMPLETE_CLOSE_KEY);
         card.Setup(cardType);
         card.UpdateData();
         PlayAppearAnimation();

@@ -1,4 +1,7 @@
+using System;
 using SonatFramework.Scripts.Helper;
+using SonatFramework.Scripts.UIModule;
+using SonatFramework.Systems.InventoryManagement;
 using UnityEngine;
 
 namespace MyGame.Modules.CardCollection
@@ -33,13 +36,6 @@ namespace MyGame.Modules.CardCollection
             _cardStar.Value = _cardStar.Value;
         }
 
-        public bool ExchangeCardStarToReward(int index)
-        {
-            var milestone = starExchangeConfig.milestones[index];
-            var neededStar = milestone.star;
-            var reward = milestone.reward;
-            return true;
-        }
 
         public void AddCardStar(int numStar)
         {
@@ -47,11 +43,47 @@ namespace MyGame.Modules.CardCollection
             SaveData();
         }
 
-
-        public bool CheckHasClaimChest(int idGift)
+        public bool OnClickReceiveChest(int index)
         {
-            return _cardStar.Value >= starExchangeConfig.milestones[idGift].star;
+            if (CanReceiveChest(index) == false)
+            {
+                PopupToast.Cretate("You don't have enough stars");
+                return false;
+            }
+            else
+            {
+                ExchangeCardStarToReward(index);
+                return true;
+            }
         }
 
+        public bool CanReceiveChest(int index)
+        {
+            return _cardStar.Value >= starExchangeConfig.milestones[index].star && index > _cardStarExchangeIndex.Value;
+        }
+
+        public void ExchangeCardStarToReward(int index)
+        {
+            var milestone = starExchangeConfig.milestones[index];
+            var neededStar = milestone.star;
+            var reward = milestone.reward;
+
+            _cardStar.Value -= neededStar;
+            _cardStarExchangeIndex.Value = index;
+            SaveData();
+
+            var logData = new EarnResourceLogData
+            {
+                spendType = "card_collection_star_exchange",
+                spendId = "card_collection_star_exchange",
+                isFirstBuy = false,
+                source = "non_iap"
+            };
+            MySonatFramework.inventoryService.AddReward(reward, logData);
+
+            UIData uiData = new UIData();
+            uiData.Add(PopupReward.REWARD_KEY, reward);
+            PanelManager.Instance.OpenPanel<PopupReward>(uiData);
+        }
     }
 }

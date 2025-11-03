@@ -12,7 +12,8 @@ namespace MyGame.Modules.CardCollection.Home
 
         private void OnEnable()
         {
-            txtStar.text = _cardCollectionService.Instance.CardStar.ToString();
+            var starModule = _cardCollectionService.Instance.StarSubmodule;
+            txtStar.text = starModule.NumberStar.ToString();
         }
 
         private void OnDisable()

@@ -16,12 +16,9 @@ MonoBehaviour:
   albumName: Vegetarian & Healthy
   reward:
     resourceDatas:
-    - resource: 4
-      quantity: 1
+    - resource: 1
+      quantity: 100
   cards: 2d0000002e0000002f000000300000003100000032000000330000003400000035000000
-  albumBorder: {fileID: 21300000, guid: e78046ee492ab0e479e9d9092ba7c3f1, type: 3}
-  albumBackground: {fileID: 21300000, guid: 730d9df3b00d57348bc74d0c9ee9f287, type: 3}
-  albumExit: {fileID: 21300000, guid: 4d40c3894cd670b4bbb1e9656eb5b1fc, type: 3}
   color: 5
   albumNamePath: Assets/_MyGame/_Features/CardCollection/Arts/Albums
   backgroundPopupPath: Assets/_MyGame/_Features/CardCollection/Arts/BackgroundPopup

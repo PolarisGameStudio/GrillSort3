@@ -80,7 +80,7 @@ public class UIPackAds : MonoBehaviour
         UpdateUI(() =>
         {
             _collected = false;
-            PanelManager.Instance.OpenPanel<PopupReward>(new UIData().Add(PopupReward.KEY_REWARD, milestoneData.rewardData));
+            PanelManager.Instance.OpenPanel<PopupReward>(new UIData().Add(PopupReward.REWARD_KEY, milestoneData.rewardData));
         });
     }
 

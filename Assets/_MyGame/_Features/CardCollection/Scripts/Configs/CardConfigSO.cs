@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace MyGame.Modules.CardCollection
 {
-    [CreateAssetMenu(fileName = "CardConfigSO", menuName = "Sonat Configs/CardCollection/CardConfigSO")]
+    [CreateAssetMenu(fileName = "CardConfigSO", menuName = "MyGame/SkewerJam/Features/CardCollection/CardConfigSO")]
     public class CardConfigSO : ScriptableObject
     {
         public CardType type;

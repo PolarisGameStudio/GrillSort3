@@ -1,15 +1,11 @@
 using System;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
-using Manager;
 using Sirenix.OdinInspector;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.UIModule.UIElements;
 using SonatFramework.Systems;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace MyGame.Modules.CardCollection
 {
@@ -52,19 +48,13 @@ namespace MyGame.Modules.CardCollection
             _cardConfig = _cardCollectionService.Instance.config.GetCardConfig(cardType);
             cardImage.SetSpriteAsync(_cardConfig.GetCardSpritePath()).Forget();
 
-            //txtMainName.text = _cardConfig.cardName;
-
-            //cardImage.sprite = _cardConfig.sprite;
-
-            //await UniTask.Yield();
-
+            txtMainName.text = _cardConfig.cardName;
             // txtMainName.GetComponent<I2.Loc.Localize>().SetTerm(_cardConfig.cardName);
-
             // txtMainName.SetMaterial(_cardConfig.textColorIndex);
 
-            //txtNameOnBack.text = _cardConfig.cardName;
+            txtNameOnBack.text = _cardConfig.cardName;
 
-            txtNameOnBack.GetComponent<I2.Loc.Localize>().SetTerm(_cardConfig.cardName);
+            // txtNameOnBack.GetComponent<I2.Loc.Localize>().SetTerm(_cardConfig.cardName);
 
             // set star
             starGroup.Setup(_cardConfig.star);
@@ -74,9 +64,8 @@ namespace MyGame.Modules.CardCollection
                 cardParticle.SetData(_cardConfig.star);
             }
 
-            framePs.SetActive((int)cardType % 9 == 8);
-
-            goldFrame.SetActive(((int)cardType % 9 == 7 || (int)cardType % 9 == 6));
+            framePs.SetActive(_cardConfig.star == 3);
+            goldFrame.SetActive(_cardConfig.star == 2);
         }
 
         public void SetData(int quantity, bool isNew)
@@ -105,7 +94,6 @@ namespace MyGame.Modules.CardCollection
 
         private void SetEnable(bool isEnable)
         {
-            isEnable = true;
             enableObj.SetActive(isEnable);
             disableObj.SetActive(!isEnable);
 
@@ -119,9 +107,9 @@ namespace MyGame.Modules.CardCollection
             {
                 SetEnable(false);
                 PanelManager.Instance.OpenPanel<PopupCard>(new UIData()
-                    .Add("cardType", cardType)
-                    .Add("position", transform.position)
-                    .Add("onCompleteClose", (Action)(() =>
+                    .Add(PopupCard.CARD_TYPE_KEY, cardType)
+                    .Add(PopupCard.POSITION_KEY, transform.position)
+                    .Add(PopupCard.ON_COMPLETE_CLOSE_KEY, (Action)(() =>
                         {
                             UpdateData();
                         }))

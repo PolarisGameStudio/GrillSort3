@@ -43,8 +43,6 @@ namespace MyGame.Modules.CardCollection
         // private IntDataPref _numCompleteCardCollection;
         // private IntDataPref _cardStar;
 
-        public int CardStar => StarSubmodule.NumberStar;
-        public int TotalCard => CardSubmodule.TotalCard;
         public event Action OnNewCardCountChanged;
 
         #region Init
@@ -218,7 +216,7 @@ namespace MyGame.Modules.CardCollection
                 source = "non_iap"
             });
             UIData uiData = new UIData();
-            uiData.Add(PopupReward.KEY_REWARD, reward);
+            uiData.Add(PopupReward.REWARD_KEY, reward);
             PanelManager.Instance.OpenPanel<PopupReward>(uiData);
         }
 
