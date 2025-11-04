@@ -1320,8 +1320,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 24901980822511611}
-  - {fileID: 2378808093461938009}
   - {fileID: 3217316199600871504}
+  - {fileID: 2378808093461938009}
   m_Father: {fileID: 6053563892270690516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2042,7 +2042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9eebeb105064e4db7fe5f9ada1dee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelOpenName: PopupTutCardCollection
+  panelOpenName: PopupTutorial_CardCollection
   tracking: 
 --- !u!114 &4697936521469253122
 MonoBehaviour:
@@ -4564,6 +4564,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2378808093461938009}
     m_Modifications:
+    - target: {fileID: 158300525938807201, guid: b29082ebc26017841aab5529c655b735, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 196920990376059432, guid: b29082ebc26017841aab5529c655b735, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1405024000994583191, guid: b29082ebc26017841aab5529c655b735, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4644,6 +4652,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2476809204427462559, guid: b29082ebc26017841aab5529c655b735, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2476809204427462559, guid: b29082ebc26017841aab5529c655b735, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2476809204427462559, guid: b29082ebc26017841aab5529c655b735, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3290611105044499787, guid: b29082ebc26017841aab5529c655b735, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4027728485526589773, guid: b29082ebc26017841aab5529c655b735, type: 3}
       propertyPath: root
       value: 
@@ -4655,6 +4679,14 @@ PrefabInstance:
     - target: {fileID: 4861464928641106118, guid: b29082ebc26017841aab5529c655b735, type: 3}
       propertyPath: m_Name
       value: Parent_UIWidgetCardStar
+      objectReference: {fileID: 0}
+    - target: {fileID: 7852847533956908756, guid: b29082ebc26017841aab5529c655b735, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8133091165700306813, guid: b29082ebc26017841aab5529c655b735, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
