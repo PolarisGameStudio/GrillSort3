@@ -17,10 +17,8 @@ MonoBehaviour:
     star: 100
     reward:
       resourceDatas:
-      - resource: 54
-        quantity: 1
-      - resource: 53
-        quantity: 1
+      - resource: 1
+        quantity: 100
       - resource: 102
         quantity: 1
   - index: 1
@@ -29,12 +27,6 @@ MonoBehaviour:
       resourceDatas:
       - resource: 1
         quantity: 100
-      - resource: 54
-        quantity: 1
-      - resource: 53
-        quantity: 1
-      - resource: 55
-        quantity: 1
       - resource: 103
         quantity: 1
       - resource: 104
@@ -45,17 +37,13 @@ MonoBehaviour:
       resourceDatas:
       - resource: 1
         quantity: 300
-      - resource: 5
-        quantity: 1
-      - resource: 3
-        quantity: 1
-      - resource: 4
-        quantity: 1
-      - resource: 6
-        quantity: 1
-      - resource: 8
+      - resource: 2
+        quantity: 900
+      - resource: 102
         quantity: 1
       - resource: 105
         quantity: 1
-      - resource: 106
+      - resource: 103
+        quantity: 1
+      - resource: 104
         quantity: 1

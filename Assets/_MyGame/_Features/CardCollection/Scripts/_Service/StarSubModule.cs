@@ -68,7 +68,7 @@ namespace MyGame.Modules.CardCollection
             return _cardStar.Value >= starExchangeConfig.milestones[index].star && index > _cardStarExchangeIndex.Value;
         }
 
-        public void ExchangeCardStarToReward(int index)
+        private void ExchangeCardStarToReward(int index)
         {
             var milestone = starExchangeConfig.milestones[index];
             var neededStar = milestone.star;
@@ -86,10 +86,6 @@ namespace MyGame.Modules.CardCollection
                 source = "non_iap"
             };
             MySonatFramework.inventoryService.AddReward(reward, logData);
-
-            UIData uiData = new UIData();
-            uiData.Add(PopupReward.REWARD_KEY, reward);
-            PanelManager.Instance.OpenPanel<PopupReward>(uiData);
         }
 
         public void AddCardStarView(int numStar)

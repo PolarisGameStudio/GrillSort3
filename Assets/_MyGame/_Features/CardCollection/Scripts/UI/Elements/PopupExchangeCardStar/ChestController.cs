@@ -1,3 +1,4 @@
+using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems;
 using SonatFramework.Systems.InventoryManagement.GameResources;
 using TMPro;
@@ -16,6 +17,7 @@ namespace MyGame.Modules.CardCollection.CardStarExchange
         private readonly Service<CardCollectionService> _cardCollectionService = new();
 
         private int index = 0;
+        private RewardData reward;
 
         public void SetData(int index)
         {
@@ -23,7 +25,7 @@ namespace MyGame.Modules.CardCollection.CardStarExchange
 
             var starModule = _cardCollectionService.Instance.StarSubmodule;
             var star = starModule.starExchangeConfig.milestones[index].star;
-            var reward = starModule.starExchangeConfig.milestones[index].reward;
+            reward = starModule.starExchangeConfig.milestones[index].reward;
 
             for (int i = 0; i < txtsStarNeed.Length; i++)
             {
@@ -37,14 +39,19 @@ namespace MyGame.Modules.CardCollection.CardStarExchange
         public void OnClick()
         {
             var starModule = _cardCollectionService.Instance.StarSubmodule;
-            if (starModule.OnClickReceiveChest(index))
-            {
+            // if (starModule.OnClickReceiveChest(index))
+            // {
 
-            }
-            else
-            {
+            // }
+            // else
+            // {
 
-            }
+            // }
+
+            var uiData = new UIData();
+            uiData.Add(PopupRewardChest.REWARD_KEY, reward);
+            uiData.Add(PopupRewardChest.SKIN_KEY, index);
+            PanelManager.Instance.OpenPanelByName<PopupRewardChest>("PopupRewardChest_CardCollection", uiData);
         }
 
         public void UpdateUI()
