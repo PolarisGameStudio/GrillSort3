@@ -4,10 +4,12 @@ using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PopupExchangeCardStar : Panel
 {
     [SerializeField] private TMP_Text txtStar;
+    [SerializeField] private RectTransform rootDesc;
     [SerializeField] private ChestController[] chestControllers;
     private readonly Service<CardCollectionService> _cardCollectionService = new();
 
@@ -20,6 +22,7 @@ public class PopupExchangeCardStar : Panel
         {
             chestControllers[i].SetData(i);
         }
+
     }
 
     public override void Open(UIData uiData)
@@ -27,6 +30,8 @@ public class PopupExchangeCardStar : Panel
         base.Open(uiData);
 
         UpdateUI();
+        Canvas.ForceUpdateCanvases();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rootDesc);
     }
 
     private void UpdateUI()

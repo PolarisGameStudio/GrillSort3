@@ -1,8 +1,5 @@
 using MyGame.Modules.CardCollection;
-using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
-using SonatFramework.Systems;
-using SonatFramework.Systems.InventoryManagement;
 using UnityEngine;
 
 public class PopupAlbum : Panel
@@ -23,6 +20,7 @@ public class PopupAlbum : Panel
     public override void Close()
     {
         base.Close();
+
         albumNavigator.SeeNewCard();
     }
 }

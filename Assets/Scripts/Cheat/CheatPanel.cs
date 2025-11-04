@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using MyGame.Modules.CardCollection;
 using Sonat;
 using Sonat.DebugViewModule;
 using Sonat.Enums;
@@ -147,6 +148,11 @@ public class CheatPanel : Panel
                 OnInputField(1);
                 inputValues[0].text = ipAdress.Value;
                 break;
+            case CheatOption.CardCollection:
+                OnDropdown(1);
+                OnInputField(1);
+                InitCardCollectionDropdown();
+                break;
         }
     }
 
@@ -291,7 +297,16 @@ public class CheatPanel : Panel
             //                  CheatManager.CheatLevelChest(chestID, curLevel);
             //              }
             //              break;
+            case CheatOption.CardCollection:
+                var cardType = cheatDropdowns[0].options[cheatDropdowns[0].value].text.ToEnum<CardType>();
+                if (cardType != CardType.None)
+                {
+                    CheatManager.CheatCardCollection(cardType);
+                }
+                break;
         }
+
+
     }
 
     private void OnDropdown(int number)
@@ -377,4 +392,22 @@ public class CheatPanel : Panel
     // 		now++;
     // 	}
     // }
+    public void InitCardCollectionDropdown()
+    {
+        List<TMP_Dropdown.OptionData> opts = new List<TMP_Dropdown.OptionData>();
+
+        for (CardType i = CardType.None + 1; i < CardType.MAX; i++)
+        {
+            TMP_Dropdown.OptionData data = new TMP_Dropdown.OptionData()
+            {
+                text = i.ToString()
+            };
+            opts.Add(data);
+        }
+
+        cheatDropdowns[0].onValueChanged.RemoveAllListeners();
+        cheatDropdowns[0].ClearOptions();
+        cheatDropdowns[0].options = opts;
+    }
+
 }

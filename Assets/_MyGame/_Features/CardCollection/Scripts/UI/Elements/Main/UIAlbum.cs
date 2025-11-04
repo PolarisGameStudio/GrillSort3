@@ -28,13 +28,6 @@ namespace MyGame.Modules.CardCollection
         [SerializeField] private GameObject completedObj;
         [SerializeField] private GameObject notCompletedObj;
 
-        // [Header("Bubble")]
-        // [SerializeField] private UIBubbleReward bubbleReward;
-        // [Header("Status")]
-        // [SerializeField] private GameObject fullObj;
-        // [SerializeField] private GameObject lockObj;
-        // [SerializeField] private GameObject normalObj;
-
         protected readonly Service<CardCollectionService> cardCollectionService = new();
         protected AlbumConfigSO albumConfig;
         public AlbumType AlbumType => albumType;

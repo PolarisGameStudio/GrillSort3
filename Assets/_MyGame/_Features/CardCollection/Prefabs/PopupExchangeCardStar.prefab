@@ -74,7 +74,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 255.105, y: -45}
+  m_AnchoredPosition: {x: 217.49, y: -45}
   m_SizeDelta: {x: 268.52, y: 84.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9108155394970634060
@@ -806,6 +806,7 @@ MonoBehaviour:
   closeTween: []
   blockGeneralCurrency: 0
   txtStar: {fileID: 7448123801143694495}
+  rootDesc: {fileID: 7233309523615178010}
   chestControllers:
   - {fileID: 4118629053027709160}
   - {fileID: 7729803647445398797}
@@ -925,6 +926,8 @@ GameObject:
   - component: {fileID: 6595078567060098225}
   - component: {fileID: 5206017815513475200}
   - component: {fileID: 3751402246998583043}
+  - component: {fileID: 8048188595003070624}
+  - component: {fileID: 3689118604304245672}
   m_Layer: 5
   m_Name: BtnClose
   m_TagString: Untagged
@@ -1045,6 +1048,40 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8048188595003070624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261645722570582266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 235fbdd43ea180149a6dccd6023e4fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverScale: 1.1
+  clickScale: 0.9
+  duration: 0.09
+  baseScale: {x: 1, y: 1, z: 1}
+--- !u!114 &3689118604304245672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261645722570582266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb4df7fa440a9a469647450de79e72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioTracks: 1
+  audioId: 0
+  volume: 1
+  audioService:
+    referenceType: 1
+    reference: {fileID: 0}
 --- !u!1 &5352087809099710989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1157,7 +1194,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 512.76, y: -45}
-  m_SizeDelta: {x: 46.79, y: 84.6}
+  m_SizeDelta: {x: 122.02, y: 84.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5340286584566233069
 CanvasRenderer:
@@ -1187,7 +1224,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 100
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e13e4bfa3ed5b20408dd981c4a6cca19, type: 2}
   m_sharedMaterial: {fileID: -4516441159803420151, guid: e13e4bfa3ed5b20408dd981c4a6cca19, type: 2}

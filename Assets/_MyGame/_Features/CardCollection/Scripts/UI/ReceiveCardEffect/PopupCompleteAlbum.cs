@@ -2,7 +2,6 @@ using DG.Tweening;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.UIModule.UIElements;
 using SonatFramework.Systems;
-using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.InventoryManagement.GameResources;
 using UnityEngine;
 using UnityEngine.UI;
@@ -57,9 +56,9 @@ namespace MyGame.Modules.CardCollection
         {
             Close();
 
-            // UIData uiData = new UIData();
-            // uiData.Add(PopupReward.REWARD_KEY, reward);
-            // PanelManager.Instance.OpenPanel<PopupReward>(uiData);
+            UIData uiData = new UIData();
+            uiData.Add(PopupReward.REWARD_KEY, reward);
+            PanelManager.Instance.OpenPanel<PopupReward>(uiData);
         }
     }
 }

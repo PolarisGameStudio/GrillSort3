@@ -60,6 +60,11 @@ public static class AddressableManager
 
         return null;
     }
+    
+    public static async UniTask<Sprite> LoadSpriteAsync(string address)
+    {
+        return await LoadImageFromPath(address);
+    }
 
 #else
     public static AddressableLoader<Sprite> spriteLoader = new();
@@ -83,6 +88,11 @@ public static class AddressableManager
         Sprite sprite = await spriteLoader.LoadAssetAsync(address);
         if (sprite != null)
             image.SetSprite(sprite);
+    }
+
+    public static async UniTask<Sprite> LoadSpriteAsync(string address)
+    {
+        return await spriteLoader.LoadAssetAsync(address);
     }
 #endif
 }

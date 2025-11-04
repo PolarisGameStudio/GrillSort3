@@ -14,11 +14,12 @@ namespace Helper
         {
             this.Asset = await LoadAssetAsync(address);
         }
+
         public async UniTask<T> LoadAssetAsync(string address)
         {
             if (loadedAssets.TryGetValue(address, out var result))
             {
-                if(result.IsDone) return result.Result;
+                if (result.IsDone) return result.Result;
                 await result.Task;
                 if (result.Status == AsyncOperationStatus.Succeeded)
                 {

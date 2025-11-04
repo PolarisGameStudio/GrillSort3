@@ -30,21 +30,36 @@ namespace MyGame.Modules.CardCollection.Home
             }
 
             UpdateData();
+
+            _cardCollectionService.Instance.CardInventoryModule.OnCollectCard += OnCollectCard;
+            _cardCollectionService.Instance.CardInventoryModule.OnCompleteCardCollection += OnCompleteCardCollection;
         }
 
         private void OnDisable()
         {
-
+            _cardCollectionService.Instance.CardInventoryModule.OnCollectCard -= OnCollectCard;
+            _cardCollectionService.Instance.CardInventoryModule.OnCompleteCardCollection -= OnCompleteCardCollection;
         }
 
-        public void UpdateData()
+        private void OnCollectCard(CardType cardType, AlbumType albumType)
+        {
+            UpdateData();
+        }
+
+        private void OnCompleteCardCollection(bool isComplete)
+        {
+            UpdateData();
+        }
+
+        private void UpdateData()
         {
             var inventoryModule = _cardCollectionService.Instance.CardInventoryModule;
             var totalCard = inventoryModule.GetTotalCards();
             var maxCard = _cardCollectionService.Instance.config.GetNumCard();
 
-            bubbleReward.gameObject.SetActive(totalCard < maxCard);
-            tickObj.SetActive(totalCard >= maxCard);
+            bubbleReward.gameObject.SetActive(inventoryModule.CompletedCardCollection == false);
+            tickObj.SetActive(inventoryModule.CompletedCardCollection);
+
             cardSlider.value = totalCard * 1.0f / maxCard;
             txtTotalCard.text = $"{totalCard}/{maxCard}";
 

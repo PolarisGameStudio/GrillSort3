@@ -18,7 +18,8 @@ namespace MyGame.Modules.CardCollection
     public abstract class PopupReceiveCardBase : Panel
     {
         public const string CARD_REWARD_KEY = "RewardData";
-        [SerializeField] private UIWidgetCardStar uiWidgetCardStar;
+        public const string RECENTLY_NEW_CARD_LIST_KEY = "RecentlyNewCardList";
+        [SerializeField] private UIWidgetReceiveCardStar uiWidgetCardStar;
         [SerializeField] private Button btnClaim;
 
         [Header("Appear Cards")]
@@ -31,6 +32,8 @@ namespace MyGame.Modules.CardCollection
         private readonly Service<PoolingContainerService> _poolingContainerService = new();
 
         protected List<CardType> cardList;
+        protected List<CardType> recentlyNewCardList;
+
         protected List<UICard> uiCards = new();
         protected List<Transform> listTargetRoots = new();
         protected List<Transform> listHorContainers = new();
@@ -46,6 +49,7 @@ namespace MyGame.Modules.CardCollection
         {
             base.Open(uiData);
             cardList = uiData.Get<List<CardType>>(CARD_REWARD_KEY);
+            recentlyNewCardList = uiData.Get<List<CardType>>(RECENTLY_NEW_CARD_LIST_KEY);
             SetupCards();
 
             PlayAppearAnimation().Forget();
@@ -91,9 +95,15 @@ namespace MyGame.Modules.CardCollection
                 card.Setup(cardType);
 
                 // Mỗi phần tử list là 1 thẻ duy nhất ⇒ numCard luôn = 1
-                var inventoryModule = _cardCollectionService.Instance.CardInventoryModule;
-                var isNewCard = inventoryModule.IsNewCard(cardType);
-                card.SetData(1, isNewCard);
+                if (recentlyNewCardList.Contains(cardType))
+                {
+                    card.SetData(1, true);
+                    recentlyNewCardList.Remove(cardType);
+                }
+                else
+                {
+                    card.SetData(1, false); // có nhiều thẻ mới cùng loại thì chỉ gán tag 1 lần
+                }
                 uiCards.Add(card);
             }
 
@@ -116,7 +126,7 @@ namespace MyGame.Modules.CardCollection
         {
             // MySonatFramework.audioService.PlaySound(AudioId.Card_Disappear_Grill_sort);
             // biến card dư thành star
-            await PlayExchangeCardToStar();
+            PlayExchangeCardToStar().Forget();
 
             // widget xuất hiện và star bay vào
             if (CheckOldCard())
@@ -124,7 +134,7 @@ namespace MyGame.Modules.CardCollection
                 await UniTask.Delay((int)(baseConfigSO.delayBeforeWidgetMoveIn * 1000));
                 uiWidgetCardStar.PlayAppearAnimation();
 
-                await UniTask.Delay((int)(baseConfigSO.delayBeforeHideNewCard * 1000f));
+                await UniTask.Delay((int)(baseConfigSO.delayBeforeHideNewCard * 1000));
                 // new card (card còn lại) biến mất
                 DisplayCardDisappear();
             }
@@ -132,12 +142,6 @@ namespace MyGame.Modules.CardCollection
             {
                 DisplayCardDisappear();
             }
-
-            await UniTask.Delay((int)(baseConfigSO.delayBeforeWidgetMoveOut * 1000));
-            uiWidgetCardStar.PlayDisappearAnimation(() =>
-            {
-                Close();
-            });
         }
 
         private void DisplayCardDisappear()
@@ -167,6 +171,8 @@ namespace MyGame.Modules.CardCollection
                 var card = uiCards[i];
                 if (card.IsNew == false)
                 {
+                    var addedStar = CardPackHelper.GetNumberStarOfCard(card.CardType);
+
                     card.transform.DOScale(0, baseConfigSO.scaleDownCardDuration).From(1).SetEase(Ease.InBack);
 
                     var collectEffect = await SonatSystem.GetService<PoolingServiceAsync>().CreateAsync<UICollectMultiple>(
@@ -177,12 +183,18 @@ namespace MyGame.Modules.CardCollection
                         uiWidgetCardStar.transform,
                         (Action)(() =>
                         {
-                            uiWidgetCardStar.PlayParticle();
+                            uiWidgetCardStar.UpdateValueView(addedStar);
                         }),
                         delayMove);
                     delayMove += baseConfigSO.delayBetweenFlyStar;
                 }
             }
+
+            await UniTask.Delay((int)((delayMove + baseConfigSO.delayBeforeWidgetMoveOut) * 1000));
+            uiWidgetCardStar.PlayDisappearAnimation(() =>
+            {
+                Close();
+            });
         }
         #endregion
     }

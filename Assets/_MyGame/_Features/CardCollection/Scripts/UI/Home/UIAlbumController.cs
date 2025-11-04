@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems;
 using SonatFramework.Systems.ObjectPooling;
 using UnityEngine;
@@ -16,22 +17,42 @@ namespace MyGame.Modules.CardCollection.Home
 
         void OnEnable()
         {
-            if (_isInit) return;
-            _isInit = true;
-            _poolingContainerService.Instance.CleanContainer(container);
-            foreach (var album in _cardCollectionService.Instance.config.albums)
+            if (_isInit == false)
             {
-                var albumObj = _poolingContainerService.Instance.CreateObject<UIAlbum>(container);
-                albumObj.Setup(album.type);
-                albums.Add(albumObj);
+                _isInit = true;
+                _poolingContainerService.Instance.CleanContainer(container);
+                foreach (var album in _cardCollectionService.Instance.config.albums)
+                {
+                    var albumObj = _poolingContainerService.Instance.CreateObject<UIAlbum>(container);
+                    albumObj.Setup(album.type);
+                    albums.Add(albumObj);
+                }
             }
+
+            _cardCollectionService.Instance.CardInventoryModule.OnCollectCard += OnCollectCard;
+            SonatUtils.ExecuteNextFrame(() =>
+            {
+                foreach (var album in albums)
+                {
+                    album.UpdateData();
+                }
+            });
+
         }
 
-        public void UpdateData()
+        void OnDisable()
+        {
+            _cardCollectionService.Instance.CardInventoryModule.OnCollectCard -= OnCollectCard;
+        }
+
+        private void OnCollectCard(CardType cardType, AlbumType albumType)
         {
             foreach (var album in albums)
             {
-                album.UpdateData();
+                if (album.AlbumType == albumType)
+                {
+                    album.UpdateData();
+                }
             }
         }
     }

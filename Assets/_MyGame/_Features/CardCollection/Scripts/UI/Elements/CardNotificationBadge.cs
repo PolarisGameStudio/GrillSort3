@@ -8,18 +8,31 @@ public class CardNotificationBadge : MonoBehaviour
 {
     private readonly Service<CardCollectionService> _cardCollectionService = new();
     [SerializeField] private bool isAllAlbum = true;
-    [SerializeField, ReadOnly, ShowIf("@!isAllAlbum")] private AlbumType albumType;
+    [SerializeField, ReadOnly, ShowIf("@!isAllAlbum")] private AlbumType albumType = AlbumType.None;
+    [SerializeField] private GameObject notificationObj;
     [SerializeField] private TMP_Text txtCount;
 
-    private void Awake()
+    private void OnEnable()
     {
-        _cardCollectionService.Instance.OnNewCardCountChanged += UpdateData;
-        UpdateData();
+        _cardCollectionService.Instance.CardInventoryModule.OnChangeNewCard += OnChangeNewCard;
+
+        if (isAllAlbum || albumType != AlbumType.None)
+        {
+            UpdateData();
+        }
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        _cardCollectionService.Instance.OnNewCardCountChanged -= UpdateData;
+        _cardCollectionService.Instance.CardInventoryModule.OnChangeNewCard -= OnChangeNewCard;
+    }
+
+    private void OnChangeNewCard(CardType cardType, AlbumType albumType)
+    {
+        if (isAllAlbum || albumType == this.albumType)
+        {
+            UpdateData();
+        }
     }
 
     public void SetData(AlbumType albumType)
@@ -35,13 +48,13 @@ public class CardNotificationBadge : MonoBehaviour
         {
             var numCard = cardInventoryModule.GetTotalNewCards();
             txtCount.text = numCard.ToString();
-            gameObject.SetActive(numCard > 0);
+            notificationObj.SetActive(numCard > 0);
         }
         else
         {
             var numCard = cardInventoryModule.GetNumberNewCardInAlbum(albumType);
             txtCount.text = numCard.ToString();
-            gameObject.SetActive(numCard > 0);
+            notificationObj.SetActive(numCard > 0);
         }
     }
 }

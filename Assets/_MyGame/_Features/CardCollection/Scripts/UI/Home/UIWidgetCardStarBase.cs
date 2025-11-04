@@ -1,25 +1,32 @@
 using System;
+using System.Collections;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Sirenix.OdinInspector;
+using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems;
+using SonatFramework.Systems.ObjectPooling;
 using TMPro;
 using UnityEngine;
 
 namespace MyGame.Modules.CardCollection.Home
 {
-    public class UIWidgetCardStar : MonoBehaviour
+    public class UIWidgetCardStarBase : MonoBehaviour
     {
-        [SerializeField] private TMP_Text txtStar;
+        [SerializeField] protected TMP_Text txtStar;
         [SerializeField] private Transform root;
         [SerializeField] private bool playOnEnable = true;
+        [Space]
+        [Header("Animation")]
+        [SerializeField] private float delayAppear = 0f;
         [SerializeField] private float durationAppear = 0.5f;
         [SerializeField] private AnimationCurve curveAppear = AnimationCurve.Linear(0, 0, 1, 1);
         [SerializeField] private float durationDisappear = 0.5f;
         [SerializeField] private AnimationCurve curveDisappear = AnimationCurve.Linear(0, 0, 1, 1);
-        [SerializeField] private ParticleSystem psParticle;
 
         private readonly Service<CardCollectionService> _cardCollectionService = new();
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             var starModule = _cardCollectionService.Instance.StarSubmodule;
             txtStar.text = starModule.NumberStar.ToString();
@@ -29,7 +36,7 @@ namespace MyGame.Modules.CardCollection.Home
 
             if (playOnEnable)
             {
-                PlayAppearAnimation();
+                PlayAppearAnimation(delayAppear);
             }
 
 
@@ -40,10 +47,10 @@ namespace MyGame.Modules.CardCollection.Home
 
         }
 
-        public void PlayAppearAnimation()
+        public void PlayAppearAnimation(float delay = 0)
         {
             transform.localPosition = root.localPosition;
-            transform.DOLocalMove(Vector3.zero, durationAppear).SetEase(curveAppear);
+            transform.DOLocalMove(Vector3.zero, durationAppear).SetEase(curveAppear).SetDelay(delay);
         }
 
         public void PlayDisappearAnimation(Action onComplete)
@@ -53,11 +60,6 @@ namespace MyGame.Modules.CardCollection.Home
             {
                 onComplete?.Invoke();
             });
-        }
-
-        public void PlayParticle()
-        {
-            psParticle.Play();
         }
     }
 }

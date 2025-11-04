@@ -13,11 +13,14 @@ namespace MyGame.Modules.CardCollection
         public const string DATA_KEY = "CARD_COLLECTION_CARD_INVENTORY_MODULE";
 
         private Dictionary<AlbumType, ListDataPref<int>> _dictAlbumAndCollectedCard = new();
-        private Dictionary<AlbumType, ListDataPref<int>> _dictAlbumAndNewCard = new();
+        private Dictionary<AlbumType, ListDataPref<int>> _dictAlbumAndNewCard = new(); // những thẻ mới
 
         private IntDataPref completedCardCollection;
 
         public bool CompletedCardCollection => completedCardCollection.Value == 1;
+        public event Action<CardType, AlbumType> OnCollectCard;
+        public event Action<CardType, AlbumType> OnChangeNewCard;
+        public event Action<bool> OnCompleteCardCollection;
 
         public void LoadData()
         {
@@ -44,6 +47,9 @@ namespace MyGame.Modules.CardCollection
             var albumType = config.GetAlbumType(cardType);
             _dictAlbumAndCollectedCard[albumType].Add((int)cardType);
             _dictAlbumAndNewCard[albumType].Add((int)cardType);
+
+            OnCollectCard?.Invoke(cardType, albumType);
+            OnChangeNewCard?.Invoke(cardType, albumType);
         }
 
 
@@ -71,6 +77,22 @@ namespace MyGame.Modules.CardCollection
         {
             var albumType = config.GetAlbumType(cardType);
             _dictAlbumAndNewCard[albumType].Remove((int)cardType);
+
+            OnChangeNewCard?.Invoke(cardType, albumType);
+        }
+
+        public void RemoveNewCard(AlbumType albumType)
+        {
+            foreach (var cardType in config.GetAlbumConfig(albumType).cards)
+            {
+                if (_dictAlbumAndNewCard[albumType].Contains((int)cardType))
+                {
+                    _dictAlbumAndNewCard[albumType].Remove((int)cardType);
+                    // OnChangeNewCard?.Invoke(cardType, albumType);
+                }
+            }
+            OnChangeNewCard?.Invoke(CardType.None, albumType);
+
         }
 
         public bool IsNewCard(CardType cardType)
@@ -99,6 +121,7 @@ namespace MyGame.Modules.CardCollection
         public void SetCompleteCardCollection(bool isComplete)
         {
             completedCardCollection.Value = isComplete ? 1 : 0;
+            OnCompleteCardCollection?.Invoke(isComplete);
         }
     }
 }

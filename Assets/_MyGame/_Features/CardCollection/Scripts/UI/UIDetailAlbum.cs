@@ -53,16 +53,5 @@ namespace MyGame.Modules.CardCollection
                 cardObj.UpdateData();
             }
         }
-
-        public void SeeNewCard()
-        {
-            foreach (var cardObj in cards)
-            {
-                var cardType = cardObj.CardType;
-
-                var inventoryModule = MySonatFramework.GetService<CardCollectionService>().CardInventoryModule;
-                inventoryModule.RemoveNewCard(cardType);
-            }
-        }
     }
 }

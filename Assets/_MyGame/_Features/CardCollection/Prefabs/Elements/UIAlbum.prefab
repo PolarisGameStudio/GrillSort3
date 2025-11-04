@@ -310,7 +310,7 @@ MonoBehaviour:
   m_text: 1000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e13e4bfa3ed5b20408dd981c4a6cca19, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 1240d7a8f275dde4894c89165daddf4e, type: 2}
+  m_sharedMaterial: {fileID: -4516441159803420151, guid: e13e4bfa3ed5b20408dd981c4a6cca19, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25.05
+  m_fontSize: 27.95
   m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -579,7 +579,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44.3
+  m_fontSize: 49.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -847,6 +847,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   albumType: 0
   albumName: {fileID: 2422682400173778170}
+  isAlbumImage: 1
   albumImage: {fileID: 614965847379630602}
   rewardItem: {fileID: 4505204959150578673}
   slider: {fileID: 4593001824185217669}
@@ -960,7 +961,7 @@ MonoBehaviour:
   m_text: BBQ & Grill
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e13e4bfa3ed5b20408dd981c4a6cca19, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 1240d7a8f275dde4894c89165daddf4e, type: 2}
+  m_sharedMaterial: {fileID: -4516441159803420151, guid: e13e4bfa3ed5b20408dd981c4a6cca19, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -984,7 +985,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 49.05
+  m_fontSize: 50
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1309,10 +1310,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7449105712174547472}
     m_Modifications:
-    - target: {fileID: 3955425064044617062, guid: d334dfdfba9f01240a49d2d6ca7faf57, type: 3}
-      propertyPath: isAllAlbum
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4120077104648025061, guid: d334dfdfba9f01240a49d2d6ca7faf57, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1393,41 +1390,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5433725929751003699, guid: d334dfdfba9f01240a49d2d6ca7faf57, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 59.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5433725929751003699, guid: d334dfdfba9f01240a49d2d6ca7faf57, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 69
-      objectReference: {fileID: 0}
-    - target: {fileID: 5433725929751003699, guid: d334dfdfba9f01240a49d2d6ca7faf57, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 2.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7116710482416948939, guid: d334dfdfba9f01240a49d2d6ca7faf57, type: 3}
-      propertyPath: m_fontSize
-      value: 37.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7116710482416948939, guid: d334dfdfba9f01240a49d2d6ca7faf57, type: 3}
-      propertyPath: m_fontSizeMax
-      value: 73.88
-      objectReference: {fileID: 0}
-    - target: {fileID: 7116710482416948939, guid: d334dfdfba9f01240a49d2d6ca7faf57, type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 4096
-      objectReference: {fileID: 0}
-    - target: {fileID: 7186943225213268661, guid: d334dfdfba9f01240a49d2d6ca7faf57, type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7538573098186035046, guid: d334dfdfba9f01240a49d2d6ca7faf57, type: 3}
       propertyPath: m_Name
       value: UICardNotificationBadge
-      objectReference: {fileID: 0}
-    - target: {fileID: 7538573098186035046, guid: d334dfdfba9f01240a49d2d6ca7faf57, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using MyGame.Modules.CardCollection;
@@ -17,6 +18,9 @@ public class UIAlbumNavigator : MonoBehaviour
 
     private int maxAlbum => _cardCollectionService.Instance.config.albums.Count;
     private int currentIndex;
+    private bool isSetup = false;
+
+    private List<AlbumType> seenAlbums = new();
 
     void OnEnable()
     {
@@ -30,11 +34,16 @@ public class UIAlbumNavigator : MonoBehaviour
 
     public async UniTask Setup(AlbumType albumType)
     {
+        seenAlbums.Clear();
+
         //Debug.Log($"anhnt: albumType {albumType}");
         currentIndex = (int)albumType;
         txtAlbumIndex.text = $"{currentIndex + 1}/{maxAlbum}";
 
         SetupDetailAlbums();
+
+        await UniTask.WaitForSeconds(0.3f); // datlt: wait for pageSlider to be setup
+        isSetup = true;
     }
 
     private void SetupDetailAlbums()
@@ -51,10 +60,14 @@ public class UIAlbumNavigator : MonoBehaviour
         {
             detailAlbum.UpdateData();
         }
+
+        seenAlbums.Add((AlbumType)currentIndex);
     }
 
     public void OnPageChanged(PageContainer page)
     {
+        if (!isSetup) return;
+
         if (page.TryGetComponent<UIDetailAlbum>(out var detailAlbum))
         {
             currentIndex = (int)detailAlbum.AlbumType;
@@ -77,6 +90,10 @@ public class UIAlbumNavigator : MonoBehaviour
 
     public void SeeNewCard()
     {
-        detailAlbums[1].SeeNewCard();
+        foreach (var albumType in seenAlbums)
+        {
+            var inventoryModule = MySonatFramework.GetService<CardCollectionService>().CardInventoryModule;
+            inventoryModule.RemoveNewCard(albumType);
+        }
     }
 }

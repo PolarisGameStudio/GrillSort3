@@ -8,9 +8,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1450512535183268377, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 50
+    - target: {fileID: 1115242292631315694, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1115242292631315694, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2422682400173778170, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
       propertyPath: m_fontAsset
@@ -22,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3ea39f9ae5c24c44fbb4886ff4b2a41a, type: 2}
     - target: {fileID: 4026670770091142794, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
       propertyPath: m_fontSize
-      value: 23.65
+      value: 27.95
       objectReference: {fileID: 0}
     - target: {fileID: 4026670770091142794, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
       propertyPath: m_sharedMaterial
@@ -32,29 +36,13 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 379f19b7f48c90b49814e451fbd9fa35, type: 3}
-    - target: {fileID: 4434528293118021345, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
-      propertyPath: m_fontSize
-      value: 31.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4434528293118021345, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 1ad186f6383d0f6449e226da1f38334b, type: 2}
-    - target: {fileID: 4434528293118021345, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: 3ea39f9ae5c24c44fbb4886ff4b2a41a, type: 2}
-    - target: {fileID: 4434528293118021345, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
-      propertyPath: m_enableWordWrapping
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6103640414850828638, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
       propertyPath: m_Name
       value: UIAlbum_Home
       objectReference: {fileID: 0}
     - target: {fileID: 6223271472700239312, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
       propertyPath: m_fontSize
-      value: 41.85
+      value: 49.4
       objectReference: {fileID: 0}
     - target: {fileID: 7449105712174547472, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
       propertyPath: m_Pivot.x

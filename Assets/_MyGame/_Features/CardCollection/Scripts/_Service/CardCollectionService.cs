@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Helper;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
+using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems.EventBus;
 using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.InventoryManagement.GameResources;
@@ -30,7 +32,7 @@ namespace MyGame.Modules.CardCollection
 
 
         private bool _isRunQueueRewardCard = false;
-        private Queue<List<CardType>> _queueListTempCards = new();
+        private Queue<TempCardRewardData> _queueListTempCards = new();
         private Queue<AlbumType> _queueListCompletedAlbum = new();
 
         public event Action OnNewCardCountChanged;
@@ -42,6 +44,13 @@ namespace MyGame.Modules.CardCollection
 
             new EventBinding<AddItemEvent>(OnAddItemEvent);
             new EventBinding<HomeProcessEvent>(OnHomeProcessEvent);
+
+            SonatUtils.ExecuteNextFrame(() =>
+            {
+                LoadImageAsync().Forget();
+            });
+
+
         }
 
         protected override void LoadConfig()
@@ -58,6 +67,23 @@ namespace MyGame.Modules.CardCollection
             StarSubmodule.LoadData();
         }
 
+        private async UniTask LoadImageAsync()
+        {
+            foreach (var album in config.albums)
+            {
+                var albumSprite = await AddressableManager.LoadSpriteAsync(album.GetAlbumSpritePath());
+                var albumBackgroundSprite = await AddressableManager.LoadSpriteAsync(album.GetAlbumBackgroundSpritePath());
+                var albumBorderSprite = await AddressableManager.LoadSpriteAsync(album.GetAlbumBorderSpritePath());
+            }
+
+            await UniTask.DelayFrame(1);
+
+            // foreach (var card in config.cards)
+            // {
+            //     var cardSprite = await AddressableManager.LoadSpriteAsync(card.GetCardSpritePath());
+            // }
+        }
+
         public override bool CanUnlock()
         {
             var level = MySonatFramework.userDataService.GetLevel();
@@ -68,7 +94,7 @@ namespace MyGame.Modules.CardCollection
         {
             // đến ngày cuối cùng của tháng thứ 3
             var date = MySonatFramework.GetService<TimeService>().GetCurrentTime();
-            var expireTime = date.AddDays(7);
+            var expireTime = date.AddDays(90);
             return ((DateTimeOffset)expireTime).ToUnixTimeSeconds();
         }
         #endregion
@@ -79,21 +105,10 @@ namespace MyGame.Modules.CardCollection
             // datlt: Cần thêm hàng đợi khi mở các gói liên tiếp
             if (GameResourceHelper.ResourceType(eventData.resource) == GameResourceType.Card)
             {
-                for (int i = 0; i < eventData.quantity; i++) // mở từng gói card packs
+                if (_isRunQueueRewardCard == false)
                 {
-                    var rewardData = new RewardData();
-                    rewardData.resourceDatas = new()
-                    {
-                        new ResourceData(eventData.resource, 1)
-                    };
-
-                    // _currentRewardQueue.Enqueue(rewardData);
-
-                    if (_isRunQueueRewardCard == false)
-                    {
-                        _isRunQueueRewardCard = true;
-                        RunQueueRewardCard().Forget();
-                    }
+                    _isRunQueueRewardCard = true;
+                    RunQueueRewardCard().Forget();
                 }
             }
         }
@@ -103,12 +118,12 @@ namespace MyGame.Modules.CardCollection
             await UniTask.Delay(1000);
             while (_queueListTempCards.Count > 0)
             {
-                var cardList = _queueListTempCards.Dequeue();
+                var tempCardRewardData = _queueListTempCards.Dequeue();
 
-                // Debug.Log("anhnt: Dequeue reward card pack " + JsonConvert.SerializeObject(_currentRewardQueue));
-
-                var popup = PanelManager.Instance.OpenPanelByName<PopupReceiveCardBase>("PopupReceiveCard_Immediately",
-                    new UIData().Add(PopupReceiveCardBase.CARD_REWARD_KEY, cardList));
+                var uiData = new UIData();
+                uiData.Add(PopupReceiveCardBase.CARD_REWARD_KEY, tempCardRewardData.cardList);
+                uiData.Add(PopupReceiveCardBase.RECENTLY_NEW_CARD_LIST_KEY, tempCardRewardData.recentlyNewCardList);
+                var popup = PanelManager.Instance.OpenPanelByName<PopupReceiveCardBase>("PopupReceiveCard_Immediately", uiData);
 
                 await UniTask.WaitUntil(() => (popup == null || popup.gameObject.activeInHierarchy == false));
             }
@@ -132,22 +147,27 @@ namespace MyGame.Modules.CardCollection
                 var albumType = _queueListCompletedAlbum.Dequeue();
 
                 var popup = PanelManager.Instance.OpenPanel<PopupCompleteAlbum>(new UIData().Add(PopupCompleteAlbum.ALBUM_TYPE_KEY, albumType));
+
                 await UniTask.WaitUntil(() => (popup == null || popup.gameObject.activeInHierarchy == false));
             }
 
+            await UniTask.Delay(300);
+            var popupRewardAlbum = PanelManager.Instance.GetPanel<PopupReward>();
+            await UniTask.WaitUntil(() => (popupRewardAlbum == null || popupRewardAlbum.gameObject.activeInHierarchy == false));
             RunCompleteCardCollection().Forget();
         }
 
         public async UniTask RunCompleteCardCollection()
         {
-            if (CardInventoryModule.CompletedCardCollection && CardInventoryModule.CheckAllAlbumComplete())
+            if (CardInventoryModule.CompletedCardCollection == false && CardInventoryModule.CheckAllAlbumComplete())
             {
                 var sceneService = MySonatFramework.GetService<SceneService>();
                 if (sceneService.GetCurrentGamePlacement() == GamePlacement.Home)
                 {
-                    HomeManager.Instance.SwitchTab(NavigationType.CardCollection);
+                    await HomeManager.Instance.SwitchTab(NavigationType.CardCollection);
                 }
 
+                await UniTask.Delay(500);
                 CardInventoryModule.SetCompleteCardCollection(true);
                 ReceiveRewardCardCollection();
 
@@ -186,12 +206,14 @@ namespace MyGame.Modules.CardCollection
                 UIData uiData = new();
                 uiData.Add(UIDataKey.CallBackOnClose, (Action)(() =>
                 {
-                    _ = HomeManager.Instance.SwitchTab(NavigationType.CardCollection, 0.25f);
+                    _ = HomeManager.Instance.SwitchTab(NavigationType.CardCollection);
                 }));
 
+                await UniTask.Delay(1000);
                 var popup = PanelManager.Instance.OpenPanelByName<Panel>("PopupTutorial_CardCollection", uiData);
 
                 await UniTask.WaitUntil(() => popup == null || popup.gameObject.activeInHierarchy == false);
+                await UniTask.Delay(1000);
                 RewardUnlockFeature();
             }
         }
@@ -212,10 +234,29 @@ namespace MyGame.Modules.CardCollection
         }
         #endregion
 
+        #region Unbox Pack Card
         public void UnboxPackCard(ResourceData resourceData, bool noti = false)
         {
             var cardList = CardPackHelper.GetCardReward(resourceData);
+            ReceiveCards(cardList);
+        }
 
+        public void ForceUnboxPackCard(CardType forceCardType)
+        {
+            var cardList = new List<CardType>() { forceCardType };
+            ReceiveCards(cardList);
+
+            EventBus<AddItemEvent>.Raise(new AddItemEvent()
+            {
+                resource = GameResource.Card_Randomx1,
+                quantity = 1
+            });
+        }
+
+        private void ReceiveCards(List<CardType> cardList)
+        {
+            var recentlyNewCardList = new List<CardType>();
+            StarSubmodule.SetNumberStarView();
             foreach (var cardType in cardList)
             {
                 if (CardInventoryModule.CheckExistCollectedCard(cardType) == true)
@@ -226,6 +267,7 @@ namespace MyGame.Modules.CardCollection
                 else
                 {
                     CardInventoryModule.CollectCard(cardType);
+                    recentlyNewCardList.Add(cardType);
 
                     var albumType = config.GetAlbumType(cardType);
                     if (CardInventoryModule.CheckCompleteAlbum(albumType))
@@ -237,7 +279,11 @@ namespace MyGame.Modules.CardCollection
                 }
             }
 
-            _queueListTempCards.Enqueue(cardList);
+            _queueListTempCards.Enqueue(new TempCardRewardData()
+            {
+                cardList = cardList,
+                recentlyNewCardList = recentlyNewCardList
+            });
         }
 
         private void ReceiveRewardAlbum(AlbumType albumType)
@@ -263,5 +309,14 @@ namespace MyGame.Modules.CardCollection
                 source = "non_iap"
             });
         }
+        #endregion
+
+
+    }
+
+    public class TempCardRewardData
+    {
+        public List<CardType> cardList;
+        public List<CardType> recentlyNewCardList;
     }
 }

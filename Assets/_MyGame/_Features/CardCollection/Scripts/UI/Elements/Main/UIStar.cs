@@ -15,11 +15,11 @@ namespace MyGame.Modules.CardCollection
             disableObj.gameObject.SetActive(!isOn);
         }
 
-#if UNITY_EDITOR
-        public void OnValidate()
-        {
-            SetData(isOn);
-        }
-#endif
+// #if UNITY_EDITOR
+//         public void OnValidate()
+//         {
+//             SetData(isOn);
+//         }
+// #endif
     }
 }
