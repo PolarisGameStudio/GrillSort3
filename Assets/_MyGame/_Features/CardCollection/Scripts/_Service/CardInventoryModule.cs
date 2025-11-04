@@ -15,9 +15,9 @@ namespace MyGame.Modules.CardCollection
         private Dictionary<AlbumType, ListDataPref<int>> _dictAlbumAndCollectedCard = new();
         private Dictionary<AlbumType, ListDataPref<int>> _dictAlbumAndNewCard = new();
 
-        private IntDataPref _isCompleteCardCollection;
+        private IntDataPref completedCardCollection;
 
-        public bool IsCompleteCardCollection => _isCompleteCardCollection.Value == 1;
+        public bool CompletedCardCollection => completedCardCollection.Value == 1;
 
         public void LoadData()
         {
@@ -30,7 +30,7 @@ namespace MyGame.Modules.CardCollection
                 _dictAlbumAndNewCard.Add(album.type, new ListDataPref<int>($"{DATA_KEY}_newCardInAlbum_{album.type}"));
             }
 
-            _isCompleteCardCollection = new IntDataPref($"{DATA_KEY}_isCompleteCardCollection", 0);
+            completedCardCollection = new IntDataPref($"{DATA_KEY}_completedCardCollection", 0);
         }
 
         public bool CheckExistCollectedCard(CardType cardType)
@@ -96,9 +96,9 @@ namespace MyGame.Modules.CardCollection
             return true;
         }
 
-        public void SetCompleteCardCollection()
+        public void SetCompleteCardCollection(bool isComplete)
         {
-            _isCompleteCardCollection.Value = 1;
+            completedCardCollection.Value = isComplete ? 1 : 0;
         }
     }
 }

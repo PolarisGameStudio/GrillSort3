@@ -13,47 +13,21 @@ MonoBehaviour:
   m_Name: CardCollectionConfigSO
   m_EditorClassIdentifier: 
   unlockLevel: 30
-  liveOpsPackData:
-    levelCondition:
-      compareType: 0
-      value: -1
-      values: 
-    levelCondition2:
-      compareType: 0
-      value: -1
-      values: 
-    dayCondition:
-      compareType: 5
-      value: 0
-      values: 
-    sessionCondition:
-      compareType: 0
-      value: -1
-      values: 
-    homeCondition:
-      compareType: 0
-      value: -1
-      values: 
-    dayOfWeekCondition:
-      compareType: 0
-      value: -1
-      values: 
-    dateTimeCondition:
-      startTime: 
-      endTime: 
   durationMonth: 3
   rewardInSeason:
     resourceDatas:
     - resource: 1
       quantity: 1500
-    - resource: 5
-      quantity: 5
-    - resource: 3
-      quantity: 5
-    - resource: 4
-      quantity: 5
     - resource: 2
       quantity: 3600
+    - resource: 102
+      quantity: 2
+    - resource: 101
+      quantity: 2
+    - resource: 103
+      quantity: 2
+    - resource: 104
+      quantity: 2
   albums:
   - {fileID: 11400000, guid: d7c3a59375556734297b06bd02a4bcff, type: 2}
   - {fileID: 11400000, guid: 1b4ac568494e8dd44b81fd1f5044cdb4, type: 2}
@@ -158,5 +132,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dbe69d8650412454b8f44de27b028f2c, type: 2}
   RewardUnlock:
     resourceDatas:
+    - resource: 1
+      quantity: 50
     - resource: 102
       quantity: 1

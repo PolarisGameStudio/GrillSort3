@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Sonat.Enums;
-using SonatFramework.Scripts.Helper;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems.EventBus;
 using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.InventoryManagement.GameResources;
+using SonatFramework.Systems.SceneManagement;
 using SonatFramework.Systems.TimeManagement;
 using UnityEngine;
 
@@ -140,11 +140,21 @@ namespace MyGame.Modules.CardCollection
 
         public async UniTask RunCompleteCardCollection()
         {
-            if (CardInventoryModule.IsCompleteCardCollection)
+            if (CardInventoryModule.CompletedCardCollection && CardInventoryModule.CheckAllAlbumComplete())
             {
+                var sceneService = MySonatFramework.GetService<SceneService>();
+                if (sceneService.GetCurrentGamePlacement() == GamePlacement.Home)
+                {
+                    HomeManager.Instance.SwitchTab(NavigationType.CardCollection);
+                }
+
+                CardInventoryModule.SetCompleteCardCollection(true);
+                ReceiveRewardCardCollection();
+
                 var uiData = new UIData();
-                uiData.Add(PopupReward.REWARD_KEY, config.rewardInSeason);
-                PanelManager.Instance.OpenPanel<PopupReward>(uiData);
+                uiData.Add(PopupRewardChest.REWARD_KEY, config.rewardInSeason);
+                uiData.Add(PopupRewardChest.SKIN_KEY, 3);
+                PanelManager.Instance.OpenPanelByName<PopupRewardChest>("PopupRewardChest_CardCollection", uiData);
             }
         }
         #endregion
@@ -159,6 +169,10 @@ namespace MyGame.Modules.CardCollection
                     Unlock();
                     ShowTutorial().Forget();
                 }
+            }
+            else
+            {
+                RunCompleteCardCollection();
             }
         }
 
@@ -224,12 +238,6 @@ namespace MyGame.Modules.CardCollection
             }
 
             _queueListTempCards.Enqueue(cardList);
-
-            if (CardInventoryModule.CheckAllAlbumComplete())
-            {
-                CardInventoryModule.SetCompleteCardCollection();
-                ReceiveRewardCardCollection();
-            }
         }
 
         private void ReceiveRewardAlbum(AlbumType albumType)

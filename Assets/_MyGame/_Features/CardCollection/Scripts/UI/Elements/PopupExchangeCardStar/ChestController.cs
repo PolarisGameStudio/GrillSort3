@@ -39,19 +39,14 @@ namespace MyGame.Modules.CardCollection.CardStarExchange
         public void OnClick()
         {
             var starModule = _cardCollectionService.Instance.StarSubmodule;
-            // if (starModule.OnClickReceiveChest(index))
-            // {
+            if (starModule.OnClickReceiveChest(index))
+            {
+                var uiData = new UIData();
+                uiData.Add(PopupRewardChest.REWARD_KEY, reward);
+                uiData.Add(PopupRewardChest.SKIN_KEY, index);
+                PanelManager.Instance.OpenPanelByName<PopupRewardChest>("PopupRewardChest_CardCollection", uiData);
+            }
 
-            // }
-            // else
-            // {
-
-            // }
-
-            var uiData = new UIData();
-            uiData.Add(PopupRewardChest.REWARD_KEY, reward);
-            uiData.Add(PopupRewardChest.SKIN_KEY, index);
-            PanelManager.Instance.OpenPanelByName<PopupRewardChest>("PopupRewardChest_CardCollection", uiData);
         }
 
         public void UpdateUI()
