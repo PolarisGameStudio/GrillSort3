@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MyGame.SkewerJam.Utils
 {
-    public class TextGroup : MonoBehaviour
+    public class UITextGroup : MonoBehaviour
     {
         [SerializeField] private TMP_Text[] texts;
 

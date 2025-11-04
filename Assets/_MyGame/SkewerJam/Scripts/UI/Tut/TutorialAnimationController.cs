@@ -10,9 +10,9 @@ namespace MyGame.SkewerJam.UI.Tut
         [SerializeField] private GameObject[] listGameObjects;
 
         [Header("Tween")]
-        [SerializeField] private float duration = 1;
-        [SerializeField] private float startDelay = 0.3f;
-        [SerializeField] private float delayBetween = 0.3f;
+        [SerializeField] private float duration = 0.5f;
+        [SerializeField] private float startDelay = 0.5f;
+        [SerializeField] private float delayBetween = 0.1f;
         [SerializeField] private AnimationCurve curve = AnimationCurve.Linear(0, 0, 1, 1);
 
         [Button("Setup Tween Elements")]

@@ -12,8 +12,8 @@ using UnityEngine.UI;
 
 public class PopupReward : Panel
 {
-    public const string KEY_REWARD = "Reward";
-    public const string KEY_ON_CLAIM_COMPLETE = "OnClaimComplete";
+    public const string REWARD_KEY = "Reward";
+    public const string ON_CLAIM_COMPLETE_KEY = "OnClaimComplete";
 
     [SerializeField] private UIRewardGrid rewardGrid;
     [SerializeField] private Image bg;
@@ -30,11 +30,11 @@ public class PopupReward : Panel
     {
         base.Open(uiData);
 
-        if (uiData.TryGet(KEY_REWARD, out rewardData))
+        if (uiData.TryGet(REWARD_KEY, out rewardData))
         {
             rewardGrid.SetReward(rewardData);
 
-            uiData.TryGet(KEY_ON_CLAIM_COMPLETE, out onClaimComplete);
+            uiData.TryGet(ON_CLAIM_COMPLETE_KEY, out onClaimComplete);
             clicked = false;
         }
 

@@ -10,6 +10,7 @@ using SonatFramework.Systems;
 using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.UserData;
 using MyGame.SkewerJam.Gameplay;
+using MyGame.Modules.CardCollection;
 
 public class CheatManager : Singleton<CheatManager>
 {
@@ -145,6 +146,11 @@ public class CheatManager : Singleton<CheatManager>
 		return cheatLevelSource;
 	}
 
+	public static void CheatCardCollection(CardType cardType)
+	{
+		var cardCollectionService = SonatSystem.GetService<CardCollectionService>();
+		cardCollectionService.ForceUnboxPackCard(cardType);
+	}
 }
 
 
@@ -161,6 +167,7 @@ public enum CheatOption
 	StarChest,
 	LevelChest,
 	TransportTracking,
+	CardCollection,
 	MAX,
 }
 

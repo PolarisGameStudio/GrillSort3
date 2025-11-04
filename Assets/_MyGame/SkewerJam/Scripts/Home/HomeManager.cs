@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using MyGame.Modules.CardCollection;
 using Sonat.Enums;
 using SonatFramework.Scripts.Helper;
 using SonatFramework.Scripts.SonatSDKAdapterModule;
@@ -69,7 +70,7 @@ public class HomeManager : SingletonSimple<HomeManager>
                 source = "non_iap"
             }, false);
             await UniTask.Delay(2000);
-            PanelManager.Instance.OpenPanel<PopupReward>(new UIData().Add(PopupReward.KEY_REWARD, rewardData));
+            PanelManager.Instance.OpenPanel<PopupReward>(new UIData().Add(PopupReward.REWARD_KEY, rewardData));
         }
     }
 
@@ -79,6 +80,13 @@ public class HomeManager : SingletonSimple<HomeManager>
         if (Input.GetKeyDown(KeyCode.F1))
         {
             PanelManager.Instance.OpenPanel<CheatPanel>();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            var uiData = new UIData();
+            uiData.Add(PopupCompleteAlbum.ALBUM_TYPE_KEY, AlbumType.Album_0);
+            PanelManager.Instance.OpenPanel<PopupCompleteAlbum>(uiData);
         }
     }
 #endif

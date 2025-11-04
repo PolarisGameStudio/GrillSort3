@@ -48,8 +48,8 @@ namespace MyGame.SkewerJam.Pack
             base.BuyComplete();
             PanelManager.Instance.OpenPanel<PopupReward>(
                 new UIData()
-            .Add(PopupReward.KEY_REWARD, shopPack.rewardData)
-            .Add(PopupReward.KEY_ON_CLAIM_COMPLETE, (Action)(() =>
+            .Add(PopupReward.REWARD_KEY, shopPack.rewardData)
+            .Add(PopupReward.ON_CLAIM_COMPLETE_KEY, (Action)(() =>
             {
                 onBuySuccessAfterPopupReward?.Invoke();
             })));

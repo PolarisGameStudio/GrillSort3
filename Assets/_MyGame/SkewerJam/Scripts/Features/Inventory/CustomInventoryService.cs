@@ -1,5 +1,9 @@
+using MyGame.Modules.CardCollection;
 using Sonat.Enums;
+using SonatFramework.Scripts.Feature.Lives;
+using SonatFramework.Systems;
 using SonatFramework.Systems.InventoryManagement;
+using SonatFramework.Systems.InventoryManagement.GameResources;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Scripts.Features.Inventory
@@ -24,6 +28,38 @@ namespace MyGame.SkewerJam.Scripts.Features.Inventory
             {
                 dataService.Instance.SetInt($"{GameResourcePrefixKey}{GameResource.BoosterUndo}", addPlate);
                 dataService.Instance.SetInt($"{GameResourcePrefixKey}{GameResource.BoosterAddPlate}", 0);
+            }
+        }
+
+        public override void AddReward(RewardData rewardData, EarnResourceLogData logData = null, bool noti = false)
+        {
+            foreach (var resourceData in rewardData.resourceDatas)
+            {
+                switch (resourceData.resource)
+                {
+                    case GameResource.Lives:
+                        SonatSystem.GetService<LivesService>().AddUnlimitedLives(resourceData.quantity, logData, noti);
+                        break;
+                    case GameResource.LivesService_SingleLive:
+                        var maxLives = SonatSystem.GetService<LivesService>().config.maxLives;
+                        var currentLives = GetResource(GameResource.Lives);
+                        var addLives = Mathf.Min(maxLives, currentLives + resourceData.quantity) - currentLives;
+                        AddResource(GameResource.Lives, addLives, logData, noti);
+                        break;
+                    default:
+                        if (GameResourceHelper.ResourceType(resourceData.resource) == GameResourceType.Card)
+                        {
+                            var cardCollectionService = SonatSystem.GetService<CardCollectionService>();
+                            cardCollectionService.UnboxPackCard(resourceData, noti);
+                        }
+                        AddResource(resourceData.resource, resourceData.quantity, logData, noti);
+                        break;
+                }
+            }
+
+            if (noti)
+            {
+                OnClaimReward?.Invoke(rewardData);
             }
         }
     }

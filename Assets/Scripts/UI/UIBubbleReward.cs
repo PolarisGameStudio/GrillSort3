@@ -9,16 +9,6 @@ public class UIBubbleReward : MonoBehaviour
     [SerializeField] private UIRewardGroup rewardGroup;
     private RewardData reward;
 
-    public void Awake()
-    {
-        if (gameObject.TryGetComponent<Canvas>(out var canvas))
-        {
-            canvas.overrideSorting = true;
-            canvas.sortingLayerName = LayerManager.TopUI;
-            canvas.sortingOrder = 100;
-        }
-    }
-
     public void SetReward(RewardData reward)
     {
         this.reward = reward;

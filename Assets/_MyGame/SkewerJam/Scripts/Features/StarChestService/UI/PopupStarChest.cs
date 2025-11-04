@@ -92,7 +92,7 @@ public class PopupStarChest : Panel
         RewardData rewardData = starChestService.Instance.CurrentChest.reward;
         var uiData = new UIData();
         uiData.Add(PopupRewardChest.REWARD_KEY, rewardData);
-        PanelManager.Instance.OpenPanel<PopupRewardChest>(uiData);
+        PanelManager.Instance.OpenPanelByName<PopupRewardChest>("PopupRewardChest_StarChest", uiData);
 
         // logic
         starChestService.Instance.NextStarChest();

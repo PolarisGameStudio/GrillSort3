@@ -209,7 +209,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
         }
 
         public void SetForceRescue(bool isForceRescue, int deltaSlot = -1)
-        {
+         {
             IsForceRescue = isForceRescue;
             if (isForceRescue == true)
             {

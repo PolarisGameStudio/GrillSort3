@@ -1,10 +1,13 @@
 using Cysharp.Threading.Tasks;
 using Manager;
+using MyGame.Scripts.UI;
+using SonatFramework.Scripts.UIModule;
+using SonatFramework.Systems.EventBus;
 using UnityEngine;
 
 public class HomeWidgetManager : MonoBehaviour
 {
-    // private BlockPanel blockPanel;
+    private BlockPanel blockPanel;
     [SerializeField] private int delayProcess = 750;
     [SerializeField] private UIHomeWidget[] widgets;
     public static int homeCount = -1;
@@ -40,6 +43,7 @@ public class HomeWidgetManager : MonoBehaviour
     {
         BlockUI();
         await UniTask.Delay(delayProcess);
+        EventBus<HomeProcessEvent>.Raise(new HomeProcessEvent());
         int popupCount = 0;
         foreach (var widget in widgets)
         {
@@ -56,15 +60,15 @@ public class HomeWidgetManager : MonoBehaviour
 
     public void BlockUI()
     {
-        // if (blockPanel != null) return;
-        // blockPanel = PanelManager.Instance.OpenPanel<BlockPanel>();
+        if (blockPanel != null) return;
+        blockPanel = PanelManager.Instance.OpenPanel<BlockPanel>();
     }
 
     public void UnlockUI()
     {
-        // if (blockPanel == null) return;
-        // blockPanel.Close();
-        // blockPanel = null;
+        if (blockPanel == null) return;
+        blockPanel.Close();
+        blockPanel = null;
     }
 
     private void OnDisable()

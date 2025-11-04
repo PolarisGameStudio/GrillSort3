@@ -1,4 +1,5 @@
 #region Includes
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -57,6 +58,7 @@ namespace TS.PageSlider
         [Tooltip("Event triggered when a page is scrolled to")]
         public UnityEvent<int> OnScrollToPage;
 
+
         /// <summary>
         /// Gets the rectangle of the ScrollRect component used for scrolling.
         /// </summary>
@@ -103,6 +105,8 @@ namespace TS.PageSlider
         private float _moveSpeed; // Speed of the scroll bar animation (normalized units per second).
 
         #endregion
+
+        public ScrollRect ScrollRect => _scrollRect;
 
         private void Awake()
         {
@@ -256,7 +260,7 @@ namespace TS.PageSlider
         /// Calculates the number of scrollable pages in the scroll view, considering the content and viewport width.
         /// </summary>
         /// <returns>The number of scrollable pages.</returns>
-        private int GetPageCount()
+        public int GetPageCount()
         {
             var contentWidth = _scrollRect.content.rect.width;
             var rectWidth = ((RectTransform)_scrollRect.transform).rect.size.x;
@@ -279,6 +283,15 @@ namespace TS.PageSlider
             }
 #endif
             return scrollRect;
+        }
+
+        public void SetImmediatePage(int index)
+        {
+            _scrollRect.horizontalNormalizedPosition = GetTargetPagePosition(index);
+
+            _targetPage = index;
+            _currentPage = index;
+            _moveSpeed = 0;
         }
     }
 }

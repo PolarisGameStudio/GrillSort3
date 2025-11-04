@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using MyGame.Modules.Scripts.SO;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.UIModule.UIElements;
 using SonatFramework.Scripts.Utils;
@@ -15,62 +16,36 @@ using UnityEngine.UI;
 public class PopupRewardChest : Panel
 {
     public const string REWARD_KEY = "REWARD_KEY";
+    public const string SKIN_KEY = "SKIN_KEY";
 
     [SerializeField] private Button tapToOpen;
     [SerializeField] private Button tapToClaim;
 
     [Space(10)]
     [SerializeField] private Transform animRoot;
-    [SerializeField] private SkeletonGraphic animation;
+    [SerializeField] private SkeletonGraphic chestAnimation;
+    [SerializeField] private string[] skins;
     [SerializeField] private UIRewardGroup uiRewardGroup;
     [SerializeField] private ParticleSystem[] psPumpkins;
 
-    [Space(10)]
-    [Header("Animation")]
-    [SerializeField] private float startScale = 0.35f;
-    [SerializeField] private AnimationCurve curveScale;
-
     [Header("Move")]
-    [SerializeField] private float delayMove = 0.5f;
-    [SerializeField] private AnimationCurve curveMoveX;
-    [SerializeField] private AnimationCurve curveMoveY;
-    [SerializeField] private float durationMove = 0.5f;
-    [SerializeField] private ParticleSystem psMove;
-    [SerializeField] private float delayMovePs = 0.5f;
-
-    [Header("Move Item")]
-    [SerializeField] private float delaySpawnItem = 0.5f;
-    [SerializeField] private float durationMoveItem = 1f;
-    [SerializeField] private float delayMoveItem = 0.5f;
-    [SerializeField] private float durationFadeItem = 0.5f;
-    [SerializeField] private AnimationCurve curveMoveItemX;
-    [SerializeField] private AnimationCurve curveMoveItemY;
-    [SerializeField] private AnimationCurve curveMoveItemScale;
+    public ParticleSystem psMove;
     [SerializeField] private ParticleSystem psMoveItemAfter;
-    [SerializeField] private float delayMovePsAfter = 0.5f;
-    [SerializeField] private Transform[] psPostions;
-
-    [Header("Scale Out Item")]
-    [SerializeField] private float delayScaleOutItem = 0.5f;
-    [SerializeField] private float durationScaleOutItem = 0.5f;
-    [SerializeField] private AnimationCurve curveScaleOutItem;
-    [SerializeField] private float delayItemOut = 0.1f;
-    [SerializeField] private float delayPsItemOut = 0.5f;
 
     [Header("Pumpkin out")]
     [SerializeField] private Transform pumpkinOutPos;
-    [SerializeField] private float delayPumpkinOut = 0.5f;
-    [SerializeField] private float durationPumpkinOut = 0.5f;
-    [SerializeField] private AnimationCurve curvePumpkinOut;
 
-    [Header("Close")]
-    [SerializeField] private float delayClose = 0.5f;
+    [Space(10)]
+    [Header("Config")]
+    [SerializeField] private PopupChestRewardConfigSO configSO;
 
     private bool isClickClaim = false;
     private bool isClickOpen = false;
     private bool canReceiveReward = false;
     private List<RewardItemEffectController> uiRewardItems = new();
     private List<Vector3> uiRewardItemsPos = new();
+
+    private int skinIndex = 0;
 
     public override void Open(UIData uiData)
     {
@@ -107,23 +82,14 @@ public class PopupRewardChest : Panel
             });
 
         }
-        // if (uiData.TryGet("StartPos", out Vector3 startPos))
-        // {
-        //     canReceiveReward = false;
-        //     animation.AnimationState.SetAnimation(0, "Idle_Before", true);
 
-        //     animRoot.position = startPos;
-        //     animRoot.localScale = Vector3.one * startScale;
+        if (uiData.TryGet(SKIN_KEY, out skinIndex))
+        {
+            chestAnimation.AnimationState.ClearTracks();
+            chestAnimation.Skeleton.SetSkin(skins[skinIndex]);
+        }
 
-        //     animRoot.DOLocalMoveX(0, durationMove).SetEase(curveMoveX).SetDelay(delayMove);
-        //     animRoot.DOLocalMoveY(0, durationMove).SetEase(curveMoveY).SetDelay(delayMove);
-        //     animRoot.DOScale(Vector3.one, durationMove).SetEase(curveScale).SetDelay(delayMove).OnComplete(() =>
-        //     {
-        //         canReceiveReward = true;
-        //         animation.AnimationState.SetAnimation(0, "Idle", true);
-        //     });
-
-        SonatUtils.DelayCall(delayMovePs, () =>
+        SonatUtils.DelayCall(configSO.delayMovePs, () =>
         {
             canReceiveReward = true;
             psMove.gameObject.SetActive(true);
@@ -131,9 +97,9 @@ public class PopupRewardChest : Panel
         });
         // }
 
-        animation.AnimationState.SetAnimation(0, "Appear", false).Complete += (TrackEntry trackEntry) =>
+        chestAnimation.AnimationState.SetAnimation(0, "Appear", false).Complete += (TrackEntry trackEntry) =>
         {
-            animation.AnimationState.SetAnimation(0, "Idle_Before", true);
+            chestAnimation.AnimationState.SetAnimation(0, "Idle_Before", true);
         };
     }
 
@@ -146,33 +112,33 @@ public class PopupRewardChest : Panel
 
     private async UniTask PlayOpenAnimation()
     {
-        animation.AnimationState.SetAnimation(0, "Open", false).Complete += (TrackEntry trackEntry) =>
+        chestAnimation.AnimationState.SetAnimation(0, "Open", false).Complete += (TrackEntry trackEntry) =>
         {
-            animation.AnimationState.SetAnimation(0, "Idle_After", true);
+            chestAnimation.AnimationState.SetAnimation(0, "Idle_After", true);
         };
 
-        SonatUtils.DelayCall(delayMovePsAfter, () =>
+        SonatUtils.DelayCall(configSO.delayMovePsAfter, () =>
         {
             // psMoveItemAfter.transform.position = psPostions[_rank - 1].position;
             psMoveItemAfter.gameObject.SetActive(true);
             psMoveItemAfter.Play();
         });
 
-        await UniTask.Delay((int)(delaySpawnItem * 1000));
-        // psPumpkins[_rank - 1].gameObject.SetActive(true);
-        // psPumpkins[_rank - 1].Play();
+        await UniTask.Delay((int)(configSO.delaySpawnItem * 1000));
+        psPumpkins[skinIndex].gameObject.SetActive(true);
+        psPumpkins[skinIndex].Play();
         for (int i = 0; i < uiRewardItems.Count; i++)
         {
             var idx = i;
-            uiRewardItems[i].PlayFade(durationFadeItem);
-            uiRewardItems[i].transform.DOScale(1, durationMoveItem).SetEase(curveMoveItemScale).From(0);
-            uiRewardItems[i].transform.DOMoveX(uiRewardItemsPos[i].x, durationMoveItem).SetEase(curveMoveItemX);
-            uiRewardItems[i].transform.DOMoveY(uiRewardItemsPos[i].y, durationMoveItem).SetEase(curveMoveItemY).OnComplete(() =>
+            uiRewardItems[i].PlayFade(configSO.durationFadeItem);
+            uiRewardItems[i].transform.DOScale(1, configSO.durationMoveItem).SetEase(configSO.curveMoveItemScale).From(0);
+            uiRewardItems[i].transform.DOMoveX(uiRewardItemsPos[i].x, configSO.durationMoveItem).SetEase(configSO.curveMoveItemX);
+            uiRewardItems[i].transform.DOMoveY(uiRewardItemsPos[i].y, configSO.durationMoveItem).SetEase(configSO.curveMoveItemY).OnComplete(() =>
             {
                 uiRewardItems[idx].PlayPS();
             });
 
-            await UniTask.Delay((int)(delayMoveItem * 1000));
+            await UniTask.Delay((int)(configSO.delayMoveItem * 1000));
         }
 
         tapToOpen.gameObject.SetActive(false);
@@ -187,24 +153,24 @@ public class PopupRewardChest : Panel
     }
     private async UniTask PlayClose()
     {
-        await UniTask.Delay((int)(delayScaleOutItem * 1000));
+        await UniTask.Delay((int)(configSO.delayScaleOutItem * 1000));
 
-        SonatUtils.DelayCall(delayPumpkinOut, () =>
+        SonatUtils.DelayCall(configSO.delayPumpkinOut, () =>
         {
-            animRoot.DOMove(pumpkinOutPos.position, durationPumpkinOut).SetEase(curvePumpkinOut);
-            animRoot.DOScale(0, durationPumpkinOut).SetEase(curvePumpkinOut);
+            animRoot.DOMove(pumpkinOutPos.position, configSO.durationPumpkinOut).SetEase(configSO.curvePumpkinOut);
+            animRoot.DOScale(0, configSO.durationPumpkinOut).SetEase(configSO.curvePumpkinOut);
         });
 
         // Tất cả scale về 0
         for (int i = 0; i < uiRewardItems.Count; i++)
         {
-            uiRewardItems[i].transform.DOScale(0, durationScaleOutItem).SetEase(curveScaleOutItem);
+            uiRewardItems[i].transform.DOScale(0, configSO.durationScaleOutItem).SetEase(configSO.curveScaleOutItem);
             var idx = i;
-            SonatUtils.DelayCall(delayPsItemOut, () =>
+            SonatUtils.DelayCall(configSO.delayPsItemOut, () =>
             {
                 uiRewardItems[idx].PlayPsHide();
             });
-            await UniTask.Delay((int)(delayItemOut * 1000));
+            await UniTask.Delay((int)(configSO.delayItemOut * 1000));
         }
 
         RewardData rewardData = uiRewardGroup.GetData();
@@ -214,7 +180,7 @@ public class PopupRewardChest : Panel
             EventBus<AddItemEvent>.Raise(new() { resource = resourceData.resource, quantity = resourceData.quantity });
         }
 
-        await UniTask.Delay((int)(delayClose * 1000));
+        await UniTask.Delay((int)(configSO.delayClose * 1000));
         Close();
 
     }
