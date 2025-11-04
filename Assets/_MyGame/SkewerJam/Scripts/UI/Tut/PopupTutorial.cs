@@ -13,7 +13,7 @@ public abstract class PopupTutorial : Panel
     public const string NAME_KEY = "NAME_KEY";
     public const string DESCRIPTION_KEY = "DESCRIPTION_KEY";
 
-    [SerializeField] private TextGroup txtName;
+    [SerializeField] private UITextGroup txtName;
     [SerializeField] private TMP_Text[] txtDescription;
     [SerializeField] protected FixedImageRatio icon;
 

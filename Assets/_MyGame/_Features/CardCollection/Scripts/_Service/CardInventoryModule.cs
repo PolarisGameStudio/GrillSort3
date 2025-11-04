@@ -15,6 +15,10 @@ namespace MyGame.Modules.CardCollection
         private Dictionary<AlbumType, ListDataPref<int>> _dictAlbumAndCollectedCard = new();
         private Dictionary<AlbumType, ListDataPref<int>> _dictAlbumAndNewCard = new();
 
+        private IntDataPref _isCompleteCardCollection;
+
+        public bool IsCompleteCardCollection => _isCompleteCardCollection.Value == 1;
+
         public void LoadData()
         {
             _dictAlbumAndCollectedCard = new Dictionary<AlbumType, ListDataPref<int>>();
@@ -25,6 +29,8 @@ namespace MyGame.Modules.CardCollection
                 _dictAlbumAndCollectedCard.Add(album.type, new ListDataPref<int>($"{DATA_KEY}_collectedCardInAlbum_{album.type}"));
                 _dictAlbumAndNewCard.Add(album.type, new ListDataPref<int>($"{DATA_KEY}_newCardInAlbum_{album.type}"));
             }
+
+            _isCompleteCardCollection = new IntDataPref($"{DATA_KEY}_isCompleteCardCollection", 0);
         }
 
         public bool CheckExistCollectedCard(CardType cardType)
@@ -71,6 +77,28 @@ namespace MyGame.Modules.CardCollection
         {
             var albumType = config.GetAlbumType(cardType);
             return _dictAlbumAndNewCard[albumType].Contains((int)cardType);
+        }
+
+        public bool CheckCompleteAlbum(AlbumType albumType)
+        {
+            return _dictAlbumAndCollectedCard[albumType].Value.Count == config.GetAlbumConfig(albumType).cards.Count;
+        }
+
+        public bool CheckAllAlbumComplete()
+        {
+            foreach (var album in config.albums)
+            {
+                if (CheckCompleteAlbum(album.type) == false)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public void SetCompleteCardCollection()
+        {
+            _isCompleteCardCollection.Value = 1;
         }
     }
 }

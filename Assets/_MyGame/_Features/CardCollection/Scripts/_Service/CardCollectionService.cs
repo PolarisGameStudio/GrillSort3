@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Cysharp.Threading.Tasks;
-using Newtonsoft.Json;
 using Sonat.Enums;
 using SonatFramework.Scripts.Helper;
 using SonatFramework.Scripts.UIModule;
@@ -33,6 +31,7 @@ namespace MyGame.Modules.CardCollection
 
         private bool _isRunQueueRewardCard = false;
         private Queue<List<CardType>> _queueListTempCards = new();
+        private Queue<AlbumType> _queueListCompletedAlbum = new();
 
         public event Action OnNewCardCountChanged;
 
@@ -115,51 +114,38 @@ namespace MyGame.Modules.CardCollection
             }
 
             _isRunQueueRewardCard = false;
+
+            RunQueueCompleteAlbum().Forget();
         }
 
-        public async UniTask<bool> RunQueueCompleteAlbum()
+        public async UniTask RunQueueCompleteAlbum()
         {
-            // var open = false;
-            // await UniTask.Delay(1000);
-            // while (_completedAlbumTypesQueue.Count > 0)
-            // {
-            //     await UniTask.Delay(300);
-            //     var popupReceiveCard = PanelManager.Instance.GetPanel<PopupReceiveCard_Immediately>();
-            //     var popupReward = PanelManager.Instance.GetPanel<PopupReward>();
-            //     await UniTask.WaitUntil(() => (popupReceiveCard == null || popupReceiveCard.gameObject.activeInHierarchy == false)
-            //                                   && (popupReward == null || popupReward.gameObject.activeInHierarchy == false));
+            while (_queueListCompletedAlbum.Count > 0)
+            {
+                await UniTask.Delay(300);
+                var popupReceiveCard = PanelManager.Instance.GetPanel<PopupReceiveCardBase>();
+                var popupReward = PanelManager.Instance.GetPanel<PopupReward>();
+                await UniTask.WaitUntil(() => (popupReceiveCard == null || popupReceiveCard.gameObject.activeInHierarchy == false)
+                                              && (popupReward == null || popupReward.gameObject.activeInHierarchy == false));
 
 
-            //     var albumType = _completedAlbumTypesQueue.Dequeue();
+                var albumType = _queueListCompletedAlbum.Dequeue();
 
-            //     var popup = PanelManager.Instance.OpenPanel<PopupCompleteAlbum>(new UIData().Add("AlbumType", albumType));
-            //     open = true;
-            //     await UniTask.WaitUntil(() => (popup == null || popup.gameObject.activeInHierarchy == false));
-            // }
+                var popup = PanelManager.Instance.OpenPanel<PopupCompleteAlbum>(new UIData().Add(PopupCompleteAlbum.ALBUM_TYPE_KEY, albumType));
+                await UniTask.WaitUntil(() => (popup == null || popup.gameObject.activeInHierarchy == false));
+            }
 
-            // if (_isCompleteCardCollection.Value == 1)
-            // {
-            //     var popupReward = PanelManager.Instance.GetPanel<PopupReward>();
-            //     await UniTask.WaitUntil(() => ((popupReward == null || popupReward.gameObject.activeInHierarchy == false)));
+            RunCompleteCardCollection().Forget();
+        }
 
-            //     _isCompleteCardCollection.Value = 0;
-            //     var reward = config.rewardInSeason;
-            //     MySonatFramework.inventoryService.AddReward(reward, new EarnResourceLogData
-            //     {
-            //         spendType = "card_collection",
-            //         spendId = "card_collection",
-            //         isFirstBuy = false,
-            //         source = "non_iap"
-            //     });
-            //     UIData uiData = new UIData();
-            //     uiData.Add("Title", "REWARD!");
-            //     uiData.Add("Reward", reward);
-            //     uiData.Add("x2", false);
-            //     PanelManager.Instance.OpenPanelByName<PopupReward>("PopupRewardCardCollection", uiData);
-            // }
-
-            // return open;
-            return false;
+        public async UniTask RunCompleteCardCollection()
+        {
+            if (CardInventoryModule.IsCompleteCardCollection)
+            {
+                var uiData = new UIData();
+                uiData.Add(PopupReward.REWARD_KEY, config.rewardInSeason);
+                PanelManager.Instance.OpenPanel<PopupReward>(uiData);
+            }
         }
         #endregion
 
@@ -174,8 +160,6 @@ namespace MyGame.Modules.CardCollection
                     ShowTutorial().Forget();
                 }
             }
-
-            TryPlayCompleteAlbum().Forget();
         }
 
         private async UniTask ShowTutorial()
@@ -214,12 +198,6 @@ namespace MyGame.Modules.CardCollection
         }
         #endregion
 
-        private async UniTask TryPlayCompleteAlbum()
-        {
-            // Hiện popup complete album
-            var openCompleteAlbum = await RunQueueCompleteAlbum();
-        }
-
         public void UnboxPackCard(ResourceData resourceData, bool noti = false)
         {
             var cardList = CardPackHelper.GetCardReward(resourceData);
@@ -234,10 +212,48 @@ namespace MyGame.Modules.CardCollection
                 else
                 {
                     CardInventoryModule.CollectCard(cardType);
+
+                    var albumType = config.GetAlbumType(cardType);
+                    if (CardInventoryModule.CheckCompleteAlbum(albumType))
+                    {
+                        _queueListCompletedAlbum.Enqueue(albumType);
+
+                        ReceiveRewardAlbum(albumType);
+                    }
                 }
             }
 
             _queueListTempCards.Enqueue(cardList);
+
+            if (CardInventoryModule.CheckAllAlbumComplete())
+            {
+                CardInventoryModule.SetCompleteCardCollection();
+                ReceiveRewardCardCollection();
+            }
+        }
+
+        private void ReceiveRewardAlbum(AlbumType albumType)
+        {
+            var reward = config.GetAlbumConfig(albumType).reward;
+            MySonatFramework.inventoryService.AddReward(reward, new EarnResourceLogData
+            {
+                spendType = "card_collection_complete_album",
+                spendId = albumType.ToString(),
+                isFirstBuy = false,
+                source = "non_iap"
+            });
+        }
+
+        private void ReceiveRewardCardCollection()
+        {
+            var reward = config.rewardInSeason;
+            MySonatFramework.inventoryService.AddReward(reward, new EarnResourceLogData
+            {
+                spendType = "card_collection_complete_collection",
+                spendId = "card_collection",
+                isFirstBuy = false,
+                source = "non_iap"
+            });
         }
     }
 }

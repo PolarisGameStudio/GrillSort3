@@ -3,6 +3,7 @@ using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.UIModule.UIElements;
 using SonatFramework.Systems;
 using SonatFramework.Systems.InventoryManagement;
+using SonatFramework.Systems.InventoryManagement.GameResources;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,14 +11,12 @@ namespace MyGame.Modules.CardCollection
 {
     public class PopupCompleteAlbum : Panel
     {
+        public const string ALBUM_TYPE_KEY = "AlbumType";
         [SerializeField] private UIAlbum album;
 
         [SerializeField] private Slider slider;
         [SerializeField] private UIRewardItem rewardItem;
 
-        [Header("Animation Slider")]
-        [SerializeField] private float delayAppearSlider = 2f;
-        [SerializeField] private AnimationCurve curveEaseSlider = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
         [Header("Animation Completed Obj")]
         [SerializeField] private float durationSlider = 0.3f;
@@ -30,18 +29,18 @@ namespace MyGame.Modules.CardCollection
 
         private readonly Service<CardCollectionService> cardCollectionService = new();
         private AlbumType albumType;
+        private RewardData reward;
         public override void Open(UIData uiData)
         {
             base.Open(uiData);
 
-            if (uiData.TryGet<AlbumType>("AlbumType", out albumType))
+            if (uiData.TryGet<AlbumType>(ALBUM_TYPE_KEY, out albumType))
             {
                 album.Setup(albumType);
 
                 var albumConfig = cardCollectionService.Instance.config.GetAlbumConfig(albumType);
-                var reward = albumConfig.reward.resourceDatas[0];
-                rewardItem.Init(reward.resource, reward.quantity);
-
+                reward = albumConfig.reward;
+                rewardItem.Init(reward.resourceDatas[0].resource, reward.resourceDatas[0].quantity);
             }
             PlayAnimationSlider();
         }
@@ -57,23 +56,10 @@ namespace MyGame.Modules.CardCollection
         public void OnClickClaim()
         {
             Close();
-            var albumConfig = cardCollectionService.Instance.config.GetAlbumConfig(albumType);
-            var reward = albumConfig.reward;
 
-            var logData = new EarnResourceLogData
-            {
-                spendType = "card_collection",
-                spendId = "card_collection",
-                isFirstBuy = false,
-                source = "non_iap"
-            };
-            MySonatFramework.inventoryService.AddReward(reward, logData);
-
-            UIData uiData = new UIData();
-            uiData.Add("Title", "REWARD!");
-            uiData.Add("Reward", reward);
-            uiData.Add("x2", false);
-            PanelManager.Instance.OpenPanel<PopupReward>(uiData);
+            // UIData uiData = new UIData();
+            // uiData.Add(PopupReward.REWARD_KEY, reward);
+            // PanelManager.Instance.OpenPanel<PopupReward>(uiData);
         }
     }
 }
