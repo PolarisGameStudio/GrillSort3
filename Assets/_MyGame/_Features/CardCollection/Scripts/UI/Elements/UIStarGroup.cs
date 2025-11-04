@@ -9,13 +9,17 @@ namespace MyGame.Modules.CardCollection
     {
         [SerializeField] private Transform container;
         private readonly Service<PoolingContainerService> _poolingService = new();
+        private readonly Service<CardCollectionService> _cardCollectionService = new();
         private List<UIStar> stars = new();
 
         public void Setup(int star)
         {
             _poolingService.Instance.CleanContainer(container);
             stars.Clear();
-            for (int i = 0; i < star; i++)
+
+            var maxStarView = _cardCollectionService.Instance.config.maxStarView;
+            var starView = Mathf.Min(star, maxStarView);
+            for (int i = 0; i < starView; i++)
             {
                 var starObj = _poolingService.Instance.CreateObject<UIStar>(container);
                 stars.Add(starObj);

@@ -19,14 +19,23 @@ namespace MyGame.Modules.CardCollection
         public RewardData rewardInSeason;
 
         [Space(10)]
+        public int maxStarView = 5;
+        public int numStarShowSpecialFrame = 6;
+        public List<int> listNumStarShowGoldFrame = new List<int> { 5, 4 };
+
+        [Space(10)]
         public List<AlbumConfigSO> albums;
         public List<CardConfigSO> cards;
+
         [Space(10)]
         public RewardData RewardUnlock;
 
         private Dictionary<AlbumType, AlbumConfigSO> _albumConfigs = new();
         private Dictionary<CardType, CardConfigSO> _cardConfigs = new();
         private Dictionary<CardType, AlbumType> _albumTypeByCard = new();
+        private int _maxStar;
+
+        public int MaxStar => _maxStar;
 
         public async UniTask InitializeAsync()
         {
@@ -35,8 +44,10 @@ namespace MyGame.Modules.CardCollection
                 _albumConfigs.Add(album.type, album);
             }
 
+            _maxStar = 0;
             foreach (var card in cards)
             {
+                _maxStar = Mathf.Max(_maxStar, card.star);
                 _cardConfigs.Add(card.type, card);
                 _albumTypeByCard.Add(card.type, albums.Find(e => e.cards.Contains(card.type))?.type ?? AlbumType.None);
             }

@@ -22,6 +22,7 @@ namespace Sonat.Enums
         Card_Randomx4 = 123,
         Card_Randomx5 = 124,
         Card_Randomx6 = 125,
+        Card_Special = 126,
         MAX = Byte.MaxValue, // 255
     }
 
@@ -53,6 +54,7 @@ namespace Sonat.Enums
                 case GameResource.Card_Randomx4:
                 case GameResource.Card_Randomx5:
                 case GameResource.Card_Randomx6:
+                case GameResource.Card_Special:
                     return GameResourceType.Card;
             }
 

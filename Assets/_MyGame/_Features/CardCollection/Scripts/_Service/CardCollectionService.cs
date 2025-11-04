@@ -64,6 +64,7 @@ namespace MyGame.Modules.CardCollection
             base.LoadData();
 
             CardInventoryModule.LoadData();
+            CardSubmodule.LoadData();
             StarSubmodule.LoadData();
         }
 
@@ -237,8 +238,11 @@ namespace MyGame.Modules.CardCollection
         #region Unbox Pack Card
         public void UnboxPackCard(ResourceData resourceData, bool noti = false)
         {
-            var cardList = CardPackHelper.GetCardReward(resourceData);
-            ReceiveCards(cardList);
+            for (int i = 0; i < resourceData.quantity; i++)
+            {
+                var cardList = CardSubmodule.GetCardReward(resourceData.resource);
+                ReceiveCards(cardList);
+            }
         }
 
         public void ForceUnboxPackCard(CardType forceCardType)

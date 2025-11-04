@@ -12,4 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6d82279190d60d4585a82da8965e7b5, type: 3}
   m_Name: CardSubmodule
   m_EditorClassIdentifier: 
+  config: {fileID: 11400000, guid: 2889fcedaacb638448b39d274f500ae1, type: 2}
   cardInventoryModule: {fileID: 11400000, guid: e7a24e4a817bfd7468e398c0b4e98066, type: 2}
+  listProbabilityCardStars:
+  - 34.35
+  - 26.23
+  - 17.56
+  - 10.62
+  - 5
+  listPack6Configs:
+  - numberPack6: 2
+    probabilityNewCard: 0.33
+  - numberPack6: 3
+    probabilityNewCard: 0.66
+  - numberPack6: 5
+    probabilityNewCard: 1
+  probabilityNewCardInPackSpecial: 0.8

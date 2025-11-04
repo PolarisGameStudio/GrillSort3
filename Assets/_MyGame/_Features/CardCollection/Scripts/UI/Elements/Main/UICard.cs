@@ -19,7 +19,7 @@ namespace MyGame.Modules.CardCollection
         [SerializeField] private FixedImageRatio cardImage;
         [SerializeField] private GameObject tagNew;
         [SerializeField] private UIStarGroup starGroup;
-        [SerializeField] private GameObject framePs, goldFrame;
+        [SerializeField] private GameObject specialPs, goldFrame;
 
         [Space]
         [Header("Enable / Disable Objects")]
@@ -64,8 +64,10 @@ namespace MyGame.Modules.CardCollection
                 cardParticle.SetData(_cardConfig.star);
             }
 
-            framePs.SetActive(_cardConfig.star == 3);
-            goldFrame.SetActive(_cardConfig.star == 2);
+            var specialFrame = _cardCollectionService.Instance.config.numStarShowSpecialFrame;
+            var listGoldFrame = _cardCollectionService.Instance.config.listNumStarShowGoldFrame;
+            specialPs.SetActive(_cardConfig.star == specialFrame);
+            goldFrame.SetActive(listGoldFrame.Contains(_cardConfig.star));
         }
 
         public void SetData(int quantity, bool isNew)
