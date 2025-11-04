@@ -1,3 +1,4 @@
+using Manager;
 using Sonat.Data;
 using Sonat.Enums;
 using SonatFramework.Scripts.SonatSDKAdapterModule;
@@ -43,7 +44,7 @@ public class WinPanel_SkewerJam : WinPanelBase
             }, this);
         }
 
-        var levelStartRate = SonatSDKAdapter.GetRemoteInt("POPUP_RATE_level_start", 3);
+        var levelStartRate = GameRemoteConfigValue.levelStartRate;
         var level = MySonatFramework.userDataService.GetLevel();
         if (level - 1 == levelStartRate)
         {

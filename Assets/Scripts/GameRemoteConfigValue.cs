@@ -51,6 +51,9 @@ namespace Manager
         public static int levelStartShowBanner;
         public static int levelShowRwdBooster;
 
+        public static int levelStartRate;
+        public static int minNumStar;
+
         public static void LoadData()
         {
             showRewardAdsLevelAddOrder = SonatSDKAdapter.GetRemoteInt("show_reward_ads_level_add_order", 9999);
@@ -67,6 +70,16 @@ namespace Manager
             levelStartShowBanner = SonatSDKAdapter.GetRemoteInt("level_start_show_banner", 9999);
             levelShowRwdBooster = SonatSDKAdapter.GetRemoteInt("level_show_rwd_booster", 1);
             levelStartShowPopupBuyBooster2 = SonatSDKAdapter.GetRemoteInt("level_start_show_popup_buy_booster2", 9999);
+
+
+
+            levelStartRate = SonatSDKAdapter.GetRemoteInt("POPUP_RATE_level_start", 3);
+#if UNITY_ANDROID
+            minNumStar = SonatSDKAdapter.GetRemoteInt("POPUP_RATE_min_num_star", 5);
+#elif UNITY_IOS
+            minNumStar = SonatSDKAdapter.GetRemoteInt("POPUP_RATE_min_num_star", 1);
+#endif
+
 
 
             countLoseToShowOffer = SonatSDKAdapter.GetRemoteInt("count_lose_to_show_offer", 0);
