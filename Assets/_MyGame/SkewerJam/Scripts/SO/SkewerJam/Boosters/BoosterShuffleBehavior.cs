@@ -140,7 +140,11 @@ namespace MyGame.SkewerJamSO.Boosters
             listItemNotInOrder.Shuffle();
             var itemInLayer0 = new List<ItemData>(listItemInOrder);
             var randomItemNotInOrder = new List<ItemData>(listItemNotInOrder.Take(countItemInLayer0 - listItemInOrder.Count));
-            listItemNotInOrder.RemoveRange(0, countItemInLayer0 - listItemInOrder.Count);
+
+            if (countItemInLayer0 - listItemInOrder.Count >= 0)
+            {
+                listItemNotInOrder.RemoveRange(0, countItemInLayer0 - listItemInOrder.Count);
+            }
             itemInLayer0.AddRange(randomItemNotInOrder);
 
             foreach (var primaryGrill in primaryGrills)
@@ -185,9 +189,17 @@ namespace MyGame.SkewerJamSO.Boosters
                         continue;
                     }
 
-                    var randItem = listItemNotInOrder[Random.Range(0, listItemNotInOrder.Count)];
-                    newLayerData.itemData[i] = randItem;
-                    listItemNotInOrder.Remove(randItem);
+                    if (listItemNotInOrder.Count > 0)
+                    {
+                        var randItem = listItemNotInOrder[Random.Range(0, listItemNotInOrder.Count)];
+                        newLayerData.itemData[i] = randItem;
+                        listItemNotInOrder.Remove(randItem);
+                    }
+                    else
+                    {
+                        newLayerData.itemData[i] = null;
+                    }
+
                 }
                 subGrill.SetShuffleLayerData(newLayerData);
             }

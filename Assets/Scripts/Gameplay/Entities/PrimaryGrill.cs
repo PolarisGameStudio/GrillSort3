@@ -177,6 +177,7 @@ namespace Gameplay.Entities
                     itemIndex++;
                 }
             }
+            subGrill.SetShowed(true);
         }
 
         public virtual void ClearGrill()
@@ -478,7 +479,7 @@ namespace Gameplay.Entities
                 if (subGrill.IsEmpty())
                 {
                     if (index == 0) updateFirst = true;
-                    subGrill.ForceClearGrill();
+                    subGrill.PlayClearGrill();
                     subGrills.Remove(subGrill);
                 }
                 else

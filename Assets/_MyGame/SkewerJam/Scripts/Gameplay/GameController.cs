@@ -282,7 +282,6 @@ namespace MyGame.SkewerJam.Gameplay
 
         private async UniTaskVoid Revive(StuckType stuckType, string by, object[] objectParams = null)
         {
-            ChangeGameState(GameState.Playing);
             MySonatFramework.GetService<AudioService>().PlayMusic(bgm);
             EventBus<LevelContinueEvent>.Raise(new LevelContinueEvent() { by = by });
             await UniTask.Delay(1000);
@@ -328,6 +327,10 @@ namespace MyGame.SkewerJam.Gameplay
 
                     break;
             }
+
+            await UniTask.Delay(1500);
+            ChangeGameState(GameState.Playing);
+
         }
 
         public async UniTaskVoid Lose(StuckType stuckType)
