@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using MyGame.Modules.CardCollection.Home;
 using MyGame.Modules.CardCollection.ReceiveCardEffect.Configs;
+using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems;
 using SonatFramework.Systems.ObjectPooling;
@@ -124,9 +125,6 @@ namespace MyGame.Modules.CardCollection
 
         private async UniTask PlayCollect()
         {
-            // MySonatFramework.audioService.PlaySound(AudioId.Card_Disappear_Grill_sort);
-            // biến card dư thành star
-
             // widget xuất hiện và star bay vào
             if (CheckOldCard())
             {
@@ -149,6 +147,7 @@ namespace MyGame.Modules.CardCollection
 
         private void DisplayCardDisappear()
         {
+            MySonatFramework.audioService.PlaySound(AudioId.Card_Disappear_Grill_sort);
             foreach (var card in uiCards)
             {
                 if (card.IsNew)
@@ -186,6 +185,7 @@ namespace MyGame.Modules.CardCollection
                         uiWidgetCardStar.transform,
                         (Action)(() =>
                         {
+                            MySonatFramework.audioService.PlaySound(AudioId.Stars_Fill_Grill_sort);
                             uiWidgetCardStar.UpdateValueView(addedStar);
                         }),
                         delayMove);

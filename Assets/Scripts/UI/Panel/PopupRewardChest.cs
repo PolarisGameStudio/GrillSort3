@@ -3,6 +3,7 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using MyGame.Modules.Scripts.SO;
+using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.UIModule.UIElements;
 using SonatFramework.Scripts.Utils;
@@ -97,9 +98,11 @@ public class PopupRewardChest : Panel
         });
         // }
 
+        MySonatFramework.audioService.PlaySound(AudioId.Chest_Level_Appear);
         chestAnimation.AnimationState.SetAnimation(0, "Appear", false).Complete += (TrackEntry trackEntry) =>
         {
             chestAnimation.AnimationState.SetAnimation(0, "Idle_Before", true);
+            MySonatFramework.audioService.PlaySound(AudioId.Chest_Level_Idle);
         };
     }
 
@@ -112,6 +115,7 @@ public class PopupRewardChest : Panel
 
     private async UniTask PlayOpenAnimation()
     {
+        MySonatFramework.audioService.PlaySound(AudioId.Chest_Level_Open);
         chestAnimation.AnimationState.SetAnimation(0, "Open", false).Complete += (TrackEntry trackEntry) =>
         {
             chestAnimation.AnimationState.SetAnimation(0, "Idle_After", true);

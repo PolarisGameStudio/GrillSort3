@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Sonat.Enums;
 using SonatFramework.Scripts.Utils;
 using UnityEngine;
 
@@ -20,12 +21,18 @@ namespace MyGame.Modules.CardCollection.Animation
             }
 
             var packIndex = CardPackHelper.GetPackIndex(uiCards.Count);
+            MySonatFramework.audioService.StopMusic();
+            SonatUtils.DelayCall(configSO.delaySoundAppearAnim, () =>
+            {
+                MySonatFramework.audioService.PlaySound(AudioId.Card_collection_Appear_open_Grill_sort);
+            });
             packAnim.Play(packIndex, false, () =>
             {
                 // play particle
                 SonatUtils.DelayCall(configSO.delayAppearPs, () =>
                 {
                     psAppear.Play();
+                    MySonatFramework.audioService.PlaySound(AudioId.Card_Appear_Grill_sort);
                 });
 
                 // hiện các thẻ
@@ -40,6 +47,12 @@ namespace MyGame.Modules.CardCollection.Animation
                     });
                 }
             }, configSO.animLifeTime, configSO.forceHideAnim);
+        }
+
+        public override void Close()
+        {
+            base.Close();
+            MySonatFramework.audioService.PlayMusic(AudioId.BGM_Home_Default_Grill3);
         }
     }
 }

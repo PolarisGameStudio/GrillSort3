@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using Gameplay.LevelData;
 using MyGame.SkewerJam.Utils;
+using Sonat.Enums;
 using SonatFramework.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -83,7 +84,14 @@ namespace Gameplay.Entities.GrillScripts
                 selectedLid.transform.localPosition = new Vector3(0, 2.5f, 0);
                 selectedLid.DOFade(0, 0);
                 // selectedLid.transform.DOScale(1, GameDefine.grillLidAnim);
-                selectedLid.transform.DOLocalMoveY(defaultLidPos, GameDefine.grillLidAnim).SetEase(Ease.InQuad);
+                selectedLid.transform.DOLocalMoveY(defaultLidPos, GameDefine.grillLidAnim).SetEase(Ease.InQuad).OnComplete(() =>
+                {
+                    if (isSoldOut)
+                    {
+                        var rand = UnityEngine.Random.Range((int)AudioId.Pot_lid_Close_01_Grill3, (int)AudioId.Pot_lid_Close_03_Grill3 + 1);
+                        MySonatFramework.audioService.PlaySound((AudioId)rand);
+                    }
+                });
                 selectedLid.DOFade(1, GameDefine.grillLidAnim).SetEase(Ease.OutQuad);
             }
             else

@@ -5,6 +5,7 @@ using MyGame.SkewerJam.Utils;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems.BoosterManagement;
+using SonatFramework.Systems.EventBus;
 using SonatFramework.Systems.UserData;
 using SonatFramework.Templates.UI.ScriptBase;
 using UnityEngine;
@@ -154,6 +155,25 @@ namespace MyGame.SkewerJam.Gameplay.Booster
             if (unlocked)
             {
                 canvasGroup.alpha = enable ? 1 : 0.7f;
+            }
+        }
+
+        protected override void OnCollectResource(AddItemEvent eventData)
+        {
+            if (eventData.resource != this.boosterType) return;
+            if (eventData.collectEffect != null)
+            {
+                eventData.collectEffect.Collect(this.boosterType, eventData.quantity, eventData.position, transform.position, () =>
+                {
+                    MySonatFramework.audioService.PlaySound(AudioId.Booster_Received_Grill3);
+                    float defaultScale = transform.localScale.x;
+                    transform.DOScale(defaultScale * 1.1f, 0.075f).SetLoops(2, LoopType.Yoyo);
+                    UpdateData();
+                });
+            }
+            else
+            {
+                UpdateData();
             }
         }
     }
