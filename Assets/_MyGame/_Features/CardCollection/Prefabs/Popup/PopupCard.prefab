@@ -1238,13 +1238,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6467861347243445018, guid: 35f698ff4890b664bac2791186e5a02e, type: 3}
-      propertyPath: materialSO
+    - target: {fileID: 8848172047986838427, guid: 35f698ff4890b664bac2791186e5a02e, type: 3}
+      propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2100000, guid: 3ea39f9ae5c24c44fbb4886ff4b2a41a, type: 2}
     m_RemovedComponents:
     - {fileID: 616263060936433688, guid: 35f698ff4890b664bac2791186e5a02e, type: 3}
     - {fileID: 1426512611957313298, guid: 35f698ff4890b664bac2791186e5a02e, type: 3}
+    - {fileID: 9211786890444060973, guid: 35f698ff4890b664bac2791186e5a02e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

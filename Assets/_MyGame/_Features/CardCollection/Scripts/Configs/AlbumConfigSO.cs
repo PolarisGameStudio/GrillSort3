@@ -66,7 +66,8 @@ namespace MyGame.Modules.CardCollection
         Album_6 = 6,
         Album_7 = 7,
         Album_8 = 8,
-        Album_9 = 9
+        Album_9 = 9,
+        MAX
     }
 
 }

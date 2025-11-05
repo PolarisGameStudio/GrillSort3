@@ -31,6 +31,7 @@ namespace MyGame.Modules.CardCollection
         //#endif
     }
 
+    [Serializable]
     public enum TextColorType
     {
         Red,

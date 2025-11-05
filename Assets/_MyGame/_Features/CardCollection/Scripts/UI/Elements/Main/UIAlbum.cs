@@ -39,7 +39,7 @@ namespace MyGame.Modules.CardCollection
 
             albumName.text = albumConfig.albumName;
             // albumName.GetComponent<Localize>().SetTerm(albumConfig.albumName);
-            // albumName.SetMaterial(albumConfig.color);
+            albumName.SetMaterial(albumConfig.color);
 
             //albumImage.sprite = albumConfig.albumIcon;
             if (isAlbumImage)

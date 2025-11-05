@@ -33,14 +33,16 @@ namespace MyGame.Modules.CardCollection
         {
             var dictCard = new Dictionary<int, (List<CardType> listNewCards, List<CardType> listOldCards)>();
             var listAllCards = new List<CardType>();
+
             var cardCollectionService = MySonatFramework.GetService<CardCollectionService>();
             var cardInventoryModule = cardCollectionService.CardInventoryModule;
             var config = cardCollectionService.config;
+
             foreach (var card in config.cards)
             {
                 listAllCards.Add(card.type);
                 var star = card.star;
-                var isNewCard = cardInventoryModule.CheckExistCollectedCard(card.type);
+                var isNewCard = cardInventoryModule.CheckExistCollectedCard(card.type) == false;
 
                 if (dictCard.ContainsKey(star) == false)
                 {

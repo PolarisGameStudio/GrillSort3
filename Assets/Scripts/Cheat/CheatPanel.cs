@@ -150,7 +150,6 @@ public class CheatPanel : Panel
                 break;
             case CheatOption.CardCollection:
                 OnDropdown(1);
-                OnInputField(1);
                 InitCardCollectionDropdown();
                 break;
         }
@@ -298,15 +297,19 @@ public class CheatPanel : Panel
             //              }
             //              break;
             case CheatOption.CardCollection:
-                var cardType = cheatDropdowns[0].options[cheatDropdowns[0].value].text.ToEnum<CardType>();
-                if (cardType != CardType.None)
+                var optionValue = cheatDropdowns[0].options[cheatDropdowns[0].value].text;
+                if (optionValue.StartsWith("Album_"))
                 {
+                    var albumType = optionValue.ToEnum<AlbumType>();
+                    CheatManager.CheatCardCollection(albumType);
+                }
+                else if (optionValue.StartsWith("Card_"))
+                {
+                    var cardType = optionValue.ToEnum<CardType>();
                     CheatManager.CheatCardCollection(cardType);
                 }
                 break;
         }
-
-
     }
 
     private void OnDropdown(int number)
@@ -395,6 +398,15 @@ public class CheatPanel : Panel
     public void InitCardCollectionDropdown()
     {
         List<TMP_Dropdown.OptionData> opts = new List<TMP_Dropdown.OptionData>();
+
+        for (AlbumType i = AlbumType.Album_0; i < AlbumType.MAX; i++)
+        {
+            TMP_Dropdown.OptionData data = new TMP_Dropdown.OptionData()
+            {
+                text = i.ToString()
+            };
+            opts.Add(data);
+        }
 
         for (CardType i = CardType.None + 1; i < CardType.MAX; i++)
         {

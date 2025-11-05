@@ -82,16 +82,17 @@ namespace MyGame.Modules.CardCollection
                 randoms.RemoveAll(e => listSelectedCards.Contains(e));
                 if (randoms.Count > 0)
                 {
-                    var rand = randoms.Rand();
-                    listSelectedCards.Add(rand);
+                    var randCard = randoms.Rand();
+                    listSelectedCards.Add(randCard);
                 }
                 else
                 {
                     // backup random in all cards
                     Debug.Log($"<color=red>[CardSubmodule] datlt: GetNormalRandomCardType: randoms is empty</color>");
                     listAllCards.RemoveAll(e => listSelectedCards.Contains(e));
+
                     var randomInAllCards = listAllCards.Rand();
-                    listSelectedCards.Add((CardType)randomInAllCards);
+                    listSelectedCards.Add(randomInAllCards);
                 }
             }
             return listSelectedCards;
@@ -135,11 +136,11 @@ namespace MyGame.Modules.CardCollection
 
             _countPack6.Value += 1;
 
-            // Lấy luôn 1 thẻ 3 sao
-            var card3Star = GetRandomCardByStar(cardDataToRandom, 3);
-            listSelectedCards.Add(card3Star);
+            // Lấy luôn 1 thẻ >= 4 sao
+            var card4Star = GetRandomCardByStar(cardDataToRandom, 3);
+            listSelectedCards.Add(card4Star);
 
-            if (cardInventoryModule.CheckExistCollectedCard(card3Star) == false) _countPack6.Value = 0;
+            if (cardInventoryModule.CheckExistCollectedCard(card4Star) == false) _countPack6.Value = 0;
 
             // Lấy nốt số thẻ còn lại
             for (int i = 0; i < number - 1; i++)
@@ -191,7 +192,7 @@ namespace MyGame.Modules.CardCollection
         private CardType GetRandomCardByStar(CardDataToRandom cardDataToRandom, int star)
         {
             var listCards = new List<CardType>();
-            for (int i = star; i <= config.MaxStar; i++)
+            for (int i = star; i <= config.MaxStar - 1; i++) // không lấy vào card 6 sao (special card)
             {
                 listCards.AddRange(cardDataToRandom.dictCard[i].listNewCards);
                 listCards.AddRange(cardDataToRandom.dictCard[i].listOldCards);
@@ -290,7 +291,7 @@ namespace MyGame.Modules.CardCollection
                 return cardDataToRandom.dictCard[config.MaxStar].listNewCards.Rand();
             }
 
-            //- Đảm bảo 100% có 1 new card hoặc card có 3 sao trở lên
+            //- Đảm bảo 100% có 1 new card hoặc card có >=4 sao trở lên
             for (int i = 1; i <= config.MaxStar; i++)
             {
                 if (i >= star)

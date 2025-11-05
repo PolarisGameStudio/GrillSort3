@@ -148,8 +148,12 @@ public class CheatManager : Singleton<CheatManager>
 
 	public static void CheatCardCollection(CardType cardType)
 	{
-		var cardCollectionService = SonatSystem.GetService<CardCollectionService>();
-		cardCollectionService.ForceUnboxPackCard(cardType);
+		CheatCardHelper.ForceUnboxPackCard(cardType);
+	}
+
+	public static void CheatCardCollection(AlbumType albumType)
+	{
+		CheatCardHelper.ForceUnboxPackCard(albumType);
 	}
 }
 

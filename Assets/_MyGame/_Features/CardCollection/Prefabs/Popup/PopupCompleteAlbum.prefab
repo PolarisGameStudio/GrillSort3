@@ -71,7 +71,7 @@ MonoBehaviour:
       mFrom: {x: 0, y: 0, z: 0}
       mTo: {x: 0, y: 0, z: 0}
       duration: 0.3
-      delay: 2.3
+      delay: 2.6
       curve:
         serializedVersion: 2
         m_Curve:
@@ -129,7 +129,7 @@ MonoBehaviour:
       mFrom: {x: 0, y: 0, z: 0}
       mTo: {x: 0, y: 0, z: 0}
       duration: 0
-      delay: 2.4
+      delay: 2.7
       curve:
         serializedVersion: 2
         m_Curve:
@@ -25035,7 +25035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208443f0c09b7ac46a2cfa7654b0b568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materialSO: {fileID: 0}
+  materialSO: {fileID: 11400000, guid: a8a15c604715ffa40bc71e6542d8aa69, type: 2}
   useFillColor: 0
   index: 0
 --- !u!114 &7770899855057046253
@@ -25061,7 +25061,7 @@ MonoBehaviour:
       mFrom: {x: 0, y: 0, z: 0}
       mTo: {x: 0, y: 0, z: 0}
       duration: 0.5
-      delay: 2.6
+      delay: 3
       curve:
         serializedVersion: 2
         m_Curve:
@@ -25338,7 +25338,7 @@ MonoBehaviour:
   album: {fileID: 7116168670670063728}
   slider: {fileID: 3754431781533724120}
   rewardItem: {fileID: 7485428454830918248}
-  durationSlider: 0.5
+  durationSlider: 1
   delaySlider: 1.2
   curveSlide:
     serializedVersion: 2
@@ -25355,17 +25355,17 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2.9817235
+      outSlope: 2.9817235
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.030088484
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   durationSliderScaleDown: 0.2
-  delaySliderScaleDown: 2.1
+  delaySliderScaleDown: 2.4
   curveSliderScaleDown:
     serializedVersion: 2
     m_Curve:
@@ -30412,7 +30412,7 @@ MonoBehaviour:
       mFrom: {x: 0, y: 0, z: 0}
       mTo: {x: 0, y: 0, z: 0}
       duration: 0.5
-      delay: 2.8
+      delay: 3.2
       curve:
         serializedVersion: 2
         m_Curve:
@@ -40582,7 +40582,7 @@ MonoBehaviour:
       mFrom: {x: 0, y: 0, z: 0}
       mTo: {x: 0, y: 0, z: 0}
       duration: 0.5
-      delay: 2.9
+      delay: 3.4
       curve:
         serializedVersion: 2
         m_Curve:
@@ -41007,10 +41007,6 @@ PrefabInstance:
       propertyPath: cardNotificationBadge
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 7630355727170497997, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
-      propertyPath: materialSO
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8030187563446426169, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -41129,7 +41125,7 @@ MonoBehaviour:
       mFrom: {x: 0, y: 0, z: 0}
       mTo: {x: 0, y: 0, z: 0}
       duration: 0
-      delay: 1.7
+      delay: 2.2
       curve:
         serializedVersion: 2
         m_Curve:
@@ -41204,7 +41200,7 @@ MonoBehaviour:
       mFrom: {x: 0, y: 0, z: 0}
       mTo: {x: 0, y: 0, z: 0}
       duration: 0.3
-      delay: 0.4
+      delay: 0.5
       curve:
         serializedVersion: 2
         m_Curve:

@@ -1,5 +1,7 @@
+using System;
 using Cysharp.Threading.Tasks;
 using MyGame.Modules.CardCollection;
+using MyGame.Scripts.UI;
 using Sonat.Enums;
 using SonatFramework.Scripts.Helper;
 using SonatFramework.Scripts.SonatSDKAdapterModule;
@@ -42,9 +44,6 @@ public class HomeManager : SingletonSimple<HomeManager>
         }, this);
 
         ClaimRewardFreeLives().Forget();
-        blockUI.SetActive(true);
-        SonatUtils.DelayCall(delayBlockUI, () => { blockUI.SetActive(false); }, this);
-
         SonatSDKAdapter.SetBanner(false);
     }
 
@@ -72,6 +71,17 @@ public class HomeManager : SingletonSimple<HomeManager>
             await UniTask.Delay(2000);
             PanelManager.Instance.OpenPanel<PopupReward>(new UIData().Add(PopupReward.REWARD_KEY, rewardData));
         }
+    }
+
+
+    public void BlockUI()
+    {
+        blockUI.SetActive(true);
+    }
+
+    public void UnlockUI()
+    {
+        blockUI.SetActive(false);
     }
 
 #if UNITY_EDITOR

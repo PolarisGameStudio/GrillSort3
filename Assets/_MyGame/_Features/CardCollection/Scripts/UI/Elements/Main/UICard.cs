@@ -50,7 +50,7 @@ namespace MyGame.Modules.CardCollection
 
             txtMainName.text = _cardConfig.cardName;
             // txtMainName.GetComponent<I2.Loc.Localize>().SetTerm(_cardConfig.cardName);
-            // txtMainName.SetMaterial(_cardConfig.textColorIndex);
+            txtMainName.SetMaterial(_cardConfig.textColorIndex);
 
             txtNameOnBack.text = _cardConfig.cardName;
 

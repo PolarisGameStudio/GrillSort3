@@ -27,19 +27,19 @@ namespace MyGame.Modules.CardCollection
             Setup();
             if (useFillColor)
             {
-                text.color = materialSO.colors[(int)index];
+                text.color = materialSO.GetMaterialData(index).color;
             }
             else
             {
-                if (localize != null)
-                {
-                    localize.SecondaryTerm = materialSO.materialTerms[(int)index];
-                    localize.OnLocalize(true);
-                }
-                else
-                {
-                    text.fontMaterial = materialSO.materials[(int)index];
-                }
+                // if (localize != null)
+                // {
+                //     localize.SecondaryTerm = materialSO.GetMaterialData(index).materialTerm;
+                //     localize.OnLocalize(true);
+                // }
+                // else
+                // {
+                text.fontMaterial = materialSO.GetMaterialData(index).material;
+                // }
             }
         }
 

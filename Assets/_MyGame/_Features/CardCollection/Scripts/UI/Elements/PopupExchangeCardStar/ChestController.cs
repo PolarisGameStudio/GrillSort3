@@ -42,6 +42,7 @@ namespace MyGame.Modules.CardCollection.CardStarExchange
             var (success, message) = starModule.OnClickReceiveChest(index);
             if (success)
             {
+                UpdateUI();
                 var uiData = new UIData();
                 uiData.Add(PopupRewardChest.REWARD_KEY, reward);
                 uiData.Add(PopupRewardChest.SKIN_KEY, index);

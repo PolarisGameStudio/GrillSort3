@@ -95,8 +95,18 @@ namespace MyGame.Modules.CardCollection
         {
             // đến ngày cuối cùng của tháng thứ 3
             var date = MySonatFramework.GetService<TimeService>().GetCurrentTime();
-            var expireTime = date.AddDays(90);
-            return ((DateTimeOffset)expireTime).ToUnixTimeSeconds();
+            // Lấy ngày cuối cùng của tháng thứ 3 (tháng hiện tại + 2)
+            int year = date.Year;
+            int month = date.Month + 2;
+            if (month > 12)
+            {
+                month -= 12;
+                year += 1;
+            }
+            int lastDay = DateTime.DaysInMonth(year, month);
+            var expireTime = new DateTime(year, month, lastDay, 23, 59, 59, DateTimeKind.Utc);
+
+            return ((DateTimeOffset)expireTime).ToUnixTimeSeconds() + 1;
         }
         #endregion
 
@@ -202,6 +212,7 @@ namespace MyGame.Modules.CardCollection
             // Hiện tut
             if (PlayerPrefs.HasKey($"{DATA_KEY}_ShowTutorial") == false)
             {
+                HomeManager.Instance.BlockUI();
                 PlayerPrefs.SetInt($"{DATA_KEY}_ShowTutorial", 1);
 
                 UIData uiData = new();
@@ -216,6 +227,7 @@ namespace MyGame.Modules.CardCollection
                 await UniTask.WaitUntil(() => popup == null || popup.gameObject.activeInHierarchy == false);
                 await UniTask.Delay(1000);
                 RewardUnlockFeature();
+                HomeManager.Instance.UnlockUI();
             }
         }
 
@@ -245,19 +257,7 @@ namespace MyGame.Modules.CardCollection
             }
         }
 
-        public void ForceUnboxPackCard(CardType forceCardType)
-        {
-            var cardList = new List<CardType>() { forceCardType };
-            ReceiveCards(cardList);
-
-            EventBus<AddItemEvent>.Raise(new AddItemEvent()
-            {
-                resource = GameResource.Card_Randomx1,
-                quantity = 1
-            });
-        }
-
-        private void ReceiveCards(List<CardType> cardList)
+        public void ReceiveCards(List<CardType> cardList)
         {
             var recentlyNewCardList = new List<CardType>();
             StarSubmodule.SetNumberStarView();
