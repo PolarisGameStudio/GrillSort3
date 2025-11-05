@@ -3,6 +3,7 @@ using Sirenix.OdinInspector;
 using Sonat.Enums;
 using SonatFramework.Scripts.Feature.CheckInternet;
 using SonatFramework.Scripts.Feature.Shop.UI;
+using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems;
 using UnityEngine;
@@ -28,7 +29,7 @@ namespace MyGame.SkewerJam.Pack
             base.SetPackData();
             if (noAdsIcon != null && showNoAdsIcon)
             {
-                noAdsIcon.SetActive(shopPack.noAds || shopPack.noAdsFree);
+                noAdsIcon.SetActive((shopPack.noAds || shopPack.noAdsFree) && SonatSDKAdapter.IsNoads() == false);
             }
         }
 
@@ -42,6 +43,14 @@ namespace MyGame.SkewerJam.Pack
             base.OnBuyClick();
         }
 
+        protected override void OnBuySuccess(ShopItemKey shopItemKey)
+        {
+            base.OnBuySuccess(shopItemKey);
+            if (noAdsIcon != null && showNoAdsIcon)
+            {
+                noAdsIcon.SetActive((shopPack.noAds || shopPack.noAdsFree) && SonatSDKAdapter.IsNoads() == false);
+            }
+        }
 
         protected override void BuyComplete()
         {
