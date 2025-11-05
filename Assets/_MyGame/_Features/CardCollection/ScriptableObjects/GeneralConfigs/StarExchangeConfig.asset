@@ -17,31 +17,37 @@ MonoBehaviour:
     star: 100
     reward:
       resourceDatas:
-      - resource: 1
-        quantity: 100
-      - resource: 102
+      - resource: 122
+        quantity: 1
+      - resource: 101
         quantity: 1
   - index: 1
-    star: 200
+    star: 250
     reward:
       resourceDatas:
-      - resource: 1
-        quantity: 100
-      - resource: 103
+      - resource: 123
         quantity: 1
-      - resource: 104
+      - resource: 122
         quantity: 1
-  - index: 2
-    star: 400
-    reward:
-      resourceDatas:
-      - resource: 1
-        quantity: 300
-      - resource: 2
-        quantity: 900
       - resource: 102
         quantity: 1
-      - resource: 105
+      - resource: 103
+        quantity: 1
+  - index: 2
+    star: 500
+    reward:
+      resourceDatas:
+      - resource: 126
+        quantity: 1
+      - resource: 123
+        quantity: 1
+      - resource: 122
+        quantity: 1
+      - resource: 103
+        quantity: 1
+      - resource: 102
+        quantity: 1
+      - resource: 101
         quantity: 1
       - resource: 103
         quantity: 1

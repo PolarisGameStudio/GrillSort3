@@ -16,6 +16,8 @@ MonoBehaviour:
   durationMonth: 3
   rewardInSeason:
     resourceDatas:
+    - resource: 200
+      quantity: 1
     - resource: 1
       quantity: 5000
     - resource: 102
@@ -26,8 +28,6 @@ MonoBehaviour:
       quantity: 2
     - resource: 104
       quantity: 3
-    - resource: 200
-      quantity: 1
   maxStarView: 5
   numStarShowSpecialFrame: 6
   listNumStarShowGoldFrame: 0500000004000000
