@@ -57,8 +57,8 @@ namespace MyGame.Modules.CardCollection.Home
             var totalCard = inventoryModule.GetTotalCards();
             var maxCard = _cardCollectionService.Instance.config.GetNumCard();
 
-            bubbleReward.gameObject.SetActive(inventoryModule.CompletedCardCollection == false);
-            tickObj.SetActive(inventoryModule.CompletedCardCollection);
+            // bubbleReward.gameObject.SetActive(inventoryModule.CompletedCardCollection == false);
+            // tickObj.SetActive(inventoryModule.CompletedCardCollection);
 
             cardSlider.value = totalCard * 1.0f / maxCard;
             txtTotalCard.text = $"{totalCard}/{maxCard}";

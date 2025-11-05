@@ -30,6 +30,12 @@ namespace MyGame.Modules.CardCollection
             _cardStar = new IntDataPref($"{DATA_KEY}_cardStar", 0);
         }
 
+        public void ResetData()
+        {
+            _cardStarExchangeIndex.Value = -1;
+            _cardStar.Value = 0;
+        }
+
         public void SetNumberStarView()
         {
             _numStarView = _cardStar.Value;

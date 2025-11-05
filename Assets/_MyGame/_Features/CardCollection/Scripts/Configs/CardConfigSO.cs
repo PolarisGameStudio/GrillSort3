@@ -21,6 +21,23 @@ namespace MyGame.Modules.CardCollection
             var albumType = Enum.Parse<AlbumType>("Album_" + type.ToString().Split('_')[1]);
             return $"{cardNamePath}/{albumType.ToString().ToLower()}/{type.ToString().ToLower()}.png";
         }
+
+        public TextColorType GetTextColor()
+        {
+            switch (star)
+            {
+                case 1:
+                case 2:
+                case 3:
+                    return TextColorType.Green;
+                case 4:
+                case 5:
+                    return TextColorType.Red;
+                case 6:
+                    return TextColorType.Purple;
+            }
+            return TextColorType.Blue;
+        }
         //#if UNITY_EDITOR
         //        private void OnValidate()
         //        {

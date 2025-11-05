@@ -68,6 +68,15 @@ namespace MyGame.Modules.CardCollection
             StarSubmodule.LoadData();
         }
 
+        protected override void ResetData()
+        {
+            base.ResetData();
+            CardInventoryModule.ResetData();
+            CardSubmodule.ResetData();
+            StarSubmodule.ResetData();
+
+        }
+
         private async UniTask LoadImageAsync()
         {
             foreach (var album in config.albums)

@@ -36,6 +36,12 @@ namespace MyGame.Modules.CardCollection
             completedCardCollection = new IntDataPref($"{DATA_KEY}_completedCardCollection", 0);
         }
 
+        public void ResetData()
+        {
+            completedCardCollection.Value = 0;
+            LoadData();
+        }
+
         public bool CheckExistCollectedCard(CardType cardType)
         {
             var albumType = config.GetAlbumType(cardType);
