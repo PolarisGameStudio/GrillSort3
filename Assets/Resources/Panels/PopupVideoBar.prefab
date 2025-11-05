@@ -2127,6 +2127,30 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 155
       objectReference: {fileID: 0}
+    - target: {fileID: 668550882504651462, guid: 750577945dcd3724ba8ca99e95752e5b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 668550882504651462, guid: 750577945dcd3724ba8ca99e95752e5b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 668550882504651462, guid: 750577945dcd3724ba8ca99e95752e5b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 668550882504651462, guid: 750577945dcd3724ba8ca99e95752e5b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 668550882504651462, guid: 750577945dcd3724ba8ca99e95752e5b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 668550882504651462, guid: 750577945dcd3724ba8ca99e95752e5b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1933680289001289651, guid: 750577945dcd3724ba8ca99e95752e5b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2207,10 +2231,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4445939216653653270, guid: 750577945dcd3724ba8ca99e95752e5b, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 155
-      objectReference: {fileID: 0}
     - target: {fileID: 5096968444398951216, guid: 750577945dcd3724ba8ca99e95752e5b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2238,6 +2258,30 @@ PrefabInstance:
     - target: {fileID: 6201144885036508414, guid: 750577945dcd3724ba8ca99e95752e5b, type: 3}
       propertyPath: m_Name
       value: UIBubbleReward
+      objectReference: {fileID: 0}
+    - target: {fileID: 7429577020826222480, guid: 750577945dcd3724ba8ca99e95752e5b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7429577020826222480, guid: 750577945dcd3724ba8ca99e95752e5b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7429577020826222480, guid: 750577945dcd3724ba8ca99e95752e5b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7585491725435719679, guid: 750577945dcd3724ba8ca99e95752e5b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7585491725435719679, guid: 750577945dcd3724ba8ca99e95752e5b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7585491725435719679, guid: 750577945dcd3724ba8ca99e95752e5b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7645854128022149088, guid: 750577945dcd3724ba8ca99e95752e5b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2473,6 +2517,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6886767013354233241, guid: 1b8710eac5bbfa74ebcd212bb12dd305, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883426924671663353, guid: 1b8710eac5bbfa74ebcd212bb12dd305, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883426924671663353, guid: 1b8710eac5bbfa74ebcd212bb12dd305, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883426924671663353, guid: 1b8710eac5bbfa74ebcd212bb12dd305, type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
