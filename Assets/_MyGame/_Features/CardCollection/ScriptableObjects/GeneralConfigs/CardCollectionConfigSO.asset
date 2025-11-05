@@ -17,17 +17,20 @@ MonoBehaviour:
   rewardInSeason:
     resourceDatas:
     - resource: 1
-      quantity: 1500
-    - resource: 2
-      quantity: 3600
+      quantity: 5000
     - resource: 102
-      quantity: 2
+      quantity: 3
     - resource: 101
       quantity: 2
     - resource: 103
       quantity: 2
     - resource: 104
-      quantity: 2
+      quantity: 3
+    - resource: 200
+      quantity: 1
+  maxStarView: 5
+  numStarShowSpecialFrame: 6
+  listNumStarShowGoldFrame: 0500000004000000
   albums:
   - {fileID: 11400000, guid: d7c3a59375556734297b06bd02a4bcff, type: 2}
   - {fileID: 11400000, guid: 1b4ac568494e8dd44b81fd1f5044cdb4, type: 2}
@@ -35,10 +38,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 91428adeec1995a479d2eebbdd4ac1e9, type: 2}
   - {fileID: 11400000, guid: 63cc6a24b1124814ca1c2bea546f7e38, type: 2}
   - {fileID: 11400000, guid: aa0a2d38a18001449998959ab0ee52b8, type: 2}
-  - {fileID: 11400000, guid: 2db7efae9452a5142816d3975c359673, type: 2}
-  - {fileID: 11400000, guid: 3ed575a8b33d86347bcb6bd5036a414a, type: 2}
-  - {fileID: 11400000, guid: ba178604a3225b74e9317e2a4b4dc5c7, type: 2}
-  - {fileID: 11400000, guid: b209b9f7eeb81a64e8249b867d506dda, type: 2}
   cards:
   - {fileID: 11400000, guid: 119b7d9cecced134ea4036d0d4a6da7c, type: 2}
   - {fileID: 11400000, guid: 873de218eb2b4e64787445cb04337bcd, type: 2}
@@ -94,42 +93,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c5f413c38e9f7e442960e5d447610e6f, type: 2}
   - {fileID: 11400000, guid: 545d849d4136f5640825d0f270bc26e8, type: 2}
   - {fileID: 11400000, guid: 55e2e3b7df46b554eb2bd8f9e5d8de04, type: 2}
-  - {fileID: 11400000, guid: f1ccca53c6a253f409623885182ea5d4, type: 2}
-  - {fileID: 11400000, guid: 468848437d838524bab74696e7bf5146, type: 2}
-  - {fileID: 11400000, guid: b5499d100e104704fb51768ba1150a7d, type: 2}
-  - {fileID: 11400000, guid: 2924dbed824009f4fa249451e9462af4, type: 2}
-  - {fileID: 11400000, guid: 20c2fa161a50ed14baedc1f2e3030ea6, type: 2}
-  - {fileID: 11400000, guid: 43e9bc40afbb8e3479bbe1a7e73a7e24, type: 2}
-  - {fileID: 11400000, guid: 78949dcab7555934893fe7ccb394144e, type: 2}
-  - {fileID: 11400000, guid: 052b284f5967003449b3aea7a5263599, type: 2}
-  - {fileID: 11400000, guid: 0e7321b68369bf447a4df9c4a0294060, type: 2}
-  - {fileID: 11400000, guid: f60c80fa8cc7f334ba0075b4c29e39d4, type: 2}
-  - {fileID: 11400000, guid: 3920bc99818feba4f837cc4fe1c61e85, type: 2}
-  - {fileID: 11400000, guid: ff89503a246be0545b4c16987c439fa2, type: 2}
-  - {fileID: 11400000, guid: e7e2f79f82c570f4295ba3d14072df7d, type: 2}
-  - {fileID: 11400000, guid: d83462a06a8ab0448b95040c2fdaff40, type: 2}
-  - {fileID: 11400000, guid: b96dd711c68e9cd4885f6fb9b77e5a7b, type: 2}
-  - {fileID: 11400000, guid: 0f0d4db42c799434e8de8195383efc03, type: 2}
-  - {fileID: 11400000, guid: 4b774893c0f2ed9439da0c468736e481, type: 2}
-  - {fileID: 11400000, guid: f9f6873950273fd47b057a6486bdee3e, type: 2}
-  - {fileID: 11400000, guid: b4b60775558db3348a009386019d67bf, type: 2}
-  - {fileID: 11400000, guid: ee2ea916ee5704247b7068ce429e07b4, type: 2}
-  - {fileID: 11400000, guid: 6bccbe15e244e5b4294e9c9cd5044fd5, type: 2}
-  - {fileID: 11400000, guid: 86f3991650ab5cc4b88a254afb2cb00c, type: 2}
-  - {fileID: 11400000, guid: 66a5b67c3542d574a9fe4d3f27282440, type: 2}
-  - {fileID: 11400000, guid: 4a4ef4aa0b4cb45468ab6f7d906c1b4d, type: 2}
-  - {fileID: 11400000, guid: a428239746447864b98643725d1324bc, type: 2}
-  - {fileID: 11400000, guid: 3de735f032a544f48a7271f616b1b08c, type: 2}
-  - {fileID: 11400000, guid: d16867aac1a40a24fa52c50b39b957c4, type: 2}
-  - {fileID: 11400000, guid: 07170fe4a1c8fb04ea7b2fdc00484e82, type: 2}
-  - {fileID: 11400000, guid: 049498f60f8ceed4088747bbc4f1d883, type: 2}
-  - {fileID: 11400000, guid: 597009e91026c574391c78f7e1efdf5c, type: 2}
-  - {fileID: 11400000, guid: 2fdae99c973c7ea46bfdf21af2424793, type: 2}
-  - {fileID: 11400000, guid: 4d7451f477118c449a7529382342b5c7, type: 2}
-  - {fileID: 11400000, guid: 127bbe4c57f324048a5f48b80356bde8, type: 2}
-  - {fileID: 11400000, guid: 4e706cb637f65cd4ebcb98c5675fb278, type: 2}
-  - {fileID: 11400000, guid: b2ae64e2d5d92604cb459616263682f7, type: 2}
-  - {fileID: 11400000, guid: dbe69d8650412454b8f44de27b028f2c, type: 2}
   RewardUnlock:
     resourceDatas:
     - resource: 121

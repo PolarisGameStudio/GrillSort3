@@ -11,8 +11,6 @@ namespace MyGame.Modules.CardCollection
         public CardType type;
         public string cardName;
         public int star;
-        //public Sprite sprite;
-        public TextColorType textColorIndex;
 
         [Space]
         [Header("Path")]

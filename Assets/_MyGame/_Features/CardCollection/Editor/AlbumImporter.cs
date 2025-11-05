@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -59,30 +60,55 @@ namespace MyGame.Modules.CardCollection
             selectedAlbumImageType = (AlbumImageType)EditorGUILayout.EnumPopup("AlbumImageType", selectedAlbumImageType);
             EditorGUILayout.Space(10);
 
-            if (GUILayout.Button("Import Sprites to CardConfigs"))
-            {
-                if (albumConfigs != null && albumConfigs.Count != 0)
-                {
-                    ImportSpritesToAlbumConfigs(selectedAlbumImageType);
-                }
-                else if (cardConfigs != null && cardConfigs.Count != 0)
-                {
-                    ImportSpritesToCardConfigs();
-                }
-                else
-                {
-                    Debug.LogError("Chưa chọn dataList!");
+            // if (GUILayout.Button("Import Sprites to CardConfigs"))
+            // {
+            //     if (albumConfigs != null && albumConfigs.Count != 0)
+            //     {
+            //         ImportSpritesToAlbumConfigs(selectedAlbumImageType);
+            //     }
+            //     else if (cardConfigs != null && cardConfigs.Count != 0)
+            //     {
+            //         ImportSpritesToCardConfigs();
+            //     }
+            //     else
+            //     {
+            //         Debug.LogError("Chưa chọn dataList!");
 
-                }
-            }
-            // base.OnGUI();
+            //     }
+            // }
+            base.OnGUI();
         }
 
         protected override void ImportCSV()
         {
-
-
             string[] lines = GetLines();
+            for (int i = 0; i < cardConfigs.Count; i++)
+            {
+                string[] values = lines[i].Split(',');
+                cardConfigs[i].cardName = values[0];
+                cardConfigs[i].star = GetStar(values[1]);
+                EditorUtility.SetDirty(cardConfigs[i]);
+            }
+            AssetDatabase.SaveAssets();
+            Debug.Log("<color=green>Import data to CardConfigs success</color>");
+        }
+
+        private int GetStar(string star)
+        {
+            try
+            {
+                return int.Parse(star);
+            }
+            catch (Exception)
+            {
+                switch (star)
+                {
+                    case "Golden":
+                        return 6;
+                    default:
+                        return 0;
+                }
+            }
         }
 
         private void ImportSpritesToCardConfigs()
@@ -92,9 +118,10 @@ namespace MyGame.Modules.CardCollection
                 Debug.LogError("Số lượng cardConfigs và sprites không khớp!");
                 return;
             }
+
             for (int i = 0; i < cardConfigs.Count; i++)
             {
-                //cardConfigs[i].sprite = sprites[i];
+                // cardConfigs[i]/.sprite = sprites[i];
                 EditorUtility.SetDirty(cardConfigs[i]);
             }
             AssetDatabase.SaveAssets();

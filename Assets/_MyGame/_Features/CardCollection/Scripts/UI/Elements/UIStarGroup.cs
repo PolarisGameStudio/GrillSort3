@@ -8,6 +8,8 @@ namespace MyGame.Modules.CardCollection
     public class UIStarGroup : MonoBehaviour
     {
         [SerializeField] private Transform container;
+        [SerializeField] private Transform customContainer;
+
         private readonly Service<PoolingContainerService> _poolingService = new();
         private readonly Service<CardCollectionService> _cardCollectionService = new();
         private List<UIStar> stars = new();
@@ -19,11 +21,29 @@ namespace MyGame.Modules.CardCollection
 
             var maxStarView = _cardCollectionService.Instance.config.maxStarView;
             var starView = Mathf.Min(star, maxStarView);
-            for (int i = 0; i < starView; i++)
+            if (starView == 5)
             {
-                var starObj = _poolingService.Instance.CreateObject<UIStar>(container);
-                stars.Add(starObj);
+                customContainer.gameObject.SetActive(true);
+                container.gameObject.SetActive(false);
+                foreach (Transform child in customContainer)
+                {
+                    if (child.TryGetComponent<UIStar>(out var starObj))
+                    {
+                        stars.Add(starObj);
+                    }
+                }
             }
+            else
+            {
+                customContainer.gameObject.SetActive(false);
+                container.gameObject.SetActive(true);
+                for (int i = 0; i < starView; i++)
+                {
+                    var starObj = _poolingService.Instance.CreateObject<UIStar>(container);
+                    stars.Add(starObj);
+                }
+            }
+
         }
 
         public void SetData(bool isOn)

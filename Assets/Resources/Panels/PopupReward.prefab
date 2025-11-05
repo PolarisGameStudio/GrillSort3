@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2466c27b53a1bfc429ddee1a8174da1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
+  type: 1
   image: {fileID: 0}
 --- !u!1 &1790133962468874049
 GameObject:
@@ -968,6 +968,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   closeTween: []
+  blockGeneralCurrency: 0
   rewardGrid: {fileID: 2050768744450766540}
   bg: {fileID: 1481648974246825783}
   btnObj: {fileID: 8335259254486091452}

@@ -46,11 +46,13 @@ namespace MyGame.Modules.CardCollection
 
 
             _cardConfig = _cardCollectionService.Instance.config.GetCardConfig(cardType);
+            var albumType = _cardCollectionService.Instance.config.GetAlbumType(cardType);
+            var _albumConfig = _cardCollectionService.Instance.config.GetAlbumConfig(albumType);
             cardImage.SetSpriteAsync(_cardConfig.GetCardSpritePath()).Forget();
 
             txtMainName.text = _cardConfig.cardName;
             // txtMainName.GetComponent<I2.Loc.Localize>().SetTerm(_cardConfig.cardName);
-            txtMainName.SetMaterial(_cardConfig.textColorIndex);
+            txtMainName.SetMaterial(_albumConfig.color);
 
             txtNameOnBack.text = _cardConfig.cardName;
 
