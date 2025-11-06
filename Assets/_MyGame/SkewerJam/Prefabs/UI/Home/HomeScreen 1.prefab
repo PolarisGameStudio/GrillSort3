@@ -1593,6 +1593,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2263151088860421303}
   - component: {fileID: 6201502876154455689}
+  - component: {fileID: 7509238617828084116}
   m_Layer: 5
   m_Name: HomeManager
   m_TagString: Untagged
@@ -1637,9 +1638,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uINavigateBar: {fileID: 5813071603495819665}
-  blockUI: {fileID: 8463760208693339182}
-  delayBlockUI: 2
   delaySoundHome: 0.5
+  blockUIManager: {fileID: 7509238617828084116}
+--- !u!114 &7509238617828084116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990251569277299068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a28c8c07d1e8f114284283a10fb2bfd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockUI: {fileID: 8463760208693339182}
 --- !u!1 &2043824961652901777
 GameObject:
   m_ObjectHideFlags: 0
@@ -5452,7 +5465,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a05a00b25f6ef2c4c8bde31a0f35185f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayProcess: 2500
+  delayProcess: 2.5
+  blockUIDuration: 3
   widgets:
   - {fileID: 7362577579740196217}
   - {fileID: 4436730800058121549}

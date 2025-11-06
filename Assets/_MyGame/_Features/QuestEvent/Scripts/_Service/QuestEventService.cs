@@ -76,6 +76,16 @@ namespace MyGame.Modules.QuestEvent
             _claimedQuestIndex = new IntDataPref(DATA_KEY + "_claimedQuestIndex", -1);
         }
 
+        protected override void ResetData()
+        {
+            base.ResetData();
+            _currentItem.Value = 0;
+            _claimedQuestIndex.Value = -1;
+
+            _numCollectAtHome = 0;
+            MySonatFramework.GetService<SubInventoryService>().SetResource(SubGameResource.QuestEventItem, 0);
+        }
+
         public override bool CanUnlock()
         {
             var level = MySonatFramework.GetService<UserDataService>().GetLevel();

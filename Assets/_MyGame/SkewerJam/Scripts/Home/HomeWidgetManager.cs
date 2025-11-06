@@ -1,13 +1,13 @@
 using Cysharp.Threading.Tasks;
 using Manager;
-using MyGame.Scripts.UI;
-using SonatFramework.Scripts.UIModule;
+using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems.EventBus;
 using UnityEngine;
 
 public class HomeWidgetManager : MonoBehaviour
 {
-    [SerializeField] private int delayProcess = 2500;
+    [SerializeField] private float delayProcess = 2.5f;
+    [SerializeField] private float blockUIDuration = 3f;
     [SerializeField] private UIHomeWidget[] widgets;
     public static int homeCount = -1;
 
@@ -19,7 +19,11 @@ public class HomeWidgetManager : MonoBehaviour
             widget.Setup();
         }
 
-        HomeManager.Instance.BlockUI();
+        HomeManager.Instance.BlockUIManager.RegisterBlockUI(nameof(HomeWidgetManager));
+        SonatUtils.DelayCall(blockUIDuration, () =>
+        {
+            HomeManager.Instance.BlockUIManager.DeregisterBlockUI(nameof(HomeWidgetManager));
+        }, this);
         ProcessTasks().Forget();
     }
 
@@ -41,7 +45,7 @@ public class HomeWidgetManager : MonoBehaviour
 
     public async UniTask ProcessTasks()
     {
-        await UniTask.Delay(delayProcess);
+        await UniTask.Delay((int)(delayProcess * 1000));
         int popupCount = 0;
         foreach (var widget in widgets)
         {
@@ -52,7 +56,6 @@ public class HomeWidgetManager : MonoBehaviour
                 popupCount++;
             }
         }
-        HomeManager.Instance.UnlockUI();
         EventBus<HomeProcessEvent>.Raise(new HomeProcessEvent());
     }
 

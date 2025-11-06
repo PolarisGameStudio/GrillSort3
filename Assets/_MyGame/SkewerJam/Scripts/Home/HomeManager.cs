@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using MyGame.Modules.CardCollection;
 using MyGame.Modules.SubInventory;
@@ -17,17 +18,18 @@ using UnityEngine;
 public class HomeManager : SingletonSimple<HomeManager>
 {
     [SerializeField] private UINavigateBarSlide uINavigateBar;
-    [SerializeField] private GameObject blockUI;
-    [SerializeField] private float delayBlockUI = 2f;
     [SerializeField] private float delaySoundHome = 0.5f;
+    [SerializeField] private BlockUIManager blockUIManager;
 
+    public BlockUIManager BlockUIManager => blockUIManager;
     private bool running = false;
 
     private void Awake()
     {
         if (uINavigateBar == null)
             uINavigateBar = GetComponentInChildren<UINavigateBarSlide>();
-        //OnCompleteAlbum();
+
+        blockUIManager.Initialize();
     }
 
     public async UniTask SwitchTab(Sonat.Enums.NavigationType navigation, float delay = 0)
@@ -73,17 +75,6 @@ public class HomeManager : SingletonSimple<HomeManager>
             await UniTask.Delay(2000);
             PanelManager.Instance.OpenPanel<PopupReward>(new UIData().Add(PopupReward.REWARD_KEY, rewardData));
         }
-    }
-
-
-    public void BlockUI()
-    {
-        blockUI.SetActive(true);
-    }
-
-    public void UnlockUI()
-    {
-        blockUI.SetActive(false);
     }
 
 #if UNITY_EDITOR
