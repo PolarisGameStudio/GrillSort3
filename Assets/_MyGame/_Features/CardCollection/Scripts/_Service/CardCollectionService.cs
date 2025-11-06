@@ -68,6 +68,15 @@ namespace MyGame.Modules.CardCollection
             StarSubmodule.LoadData();
         }
 
+        protected override void ResetData()
+        {
+            base.ResetData();
+            CardInventoryModule.ResetData();
+            CardSubmodule.ResetData();
+            StarSubmodule.ResetData();
+
+        }
+
         private async UniTask LoadImageAsync()
         {
             foreach (var album in config.albums)
@@ -134,6 +143,7 @@ namespace MyGame.Modules.CardCollection
                 var uiData = new UIData();
                 uiData.Add(PopupReceiveCardBase.CARD_REWARD_KEY, tempCardRewardData.cardList);
                 uiData.Add(PopupReceiveCardBase.RECENTLY_NEW_CARD_LIST_KEY, tempCardRewardData.recentlyNewCardList);
+                uiData.Add(PopupReceiveCardBase.PACK_RESOURCE_KEY, tempCardRewardData.packResource);
                 var popup = PanelManager.Instance.OpenPanelByName<PopupReceiveCardBase>("PopupReceiveCard_Immediately", uiData);
 
                 await UniTask.WaitUntil(() => (popup == null || popup.gameObject.activeInHierarchy == false));
@@ -253,11 +263,11 @@ namespace MyGame.Modules.CardCollection
             for (int i = 0; i < resourceData.quantity; i++)
             {
                 var cardList = CardSubmodule.GetCardReward(resourceData.resource);
-                ReceiveCards(cardList);
+                ReceiveCards(cardList, resourceData.resource);
             }
         }
 
-        public void ReceiveCards(List<CardType> cardList)
+        public void ReceiveCards(List<CardType> cardList, GameResource packResource)
         {
             var recentlyNewCardList = new List<CardType>();
             StarSubmodule.SetNumberStarView();
@@ -286,7 +296,8 @@ namespace MyGame.Modules.CardCollection
             _queueListTempCards.Enqueue(new TempCardRewardData()
             {
                 cardList = cardList,
-                recentlyNewCardList = recentlyNewCardList
+                recentlyNewCardList = recentlyNewCardList,
+                packResource = packResource
             });
         }
 
@@ -318,6 +329,7 @@ namespace MyGame.Modules.CardCollection
 
     public class TempCardRewardData
     {
+        public GameResource packResource;
         public List<CardType> cardList;
         public List<CardType> recentlyNewCardList;
     }

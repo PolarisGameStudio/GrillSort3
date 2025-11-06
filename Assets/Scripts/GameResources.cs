@@ -23,6 +23,8 @@ namespace Sonat.Enums
         Card_Randomx5 = 124,
         Card_Randomx6 = 125,
         Card_Special = 126,
+
+        Badge_CardCollection = 200,
         MAX = Byte.MaxValue, // 255
     }
 
@@ -31,7 +33,8 @@ namespace Sonat.Enums
         None = 0,
         Currency,
         Booster,
-        Card
+        Card, 
+        Badge,
     }
 
     public static class GameResourceHelper
@@ -56,6 +59,8 @@ namespace Sonat.Enums
                 case GameResource.Card_Randomx6:
                 case GameResource.Card_Special:
                     return GameResourceType.Card;
+                case GameResource.Badge_CardCollection:
+                    return GameResourceType.Badge;
             }
 
             return GameResourceType.None;

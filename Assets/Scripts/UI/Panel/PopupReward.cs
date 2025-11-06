@@ -4,6 +4,7 @@ using DG.Tweening;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.UIModule.UIElements;
+using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems.EventBus;
 using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.InventoryManagement.GameResources;
@@ -21,6 +22,7 @@ public class PopupReward : Panel
 
     [Header("Anim")]
     [SerializeField] private float duration = 0.3f;
+    [SerializeField] private float durationScaleDown = 0.2f;
     [SerializeField] private float delayBetweenItemsAppear = 0.1f;
     [SerializeField] private float delayBetweenItems = 0.3f;
 
@@ -49,7 +51,10 @@ public class PopupReward : Panel
             {
                 if (item.gameObject.activeSelf)
                 {
-                    item.transform.localScale = Vector3.zero;
+                    if (item.transform.childCount > 0)
+                    {
+                        item.transform.GetChild(0).localScale = Vector3.zero;
+                    }
                 }
             }
         }
@@ -60,7 +65,14 @@ public class PopupReward : Panel
             {
                 if (item.gameObject.activeSelf)
                 {
-                    item.DOScale(1, duration).SetEase(Ease.OutBack);
+                    if (item.transform.childCount > 0)
+                    {
+                        item.transform.GetChild(0).DOScale(1, duration).SetEase(Ease.OutBack);
+                    }
+                    if (item.TryGetComponent<RewardItemEffectController>(out var rewardItemEffectController))
+                    {
+                        rewardItemEffectController.PlayPS();
+                    }
                     await UniTask.Delay((int)(delayBetweenItemsAppear * 1000));
                 }
             }
@@ -166,7 +178,19 @@ public class PopupReward : Panel
             UIRewardItem rewardItem = rewardGrid.GetRewardItem(resource.resource);
             if (rewardItem != null)
             {
-                rewardItem.GetComponent<CanvasGroup>().alpha = 0;
+                // rewardItem.GetComponent<CanvasGroup>().alpha = 0;
+                if (rewardItem.transform.childCount > 0)
+                {
+                    rewardItem.transform.GetChild(0).DOScale(0, durationScaleDown).SetEase(Ease.InBack);
+                }
+                if (rewardItem.TryGetComponent<RewardItemEffectController>(out var rewardItemEffectController))
+                {
+                    SonatUtils.DelayCall(durationScaleDown, () =>
+                    {
+                        rewardItemEffectController.PlayPsHide();
+                    }, rewardItem);
+                }
+
             }
 
             var quantity = resource.resource == GameResource.Lives ? 1 : resource.quantity;

@@ -34,6 +34,11 @@ namespace MyGame.Modules.CardCollection
             _countPack6 = new IntDataPref($"{DATA_KEY}_countPack6", 0);
         }
 
+        public void ResetData()
+        {
+            _countPack6.Value = 0;
+        }
+
         public List<CardType> GetCardReward(GameResource gameResource)
         {
             var packType = gameResource;

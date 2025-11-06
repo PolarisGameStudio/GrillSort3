@@ -9,5 +9,6 @@ namespace MyGame.Modules.CardCollection.Animation
         public float animLifeTime = 1.95f;
         public float delayAppearPs = 0.05f;
         public float delayBeforePlayCardParticle = 0.35f;
+        public float delaySoundAppearAnim = 0.5f;
     }
 }

@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89567a8862df426dbd1dc1aaaaa690cd, type: 3}
   m_Name: AtlasService
   m_EditorClassIdentifier: 
-  spriteAtlas: {fileID: 100100200, guid: 061a8ce2fbe431f42ae3698f4977a7a1, type: 3}
+  spriteAtlases:
+  - {fileID: 100100200, guid: 061a8ce2fbe431f42ae3698f4977a7a1, type: 3}
+  - {fileID: 100100200, guid: b7b53a42963d33849b1cb77199df5912, type: 3}

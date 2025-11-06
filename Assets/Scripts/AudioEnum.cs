@@ -33,6 +33,10 @@ namespace Sonat.Enums
         Box_Appear_Grill3,
         Box_Close_Grill3,
         Slot_Warning_Grill3,
+        
+        Pot_lid_Close_01_Grill3,
+        Pot_lid_Close_02_Grill3,
+        Pot_lid_Close_03_Grill3,
 
         Items_Merge_combo_1 = 40,
         Items_Merge_combo_2,
@@ -64,15 +68,29 @@ namespace Sonat.Enums
         Obstacle_Locknkey_Open_Grill_sort,
 
 
+
         Items_Pick_01_Grill3 = 100,
         Items_Pick_02_Grill3,
         Items_Pick_03_Grill3,
         Items_Pick_04_Grill3,
 
+        Items_Put_Grill3,
+
+
         Sizzle_01_Grill3 = 120,
         Sizzle_02_Grill3,
         Sizzle_03_Grill3,
         Sizzle_04_Grill3,
+
+        // card collection
+        Card_collection_Appear_open_Grill_sort = 130,
+        Card_Appear_Grill_sort,
+        Card_Disappear_Grill_sort,
+        Stars_Fill_Grill_sort,
+
+        Chest_Level_Appear,
+        Chest_Level_Idle,
+        Chest_Level_Open,
 
         Booster_Spatula_Appear_Grill3 = 200,
         Booster_AddTray_Grill3 = 201,
@@ -80,6 +98,8 @@ namespace Sonat.Enums
         Booster_FoodTray_Appear_Grill3 = 203,
         Booster_FoodTray_Fill_tray_Grill3 = 204,
         Booster_Out_Grill3 = 205,
+        Booster_Received_Grill3,
+        Coin_Received,
     }
 }
 #endif

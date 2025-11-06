@@ -16,6 +16,7 @@ namespace MyGame.Modules.CardCollection.Home
         [SerializeField] protected TMP_Text txtStar;
         [SerializeField] private Transform root;
         [SerializeField] private bool playOnEnable = true;
+        [SerializeField] private bool registerEvent = true;
         [Space]
         [Header("Animation")]
         [SerializeField] private float delayAppear = 0f;
@@ -39,12 +40,25 @@ namespace MyGame.Modules.CardCollection.Home
                 PlayAppearAnimation(delayAppear);
             }
 
-
+            if (registerEvent)
+            {
+                var starSubmodule = _cardCollectionService.Instance.StarSubmodule;
+                starSubmodule.OnStarChanged += OnStarChanged;
+            }
         }
 
         private void OnDisable()
         {
+            if (registerEvent)
+            {
+                var starSubmodule = _cardCollectionService.Instance.StarSubmodule;
+                starSubmodule.OnStarChanged -= OnStarChanged;
+            }
+        }
 
+        private void OnStarChanged(int value)
+        {
+            txtStar.text = value.ToString();
         }
 
         public void PlayAppearAnimation(float delay = 0)

@@ -10,6 +10,7 @@ using System.Linq;
 using MyGame.SkewerJam.Level;
 using MyGame.SkewerJamSO.Boosters;
 using MyGame.SkewerJam.Gameplay.Helpers;
+using Sonat.Enums;
 
 namespace MyGame.SkewerJam.Objects
 {
@@ -61,6 +62,7 @@ namespace MyGame.SkewerJam.Objects
         {
             if (slot.GetGrill() is WaitingGrill waitingGrill)
             {
+                MySonatFramework.audioService.PlaySound(AudioId.Items_Put_Grill3);
                 OnItemEndSwitch(item).Forget();
             }
         }

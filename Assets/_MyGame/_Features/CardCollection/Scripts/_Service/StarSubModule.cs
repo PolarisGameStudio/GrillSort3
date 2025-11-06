@@ -21,13 +21,20 @@ namespace MyGame.Modules.CardCollection
         public int NumberStar => _cardStar.Value;
         public int NumberStarView => _numStarView;
 
-        public event Action<int> OnStarCountChanged;
+        public event Action<int> OnStarChanged;
 
 
         public void LoadData()
         {
             _cardStarExchangeIndex = new IntDataPref($"{DATA_KEY}_cardStarExchangeIndex", -1);
             _cardStar = new IntDataPref($"{DATA_KEY}_cardStar", 0);
+        }
+
+        public void ResetData()
+        {
+            _cardStarExchangeIndex.Value = -1;
+            _cardStar.Value = 0;
+            OnStarChanged?.Invoke(_cardStar.Value);
         }
 
         public void SetNumberStarView()
@@ -38,6 +45,7 @@ namespace MyGame.Modules.CardCollection
         public void AddCardStar(int numStar)
         {
             _cardStar.Value += numStar;
+            OnStarChanged?.Invoke(_cardStar.Value);
         }
 
         public (bool success, string message) OnClickReceiveChest(int index)
@@ -77,6 +85,7 @@ namespace MyGame.Modules.CardCollection
 
             _cardStar.Value -= neededStar;
             _cardStarExchangeIndex.Value = index;
+            OnStarChanged?.Invoke(_cardStar.Value);
 
             var logData = new EarnResourceLogData
             {

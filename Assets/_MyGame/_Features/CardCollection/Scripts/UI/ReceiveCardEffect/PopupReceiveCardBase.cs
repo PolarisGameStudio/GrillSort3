@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using MyGame.Modules.CardCollection.Home;
 using MyGame.Modules.CardCollection.ReceiveCardEffect.Configs;
+using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems;
 using SonatFramework.Systems.ObjectPooling;
@@ -17,6 +18,7 @@ namespace MyGame.Modules.CardCollection
 
     public abstract class PopupReceiveCardBase : Panel
     {
+        public const string PACK_RESOURCE_KEY = "PackResource";
         public const string CARD_REWARD_KEY = "RewardData";
         public const string RECENTLY_NEW_CARD_LIST_KEY = "RecentlyNewCardList";
         [SerializeField] private UIWidgetReceiveCardStar uiWidgetCardStar;
@@ -31,6 +33,7 @@ namespace MyGame.Modules.CardCollection
         private readonly Service<CardCollectionService> _cardCollectionService = new();
         private readonly Service<PoolingContainerService> _poolingContainerService = new();
 
+        protected GameResource packResource;
         protected List<CardType> cardList;
         protected List<CardType> recentlyNewCardList;
 
@@ -50,6 +53,7 @@ namespace MyGame.Modules.CardCollection
             base.Open(uiData);
             cardList = uiData.Get<List<CardType>>(CARD_REWARD_KEY);
             recentlyNewCardList = uiData.Get<List<CardType>>(RECENTLY_NEW_CARD_LIST_KEY);
+            packResource = uiData.Get<GameResource>(PACK_RESOURCE_KEY);
             SetupCards();
 
             PlayAppearAnimation().Forget();
@@ -124,9 +128,6 @@ namespace MyGame.Modules.CardCollection
 
         private async UniTask PlayCollect()
         {
-            // MySonatFramework.audioService.PlaySound(AudioId.Card_Disappear_Grill_sort);
-            // biến card dư thành star
-
             // widget xuất hiện và star bay vào
             if (CheckOldCard())
             {
@@ -149,6 +150,7 @@ namespace MyGame.Modules.CardCollection
 
         private void DisplayCardDisappear()
         {
+            MySonatFramework.audioService.PlaySound(AudioId.Card_Disappear_Grill_sort);
             foreach (var card in uiCards)
             {
                 if (card.IsNew)
@@ -186,6 +188,7 @@ namespace MyGame.Modules.CardCollection
                         uiWidgetCardStar.transform,
                         (Action)(() =>
                         {
+                            MySonatFramework.audioService.PlaySound(AudioId.Stars_Fill_Grill_sort);
                             uiWidgetCardStar.UpdateValueView(addedStar);
                         }),
                         delayMove);

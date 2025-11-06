@@ -7,6 +7,7 @@ using Facebook.Unity;
 using Gameplay.BoosteeManagement;
 using Gameplay.Entities.GrillScripts;
 using Gameplay.LevelData;
+using Sonat.Enums;
 using SonatFramework.Scripts.Utils;
 using UnityEngine;
 
