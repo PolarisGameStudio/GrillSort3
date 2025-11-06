@@ -145,11 +145,12 @@ public class PopupSettings : PopupSettingsBase
 
     public void OpenFanPage()
     {
-        Application.OpenURL("https://www.facebook.com/groups/1526661221663574");
+        Application.OpenURL("https://www.facebook.com/groups/704136519375555");
     }
 
     public void OpenGroup()
     {
-        Application.OpenURL("https://www.facebook.com/groups/1526661221663574");
+        Application.OpenURL("https://www.facebook.com/groups/704136519375555");
+        // Application.OpenURL("https://www.facebook.com/groups/1526661221663574");
     }
 }

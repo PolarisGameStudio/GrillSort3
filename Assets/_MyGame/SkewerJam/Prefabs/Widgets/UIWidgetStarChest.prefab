@@ -135,6 +135,10 @@ MonoBehaviour:
   blockClick: 1
   plusObj: {fileID: 0}
   blastEffect: {fileID: 0}
+  useSound: 0
+  audioId: 207
+  delaySound: 0.1
+  isGeneralCurrency: 0
 --- !u!225 &7518649657248122875
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -334,19 +338,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1543639859799559368, guid: d9cdba3166bf8e8448ac77edf69a30a8, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1543639859799559368, guid: d9cdba3166bf8e8448ac77edf69a30a8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1543639859799559368, guid: d9cdba3166bf8e8448ac77edf69a30a8, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1543639859799559368, guid: d9cdba3166bf8e8448ac77edf69a30a8, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1543639859799559368, guid: d9cdba3166bf8e8448ac77edf69a30a8, type: 3}
       propertyPath: m_SizeDelta.x
@@ -386,11 +390,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1543639859799559368, guid: d9cdba3166bf8e8448ac77edf69a30a8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1543639859799559368, guid: d9cdba3166bf8e8448ac77edf69a30a8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 722
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1543639859799559368, guid: d9cdba3166bf8e8448ac77edf69a30a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -438,7 +442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7140230648142593261, guid: d9cdba3166bf8e8448ac77edf69a30a8, type: 3}
       propertyPath: m_Name
-      value: WidgetStarChest
+      value: UIWidgetStarChest
       objectReference: {fileID: 0}
     - target: {fileID: 7660825958317929600, guid: d9cdba3166bf8e8448ac77edf69a30a8, type: 3}
       propertyPath: m_Sprite
