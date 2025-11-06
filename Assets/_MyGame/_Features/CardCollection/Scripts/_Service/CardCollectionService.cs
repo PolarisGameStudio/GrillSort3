@@ -140,7 +140,7 @@ namespace MyGame.Modules.CardCollection
                 var popup = PanelManager.Instance.OpenPanelByName<Panel>("PopupTutorial_CardCollection", uiData);
 
                 await UniTask.WaitUntil(() => popup == null || popup.gameObject.activeInHierarchy == false);
-                await UniTask.Delay(1000);
+                await UniTask.Delay(300);
                 RewardUnlockFeature();
                 HomeManager.Instance.BlockUIManager.DeregisterBlockUI(nameof(CardCollectionService));
             }

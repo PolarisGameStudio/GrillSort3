@@ -5,6 +5,7 @@ using MyGame.Modules.UI.LoopScroll;
 using MyGame.SkewerJam.Utils;
 using SonatFramework.Scripts.UIModule.UIElements;
 using SonatFramework.Systems;
+using SonatFramework.Systems.InventoryManagement.GameResources;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,12 +23,15 @@ namespace MyGame.Modules.QuestEvent.UI
     public class UIQuestElement : ItemViewBase<QuestEventData>
     {
         [SerializeField] private TMP_Text txtTitle;
-        [SerializeField] private UIRewardGroup uiRewardGroup;
         [SerializeField] private Image bg;
         [SerializeField] private GameObject[] objLock;
         [SerializeField] private GameObject[] objComplete;
         [SerializeField] private GameObject[] objCurrent;
         [SerializeField] private GameObject[] objLines;
+        [Header("Reward")]
+        [SerializeField] private UIRewardGroup uiRewardGroup;
+        [SerializeField] private UIBubbleReward uiBubbleReward;
+        [SerializeField] private int thresholdResourceCount = 3;
 
         [Header("bg sprite")]
         [SerializeField] private Sprite spriteBgNormal;
@@ -52,6 +56,7 @@ namespace MyGame.Modules.QuestEvent.UI
         private void OnDisable()
         {
             _questEventService.Instance.OnDataUpdated -= OnDataUpdated;
+            // ShowReward(false, null);
         }
 
         private void OnDataUpdated()
@@ -155,7 +160,7 @@ namespace MyGame.Modules.QuestEvent.UI
             {
                 case State.Completed:
                     bg.sprite = spriteBgNormal;
-                    uiRewardGroup.gameObject.SetActive(false);
+                    ShowReward(false, null);
 
                     imgFill.DOKill();
                     imgFill.fillAmount = 1;
@@ -165,8 +170,7 @@ namespace MyGame.Modules.QuestEvent.UI
                     bg.sprite = spriteBgNormal;
 
                     var rewardDataLocked = _questEventService.Instance.config.listMilestones[_index].rewardData;
-                    uiRewardGroup.SetData(rewardDataLocked);
-                    uiRewardGroup.gameObject.SetActive(true);
+                    ShowReward(true, rewardDataLocked);
 
                     imgFill.DOKill();
                     imgFill.fillAmount = 0;
@@ -177,8 +181,7 @@ namespace MyGame.Modules.QuestEvent.UI
                     bg.sprite = spriteBgCurrent;
 
                     var rewardData = _questEventService.Instance.config.listMilestones[_index].rewardData;
-                    uiRewardGroup.SetData(rewardData);
-                    uiRewardGroup.gameObject.SetActive(true);
+                    ShowReward(true, rewardData);
 
                     imgFill.DOKill();
                     imgFill.fillAmount = 0;
@@ -192,6 +195,28 @@ namespace MyGame.Modules.QuestEvent.UI
             {
                 _questEventService.Instance.ClaimQuest();
                 return;
+            }
+        }
+
+        private void ShowReward(bool show, RewardData rewardData = null)
+        {
+            uiBubbleReward.gameObject.SetActive(show);
+            uiRewardGroup.gameObject.SetActive(show);
+            if (show)
+            {
+                if (rewardData.resourceDatas.Count <= thresholdResourceCount)
+                {
+                    uiBubbleReward.gameObject.SetActive(false);
+
+                    uiRewardGroup.gameObject.SetActive(true);
+                    uiRewardGroup.SetData(rewardData);
+                }
+                else
+                {
+                    uiRewardGroup.gameObject.SetActive(false);
+                    uiBubbleReward.gameObject.SetActive(true);
+                    uiBubbleReward.SetReward(rewardData);
+                }
             }
         }
     }

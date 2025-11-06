@@ -60,7 +60,7 @@ namespace MyGame.Modules
 
         private void OnHomeSetupEvent(HomeSetupEvent eventData)
         {
-            if (CanUnlock() == true)
+            if (IsUnlocked() == false && CanUnlock() == true)
             {
                 Unlock();
             }
