@@ -123,11 +123,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4923830163265052286}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -29.899971}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -185.89996}
   m_SizeDelta: {x: 246, y: 154}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &8523165038384701348
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -355,6 +355,8 @@ MonoBehaviour:
   customIcon: 0
   quantityFormat: x{0}
   iconNameFormat: ico_{0}
+  useCustomIconScale: 0
+  customIconScale: 1
 --- !u!1 &6201144885036508414
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,6 +453,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pReward: {fileID: 6751221344741737847}
   rewardGroup: {fileID: 7779021621886708894}
+  dynamicSize: 0
+  bg: {fileID: 9075788860357180777}
+  widths:
+  - 160
+  - 260
+  threshold: 3
 --- !u!223 &8266936422998167032
 Canvas:
   m_ObjectHideFlags: 0

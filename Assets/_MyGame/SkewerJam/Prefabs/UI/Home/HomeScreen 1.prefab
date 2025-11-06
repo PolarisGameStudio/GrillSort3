@@ -11199,29 +11199,37 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2446048547670201151, guid: 46087e4781223ff4ba277c8cc8672020, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
+    - target: {fileID: 7597621181136206032, guid: 46087e4781223ff4ba277c8cc8672020, type: 3}
+      propertyPath: useForceEffect
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2446048547670201151, guid: 46087e4781223ff4ba277c8cc8672020, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
+    - target: {fileID: 7597621181136206032, guid: 46087e4781223ff4ba277c8cc8672020, type: 3}
+      propertyPath: OnForceEffectFinished.m_PersistentCalls.m_Calls.Array.size
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2446048547670201151, guid: 46087e4781223ff4ba277c8cc8672020, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
+    - target: {fileID: 7597621181136206032, guid: 46087e4781223ff4ba277c8cc8672020, type: 3}
+      propertyPath: OnForceEffectFinished.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3435156172934259536, guid: 46087e4781223ff4ba277c8cc8672020, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
+    - target: {fileID: 7597621181136206032, guid: 46087e4781223ff4ba277c8cc8672020, type: 3}
+      propertyPath: OnForceEffectFinished.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8240635633324109331}
+    - target: {fileID: 7597621181136206032, guid: 46087e4781223ff4ba277c8cc8672020, type: 3}
+      propertyPath: OnForceEffectFinished.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 3435156172934259536, guid: 46087e4781223ff4ba277c8cc8672020, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
+    - target: {fileID: 7597621181136206032, guid: 46087e4781223ff4ba277c8cc8672020, type: 3}
+      propertyPath: OnForceEffectFinished.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayUpdateSlider
       objectReference: {fileID: 0}
-    - target: {fileID: 3435156172934259536, guid: 46087e4781223ff4ba277c8cc8672020, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
+    - target: {fileID: 7597621181136206032, guid: 46087e4781223ff4ba277c8cc8672020, type: 3}
+      propertyPath: OnForceEffectFinished.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MyGame.Modules.QuestEvent.UI.Elements.UISliderQuestEvent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7597621181136206032, guid: 46087e4781223ff4ba277c8cc8672020, type: 3}
+      propertyPath: OnForceEffectFinished.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8134583859292773200, guid: 46087e4781223ff4ba277c8cc8672020, type: 3}
       propertyPath: m_SortingLayer
@@ -11307,10 +11315,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9066376388192560923, guid: 46087e4781223ff4ba277c8cc8672020, type: 3}
-      propertyPath: hoverScale
-      value: 1.05
-      objectReference: {fileID: 0}
     - target: {fileID: 9132706912952331071, guid: 46087e4781223ff4ba277c8cc8672020, type: 3}
       propertyPath: m_SortingLayer
       value: 0
@@ -11334,6 +11338,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7ca4ee09b7249d49b8019bea39f2956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8240635633324109331 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 455390595480259521, guid: 46087e4781223ff4ba277c8cc8672020, type: 3}
+  m_PrefabInstance: {fileID: 8362411722783466962}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47185aaadc6c81e49af0f74f8227f741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &8365009287467718675

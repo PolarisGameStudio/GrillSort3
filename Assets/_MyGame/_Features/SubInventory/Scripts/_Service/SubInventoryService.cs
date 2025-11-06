@@ -38,7 +38,14 @@ namespace MyGame.Modules.SubInventory
 
         public int SetResource(SubGameResource resource, int value)
         {
-            dataService.Instance.SetInt($"{SubInventoryPrefixKey}{resource}", value);
+            if (value <= 0)
+            {
+                dataService.Instance.DeleteKey($"{SubInventoryPrefixKey}{resource}");
+            }
+            else
+            {
+                dataService.Instance.SetInt($"{SubInventoryPrefixKey}{resource}", value);
+            }
             if (!currentResources.TryAdd(resource, value))
             {
                 currentResources[resource] = value;

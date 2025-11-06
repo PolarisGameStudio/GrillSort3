@@ -1,5 +1,6 @@
 using System;
 using Manager;
+using MyGame.Modules.CardCollection;
 using Sonat.CustomService;
 using Sonat.Enums;
 using SonatFramework.Scripts.Feature.CheckInternet;
@@ -118,6 +119,17 @@ public class MySonatFramework : SonatSystem
         else
         {
             return false;
+        }
+    }
+
+    public static bool CanReceive(GameResource resource)
+    {
+        switch (GameResourceHelper.ResourceType(resource))
+        {
+            case GameResourceType.Card:
+                return MySonatFramework.GetService<CardCollectionService>().IsUnlocked();
+            default:
+                return true;
         }
     }
 

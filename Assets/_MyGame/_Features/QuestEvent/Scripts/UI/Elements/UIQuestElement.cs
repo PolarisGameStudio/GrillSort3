@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using MyGame.Modules.UI.LoopScroll;
+using MyGame.SkewerJam.Utils;
 using SonatFramework.Scripts.UIModule.UIElements;
 using SonatFramework.Systems;
 using TMPro;
@@ -23,9 +24,10 @@ namespace MyGame.Modules.QuestEvent.UI
         [SerializeField] private TMP_Text txtTitle;
         [SerializeField] private UIRewardGroup uiRewardGroup;
         [SerializeField] private Image bg;
-        [SerializeField] private GameObject objLock;
-        [SerializeField] private GameObject objComplete;
-        [SerializeField] private GameObject objCurrent;
+        [SerializeField] private GameObject[] objLock;
+        [SerializeField] private GameObject[] objComplete;
+        [SerializeField] private GameObject[] objCurrent;
+        [SerializeField] private GameObject[] objLines;
 
         [Header("bg sprite")]
         [SerializeField] private Sprite spriteBgNormal;
@@ -39,12 +41,39 @@ namespace MyGame.Modules.QuestEvent.UI
         private readonly Service<QuestEventService> _questEventService = new();
 
         private int _index;
+        private int _max;
         private State _state;
+
+        private void OnEnable()
+        {
+            _questEventService.Instance.OnDataUpdated += OnDataUpdated;
+        }
+
+        private void OnDisable()
+        {
+            _questEventService.Instance.OnDataUpdated -= OnDataUpdated;
+        }
+
+        private void OnDataUpdated()
+        {
+            UpdateUI();
+
+            if (_index == _questEventService.Instance.GetCurrentQuestIndexView() - 1)
+            {
+                imgFill.DOKill();
+                imgFill.DOFillAmount(1, duration).SetEase(Ease.OutSine).SetDelay(delayAnim);
+            }
+        }
 
         public override void Bind(QuestEventData data)
         {
             _index = data.index;
+            _max = data.max;
+            UpdateUI();
+        }
 
+        private void UpdateUI()
+        {
             txtTitle.text = (_index + 1).ToString();
 
             var currentQuestIndexView = _questEventService.Instance.GetCurrentQuestIndexView();
@@ -71,6 +100,11 @@ namespace MyGame.Modules.QuestEvent.UI
                     // locked quest
                     SetLockedState();
                 }
+            }
+
+            foreach (var obj in objLines)
+            {
+                obj.SetActive(_index != _max - 1);
             }
         }
 
@@ -104,9 +138,18 @@ namespace MyGame.Modules.QuestEvent.UI
 
         private void SetObjectState(State state)
         {
-            objComplete.SetActive(state == State.Completed);
-            objCurrent.SetActive(state == State.Current || state == State.Claim);
-            objLock.SetActive(state == State.Locked);
+            foreach (var obj in objComplete)
+            {
+                obj.SetActive(state == State.Completed);
+            }
+            foreach (var obj in objCurrent)
+            {
+                obj.SetActive(state == State.Current || state == State.Claim);
+            }
+            foreach (var obj in objLock)
+            {
+                obj.SetActive(state == State.Locked);
+            }
 
             switch (state)
             {
@@ -145,10 +188,8 @@ namespace MyGame.Modules.QuestEvent.UI
 
         public void OnClickClaim()
         {
-            if (_state == State.Claim)
+            if (_questEventService.Instance.CheckCanClaimQuest())
             {
-                imgFill.DOKill();
-                imgFill.DOFillAmount(1, duration).SetEase(Ease.OutSine).SetDelay(delayAnim);
                 _questEventService.Instance.ClaimQuest();
                 return;
             }
@@ -158,5 +199,6 @@ namespace MyGame.Modules.QuestEvent.UI
     public class QuestEventData : ItemData
     {
         public int index;
+        public int max;
     }
 }

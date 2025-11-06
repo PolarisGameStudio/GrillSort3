@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Manager;
+using MyGame.Modules.QuestEvent;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Scripts.SO.SkewerJam.Gameplay;
 using MyGame.SkewerJam.UI.Loading;
@@ -380,7 +381,7 @@ namespace MyGame.SkewerJam.Gameplay
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                PanelManager.Instance.OpenPanel<PopupHightlightGameplay>();
+                MySonatFramework.GetService<QuestEventService>().AddNumItemInGame(1, Vector3.zero);
             }
         }
 

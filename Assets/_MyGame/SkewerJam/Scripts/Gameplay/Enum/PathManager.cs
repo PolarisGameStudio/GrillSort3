@@ -653,7 +653,7 @@ namespace Manager
 
         FINISH_NORMAL,
 
-        Item_special_1 = 1000,
+        Item_Special_QuestEvent = 1000,
         Item_special_2 = 1001,
         Item_Special_Coin_1 = 1002,
         Item_Special_Coin_2 = 1003

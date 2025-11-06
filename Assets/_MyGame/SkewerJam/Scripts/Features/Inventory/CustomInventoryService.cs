@@ -47,12 +47,18 @@ namespace MyGame.SkewerJam.Scripts.Features.Inventory
                         AddResource(GameResource.Lives, addLives, logData, noti);
                         break;
                     default:
-                        if (GameResourceHelper.ResourceType(resourceData.resource) == GameResourceType.Card)
+                        if (MySonatFramework.CanReceive(resourceData.resource))
                         {
-                            var cardCollectionService = SonatSystem.GetService<CardCollectionService>();
-                            cardCollectionService.UnboxPackCard(resourceData, noti);
+                            if (GameResourceHelper.ResourceType(resourceData.resource) == GameResourceType.Card)
+                            {
+                                var cardCollectionService = SonatSystem.GetService<CardCollectionService>();
+                                cardCollectionService.UnboxPackCard(resourceData, noti);
+                            }
+                            else
+                            {
+                                AddResource(resourceData.resource, resourceData.quantity, logData, noti);
+                            }
                         }
-                        AddResource(resourceData.resource, resourceData.quantity, logData, noti);
                         break;
                 }
             }

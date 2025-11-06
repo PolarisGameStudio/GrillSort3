@@ -108,6 +108,12 @@ namespace MyGame.SkewerJam.Gameplay
             {
                 return false;
             }
+
+            if (item.OnCustomSelect() == true)
+            {
+                return true;
+            }
+
             // ItemOnOrder thì không cần chặn
             // Nếu đang warning và số lần chặn click vẫn còn thì chặn click
             var checkItemOnOrder = ItemHelper.CheckSelectedItemOnOrder(item);

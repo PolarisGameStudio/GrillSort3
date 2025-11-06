@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems;
 using SonatFramework.Systems.EventBus;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace MyGame.Modules.SubInventory.UI.Elements
@@ -25,8 +27,12 @@ namespace MyGame.Modules.SubInventory.UI.Elements
         private readonly Service<SubInventoryService> subInventoryService = new();
         [SerializeField] private ParticleSystem blastEffect;
 
+        [SerializeField] private bool useForceEffect = false;
+        [SerializeField, ShowIf("useForceEffect")] private UnityEvent OnForceEffectFinished;
+
         private EventBinding<AddSubItemEvent> addSubItemEvent;
         private EventBinding<ReduceSubItemEvent> reduceSubItemEvent;
+        private EventBinding<ForceEffectSubItemEvent> forceEffectSubItemEvent;
         private bool blockCollectEffect = false;
 
         protected virtual void Start()
@@ -40,6 +46,11 @@ namespace MyGame.Modules.SubInventory.UI.Elements
             UpdateValueView(false);
             addSubItemEvent = new EventBinding<AddSubItemEvent>(OnAddSubItem);
             reduceSubItemEvent = new EventBinding<ReduceSubItemEvent>(OnReduceSubItem);
+
+            if (useForceEffect)
+            {
+                forceEffectSubItemEvent = new EventBinding<ForceEffectSubItemEvent>(OnForceEffectSubItem);
+            }
         }
 
         protected virtual void OnDisable()
@@ -49,6 +60,11 @@ namespace MyGame.Modules.SubInventory.UI.Elements
             EventBus<ReduceSubItemEvent>.Deregister(reduceSubItemEvent);
             addSubItemEvent = null;
             reduceSubItemEvent = null;
+            if (useForceEffect)
+            {
+                EventBus<ForceEffectSubItemEvent>.Deregister(forceEffectSubItemEvent);
+                forceEffectSubItemEvent = null;
+            }
             txtValue.DOKill();
         }
 
@@ -59,7 +75,14 @@ namespace MyGame.Modules.SubInventory.UI.Elements
             //UpdateValueView(true);
             if (blockCollectEffect == false && eventData.collectEffect != null && icon != null)
             {
-                eventData.collectEffect.Collect(this.resource, eventData.quantity, eventData.position, icon.transform.position, OnCollectEffectFinished);
+                eventData.collectEffect.Collect(
+                    this.resource,
+                    eventData.quantity,
+                    eventData.position,
+                    icon.transform.position,
+                    OnCollectEffectFinished,
+                    PlayCollectEffect
+                );
             }
             else
             {
@@ -72,7 +95,7 @@ namespace MyGame.Modules.SubInventory.UI.Elements
             try
             {
                 UpdateValueView();
-                PlayCollectEffect();
+                // PlayCollectEffect();
                 // if (blastEffect)
                 // {
                 //     blastEffect.gameObject.SetActive(true);
@@ -162,6 +185,30 @@ namespace MyGame.Modules.SubInventory.UI.Elements
 
             transform.localScale = Vector3.one;
             collectAnim = null;
+        }
+
+        private void OnForceEffectSubItem(ForceEffectSubItemEvent eventData)
+        {
+            if (eventData.resource != this.resource && eventData.resource != SubGameResource.MAX) return;
+            //UpdateValueView(true);
+            if (blockCollectEffect == false && eventData.collectEffect != null && icon != null)
+            {
+                eventData.collectEffect.Collect(
+                    this.resource,
+                    eventData.quantity,
+                    eventData.position,
+                    icon.transform.position,
+                    () =>
+                    {
+                        OnForceEffectFinished?.Invoke();
+                    },
+                    PlayCollectEffect
+                );
+            }
+            else
+            {
+                UpdateValueView();
+            }
         }
     }
 }

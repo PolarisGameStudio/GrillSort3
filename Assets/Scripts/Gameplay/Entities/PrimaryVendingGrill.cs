@@ -78,7 +78,7 @@ namespace Gameplay.Entities
             return await grillBaseBehaviorSO.gameFactorySO.CreateItem<SubGrill>(subGrillName, pos, subContainer);
         }
 
-        public override bool CreateSpecialItem(int itemId)
+        public override bool CreateSpecialItem(int itemId, ItemType itemType)
         {
             return false;
         }

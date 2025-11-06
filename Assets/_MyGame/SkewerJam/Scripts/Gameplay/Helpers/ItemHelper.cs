@@ -9,6 +9,12 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 {
     public static class ItemHelper
     {
+
+        public static bool IsItemSpecial(ItemId itemId)
+        {
+            return itemId == ItemId.Item_Special_QuestEvent || itemId == ItemId.Item_special_2 || itemId == ItemId.Item_Special_Coin_1 || itemId == ItemId.Item_Special_Coin_2;
+        }
+
         public static Dictionary<ItemId, int> GetItemIdDictInGameplay(int numLayer, bool ignoreLock = false)
         {
             var grillManager = GameController.Instance.GameLogicHandler.GrillManager;
@@ -21,6 +27,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                 var item = slot.GetItem();
                 if (item != null)
                 {
+                    if (IsItemSpecial((ItemId)item.id)) continue;
                     listItemIds.Add((ItemId)item.id);
                 }
             }
@@ -41,6 +48,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                         var item = slot.GetItem();
                         if (item != null)
                         {
+                            if (IsItemSpecial((ItemId)item.id)) continue;
                             listItemIds.Add((ItemId)item.id);
                         }
                     }
@@ -52,6 +60,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                         var item = slot.GetItem();
                         if (item != null && item.IsLocked)
                         {
+                            if (IsItemSpecial((ItemId)item.id)) continue;
                             listItemIds.Add((ItemId)item.id);
                         }
                     }
@@ -77,6 +86,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                             var item = slot.GetItem();
                             if (item != null)
                             {
+                                if (IsItemSpecial((ItemId)item.id)) continue;
                                 listItemIds.Add((ItemId)item.id);
                             }
                         }
@@ -89,6 +99,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                         var item = slot.GetItem();
                         if (item != null && item.itemType == ItemType.Hidden)
                         {
+                            if (IsItemSpecial((ItemId)item.id)) continue;
                             listItemIds.Add((ItemId)item.id);
                         }
                     }
@@ -124,7 +135,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                     if (item == null) continue;
                     if (item.IsLocked) continue;
 
-                    if (dictOrder.ContainsKey((ItemId)item.id)) continue;
+                    if (dictOrder.ContainsKey((ItemId)item.id) || IsItemSpecial((ItemId)item.id)) continue;
 
                     listSelectedItems.Add(item);
                 }

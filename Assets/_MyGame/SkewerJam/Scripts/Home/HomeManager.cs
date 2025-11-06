@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using MyGame.Modules.CardCollection;
+using MyGame.Modules.SubInventory;
 using MyGame.Scripts.UI;
 using Sonat.Enums;
 using SonatFramework.Scripts.Helper;
@@ -8,6 +9,7 @@ using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems.AudioManagement;
+using SonatFramework.Systems.EventBus;
 using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.InventoryManagement.GameResources;
 using UnityEngine;
@@ -94,9 +96,16 @@ public class HomeManager : SingletonSimple<HomeManager>
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            var uiData = new UIData();
-            uiData.Add(PopupCompleteAlbum.ALBUM_TYPE_KEY, AlbumType.Album_0);
-            PanelManager.Instance.OpenPanel<PopupCompleteAlbum>(uiData);
+            EventBus<ForceEffectSubItemEvent>.Raise(new ForceEffectSubItemEvent()
+            {
+                resource = SubGameResource.QuestEventItem,
+                quantity = UnityEngine.Random.Range(1, 10),
+                position = Vector3.zero,
+                collectEffect = new CollectEffectMultiple()
+                {
+                    collectEffectName = "UICollectEffectSubItem_AtHome"
+                }
+            });
         }
     }
 #endif

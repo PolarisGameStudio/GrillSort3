@@ -1,7 +1,9 @@
 using System;
 using Cysharp.Threading.Tasks;
+using MyGame.Modules.SubInventory;
 using SonatFramework.Scripts.Helper;
 using SonatFramework.Scripts.UIModule;
+using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems.EventBus;
 using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.TimeManagement;
@@ -22,9 +24,10 @@ namespace MyGame.Modules.QuestEvent
         private IntDataPref _claimedQuestIndex;
 
         public int CurrentItem => _currentItem.Value;
-        public int ClaimedQuestIndex => _claimedQuestIndex.Value;
 
-        private int numItemInGame = 0;
+        public event Action OnDataUpdated;
+
+        private int _numCollectAtHome = 0;
 
         public override void Initialize()
         {
@@ -36,20 +39,32 @@ namespace MyGame.Modules.QuestEvent
 
         private void OnLevelStarted(LevelStartedEvent eventData)
         {
-            numItemInGame = 0;
+            MySonatFramework.GetService<SubInventoryService>().SetResource(SubGameResource.QuestEventItem, 0);
         }
 
         private void OnLevelEnded(LevelEndedEvent eventData)
         {
             if (eventData.success)
             {
-                _currentItem.Value += numItemInGame;
+                _numCollectAtHome = MySonatFramework.GetService<SubInventoryService>().GetResource(SubGameResource.QuestEventItem);
+                _currentItem.Value += _numCollectAtHome;
             }
+            MySonatFramework.GetService<SubInventoryService>().SetResource(SubGameResource.QuestEventItem, 0);
         }
 
-        public void AddNumItemInGame(int num)
+        public void AddNumItemInGame(int num, Vector3 position)
         {
-            numItemInGame += num;
+            MySonatFramework.GetService<SubInventoryService>().AddResource(SubGameResource.QuestEventItem, num);
+            EventBus<AddSubItemEvent>.Raise(new AddSubItemEvent()
+            {
+                resource = SubGameResource.QuestEventItem,
+                quantity = 1,
+                position = position,
+                collectEffect = new CollectEffectMultiple()
+                {
+                    collectEffectName = "UICollectEffectSubItem"
+                }
+            });
         }
 
         #region implement
@@ -76,19 +91,35 @@ namespace MyGame.Modules.QuestEvent
 
         protected override void ProgressUnlockFeature()
         {
-            // throw new NotImplementedException();
+            if (_numCollectAtHome > 0)
+            {
+                EventBus<ForceEffectSubItemEvent>.Raise(new ForceEffectSubItemEvent()
+                {
+                    resource = SubGameResource.QuestEventItem,
+                    quantity = _numCollectAtHome,
+                    position = Vector3.zero,
+                    collectEffect = new CollectEffectMultiple()
+                    {
+                        collectEffectName = "UICollectEffectSubItem_AtHome"
+                    }
+                });
+
+                _numCollectAtHome = 0;
+
+                SonatUtils.DelayCall(2f, () =>
+                {
+                    if (CheckCanClaimQuest())
+                    {
+                        PanelManager.Instance.OpenPanel<PopupQuestEvent>();
+                    }
+                });
+            }
         }
 
         protected override async UniTask TryShowTutorial()
         {
-            // // Hiện tut
-            // if (PlayerPrefs.HasKey($"{DATA_KEY}_ShowTutorial") == false)
-            // {
-            //     HomeManager.Instance.BlockUI();
-            //     PlayerPrefs.SetInt($"{DATA_KEY}_ShowTutorial", 1);
-            // }
+            // throw new NotImplementedException();
         }
-
         #endregion
 
         public int GetCurrentQuestIndexView()
@@ -105,11 +136,16 @@ namespace MyGame.Modules.QuestEvent
 
         public void ClaimQuest()
         {
+            if (!CheckCanClaimQuest())
+            {
+                return;
+            }
             var currentQuestIndex = GetCurrentQuestIndexView();
             var itemRequired = config.listMilestones[currentQuestIndex].numItem;
 
             _currentItem.Value -= itemRequired;
             _claimedQuestIndex.Value += 1;
+            OnDataUpdated?.Invoke();
 
             var rewardData = config.listMilestones[currentQuestIndex].rewardData;
             var log = new EarnResourceLogData
@@ -124,6 +160,21 @@ namespace MyGame.Modules.QuestEvent
             uiData.Add(PopupReward.REWARD_KEY, rewardData);
             PanelManager.Instance.OpenPanel<PopupReward>(uiData);
 
+        }
+
+        public bool CheckCompleteAllQuest()
+        {
+            return _claimedQuestIndex.Value >= config.listMilestones.Count - 1;
+        }
+
+        public int GetCurrentItemView()
+        {
+            return _currentItem.Value - _numCollectAtHome;
+        }
+
+        public bool CanSpawItemQuestEvent()
+        {
+            return IsUnlocked() && !CheckCompleteAllQuest();
         }
     }
 }

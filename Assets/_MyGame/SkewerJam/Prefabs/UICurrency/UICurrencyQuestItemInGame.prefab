@@ -218,7 +218,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6544059665642764401}
-  - component: {fileID: 783423193040508593}
+  - component: {fileID: -5604695267156187579}
   m_Layer: 5
   m_Name: UICurrencyQuestItemInGame
   m_TagString: Untagged
@@ -248,7 +248,7 @@ RectTransform:
   m_AnchoredPosition: {x: 844, y: -80.2}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &783423193040508593
+--- !u!114 &-5604695267156187579
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -257,24 +257,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 5597579702641229547}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d428105d860db54aa0bab3a15dada8c, type: 3}
+  m_Script: {fileID: 11500000, guid: 923fefef7d5d7f344a638605565b0698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resource: 4
+  resource: 0
   icon: {fileID: 6234976919707723655}
   txtValue: {fileID: 9002477159335769652}
   counterDuration: 0.5
   scaleSpeed: 3
   scaleMax: 1.15
-  blockClick: 0
-  plusObj: {fileID: 0}
   blastEffect: {fileID: 0}
-  useSound: 0
-  audioId: 207
-  delaySound: 0.1
-  isGeneralCurrency: 0
-  forceValue: 0
-  isMiss: 0
+  useForceEffect: 0
+  OnForceEffectFinished:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6249983778572893471
 GameObject:
   m_ObjectHideFlags: 0
