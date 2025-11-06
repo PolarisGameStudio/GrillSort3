@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using MyGame.Modules.UI.LoopScroll;
 using SonatFramework.Scripts.UIModule.UIElements;
 using SonatFramework.Systems;
@@ -30,6 +31,11 @@ namespace MyGame.Modules.QuestEvent.UI
         [SerializeField] private Sprite spriteBgNormal;
         [SerializeField] private Sprite spriteBgCurrent;
 
+        [Header("Anim")]
+        [SerializeField] private float delayAnim = 0.5f;
+        [SerializeField] private float duration = 0.5f;
+        [SerializeField] private Image imgFill;
+
         private readonly Service<QuestEventService> _questEventService = new();
 
         private int _index;
@@ -41,16 +47,16 @@ namespace MyGame.Modules.QuestEvent.UI
 
             txtTitle.text = (_index + 1).ToString();
 
-            var currentQuestIndexView = QuestEventHelper.GetQuestIndexView();
+            var currentQuestIndexView = _questEventService.Instance.GetCurrentQuestIndexView();
             if (_index == currentQuestIndexView)
             {
-                if (QuestEventHelper.CheckClaimedQuest())
+                if (_questEventService.Instance.CheckCanClaimQuest())
                 {
-                    SetCurrentState();
+                    SetClaimState();
                 }
                 else
                 {
-                    SetClaimState();
+                    SetCurrentState();
                 }
             }
             else
@@ -107,6 +113,10 @@ namespace MyGame.Modules.QuestEvent.UI
                 case State.Completed:
                     bg.sprite = spriteBgNormal;
                     uiRewardGroup.gameObject.SetActive(false);
+
+                    imgFill.DOKill();
+                    imgFill.fillAmount = 1;
+
                     break;
                 case State.Locked:
                     bg.sprite = spriteBgNormal;
@@ -114,6 +124,10 @@ namespace MyGame.Modules.QuestEvent.UI
                     var rewardDataLocked = _questEventService.Instance.config.listMilestones[_index].rewardData;
                     uiRewardGroup.SetData(rewardDataLocked);
                     uiRewardGroup.gameObject.SetActive(true);
+
+                    imgFill.DOKill();
+                    imgFill.fillAmount = 0;
+
                     break;
                 case State.Current:
                 case State.Claim:
@@ -122,6 +136,9 @@ namespace MyGame.Modules.QuestEvent.UI
                     var rewardData = _questEventService.Instance.config.listMilestones[_index].rewardData;
                     uiRewardGroup.SetData(rewardData);
                     uiRewardGroup.gameObject.SetActive(true);
+
+                    imgFill.DOKill();
+                    imgFill.fillAmount = 0;
                     break;
             }
         }
@@ -130,7 +147,9 @@ namespace MyGame.Modules.QuestEvent.UI
         {
             if (_state == State.Claim)
             {
-                PopupToast.Cretate("You can claim the reward after completing the quest");
+                imgFill.DOKill();
+                imgFill.DOFillAmount(1, duration).SetEase(Ease.OutSine).SetDelay(delayAnim);
+                _questEventService.Instance.ClaimQuest();
                 return;
             }
         }

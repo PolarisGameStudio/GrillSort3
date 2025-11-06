@@ -1,4 +1,5 @@
 using System;
+using MyGame.Modules.SubInventory;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.Utils;
@@ -18,6 +19,31 @@ namespace SkewerJam.Utils.Effects
         public bool isShowText = false;
 
         public override void Collect(GameResource resource, int quantity, Vector3 startPos, Vector3 endPos, Action callback)
+        {
+            callback = null;
+            float timeSpawn = 0;
+            for (int i = 0; i < Mathf.Min(maxCount, quantity); i++)
+            {
+                Vector3 ran = UnityEngine.Random.insideUnitCircle * new Vector2(radiusX, radiusY);
+                Vector3 pos = startPos + ran;
+
+                SonatUtils.DelayCall(timeSpawn, () =>
+                        {
+                            var item = SonatSystem.GetService<PoolingServiceAsync>().CreateAsync<UICollectResouceEffectAtHome>(collectEffectName, PanelManager.Instance.transform,
+                            resource, quantity, pos, endPos, callback);
+                            callback = null;
+                        });
+                timeSpawn += delaySpawn;
+            }
+            if (isShowText)
+            {
+                var text = SonatSystem.GetService<PoolingServiceAsync>().CreateAsync<UICollectResouceText>("UICollectResouceText", PanelManager.Instance.transform,
+                        resource, quantity, startPos);
+
+            }
+        }
+
+        public override void Collect(SubGameResource resource, int quantity, Vector3 startPos, Vector3 endPos, Action callback)
         {
             callback = null;
             float timeSpawn = 0;

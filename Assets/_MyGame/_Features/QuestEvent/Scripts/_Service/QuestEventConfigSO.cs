@@ -12,6 +12,11 @@ namespace MyGame.Modules.QuestEvent
         public int unlocklevel = 15;
         public List<MilestoneConfig> listMilestones;
 
+        public int GetMaxItem(int index)
+        {
+            return listMilestones[index].numItem;
+        }
+
 #if UNITY_EDITOR
         private void OnValidate()
         {

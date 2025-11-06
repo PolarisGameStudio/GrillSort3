@@ -1,6 +1,9 @@
 using System;
 using Cysharp.Threading.Tasks;
 using SonatFramework.Scripts.Helper;
+using SonatFramework.Scripts.UIModule;
+using SonatFramework.Systems.EventBus;
+using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.TimeManagement;
 using SonatFramework.Systems.UserData;
 using UnityEngine;
@@ -11,23 +14,49 @@ namespace MyGame.Modules.QuestEvent
     public class QuestEventService : BaseExpireService
     {
         public override string DATA_KEY => "QUEST_EVENT";
+        public const string ITEM_NAME = "quest_item";
 
         public QuestEventConfigSO config;
 
-        private IntDataPref _currentQuestIndex;
         private IntDataPref _currentItem;
         private IntDataPref _claimedQuestIndex;
 
-        public int CurrentQuestIndex => _currentQuestIndex.Value;
         public int CurrentItem => _currentItem.Value;
         public int ClaimedQuestIndex => _claimedQuestIndex.Value;
+
+        private int numItemInGame = 0;
+
+        public override void Initialize()
+        {
+            base.Initialize();
+
+            new EventBinding<LevelStartedEvent>(OnLevelStarted);
+            new EventBinding<LevelEndedEvent>(OnLevelEnded);
+        }
+
+        private void OnLevelStarted(LevelStartedEvent eventData)
+        {
+            numItemInGame = 0;
+        }
+
+        private void OnLevelEnded(LevelEndedEvent eventData)
+        {
+            if (eventData.success)
+            {
+                _currentItem.Value += numItemInGame;
+            }
+        }
+
+        public void AddNumItemInGame(int num)
+        {
+            numItemInGame += num;
+        }
 
         #region implement
         protected override void LoadData()
         {
             base.LoadData();
 
-            _currentQuestIndex = new IntDataPref(DATA_KEY + "_currentQuestIndex", 0);
             _currentItem = new IntDataPref(DATA_KEY + "_currentItem", 0);
             _claimedQuestIndex = new IntDataPref(DATA_KEY + "_claimedQuestIndex", -1);
         }
@@ -62,11 +91,39 @@ namespace MyGame.Modules.QuestEvent
 
         #endregion
 
-        public float GetCurrentProgress()
+        public int GetCurrentQuestIndexView()
         {
-            var cur = _currentItem.Value;
-            var max = config.listMilestones[_currentQuestIndex.Value].numItem;
-            return cur * 1.0f / max;
+            return _claimedQuestIndex.Value + 1;
+        }
+
+        public bool CheckCanClaimQuest()
+        {
+            var currentQuestIndex = GetCurrentQuestIndexView();
+            var itemRequired = config.listMilestones[currentQuestIndex].numItem;
+            return _currentItem.Value >= itemRequired;
+        }
+
+        public void ClaimQuest()
+        {
+            var currentQuestIndex = GetCurrentQuestIndexView();
+            var itemRequired = config.listMilestones[currentQuestIndex].numItem;
+
+            _currentItem.Value -= itemRequired;
+            _claimedQuestIndex.Value += 1;
+
+            var rewardData = config.listMilestones[currentQuestIndex].rewardData;
+            var log = new EarnResourceLogData
+            {
+                spendType = "feature",
+                spendId = "quest_event"
+            };
+            MySonatFramework.GetService<InventoryService>().AddReward(rewardData, log);
+
+            // ui
+            var uiData = new UIData();
+            uiData.Add(PopupReward.REWARD_KEY, rewardData);
+            PanelManager.Instance.OpenPanel<PopupReward>(uiData);
+
         }
     }
 }

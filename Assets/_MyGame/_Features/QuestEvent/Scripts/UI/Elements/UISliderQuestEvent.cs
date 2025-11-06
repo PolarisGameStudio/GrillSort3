@@ -19,26 +19,16 @@ namespace MyGame.Modules.QuestEvent.UI.Elements
 
         public void UpdateUI()
         {
-            var currentQuestIndexView = QuestEventHelper.GetQuestIndexView();
+            var currentQuestIndexView = _questEventService.Instance.GetCurrentQuestIndexView();
+            var maxItem = _questEventService.Instance.config.GetMaxItem(currentQuestIndexView);
+            var currentItem = _questEventService.Instance.CurrentItem;
 
-            var currentItem = QuestEventHelper.GetNumberQuestView();
+            currentItem = Mathf.Min(currentItem, maxItem);
 
-            if (currentQuestIndexView < _questEventService.Instance.config.listMilestones.Count)
-            {
-                var milestone = _questEventService.Instance.config.listMilestones[currentQuestIndexView];
-                slider.value = _questEventService.Instance.GetCurrentProgress();
-                txtProgress.text = $"{currentItem}/{milestone.numItem}";
+            slider.value = currentItem * 1.0f / maxItem;
+            txtProgress.text = $"{currentItem}/{maxItem}";
 
-                bubbleReward.SetReward(milestone.rewardData);
-            }
-            else
-            {
-                var milestone = _questEventService.Instance.config.listMilestones[_questEventService.Instance.config.listMilestones.Count - 1];
-                slider.value = _questEventService.Instance.GetCurrentProgress();
-                txtProgress.text = $"{milestone.numItem}/{milestone.numItem}";
-
-                bubbleReward.SetReward(milestone.rewardData);
-            }
+            bubbleReward.SetReward(_questEventService.Instance.config.listMilestones[currentQuestIndexView].rewardData);
         }
     }
 }
