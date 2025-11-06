@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalCount: 10
-  reverseDirection: 0
+  reverseDirection: 1
   m_Content: {fileID: 5972379057899127431}
   m_Horizontal: 0
   m_Vertical: 1
@@ -457,6 +457,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5972379057899127431}
     m_Modifications:
+    - target: {fileID: 1775077659530310357, guid: d8a5644bdf7283e4fbea4e4c62352c81, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1775077659530310357, guid: d8a5644bdf7283e4fbea4e4c62352c81, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1775077659530310357, guid: d8a5644bdf7283e4fbea4e4c62352c81, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1775077659530310357, guid: d8a5644bdf7283e4fbea4e4c62352c81, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1775077659530310357, guid: d8a5644bdf7283e4fbea4e4c62352c81, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1775077659530310357, guid: d8a5644bdf7283e4fbea4e4c62352c81, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2070600868038152393, guid: d8a5644bdf7283e4fbea4e4c62352c81, type: 3}
       propertyPath: m_LocalScale.x
       value: 0

@@ -15,7 +15,7 @@ namespace MyGame.Modules.QuestEvent.UI
 
         protected override QuestEventData GetData(int idx)
         {
-            return new QuestEventData { index = idx };
+            return new QuestEventData { index = GetMaxElements() - idx - 1 };
         }
     }
 }

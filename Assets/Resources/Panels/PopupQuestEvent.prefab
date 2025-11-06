@@ -75,8 +75,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -395, y: 554}
-  m_SizeDelta: {x: 151.4673, y: 151.4673}
+  m_AnchoredPosition: {x: -411, y: 570}
+  m_SizeDelta: {x: 69.0639, y: 69.0639}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2092233066069409691
 CanvasRenderer:
@@ -243,7 +243,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 115, y: 115}
+  m_SizeDelta: {x: 72.4249, y: 72.4249}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3932200556291676347
 CanvasRenderer:
@@ -1077,6 +1077,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1402635981743864949, guid: 64b07c13a6fa4ab49bcb6b070d0a7dbf, type: 3}
+      propertyPath: m_Spacing
+      value: -250
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402635981743864949, guid: 64b07c13a6fa4ab49bcb6b070d0a7dbf, type: 3}
+      propertyPath: m_ChildAlignment
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1719806554678431243, guid: 64b07c13a6fa4ab49bcb6b070d0a7dbf, type: 3}
       propertyPath: m_Name
       value: QuestEventScroll
@@ -1166,8 +1174,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5972379057899127431, guid: 64b07c13a6fa4ab49bcb6b070d0a7dbf, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972379057899127431, guid: 64b07c13a6fa4ab49bcb6b070d0a7dbf, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972379057899127431, guid: 64b07c13a6fa4ab49bcb6b070d0a7dbf, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972379057899127431, guid: 64b07c13a6fa4ab49bcb6b070d0a7dbf, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972379057899127431, guid: 64b07c13a6fa4ab49bcb6b070d0a7dbf, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 465
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

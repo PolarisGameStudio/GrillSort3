@@ -13,6 +13,7 @@ namespace MyGame.Modules.QuestEvent.UI
     {
         Completed,
         Current,
+        Claim,
         Locked,
     }
 
@@ -38,15 +39,23 @@ namespace MyGame.Modules.QuestEvent.UI
         {
             _index = data.index;
 
-            txtTitle.text = _index.ToString();
-            var currentQuestIndex = _questEventService.Instance.CurrentQuestIndex;
-            if (_index == currentQuestIndex)
+            txtTitle.text = (_index + 1).ToString();
+
+            var currentQuestIndexView = QuestEventHelper.GetQuestIndexView();
+            if (_index == currentQuestIndexView)
             {
-                SetCurrentState();
+                if (QuestEventHelper.CheckClaimedQuest())
+                {
+                    SetCurrentState();
+                }
+                else
+                {
+                    SetClaimState();
+                }
             }
             else
             {
-                if (_index < currentQuestIndex)
+                if (_index < currentQuestIndexView)
                 {
                     // completed quest
                     SetCompletedState();
@@ -59,14 +68,16 @@ namespace MyGame.Modules.QuestEvent.UI
             }
         }
 
+        private void SetClaimState()
+        {
+            _state = State.Claim;
+
+            SetObjectState(State.Claim);
+        }
+
         private void SetCurrentState()
         {
             _state = State.Current;
-            bg.sprite = spriteBgCurrent;
-
-            var rewardData = _questEventService.Instance.config.listMilestones[_index].rewardData;
-            uiRewardGroup.SetData(rewardData);
-            uiRewardGroup.gameObject.SetActive(true);
 
             SetObjectState(State.Current);
         }
@@ -74,11 +85,6 @@ namespace MyGame.Modules.QuestEvent.UI
         private void SetLockedState()
         {
             _state = State.Locked;
-            bg.sprite = spriteBgNormal;
-
-            var rewardData = _questEventService.Instance.config.listMilestones[_index].rewardData;
-            uiRewardGroup.SetData(rewardData);
-            uiRewardGroup.gameObject.SetActive(true);
 
             SetObjectState(State.Locked);
         }
@@ -86,20 +92,43 @@ namespace MyGame.Modules.QuestEvent.UI
         private void SetCompletedState()
         {
             _state = State.Completed;
+
             SetObjectState(State.Completed);
-            uiRewardGroup.gameObject.SetActive(false);
         }
 
         private void SetObjectState(State state)
         {
             objComplete.SetActive(state == State.Completed);
-            objCurrent.SetActive(state == State.Current);
+            objCurrent.SetActive(state == State.Current || state == State.Claim);
             objLock.SetActive(state == State.Locked);
+
+            switch (state)
+            {
+                case State.Completed:
+                    bg.sprite = spriteBgNormal;
+                    uiRewardGroup.gameObject.SetActive(false);
+                    break;
+                case State.Locked:
+                    bg.sprite = spriteBgNormal;
+
+                    var rewardDataLocked = _questEventService.Instance.config.listMilestones[_index].rewardData;
+                    uiRewardGroup.SetData(rewardDataLocked);
+                    uiRewardGroup.gameObject.SetActive(true);
+                    break;
+                case State.Current:
+                case State.Claim:
+                    bg.sprite = spriteBgCurrent;
+
+                    var rewardData = _questEventService.Instance.config.listMilestones[_index].rewardData;
+                    uiRewardGroup.SetData(rewardData);
+                    uiRewardGroup.gameObject.SetActive(true);
+                    break;
+            }
         }
 
         public void OnClickClaim()
         {
-            if (_state == State.Current)
+            if (_state == State.Claim)
             {
                 PopupToast.Cretate("You can claim the reward after completing the quest");
                 return;

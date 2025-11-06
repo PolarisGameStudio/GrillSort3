@@ -19,12 +19,13 @@ namespace MyGame.Modules.QuestEvent.UI.Elements
 
         public void UpdateUI()
         {
-            var currentQuestIndex = _questEventService.Instance.CurrentQuestIndex;
-            var currentItem = _questEventService.Instance.CurrentItem;
+            var currentQuestIndexView = QuestEventHelper.GetQuestIndexView();
 
-            if (currentQuestIndex + 1 < _questEventService.Instance.config.listMilestones.Count)
+            var currentItem = QuestEventHelper.GetNumberQuestView();
+
+            if (currentQuestIndexView < _questEventService.Instance.config.listMilestones.Count)
             {
-                var milestone = _questEventService.Instance.config.listMilestones[currentQuestIndex + 1];
+                var milestone = _questEventService.Instance.config.listMilestones[currentQuestIndexView];
                 slider.value = _questEventService.Instance.GetCurrentProgress();
                 txtProgress.text = $"{currentItem}/{milestone.numItem}";
 

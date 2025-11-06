@@ -29,7 +29,7 @@ namespace MyGame.Modules.QuestEvent
 
             _currentQuestIndex = new IntDataPref(DATA_KEY + "_currentQuestIndex", 0);
             _currentItem = new IntDataPref(DATA_KEY + "_currentItem", 0);
-            _claimedQuestIndex = new IntDataPref(DATA_KEY + "_claimedQuestIndex", 0);
+            _claimedQuestIndex = new IntDataPref(DATA_KEY + "_claimedQuestIndex", -1);
         }
 
         public override bool CanUnlock()
