@@ -13,7 +13,7 @@ namespace MyGame.Modules.CardCollection
             var cardCollectionService = SonatSystem.GetService<CardCollectionService>();
 
             var cardList = new List<CardType>() { forceCardType };
-            cardCollectionService.ReceiveCards(cardList);
+            cardCollectionService.ReceiveCards(cardList, GameResource.Card_Special);
 
             EventBus<AddItemEvent>.Raise(new AddItemEvent()
             {
@@ -46,7 +46,7 @@ namespace MyGame.Modules.CardCollection
                 cardList.Add(albumConfig.cards.Rand());
             }
 
-            cardCollectionService.ReceiveCards(cardList);
+            cardCollectionService.ReceiveCards(cardList, GameResource.Card_Special);
 
             EventBus<AddItemEvent>.Raise(new AddItemEvent()
             {

@@ -20,7 +20,7 @@ namespace MyGame.Modules.CardCollection.Animation
                 uiCards[i].gameObject.SetActive(false);
             }
 
-            var packIndex = CardPackHelper.GetPackIndex(uiCards.Count);
+            var packIndex = CardPackHelper.GetPackIndex(packResource);
             MySonatFramework.audioService.StopMusic();
             SonatUtils.DelayCall(configSO.delaySoundAppearAnim, () =>
             {

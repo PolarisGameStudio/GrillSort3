@@ -24,9 +24,23 @@ namespace MyGame.Modules.CardCollection
 
         }
 
-        public static int GetPackIndex(int count)
+        public static int GetPackIndex(GameResource packResource)
         {
-            return (count - 1) / 2;
+            switch (packResource)
+            {
+                case GameResource.Card_Randomx1:
+                case GameResource.Card_Randomx2:
+                    return 1 - 1;
+                case GameResource.Card_Randomx3:
+                    return 5 - 1;
+                case GameResource.Card_Randomx4:
+                    return 2 - 1;
+                case GameResource.Card_Randomx6:
+                    return 4 - 1;
+                case GameResource.Card_Special:
+                    return 3 - 1;
+            }
+            return 1 - 1;
         }
 
         public static CardDataToRandom GetDictCardTypeToRandom()

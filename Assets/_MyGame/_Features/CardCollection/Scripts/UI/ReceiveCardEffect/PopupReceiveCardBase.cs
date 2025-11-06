@@ -18,6 +18,7 @@ namespace MyGame.Modules.CardCollection
 
     public abstract class PopupReceiveCardBase : Panel
     {
+        public const string PACK_RESOURCE_KEY = "PackResource";
         public const string CARD_REWARD_KEY = "RewardData";
         public const string RECENTLY_NEW_CARD_LIST_KEY = "RecentlyNewCardList";
         [SerializeField] private UIWidgetReceiveCardStar uiWidgetCardStar;
@@ -32,6 +33,7 @@ namespace MyGame.Modules.CardCollection
         private readonly Service<CardCollectionService> _cardCollectionService = new();
         private readonly Service<PoolingContainerService> _poolingContainerService = new();
 
+        protected GameResource packResource;
         protected List<CardType> cardList;
         protected List<CardType> recentlyNewCardList;
 
@@ -51,6 +53,7 @@ namespace MyGame.Modules.CardCollection
             base.Open(uiData);
             cardList = uiData.Get<List<CardType>>(CARD_REWARD_KEY);
             recentlyNewCardList = uiData.Get<List<CardType>>(RECENTLY_NEW_CARD_LIST_KEY);
+            packResource = uiData.Get<GameResource>(PACK_RESOURCE_KEY);
             SetupCards();
 
             PlayAppearAnimation().Forget();
