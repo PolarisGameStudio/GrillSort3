@@ -1,7 +1,8 @@
+using System;
 using Cysharp.Threading.Tasks;
 using SonatFramework.Scripts.Helper;
 using SonatFramework.Systems;
-using SonatFramework.Systems.TimeManagement;
+using SonatFramework.Systems.EventBus;
 
 namespace MyGame.Modules
 {
@@ -15,6 +16,9 @@ namespace MyGame.Modules
         {
             LoadConfig();
             LoadData();
+
+            new EventBinding<HomeSetupEvent>(OnHomeSetupEvent);
+            new EventBinding<HomeProcessEvent>(OnHomeProcessEvent);
         }
 
         protected virtual void LoadConfig()
@@ -51,5 +55,27 @@ namespace MyGame.Modules
             ResetData();
         }
         #endregion
+
+
+
+        private void OnHomeSetupEvent(HomeSetupEvent eventData)
+        {
+            if (CanUnlock() == true)
+            {
+                Unlock();
+            }
+        }
+
+        private void OnHomeProcessEvent(HomeProcessEvent @event)
+        {
+            if (IsUnlocked() == true)
+            {
+                TryShowTutorial().Forget();
+                ProgressUnlockFeature();
+            }
+        }
+
+        protected abstract UniTask TryShowTutorial();
+        protected abstract void ProgressUnlockFeature();
     }
 }

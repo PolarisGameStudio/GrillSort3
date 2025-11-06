@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace MyGame.Modules.QuestEvent.UI.Elements
 {
-    public class UISlider : MonoBehaviour
+    public class UISliderQuestEvent : MonoBehaviour
     {
         [SerializeField] private TMP_Text txtProgress;
         [SerializeField] private Slider slider;
@@ -14,16 +14,30 @@ namespace MyGame.Modules.QuestEvent.UI.Elements
 
         private void OnEnable()
         {
+            UpdateUI();
+        }
+
+        public void UpdateUI()
+        {
             var currentQuestIndex = _questEventService.Instance.CurrentQuestIndex;
             var currentItem = _questEventService.Instance.CurrentItem;
-            var milestone = _questEventService.Instance.config.listMilestones[currentQuestIndex];
 
-            slider.value = _questEventService.Instance.GetCurrentProgress();
-            txtProgress.text = $"{currentItem}/{milestone.numItem}";
+            if (currentQuestIndex + 1 < _questEventService.Instance.config.listMilestones.Count)
+            {
+                var milestone = _questEventService.Instance.config.listMilestones[currentQuestIndex + 1];
+                slider.value = _questEventService.Instance.GetCurrentProgress();
+                txtProgress.text = $"{currentItem}/{milestone.numItem}";
 
-            bubbleReward.SetReward(milestone.rewardData);
+                bubbleReward.SetReward(milestone.rewardData);
+            }
+            else
+            {
+                var milestone = _questEventService.Instance.config.listMilestones[_questEventService.Instance.config.listMilestones.Count - 1];
+                slider.value = _questEventService.Instance.GetCurrentProgress();
+                txtProgress.text = $"{milestone.numItem}/{milestone.numItem}";
 
-
+                bubbleReward.SetReward(milestone.rewardData);
+            }
         }
     }
 }

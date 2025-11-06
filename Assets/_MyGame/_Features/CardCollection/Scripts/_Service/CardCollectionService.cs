@@ -43,7 +43,6 @@ namespace MyGame.Modules.CardCollection
             base.Initialize();
 
             new EventBinding<AddItemEvent>(OnAddItemEvent);
-            new EventBinding<HomeProcessEvent>(OnHomeProcessEvent);
 
             SonatUtils.ExecuteNextFrame(() =>
             {
@@ -116,6 +115,35 @@ namespace MyGame.Modules.CardCollection
             var expireTime = new DateTime(year, month, lastDay, 23, 59, 59, DateTimeKind.Utc);
 
             return ((DateTimeOffset)expireTime).ToUnixTimeSeconds() + 1;
+        }
+
+        protected override void ProgressUnlockFeature()
+        {
+            RunCompleteCardCollection();
+        }
+
+        protected override async UniTask TryShowTutorial()
+        {
+            // Hiện tut
+            if (PlayerPrefs.HasKey($"{DATA_KEY}_ShowTutorial") == false)
+            {
+                HomeManager.Instance.BlockUI();
+                PlayerPrefs.SetInt($"{DATA_KEY}_ShowTutorial", 1);
+
+                UIData uiData = new();
+                uiData.Add(UIDataKey.CallBackOnClose, (Action)(() =>
+                {
+                    _ = HomeManager.Instance.SwitchTab(NavigationType.CardCollection);
+                }));
+
+                await UniTask.Delay(1000);
+                var popup = PanelManager.Instance.OpenPanelByName<Panel>("PopupTutorial_CardCollection", uiData);
+
+                await UniTask.WaitUntil(() => popup == null || popup.gameObject.activeInHierarchy == false);
+                await UniTask.Delay(1000);
+                RewardUnlockFeature();
+                HomeManager.Instance.UnlockUI();
+            }
         }
         #endregion
 
@@ -200,47 +228,6 @@ namespace MyGame.Modules.CardCollection
         }
         #endregion
 
-        #region Event unlock
-        private void OnHomeProcessEvent(HomeProcessEvent eventData)
-        {
-            if (IsUnlocked() == false)
-            {
-                if (CanUnlock() == true)
-                {
-                    Unlock();
-                    ShowTutorial().Forget();
-                }
-            }
-            else
-            {
-                RunCompleteCardCollection();
-            }
-        }
-
-        private async UniTask ShowTutorial()
-        {
-            // Hiện tut
-            if (PlayerPrefs.HasKey($"{DATA_KEY}_ShowTutorial") == false)
-            {
-                HomeManager.Instance.BlockUI();
-                PlayerPrefs.SetInt($"{DATA_KEY}_ShowTutorial", 1);
-
-                UIData uiData = new();
-                uiData.Add(UIDataKey.CallBackOnClose, (Action)(() =>
-                {
-                    _ = HomeManager.Instance.SwitchTab(NavigationType.CardCollection);
-                }));
-
-                await UniTask.Delay(1000);
-                var popup = PanelManager.Instance.OpenPanelByName<Panel>("PopupTutorial_CardCollection", uiData);
-
-                await UniTask.WaitUntil(() => popup == null || popup.gameObject.activeInHierarchy == false);
-                await UniTask.Delay(1000);
-                RewardUnlockFeature();
-                HomeManager.Instance.UnlockUI();
-            }
-        }
-
         private void RewardUnlockFeature()
         {
             RewardData reward = config.RewardUnlock;
@@ -255,7 +242,7 @@ namespace MyGame.Modules.CardCollection
             uiData.Add(PopupReward.REWARD_KEY, reward);
             PanelManager.Instance.OpenPanel<PopupReward>(uiData);
         }
-        #endregion
+
 
         #region Unbox Pack Card
         public void UnboxPackCard(ResourceData resourceData, bool noti = false)

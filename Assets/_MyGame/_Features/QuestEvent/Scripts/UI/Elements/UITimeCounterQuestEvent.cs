@@ -4,13 +4,18 @@ using UnityEngine;
 
 namespace MyGame.Modules.QuestEvent.UI.Elements
 {
-    public class UITimeCounter : MonoBehaviour
+    public class UITimeCounterQuestEvent : MonoBehaviour
     {
-        [SerializeField] private SonatFramework.Scripts.UIModule.UIElements.UITimeCounter timeCounter;
+        [SerializeField] private UITimeCounter timeCounter;
         private readonly Service<QuestEventService> _questEventService = new();
 
 
         private void OnEnable()
+        {
+            UpdateUI();
+        }
+
+        public void UpdateUI()
         {
             timeCounter.SetData(_questEventService.Instance.GetRemainTime());
         }

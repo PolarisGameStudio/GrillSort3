@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using SonatFramework.Scripts.Helper;
 using SonatFramework.Systems.TimeManagement;
 using SonatFramework.Systems.UserData;
@@ -43,6 +44,22 @@ namespace MyGame.Modules.QuestEvent
             var nextDay = now.Date.AddDays(7);
             return ((DateTimeOffset)nextDay).ToUnixTimeSeconds();
         }
+
+        protected override void ProgressUnlockFeature()
+        {
+            // throw new NotImplementedException();
+        }
+
+        protected override async UniTask TryShowTutorial()
+        {
+            // // Hiện tut
+            // if (PlayerPrefs.HasKey($"{DATA_KEY}_ShowTutorial") == false)
+            // {
+            //     HomeManager.Instance.BlockUI();
+            //     PlayerPrefs.SetInt($"{DATA_KEY}_ShowTutorial", 1);
+            // }
+        }
+
         #endregion
 
         public float GetCurrentProgress()
