@@ -103,6 +103,7 @@ namespace MyGame.Modules.QuestEvent
         {
             if (_numCollectAtHome > 0)
             {
+                HomeManager.Instance.BlockUIManager.RegisterBlockUI(nameof(QuestEventService) + "_receive_at_home");
                 EventBus<ForceEffectSubItemEvent>.Raise(new ForceEffectSubItemEvent()
                 {
                     resource = SubGameResource.QuestEventItem,
@@ -114,14 +115,15 @@ namespace MyGame.Modules.QuestEvent
                     }
                 });
 
-                _numCollectAtHome = 0;
 
-                SonatUtils.DelayCall(2f, () =>
+                SonatUtils.DelayCall(3f, () =>
                 {
+                    _numCollectAtHome = 0;
                     if (CheckCanClaimQuest())
                     {
                         PanelManager.Instance.OpenPanel<PopupQuestEvent>();
                     }
+                    HomeManager.Instance.BlockUIManager.DeregisterBlockUI(nameof(QuestEventService) + "_receive_at_home");
                 });
             }
         }

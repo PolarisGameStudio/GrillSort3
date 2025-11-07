@@ -85,10 +85,11 @@ namespace MyGame.Modules.QuestEvent.UI.Elements
             var temp = _value * 100;
             _value = currentItem;
 
-            DOTween.To(() => oldValue, x => temp = x, newValue, 1f).OnUpdate(() =>
+            DOTween.To(() => oldValue, x => temp = x, newValue, 0.3f).OnUpdate(() =>
             {
                 txtProgress.text = $"{Mathf.FloorToInt(temp * 1.0f / 100)}/{maxItem}";
-                SetSliderValue(temp / 100, maxItem);
+
+                slider.value = (temp * 1.0f / 100) / maxItem;
             });
         }
     }

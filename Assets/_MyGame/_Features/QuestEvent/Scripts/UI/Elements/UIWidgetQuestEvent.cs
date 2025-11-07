@@ -32,8 +32,8 @@ namespace MyGame.Modules.QuestEvent.UI.Elements
 
             if (active)
             {
-                timeCounter.UpdateUI();
-                sliderQuestEvent.UpdateUI();
+                // timeCounter.UpdateUI();
+                // sliderQuestEvent.UpdateUI();
             }
             else
             {

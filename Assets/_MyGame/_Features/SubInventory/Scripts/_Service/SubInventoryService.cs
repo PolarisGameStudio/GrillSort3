@@ -50,6 +50,7 @@ namespace MyGame.Modules.SubInventory
             {
                 currentResources[resource] = value;
             }
+            SetLastResource(resource, value);
 
             return value;
         }
