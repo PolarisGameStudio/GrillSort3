@@ -209,8 +209,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8883426924671663353}
+  m_Children: []
   m_Father: {fileID: 6552592996518844505}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -300,6 +299,7 @@ RectTransform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5589696044903603712}
+  - {fileID: 8883426924671663353}
   - {fileID: 2441034002999481983}
   m_Father: {fileID: 9175612027958157029}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -325,6 +325,8 @@ MonoBehaviour:
   customIcon: 0
   quantityFormat: x{0}
   iconNameFormat: ico_{0}
+  useCustomIconScale: 0
+  customIconScale: 1
 --- !u!1 &3488766838502827282
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,6 +594,8 @@ MonoBehaviour:
   customIcon: 0
   quantityFormat: x{0}
   iconNameFormat: ico_{0}
+  useCustomIconScale: 0
+  customIconScale: 1
 --- !u!1 &4744959856975390690
 GameObject:
   m_ObjectHideFlags: 0
@@ -1243,6 +1247,8 @@ MonoBehaviour:
   customIcon: 0
   quantityFormat: x{0}
   iconNameFormat: ico_{0}
+  useCustomIconScale: 0
+  customIconScale: 1
 --- !u!1 &8573349022808692427
 GameObject:
   m_ObjectHideFlags: 0
@@ -1739,7 +1745,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5589696044903603712}
+    m_TransformParent: {fileID: 6552592996518844505}
     m_Modifications:
     - target: {fileID: 1137423148401269956, guid: 7f8afc44a167dda49b7441baae40e02e, type: 3}
       propertyPath: m_SortingLayer

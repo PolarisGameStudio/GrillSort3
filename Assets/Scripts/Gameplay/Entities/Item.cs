@@ -119,6 +119,11 @@ namespace Gameplay.Entities
             itemBehaviorSO.OnMouseDown(this);
         }
 
+        public virtual bool OnCustomSelect()
+        {
+            return false;
+        }
+
         private Vector3 vel;
 
         public virtual void OnMoveItem()
@@ -570,7 +575,7 @@ namespace Gameplay.Entities
 
         public virtual void OnEndSwitch()
         {
-            
+
         }
     }
 }

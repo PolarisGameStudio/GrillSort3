@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Gameplay.Entities;
 using Manager;
+using MyGame.SkewerJam.Gameplay.Helpers;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay.LogicOrder
@@ -113,6 +114,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
                 foreach (var itemId in dictItems.Keys)
                 {
+                    if (ItemHelper.IsItemSpecial(itemId)) continue;
                     var numItems = dictItems[itemId];
                     // cần chọn item tối ưu cho order
                     if (neededItemsForCurrentOrder.ContainsKey(itemId))
@@ -159,6 +161,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                 var dictItems = listCurrentItems.GroupBy(e => (ItemId)e.id).ToDictionary(e => e.Key, e => e.Count());
                 foreach (var itemId in dictItems.Keys)
                 {
+                    if (ItemHelper.IsItemSpecial(itemId)) continue;
                     if (neededItemsForCurrentOrder.ContainsKey(itemId))
                     {
                         dictListItemStepInfo.TryAdd(itemId, new List<(List<Item>, int)>());
@@ -195,6 +198,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
                 foreach (var itemId in dictItems.Keys)
                 {
+                    if (ItemHelper.IsItemSpecial(itemId)) continue;
                     var numItems = dictItems[itemId];
                     var currentNeededSlot = dictCountSlotByGrill.GetValueOrDefault(primaryGrill.id, 0);
 

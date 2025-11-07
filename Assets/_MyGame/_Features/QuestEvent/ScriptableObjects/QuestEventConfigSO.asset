@@ -1,0 +1,148 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3044c30962b70b84492f02fd4629783f, type: 3}
+  m_Name: QuestEventConfigSO
+  m_EditorClassIdentifier: 
+  unlocklevel: 15
+  listMilestones:
+  - index: 0
+    numItem: 6
+    rewardData:
+      resourceDatas:
+      - resource: 2
+        quantity: 900
+  - index: 1
+    numItem: 6
+    rewardData:
+      resourceDatas:
+      - resource: 1
+        quantity: 20
+  - index: 2
+    numItem: 8
+    rewardData:
+      resourceDatas:
+      - resource: 121
+        quantity: 1
+  - index: 3
+    numItem: 8
+    rewardData:
+      resourceDatas:
+      - resource: 1
+        quantity: 50
+  - index: 4
+    numItem: 9
+    rewardData:
+      resourceDatas:
+      - resource: 2
+        quantity: 1800
+  - index: 5
+    numItem: 9
+    rewardData:
+      resourceDatas:
+      - resource: 121
+        quantity: 1
+      - resource: 101
+        quantity: 1
+  - index: 6
+    numItem: 11
+    rewardData:
+      resourceDatas:
+      - resource: 102
+        quantity: 1
+  - index: 7
+    numItem: 12
+    rewardData:
+      resourceDatas:
+      - resource: 122
+        quantity: 1
+  - index: 8
+    numItem: 12
+    rewardData:
+      resourceDatas:
+      - resource: 1
+        quantity: 50
+  - index: 9
+    numItem: 12
+    rewardData:
+      resourceDatas:
+      - resource: 122
+        quantity: 1
+  - index: 10
+    numItem: 12
+    rewardData:
+      resourceDatas:
+      - resource: 103
+        quantity: 1
+  - index: 11
+    numItem: 12
+    rewardData:
+      resourceDatas:
+      - resource: 123
+        quantity: 1
+  - index: 12
+    numItem: 14
+    rewardData:
+      resourceDatas:
+      - resource: 2
+        quantity: 1800
+  - index: 13
+    numItem: 14
+    rewardData:
+      resourceDatas:
+      - resource: 1
+        quantity: 100
+  - index: 14
+    numItem: 15
+    rewardData:
+      resourceDatas:
+      - resource: 103
+        quantity: 1
+  - index: 15
+    numItem: 15
+    rewardData:
+      resourceDatas:
+      - resource: 123
+        quantity: 1
+  - index: 16
+    numItem: 15
+    rewardData:
+      resourceDatas:
+      - resource: 1
+        quantity: 200
+  - index: 17
+    numItem: 18
+    rewardData:
+      resourceDatas:
+      - resource: 102
+        quantity: 1
+  - index: 18
+    numItem: 18
+    rewardData:
+      resourceDatas:
+      - resource: 104
+        quantity: 1
+      - resource: 101
+        quantity: 1
+  - index: 19
+    numItem: 20
+    rewardData:
+      resourceDatas:
+      - resource: 1
+        quantity: 300
+      - resource: 125
+        quantity: 1
+      - resource: 104
+        quantity: 1
+      - resource: 102
+        quantity: 1
+      - resource: 2
+        quantity: 3600

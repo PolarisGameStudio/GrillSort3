@@ -1,4 +1,5 @@
 using System;
+using MyGame.Modules.CardCollection;
 
 namespace Sonat.Enums
 {
@@ -33,7 +34,7 @@ namespace Sonat.Enums
         None = 0,
         Currency,
         Booster,
-        Card, 
+        Card,
         Badge,
     }
 

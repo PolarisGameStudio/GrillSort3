@@ -288,7 +288,8 @@ namespace Gameplay.LevelData
         Key2 = 6,
         KeyArea = 7,
         Coin = 8,
-        Wrapped = 9
+        Wrapped = 9,
+        Special_QuestEvent = 100
     }
 
     public enum MoveType : byte

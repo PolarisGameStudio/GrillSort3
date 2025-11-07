@@ -6,6 +6,8 @@ using Gameplay.Entities;
 using Gameplay.Entities.Grills;
 using Gameplay.Entities.Obstacle;
 using Gameplay.LevelData;
+using Manager;
+using MyGame.Modules.QuestEvent;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Gameplay.Objects;
 using MyGame.SkewerJam.Level;
@@ -79,8 +81,10 @@ namespace MyGame.SkewerJam.Gameplay
             var obstacleManager = gameLogicHandler.ObstacleManager;
             await GenerateObstacles(levelData.obstacleData, obstacleManager);
             await UniTask.DelayFrame(1);
-        }
 
+            // create special item = quest item
+            GenerateQuestItem();
+        }
 
         private LevelData_SkewerJam ValidateLevelData(LevelData_SkewerJam levelData)
         {
@@ -296,6 +300,30 @@ namespace MyGame.SkewerJam.Gameplay
                 obstacle.SetData(obstacleData);
                 obstacle.SetGrill(grillsSelected);
                 obstacleManager.AddObstacle(obstacle);
+            }
+        }
+
+
+
+        private void GenerateQuestItem()
+        {
+            QuestEventService questEventService = MySonatFramework.GetService<QuestEventService>();
+            if (!questEventService.CanSpawItemQuestEvent()) return;
+
+            int specialItemId = 1000;
+
+
+            var grillManager = GameController.Instance.GameLogicHandler.GrillManager;
+            var listPrimaryGrills = grillManager.ListGrills;
+            List<PrimaryGrill> grillsSelected = RandomExtensions.GetRandomElemntsInList(listPrimaryGrills, listPrimaryGrills.Count);
+            int count = 0;
+            foreach (var primaryGrill in grillsSelected)
+            {
+                if (primaryGrill.CreateSpecialItem(specialItemId, ItemType.Special_QuestEvent))
+                {
+                    count++;
+                    if (count >= GameRemoteConfigValue.numberSpecialItemPerLevel) return;
+                }
             }
         }
     }

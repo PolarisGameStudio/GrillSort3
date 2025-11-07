@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using MyGame.Modules.CardCollection;
+using MyGame.Modules.SubInventory;
 using MyGame.Scripts.UI;
 using Sonat.Enums;
 using SonatFramework.Scripts.Helper;
@@ -8,6 +10,7 @@ using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems.AudioManagement;
+using SonatFramework.Systems.EventBus;
 using SonatFramework.Systems.InventoryManagement;
 using SonatFramework.Systems.InventoryManagement.GameResources;
 using UnityEngine;
@@ -15,17 +18,18 @@ using UnityEngine;
 public class HomeManager : SingletonSimple<HomeManager>
 {
     [SerializeField] private UINavigateBarSlide uINavigateBar;
-    [SerializeField] private GameObject blockUI;
-    [SerializeField] private float delayBlockUI = 2f;
     [SerializeField] private float delaySoundHome = 0.5f;
+    [SerializeField] private BlockUIManager blockUIManager;
 
+    public BlockUIManager BlockUIManager => blockUIManager;
     private bool running = false;
 
     private void Awake()
     {
         if (uINavigateBar == null)
             uINavigateBar = GetComponentInChildren<UINavigateBarSlide>();
-        //OnCompleteAlbum();
+
+        blockUIManager.Initialize();
     }
 
     public async UniTask SwitchTab(Sonat.Enums.NavigationType navigation, float delay = 0)
@@ -73,17 +77,6 @@ public class HomeManager : SingletonSimple<HomeManager>
         }
     }
 
-
-    public void BlockUI()
-    {
-        blockUI.SetActive(true);
-    }
-
-    public void UnlockUI()
-    {
-        blockUI.SetActive(false);
-    }
-
 #if UNITY_EDITOR
     private void Update()
     {
@@ -94,9 +87,16 @@ public class HomeManager : SingletonSimple<HomeManager>
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            var uiData = new UIData();
-            uiData.Add(PopupCompleteAlbum.ALBUM_TYPE_KEY, AlbumType.Album_0);
-            PanelManager.Instance.OpenPanel<PopupCompleteAlbum>(uiData);
+            EventBus<ForceEffectSubItemEvent>.Raise(new ForceEffectSubItemEvent()
+            {
+                resource = SubGameResource.QuestEventItem,
+                quantity = UnityEngine.Random.Range(1, 10),
+                position = Vector3.zero,
+                collectEffect = new CollectEffectMultiple()
+                {
+                    collectEffectName = "UICollectEffectSubItem_AtHome"
+                }
+            });
         }
     }
 #endif

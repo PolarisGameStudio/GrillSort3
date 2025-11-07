@@ -71,6 +71,8 @@ namespace Manager
             levelShowRwdBooster = SonatSDKAdapter.GetRemoteInt("level_show_rwd_booster", 1);
             levelStartShowPopupBuyBooster2 = SonatSDKAdapter.GetRemoteInt("level_start_show_popup_buy_booster2", 9999);
 
+            numberSpecialItemPerLevel = SonatSDKAdapter.GetRemoteInt("IN_GAME_number_special_item_per_level", 3);
+
 
 
             levelStartRate = SonatSDKAdapter.GetRemoteInt("POPUP_RATE_level_start", 3);

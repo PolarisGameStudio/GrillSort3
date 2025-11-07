@@ -1,3 +1,4 @@
+using SonatFramework.Systems.EventBus;
 using SonatFramework.Systems.UserData;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class TabHome : UITabBase
         base.Start();
         // MySonatFramework.audioService.PlayMusic(GameplayController.GetBackgroundMusic(), true, 0.5f);
         // MySonatFramework.audioService.PlayMusic(Sonat.Enums.AudioId.BGM_Home_summer_Grill_sort, true, 0.5f);
+        EventBus<HomeSetupEvent>.Raise(new HomeSetupEvent());
         homeWidgetManager.Setup();
     }
 

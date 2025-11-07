@@ -630,7 +630,7 @@ namespace Gameplay.Entities
             base.OnReturnObj();
         }
 
-        public virtual bool CreateSpecialItem(int itemId)
+        public virtual bool CreateSpecialItem(int itemId, ItemType itemType)
         {
             if (subGrills == null || subGrills.Count == 0 || slots.Length < 3) return false;
             List<SubGrill> subGrillsTemp = new List<SubGrill>(subGrills);
@@ -640,7 +640,7 @@ namespace Gameplay.Entities
                 int emptySlot = subGrill.GetEmptySlot();
                 if (emptySlot >= 0)
                 {
-                    subGrill.CreateSpecialItem(new ItemData() { id = itemId, itemType = ItemType.Special }, emptySlot);
+                    subGrill.CreateSpecialItem(new ItemData() { id = itemId, itemType = itemType }, emptySlot);
                     return true;
                 }
             }

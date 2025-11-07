@@ -39,7 +39,12 @@ namespace MyGame.Modules.CardCollection
         public void ResetData()
         {
             completedCardCollection.Value = 0;
-            LoadData();
+
+            foreach (var album in config.albums)
+            {
+                _dictAlbumAndCollectedCard[album.type].Clear();
+                _dictAlbumAndNewCard[album.type].Clear();
+            }
         }
 
         public bool CheckExistCollectedCard(CardType cardType)
