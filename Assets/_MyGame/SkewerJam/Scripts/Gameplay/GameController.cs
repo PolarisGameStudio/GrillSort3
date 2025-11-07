@@ -86,12 +86,13 @@ namespace MyGame.SkewerJam.Gameplay
         void OnDestroy()
         {
             EventBus<PanelUpdatedEvent>.Deregister(onPanelsUpdatedEvent);
+
+            OnPlayTutorial = null;
+            OnInitLevel = null;
         }
 
         private void Initialize()
         {
-            OnPlayTutorial = null;
-            OnInitLevel = null;
             gameViewport.Init();
             level = MySonatFramework.userDataService.GetLevel(GameMode.Classic);
             gameStateChangeEvent = new EventBinding<GameStateChangeEvent>(OnGameStateChangedEvent);

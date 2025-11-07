@@ -13,6 +13,12 @@ namespace MyGame.Modules.QuestEvent.UI.Elements
         private void OnEnable()
         {
             UpdateUI();
+
+            _questEventService.Instance.OnDataUpdated += UpdateUI;
+        }
+        private void OnDisable()
+        {
+            _questEventService.Instance.OnDataUpdated -= UpdateUI;
         }
 
         public void UpdateUI()

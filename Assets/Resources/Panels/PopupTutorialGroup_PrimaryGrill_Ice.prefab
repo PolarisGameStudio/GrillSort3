@@ -16,6 +16,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: PopupTutorialGroup_PrimaryGrill_Ice
       objectReference: {fileID: 0}
+    - target: {fileID: 5272323190057070058, guid: c8b966987b7cb4246954d298d0b09a31, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 5272323190057070058, guid: c8b966987b7cb4246954d298d0b09a31, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 5272323190057070058, guid: c8b966987b7cb4246954d298d0b09a31, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 238
+      objectReference: {fileID: 0}
+    - target: {fileID: 5272323190057070058, guid: c8b966987b7cb4246954d298d0b09a31, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 7002226178633651991, guid: c8b966987b7cb4246954d298d0b09a31, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -94,6 +110,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7002226178633651991, guid: c8b966987b7cb4246954d298d0b09a31, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7019115549264392547, guid: c8b966987b7cb4246954d298d0b09a31, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 88
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692710593185175960, guid: c8b966987b7cb4246954d298d0b09a31, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692710593185175960, guid: c8b966987b7cb4246954d298d0b09a31, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692710593185175960, guid: c8b966987b7cb4246954d298d0b09a31, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 224.25793
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692710593185175960, guid: c8b966987b7cb4246954d298d0b09a31, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

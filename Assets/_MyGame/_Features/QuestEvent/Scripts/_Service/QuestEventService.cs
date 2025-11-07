@@ -84,6 +84,7 @@ namespace MyGame.Modules.QuestEvent
 
             _numCollectAtHome = 0;
             MySonatFramework.GetService<SubInventoryService>().SetResource(SubGameResource.QuestEventItem, 0);
+            OnDataUpdated?.Invoke();
         }
 
         public override bool CanUnlock()
@@ -189,6 +190,8 @@ namespace MyGame.Modules.QuestEvent
             uiData.Add(PopupReward.REWARD_KEY, rewardData);
             PanelManager.Instance.OpenPanel<PopupReward>(uiData);
 
+            // loop claim
+            ClaimQuest();
         }
 
         public bool CheckCompleteAllQuest()
