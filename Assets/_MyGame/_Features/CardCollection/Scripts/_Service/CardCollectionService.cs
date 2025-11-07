@@ -103,16 +103,19 @@ namespace MyGame.Modules.CardCollection
         {
             // đến ngày cuối cùng của tháng thứ 3
             var date = MySonatFramework.GetService<TimeService>().GetCurrentTime();
-            // Lấy ngày cuối cùng của tháng thứ 3 (tháng hiện tại + 2)
+            // Kết thúc vào ngày cuối cùng của tháng hiện tại
             int year = date.Year;
-            int month = date.Month + 2;
-            if (month > 12)
+            int month = date.Month;
+            if (month == 12)
             {
-                month -= 12;
-                year += 1;
+                year++;
+                month = 1;
             }
-            int lastDay = DateTime.DaysInMonth(year, month);
-            var expireTime = new DateTime(year, month, lastDay, 23, 59, 59, DateTimeKind.Utc);
+            else
+            {
+                month++;
+            }
+            var expireTime = new DateTime(year, month, 1, 0, 0, 0, DateTimeKind.Utc);
 
             return ((DateTimeOffset)expireTime).ToUnixTimeSeconds() + 1;
         }

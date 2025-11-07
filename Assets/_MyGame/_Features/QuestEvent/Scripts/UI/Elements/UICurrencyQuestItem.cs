@@ -17,6 +17,19 @@ namespace MyGame.Modules.QuestEvent.UI.Elements
             {
                 gameObject.SetActive(false);
             }
+
+            questEventService.Instance.OnResetItemQuestEvent += OnResetItemQuestEvent;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            questEventService.Instance.OnResetItemQuestEvent -= OnResetItemQuestEvent;
+        }
+
+        private void OnResetItemQuestEvent()
+        {
+            UpdateValueView(false);
         }
     }
 }

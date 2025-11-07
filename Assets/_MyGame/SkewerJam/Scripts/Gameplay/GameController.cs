@@ -233,7 +233,7 @@ namespace MyGame.SkewerJam.Gameplay
             {
                 level = level,
                 reward = winReward,
-                nextLevel = () => NextLevel()
+                nextLevel = (checkInterAds) => NextLevel(checkInterAds)
             };
             PanelManager.Instance.OpenForget<WinPanel_SkewerJam>(data);
             // NextLevel();
@@ -344,25 +344,43 @@ namespace MyGame.SkewerJam.Gameplay
             PanelManager.Instance.OpenPanelByName<PopupLose_SkewerJam>("PopupLose_SkewerJam");
         }
 
-        private void NextLevel()
+        private void NextLevel(bool checkInterAds = true)
         {
             level = MySonatFramework.userDataService.GetLevel(GameMode.Classic);
 
             if (level >= GameRemoteConfigValue.levelForceHome)
             {
-                SonatSDKAdapter.ShowInterAds("go_home", () =>
+                if (checkInterAds)
+                {
+                    SonatSDKAdapter.ShowInterAds("go_home", () =>
+                    {
+                        GameplayHelper.GoHome();
+                    });
+                }
+                else
                 {
                     GameplayHelper.GoHome();
-                });
+                }
             }
             else
             {
-                PlayLevel(level).Forget();
+                if (checkInterAds)
+                {
+                    SonatSDKAdapter.ShowInterAds("next_level", () =>
+                    {
+                        PlayLevel(level).Forget();
+                    });
+                }
+                else
+                {
+                    PlayLevel(level).Forget();
+                }
             }
         }
 
         public void Replay()
         {
+            EventBus<LevelReplayEvent>.Raise(new LevelReplayEvent() { cause = "replay" });
             PlayLevel(level).Forget();
         }
 

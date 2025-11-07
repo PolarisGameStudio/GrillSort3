@@ -26,6 +26,7 @@ namespace MyGame.Modules.QuestEvent
         public int CurrentItem => _currentItem.Value;
 
         public event Action OnDataUpdated;
+        public event Action OnResetItemQuestEvent;
 
         private int _numCollectAtHome = 0;
 
@@ -36,11 +37,13 @@ namespace MyGame.Modules.QuestEvent
             new EventBinding<LevelStartedEvent>(OnLevelStarted);
             new EventBinding<LevelEndedEvent>(OnLevelEnded);
             new EventBinding<LevelQuitEvent>(OnLevelQuit);
+            new EventBinding<LevelReplayEvent>(OnLevelReplay);
         }
 
         private void OnLevelStarted(LevelStartedEvent eventData)
         {
             MySonatFramework.GetService<SubInventoryService>().SetResource(SubGameResource.QuestEventItem, 0);
+            OnResetItemQuestEvent?.Invoke();
         }
 
         private void OnLevelEnded(LevelEndedEvent eventData)
@@ -51,11 +54,19 @@ namespace MyGame.Modules.QuestEvent
                 _currentItem.Value += _numCollectAtHome;
             }
             MySonatFramework.GetService<SubInventoryService>().SetResource(SubGameResource.QuestEventItem, 0);
+            OnResetItemQuestEvent?.Invoke();
         }
 
         private void OnLevelQuit(LevelQuitEvent eventData)
         {
             MySonatFramework.GetService<SubInventoryService>().SetResource(SubGameResource.QuestEventItem, 0);
+            OnResetItemQuestEvent?.Invoke();
+        }
+
+        private void OnLevelReplay(LevelReplayEvent eventData)
+        {
+            MySonatFramework.GetService<SubInventoryService>().SetResource(SubGameResource.QuestEventItem, 0);
+            OnResetItemQuestEvent?.Invoke();
         }
 
         public void AddNumItemInGame(int num, Vector3 position)
@@ -102,8 +113,9 @@ namespace MyGame.Modules.QuestEvent
         protected override long GetNextExpireTime()
         {
             var now = MySonatFramework.GetService<TimeService>().GetCurrentTime();
-            var nextDay = now.Date.AddDays(7);
-            return ((DateTimeOffset)nextDay).ToUnixTimeSeconds();
+            int daysToEndOfWeek = ((int)DayOfWeek.Sunday - (int)now.DayOfWeek + 7) % 7;
+            var endOfNextWeek = now.Date.AddDays(daysToEndOfWeek + 1);
+            return ((DateTimeOffset)endOfNextWeek).ToUnixTimeSeconds();
         }
 
         protected override void ProgressUnlockFeature()

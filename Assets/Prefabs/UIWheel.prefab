@@ -400,7 +400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pArrow: {fileID: 405345977283398159}
-  duration: 3
+  duration: 5
   isRotate: 0
   valueMax: 8
   valueMid: 5
@@ -427,14 +427,32 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.5
-      value: 0.5
-      inSlope: 2.9318557
-      outSlope: 2.9318557
+      time: 0.35
+      value: 0.125
+      inSlope: 1
+      outSlope: 1
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.06194687
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 0.5
+      inSlope: 3.8794959
+      outSlope: 3.8794959
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.17109159
+    - serializedVersion: 3
+      time: 0.65
+      value: 0.875
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1

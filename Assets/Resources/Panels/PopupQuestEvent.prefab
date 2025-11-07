@@ -447,6 +447,42 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6871137398432295334, guid: 17a11756e1c50724792bbc402093bab5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6871137398432295334, guid: 17a11756e1c50724792bbc402093bab5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6871137398432295334, guid: 17a11756e1c50724792bbc402093bab5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6871137398432295334, guid: 17a11756e1c50724792bbc402093bab5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085969533664414626, guid: 17a11756e1c50724792bbc402093bab5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085969533664414626, guid: 17a11756e1c50724792bbc402093bab5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085969533664414626, guid: 17a11756e1c50724792bbc402093bab5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085969533664414626, guid: 17a11756e1c50724792bbc402093bab5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085969533664414626, guid: 17a11756e1c50724792bbc402093bab5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8358268968135877803, guid: 17a11756e1c50724792bbc402093bab5, type: 3}
       propertyPath: m_LocalScale.x
       value: 0
@@ -704,9 +740,13 @@ PrefabInstance:
       value: 81.7
       objectReference: {fileID: 0}
     - target: {fileID: 2321207598065418232, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321207598065418232, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 184f25a5dcff0784f921bfa22137d9a2, type: 3}
+      objectReference: {fileID: 21300000, guid: 45dc65669e03744498b7f06334a343bc, type: 3}
     - target: {fileID: 2338080940412523142, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -951,7 +991,7 @@ MonoBehaviour:
   keepCached: 0
   pauseGame: 0
   ignoreTracking: 0
-  trackingName: 
+  trackingName: H:::popup_quest_event
   openTween:
   - target: {fileID: 5483677386565954002}
     configSO: {fileID: 11400000, guid: f5deaa398b128a447889a074544bf531, type: 2}

@@ -8,6 +8,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2160116397991423177, guid: c8b966987b7cb4246954d298d0b09a31, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059014293525869722, guid: c8b966987b7cb4246954d298d0b09a31, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059014293525869722, guid: c8b966987b7cb4246954d298d0b09a31, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059014293525869722, guid: c8b966987b7cb4246954d298d0b09a31, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 112.12897
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059014293525869722, guid: c8b966987b7cb4246954d298d0b09a31, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4001940709824062086, guid: c8b966987b7cb4246954d298d0b09a31, type: 3}
       propertyPath: txtName
       value: 
