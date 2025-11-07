@@ -71,10 +71,7 @@ namespace Manager
             levelShowRwdBooster = SonatSDKAdapter.GetRemoteInt("level_show_rwd_booster", 1);
             levelStartShowPopupBuyBooster2 = SonatSDKAdapter.GetRemoteInt("level_start_show_popup_buy_booster2", 9999);
 
-            numberSpecialItemPerLevel = SonatSDKAdapter.GetRemoteInt("IN_GAME_number_special_item_per_level", 3);
-
-
-
+            // Popup Rate
             levelStartRate = SonatSDKAdapter.GetRemoteInt("POPUP_RATE_level_start", 3);
 #if UNITY_ANDROID
             minNumStar = SonatSDKAdapter.GetRemoteInt("POPUP_RATE_min_num_star", 5);
@@ -82,7 +79,8 @@ namespace Manager
             minNumStar = SonatSDKAdapter.GetRemoteInt("POPUP_RATE_min_num_star", 1);
 #endif
 
-
+            // In Game
+            numberSpecialItemPerLevel = SonatSDKAdapter.GetRemoteInt("IN_GAME_number_special_item_per_level", 3);
 
             countLoseToShowOffer = SonatSDKAdapter.GetRemoteInt("count_lose_to_show_offer", 0);
             noCharacter = SonatSDKAdapter.GetRemoteBool("no_character", true);
@@ -102,6 +100,11 @@ namespace Manager
             levelReplayDataDefault.levelReplayData.Add(8, new Dictionary<int, int>() { { 1, 0 }, { 3, 1 }, { 5, 2 } });
             Debug.Log("Level Replay Data: " + JsonConvert.SerializeObject(levelReplayDataDefault));
             levelReplayData = SonatSDKAdapter.GetRemoteConfig("level_replay_data", levelReplayDataDefault);
+        }
+
+        public static int GetInt(string key, int defaultValue)
+        {
+            return SonatSDKAdapter.GetRemoteInt(key, defaultValue);
         }
     }
 
