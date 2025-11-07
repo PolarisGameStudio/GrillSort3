@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using MyGame.Modules.CardCollection;
 using MyGame.Modules.SubInventory;
 using MyGame.Scripts.UI;
+using MyGame.SkewerJam.Gameplay;
 using Sonat.Enums;
 using SonatFramework.Scripts.Helper;
 using SonatFramework.Scripts.SonatSDKAdapterModule;
@@ -20,7 +21,9 @@ public class HomeManager : SingletonSimple<HomeManager>
     [SerializeField] private UINavigateBarSlide uINavigateBar;
     [SerializeField] private float delaySoundHome = 0.5f;
     [SerializeField] private BlockUIManager blockUIManager;
+    [SerializeField] private TutorialFeatureManager tutorialFeatureManager;
 
+    public TutorialFeatureManager TutorialFeatureManager => tutorialFeatureManager;
     public BlockUIManager BlockUIManager => blockUIManager;
     private bool running = false;
 
@@ -29,6 +32,7 @@ public class HomeManager : SingletonSimple<HomeManager>
         if (uINavigateBar == null)
             uINavigateBar = GetComponentInChildren<UINavigateBarSlide>();
 
+        tutorialFeatureManager.Initialize();
         blockUIManager.Initialize();
     }
 

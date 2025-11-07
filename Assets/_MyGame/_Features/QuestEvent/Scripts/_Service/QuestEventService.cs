@@ -134,7 +134,6 @@ namespace MyGame.Modules.QuestEvent
             // Hiện tut
             if (PlayerPrefs.HasKey($"{DATA_KEY}_ShowTutorial") == false)
             {
-                HomeManager.Instance.BlockUIManager.RegisterBlockUI(nameof(QuestEventService));
                 PlayerPrefs.SetInt($"{DATA_KEY}_ShowTutorial", 1);
 
                 await UniTask.Delay(300);
@@ -145,9 +144,6 @@ namespace MyGame.Modules.QuestEvent
 
                 var popup2 = PanelManager.Instance.OpenPanelByName<Panel>("PopupQuestEvent");
                 await UniTask.WaitUntil(() => popup2 == null || popup2.gameObject.activeInHierarchy == false);
-                await UniTask.Delay(300);
-
-                HomeManager.Instance.BlockUIManager.DeregisterBlockUI(nameof(QuestEventService));
             }
         }
         #endregion

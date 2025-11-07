@@ -2,6 +2,8 @@ using System;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Gameplay.Entities;
+using Manager;
+using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Level;
 using MyGame.SkewerJam.Objects.Entities;
 using UnityEngine;
@@ -73,7 +75,7 @@ namespace MyGame.SkewerJam.Gameplay.Objects
                         {
                             foreach (var itemData in layerData.itemData)
                             {
-                                if (itemData != null && itemData.id > 0)
+                                if (itemData != null && itemData.id > 0 && ItemHelper.IsItemSpecial((ItemId)itemData.id) == false)
                                 {
                                     totalItems++;
                                 }

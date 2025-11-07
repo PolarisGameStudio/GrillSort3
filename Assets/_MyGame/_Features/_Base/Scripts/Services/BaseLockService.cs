@@ -1,13 +1,16 @@
 using System;
 using Cysharp.Threading.Tasks;
+using MyGame.SkewerJam.Gameplay;
 using SonatFramework.Scripts.Helper;
 using SonatFramework.Systems;
 using SonatFramework.Systems.EventBus;
+using UnityEngine;
 
 namespace MyGame.Modules
 {
     public abstract class BaseLockService : SonatServiceSo, IServiceInitialize
     {
+        [SerializeField] private int orderTutorial = 0;
         public abstract string DATA_KEY { get; }
 
         private IntDataPref isUnlocked;
@@ -63,6 +66,15 @@ namespace MyGame.Modules
             if (IsUnlocked() == false && CanUnlock() == true)
             {
                 Unlock();
+                HomeManager.Instance.TutorialFeatureManager.AddTutorial(new TutorialFeatureData()
+                {
+                    featureName = DATA_KEY,
+                    order = orderTutorial,
+                    action = async () =>
+                    {
+                        await TryShowTutorial();
+                    }
+                });
             }
         }
 
@@ -70,7 +82,6 @@ namespace MyGame.Modules
         {
             if (IsUnlocked() == true)
             {
-                TryShowTutorial().Forget();
                 ProgressUnlockFeature();
             }
         }

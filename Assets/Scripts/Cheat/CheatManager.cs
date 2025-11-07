@@ -172,6 +172,7 @@ public enum CheatOption
 	LevelChest,
 	TransportTracking,
 	CardCollection,
+	QuestEvent,
 	MAX,
 }
 

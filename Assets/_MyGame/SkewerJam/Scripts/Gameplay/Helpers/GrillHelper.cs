@@ -44,6 +44,8 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                 if (layerData?.itemData == null) continue;
                 foreach (var itemData in layerData.itemData)
                 {
+                    if (itemData == null) continue;
+                    if (ItemHelper.IsItemSpecial((ItemId)itemData.id)) continue;
                     if (itemData is not { id: > 0 }) continue;
                     listItemIds.Add((ItemId)itemData.id);
                 }
@@ -62,6 +64,8 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                     if (subLayerData?.itemData == null) continue;
                     foreach (var itemData in subLayerData.itemData)
                     {
+                        if (itemData == null) continue;
+                        if (ItemHelper.IsItemSpecial((ItemId)itemData.id)) continue;
                         if (itemData is not { id: > 0 }) continue;
                         listItemIds.Add((ItemId)itemData.id);
                     }

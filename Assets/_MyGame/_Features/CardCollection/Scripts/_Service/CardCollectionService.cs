@@ -127,7 +127,6 @@ namespace MyGame.Modules.CardCollection
             // Hiện tut
             if (PlayerPrefs.HasKey($"{DATA_KEY}_ShowTutorial") == false)
             {
-                HomeManager.Instance.BlockUIManager.RegisterBlockUI(nameof(CardCollectionService));
                 PlayerPrefs.SetInt($"{DATA_KEY}_ShowTutorial", 1);
 
                 UIData uiData = new();
@@ -142,7 +141,9 @@ namespace MyGame.Modules.CardCollection
                 await UniTask.WaitUntil(() => popup == null || popup.gameObject.activeInHierarchy == false);
                 await UniTask.Delay(300);
                 RewardUnlockFeature();
-                HomeManager.Instance.BlockUIManager.DeregisterBlockUI(nameof(CardCollectionService));
+
+                var popupReward = PanelManager.Instance.GetPanel<PopupReward>();
+                await UniTask.WaitUntil(() => popupReward == null || popupReward.gameObject.activeInHierarchy == false);
             }
         }
         #endregion

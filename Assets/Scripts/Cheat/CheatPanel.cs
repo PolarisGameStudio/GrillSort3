@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using MyGame.Modules.CardCollection;
+using MyGame.Modules.QuestEvent;
 using Sonat;
 using Sonat.DebugViewModule;
 using Sonat.Enums;
@@ -10,6 +9,7 @@ using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems;
 using SonatFramework.Systems.EventBus;
 using SonatFramework.Systems.GameDataManagement;
+using SonatFramework.Systems.SceneManagement;
 using SonatFramework.Systems.TimeManagement;
 using TMPro;
 using UnityEngine;
@@ -151,6 +151,9 @@ public class CheatPanel : Panel
             case CheatOption.CardCollection:
                 OnDropdown(1);
                 InitCardCollectionDropdown();
+                break;
+            case CheatOption.QuestEvent:
+                OnInputField(1);
                 break;
         }
     }
@@ -307,6 +310,19 @@ public class CheatPanel : Panel
                 {
                     var cardType = optionValue.ToEnum<CardType>();
                     CheatManager.CheatCardCollection(cardType);
+                }
+                break;
+            case CheatOption.QuestEvent:
+                if (int.TryParse(inputValues[0].text, out var numItem))
+                {
+                    if (MySonatFramework.GetService<SceneService>().GetCurrentGamePlacement() == GamePlacement.Gameplay_SkewerJam)
+                    {
+                        MySonatFramework.GetService<QuestEventService>().AddNumItemInGame(numItem, Vector3.zero);
+                    }
+                    else
+                    {
+                        PopupToast.Cretate("Vào gameplay đi ạ !!!");
+                    }
                 }
                 break;
         }

@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Manager;
 using SonatFramework.Scripts.Utils;
@@ -10,6 +12,7 @@ public class HomeWidgetManager : MonoBehaviour
     [SerializeField] private float blockUIDuration = 3f;
     [SerializeField] private UIHomeWidget[] widgets;
     public static int homeCount = -1;
+
 
     public void Setup()
     {
@@ -24,7 +27,7 @@ public class HomeWidgetManager : MonoBehaviour
         {
             HomeManager.Instance.BlockUIManager.DeregisterBlockUI(nameof(HomeWidgetManager));
         }, this);
-        ProcessTasks().Forget();
+        // ProcessTasks().Forget();
     }
 
     public void OnFocus()
@@ -43,7 +46,7 @@ public class HomeWidgetManager : MonoBehaviour
         }
     }
 
-    public async UniTask ProcessTasks()
+    public async UniTask ProcessTasks(Action onComplete = null)
     {
         await UniTask.Delay((int)(delayProcess * 1000));
         int popupCount = 0;
@@ -57,6 +60,7 @@ public class HomeWidgetManager : MonoBehaviour
             }
         }
         EventBus<HomeProcessEvent>.Raise(new HomeProcessEvent());
+        onComplete?.Invoke();
     }
 
     private void OnDisable()

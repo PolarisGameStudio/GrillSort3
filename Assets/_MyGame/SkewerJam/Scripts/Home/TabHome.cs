@@ -1,5 +1,4 @@
 using SonatFramework.Systems.EventBus;
-using SonatFramework.Systems.UserData;
 using UnityEngine;
 
 public class TabHome : UITabBase
@@ -7,6 +6,7 @@ public class TabHome : UITabBase
     [Space]
     [Header("Tab Home")]
     [SerializeField] private HomeWidgetManager homeWidgetManager;
+
     private bool firstTime = true;
 
     protected override void Start()
@@ -16,6 +16,10 @@ public class TabHome : UITabBase
         // MySonatFramework.audioService.PlayMusic(Sonat.Enums.AudioId.BGM_Home_summer_Grill_sort, true, 0.5f);
         EventBus<HomeSetupEvent>.Raise(new HomeSetupEvent());
         homeWidgetManager.Setup();
+        homeWidgetManager.ProcessTasks(() =>
+        {
+            HomeManager.Instance.TutorialFeatureManager.PlayTutorial();
+        });
     }
 
     public override void OnShow()

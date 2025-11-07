@@ -2042,9 +2042,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5956362616929522410}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 149.745, y: -100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 84.9969, y: 86.6142}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2928149460317638652
@@ -2121,7 +2121,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 253.18, y: -100.000015}
-  m_SizeDelta: {x: 0, y: 200}
+  m_SizeDelta: {x: 149.22, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8679434846824278854
 CanvasRenderer:
@@ -3751,6 +3751,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4207750069005980321}
     m_Modifications:
+    - target: {fileID: 208285865459769570, guid: 3f5257c1ae7f30243afceef5acaa53e1, type: 3}
+      propertyPath: duration
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2418175612950429131, guid: 3f5257c1ae7f30243afceef5acaa53e1, type: 3}
       propertyPath: m_Name
       value: UIWheel
