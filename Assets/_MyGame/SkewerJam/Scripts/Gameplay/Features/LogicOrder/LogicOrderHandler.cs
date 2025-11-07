@@ -137,6 +137,11 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             }
 
             var phase = GetCurrentPhase();
+            // Nếu ở phase cuối mà 
+            if (CheckRescueOrderInFinalPhase(phase) == true)
+            {
+                return listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Rescue);
+            }
 
             var phaseConfig = selectedSequenceConfig.listPhaseConfigs[phase];
             var (idxBO, idxSO) = dynamicLogicOrder.GetDynamicIndex(phaseConfig.indexBO, phaseConfig.indexSO);
@@ -185,6 +190,12 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
         }
 
+        private bool CheckRescueOrderInFinalPhase(int phase)
+        {
+            var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
+            return phase == selectedSequenceConfig.listPhaseConfigs.Count - 1 && waitingGrillManager.GetWaitingGrillIds().Count >= 3;
+        }
+
         private bool CheckExistBasicOrder()
         {
             var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
@@ -209,7 +220,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
         }
 
         public void SetForceRescue(bool isForceRescue, int deltaSlot = -1)
-         {
+        {
             IsForceRescue = isForceRescue;
             if (isForceRescue == true)
             {

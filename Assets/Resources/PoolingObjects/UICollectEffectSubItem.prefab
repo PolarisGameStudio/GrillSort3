@@ -36,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -30}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.8, y: -5.8}
-  m_SizeDelta: {x: 90.9679, y: 191.0325}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 110.4567, y: 231.959}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4867757605822941507
 CanvasRenderer:
@@ -109,11 +109,11 @@ MonoBehaviour:
     custom: 1
     config:
       tweenType: 1
-      from: 0.5
+      from: 0.2
       to: 1
       mFrom: {x: 0, y: 0, z: 0}
       mTo: {x: 0, y: 0, z: 0}
-      duration: 0.3
+      duration: 0.2
       delay: 0
       curve:
         serializedVersion: 2
@@ -121,21 +121,21 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 4.334861
-          outSlope: 4.334861
+          inSlope: 2.7939029
+          outSlope: 2.7939029
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.047197636
+          outWeight: 0.11514444
         - serializedVersion: 3
-          time: 0.6
-          value: 1.2
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
+          time: 0.7
+          value: 1.25
+          inSlope: 0.6484194
+          outSlope: -0.29487386
+          tangentMode: 1
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0.14180933
+          outWeight: 0.5148554
         - serializedVersion: 3
           time: 1
           value: 1.0026245
@@ -257,7 +257,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  duration: 1
+  duration: 1.25
   rotate: 0
   returnPool: 0
 --- !u!1 &7852382621959931781

@@ -155,6 +155,11 @@ public class CheatManager : Singleton<CheatManager>
 	{
 		CheatCardHelper.ForceUnboxPackCard(albumType);
 	}
+
+	public static void CheatAllCardCollection()
+	{
+		CheatCardHelper.ForceUnboxAllCard();
+	}
 }
 
 

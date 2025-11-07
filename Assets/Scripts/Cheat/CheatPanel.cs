@@ -150,10 +150,13 @@ public class CheatPanel : Panel
                 break;
             case CheatOption.CardCollection:
                 OnDropdown(1);
+                OnInputField(0);
+
                 InitCardCollectionDropdown();
                 break;
             case CheatOption.QuestEvent:
                 OnInputField(1);
+
                 break;
         }
     }
@@ -301,7 +304,11 @@ public class CheatPanel : Panel
             //              break;
             case CheatOption.CardCollection:
                 var optionValue = cheatDropdowns[0].options[cheatDropdowns[0].value].text;
-                if (optionValue.StartsWith("Album_"))
+                if (optionValue.StartsWith("All"))
+                {
+                    CheatManager.CheatAllCardCollection();
+                }
+                else if (optionValue.StartsWith("Album_"))
                 {
                     var albumType = optionValue.ToEnum<AlbumType>();
                     CheatManager.CheatCardCollection(albumType);
@@ -414,6 +421,12 @@ public class CheatPanel : Panel
     public void InitCardCollectionDropdown()
     {
         List<TMP_Dropdown.OptionData> opts = new List<TMP_Dropdown.OptionData>();
+
+        TMP_Dropdown.OptionData allData = new TMP_Dropdown.OptionData()
+        {
+            text = "All"
+        };
+        opts.Add(allData);
 
         for (AlbumType i = AlbumType.Album_0; i < AlbumType.MAX; i++)
         {

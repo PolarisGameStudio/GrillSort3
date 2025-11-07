@@ -35,6 +35,7 @@ namespace MyGame.Modules.QuestEvent
 
             new EventBinding<LevelStartedEvent>(OnLevelStarted);
             new EventBinding<LevelEndedEvent>(OnLevelEnded);
+            new EventBinding<LevelQuitEvent>(OnLevelQuit);
         }
 
         private void OnLevelStarted(LevelStartedEvent eventData)
@@ -49,6 +50,11 @@ namespace MyGame.Modules.QuestEvent
                 _numCollectAtHome = MySonatFramework.GetService<SubInventoryService>().GetResource(SubGameResource.QuestEventItem);
                 _currentItem.Value += _numCollectAtHome;
             }
+            MySonatFramework.GetService<SubInventoryService>().SetResource(SubGameResource.QuestEventItem, 0);
+        }
+
+        private void OnLevelQuit(LevelQuitEvent eventData)
+        {
             MySonatFramework.GetService<SubInventoryService>().SetResource(SubGameResource.QuestEventItem, 0);
         }
 

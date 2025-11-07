@@ -56,6 +56,7 @@ namespace MyGame.Modules.CardCollection
         public void CollectCard(CardType cardType)
         {
             var albumType = config.GetAlbumType(cardType);
+
             _dictAlbumAndCollectedCard[albumType].Add((int)cardType);
             _dictAlbumAndNewCard[albumType].Add((int)cardType);
 

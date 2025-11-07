@@ -2,12 +2,21 @@ using System.Collections.Generic;
 using Sonat.Enums;
 using SonatFramework.Systems;
 using SonatFramework.Systems.EventBus;
-using Unity.VisualScripting;
-
 namespace MyGame.Modules.CardCollection
 {
     public static class CheatCardHelper
     {
+        public static void ForceUnboxAllCard()
+        {
+            var cardCollectionService = SonatSystem.GetService<CardCollectionService>();
+            var cardInventoryModule = cardCollectionService.CardInventoryModule;
+            var config = cardCollectionService.config;
+            foreach (var card in config.cards)
+            {
+                if (cardInventoryModule.CheckExistCollectedCard(card.type)) continue;
+                cardInventoryModule.CollectCard(card.type);
+            }
+        }
         public static void ForceUnboxPackCard(CardType forceCardType)
         {
             var cardCollectionService = SonatSystem.GetService<CardCollectionService>();

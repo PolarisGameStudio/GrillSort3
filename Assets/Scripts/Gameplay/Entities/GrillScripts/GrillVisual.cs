@@ -86,11 +86,11 @@ namespace Gameplay.Entities.GrillScripts
                 // selectedLid.transform.DOScale(1, GameDefine.grillLidAnim);
                 selectedLid.transform.DOLocalMoveY(defaultLidPos, GameDefine.grillLidAnim).SetEase(Ease.InQuad).OnComplete(() =>
                 {
-                    if (isSoldOut)
-                    {
-                        var rand = UnityEngine.Random.Range((int)AudioId.Pot_lid_Close_01_Grill3, (int)AudioId.Pot_lid_Close_03_Grill3 + 1);
-                        MySonatFramework.audioService.PlaySound((AudioId)rand);
-                    }
+                    // if (isSoldOut)
+                    // {
+                    //     var rand = UnityEngine.Random.Range((int)AudioId.Pot_lid_Close_01_Grill3, (int)AudioId.Pot_lid_Close_03_Grill3 + 1);
+                    //     MySonatFramework.audioService.PlaySound((AudioId)rand);
+                    // }
                 });
                 selectedLid.DOFade(1, GameDefine.grillLidAnim).SetEase(Ease.OutQuad);
             }
