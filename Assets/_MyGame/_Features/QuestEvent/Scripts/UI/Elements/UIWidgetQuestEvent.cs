@@ -37,7 +37,7 @@ namespace MyGame.Modules.QuestEvent.UI.Elements
             }
             else
             {
-                var unlockLevel = _questEventService.Instance.config.unlocklevel;
+                var unlockLevel = _questEventService.Instance.GetConfig().unlockLevel;
                 // levelUnlockParamsManager.SetParameterValue("VALUE", $"{unlockLevel}");
                 txtLevelUnlock.text = $"Unlock at level {unlockLevel}";
             }
@@ -63,7 +63,7 @@ namespace MyGame.Modules.QuestEvent.UI.Elements
             }
             else
             {
-                var unlockLevel = _questEventService.Instance.config.unlocklevel;
+                var unlockLevel = _questEventService.Instance.GetConfig().unlockLevel;
                 PopupToast.Cretate($"Unlock at level {unlockLevel}");
             }
         }

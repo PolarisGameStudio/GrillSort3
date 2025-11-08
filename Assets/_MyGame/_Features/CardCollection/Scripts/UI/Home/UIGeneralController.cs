@@ -24,7 +24,7 @@ namespace MyGame.Modules.CardCollection.Home
             if (_isInit == false)
             {
                 _isInit = true;
-                var reward = _cardCollectionService.Instance.config.rewardInSeason;
+                var reward = _cardCollectionService.Instance.GetConfig().rewardInSeason;
                 rewardGroup.SetData(reward);
                 bubbleReward.SetReward(reward);
             }
@@ -55,7 +55,7 @@ namespace MyGame.Modules.CardCollection.Home
         {
             var inventoryModule = _cardCollectionService.Instance.CardInventoryModule;
             var totalCard = inventoryModule.GetTotalCards();
-            var maxCard = _cardCollectionService.Instance.config.GetNumCard();
+            var maxCard = _cardCollectionService.Instance.GetConfig().GetNumCard();
 
             // bubbleReward.gameObject.SetActive(inventoryModule.CompletedCardCollection == false);
             // tickObj.SetActive(inventoryModule.CompletedCardCollection);

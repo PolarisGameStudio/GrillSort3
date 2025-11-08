@@ -18,7 +18,7 @@ namespace MyGame.Modules.CardCollection
 
         public static int GetNumberStarOfCard(CardType cardType)
         {
-            var config = MySonatFramework.GetService<CardCollectionService>().config;
+            var config = MySonatFramework.GetService<CardCollectionService>().GetConfig();
             var cardConfig = config.cards.FirstOrDefault(e => e.type == cardType);
             return cardConfig.star;
 
@@ -50,7 +50,7 @@ namespace MyGame.Modules.CardCollection
 
             var cardCollectionService = MySonatFramework.GetService<CardCollectionService>();
             var cardInventoryModule = cardCollectionService.CardInventoryModule;
-            var config = cardCollectionService.config;
+            var config = cardCollectionService.GetConfig();
 
             foreach (var card in config.cards)
             {

@@ -45,7 +45,7 @@ namespace MyGame.Modules.CardCollection
             this.cardType = cardType;
 
 
-            _cardConfig = _cardCollectionService.Instance.config.GetCardConfig(cardType);
+            _cardConfig = _cardCollectionService.Instance.GetConfig().GetCardConfig(cardType);
             // var albumType = _cardCollectionService.Instance.config.GetAlbumType(cardType);
             // var _albumConfig = _cardCollectionService.Instance.config.GetAlbumConfig(albumType);
             cardImage.SetSpriteAsync(_cardConfig.GetCardSpritePath()).Forget();
@@ -66,8 +66,8 @@ namespace MyGame.Modules.CardCollection
                 cardParticle.SetData(_cardConfig.star);
             }
 
-            var specialFrame = _cardCollectionService.Instance.config.numStarShowSpecialFrame;
-            var listGoldFrame = _cardCollectionService.Instance.config.listNumStarShowGoldFrame;
+            var specialFrame = _cardCollectionService.Instance.GetConfig().numStarShowSpecialFrame;
+            var listGoldFrame = _cardCollectionService.Instance.GetConfig().listNumStarShowGoldFrame;
             specialPs.SetActive(_cardConfig.star == specialFrame);
             goldFrame.SetActive(listGoldFrame.Contains(_cardConfig.star));
         }

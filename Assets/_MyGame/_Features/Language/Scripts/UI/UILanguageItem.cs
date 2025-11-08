@@ -10,18 +10,22 @@ namespace MyGame.Modules.Language.UI
         [SerializeField] public ELanguage language;
         [SerializeField] Image imgSelected;
         [SerializeField] TMP_Text text;
-        void Awake()
-        {
-            if (imgSelected != null)
-            {
-                imgSelected.gameObject.SetActive(false);
-            }
-        }
+
+        private ELanguage _language;
 
         public override void Bind(LanguageData data)
         {
+            _language = data.language;
 
-
+            text.text = _language.ToString();
+            if (_language == MySonatFramework.GetService<LanguageService>().CurrentLanguage)
+            {
+                Selected();
+            }
+            else
+            {
+                Unselected();
+            }
         }
 
         public void Unselected()
@@ -56,7 +60,6 @@ namespace MyGame.Modules.Language.UI
 
     public class LanguageData : ItemData
     {
-        public string languageName;
-        public string languageCode;
+        public ELanguage language;
     }
 }

@@ -6,13 +6,11 @@ using UnityEngine;
 namespace MyGame.Modules.CardCollection
 {
     [CreateAssetMenu(fileName = "CardCollectionConfigSO", menuName = "MyGame/SkewerJam/Features/CardCollection/CardCollectionConfigSO")]
-    public class CardCollectionConfigSO : ScriptableObject
+    public class CardCollectionConfigSO : LockServiceConfigSO
     {
-        public int unlockLevel;
-        // public LiveOpsPackData liveOpsPackData;
-
-        [Header("Config expire")]
-        public int durationMonth = 3;
+        // [Space(10)]
+        // [Header("Config expire")]
+        // public int durationMonth = 3;
 
         [Space(10)]
         [Header("Config reward")]

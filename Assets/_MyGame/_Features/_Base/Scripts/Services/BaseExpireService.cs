@@ -5,7 +5,7 @@ using SonatFramework.Systems.TimeManagement;
 
 namespace MyGame.Modules
 {
-    public abstract class BaseExpireService : BaseLockService
+    public abstract class BaseExpireService<T> : BaseLockService<T> where T : LockServiceConfigSO
     {
         private LongDataPref expireTime;
 

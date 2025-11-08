@@ -21,7 +21,7 @@ namespace MyGame.Modules.CardCollection.Home
             {
                 _isInit = true;
                 _poolingContainerService.Instance.CleanContainer(container);
-                foreach (var album in _cardCollectionService.Instance.config.albums)
+                foreach (var album in _cardCollectionService.Instance.GetConfig().albums)
                 {
                     var albumObj = _poolingContainerService.Instance.CreateObject<UIAlbum>(container);
                     albumObj.Setup(album.type);

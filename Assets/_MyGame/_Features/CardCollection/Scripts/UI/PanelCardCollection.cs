@@ -22,7 +22,7 @@ namespace MyGame.Modules.CardCollection
             if (_cardCollectionService.Instance.IsUnlocked() == false)
             {
                 SetUnlockState(false);
-                levelUnlockParamsManager.SetParameterValue("VALUE", $"{_cardCollectionService.Instance.config.unlockLevel}");
+                levelUnlockParamsManager.SetParameterValue("VALUE", $"{_cardCollectionService.Instance.GetConfig().unlockLevel}");
                 return;
             }
 

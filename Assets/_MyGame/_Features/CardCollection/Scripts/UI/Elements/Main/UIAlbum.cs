@@ -35,7 +35,7 @@ namespace MyGame.Modules.CardCollection
         public virtual void Setup(AlbumType albumType)
         {
             this.albumType = albumType;
-            albumConfig = cardCollectionService.Instance.config.GetAlbumConfig(albumType);
+            albumConfig = cardCollectionService.Instance.GetConfig().GetAlbumConfig(albumType);
 
             albumName.text = albumConfig.albumName;
             // albumName.GetComponent<Localize>().SetTerm(albumConfig.albumName);

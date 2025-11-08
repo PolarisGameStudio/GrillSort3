@@ -289,7 +289,7 @@ namespace MyGame.Modules.CardCollection
         {
             //- Uu tien special card
             var listCards = new List<CardType>();
-            var config = MySonatFramework.GetService<CardCollectionService>().config;
+            var config = MySonatFramework.GetService<CardCollectionService>().GetConfig();
 
             if (cardDataToRandom.dictCard[config.MaxStar].listNewCards.Count > 0)
             {
