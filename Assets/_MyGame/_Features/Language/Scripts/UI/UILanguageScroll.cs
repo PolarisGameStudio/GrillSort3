@@ -14,12 +14,12 @@ namespace MyGame.Modules.Language.UI
 
         protected override int GetMaxElements()
         {
-            return _languageService.Instance.GetConfig().listLanguages.Count;
+            return _languageService.Instance.GetConfig().listLanguageDatas.Count;
         }
 
         protected override LanguageData GetData(int idx)
         {
-            return new LanguageData { language = _languageService.Instance.GetConfig().listLanguages[idx] };
+            return new LanguageData { language = _languageService.Instance.GetConfig().listLanguageDatas[idx].language };
         }
 
         // public void ScrollToCurrent(bool start, Action onComplete = null)

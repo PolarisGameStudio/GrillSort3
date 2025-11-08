@@ -1,6 +1,7 @@
 using UnityEngine;
 using I2.Loc;
 using SonatFramework.Scripts.Utils;
+using System;
 
 namespace MyGame.Modules.Language
 {
@@ -9,6 +10,8 @@ namespace MyGame.Modules.Language
     {
         public override string DATA_KEY => "LANGUAGE_SERVICE";
         public ELanguage CurrentLanguage => LocalizationManager.CurrentLanguage.ToEnum<ELanguage>();
+
+        public event Action OnLanguageChanged;
 
         #region Override
         protected override void LoadConfig()
@@ -32,6 +35,7 @@ namespace MyGame.Modules.Language
             if (LocalizationManager.HasLanguage(language.ToString()))
             {
                 LocalizationManager.CurrentLanguage = language.ToString();
+                OnLanguageChanged?.Invoke();
             }
         }
     }

@@ -2,6 +2,9 @@ using MyGame.Modules.UI.LoopScroll;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using SonatFramework.Systems;
+using SonatFramework.Scripts.Helper;
+using MyGame.Modules.CardCollection;
 
 namespace MyGame.Modules.Language.UI
 {
@@ -13,12 +16,36 @@ namespace MyGame.Modules.Language.UI
 
         private ELanguage _language;
 
+        private readonly Service<LanguageService> _languageService = new();
+
+        #region Listeners
+        private void OnEnable()
+        {
+            _languageService.Instance.OnLanguageChanged += OnLanguageChanged;
+        }
+        private void OnDisable()
+        {
+            _languageService.Instance.OnLanguageChanged -= OnLanguageChanged;
+        }
+        private void OnLanguageChanged()
+        {
+            if (_language == _languageService.Instance.CurrentLanguage)
+            {
+                Selected();
+            }
+            else
+            {
+                Unselected();
+            }
+        }
+        #endregion
+
         public override void Bind(LanguageData data)
         {
             _language = data.language;
 
-            text.text = _language.ToString();
-            if (_language == MySonatFramework.GetService<LanguageService>().CurrentLanguage)
+            text.SetLocalize(_language.ToString());
+            if (_language == _languageService.Instance.CurrentLanguage)
             {
                 Selected();
             }
@@ -39,7 +66,7 @@ namespace MyGame.Modules.Language.UI
         public void OnClickChangeLanguage()
         {
             Selected();
-            MySonatFramework.GetService<LanguageService>().ChangeLanguage(language);
+            _languageService.Instance.ChangeLanguage(language);
         }
 
         public void Selected()

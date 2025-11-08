@@ -3,16 +3,16 @@ namespace MyGame.Modules.Language
     public enum ELanguage
     {
         English,
+        Vietnamese,
+        Chinese,
         Korean,
         Japanese,
-        Chinese,
         Portuguese,
         Spanish,
         Indonesian,
         Turkish,
         German,
         French,
-        Vietnamese,
         Pilipino,
         Italiano,
         Russian,

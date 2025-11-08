@@ -13,6 +13,10 @@ PrefabInstance:
       value: UILanguageScroll
       objectReference: {fileID: 0}
     - target: {fileID: 429684592670883864, guid: 8c3946644c20b084ea9b88c8d543913e, type: 3}
+      propertyPath: m_Spacing
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 429684592670883864, guid: 8c3946644c20b084ea9b88c8d543913e, type: 3}
       propertyPath: m_ChildAlignment
       value: 1
       objectReference: {fileID: 0}
@@ -98,19 +102,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1758693451457898839, guid: 8c3946644c20b084ea9b88c8d543913e, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -46.15993
+      value: -0.000005722046
       objectReference: {fileID: 0}
     - target: {fileID: 1758693451457898839, guid: 8c3946644c20b084ea9b88c8d543913e, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -25.760098
+      value: -0.00002193451
       objectReference: {fileID: 0}
     - target: {fileID: 1758693451457898839, guid: 8c3946644c20b084ea9b88c8d543913e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1.9000244
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1758693451457898839, guid: 8c3946644c20b084ea9b88c8d543913e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.33996582
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899243860702172617, guid: 8c3946644c20b084ea9b88c8d543913e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3268915147699379659, guid: 8c3946644c20b084ea9b88c8d543913e, type: 3}
       propertyPath: m_AnchorMax.y
@@ -151,6 +159,18 @@ PrefabInstance:
     - target: {fileID: 4927928918684614378, guid: 8c3946644c20b084ea9b88c8d543913e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -785
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989598204072401531, guid: 8c3946644c20b084ea9b88c8d543913e, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474946030054770109, guid: 8c3946644c20b084ea9b88c8d543913e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474946030054770109, guid: 8c3946644c20b084ea9b88c8d543913e, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -395,7 +415,54 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6009096099012315714, guid: b3886f02809de454383b21112b46a072, type: 3}
       insertIndex: -1
       addedObject: {fileID: 136248263721159701}
+    - targetCorrespondingSourceObject: {fileID: 4904973939080154567, guid: b3886f02809de454383b21112b46a072, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3924971682279473657}
   m_SourcePrefab: {fileID: 100100000, guid: b3886f02809de454383b21112b46a072, type: 3}
+--- !u!1 &820748587375258000 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4904973939080154567, guid: b3886f02809de454383b21112b46a072, type: 3}
+  m_PrefabInstance: {fileID: 5724661933660709975}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3924971682279473657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820748587375258000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Language
+  mTermSecondary: 1FTVVIPMikado-Black SDF-Title-Brown
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &2023959710865862165 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6009096099012315714, guid: b3886f02809de454383b21112b46a072, type: 3}
