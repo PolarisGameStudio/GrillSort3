@@ -1,27 +1,31 @@
 using UnityEngine;
-using SonatFramework.Systems;
 using I2.Loc;
 using SonatFramework.Scripts.Utils;
 
 namespace MyGame.Modules.Language
 {
     [CreateAssetMenu(fileName = "LanguageService", menuName = "MyGame/SkewerJam/Features/Language/LanguageService")]
-    public class LanguageService : SonatServiceSo, IServiceInitialize
+    public class LanguageService : MyService<LanguageConfigSO>
     {
-        public LanguageConfigSO config;
-
+        public override string DATA_KEY => "LANGUAGE_SERVICE";
         public ELanguage CurrentLanguage => LocalizationManager.CurrentLanguage.ToEnum<ELanguage>();
 
-
-        public void Initialize()
+        #region Override
+        protected override void LoadConfig()
         {
-            LoadData();
+            // do nothing
         }
 
-        private void LoadData()
+        protected override void ResetData()
+        {
+            // do nothing
+        }
+
+        protected override void LoadData()
         {
             LocalizationManager.CurrentLanguage = CurrentLanguage.ToString();
         }
+        #endregion
 
         public void ChangeLanguage(ELanguage language)
         {

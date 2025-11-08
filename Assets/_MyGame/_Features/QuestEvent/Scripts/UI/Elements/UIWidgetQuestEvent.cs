@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using I2.Loc;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems;
 using TMPro;

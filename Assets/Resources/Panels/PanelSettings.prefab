@@ -2179,6 +2179,7 @@ GameObject:
   - component: {fileID: 4564930709942905175}
   - component: {fileID: 6673264712596198146}
   - component: {fileID: 6703607316454528936}
+  - component: {fileID: 1278727940239643902}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -2323,6 +2324,20 @@ MonoBehaviour:
   audioService:
     referenceType: 1
     reference: {fileID: 0}
+--- !u!114 &1278727940239643902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2395984391851094229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa9eebeb105064e4db7fe5f9ada1dee3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelOpenName: PopupLanguage
+  tracking: 
 --- !u!1 &2574017640716615626
 GameObject:
   m_ObjectHideFlags: 0

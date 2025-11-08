@@ -5,6 +5,8 @@ namespace MyGame.Modules
 {
     public abstract class MyService<T> : SonatServiceSo, IServiceInitialize where T : MyServiceConfigSO
     {
+        public abstract string DATA_KEY { get; }
+
         [SerializeField] protected T config;
         public T GetConfig() => config as T;
 

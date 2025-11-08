@@ -1,8 +1,6 @@
 using System;
 using MyGame.Modules.UI.LoopScroll;
-using SonatFramework.Scripts.Utils;
 using SonatFramework.Systems;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace MyGame.Modules.Language.UI
@@ -16,12 +14,12 @@ namespace MyGame.Modules.Language.UI
 
         protected override int GetMaxElements()
         {
-            return _languageService.Instance.config.listLanguages.Count;
+            return _languageService.Instance.GetConfig().listLanguages.Count;
         }
 
         protected override LanguageData GetData(int idx)
         {
-            return new LanguageData { language = _languageService.Instance.config.listLanguages[idx] };
+            return new LanguageData { language = _languageService.Instance.GetConfig().listLanguages[idx] };
         }
 
         // public void ScrollToCurrent(bool start, Action onComplete = null)

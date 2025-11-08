@@ -36,7 +36,7 @@ namespace MyGame.Modules.Language.UI
             }
         }
 
-        public void OnClick()
+        public void OnClickChangeLanguage()
         {
             Selected();
             MySonatFramework.GetService<LanguageService>().ChangeLanguage(language);

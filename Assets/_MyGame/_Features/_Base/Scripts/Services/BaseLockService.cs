@@ -8,11 +8,9 @@ namespace MyGame.Modules
 {
     public abstract class BaseLockService<T> : MyService<T> where T : LockServiceConfigSO
     {
-        public abstract string DATA_KEY { get; }
-
         private IntDataPref isUnlocked;
 
-        public virtual void Initialize()
+        public override void Initialize()
         {
             base.Initialize();
 

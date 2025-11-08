@@ -752,6 +752,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e5d3637cdda220408cad43a2faee611, type: 3}
+--- !u!114 &4919852264249165370 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8371200697756241098, guid: 5e5d3637cdda220408cad43a2faee611, type: 3}
+  m_PrefabInstance: {fileID: 3488786952633338608}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b657e4ae01977d745a77607f6a570246, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &9147323611272758048 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5664256625235364304, guid: 5e5d3637cdda220408cad43a2faee611, type: 3}
@@ -1167,5 +1178,5 @@ MonoBehaviour:
         m_RotationOrder: 4
   closeTween: []
   blockGeneralCurrency: 0
-  questEventScroll: {fileID: 0}
+  questEventScroll: {fileID: 4919852264249165370}
   delayScrollToNextIndexQuest: 1

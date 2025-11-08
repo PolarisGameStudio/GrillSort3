@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3044c30962b70b84492f02fd4629783f, type: 3}
   m_Name: QuestEventConfigSO
   m_EditorClassIdentifier: 
-  unlocklevel: 10
+  unlockLevel: 10
+  orderTutorial: 0
   listMilestones:
   - index: 0
     numItem: 6
