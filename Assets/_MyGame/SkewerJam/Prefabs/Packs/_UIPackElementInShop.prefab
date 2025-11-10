@@ -291,6 +291,7 @@ GameObject:
   - component: {fileID: 80867833637013347}
   - component: {fileID: 8259710792427873272}
   - component: {fileID: 4892736783187194642}
+  - component: {fileID: 780819543014736358}
   m_Layer: 5
   m_Name: PackName
   m_TagString: Untagged
@@ -347,8 +348,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Limited Bundle
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e13e4bfa3ed5b20408dd981c4a6cca19, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: cf53e477e97bbe64dacb246de554b100, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b328c42045a2c414684f790785352a80, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 708ac44a48164d4448b3ae27471e8f0e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -372,7 +373,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 67.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -414,6 +415,45 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &780819543014736358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2689634299409497923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: 
+  mTermSecondary: 1FTVVIPMikado-Black SDF-Title-Pink
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &3684374226637373764
 GameObject:
   m_ObjectHideFlags: 0
@@ -1133,8 +1173,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "249.000\u20AB \n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1ad186f6383d0f6449e226da1f38334b, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: ef843bea28baeae4e90723f983e3beb0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 0a32742b6c7b4474180003b8f3188837, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

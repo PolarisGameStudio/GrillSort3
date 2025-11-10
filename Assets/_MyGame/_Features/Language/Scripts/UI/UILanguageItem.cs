@@ -10,7 +10,6 @@ namespace MyGame.Modules.Language.UI
 {
     public class UILanguageItem : ItemViewBase<LanguageData>
     {
-        [SerializeField] public ELanguage language;
         [SerializeField] Image imgSelected;
         [SerializeField] TMP_Text text;
 
@@ -29,14 +28,7 @@ namespace MyGame.Modules.Language.UI
         }
         private void OnLanguageChanged()
         {
-            if (_language == _languageService.Instance.CurrentLanguage)
-            {
-                Selected();
-            }
-            else
-            {
-                Unselected();
-            }
+            UpdateUI();
         }
         #endregion
 
@@ -44,6 +36,11 @@ namespace MyGame.Modules.Language.UI
         {
             _language = data.language;
 
+            UpdateUI();
+        }
+
+        private void UpdateUI()
+        {
             text.SetLocalize(_language.ToString());
             if (_language == _languageService.Instance.CurrentLanguage)
             {
@@ -55,7 +52,15 @@ namespace MyGame.Modules.Language.UI
             }
         }
 
-        public void Unselected()
+        private void Selected()
+        {
+            if (imgSelected != null)
+            {
+                imgSelected.gameObject.SetActive(true);
+            }
+        }
+
+        private void Unselected()
         {
             if (imgSelected != null)
             {
@@ -65,24 +70,8 @@ namespace MyGame.Modules.Language.UI
 
         public void OnClickChangeLanguage()
         {
-            Selected();
-            _languageService.Instance.ChangeLanguage(language);
+            _languageService.Instance.ChangeLanguage(_language);
         }
-
-        public void Selected()
-        {
-            if (imgSelected != null)
-            {
-                imgSelected.gameObject.SetActive(true);
-            }
-        }
-
-        // #if UNITY_EDITOR
-        //         private void OnValidate()
-        //         {
-        //             text.text = PopupLanguage.txtLanguages[(int)language];
-        //         }
-        // #endif
     }
 
     public class LanguageData : ItemData

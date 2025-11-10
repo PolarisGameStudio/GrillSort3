@@ -88,6 +88,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 780819543014736358, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: mTerm
+      value: Ultra Bundle
+      objectReference: {fileID: 0}
     - target: {fileID: 822235225850093014, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_SortingLayer
       value: 0
@@ -179,6 +183,10 @@ PrefabInstance:
     - target: {fileID: 2700025029971077428, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_SizeDelta.y
       value: 283
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132039331450613879, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: m_fontSize
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 3224582344766604251, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_LocalScale.x
@@ -273,9 +281,13 @@ PrefabInstance:
       value: Ultra Bundle
       objectReference: {fileID: 0}
     - target: {fileID: 4892736783187194642, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b328c42045a2c414684f790785352a80, type: 2}
+    - target: {fileID: 4892736783187194642, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 0bd511f1592a90442ba25459736c0c49, type: 2}
+      objectReference: {fileID: 2100000, guid: 36c7e898902370d4b8e17d73063b2ee9, type: 2}
     - target: {fileID: 4894619779023653772, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_LocalScale.x
       value: 0
@@ -379,5 +391,52 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2689634299409497923, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1058515985010815458}
   m_SourcePrefab: {fileID: 100100000, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+--- !u!1 &1018504937513538431 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2689634299409497923, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+  m_PrefabInstance: {fileID: 3130552583638985788}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1058515985010815458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018504937513538431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Ultra Bundle
+  mTermSecondary: 1FTVVIPMikado-Black SDF-Title-Purple
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI

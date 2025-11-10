@@ -25,7 +25,9 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _TextureHeight: 512
+    - _TextureWidth: 256
     m_Colors:
     - _OutlineColor: {r: 0.023153365, g: 0.12743773, b: 0.48514998, a: 1}
     - _UnderlayColor: {r: 0.023529412, g: 0.1254902, b: 0.4862745, a: 1}

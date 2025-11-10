@@ -141,10 +141,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: English
+  m_text: "\uD55C\uAD6D\uC5B4"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1ad186f6383d0f6449e226da1f38334b, type: 2}
-  m_sharedMaterial: {fileID: 3583879164573703614, guid: 1ad186f6383d0f6449e226da1f38334b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b328c42045a2c414684f790785352a80, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 23c104a5f794b444cb0bca7d91012613, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -237,10 +237,9 @@ MonoBehaviour:
   AllowLocalizedParameters: 1
   AllowParameters: 1
   TranslatedObjects:
-  - {fileID: 3583879164573703614, guid: 1ad186f6383d0f6449e226da1f38334b, type: 2}
-  - {fileID: 2100000, guid: 89eea88d419af6e46a171a74afb7f5b0, type: 2}
   - {fileID: 2100000, guid: a82e4144921fa994a83db7cbd527e9ed, type: 2}
   - {fileID: 2100000, guid: cb0cdd8a12e2a094fa8afa58a87419f2, type: 2}
+  - {fileID: 2100000, guid: 7b855a6abbecf8946bf36854d1b99209, type: 2}
   LocalizeEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -479,7 +478,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daa49a0f236041140affea698ddd0b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  language: 0
   imgSelected: {fileID: 6008734647164384256}
   text: {fileID: 5208960228670733426}
 --- !u!222 &8901307674247034939

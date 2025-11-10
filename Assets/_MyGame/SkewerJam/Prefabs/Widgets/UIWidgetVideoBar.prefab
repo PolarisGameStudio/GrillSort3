@@ -266,8 +266,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7788745795629634695, guid: 69fe0222623a4314f980b09bc78d84fd, type: 3}
       propertyPath: m_fontSize
-      value: 37.1
+      value: 39.25
       objectReference: {fileID: 0}
+    - target: {fileID: 7788745795629634695, guid: 69fe0222623a4314f980b09bc78d84fd, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+    - target: {fileID: 7788745795629634695, guid: 69fe0222623a4314f980b09bc78d84fd, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 7b855a6abbecf8946bf36854d1b99209, type: 2}
     - target: {fileID: 7988893489618640641, guid: 69fe0222623a4314f980b09bc78d84fd, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -275,6 +283,10 @@ PrefabInstance:
     - target: {fileID: 8013511812672948398, guid: 69fe0222623a4314f980b09bc78d84fd, type: 3}
       propertyPath: panelOpenName
       value: PopupVideoBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8937627327210264510, guid: 69fe0222623a4314f980b09bc78d84fd, type: 3}
+      propertyPath: mTerm
+      value: Video Bar
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4034789903437812678, guid: 69fe0222623a4314f980b09bc78d84fd, type: 3}

@@ -96,6 +96,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 77.58572
       objectReference: {fileID: 0}
+    - target: {fileID: 780819543014736358, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: mTerm
+      value: Starter Bundle
+      objectReference: {fileID: 0}
+    - target: {fileID: 780819543014736358, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: mTermSecondary
+      value: 1FTVVIPMikado-Black SDF-Title-Red
+      objectReference: {fileID: 0}
     - target: {fileID: 1309533403758895999, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -245,9 +253,13 @@ PrefabInstance:
       value: Starter Bundle
       objectReference: {fileID: 0}
     - target: {fileID: 4892736783187194642, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 4892736783187194642, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 8aa4c213f39c745439f43d9c853a4d3c, type: 2}
+      objectReference: {fileID: 2100000, guid: c52d3dfc10804354fb84543b1e1743ad, type: 2}
     - target: {fileID: 5021228179410338451, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_Sprite
       value: 

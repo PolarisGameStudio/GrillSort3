@@ -129,16 +129,40 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4026670770091142794, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
       propertyPath: m_fontSize
-      value: 23.65
+      value: 25.05
       objectReference: {fileID: 0}
+    - target: {fileID: 4026670770091142794, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
     - target: {fileID: 4026670770091142794, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -4516441159803420151, guid: e13e4bfa3ed5b20408dd981c4a6cca19, type: 2}
+      objectReference: {fileID: 2317955595084648453, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+    - target: {fileID: 4026670770091142794, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4392169963436534431, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 379f19b7f48c90b49814e451fbd9fa35, type: 3}
+    - target: {fileID: 4434528293118021345, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
+      propertyPath: m_fontSize
+      value: 54.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434528293118021345, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+    - target: {fileID: 4434528293118021345, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2317955595084648453, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+    - target: {fileID: 4434528293118021345, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4593001824185217669, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
       propertyPath: m_Value
       value: 1
@@ -153,7 +177,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6223271472700239312, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
       propertyPath: m_fontSize
-      value: 41.85
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 6223271472700239312, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+    - target: {fileID: 6223271472700239312, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2317955595084648453, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+    - target: {fileID: 6223271472700239312, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6458162119024217686, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
+      propertyPath: mTermSecondary
+      value: 1FTVVIPMikado-Black SDF-Desc-Green
       objectReference: {fileID: 0}
     - target: {fileID: 7449105712174547472, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
       propertyPath: m_Pivot.x

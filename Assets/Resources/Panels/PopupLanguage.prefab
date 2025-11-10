@@ -259,8 +259,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_text
-      value: Language
+      value: "\uC5B8\uC5B4"
       objectReference: {fileID: 0}
+    - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_fontSize
+      value: 103.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b328c42045a2c414684f790785352a80, type: 2}
+    - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 0f449fc02123d7a4992f2acd8af4daa0, type: 2}
     - target: {fileID: 2338080940412523142, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -450,7 +462,10 @@ MonoBehaviour:
   AddSpacesToJoinedLanguages: 0
   AllowLocalizedParameters: 1
   AllowParameters: 1
-  TranslatedObjects: []
+  TranslatedObjects:
+  - {fileID: 2100000, guid: c6adeee58db9520459c45216a5f10ac6, type: 2}
+  - {fileID: 2100000, guid: 0f449fc02123d7a4992f2acd8af4daa0, type: 2}
+  - {fileID: 2100000, guid: bd89686e2079263488201bd4904e335c, type: 2}
   LocalizeEvent:
     m_PersistentCalls:
       m_Calls: []
