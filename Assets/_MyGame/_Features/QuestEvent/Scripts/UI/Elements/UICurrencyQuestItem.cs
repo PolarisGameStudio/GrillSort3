@@ -12,13 +12,13 @@ namespace MyGame.Modules.QuestEvent.UI.Elements
             if (questEventService.Instance.CanSpawItemQuestEvent())
             {
                 base.OnEnable();
+                questEventService.Instance.OnResetItemQuestEvent += OnResetItemQuestEvent;
             }
             else
             {
                 gameObject.SetActive(false);
             }
 
-            questEventService.Instance.OnResetItemQuestEvent += OnResetItemQuestEvent;
         }
 
         protected override void OnDisable()
