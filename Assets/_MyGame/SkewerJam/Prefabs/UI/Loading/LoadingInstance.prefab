@@ -301,8 +301,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Loading...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e13e4bfa3ed5b20408dd981c4a6cca19, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: c58291584ac3bf9488ace9e0603ff3a2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+  m_sharedMaterial: {fileID: 2317955595084648453, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -646,6 +646,14 @@ PrefabInstance:
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1880526490786596870, guid: 659f756af558af24a862a77194f07f1c, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+    - target: {fileID: 1880526490786596870, guid: 659f756af558af24a862a77194f07f1c, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 77048ad586e137a40b98b1f9be571abd, type: 2}
     - target: {fileID: 4987243066852846469, guid: 659f756af558af24a862a77194f07f1c, type: 3}
       propertyPath: m_Name
       value: LoadingScreen

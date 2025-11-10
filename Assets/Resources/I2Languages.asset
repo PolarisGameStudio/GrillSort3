@@ -17,6 +17,17 @@ MonoBehaviour:
     UserAgreesToHaveItInsideThePluginsFolder: 0
     GoogleLiveSyncIsUptoDate: 1
     mTerms:
+    - Term: 0123456789.,!?:& /
+      TermType: 0
+      Description: 
+      Languages:
+      - 0123456789.,!?:&%/
+      - 0123456789.,!?:&%/
+      - 0123456789.,!?:&%/
+      - 0123456789.,!?:&%/
+      - 0123456789.,!?:&%/
+      Flags: 0000000000
+      Languages_Touch: []
     - Term: 1FTVVIPMikado-Black SDF
       TermType: 6
       Description: 
@@ -127,6 +138,17 @@ MonoBehaviour:
       - JP_FUTEHODO-MARUGOTHIC SDF Material Desc Yellow
       Flags: 0000000000
       Languages_Touch: []
+    - Term: 1FTVVIPMikado-Black SDF-Title-Big
+      TermType: 6
+      Description: 
+      Languages:
+      - 1FTVVIPMikado-Black SDF Material Title Big
+      - 1FTVVIPMikado-Black SDF Material Title Big
+      - NotoSansSC-ExtraBold SDF Material Title Big
+      - KO_JALNANGOTHICTTF SDF Material Title Big
+      - JP_FUTEHODO-MARUGOTHIC SDF Material Title Big
+      Flags: 0000000000
+      Languages_Touch: []
     - Term: 1FTVVIPMikado-Black SDF-Title-Black
       TermType: 6
       Description: 
@@ -226,6 +248,61 @@ MonoBehaviour:
       - JP_FUTEHODO-MARUGOTHIC SDF Material Title Yellow
       Flags: 0000000000
       Languages_Touch: []
+    - Term: Bacon
+      TermType: 0
+      Description: 
+      Languages:
+      - Bacon
+      - "Th\u1ECBt x\xF4ng kh\xF3i"
+      - "\u57F9\u6839"
+      - "\uBCA0\uC774\uCEE8"
+      - "\u30D9\u30FC\u30B3\u30F3"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Beer
+      TermType: 0
+      Description: 
+      Languages:
+      - Beer
+      - Bia
+      - "\u5564\u9152"
+      - "\uB9E5\uC8FC"
+      - "\u30D3\u30FC\u30EB"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Birthday
+      TermType: 0
+      Description: 
+      Languages:
+      - Birthday
+      - "Sinh nh\u1EADt"
+      - "\u751F\u65E5"
+      - "\uC0DD\uC77C"
+      - "\u8A95\u751F\u65E5"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Breakfast
+      TermType: 0
+      Description: 
+      Languages:
+      - Breakfast
+      - "B\u1EEFa s\xE1ng"
+      - "\u65E9\u9910"
+      - "\uC544\uCE68\uC2DD\uC0AC"
+      - "\u671D\u98DF"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Cappucino
+      TermType: 0
+      Description: 
+      Languages:
+      - Cappucino
+      - "C\xE0 ph\xEA cappuccino"
+      - "\u5361\u5E03\u5947\u8BFA"
+      - "\uCE74\uD478\uCE58\uB178"
+      - "\u30AB\u30D7\u30C1\u30FC\u30CE"
+      Flags: 0000000000
+      Languages_Touch: []
     - Term: Card Collection
       TermType: 0
       Description: 
@@ -235,6 +312,28 @@ MonoBehaviour:
       - "\u5361\u7247\u6536\u85CF"
       - "\uCE74\uB4DC \uCEEC\uB809\uC158"
       - "\u30AB\u30FC\u30C9\u30B3\u30EC\u30AF\u30B7\u30E7\u30F3"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Card Star
+      TermType: 0
+      Description: 
+      Languages:
+      - Card Star
+      - "Th\u1EBB sao"
+      - "\u661F\u5361"
+      - "\uCE74\uB4DC \uC2A4\uD0C0"
+      - "\u30AB\u30FC\u30C9\u30B9\u30BF\u30FC"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Chicken
+      TermType: 0
+      Description: 
+      Languages:
+      - Chicken
+      - "Th\u1ECBt g\xE0"
+      - "\u9E21\u8089"
+      - "\uB2ED\uACE0\uAE30"
+      - "\u30C1\u30AD\u30F3"
       Flags: 0000000000
       Languages_Touch: []
     - Term: Chinese
@@ -248,6 +347,111 @@ MonoBehaviour:
       - "\u4E2D\u56FD\u8A9E"
       Flags: 0000000000
       Languages_Touch: []
+    - Term: Chocolate
+      TermType: 0
+      Description: 
+      Languages:
+      - Chocolate
+      - "S\xF4 c\xF4 la"
+      - "\u5DE7\u514B\u529B"
+      - "\uCD08\uCF5C\uB9BF"
+      - "\u30C1\u30E7\u30B3\u30EC\u30FC\u30C8"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Cocoa
+      TermType: 0
+      Description: 
+      Languages:
+      - Cocoa
+      - Ca cao
+      - "\u53EF\u53EF"
+      - "\uCF54\uCF54\uC544"
+      - "\u30B3\u30B3\u30A2"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Coconut
+      TermType: 0
+      Description: 
+      Languages:
+      - Coconut
+      - "D\u1EEBa"
+      - "\u6930\u5B50"
+      - "\uCF54\uCF54\uB11B"
+      - "\u30B3\u30B3\u30CA\u30C3\u30C4"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Coffee
+      TermType: 0
+      Description: 
+      Languages:
+      - Coffee
+      - "C\xE0 ph\xEA"
+      - "\u5496\u5561"
+      - "\uCEE4\uD53C"
+      - "\u30B3\u30FC\u30D2\u30FC"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Collect card packs from amazing events and chest!
+      TermType: 0
+      Description: 
+      Languages:
+      - Collect card packs from amazing events and chest!
+      - "Thu th\u1EADp g\xF3i th\u1EBB t\u1EEB c\xE1c s\u1EF1 ki\u1EC7n v\xE0 r\u01B0\u01A1ng
+        tuy\u1EC7t v\u1EDDi!"
+      - "\u4ECE\u7CBE\u5F69\u6D3B\u52A8\u548C\u5B9D\u7BB1\u4E2D\u6536\u96C6\u5361\u5305\uFF01"
+      - "\uC774\uBCA4\uD2B8\uC640 \uBA4B\uC9C4 \uC0C1\uC790\uC5D0\uC11C \uCE74\uB4DC
+        \uD329\uC744 \uBAA8\uC73C\uC138\uC694!"
+      - "\u7D20\u6674\u3089\u3057\u3044\u30A4\u30D9\u30F3\u30C8\u3084\u5B9D\u7BB1\u304B\u3089\u30AB\u30FC\u30C9\u30D1\u30C3\u30AF\u3092\u96C6\u3081\u3088\u3046\uFF01"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: CollectGoldenChicken
+      TermType: 0
+      Description: 
+      Languages:
+      - Collect <color=#FFE92B>Golden chicken thighs</color> to open and claim rewards!
+      - "Thu th\u1EADp <color=#FFE92B>\u0111\xF9i g\xE0 v\xE0ng</color> \u0111\u1EC3
+        m\u1EDF v\xE0 nh\u1EADn ph\u1EA7n th\u01B0\u1EDFng!"
+      - "\u6536\u96C6<color=#FFE92B>\u91D1\u9E21\u817F</color>\u4EE5\u5F00\u542F\u5E76\u9886\u53D6\u5956\u52B1\uFF01"
+      - "<color=#FFE92B>\uD669\uAE08 \uB2ED\uB2E4\uB9AC</color>\uB97C \uBAA8\uC544
+        \uBCF4\uC0C1\uC744 \uBC1B\uC73C\uC138\uC694!"
+      - "<color=#FFE92B>\u9EC4\u91D1\u306E\u30C1\u30AD\u30F3\u30C9\u30E9\u30E0</color>\u3092\u96C6\u3081\u3066\u5831\u916C\u3092\u7372\u5F97\u3057\u3088\u3046\uFF01"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Collection
+      TermType: 0
+      Description: 
+      Languages:
+      - Collection
+      - "B\u1ED9 s\u01B0u t\u1EADp"
+      - "\u6536\u85CF"
+      - "\uCEEC\uB809\uC158"
+      - "\u30B3\u30EC\u30AF\u30B7\u30E7\u30F3"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Complete all sets to claim collection rewards and Grill Badge!
+      TermType: 0
+      Description: 
+      Languages:
+      - Complete all sets to claim collection rewards and Grill Badge!
+      - "Ho\xE0n th\xE0nh t\u1EA5t c\u1EA3 b\u1ED9 s\u01B0u t\u1EADp \u0111\u1EC3
+        nh\u1EADn th\u01B0\u1EDFng v\xE0 Huy hi\u1EC7u N\u01B0\u1EDBng!"
+      - "\u5B8C\u6210\u6240\u6709\u5957\u88C5\u4EE5\u9886\u53D6\u6536\u85CF\u5956\u52B1\u548C\u70E4\u67B6\u5FBD\u7AE0\uFF01"
+      - "\uBAA8\uB4E0 \uC138\uD2B8\uB97C \uC644\uB8CC\uD558\uACE0 \uCEEC\uB809\uC158
+        \uBCF4\uC0C1\uACFC \uADF8\uB9B4 \uBC30\uC9C0\uB97C \uBC1B\uC73C\uC138\uC694!"
+      - "\u3059\u3079\u3066\u306E\u30BB\u30C3\u30C8\u3092\u5B8C\u6210\u3055\u305B\u3066\u30B3\u30EC\u30AF\u30B7\u30E7\u30F3\u5831\u916C\u3068\u30B0\u30EA\u30EB\u30D0\u30C3\u30B8\u3092\u624B\u306B\u5165\u308C\u3088\u3046\uFF01"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Continue
+      TermType: 0
+      Description: 
+      Languages:
+      - Continue
+      - "Ti\u1EBFp t\u1EE5c"
+      - "\u7EE7\u7EED"
+      - "\uACC4\uC18D"
+      - "\u7D9A\u3051\u308B"
+      Flags: 0000000000
+      Languages_Touch: []
     - Term: Cooking
       TermType: 0
       Description: 
@@ -257,6 +461,61 @@ MonoBehaviour:
       - "\u70F9\u996A"
       - "\uC694\uB9AC"
       - "\u6599\u7406"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Cooking Pot
+      TermType: 0
+      Description: 
+      Languages:
+      - Cooking Pot
+      - "N\u1ED3i n\u1EA5u \u0103n"
+      - "\u9505"
+      - "\uB0C4\uBE44"
+      - "\u934B"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Crab
+      TermType: 0
+      Description: 
+      Languages:
+      - Crab
+      - Cua
+      - "\u8783\u87F9"
+      - "\uAC8C"
+      - "\u30AB\u30CB"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Cup Cake
+      TermType: 0
+      Description: 
+      Languages:
+      - Cup Cake
+      - "B\xE1nh cupcake"
+      - "\u676F\u5B50\u86CB\u7CD5"
+      - "\uCEF5\uCF00\uC774\uD06C"
+      - "\u30AB\u30C3\u30D7\u30B1\u30FC\u30AD"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Cutlery
+      TermType: 0
+      Description: 
+      Languages:
+      - Cutlery
+      - "D\u1EE5ng c\u1EE5 \u0103n"
+      - "\u9910\u5177"
+      - "\uC2DD\uAE30"
+      - "\u30AB\u30C8\u30E9\u30EA\u30FC"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Dinner
+      TermType: 0
+      Description: 
+      Languages:
+      - Dinner
+      - "B\u1EEFa t\u1ED1i"
+      - "\u665A\u9910"
+      - "\uC800\uB141"
+      - "\u30C7\u30A3\u30CA\u30FC"
       Flags: 0000000000
       Languages_Touch: []
     - Term: Drinks
@@ -270,6 +529,17 @@ MonoBehaviour:
       - "\u30C9\u30EA\u30F3\u30AF"
       Flags: 0000000000
       Languages_Touch: []
+    - Term: Earn awesome rewards
+      TermType: 0
+      Description: 
+      Languages:
+      - Earn awesome rewards
+      - "Nh\u1EADn ph\u1EA7n th\u01B0\u1EDFng h\u1EA5p d\u1EABn"
+      - "\u8D62\u53D6\u7CBE\u5F69\u5956\u52B1"
+      - "\uBA4B\uC9C4 \uBCF4\uC0C1\uC744 \uBC1B\uC73C\uC138\uC694"
+      - "\u7D20\u6674\u3089\u3057\u3044\u5831\u916C\u3092\u7372\u5F97\u3057\u3088\u3046"
+      Flags: 0000000000
+      Languages_Touch: []
     - Term: English
       TermType: 0
       Description: 
@@ -279,6 +549,28 @@ MonoBehaviour:
       - "\u82F1\u8BED"
       - "\uC601\uC5B4"
       - "\u82F1\u8A9E"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Fill the bar
+      TermType: 0
+      Description: 
+      Languages:
+      - Fill the bar
+      - "L\xE0m \u0111\u1EA7y thanh"
+      - "\u586B\u6EE1\u8FDB\u5EA6\u6761"
+      - "\uB9C9\uB300\uB97C \uCC44\uC6B0\uC138\uC694"
+      - "\u30D0\u30FC\u3092\u6E80\u305F\u3059"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Fish
+      TermType: 0
+      Description: 
+      Languages:
+      - Fish
+      - "C\xE1"
+      - "\u9C7C"
+      - "\uC0DD\uC120"
+      - "\u9B5A"
       Flags: 0000000000
       Languages_Touch: []
     - Term: Food
@@ -292,6 +584,39 @@ MonoBehaviour:
       - "\u98DF\u3079\u7269"
       Flags: 0000000000
       Languages_Touch: []
+    - Term: Free
+      TermType: 0
+      Description: 
+      Languages:
+      - Free
+      - "Mi\u1EC5n ph\xED"
+      - "\u514D\u8D39"
+      - "\uBB34\uB8CC"
+      - "\u7121\u6599"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Free 1 Life
+      TermType: 0
+      Description: 
+      Languages:
+      - Free 1 Life
+      - "T\u1EB7ng 1 m\u1EA1ng mi\u1EC5n ph\xED"
+      - "\u514D\u8D39\u83B7\u5F971\u6761\u547D"
+      - "\uBB34\uB8CC\uB85C 1 \uC0DD\uBA85"
+      - "\u7121\u6599\u30671\u30E9\u30A4\u30D5"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Fried Chicken
+      TermType: 0
+      Description: 
+      Languages:
+      - Fried Chicken
+      - "G\xE0 r\xE1n"
+      - "\u70B8\u9E21"
+      - "\uD504\uB77C\uC774\uB4DC\uCE58\uD0A8"
+      - "\u30D5\u30E9\u30A4\u30C9\u30C1\u30AD\u30F3"
+      Flags: 0000000000
+      Languages_Touch: []
     - Term: Full
       TermType: 0
       Description: 
@@ -301,6 +626,19 @@ MonoBehaviour:
       - "\u6EE1"
       - "\uAC00\uB4DD \uCC38"
       - "\u6E80\u30BF\u30F3"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Get cards from card packs and frends to complete sets!
+      TermType: 0
+      Description: 
+      Languages:
+      - Get cards from card packs and friends to complete sets!
+      - "Nh\u1EADn th\u1EBB t\u1EEB g\xF3i th\u1EBB v\xE0 b\u1EA1n b\xE8 \u0111\u1EC3
+        ho\xE0n th\xE0nh b\u1ED9 s\u01B0u t\u1EADp!"
+      - "\u4ECE\u5361\u5305\u548C\u670B\u53CB\u90A3\u91CC\u83B7\u53D6\u5361\u7247\u4EE5\u5B8C\u6210\u5957\u88C5\uFF01"
+      - "\uCE74\uB4DC \uD329\uACFC \uCE5C\uAD6C\uC5D0\uAC8C\uC11C \uCE74\uB4DC\uB97C
+        \uBC1B\uC544 \uC138\uD2B8\uB97C \uC644\uC131\uD558\uC138\uC694!"
+      - "\u30AB\u30FC\u30C9\u30D1\u30C3\u30AF\u3084\u30D5\u30EC\u30F3\u30C9\u304B\u3089\u30AB\u30FC\u30C9\u3092\u96C6\u3081\u3066\u30BB\u30C3\u30C8\u3092\u5B8C\u6210\u3055\u305B\u3088\u3046\uFF01"
       Flags: 0000000000
       Languages_Touch: []
     - Term: Giant Bundle
@@ -314,6 +652,17 @@ MonoBehaviour:
       - "\u30B8\u30E3\u30A4\u30A2\u30F3\u30C8\u30D0\u30F3\u30C9\u30EB"
       Flags: 0000000000
       Languages_Touch: []
+    - Term: Golden Skewer
+      TermType: 0
+      Description: 
+      Languages:
+      - Golden Skewer
+      - "Xi\xEAn v\xE0ng"
+      - "\u9EC4\u91D1\u4E32"
+      - "\uD669\uAE08 \uAF2C\uCE58"
+      - "\u30B4\u30FC\u30EB\u30C7\u30F3\u30B9\u30AD\u30E5\u30A2"
+      Flags: 0000000000
+      Languages_Touch: []
     - Term: Grand Prize
       TermType: 0
       Description: 
@@ -323,6 +672,39 @@ MonoBehaviour:
       - "\u5927\u5956"
       - "\uB300\uC0C1"
       - "\u30B0\u30E9\u30F3\u30D7\u30EA"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Grill
+      TermType: 0
+      Description: 
+      Languages:
+      - Grill
+      - "V\u1EC9 n\u01B0\u1EDBng"
+      - "\u70E4\u67B6"
+      - "\uADF8\uB9B4"
+      - "\u30B0\u30EA\u30EB"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Grill Ribs
+      TermType: 0
+      Description: 
+      Languages:
+      - Grill Ribs
+      - "S\u01B0\u1EDDn n\u01B0\u1EDBng"
+      - "\u70E4\u6392\u9AA8"
+      - "\uADF8\uB9B4 \uB9BD"
+      - "\u30B0\u30EA\u30EB\u30EA\u30D6"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Hamburger
+      TermType: 0
+      Description: 
+      Languages:
+      - Hamburger
+      - "B\xE1nh hamburger"
+      - "\u6C49\u5821"
+      - "\uD584\uBC84\uAC70"
+      - "\u30CF\u30F3\u30D0\u30FC\u30AC\u30FC"
       Flags: 0000000000
       Languages_Touch: []
     - Term: Home
@@ -336,6 +718,28 @@ MonoBehaviour:
       - "\u30DB\u30FC\u30E0"
       Flags: 0000000000
       Languages_Touch: []
+    - Term: Honey Cake
+      TermType: 0
+      Description: 
+      Languages:
+      - Honey Cake
+      - "B\xE1nh m\u1EADt ong"
+      - "\u8702\u871C\u86CB\u7CD5"
+      - "\uAFC0 \uCF00\uC774\uD06C"
+      - "\u30CF\u30CB\u30FC\u30B1\u30FC\u30AD"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Hot Dog
+      TermType: 0
+      Description: 
+      Languages:
+      - Hot Dog
+      - "X\xFAc x\xEDch k\u1EB9p b\xE1nh m\xEC"
+      - "\u70ED\u72D7"
+      - "\uD56B\uB3C4\uADF8"
+      - "\u30DB\u30C3\u30C8\u30C9\u30C3\u30B0"
+      Flags: 0000000000
+      Languages_Touch: []
     - Term: Japanese
       TermType: 0
       Description: 
@@ -347,6 +751,39 @@ MonoBehaviour:
       - "\u65E5\u672C\u8A9E"
       Flags: 0000000000
       Languages_Touch: []
+    - Term: Jelly
+      TermType: 0
+      Description: 
+      Languages:
+      - Jelly
+      - "Th\u1EA1ch"
+      - "\u679C\u51BB"
+      - "\uC824\uB9AC"
+      - "\u30BC\u30EA\u30FC"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Join Us!
+      TermType: 0
+      Description: 
+      Languages:
+      - Join Us!
+      - "Tham gia c\xF9ng ch\xFAng t\xF4i!"
+      - "\u52A0\u5165\u6211\u4EEC"
+      - "\uD568\uAED8\uD558\uC138\uC694!"
+      - "\u53C2\u52A0\u3057\u3088\u3046"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Juice
+      TermType: 0
+      Description: 
+      Languages:
+      - Juice
+      - "N\u01B0\u1EDBc \xE9p"
+      - "\u679C\u6C41"
+      - "\uC8FC\uC2A4"
+      - "\u30B8\u30E5\u30FC\u30B9"
+      Flags: 0000000000
+      Languages_Touch: []
     - Term: Korean
       TermType: 0
       Description: 
@@ -356,6 +793,17 @@ MonoBehaviour:
       - "\u97E9\u8BED"
       - "\uD55C\uAD6D\uC5B4"
       - "\u97D3\u56FD\u8A9E"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Lamb Chops
+      TermType: 0
+      Description: 
+      Languages:
+      - Lamb Chops
+      - "S\u01B0\u1EDDn c\u1EEBu"
+      - "\u7F8A\u6392"
+      - "\uC591\uAC08\uBE44"
+      - "\u30E9\u30E0\u30C1\u30E7\u30C3\u30D7"
       Flags: 0000000000
       Languages_Touch: []
     - Term: Language
@@ -380,6 +828,17 @@ MonoBehaviour:
       - "\u65E5\u672C\u8A9E"
       Flags: 0000000000
       Languages_Touch: []
+    - Term: 'Languages:'
+      TermType: 0
+      Description: 
+      Languages:
+      - 'Languages:'
+      - "Ng\xF4n ng\u1EEF:"
+      - "\u8BED\u8A00\uFF1A"
+      - "\uC5B8\uC5B4:"
+      - "\u8A00\u8A9E\uFF1A"
+      Flags: 0000000000
+      Languages_Touch: []
     - Term: Large Bundle
       TermType: 0
       Description: 
@@ -391,6 +850,17 @@ MonoBehaviour:
       - "\u30E9\u30FC\u30B8\u30D0\u30F3\u30C9\u30EB"
       Flags: 0000000000
       Languages_Touch: []
+    - Term: Lavender
+      TermType: 0
+      Description: 
+      Languages:
+      - Lavender
+      - "Hoa o\u1EA3i h\u01B0\u01A1ng"
+      - "\u85B0\u8863\u8349"
+      - "\uB77C\uBCA4\uB354"
+      - "\u30E9\u30D9\u30F3\u30C0\u30FC"
+      Flags: 0000000000
+      Languages_Touch: []
     - Term: Legendary Bundle
       TermType: 0
       Description: 
@@ -400,6 +870,17 @@ MonoBehaviour:
       - "\u4F20\u5947\u793C\u5305"
       - "\uC804\uC124 \uBC88\uB4E4"
       - "\u30EC\u30B8\u30A7\u30F3\u30C0\u30EA\u30FC\u30D0\u30F3\u30C9\u30EB"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Less Offers!
+      TermType: 0
+      Description: 
+      Languages:
+      - Less Offers!
+      - "\xCDt \u01B0u \u0111\xE3i h\u01A1n!"
+      - "\u66F4\u5C11\u7684\u4F18\u60E0\uFF01"
+      - "\uC801\uC740 \uD61C\uD0DD!"
+      - "\u30AA\u30D5\u30A1\u30FC\u304C\u5C11\u306A\u3044\uFF01"
       Flags: 0000000000
       Languages_Touch: []
     - Term: Limited Bundle
@@ -424,6 +905,28 @@ MonoBehaviour:
       - "\u671F\u9593\u9650\u5B9A\u30AA\u30D5\u30A1\u30FC"
       Flags: 0000000000
       Languages_Touch: []
+    - Term: Lobster
+      TermType: 0
+      Description: 
+      Languages:
+      - Lobster
+      - "T\xF4m h\xF9m"
+      - "\u9F99\u867E"
+      - "\uBC14\uB2F7\uAC00\uC7AC"
+      - "\u30ED\u30D6\u30B9\u30BF\u30FC"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Macaron
+      TermType: 0
+      Description: 
+      Languages:
+      - Macaron
+      - "B\xE1nh macaron"
+      - "\u9A6C\u5361\u9F99"
+      - "\uB9C8\uCE74\uB871"
+      - "\u30DE\u30AB\u30ED\u30F3"
+      Flags: 0000000000
+      Languages_Touch: []
     - Term: Meat
       TermType: 0
       Description: 
@@ -446,6 +949,127 @@ MonoBehaviour:
       - "\u30DF\u30CB\u30D0\u30F3\u30C9\u30EB"
       Flags: 0000000000
       Languages_Touch: []
+    - Term: Mini Grill
+      TermType: 0
+      Description: 
+      Languages:
+      - Mini Grill
+      - "V\u1EC9 n\u01B0\u1EDBng mini"
+      - "\u8FF7\u4F60\u70E4\u67B6"
+      - "\uBBF8\uB2C8 \uADF8\uB9B4"
+      - "\u30DF\u30CB\u30B0\u30EA\u30EB"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: More Offers!
+      TermType: 0
+      Description: 
+      Languages:
+      - More Offers!
+      - "Nhi\u1EC1u \u01B0u \u0111\xE3i h\u01A1n!"
+      - "\u66F4\u591A\u4F18\u60E0\uFF01"
+      - "\uB354 \uB9CE\uC740 \uD61C\uD0DD!"
+      - "\u3088\u308A\u591A\u304F\u306E\u30AA\u30D5\u30A1\u30FC\uFF01"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: More lives
+      TermType: 0
+      Description: 
+      Languages:
+      - More lives
+      - "Th\xEAm m\u1EA1ng"
+      - "\u66F4\u591A\u751F\u547D"
+      - "\uCD94\uAC00 \uC0DD\uBA85"
+      - "\u30E9\u30A4\u30D5\u3092\u8FFD\u52A0"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Music
+      TermType: 0
+      Description: 
+      Languages:
+      - Music
+      - "\xC2m nh\u1EA1c"
+      - "\u97F3\u4E50"
+      - "\uC74C\uC545"
+      - "\u97F3\u697D"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: 'Next life in:'
+      TermType: 0
+      Description: 
+      Languages:
+      - 'Next life in:'
+      - "M\u1EA1ng ti\u1EBFp theo sau:"
+      - "\u4E0B\u4E00\u6761\u547D\u5728\uFF1A"
+      - "\uB2E4\uC74C \uC0DD\uBA85\uAE4C\uC9C0:"
+      - "\u6B21\u306E\u30E9\u30A4\u30D5\u307E\u3067\uFF1A"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Noodle
+      TermType: 0
+      Description: 
+      Languages:
+      - Noodle
+      - "M\xEC"
+      - "\u9762\u6761"
+      - "\uBA74"
+      - "\u30CC\u30FC\u30C9\u30EB"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Octopus
+      TermType: 0
+      Description: 
+      Languages:
+      - Octopus
+      - "B\u1EA1ch tu\u1ED9c"
+      - "\u7AE0\u9C7C"
+      - "\uBB38\uC5B4"
+      - "\u30BF\u30B3"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Oven
+      TermType: 0
+      Description: 
+      Languages:
+      - Oven
+      - "L\xF2 n\u01B0\u1EDBng"
+      - "\u70E4\u7BB1"
+      - "\uC624\uBE10"
+      - "\u30AA\u30FC\u30D6\u30F3"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Over Mitts
+      TermType: 0
+      Description: 
+      Languages:
+      - Over Mitts
+      - "G\u0103ng tay l\xF2 n\u01B0\u1EDBng"
+      - "\u70E4\u7BB1\u624B\u5957"
+      - "\uC624\uBE10 \uC7A5\uAC11"
+      - "\u30AA\u30FC\u30D6\u30F3\u30DF\u30C3\u30C8"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Oyster
+      TermType: 0
+      Description: 
+      Languages:
+      - Oyster
+      - "H\xE0u"
+      - "\u7261\u86CE"
+      - "\uAD74"
+      - "\u7261\u8823"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Pizza
+      TermType: 0
+      Description: 
+      Languages:
+      - Pizza
+      - "B\xE1nh pizza"
+      - "\u6BD4\u8428"
+      - "\uD53C\uC790"
+      - "\u30D4\u30B6"
+      Flags: 0000000000
+      Languages_Touch: []
     - Term: Play
       TermType: 0
       Description: 
@@ -455,6 +1079,149 @@ MonoBehaviour:
       - "\u73A9"
       - "\uD50C\uB808\uC774"
       - "\u30D7\u30EC\u30A4"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Pork Leg
+      TermType: 0
+      Description: 
+      Languages:
+      - Pork Leg
+      - "Ch\xE2n gi\xF2 heo"
+      - "\u732A\u817F"
+      - "\uB3FC\uC9C0 \uB2E4\uB9AC"
+      - "\u8C5A\u8DB3"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Pork Skewers
+      TermType: 0
+      Description: 
+      Languages:
+      - Pork Skewers
+      - "Th\u1ECBt xi\xEAn heo"
+      - "\u732A\u8089\u4E32"
+      - "\uB3FC\uC9C0\uACE0\uAE30 \uAF2C\uCE58"
+      - "\u8C5A\u4E32"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Pretzel
+      TermType: 0
+      Description: 
+      Languages:
+      - Pretzel
+      - "B\xE1nh xo\u1EAFn"
+      - "\u626D\u7ED3\u997C"
+      - "\uD504\uB808\uCCBC"
+      - "\u30D7\u30EC\u30C3\u30C4\u30A7\u30EB"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Privacy Policy
+      TermType: 0
+      Description: 
+      Languages:
+      - Privacy Policy
+      - "Ch\xEDnh s\xE1ch b\u1EA3o m\u1EADt"
+      - "\u9690\u79C1\u653F\u7B56"
+      - "\uAC1C\uC778\uC815\uBCF4 \uBCF4\uD638\uC815\uCC45"
+      - "\u30D7\u30E9\u30A4\u30D0\u30B7\u30FC\u30DD\u30EA\u30B7\u30FC"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Rate
+      TermType: 0
+      Description: 
+      Languages:
+      - Rate
+      - "\u0110\xE1nh gi\xE1"
+      - "\u8BC4\u5206"
+      - "\uD3C9\uAC00\uD558\uAE30"
+      - "\u8A55\u4FA1\u3059\u308B"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Raw Meat
+      TermType: 0
+      Description: 
+      Languages:
+      - Raw Meat
+      - "Th\u1ECBt s\u1ED1ng"
+      - "\u751F\u8089"
+      - "\uC0DD\uACE0\uAE30"
+      - "\u751F\u8089"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Red Velvet
+      TermType: 0
+      Description: 
+      Languages:
+      - Red Velvet
+      - "B\xE1nh nhung \u0111\u1ECF"
+      - "\u7EA2\u4E1D\u7ED2"
+      - "\uB808\uB4DC\uBCA8\uBCB3"
+      - "\u30EC\u30C3\u30C9\u30D9\u30EB\u30D9\u30C3\u30C8"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Refill
+      TermType: 0
+      Description: 
+      Languages:
+      - Refill
+      - "N\u1EA1p l\u1EA1i"
+      - "\u8865\u5145"
+      - "\uB9AC\uD544"
+      - "\u30EA\u30D5\u30A3\u30EB"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Restore
+      TermType: 0
+      Description: 
+      Languages:
+      - Restore
+      - "Kh\xF4i ph\u1EE5c"
+      - "\u6062\u590D"
+      - "\uBCF5\uC6D0"
+      - "\u5FA9\u5143"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Roast Beef
+      TermType: 0
+      Description: 
+      Languages:
+      - Roast Beef
+      - "Th\u1ECBt b\xF2 quay"
+      - "\u70E4\u725B\u8089"
+      - "\uB85C\uC2A4\uD2B8\uBE44\uD504"
+      - "\u30ED\u30FC\u30B9\u30C8\u30D3\u30FC\u30D5"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Salmon
+      TermType: 0
+      Description: 
+      Languages:
+      - Salmon
+      - "C\xE1 h\u1ED3i"
+      - "\u4E09\u6587\u9C7C"
+      - "\uC5F0\uC5B4"
+      - "\u30B5\u30FC\u30E2\u30F3"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Sausage
+      TermType: 0
+      Description: 
+      Languages:
+      - Sausage
+      - "X\xFAc x\xEDch"
+      - "\u9999\u80A0"
+      - "\uC18C\uC2DC\uC9C0"
+      - "\u30BD\u30FC\u30BB\u30FC\u30B8"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Scallops
+      TermType: 0
+      Description: 
+      Languages:
+      - Scallops
+      - "S\xF2 \u0111i\u1EC7p"
+      - "\u6247\u8D1D"
+      - "\uAC00\uB9AC\uBE44"
+      - "\u30DB\u30BF\u30C6"
       Flags: 0000000000
       Languages_Touch: []
     - Term: Sea Food
@@ -468,6 +1235,50 @@ MonoBehaviour:
       - "\u30B7\u30FC\u30D5\u30FC\u30C9"
       Flags: 0000000000
       Languages_Touch: []
+    - Term: Send
+      TermType: 0
+      Description: 
+      Languages:
+      - Send
+      - "G\u1EEDi"
+      - "\u53D1\u9001"
+      - "\uBCF4\uB0B4\uAE30"
+      - "\u9001\u4FE1"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Set Completed!
+      TermType: 0
+      Description: 
+      Languages:
+      - Set Completed!
+      - "Ho\xE0n th\xE0nh b\u1ED9 s\u01B0u t\u1EADp!"
+      - "\u5957\u88C5\u5B8C\u6210\uFF01"
+      - "\uC138\uD2B8 \uC644\uC131!"
+      - "\u30BB\u30C3\u30C8\u5B8C\u6210\uFF01"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Settings
+      TermType: 0
+      Description: 
+      Languages:
+      - Settings
+      - "C\xE0i \u0111\u1EB7t"
+      - "\u8BBE\u7F6E"
+      - "\uC124\uC815"
+      - "\u8A2D\u5B9A"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Shake
+      TermType: 0
+      Description: 
+      Languages:
+      - Shake
+      - "L\u1EAFc"
+      - "\u6447\u52A8"
+      - "\uD754\uB4E4\uAE30"
+      - "\u30B7\u30A7\u30A4\u30AF"
+      Flags: 0000000000
+      Languages_Touch: []
     - Term: Shop
       TermType: 0
       Description: 
@@ -479,6 +1290,17 @@ MonoBehaviour:
       - "\u30B7\u30E7\u30C3\u30D7"
       Flags: 0000000000
       Languages_Touch: []
+    - Term: Shrimp
+      TermType: 0
+      Description: 
+      Languages:
+      - Shrimp
+      - "T\xF4m"
+      - "\u867E"
+      - "\uC0C8\uC6B0"
+      - "\u30A8\u30D3"
+      Flags: 0000000000
+      Languages_Touch: []
     - Term: Skewer Collection
       TermType: 0
       Description: 
@@ -488,6 +1310,28 @@ MonoBehaviour:
       - "\u4E32\u6536\u85CF"
       - "\uAF2C\uCE58 \uCEEC\uB809\uC158"
       - "\u4E32\u30B3\u30EC\u30AF\u30B7\u30E7\u30F3"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Sound
+      TermType: 0
+      Description: 
+      Languages:
+      - Sound
+      - "\xC2m thanh"
+      - "\u58F0\u97F3"
+      - "\uC0AC\uC6B4\uB4DC"
+      - "\u30B5\u30A6\u30F3\u30C9"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Squid
+      TermType: 0
+      Description: 
+      Languages:
+      - Squid
+      - "M\u1EF1c"
+      - "\u9C7F\u9C7C"
+      - "\uC624\uC9D5\uC5B4"
+      - "\u30A4\u30AB"
       Flags: 0000000000
       Languages_Touch: []
     - Term: Star Chest
@@ -523,6 +1367,28 @@ MonoBehaviour:
       - "\u30B9\u30BF\u30FC\u30BF\u30FC\u30D0\u30F3\u30C9\u30EB"
       Flags: 0000000000
       Languages_Touch: []
+    - Term: Steak
+      TermType: 0
+      Description: 
+      Languages:
+      - Steak
+      - "B\xEDt t\u1EBFt"
+      - "\u725B\u6392"
+      - "\uC2A4\uD14C\uC774\uD06C"
+      - "\u30B9\u30C6\u30FC\u30AD"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Strawberry
+      TermType: 0
+      Description: 
+      Languages:
+      - Strawberry
+      - "D\xE2u t\xE2y"
+      - "\u8349\u8393"
+      - "\uB538\uAE30"
+      - "\u3044\u3061\u3054"
+      Flags: 0000000000
+      Languages_Touch: []
     - Term: Sweets
       TermType: 0
       Description: 
@@ -532,6 +1398,61 @@ MonoBehaviour:
       - "\u751C\u98DF"
       - "\uACFC\uC790"
       - "\u30B9\u30A4\u30FC\u30C4"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Tacos
+      TermType: 0
+      Description: 
+      Languages:
+      - Tacos
+      - "B\xE1nh taco"
+      - "\u7389\u7C73\u997C"
+      - "\uD0C0\uCF54"
+      - "\u30BF\u30B3\u30B9"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Tap To Continue
+      TermType: 0
+      Description: 
+      Languages:
+      - Tap To Continue
+      - "Ch\u1EA1m \u0111\u1EC3 ti\u1EBFp t\u1EE5c"
+      - "\u70B9\u51FB\u7EE7\u7EED"
+      - "\uD0ED\uD558\uC5EC \uACC4\uC18D"
+      - "\u30BF\u30C3\u30D7\u3057\u3066\u7D9A\u884C"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Tea Bag
+      TermType: 0
+      Description: 
+      Languages:
+      - Tea Bag
+      - "T\xFAi tr\xE0"
+      - "\u8336\u5305"
+      - "\uD2F0\uBC31"
+      - "\u30C6\u30A3\u30FC\u30D0\u30C3\u30B0"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Tea Time
+      TermType: 0
+      Description: 
+      Languages:
+      - Tea Time
+      - "Gi\u1EDD tr\xE0"
+      - "\u8336\u6B47\u65F6\u95F4"
+      - "\uD2F0\uD0C0\uC784"
+      - "\u30C6\u30A3\u30FC\u30BF\u30A4\u30E0"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Toaster
+      TermType: 0
+      Description: 
+      Languages:
+      - Toaster
+      - "M\xE1y n\u01B0\u1EDBng b\xE1nh m\xEC"
+      - "\u70E4\u9762\u5305\u673A"
+      - "\uD1A0\uC2A4\uD130"
+      - "\u30C8\u30FC\u30B9\u30BF\u30FC"
       Flags: 0000000000
       Languages_Touch: []
     - Term: Ultra Bundle
@@ -556,6 +1477,17 @@ MonoBehaviour:
       - "{[VALUE]} \u30EC\u30D9\u30EB\u3067\u30A2\u30F3\u30ED\u30C3\u30AF"
       Flags: 0000000000
       Languages_Touch: []
+    - Term: Use your extra stars to open chest!
+      TermType: 0
+      Description: 
+      Languages:
+      - Use your extra stars to open chest!
+      - "D\xF9ng sao d\u01B0 \u0111\u1EC3 m\u1EDF r\u01B0\u01A1ng!"
+      - "\u4F7F\u7528\u591A\u4F59\u7684\u661F\u661F\u6765\u6253\u5F00\u5B9D\u7BB1\uFF01"
+      - "\uB0A8\uC740 \uBCC4\uC744 \uC0AC\uC6A9\uD574 \uC0C1\uC790\uB97C \uC5EC\uC138\uC694!"
+      - "\u4F59\u3063\u305F\u30B9\u30BF\u30FC\u3067\u5B9D\u7BB1\u3092\u958B\u3051\u3088\u3046\uFF01"
+      Flags: 0000000000
+      Languages_Touch: []
     - Term: Video Bar
       TermType: 0
       Description: 
@@ -578,15 +1510,81 @@ MonoBehaviour:
       - "\u30D9\u30C8\u30CA\u30E0\u8A9E"
       Flags: 0000000000
       Languages_Touch: []
-    - Term: 0123456789.,!? &
+    - Term: Waffle Maker
       TermType: 0
       Description: 
       Languages:
-      - ' "0123456789.,!?%&"'
-      - ' "0123456789.,!?%&"'
-      - ' "0123456789.,!?%&"'
-      - ' "0123456789.,!?%&"'
-      - ' "0123456789.,!?%&"'
+      - Waffle Maker
+      - "M\xE1y l\xE0m b\xE1nh qu\u1EBF"
+      - "\u534E\u592B\u997C\u673A"
+      - "\uC640\uD50C \uAE30\uACC4"
+      - "\u30EF\u30C3\u30D5\u30EB\u30E1\u30FC\u30AB\u30FC"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Watch Video
+      TermType: 0
+      Description: 
+      Languages:
+      - Watch Video
+      - Xem video
+      - "\u89C2\u770B\u89C6\u9891"
+      - "\uC601\uC0C1 \uC2DC\uCCAD"
+      - "\u52D5\u753B\u3092\u898B\u308B"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Watch videos
+      TermType: 0
+      Description: 
+      Languages:
+      - Watch videos
+      - Xem video
+      - "\u89C2\u770B\u89C6\u9891"
+      - "\uC601\uC0C1 \uC2DC\uCCAD"
+      - "\u52D5\u753B\u3092\u898B\u308B"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Wine
+      TermType: 0
+      Description: 
+      Languages:
+      - Wine
+      - "R\u01B0\u1EE3u vang"
+      - "\u8461\u8404\u9152"
+      - "\uC640\uC778"
+      - "\u30EF\u30A4\u30F3"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: You don't have enough stars
+      TermType: 0
+      Description: 
+      Languages:
+      - You don't have enough stars
+      - "B\u1EA1n kh\xF4ng \u0111\u1EE7 sao"
+      - "\u4F60\u7684\u661F\u661F\u4E0D\u591F"
+      - "\uBCC4\uC774 \uBD80\uC871\uD569\uB2C8\uB2E4"
+      - "\u30B9\u30BF\u30FC\u304C\u8DB3\u308A\u307E\u305B\u3093"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: You have
+      TermType: 0
+      Description: 
+      Languages:
+      - You have
+      - "B\u1EA1n c\xF3"
+      - "\u4F60\u62E5\u6709"
+      - "\uBCF4\uC720 \uC911"
+      - "\u6240\u6301"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: You have already received the reward
+      TermType: 0
+      Description: 
+      Languages:
+      - You have already received the reward
+      - "B\u1EA1n \u0111\xE3 nh\u1EADn ph\u1EA7n th\u01B0\u1EDFng r\u1ED3i"
+      - "\u60A8\u5DF2\u9886\u53D6\u5956\u52B1"
+      - "\uC774\uBBF8 \uBCF4\uC0C1\uC744 \uBC1B\uC558\uC2B5\uB2C8\uB2E4"
+      - "\u3059\u3067\u306B\u5831\u916C\u3092\u53D7\u3051\u53D6\u308A\u307E\u3057\u305F"
       Flags: 0000000000
       Languages_Touch: []
     CaseInsensitiveTerms: 0
@@ -657,7 +1655,6 @@ MonoBehaviour:
     - {fileID: 2100000, guid: 4ce4f76a07f91954da9f75c45c4b8eaf, type: 2}
     - {fileID: 2100000, guid: 95da0031814916b43a2ac298b86cb738, type: 2}
     - {fileID: 2100000, guid: 9f5d41a75bf5044458f1b271a5e475c7, type: 2}
-    - {fileID: 2100000, guid: 2c65eabe31370674d961bf595df18b29, type: 2}
     - {fileID: 2100000, guid: 5719243a1e59e5e489791e956429d026, type: 2}
     - {fileID: 2100000, guid: 8f70d7e22943e954eb086685ba8a50fa, type: 2}
     - {fileID: 2100000, guid: 74012c7fcd98d844ba76c55a134286d2, type: 2}
@@ -700,7 +1697,12 @@ MonoBehaviour:
     - {fileID: 2100000, guid: 2cbc1b3b093213440b6c2f694a941b7e, type: 2}
     - {fileID: 2100000, guid: 36c7e898902370d4b8e17d73063b2ee9, type: 2}
     - {fileID: 2100000, guid: 708ac44a48164d4448b3ae27471e8f0e, type: 2}
-    Spreadsheet_LocalFileName: C:/Users/ADMIN/Documents/GameSonat2025/ThisIsBlast/GrillSort3/Localization/LocalizationImport.csv
+    - {fileID: 2100000, guid: 77048ad586e137a40b98b1f9be571abd, type: 2}
+    - {fileID: 2100000, guid: f2be6daa777110c45ab2f574cedc25d5, type: 2}
+    - {fileID: 2100000, guid: 25c8a557b3095b746b9f1324b4b39fd9, type: 2}
+    - {fileID: 2100000, guid: 759f361155a808d42abdcdaccb004472, type: 2}
+    - {fileID: 2100000, guid: f783fc7cf6e9b9f42b198260d660a916, type: 2}
+    Spreadsheet_LocalFileName: C:/Users/ADMIN/Documents/GameSonat2025/ThisIsBlast/GrillSort3/Localization/LocalizationExport.csv
     Spreadsheet_LocalCSVSeparator: ','
     Spreadsheet_LocalCSVEncoding: utf-8
     Spreadsheet_SpecializationAsRows: 1

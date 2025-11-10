@@ -332,6 +332,7 @@ GameObject:
   - component: {fileID: 7243781986915867227}
   - component: {fileID: 8094764780925805748}
   - component: {fileID: 8583132094044260624}
+  - component: {fileID: 1719300587846262726}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -388,7 +389,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Free
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1ad186f6383d0f6449e226da1f38334b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: ef843bea28baeae4e90723f983e3beb0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -452,9 +453,48 @@ MonoBehaviour:
   m_margin: {x: 124.88269, y: 0, z: -2.4788818, w: 6.892334}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1719300587846262726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8430944153704479482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Free
+  mTermSecondary: 1FTVVIPMikado-Black SDF-Desc-Green
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1001 &627700409304610843
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -564,6 +604,10 @@ PrefabInstance:
       value: -2.4788818
       objectReference: {fileID: 0}
     - target: {fileID: 1771516496357131017, guid: 2099faaf532c4444e9649d6474414d72, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 917d1465f6f4b514cb583051b2efe8d2, type: 2}
+    - target: {fileID: 1771516496357131017, guid: 2099faaf532c4444e9649d6474414d72, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
       objectReference: {fileID: 0}
@@ -620,12 +664,59 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2162266868284295063, guid: 2099faaf532c4444e9649d6474414d72, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7610528642678406222}
+    - targetCorrespondingSourceObject: {fileID: 1855118184944806235, guid: 2099faaf532c4444e9649d6474414d72, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4831645526586698787}
   m_SourcePrefab: {fileID: 100100000, guid: 2099faaf532c4444e9649d6474414d72, type: 3}
 --- !u!224 &158232094790626985 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 757780605692303026, guid: 2099faaf532c4444e9649d6474414d72, type: 3}
   m_PrefabInstance: {fileID: 627700409304610843}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1227439923241898304 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1855118184944806235, guid: 2099faaf532c4444e9649d6474414d72, type: 3}
+  m_PrefabInstance: {fileID: 627700409304610843}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4831645526586698787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227439923241898304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Free
+  mTermSecondary: 1FTVVIPMikado-Black SDF-Title-Green
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &1637023764977385356 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2162266868284295063, guid: 2099faaf532c4444e9649d6474414d72, type: 3}
@@ -808,7 +899,7 @@ PrefabInstance:
     - target: {fileID: 7269420051825237776, guid: 4aaeb6009dd311d4e880e8ecde70d960, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 1ad186f6383d0f6449e226da1f38334b, type: 2}
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
     - target: {fileID: 7269420051825237776, guid: 4aaeb6009dd311d4e880e8ecde70d960, type: 3}
       propertyPath: m_fontColor.b
       value: 1
@@ -828,7 +919,7 @@ PrefabInstance:
     - target: {fileID: 7269420051825237776, guid: 4aaeb6009dd311d4e880e8ecde70d960, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 8f2e0c3849d36434aac2d6e388a34f53, type: 2}
+      objectReference: {fileID: 2100000, guid: 075ae1c61b7e91d439aea58cfcfb8709, type: 2}
     - target: {fileID: 7269420051825237776, guid: 4aaeb6009dd311d4e880e8ecde70d960, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4294967295

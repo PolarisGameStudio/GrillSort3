@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
+using SonatFramework.Scripts.Helper;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.UIModule.UIElements;
 using SonatFramework.Systems;
@@ -50,13 +51,10 @@ namespace MyGame.Modules.CardCollection
             // var _albumConfig = _cardCollectionService.Instance.config.GetAlbumConfig(albumType);
             cardImage.SetSpriteAsync(_cardConfig.GetCardSpritePath()).Forget();
 
-            txtMainName.text = _cardConfig.cardName;
-            // txtMainName.GetComponent<I2.Loc.Localize>().SetTerm(_cardConfig.cardName);
+            txtMainName.SetLocalize(_cardConfig.cardName);
             txtMainName.SetMaterial(_cardConfig.GetTextColor());
 
-            txtNameOnBack.text = _cardConfig.cardName;
-
-            // txtNameOnBack.GetComponent<I2.Loc.Localize>().SetTerm(_cardConfig.cardName);
+            txtNameOnBack.SetLocalize(_cardConfig.cardName);
 
             // set star
             starGroup.Setup(_cardConfig.star);
