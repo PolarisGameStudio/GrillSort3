@@ -42,12 +42,14 @@ namespace MyGame.Modules.QuestEvent
 
         private void OnLevelStarted(LevelStartedEvent eventData)
         {
+            if (IsUnlocked() == false) return;
             MySonatFramework.GetService<SubInventoryService>().SetResource(SubGameResource.QuestEventItem, 0);
             OnResetItemQuestEvent?.Invoke();
         }
 
         private void OnLevelEnded(LevelEndedEvent eventData)
         {
+            if (IsUnlocked() == false) return;
             if (eventData.success)
             {
                 _numCollectAtHome = MySonatFramework.GetService<SubInventoryService>().GetResource(SubGameResource.QuestEventItem);
@@ -59,12 +61,14 @@ namespace MyGame.Modules.QuestEvent
 
         private void OnLevelQuit(LevelQuitEvent eventData)
         {
+            if (IsUnlocked() == false) return;
             MySonatFramework.GetService<SubInventoryService>().SetResource(SubGameResource.QuestEventItem, 0);
             OnResetItemQuestEvent?.Invoke();
         }
 
         private void OnLevelReplay(LevelReplayEvent eventData)
         {
+            if (IsUnlocked() == false) return;
             MySonatFramework.GetService<SubInventoryService>().SetResource(SubGameResource.QuestEventItem, 0);
             OnResetItemQuestEvent?.Invoke();
         }
