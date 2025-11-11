@@ -1,5 +1,4 @@
 
-using System;
 using I2.Loc;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -12,7 +11,7 @@ namespace MyGame.Modules.CardCollection
     public class ChangeTextMaterial : MonoBehaviour
     {
         public TextMaterialSO materialSO;
-        public bool useFillColor;
+        // public bool useFillColor;
         private TMP_Text text;
         private Localize localize;
 
@@ -25,22 +24,22 @@ namespace MyGame.Modules.CardCollection
         public void SetMaterial(TextColorType index)
         {
             Setup();
-            if (useFillColor)
-            {
-                text.color = materialSO.GetMaterialData(index).color;
-            }
-            else
-            {
-                // if (localize != null)
-                // {
-                //     localize.SecondaryTerm = materialSO.GetMaterialData(index).materialTerm;
-                //     localize.OnLocalize(true);
-                // }
-                // else
-                // {
-                text.fontMaterial = materialSO.GetMaterialData(index).material;
-                // }
-            }
+            // if (useFillColor)
+            // {
+            //     text.color = materialSO.GetMaterialData(index).color;
+            // }
+            // else
+            // {
+            // if (localize != null)
+            // {
+            localize.SecondaryTerm = materialSO.GetMaterialData(index).materialTerm;
+            localize.OnLocalize(true);
+            // }
+            // else
+            // {
+            //     text.fontMaterial = materialSO.GetMaterialData(index).material;
+            // }
+            // }
         }
 
 #if UNITY_EDITOR

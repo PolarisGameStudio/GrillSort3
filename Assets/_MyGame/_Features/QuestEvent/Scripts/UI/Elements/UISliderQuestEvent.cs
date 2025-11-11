@@ -26,14 +26,14 @@ namespace MyGame.Modules.QuestEvent.UI.Elements
             if (useCollectAtHome)
             {
                 var currentQuestIndexView = _questEventService.Instance.GetCurrentQuestIndexView();
-                var maxItem = _questEventService.Instance.config.GetMaxItem(currentQuestIndexView);
+                var maxItem = _questEventService.Instance.GetConfig().GetMaxItem(currentQuestIndexView);
 
                 var currentItem = _questEventService.Instance.GetCurrentItemView();
                 _value = currentItem;
 
                 SetSliderValue(_value, maxItem);
 
-                bubbleReward.SetReward(_questEventService.Instance.config.listMilestones[currentQuestIndexView].rewardData);
+                bubbleReward.SetReward(_questEventService.Instance.GetConfig().listMilestones[currentQuestIndexView].rewardData);
             }
             else
             {
@@ -55,13 +55,13 @@ namespace MyGame.Modules.QuestEvent.UI.Elements
         public void UpdateUI()
         {
             var currentQuestIndexView = _questEventService.Instance.GetCurrentQuestIndexView();
-            var maxItem = _questEventService.Instance.config.GetMaxItem(currentQuestIndexView);
+            var maxItem = _questEventService.Instance.GetConfig().GetMaxItem(currentQuestIndexView);
 
             var currentItem = _questEventService.Instance.CurrentItem;
 
             SetSliderValue(currentItem, maxItem);
 
-            bubbleReward.SetReward(_questEventService.Instance.config.listMilestones[currentQuestIndexView].rewardData);
+            bubbleReward.SetReward(_questEventService.Instance.GetConfig().listMilestones[currentQuestIndexView].rewardData);
         }
 
         private void SetSliderValue(int currentItem, int maxItem)
@@ -74,7 +74,7 @@ namespace MyGame.Modules.QuestEvent.UI.Elements
         public void PlayUpdateSlider()
         {
             var currentQuestIndexView = _questEventService.Instance.GetCurrentQuestIndexView();
-            var maxItem = _questEventService.Instance.config.GetMaxItem(currentQuestIndexView);
+            var maxItem = _questEventService.Instance.GetConfig().GetMaxItem(currentQuestIndexView);
 
             var currentItem = _questEventService.Instance.CurrentItem;
             currentItem = Mathf.Min(currentItem, maxItem);

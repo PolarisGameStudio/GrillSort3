@@ -13,12 +13,10 @@ using UnityEngine;
 namespace MyGame.Modules.QuestEvent
 {
     [CreateAssetMenu(fileName = "QuestEventService", menuName = "MyGame/SkewerJam/Features/QuestEvent/QuestEventService")]
-    public class QuestEventService : BaseExpireService
+    public class QuestEventService : BaseExpireService<QuestEventConfigSO>
     {
         public override string DATA_KEY => "QUEST_EVENT";
         public const string ITEM_NAME = "quest_item";
-
-        public QuestEventConfigSO config;
 
         private IntDataPref _currentItem;
         private IntDataPref _claimedQuestIndex;
@@ -111,7 +109,7 @@ namespace MyGame.Modules.QuestEvent
         public override bool CanUnlock()
         {
             var level = MySonatFramework.GetService<UserDataService>().GetLevel();
-            return level >= config.unlocklevel;
+            return level >= GetConfig().unlockLevel;
         }
 
         protected override long GetNextExpireTime()
@@ -178,7 +176,7 @@ namespace MyGame.Modules.QuestEvent
         public bool CheckCanClaimQuest()
         {
             var currentQuestIndex = GetCurrentQuestIndexView();
-            var itemRequired = config.listMilestones[currentQuestIndex].numItem;
+            var itemRequired = GetConfig().listMilestones[currentQuestIndex].numItem;
             return _currentItem.Value >= itemRequired;
         }
 
@@ -189,13 +187,13 @@ namespace MyGame.Modules.QuestEvent
                 return;
             }
             var currentQuestIndex = GetCurrentQuestIndexView();
-            var itemRequired = config.listMilestones[currentQuestIndex].numItem;
+            var itemRequired = GetConfig().listMilestones[currentQuestIndex].numItem;
 
             _currentItem.Value -= itemRequired;
             _claimedQuestIndex.Value += 1;
             OnDataUpdated?.Invoke();
 
-            var rewardData = config.listMilestones[currentQuestIndex].rewardData;
+            var rewardData = GetConfig().listMilestones[currentQuestIndex].rewardData;
             var log = new EarnResourceLogData
             {
                 spendType = "feature",
@@ -214,7 +212,7 @@ namespace MyGame.Modules.QuestEvent
 
         public bool CheckCompleteAllQuest()
         {
-            return _claimedQuestIndex.Value >= config.listMilestones.Count - 1;
+            return _claimedQuestIndex.Value >= GetConfig().listMilestones.Count - 1;
         }
 
         public int GetCurrentItemView()

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9113392204048772223}
   - component: {fileID: 6758968078917194743}
   - component: {fileID: 8390813297811240217}
+  - component: {fileID: 6729721020046556855}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -65,11 +66,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Collect <color=#FFE92B>Golden chicken thighs</color> to open and claim
-    rewards!
+  m_text: "Thu th\u1EADp <color=#FFE92B>\u0111\xF9i g\xE0 v\xE0ng</color> \u0111\u1EC3
+    m\u1EDF v\xE0 nh\u1EADn ph\u1EA7n th\u01B0\u1EDFng!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1ad186f6383d0f6449e226da1f38334b, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 8d4d5bd9cd3421040b2cc7cda8728715, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 77048ad586e137a40b98b1f9be571abd, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -93,7 +94,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 65.2
+  m_fontSize: 75.3
   m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -135,6 +136,45 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6729721020046556855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4268135284549596226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: CollectGoldenChicken
+  mTermSecondary: 1FTVVIPMikado-Black SDF-Desc-Brown
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1001 &650663397490664182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -243,6 +283,10 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6560615628747177147, guid: 17a11756e1c50724792bbc402093bab5, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 9df39a9317010674ba6bc45c4e600d13, type: 2}
     - target: {fileID: 6685110356103455301, guid: 17a11756e1c50724792bbc402093bab5, type: 3}
       propertyPath: m_SortingLayer
       value: 0
@@ -381,6 +425,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -88.48
       objectReference: {fileID: 0}
+    - target: {fileID: 452028972814236675, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
+      propertyPath: m_text
+      value: "Ti\u1EBFp t\u1EE5c"
+      objectReference: {fileID: 0}
+    - target: {fileID: 452028972814236675, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 0a32742b6c7b4474180003b8f3188837, type: 2}
+    - target: {fileID: 649503989189120637, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
+      propertyPath: mTerm
+      value: Continue
+      objectReference: {fileID: 0}
+    - target: {fileID: 843062371049703637, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
+      propertyPath: mLocalizeTargetName
+      value: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098758805056485401, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
+      propertyPath: mTerm
+      value: Golden Skewer
+      objectReference: {fileID: 0}
     - target: {fileID: 1426589005505369490, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
       propertyPath: m_SizeDelta.x
       value: 976
@@ -423,7 +487,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: e6fb7c3a76770264d84a18bbc611d7d6, type: 3}
     - target: {fileID: 2302525876580298392, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
       propertyPath: m_text
-      value: Golden Skewer
+      value: "Xi\xEAn v\xE0ng"
       objectReference: {fileID: 0}
     - target: {fileID: 2302525876580298392, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
       propertyPath: m_fontSize

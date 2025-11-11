@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using I2.Loc;
 using MyGame.SkewerJam.Gameplay;
 using Sonat.Enums;
+using SonatFramework.Scripts.Helper;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +13,7 @@ namespace MyGame.SkewerJam.Gameplay
     public class UICombo : MonoBehaviour
     {
         [SerializeField] private Slider slider;
-        [SerializeField] private TMP_Text txtCombo;
+        [SerializeField] private LocalizationParamsManager comboParamsManager;
         [SerializeField] private GameObject mainObject;
         [SerializeField] private ParticleSystem blastEffect;
         [SerializeField] private LayoutElement layoutElement;
@@ -65,7 +67,7 @@ namespace MyGame.SkewerJam.Gameplay
                     blastEffect.gameObject.SetActive(true);
                     blastEffect.Play();
                 }
-                txtCombo.text = "Combo " + combo.ToString();
+                comboParamsManager.SetParameterValue("VALUE", combo.ToString());
                 if (cooldownCoroutine != null)
                 {
                     StopCoroutine(cooldownCoroutine);

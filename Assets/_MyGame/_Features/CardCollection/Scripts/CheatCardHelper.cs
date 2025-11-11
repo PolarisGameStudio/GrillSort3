@@ -10,7 +10,7 @@ namespace MyGame.Modules.CardCollection
         {
             var cardCollectionService = SonatSystem.GetService<CardCollectionService>();
             var cardInventoryModule = cardCollectionService.CardInventoryModule;
-            var config = cardCollectionService.config;
+            var config = cardCollectionService.GetConfig();
             foreach (var card in config.cards)
             {
                 if (cardInventoryModule.CheckExistCollectedCard(card.type)) continue;
@@ -36,7 +36,7 @@ namespace MyGame.Modules.CardCollection
             var cardCollectionService = SonatSystem.GetService<CardCollectionService>();
             var cardInventoryModule = cardCollectionService.CardInventoryModule;
 
-            var albumConfig = cardCollectionService.config.GetAlbumConfig(forceAlbumType);
+            var albumConfig = cardCollectionService.GetConfig().GetAlbumConfig(forceAlbumType);
             var cardList = new List<CardType>();
             foreach (var cardType in albumConfig.cards)
             {

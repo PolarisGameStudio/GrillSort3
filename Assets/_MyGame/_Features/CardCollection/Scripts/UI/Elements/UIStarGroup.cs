@@ -19,7 +19,7 @@ namespace MyGame.Modules.CardCollection
             _poolingService.Instance.CleanContainer(container);
             stars.Clear();
 
-            var maxStarView = _cardCollectionService.Instance.config.maxStarView;
+            var maxStarView = _cardCollectionService.Instance.GetConfig().maxStarView;
             var starView = Mathf.Min(star, maxStarView);
             if (starView == 5)
             {

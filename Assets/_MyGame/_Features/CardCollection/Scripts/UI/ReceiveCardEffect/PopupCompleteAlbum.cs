@@ -37,7 +37,7 @@ namespace MyGame.Modules.CardCollection
             {
                 album.Setup(albumType);
 
-                var albumConfig = cardCollectionService.Instance.config.GetAlbumConfig(albumType);
+                var albumConfig = cardCollectionService.Instance.GetConfig().GetAlbumConfig(albumType);
                 reward = albumConfig.reward;
                 rewardItem.Init(reward.resourceDatas[0].resource, reward.resourceDatas[0].quantity);
             }

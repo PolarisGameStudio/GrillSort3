@@ -335,9 +335,21 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 28.25
       objectReference: {fileID: 0}
+    - target: {fileID: 7788745795629634695, guid: 69fe0222623a4314f980b09bc78d84fd, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b328c42045a2c414684f790785352a80, type: 2}
+    - target: {fileID: 7788745795629634695, guid: 69fe0222623a4314f980b09bc78d84fd, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 23c104a5f794b444cb0bca7d91012613, type: 2}
     - target: {fileID: 8013511812672948398, guid: 69fe0222623a4314f980b09bc78d84fd, type: 3}
       propertyPath: panelOpenName
       value: PopupLimitedBundle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8937627327210264510, guid: 69fe0222623a4314f980b09bc78d84fd, type: 3}
+      propertyPath: mTerm
+      value: Limited Offer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

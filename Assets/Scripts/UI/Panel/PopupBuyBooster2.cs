@@ -1,12 +1,6 @@
-using MyGame.SkewerJam.Gameplay.Helpers;
-using MyGame.SkewerJam.Scripts.SO.UIConfig;
 using Scripts.UI.Gameplay.PackBooster;
-using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
-using SonatFramework.Systems;
 using SonatFramework.Systems.BoosterManagement;
-using SonatFramework.Templates.UI.ScriptBase;
-using TMPro;
 using UnityEngine;
 
 public class PopupBuyBooster2 : PopupBuyBooster

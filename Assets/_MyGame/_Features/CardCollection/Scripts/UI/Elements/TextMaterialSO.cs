@@ -32,8 +32,8 @@ namespace MyGame.Modules.CardCollection
     {
         [GUIColor(0, 1, 0)]
         public TextColorType type;
-        public Material material;
-        public Color color;
+        // public Material material;
+        // public Color color;
         public string materialTerm;
     }
 }

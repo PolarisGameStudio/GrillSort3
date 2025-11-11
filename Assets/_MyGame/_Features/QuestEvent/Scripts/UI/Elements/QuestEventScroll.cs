@@ -16,7 +16,7 @@ namespace MyGame.Modules.QuestEvent.UI
 
         protected override int GetMaxElements()
         {
-            return _questEventService.Instance.config.listMilestones.Count;
+            return _questEventService.Instance.GetConfig().listMilestones.Count;
         }
 
         protected override QuestEventData GetData(int idx)

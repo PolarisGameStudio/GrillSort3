@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using DG.Tweening;
+using I2.Loc;
 using MyGame.SkewerJam.Features.BannerController;
 using MyGame.SkewerJam.Gameplay.Booster;
 using Sonat.Enums;
@@ -13,7 +14,7 @@ namespace MyGame.SkewerJam.Gameplay
 {
     public class GameplayScreen : MonoBehaviour
     {
-        [SerializeField] private TMP_Text txtLevel;
+        [SerializeField] private LocalizationParamsManager levelParamsManager;
         [SerializeField] private TMP_Text txtTotalItems;
         [SerializeField] private UICurrency[] currencies;
 
@@ -27,7 +28,7 @@ namespace MyGame.SkewerJam.Gameplay
 
         public void InitLevel(int level)
         {
-            txtLevel.text = $"Level {level}";
+            levelParamsManager.SetParameterValue("VALUE", level.ToString());
             foreach (var currency in currencies)
             {
                 currency.gameObject.SetActive(true);

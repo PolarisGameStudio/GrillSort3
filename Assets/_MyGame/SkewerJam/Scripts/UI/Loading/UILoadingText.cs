@@ -1,4 +1,5 @@
 using System.Collections;
+using SonatFramework.Scripts.Helper;
 using TMPro;
 using UnityEngine;
 
@@ -31,7 +32,7 @@ namespace MyGame.SkewerJam.UI.Loading
             while (true)
             {
                 yield return new WaitForSeconds(delayBetweenTexts);
-                textLoading.text = texts[index];
+                textLoading.SetLocalize(texts[index]);
                 index++;
                 if (index >= texts.Length)
                 {

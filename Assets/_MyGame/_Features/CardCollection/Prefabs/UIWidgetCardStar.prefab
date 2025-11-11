@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 456
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1ad186f6383d0f6449e226da1f38334b, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 6922283945afbe048b3ed3beaa5cda7b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: ffe8faec5033926408892549401fc17c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -347,6 +347,8 @@ MonoBehaviour:
   txtStar: {fileID: 5070453922050584765}
   root: {fileID: 0}
   playOnEnable: 1
+  registerEvent: 1
+  delayAppear: 0
   durationAppear: 0.5
   curveAppear:
     serializedVersion: 2

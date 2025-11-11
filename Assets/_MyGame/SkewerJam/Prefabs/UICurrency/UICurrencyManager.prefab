@@ -247,6 +247,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: UICurrencyLives
       objectReference: {fileID: 0}
+    - target: {fileID: 2783531552070695882, guid: e5836d63ae0a1144baa0271be2bb675f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 1ad186f6383d0f6449e226da1f38334b, type: 2}
+    - target: {fileID: 2783531552070695882, guid: e5836d63ae0a1144baa0271be2bb675f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 3583879164573703614, guid: 1ad186f6383d0f6449e226da1f38334b, type: 2}
+    - target: {fileID: 2783531552070695882, guid: e5836d63ae0a1144baa0271be2bb675f, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4891259435002233016, guid: e5836d63ae0a1144baa0271be2bb675f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -330,8 +342,55 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5824434915344921500, guid: e5836d63ae0a1144baa0271be2bb675f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7037729031594777948}
   m_SourcePrefab: {fileID: 100100000, guid: e5836d63ae0a1144baa0271be2bb675f, type: 3}
+--- !u!1 &2987485232757361511 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5824434915344921500, guid: e5836d63ae0a1144baa0271be2bb675f, type: 3}
+  m_PrefabInstance: {fileID: 8764322976863516923}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7037729031594777948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2987485232757361511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Full
+  mTermSecondary: 1FTVVIPMikado-Black SDF
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!224 &4197389785341917251 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4891259435002233016, guid: e5836d63ae0a1144baa0271be2bb675f, type: 3}

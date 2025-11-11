@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using I2.Loc;
 using Sirenix.OdinInspector;
+using SonatFramework.Scripts.Helper;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.UIModule.UIElements;
 using SonatFramework.Systems;
@@ -35,10 +36,9 @@ namespace MyGame.Modules.CardCollection
         public virtual void Setup(AlbumType albumType)
         {
             this.albumType = albumType;
-            albumConfig = cardCollectionService.Instance.config.GetAlbumConfig(albumType);
+            albumConfig = cardCollectionService.Instance.GetConfig().GetAlbumConfig(albumType);
 
-            albumName.text = albumConfig.albumName;
-            // albumName.GetComponent<Localize>().SetTerm(albumConfig.albumName);
+            albumName.SetLocalize(albumConfig.albumName);
             albumName.SetMaterial(albumConfig.color);
 
             //albumImage.sprite = albumConfig.albumIcon;

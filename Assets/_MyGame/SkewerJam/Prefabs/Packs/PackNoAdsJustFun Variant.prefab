@@ -166,6 +166,8 @@ MonoBehaviour:
   customIcon: 0
   quantityFormat: x{0}
   iconNameFormat: ico_{0}
+  useCustomIconScale: 0
+  customIconScale: 1
 --- !u!1 &8489786026493894311
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,7 +416,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1767145499903218235, guid: a3147389cdf0b424aa10b67aab8f03b6, type: 3}
       propertyPath: m_fontSize
-      value: 53.45
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 1789905650414729603, guid: a3147389cdf0b424aa10b67aab8f03b6, type: 3}
       propertyPath: m_SizeDelta.x
@@ -495,6 +497,18 @@ PrefabInstance:
     - target: {fileID: 3172197352711180904, guid: a3147389cdf0b424aa10b67aab8f03b6, type: 3}
       propertyPath: m_Name
       value: PackNoAdsJustFun Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306536922545945596, guid: a3147389cdf0b424aa10b67aab8f03b6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306536922545945596, guid: a3147389cdf0b424aa10b67aab8f03b6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306536922545945596, guid: a3147389cdf0b424aa10b67aab8f03b6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3521345650495555895, guid: a3147389cdf0b424aa10b67aab8f03b6, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -594,7 +608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4098324015056922621, guid: a3147389cdf0b424aa10b67aab8f03b6, type: 3}
       propertyPath: m_fontSize
-      value: 59.35
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 4098324015056922621, guid: a3147389cdf0b424aa10b67aab8f03b6, type: 3}
       propertyPath: m_margin.x
@@ -654,7 +668,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8077041533844394334, guid: a3147389cdf0b424aa10b67aab8f03b6, type: 3}
       propertyPath: m_fontSize
-      value: 51.55
+      value: 46.15
       objectReference: {fileID: 0}
     - target: {fileID: 8077041533844394334, guid: a3147389cdf0b424aa10b67aab8f03b6, type: 3}
       propertyPath: m_margin.z
@@ -667,7 +681,7 @@ PrefabInstance:
     - target: {fileID: 8077041533844394334, guid: a3147389cdf0b424aa10b67aab8f03b6, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 8aa4c213f39c745439f43d9c853a4d3c, type: 2}
+      objectReference: {fileID: 4969951290696890425, guid: b328c42045a2c414684f790785352a80, type: 2}
     - target: {fileID: 8078396242260748736, guid: a3147389cdf0b424aa10b67aab8f03b6, type: 3}
       propertyPath: m_LocalScale.x
       value: 0

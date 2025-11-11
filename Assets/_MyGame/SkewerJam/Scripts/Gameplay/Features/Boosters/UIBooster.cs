@@ -75,7 +75,7 @@ namespace MyGame.SkewerJam.Gameplay.Booster
         {
             base.BoosterLockFeedback();
 
-            PopupToast.Cretate("Unlock at level " + config.levelUnlock);
+            PopupToast.Cretate("Unlock at level", config.levelUnlock.ToString());
         }
 
         public override void UseBooster()

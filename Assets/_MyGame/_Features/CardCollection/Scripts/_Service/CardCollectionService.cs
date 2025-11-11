@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Helper;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.Utils;
@@ -16,12 +15,9 @@ namespace MyGame.Modules.CardCollection
 {
     [CreateAssetMenu(fileName = "CardCollectionService", menuName = "MyGame/SkewerJam/Features/CardCollection/CardCollectionService")]
 
-    public class CardCollectionService : BaseExpireService
+    public class CardCollectionService : BaseExpireService<CardCollectionConfigSO>
     {
         public override string DATA_KEY => "CARD_COLLECTION";
-
-        [Header("CONFIGS")]
-        public CardCollectionConfigSO config;
 
         [Space(10)]
         [Header("SubModules")]
@@ -55,7 +51,7 @@ namespace MyGame.Modules.CardCollection
         protected override void LoadConfig()
         {
             base.LoadConfig();
-            config.InitializeAsync();
+            GetConfig().InitializeAsync();
         }
 
         protected override void LoadData()
@@ -78,7 +74,7 @@ namespace MyGame.Modules.CardCollection
 
         private async UniTask LoadImageAsync()
         {
-            foreach (var album in config.albums)
+            foreach (var album in GetConfig().albums)
             {
                 var albumSprite = await AddressableManager.LoadSpriteAsync(album.GetAlbumSpritePath());
                 var albumBackgroundSprite = await AddressableManager.LoadSpriteAsync(album.GetAlbumBackgroundSpritePath());
@@ -96,7 +92,7 @@ namespace MyGame.Modules.CardCollection
         public override bool CanUnlock()
         {
             var level = MySonatFramework.userDataService.GetLevel();
-            return level >= config.unlockLevel;
+            return level >= GetConfig().unlockLevel;
         }
 
         protected override long GetNextExpireTime()
@@ -225,7 +221,7 @@ namespace MyGame.Modules.CardCollection
                 ReceiveRewardCardCollection();
 
                 var uiData = new UIData();
-                uiData.Add(PopupRewardChest.REWARD_KEY, config.rewardInSeason);
+                uiData.Add(PopupRewardChest.REWARD_KEY, GetConfig().rewardInSeason);
                 uiData.Add(PopupRewardChest.SKIN_KEY, 3);
                 PanelManager.Instance.OpenPanelByName<PopupRewardChest>("PopupRewardChest_CardCollection", uiData);
             }
@@ -234,7 +230,7 @@ namespace MyGame.Modules.CardCollection
 
         private void RewardUnlockFeature()
         {
-            RewardData reward = config.RewardUnlock;
+            RewardData reward = GetConfig().RewardUnlock;
             MySonatFramework.inventoryService.AddReward(reward, new EarnResourceLogData
             {
                 spendType = "card_collection",
@@ -274,7 +270,7 @@ namespace MyGame.Modules.CardCollection
                     CardInventoryModule.CollectCard(cardType);
                     recentlyNewCardList.Add(cardType);
 
-                    var albumType = config.GetAlbumType(cardType);
+                    var albumType = GetConfig().GetAlbumType(cardType);
                     if (CardInventoryModule.CheckCompleteAlbum(albumType))
                     {
                         _queueListCompletedAlbum.Enqueue(albumType);
@@ -294,7 +290,7 @@ namespace MyGame.Modules.CardCollection
 
         private void ReceiveRewardAlbum(AlbumType albumType)
         {
-            var reward = config.GetAlbumConfig(albumType).reward;
+            var reward = GetConfig().GetAlbumConfig(albumType).reward;
             MySonatFramework.inventoryService.AddReward(reward, new EarnResourceLogData
             {
                 spendType = "card_collection_complete_album",
@@ -306,7 +302,7 @@ namespace MyGame.Modules.CardCollection
 
         private void ReceiveRewardCardCollection()
         {
-            var reward = config.rewardInSeason;
+            var reward = GetConfig().rewardInSeason;
             MySonatFramework.inventoryService.AddReward(reward, new EarnResourceLogData
             {
                 spendType = "card_collection_complete_collection",

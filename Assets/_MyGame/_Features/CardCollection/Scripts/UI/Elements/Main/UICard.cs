@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
+using SonatFramework.Scripts.Helper;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.UIModule.UIElements;
 using SonatFramework.Systems;
@@ -45,18 +46,15 @@ namespace MyGame.Modules.CardCollection
             this.cardType = cardType;
 
 
-            _cardConfig = _cardCollectionService.Instance.config.GetCardConfig(cardType);
+            _cardConfig = _cardCollectionService.Instance.GetConfig().GetCardConfig(cardType);
             // var albumType = _cardCollectionService.Instance.config.GetAlbumType(cardType);
             // var _albumConfig = _cardCollectionService.Instance.config.GetAlbumConfig(albumType);
             cardImage.SetSpriteAsync(_cardConfig.GetCardSpritePath()).Forget();
 
-            txtMainName.text = _cardConfig.cardName;
-            // txtMainName.GetComponent<I2.Loc.Localize>().SetTerm(_cardConfig.cardName);
+            txtMainName.SetLocalize(_cardConfig.cardName);
             txtMainName.SetMaterial(_cardConfig.GetTextColor());
 
-            txtNameOnBack.text = _cardConfig.cardName;
-
-            // txtNameOnBack.GetComponent<I2.Loc.Localize>().SetTerm(_cardConfig.cardName);
+            txtNameOnBack.SetLocalize(_cardConfig.cardName);
 
             // set star
             starGroup.Setup(_cardConfig.star);
@@ -66,8 +64,8 @@ namespace MyGame.Modules.CardCollection
                 cardParticle.SetData(_cardConfig.star);
             }
 
-            var specialFrame = _cardCollectionService.Instance.config.numStarShowSpecialFrame;
-            var listGoldFrame = _cardCollectionService.Instance.config.listNumStarShowGoldFrame;
+            var specialFrame = _cardCollectionService.Instance.GetConfig().numStarShowSpecialFrame;
+            var listGoldFrame = _cardCollectionService.Instance.GetConfig().listNumStarShowGoldFrame;
             specialPs.SetActive(_cardConfig.star == specialFrame);
             goldFrame.SetActive(listGoldFrame.Contains(_cardConfig.star));
         }

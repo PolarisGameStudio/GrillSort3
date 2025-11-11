@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using I2.Loc;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems;
@@ -12,8 +10,7 @@ namespace MyGame.Modules.QuestEvent.UI.Elements
     {
         [SerializeField] private UITimeCounterQuestEvent timeCounter;
         [SerializeField] private UISliderQuestEvent sliderQuestEvent;
-        [SerializeField] private TMP_Text txtLevelUnlock;
-        // [SerializeField] private LocalizationParamsManager levelUnlockParamsManager;
+        [SerializeField] private LocalizationParamsManager levelUnlockParamsManager;
 
         [Header("Lock")]
         [SerializeField] private GameObject[] lockedObjects;
@@ -37,9 +34,8 @@ namespace MyGame.Modules.QuestEvent.UI.Elements
             }
             else
             {
-                var unlockLevel = _questEventService.Instance.config.unlocklevel;
-                // levelUnlockParamsManager.SetParameterValue("VALUE", $"{unlockLevel}");
-                txtLevelUnlock.text = $"Unlock at level {unlockLevel}";
+                var unlockLevel = _questEventService.Instance.GetConfig().unlockLevel;
+                levelUnlockParamsManager.SetParameterValue("VALUE", $"{unlockLevel}");
             }
         }
 
@@ -63,7 +59,7 @@ namespace MyGame.Modules.QuestEvent.UI.Elements
             }
             else
             {
-                var unlockLevel = _questEventService.Instance.config.unlocklevel;
+                var unlockLevel = _questEventService.Instance.GetConfig().unlockLevel;
                 PopupToast.Cretate($"Unlock at level {unlockLevel}");
             }
         }

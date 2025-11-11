@@ -16,7 +16,7 @@ public class UIAlbumNavigator : MonoBehaviour
     [SerializeField] private UIDetailAlbum[] detailAlbums;
     private readonly Service<CardCollectionService> _cardCollectionService = new();
 
-    private int maxAlbum => _cardCollectionService.Instance.config.albums.Count;
+    private int maxAlbum => _cardCollectionService.Instance.GetConfig().albums.Count;
     private int currentIndex;
     private bool isSetup = false;
 

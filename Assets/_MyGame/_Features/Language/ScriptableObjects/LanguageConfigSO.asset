@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27eae395a49bbfc479e267eddf0dbfa9, type: 3}
+  m_Name: LanguageConfigSO
+  m_EditorClassIdentifier: 
+  listLanguageDatas:
+  - language: 0
+    languageString: English
+    font: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+  - language: 4
+    languageString: "\u65E5\u672C\u8A9E"
+    font: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
+  - language: 3
+    languageString: "\uD55C\uAD6D\uC5B4"
+    font: {fileID: 11400000, guid: b328c42045a2c414684f790785352a80, type: 2}
+  - language: 2
+    languageString: "\u4E2D\u6587"
+    font: {fileID: 11400000, guid: 9a996f35ab1c1ab4e896ee9b87652166, type: 2}
+  - language: 13
+    languageString: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439"
+    font: {fileID: 11400000, guid: 75dd9612f0cec5b46b3f34857baf0498, type: 2}
+  - language: 10
+    languageString: "Fran\xE7ais"
+    font: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+  - language: 5
+    languageString: "Portugu\xEAs"
+    font: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+  - language: 6
+    languageString: "Espa\xF1ol"
+    font: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+  - language: 12
+    languageString: Italiano
+    font: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+  - language: 9
+    languageString: Deutsch
+    font: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+  - language: 8
+    languageString: "T\xFCrk\xE7e"
+    font: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+  - language: 1
+    languageString: "Ti\u1EBFng Vi\u1EC7t"
+    font: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+  - language: 16
+    languageString: "\u0939\u093F\u0928\u094D\u0926\u0940"
+    font: {fileID: 11400000, guid: 4d195ec0346ea1b4bbdc38fb7f476877, type: 2}
+  - language: 14
+    languageString: "\u0E44\u0E17\u0E22"
+    font: {fileID: 11400000, guid: 36fdecb6b9143be4ab50457c90cf69bf, type: 2}
+  - language: 7
+    languageString: Bahasa Indonesia
+    font: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}

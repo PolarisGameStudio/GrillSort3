@@ -1,45 +1,34 @@
-using System;
 using Cysharp.Threading.Tasks;
 using MyGame.SkewerJam.Gameplay;
 using SonatFramework.Scripts.Helper;
-using SonatFramework.Systems;
 using SonatFramework.Systems.EventBus;
 using UnityEngine;
 
 namespace MyGame.Modules
 {
-    public abstract class BaseLockService : SonatServiceSo, IServiceInitialize
+    public abstract class BaseLockService<T> : MyService<T> where T : LockServiceConfigSO
     {
-        [SerializeField] private int orderTutorial = 0;
-        public abstract string DATA_KEY { get; }
-
         private IntDataPref isUnlocked;
 
-        public virtual void Initialize()
+        public override void Initialize()
         {
-            LoadConfig();
-            LoadData();
+            base.Initialize();
 
             new EventBinding<HomeSetupEvent>(OnHomeSetupEvent);
             new EventBinding<HomeProcessEvent>(OnHomeProcessEvent);
         }
 
-        protected virtual void LoadConfig()
+        protected override void LoadConfig()
         {
 
         }
 
-        protected virtual void LoadData()
+        protected override void LoadData()
         {
             isUnlocked = new IntDataPref($"{DATA_KEY}_isUnlocked", 0);
         }
 
-        protected virtual void ResetData()
-        {
-
-        }
-
-        protected virtual void SaveData()
+        protected override void ResetData()
         {
 
         }
@@ -69,7 +58,7 @@ namespace MyGame.Modules
                 HomeManager.Instance.TutorialFeatureManager.AddTutorial(new TutorialFeatureData()
                 {
                     featureName = DATA_KEY,
-                    order = orderTutorial,
+                    order = GetConfig().orderTutorial,
                     action = async () =>
                     {
                         await TryShowTutorial();

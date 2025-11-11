@@ -7,9 +7,10 @@ using UnityEngine;
 namespace MyGame.Modules.QuestEvent
 {
     [CreateAssetMenu(fileName = "QuestEventConfigSO", menuName = "MyGame/SkewerJam/Features/QuestEvent/QuestEventConfigSO")]
-    public class QuestEventConfigSO : ScriptableObject
+    public class QuestEventConfigSO : LockServiceConfigSO
     {
-        public int unlocklevel = 15;
+        [Space(10)]
+        [Header("Config milestones")]
         public List<MilestoneConfig> listMilestones;
 
         public int GetMaxItem(int index)

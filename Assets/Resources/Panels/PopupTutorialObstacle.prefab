@@ -118,8 +118,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4848153371313107739, guid: 182320162e5ae994da85a9735fa80033, type: 3}
       propertyPath: m_text
-      value: New obstacle unlocked!
+      value: "\u0110\xE3 m\u1EDF kh\xF3a v\u1EADt ph\u1EA9m t\u0103ng c\u01B0\u1EDDng
+        m\u1EDBi!"
       objectReference: {fileID: 0}
+    - target: {fileID: 4848153371313107739, guid: 182320162e5ae994da85a9735fa80033, type: 3}
+      propertyPath: m_fontSize
+      value: 59.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4848153371313107739, guid: 182320162e5ae994da85a9735fa80033, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+    - target: {fileID: 4848153371313107739, guid: 182320162e5ae994da85a9735fa80033, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 77048ad586e137a40b98b1f9be571abd, type: 2}
     - target: {fileID: 5774354934344979602, guid: 182320162e5ae994da85a9735fa80033, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -128,6 +141,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnClickClose
       objectReference: {fileID: 0}
+    - target: {fileID: 6204064719346989471, guid: 182320162e5ae994da85a9735fa80033, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 7b855a6abbecf8946bf36854d1b99209, type: 2}
+    - target: {fileID: 7926056400983687701, guid: 182320162e5ae994da85a9735fa80033, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8406705152610806135, guid: 182320162e5ae994da85a9735fa80033, type: 3}
+      propertyPath: m_text
+      value: "Ch\u1EA1m \u0111\u1EC3 ti\u1EBFp t\u1EE5c"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8406705152610806135, guid: 182320162e5ae994da85a9735fa80033, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 7b855a6abbecf8946bf36854d1b99209, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

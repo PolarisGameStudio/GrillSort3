@@ -169,7 +169,7 @@ namespace MyGame.Modules.QuestEvent.UI
                 case State.Locked:
                     bg.sprite = spriteBgNormal;
 
-                    var rewardDataLocked = _questEventService.Instance.config.listMilestones[_index].rewardData;
+                    var rewardDataLocked = _questEventService.Instance.GetConfig().listMilestones[_index].rewardData;
                     ShowReward(true, rewardDataLocked);
 
                     imgFill.DOKill();
@@ -180,7 +180,7 @@ namespace MyGame.Modules.QuestEvent.UI
                 case State.Claim:
                     bg.sprite = spriteBgCurrent;
 
-                    var rewardData = _questEventService.Instance.config.listMilestones[_index].rewardData;
+                    var rewardData = _questEventService.Instance.GetConfig().listMilestones[_index].rewardData;
                     ShowReward(true, rewardData);
 
                     imgFill.DOKill();
