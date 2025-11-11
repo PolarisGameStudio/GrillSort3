@@ -1,6 +1,7 @@
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Scripts.SO.UIConfig;
 using Sonat.Enums;
+using SonatFramework.Scripts.Helper;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Systems;
 using SonatFramework.Systems.BoosterManagement;
@@ -22,8 +23,8 @@ public class PopupBuyBooster : PopupBuyBoosterBase
         var popupBuyBoosterConfigSO = boosterService.Instance.BoostersConfig.popupBuyBoosterConfigSO;
         var (title, description) = popupBuyBoosterConfigSO.GetBoosterConfig(boosterConfig.booster);
 
-        txtName.text = title;
-        txtDescription.text = description;
+        txtName.SetLocalize(title);
+        txtDescription.SetLocalize(description);
 
         // switch (boosterConfig.booster)
         // {

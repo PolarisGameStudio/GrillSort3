@@ -1,3 +1,4 @@
+using SonatFramework.Scripts.Helper;
 using TMPro;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace MyGame.SkewerJam.Utils
         {
             foreach (var text in texts)
             {
-                text.text = content;
+                text.SetLocalize(content);
             }
         }
     }

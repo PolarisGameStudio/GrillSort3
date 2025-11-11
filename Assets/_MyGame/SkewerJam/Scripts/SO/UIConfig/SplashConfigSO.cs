@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MyGame.SkewerJam.UI.Loading
 {
-    [CreateAssetMenu(fileName = "SplashConfigSO", menuName = "MyGame/SkewerJam/Loading/SplashConfigSO")]
+    [CreateAssetMenu(fileName = "SplashConfig", menuName = "MyGame/SkewerJam/Loading/SplashConfigSO")]
     public class SplashConfigSO : ScriptableObject
     {
         [Header("Slider")]

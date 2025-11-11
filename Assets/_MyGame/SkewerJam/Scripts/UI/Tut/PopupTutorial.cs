@@ -2,6 +2,7 @@ using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Utils;
 using Sonat.AdsModule;
 using Sonat.Enums;
+using SonatFramework.Scripts.Helper;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.UIModule.UIElements;
 using SonatFramework.Scripts.Utils;
@@ -41,7 +42,7 @@ public abstract class PopupTutorial : Panel
             }
             for (int i = 0; i < txtDescription.Length; i++)
             {
-                txtDescription[i].text = descriptions[i];
+                txtDescription[i].SetLocalize(descriptions[i]);
             }
         }
 

@@ -21,11 +21,11 @@ MonoBehaviour:
       TermType: 0
       Description: 
       Languages:
-      - 0123456789.,!?:&%/
-      - 0123456789.,!?:&%/
-      - 0123456789.,!?:&%/
-      - 0123456789.,!?:&%/
-      - 0123456789.,!?:&%/
+      - 0123456789.,!?:&%/+x
+      - 0123456789.,!?:&%/+x
+      - 0123456789.,!?:&%/+x
+      - 0123456789.,!?:&%/+x
+      - 0123456789.,!?:&%/+x
       Flags: 0000000000
       Languages_Touch: []
     - Term: 1FTVVIPMikado-Black SDF
@@ -302,6 +302,17 @@ MonoBehaviour:
       - "\u6DFB\u52A0\u4E00\u4E2A\u76D8\u5B50\uFF01"
       - "\uC811\uC2DC \uD558\uB098 \uCD94\uAC00!"
       - "\u76BF\u30921\u679A\u8FFD\u52A0\uFF01"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Are You Sure!
+      TermType: 0
+      Description: 
+      Languages:
+      - Are You Sure!
+      - "B\u1EA1n c\xF3 ch\u1EAFc kh\xF4ng!"
+      - "\u4F60\u786E\u5B9A\u5417\uFF01"
+      - "\uC815\uB9D0\uB85C \uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C!"
+      - "\u672C\u5F53\u306B\u3088\u308D\u3057\u3044\u3067\u3059\u304B\uFF01"
       Flags: 0000000000
       Languages_Touch: []
     - Term: Bacon
@@ -1497,6 +1508,17 @@ MonoBehaviour:
       - "\u30D7\u30E9\u30A4\u30D0\u30B7\u30FC\u30DD\u30EA\u30B7\u30FC"
       Flags: 0000000000
       Languages_Touch: []
+    - Term: Quit
+      TermType: 0
+      Description: 
+      Languages:
+      - Quit
+      - "Tho\xE1t"
+      - "\u9000\u51FA"
+      - "\uB098\uAC00\uAE30"
+      - "\u7D42\u4E86"
+      Flags: 0000000000
+      Languages_Touch: []
     - Term: Rate
       TermType: 0
       Description: 
@@ -2226,6 +2248,17 @@ MonoBehaviour:
       - "\u3059\u3067\u306B\u5831\u916C\u3092\u53D7\u3051\u53D6\u308A\u307E\u3057\u305F"
       Flags: 0000000000
       Languages_Touch: []
+    - Term: You will lose a life!
+      TermType: 0
+      Description: 
+      Languages:
+      - You will lose a life!
+      - "B\u1EA1n s\u1EBD m\u1EA5t m\u1ED9t m\u1EA1ng!"
+      - "\u4F60\u4F1A\u5931\u53BB\u4E00\u6761\u547D\uFF01"
+      - "\uC0DD\uBA85\uC744 \uC783\uAC8C \uB429\uB2C8\uB2E4!"
+      - "\u30E9\u30A4\u30D5\u3092\u5931\u3044\u307E\u3059\uFF01"
+      Flags: 0000000000
+      Languages_Touch: []
     - Term: 'You''ll miss out on:'
       TermType: 0
       Description: 
@@ -2235,6 +2268,28 @@ MonoBehaviour:
       - "\u4F60\u5C06\u9519\u8FC7\uFF1A"
       - "\uB193\uCE58\uAC8C \uB429\uB2C8\uB2E4:"
       - "\u898B\u9003\u3057\u307E\u3059\uFF1A"
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Show your love by giving 5 Stars !
+      TermType: 0
+      Description: 
+      Languages:
+      - 
+      - 
+      - 
+      - 
+      - 
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Show your love by giving 5 Stars!
+      TermType: 0
+      Description: 
+      Languages:
+      - 
+      - 
+      - 
+      - 
+      - 
       Flags: 0000000000
       Languages_Touch: []
     CaseInsensitiveTerms: 0
@@ -2352,7 +2407,7 @@ MonoBehaviour:
     - {fileID: 2100000, guid: 25c8a557b3095b746b9f1324b4b39fd9, type: 2}
     - {fileID: 2100000, guid: 759f361155a808d42abdcdaccb004472, type: 2}
     - {fileID: 2100000, guid: f783fc7cf6e9b9f42b198260d660a916, type: 2}
-    Spreadsheet_LocalFileName: C:/Users/ADMIN/Documents/GameSonat2025/ThisIsBlast/GrillSort3/Localization/LocalizationBackup.csv
+    Spreadsheet_LocalFileName: C:/Users/ADMIN/Documents/GameSonat2025/ThisIsBlast/GrillSort3/Localization/LocalizationExport.csv
     Spreadsheet_LocalCSVSeparator: ','
     Spreadsheet_LocalCSVEncoding: utf-8
     Spreadsheet_SpecializationAsRows: 1
