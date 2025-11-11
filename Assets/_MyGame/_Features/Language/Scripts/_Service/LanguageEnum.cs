@@ -13,11 +13,11 @@ namespace MyGame.Modules.Language
         Turkish,
         German,
         French,
-        Pilipino,
-        Italiano,
+        Pilipino,//
+        Italian,
         Russian,
         Thai,
-        Arabic,
+        Arabic,//
         Hindi,
     };
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 
 namespace MyGame.Modules.Language
@@ -31,5 +32,8 @@ namespace MyGame.Modules.Language
     {
         [GUIColor(0, 1, 0)]
         public ELanguage language;
+        public string languageString;
+        public TMP_FontAsset font;
+        // public Material material;
     }
 }

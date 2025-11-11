@@ -475,10 +475,12 @@ MonoBehaviour:
       - "F\xFCge <color=#1AA41D>1 Tablett</color> zum Fortfahren hinzu!"
       - "Ajoutez <color=#1AA41D>1 plateau</color> pour continuer\_!"
       - Aggiungi <color=#1AA41D>1 vassoio</color> per continuare!
-      - "\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 <color=#1AA41D>1 \u043F\u043E\u0434\u043D\u043E\u0441</color>"
-      - " \u0447\u0442\u043E\u0431\u044B \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C!"
+      - "\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 <color=#1AA41D>1 \u043F\u043E\u0434\u043D\u043E\u0441</color>,
+        \u0447\u0442\u043E\u0431\u044B \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C!"
       - "\u0E40\u0E1E\u0E34\u0E48\u0E21 <color=#1AA41D>1 \u0E16\u0E32\u0E14</color>
         \u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E14\u0E33\u0E40\u0E19\u0E34\u0E19\u0E01\u0E32\u0E23\u0E15\u0E48\u0E2D!"
+      - "<color=#1AA41D>1 \u091F\u094D\u0930\u0947</color> \u091C\u094B\u0921\u093C\u0947\u0902
+        \u091C\u093E\u0930\u0940 \u0930\u0916\u0928\u0947 \u0915\u0947 \u0932\u093F\u090F!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Add Plate!
@@ -704,14 +706,14 @@ MonoBehaviour:
       - "\u30AB\u30FC\u30C9\u30B3\u30EC\u30AF\u30B7\u30E7\u30F3"
       - "Cole\xE7\xE3o de cartas"
       - "Colecci\xF3n de cartas"
+      - Colezione carte
       - Koleksi Kartu
       - Kart Koleksiyonu
-      - "Kart Koleksiyas\u0131"
       - Kartensammlung
       - Collection de cartes
-      - Collezione carte
       - "\u041A\u043E\u043B\u043B\u0435\u043A\u0446\u0438\u044F \u043A\u0430\u0440\u0442"
       - "\u0E01\u0E32\u0E23\u0E4C\u0E14\u0E2A\u0E30\u0E2A\u0E21"
+      - "\u0915\u093E\u0930\u094D\u0921 \u0938\u0902\u0917\u094D\u0930\u0939"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Card Star
@@ -725,11 +727,11 @@ MonoBehaviour:
       - "\u30AB\u30FC\u30C9\u30B9\u30BF\u30FC"
       - "Estrela do Cart\xE3o"
       - Estrella de Carta
+      - Stella della Carta
       - Kartu Bintang
       - "Kart Y\u0131ld\u0131z\u0131"
       - Kartenstern
       - "\xC9toile de Carte"
-      - Stella della Carta
       - "\u0417\u0432\u0435\u0437\u0434\u0430 \u043A\u0430\u0440\u0442\u044B"
       - "\u0E2A\u0E15\u0E32\u0E23\u0E4C\u0E01\u0E32\u0E23\u0E4C\u0E14"
       - "\u0915\u093E\u0930\u094D\u0921 \u0938\u094D\u091F\u093E\u0930"
@@ -746,11 +748,11 @@ MonoBehaviour:
       - "\u30C1\u30AD\u30F3"
       - Frango
       - Pollo
+      - Pollo
       - Ayam
       - Tavuk
       - "H\xE4hnchen"
       - Poulet
-      - Pollo
       - "\u041A\u0443\u0440\u0438\u0446\u0430"
       - "\u0E44\u0E01\u0E48"
       - "\u091A\u093F\u0915\u0928"
@@ -767,11 +769,11 @@ MonoBehaviour:
       - "\u4E2D\u56FD\u8A9E"
       - "Chin\xEAs"
       - Chino
+      - Cinese
       - Cina
       - "\xC7ince"
       - Chinesisch
       - Chinois
-      - Cinese
       - "\u041A\u0438\u0442\u0430\u0439\u0441\u043A\u0438\u0439"
       - "\u0E08\u0E35\u0E19"
       - "\u091A\u0940\u0928\u0940"
@@ -788,11 +790,11 @@ MonoBehaviour:
       - "\u30C1\u30E7\u30B3\u30EC\u30FC\u30C8"
       - Chocolate
       - Chocolate
+      - Cioccolato
       - Cokelat
       - "\xC7ikolata"
       - Schokolade
       - Chocolat
-      - Cioccolato
       - "\u0428\u043E\u043A\u043E\u043B\u0430\u0434"
       - "\u0E0A\u0E47\u0E2D\u0E01\u0E42\u0E01\u0E41\u0E25\u0E15"
       - "\u091A\u0949\u0915\u0932\u0947\u091F"
@@ -809,11 +811,11 @@ MonoBehaviour:
       - "\u53D7\u3051\u53D6\u308B"
       - Resgatar
       - Reclamar
+      - Riscatta
       - Klaim
       - Talep Et
       - Beanspruchen
       - "R\xE9clamer"
-      - Riscatta
       - "\u041F\u043E\u043B\u0443\u0447\u0438\u0442\u044C"
       - "\u0E23\u0E31\u0E1A\u0E2A\u0E34\u0E17\u0E18\u0E34\u0E4C"
       - "\u0915\u094D\u0932\u0947\u092E \u0915\u0930\u0947\u0902"
@@ -830,11 +832,11 @@ MonoBehaviour:
       - "\u3059\u3079\u3066\u306E\u76BF\u3092\u30AF\u30EA\u30A2\uFF01"
       - Limpar todos os pratos!
       - "\xA1Limpiar todos los platos!"
+      - Svuota tutti i piatti!
       - Bersihkan semua piring!
       - "T\xFCm tabaklar\u0131 temizle!"
       - Alle Teller leeren!
       - Effacer toutes les assiettes!
-      - Svuota tutti i piatti!
       - "\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u044C \u0432\u0441\u0435 \u0442\u0430\u0440\u0435\u043B\u043A\u0438!"
       - "\u0E40\u0E04\u0E25\u0E35\u0E22\u0E23\u0E4C\u0E08\u0E32\u0E19\u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14!"
       - "\u0938\u092D\u0940 \u092A\u094D\u0932\u0947\u091F \u0938\u093E\u092B\u093C
@@ -852,11 +854,11 @@ MonoBehaviour:
       - "\u30B3\u30B3\u30A2"
       - Cacau
       - Cacao
-      - Kakao
-      - Kakao
-      - Kakao
-      - Kakao
       - Cacao
+      - Kakao
+      - Kakao
+      - Kakao
+      - Kakao
       - "\u041A\u0430\u043A\u0430\u043E"
       - "\u0E42\u0E01\u0E42\u0E01\u0E49"
       - "\u0915\u094B\u0915\u094B\u0906"
@@ -873,11 +875,11 @@ MonoBehaviour:
       - "\u30B3\u30B3\u30CA\u30C3\u30C4"
       - Coco
       - Coco
+      - Cocco
       - Kelapa
       - Hindistancevizi
       - Kokosnuss
       - Noix de coco
-      - Cocco
       - "\u041A\u043E\u043A\u043E\u0441"
       - "\u0E21\u0E30\u0E1E\u0E23\u0E49\u0E32\u0E27"
       - "\u0928\u093E\u0930\u093F\u092F\u0932"
@@ -894,11 +896,11 @@ MonoBehaviour:
       - "\u30B3\u30FC\u30D2\u30FC"
       - "Caf\xE9"
       - "Caf\xE9"
+      - "Caff\xE8"
       - Kopi
       - Kahve
       - Kaffee
       - "Caf\xE9"
-      - "Caff\xE8"
       - "\u041A\u043E\u0444\u0435"
       - "\u0E01\u0E32\u0E41\u0E1F"
       - "\u0915\u0949\u092B\u0940"
@@ -917,11 +919,11 @@ MonoBehaviour:
       - "\u7D20\u6674\u3089\u3057\u3044\u30A4\u30D9\u30F3\u30C8\u3084\u5B9D\u7BB1\u304B\u3089\u30AB\u30FC\u30C9\u30D1\u30C3\u30AF\u3092\u96C6\u3081\u3088\u3046\uFF01"
       - "Colete pacotes de cartas de eventos incr\xEDveis e ba\xFAs!"
       - "\xA1Consigue paquetes de cartas de eventos y cofres incre\xEDbles!"
+      - Raccogli pacchetti di carte da eventi fantastici e forzieri!
       - Kumpulkan paket kartu dari acara menakjubkan dan peti!
       - "Harika etkinlikler ve sand\u0131klardan kart paketleri topla!"
       - Sammle Kartenpakete aus tollen Events und Truhen!
       - "Collectez des paquets de cartes lors d'\xE9v\xE9nements et coffres formidables\_!"
-      - Raccogli pacchetti di carte da eventi fantastici e forzieri!
       - "\u0421\u043E\u0431\u0438\u0440\u0430\u0439\u0442\u0435 \u043D\u0430\u0431\u043E\u0440\u044B
         \u043A\u0430\u0440\u0442 \u0441 \u0443\u0434\u0438\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0445
         \u0441\u043E\u0431\u044B\u0442\u0438\u0439 \u0438 \u0441\u0443\u043D\u0434\u0443\u043A\u043E\u0432!"
@@ -940,25 +942,30 @@ MonoBehaviour:
         m\u1EDF v\xE0 nh\u1EADn ph\u1EA7n th\u01B0\u1EDFng!"
       - "\u6536\u96C6<color=#FFE92B>\u91D1\u9E21\u817F</color>\u4EE5\u5F00\u542F\u5E76\u9886\u53D6\u5956\u52B1\uFF01"
       - "<color=#FFE92B>\uD669\uAE08 \uB2ED\uB2E4\uB9AC</color>\uB97C \uBAA8\uC544
-        \uBCF4\uC0C1\uC744 \uBC1B\uC73C\uC138\uC694!"
-      - "<color=#FFE92B>\u9EC4\u91D1\u306E\u30C1\u30AD\u30F3\u30C9\u30E9\u30E0</color>\u3092\u96C6\u3081\u3066\u5831\u916C\u3092\u7372\u5F97\u3057\u3088\u3046\uFF01"
+        \uBCF4\uC0C1\uC744 \uBC1B\uACE0 \uBCF4\uC0C1\uC744 \uBC1B\uC73C\uC138\uC694!"
+      - "<color=#FFE92B>\u91D1\u306E\u30C1\u30AD\u30F3\u30C9\u30E9\u30E0</color>\u3092\u96C6\u3081\u3066\u5831\u916C\u3092\u7372\u5F97\u3057\u3088\u3046\uFF01"
       - Colete <color=#FFE92B>coxas de frango douradas</color> para abrir e resgatar
         recompensas!
       - "\xA1Consigue <color=#FFE92B>muslos de pollo dorados</color> para abrir y
         reclamar recompensas!"
       - Kumpulkan <color=#FFE92B>paha ayam emas</color> untuk membuka dan klaim hadiah!
-      - "<color=#FFE92B>Alt\u0131n tavuk butlar\u0131</color> topla ve \xF6d\xFCller
-        kazan!"
-      - "Sammle <color=#FFE92B>goldene H\xE4hnchenschenkel</color>"
-      - ' um Belohnungen zu erhalten!'
+      - "<color=#FFE92B>Alt\u0131n tavuk butlar\u0131</color> topla ve \xF6d\xFClleri
+        al!"
+      - "Sammle <color=#FFE92B>goldene H\xE4hnchenschenkel</color>, um Belohnungen
+        zu erhalten!"
       - "Collectez des <color=#FFE92B>cuisses de poulet dor\xE9es</color> pour ouvrir
         et r\xE9clamer des r\xE9compenses\_!"
-      - Raccogli <color=#FFE92B>cosce di pollo d'oro</color> per sbloccare e riscattare
+      - Raccogli <color=#FFE92B>cosce di pollo dorate</color> per sbloccare e riscattare
         ricompense!
-      - "\u0421\u043E\u0431\u0438\u0440\u0430\u0439\u0442\u0435 <color=#FFE92B>\u0437\u043E\u043B\u043E\u0442\u044B\u0435
-        \u043A\u0443\u0440\u0438\u043D\u044B\u0435 \u043D\u043E\u0436\u043A\u0438</color>"
-      - " \u0447\u0442\u043E\u0431\u044B \u043F\u043E\u043B\u0443\u0447\u0430\u0442\u044C
+      - "\u041F\u043E\u043B\u0443\u0447\u0430\u0439\u0442\u0435 <color=#FFE92B>\u0437\u043E\u043B\u043E\u0442\u044B\u0435
+        \u043A\u0443\u0440\u0438\u043D\u044B\u0435 \u043D\u043E\u0436\u043A\u0438</color>,
+        \u0447\u0442\u043E\u0431\u044B \u043F\u043E\u043B\u0443\u0447\u0430\u0442\u044C
         \u043D\u0430\u0433\u0440\u0430\u0434\u044B!"
+      - "\u0E40\u0E01\u0E47\u0E1A <color=#FFE92B>\u0E19\u0E48\u0E2D\u0E07\u0E44\u0E01\u0E48\u0E17\u0E2D\u0E07\u0E04\u0E33</color>
+        \u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E40\u0E1B\u0E34\u0E14\u0E41\u0E25\u0E30\u0E23\u0E31\u0E1A\u0E23\u0E32\u0E07\u0E27\u0E31\u0E25!"
+      - "<color=#FFE92B>\u0917\u094B\u0932\u094D\u0921\u0928 \u091A\u093F\u0915\u0928
+        \u0925\u0947\u0908\u091C</color> \u091C\u092E\u093E \u0915\u0930\u0947\u0902
+        \u0914\u0930 \u0907\u0928\u093E\u092E \u092A\u093E\u090F\u0902!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Collection
@@ -1009,27 +1016,33 @@ MonoBehaviour:
       Languages:
       - Complete all sets to claim collection rewards and Grill Badge!
       - "Ho\xE0n th\xE0nh t\u1EA5t c\u1EA3 b\u1ED9 s\u01B0u t\u1EADp \u0111\u1EC3
-        nh\u1EADn th\u01B0\u1EDFng v\xE0 Huy hi\u1EC7u N\u01B0\u1EDBng!"
-      - "\u5B8C\u6210\u6240\u6709\u5957\u88C5\u4EE5\u9886\u53D6\u6536\u85CF\u5956\u52B1\u548C\u70E4\u67B6\u5FBD\u7AE0\uFF01"
-      - "\uBAA8\uB4E0 \uC138\uD2B8\uB97C \uC644\uB8CC\uD558\uACE0 \uCEEC\uB809\uC158
-        \uBCF4\uC0C1\uACFC \uADF8\uB9B4 \uBC30\uC9C0\uB97C \uBC1B\uC73C\uC138\uC694!"
+        nh\u1EADn ph\u1EA7n th\u01B0\u1EDFng v\xE0 Huy hi\u1EC7u N\u01B0\u1EDBng!"
+      - "\u5B8C\u6210\u6240\u6709\u5957\u88C5\u4EE5\u9886\u53D6\u6536\u85CF\u5956\u52B1\u548CGrill\u5FBD\u7AE0\uFF01"
+      - "\uBAA8\uB4E0 \uC138\uD2B8\uB97C \uC644\uC131\uD558\uC5EC \uC218\uC9D1 \uBCF4\uC0C1
+        \uBC0F \uADF8\uB9B4 \uBC30\uC9C0\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
       - "\u3059\u3079\u3066\u306E\u30BB\u30C3\u30C8\u3092\u5B8C\u6210\u3055\u305B\u3066\u30B3\u30EC\u30AF\u30B7\u30E7\u30F3\u5831\u916C\u3068\u30B0\u30EA\u30EB\u30D0\u30C3\u30B8\u3092\u624B\u306B\u5165\u308C\u3088\u3046\uFF01"
-      - "Complete todos os conjuntos para ganhar pr\xEAmios de cole\xE7\xE3o e Distintivo
-        da Churrasqueira!"
+      - "Complete todos os conjuntos para receber recompensas de cole\xE7\xE3o e
+        o Distintivo da Grelha!"
       - "\xA1Completa todos los sets para reclamar las recompensas de colecci\xF3n
         y la Insignia de la Parrilla!"
-      - Lengkapi semua set untuk klaim hadiah koleksi dan Lencana Pemanggang!
-      - "T\xFCm setleri tamamla ve koleksiyon \xF6d\xFClleri ile Izgara Rozetini
-        al!"
-      - "Schlie\xDFe alle Sets ab"
-      - ' um Sammlungsbelohnungen und den Grillabzeichen zu erhalten!'
-      - "Compl\xE9tez tous les ensembles pour collecter les r\xE9compenses et l'insigne
-        Grill\_!"
-      - Completa tutti i set per ricevere premi e il distintivo della Griglia!
-      - "\u0421\u043E\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0441\u0435 \u043D\u0430\u0431\u043E\u0440\u044B"
-      - " \u0447\u0442\u043E\u0431\u044B \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C
-        \u043F\u0440\u0438\u0437\u044B \u043A\u043E\u043B\u043B\u0435\u043A\u0446\u0438\u0438
-        \u0438 \u0437\u043D\u0430\u0447\u043E\u043A \u0433\u0440\u0438\u043B\u044F!"
+      - "Completa todos os conjuntos para obter recompensas de cole\xE7\xE3o e o
+        Distintivo da Grelha!"
+      - "\xA1Completa todos los sets para reclamar recompensas de colecci\xF3n y
+        la Insignia de la Parrilla!"
+      - "Schlie\xDFe alle Sets ab, um Sammlungsbelohnungen und das Grillabzeichen
+        zu erhalten!"
+      - "Compl\xE9tez tous les ensembles pour obtenir les r\xE9compenses de collection
+        et le Badge Grill!"
+      - Completa tutti i set per ottenere premi collezione e il Distintivo Grill!
+      - "\u0421\u043E\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0441\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u044B,
+        \u0447\u0442\u043E\u0431\u044B \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C
+        \u043D\u0430\u0433\u0440\u0430\u0434\u044B \u043A\u043E\u043B\u043B\u0435\u043A\u0446\u0438\u0438
+        \u0438 \u0437\u043D\u0430\u0447\u043E\u043A \u0413\u0440\u0438\u043B\u044C!"
+      - "\u0E17\u0E33\u0E0A\u0E38\u0E14\u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14\u0E43\u0E2B\u0E49\u0E04\u0E23\u0E1A\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E23\u0E31\u0E1A\u0E23\u0E32\u0E07\u0E27\u0E31\u0E25\u0E2A\u0E30\u0E2A\u0E21\u0E41\u0E25\u0E30\u0E15\u0E23\u0E32\u0E40\u0E15\u0E32\u0E22\u0E48\u0E32\u0E07!"
+      - "\u0938\u092D\u0940 \u0938\u0947\u091F \u092A\u0942\u0930\u0947 \u0915\u0930\u0947\u0902
+        \u0914\u0930 \u0915\u0932\u0947\u0915\u094D\u0936\u0928 \u0930\u093F\u0935\u0949\u0930\u094D\u0921\u094D\u0938
+        \u0924\u0925\u093E \u0917\u094D\u0930\u093F\u0932 \u092C\u0948\u091C \u092A\u094D\u0930\u093E\u092A\u094D\u0924
+        \u0915\u0930\u0947\u0902!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Continue
@@ -1107,7 +1120,7 @@ MonoBehaviour:
       - "\uC694\uB9AC"
       - "\u6599\u7406"
       - Cozinhando
-      - Cocinar
+      - Cocinando
       - Memasak
       - "Pi\u015Firme"
       - Kochen
@@ -1128,8 +1141,8 @@ MonoBehaviour:
       - "\uB0C4\uBE44"
       - "\u934B"
       - Panela
-      - Pote
-      - Mangkuk Masak
+      - Olla
+      - Panci Masak
       - "Pi\u015Firme Tenceresi"
       - Kochtopf
       - Casserole
@@ -1190,16 +1203,16 @@ MonoBehaviour:
       - "\u9910\u5177"
       - "\uC2DD\uAE30"
       - "\u30AB\u30C8\u30E9\u30EA\u30FC"
-      - Couverts
-      - Cubiertos
       - Talheres
-      - Bestek
-      - "\u041F\u0440\u0438\u0431\u043E\u0440\u044B"
-      - Vajilla
+      - Cubiertos
+      - Peralatan Makan
       - "\xC7atal b\u0131\xE7ak tak\u0131m\u0131"
-      - Priborlar
-      - "\u0641\u064E\u0636\u0650\u0651\u064A\u064E\u0651\u0629 \u0627\u0644\u0645\u0627\u0626\u062F\u0629"
-      - "\xC7atal-b\u0131\xE7ak"
+      - Besteck
+      - Couverts
+      - Posate
+      - "\u0421\u0442\u043E\u043B\u043E\u0432\u044B\u0435 \u043F\u0440\u0438\u0431\u043E\u0440\u044B"
+      - "\u0E0A\u0E49\u0E2D\u0E19\u0E2A\u0E49\u0E2D\u0E21"
+      - "\u0915\u091F\u0932\u0930\u0940"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Dinner
@@ -1211,15 +1224,15 @@ MonoBehaviour:
       - "\u665A\u9910"
       - "\uC800\uB141"
       - "\u30C7\u30A3\u30CA\u30FC"
+      - Jantar
+      - Cena
+      - Makan malam
+      - "Ak\u015Fam yeme\u011Fi"
+      - Abendessen
       - "D\xEEner"
       - Cena
-      - Jantar
-      - Dinner
       - "\u0423\u0436\u0438\u043D"
-      - Cena
-      - "Ak\u015Fam yeme\u011Fi"
-      - "Ak\u015Fam yeme\u011Fi"
-      - "\u0639\u0634\u0627\u0621"
+      - "\u0E2D\u0E32\u0E2B\u0E32\u0E23\u0E40\u0E22\u0E47\u0E19"
       - "\u0921\u093F\u0928\u0930"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
@@ -1232,15 +1245,15 @@ MonoBehaviour:
       - "\u996E\u6599"
       - "\uC74C\uB8CC"
       - "\u30C9\u30EA\u30F3\u30AF"
-      - Boissons
       - Bebidas
       - Bebidas
-      - Drankjes
-      - "\u041D\u0430\u043F\u0438\u0442\u043A\u0438"
       - Minuman
       - "\u0130\xE7ecekler"
-      - Minuman
-      - "\u0645\u0634\u0631\u0648\u0628\u0627\u062A"
+      - "Getr\xE4nke"
+      - Boissons
+      - Bevande
+      - "\u041D\u0430\u043F\u0438\u0442\u043A\u0438"
+      - "\u0E40\u0E04\u0E23\u0E37\u0E48\u0E2D\u0E07\u0E14\u0E37\u0E48\u0E21"
       - "\u092A\u0947\u092F \u092A\u0926\u093E\u0930\u094D\u0925"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
@@ -1252,18 +1265,17 @@ MonoBehaviour:
       - "Nh\u1EADn ph\u1EA7n th\u01B0\u1EDFng h\u1EA5p d\u1EABn"
       - "\u8D62\u53D6\u7CBE\u5F69\u5956\u52B1"
       - "\uBA4B\uC9C4 \uBCF4\uC0C1\uC744 \uBC1B\uC73C\uC138\uC694"
-      - "\u7D20\u6674\u3089\u3057\u3044\u5831\u916C\u3092\u7372\u5F97\u3057\u3088\u3046"
-      - "Gagnez des r\xE9compenses g\xE9niales"
+      - "\u7D20\u6674\u3089\u3057\u3044\u5831\u916C\u3092\u7372\u5F97\u3057\u3088\u3046\uFF01"
+      - "Obtenez des r\xE9compenses g\xE9niales"
       - "Gana incre\xEDbles recompensas"
-      - "Receba recompensas incr\xEDveis"
-      - Ontvang geweldige beloningen
-      - "\u041F\u043E\u043B\u0443\u0447\u0438\u0442\u0435 \u043F\u043E\u0442\u0440\u044F\u0441\u0430\u044E\u0449\u0438\u0435
-        \u043D\u0430\u0433\u0440\u0430\u0434\u044B"
+      - "Ganhe recompensas incr\xEDveis"
       - Dapatkan hadiah menakjubkan
       - "Harika \xF6d\xFCller kazan\u0131n"
-      - "Crazy m\xFCkafatlar qazan\u0131n"
-      - "\u0627\u062D\u0635\u0644 \u0639\u0644\u0649 \u0645\u0643\u0627\u0641\u0622\u062A
-        \u0631\u0627\u0626\u0639\u0629"
+      - Erhalte tolle Belohnungen
+      - Ottieni ricompense fantastiche
+      - "\u041F\u043E\u043B\u0443\u0447\u0438\u0442\u0435 \u043F\u043E\u0442\u0440\u044F\u0441\u0430\u044E\u0449\u0438\u0435
+        \u043D\u0430\u0433\u0440\u0430\u0434\u044B"
+      - "\u0E23\u0E31\u0E1A\u0E23\u0E32\u0E07\u0E27\u0E31\u0E25\u0E40\u0E08\u0E4B\u0E07\u0E46"
       - "\u0936\u093E\u0928\u0926\u093E\u0930 \u092A\u0941\u0930\u0938\u094D\u0915\u093E\u0930
         \u0905\u0930\u094D\u091C\u093F\u0924 \u0915\u0930\u0947\u0902"
       Flags: 000000000000000000000000000000
@@ -1275,19 +1287,17 @@ MonoBehaviour:
       - Eliminate Octochef immediately!
       - "Lo\u1EA1i b\u1ECF Octochef ngay l\u1EADp t\u1EE9c!"
       - "\u7ACB\u5373\u6D88\u706D\u7AE0\u9C7C\u53A8\u5E08\uFF01"
-      - "\uC989\uC2DC \uC625\uD1A0\uC170\uD504 \uC81C\uAC70!"
-      - "\u4ECA\u3059\u3050\u30AA\u30AF\u30C8\u30B7\u30A7\u30D5\u3092\u5012\u305D\u3046\uFF01"
-      - "\xC9liminez Octochef imm\xE9diatement !"
-      - "\xA1Elimina a Octochef de inmediato!"
+      - "\uC989\uC2DC Octochef\uB97C \uC81C\uAC70\uD558\uC138\uC694!"
+      - "\u4ECA\u3059\u3050Octochef\u3092\u5012\u305D\u3046\uFF01"
       - Elimine Octochef imediatamente!
-      - Octochef onmiddellijk uitschakelen!
-      - "\u0423\u0441\u0442\u0440\u0430\u043D\u0438\u0442\u0435 \u041E\u043A\u0442\u043E\u0447\u0435\u0444\u0430
-        \u043D\u0435\u043C\u0435\u0434\u043B\u0435\u043D\u043D\u043E!"
+      - "\xA1Elimina a Octochef de inmediato!"
       - Segera singkirkan Octochef!
-      - "Octochef'i hemen ortadan kald\u0131r\u0131n!"
-      - "Octochef'i d\u0259rhal l\u0259\u011Fv edin!"
-      - "\u0627\u0642\u0636\u0650 \u0639\u0644\u0649 \u0623\u062E\u0637\u0628\u0648\u0637
-        \u0627\u0644\u0637\u0627\u0647\u064A \u0641\u0648\u0631\u064B\u0627!"
+      - "Hemen Octochef'i ortadan kald\u0131r\u0131n!"
+      - Eliminiert Octochef sofort!
+      - "\xC9liminez Octochef imm\xE9diatement !"
+      - Elimina immediatamente Octochef!
+      - "\u0423\u0441\u0442\u0440\u0430\u043D\u0438\u0442\u0435 Octochef \u043D\u0435\u043C\u0435\u0434\u043B\u0435\u043D\u043D\u043E!"
+      - "\u0E01\u0E33\u0E08\u0E31\u0E14 Octochef \u0E17\u0E31\u0E19\u0E17\u0E35!"
       - "\u0911\u0915\u094D\u091F\u094B\u0936\u0947\u092B \u0915\u094B \u0924\u0941\u0930\u0902\u0924
         \u0938\u092E\u093E\u092A\u094D\u0924 \u0915\u0930\u0947\u0902!"
       Flags: 000000000000000000000000000000
@@ -1301,41 +1311,45 @@ MonoBehaviour:
       - "\u82F1\u8BED"
       - "\uC601\uC5B4"
       - "\u82F1\u8A9E"
-      - Anglais
-      - "Ingl\xE9s"
       - "Ingl\xEAs"
-      - Engels
-      - "\u0410\u043D\u0433\u043B\u0438\u0439\u0441\u043A\u0438\u0439"
-      - Inggris
+      - "Ingl\xE9s"
+      - Bahasa Inggris
       - "\u0130ngilizce"
-      - "\u0130ngilis dili"
-      - "\u0627\u0644\u0625\u0646\u062C\u0644\u064A\u0632\u064A\u0629"
+      - Englisch
+      - Anglais
+      - Inglese
+      - "\u0410\u043D\u0433\u043B\u0438\u0439\u0441\u043A\u0438\u0439"
+      - "\u0E2D\u0E31\u0E07\u0E01\u0E24\u0E29"
       - "\u0905\u0902\u0917\u094D\u0930\u0947\u091C\u093C\u0940"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
-    - Term: Fail to sort items within 2 moves, the ice will grow thinker!
+    - Term: Fail to sort items within 2 moves, the ice will grow thicker!
       TermType: 0
       Description: 
       Languages:
-      - Fail to sort items within 2 moves, the ice will grow thinker!
+      - Fail to sort items within 2 moves, the ice will grow thicker!
       - "Kh\xF4ng s\u1EAFp x\u1EBFp trong 2 l\u01B0\u1EE3t, b\u0103ng s\u1EBD d\xE0y
         th\xEAm!"
       - "2\u6B65\u5185\u672A\u6392\u5E8F\uFF0C\u51B0\u5C42\u4F1A\u53D8\u539A\uFF01"
       - "2\uD134 \uC548\uC5D0 \uC815\uB9AC\uD558\uC9C0 \uC54A\uC73C\uBA74 \uC5BC\uC74C\uC774
         \uB450\uAEBC\uC6CC\uC9D1\uB2C8\uB2E4!"
       - "2\u624B\u4EE5\u5185\u306B\u4E26\u3079\u306A\u3044\u3068\u6C37\u304C\u539A\u304F\u306A\u308A\u307E\u3059\uFF01"
-      - "\xC9chouez \xE0 trier les objets en 2 fois"
-      - " la glace \xE9paissira\uFF01"
-      - "No ordenar los elementos en 2 movimientos har\xE1 que el hielo se engrose"
-      - "N\xE3o organize os itens em 2 movimentos"
-      - " o gelo ficar\xE1 mais espesso"
-      - Als je items niet binnen 2 beurten sorteert
-      - ' wordt het ijs dikker'
+      - "Falha ao ordenar os itens em 2 jogadas, o gelo ficar\xE1 mais grosso!"
+      - "\xA1Si no organizas los objetos en 2 jugadas, el hielo ser\xE1 m\xE1s grueso!"
+      - Jika tidak mengurutkan item dalam 2 langkah, es akan menjadi lebih tebal!
+      - "D\xFCzenleme yapmazsan\u0131z 2 hamlede buz daha da kal\u0131nla\u015F\u0131r!"
+      - "Wenn du die Gegenst\xE4nde nicht innerhalb von 2 Z\xFCgen sortierst, wird
+        das Eis dicker!"
+      - "Si vous ne triez pas les objets en 2 coups, la glace s'\xE9paissira !"
+      - "Se non ordini gli oggetti entro 2 mosse, il ghiaccio si ispessir\xE0!"
       - "\u041D\u0435 \u043E\u0442\u0441\u043E\u0440\u0442\u0438\u0440\u0443\u0435\u0442\u0435
         \u043F\u0440\u0435\u0434\u043C\u0435\u0442\u044B \u0437\u0430 2 \u0445\u043E\u0434\u0430
         \u2014 \u043B\u0451\u0434 \u0441\u0442\u0430\u043D\u0435\u0442 \u0442\u043E\u043B\u0449\u0435!"
-      - Gagal menyortir item dalam 2 langkah
-      - ' es akan semakin tebal'
+      - "\u0E2B\u0E32\u0E01\u0E08\u0E31\u0E14\u0E40\u0E23\u0E35\u0E22\u0E07\u0E23\u0E32\u0E22\u0E01\u0E32\u0E23\u0E44\u0E21\u0E48\u0E17\u0E31\u0E19\u0E43\u0E19
+        2 \u0E04\u0E23\u0E31\u0E49\u0E07 \u0E19\u0E49\u0E33\u0E41\u0E02\u0E47\u0E07\u0E08\u0E30\u0E2B\u0E19\u0E32\u0E02\u0E36\u0E49\u0E19!"
+      - "\u0905\u0917\u0930 2 \u091A\u093E\u0932\u094B\u0902 \u092E\u0947\u0902 \u0935\u0938\u094D\u0924\u0941\u090F\u0902
+        \u0928\u0939\u0940\u0902 \u0938\u0941\u0932\u091D\u093E\u0908\u0902 \u0924\u094B
+        \u092C\u0930\u094D\u092B \u0914\u0930 \u092E\u094B\u091F\u0940 \u0939\u094B\u0917\u0940!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Fill the bar
@@ -1347,15 +1361,15 @@ MonoBehaviour:
       - "\u586B\u6EE1\u8FDB\u5EA6\u6761"
       - "\uB9C9\uB300\uB97C \uCC44\uC6B0\uC138\uC694"
       - "\u30D0\u30FC\u3092\u6E80\u305F\u3059"
-      - Remplissez la barre
+      - Preencha a barra
       - Llena la barra
-      - Encha o medidor
-      - Vul de balk
-      - "\u0417\u0430\u043F\u043E\u043B\u043D\u0438\u0442\u0435 \u0448\u043A\u0430\u043B\u0443"
-      - Penuhi bar
+      - Isi bar
       - "\xC7ubu\u011Fu doldur"
-      - "\xC7ubu\u011Fu doldurun"
-      - "\u0627\u0645\u0644\u0623 \u0627\u0644\u0634\u0631\u064A\u0637"
+      - "Leiste f\xFCllen"
+      - Remplissez la barre
+      - Riempi la barra
+      - "\u0417\u0430\u043F\u043E\u043B\u043D\u0438\u0442\u0435 \u0448\u043A\u0430\u043B\u0443"
+      - "\u0E40\u0E15\u0E34\u0E21\u0E41\u0E16\u0E1A"
       - "\u092C\u093E\u0930 \u0915\u094B \u092D\u0930\u0947\u0902"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
@@ -1368,15 +1382,15 @@ MonoBehaviour:
       - "\u5B8C\u6210\u4E00\u4E2A\u8BA2\u5355\uFF01"
       - "\uC8FC\uBB38\uC744 \uC644\uB8CC\uD558\uC138\uC694!"
       - "\u6CE8\u6587\u3092\u5B8C\u4E86\u3057\u3088\u3046\uFF01"
-      - Terminez une commande !
-      - "\xA1Completa un pedido!"
       - Conclua um pedido!
-      - Rond een bestelling af!
+      - "\xA1Completa un pedido!"
+      - Termine um pedido!
+      - "Sipari\u015Fi tamamla!"
+      - "Schlie\xDFe eine Bestellung ab!"
+      - Terminez une commande !
+      - Completa un ordine!
       - "\u0417\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u0435 \u0437\u0430\u043A\u0430\u0437!"
-      - Selesaikan pesanan!
-      - "Bir sipari\u015Fi tamamla!"
-      - "Bir sifari\u015Fi bitir!"
-      - "\u0623\u0643\u0645\u0644 \u0637\u0644\u0628\u0627\u064B!"
+      - "\u0E2A\u0E34\u0E49\u0E19\u0E2A\u0E38\u0E14\u0E2D\u0E2D\u0E23\u0E4C\u0E40\u0E14\u0E2D\u0E23\u0E4C!"
       - "\u090F\u0915 \u0911\u0930\u094D\u0921\u0930 \u092A\u0942\u0930\u093E \u0915\u0930\u0947\u0902!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
@@ -1389,15 +1403,15 @@ MonoBehaviour:
       - "\u9C7C"
       - "\uC0DD\uC120"
       - "\u9B5A"
-      - Poisson
-      - Pez
       - Peixe
-      - Vis
-      - "\u0420\u044B\u0431\u0430"
+      - Pez
       - Ikan
       - "Bal\u0131k"
-      - "Bal\u0131q"
-      - "\u0633\u0645\u0643"
+      - Vis
+      - Poisson
+      - Pesce
+      - "\u0420\u044B\u0431\u0430"
+      - "\u0E1B\u0E25\u0E32"
       - "\u092E\u091B\u0932\u0940"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
@@ -1410,9 +1424,8 @@ MonoBehaviour:
       - "\u98DF\u7269"
       - "\uC74C\uC2DD"
       - "\u98DF\u3079\u7269"
-      - "Alimenta\xE7\xE3o"
       - Comida
-      - "\u0E2D\u0E32\u0E2B\u0E32\u0E23"
+      - Comida
       - Makanan
       - Yemek
       - Essen
@@ -1420,6 +1433,7 @@ MonoBehaviour:
       - Cibo
       - "\u041F\u0438\u0449\u0430"
       - "\u0E2D\u0E32\u0E2B\u0E32\u0E23"
+      - "\u0916\u093E\u0928\u093E"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Food Box
@@ -1433,14 +1447,14 @@ MonoBehaviour:
       - "\u30D5\u30FC\u30C9\u30DC\u30C3\u30AF\u30B9"
       - Caixa de comida
       - Caja de comida
-      - "\u0E01\u0E25\u0E48\u0E2D\u0E07\u0E2D\u0E32\u0E2B\u0E32\u0E23"
-      - Box Makanan
+      - Box makanan
       - Yemek Kutusu
       - Essensbox
       - "Bo\xEEte alimentaire"
       - Scatola di cibo
       - "\u041A\u043E\u0440\u043E\u0431\u043A\u0430 \u0434\u043B\u044F \u0435\u0434\u044B"
       - "\u0E01\u0E25\u0E48\u0E2D\u0E07\u0E2D\u0E32\u0E2B\u0E32\u0E23"
+      - "\u092B\u0942\u0921 \u092C\u0949\u0915\u094D\u0938"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Free
@@ -1454,7 +1468,6 @@ MonoBehaviour:
       - "\u7121\u6599"
       - "Gr\xE1tis"
       - Gratis
-      - "\u0E1F\u0E23\u0E35"
       - Gratis
       - "\xDCcretsiz"
       - Kostenlos
@@ -1462,6 +1475,7 @@ MonoBehaviour:
       - Gratis
       - "\u0411\u0435\u0441\u043F\u043B\u0430\u0442\u043D\u043E"
       - "\u0E1F\u0E23\u0E35"
+      - "\u0928\u093F:\u0936\u0941\u0932\u094D\u0915"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Free 1 Life
@@ -1473,16 +1487,16 @@ MonoBehaviour:
       - "\u514D\u8D39\u83B7\u5F971\u6761\u547D"
       - "\uBB34\uB8CC\uB85C 1 \uC0DD\uBA85"
       - "\u7121\u6599\u30671\u30E9\u30A4\u30D5"
-      - "1 vida gr\xE1tis"
-      - 1 vida gratis
-      - "\u0E41\u0E16\u0E21 1 \u0E0A\u0E35\u0E27\u0E34\u0E15\u0E1F\u0E23\u0E35"
-      - Gratis 1 nyawa
+      - "1 Vida Gr\xE1tis"
+      - 1 Vida Gratis
+      - 1 nyawa gratis
       - "\xDCcretsiz 1 Can"
       - 1 Leben gratis
       - 1 vie gratuite
       - 1 vita gratis
       - "\u0411\u0435\u0441\u043F\u043B\u0430\u0442\u043D\u043E 1 \u0436\u0438\u0437\u043D\u044C"
       - "\u0E1F\u0E23\u0E35 1 \u0E0A\u0E35\u0E27\u0E34\u0E15"
+      - "\u0928\u093F:\u0936\u0941\u0932\u094D\u0915 1 \u091C\u0940\u0935\u0928"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Freeze
@@ -1496,7 +1510,6 @@ MonoBehaviour:
       - "\u30D5\u30EA\u30FC\u30BA"
       - Congelar
       - Congelar
-      - "\u0E41\u0E0A\u0E48\u0E41\u0E02\u0E47\u0E07"
       - Beku
       - Dondur
       - Einfrieren
@@ -1504,6 +1517,28 @@ MonoBehaviour:
       - Congelare
       - "\u0417\u0430\u043C\u043E\u0440\u043E\u0437\u0438\u0442\u044C"
       - "\u0E41\u0E0A\u0E48\u0E41\u0E02\u0E47\u0E07"
+      - "\u092B\u094D\u0930\u0940\u091C"
+      Flags: 000000000000000000000000000000
+      Languages_Touch: []
+    - Term: French
+      TermType: 0
+      Description: 
+      Languages:
+      - French
+      - "Ti\u1EBFng Ph\xE1p"
+      - "\u6CD5\u8BED"
+      - "\uD504\uB791\uC2A4\uC5B4"
+      - "\u30D5\u30E9\u30F3\u30B9\u8A9E"
+      - "Franc\xEAs"
+      - "Franc\xE9s"
+      - "Fran\xE7ais"
+      - "Franz\xF6sisch"
+      - Francese
+      - "\u0424\u0440\u0430\u043D\u0446\u0443\u0437\u0441\u043A\u0438\u0439"
+      - "\u0E1D\u0E23\u0E31\u0E48\u0E07\u0E40\u0E28\u0E2A"
+      - "\u092B\u093C\u094D\u0930\u0947\u0902\u091A"
+      - "\u0E1D\u0E23\u0E31\u0E48\u0E07\u0E40\u0E28\u0E2A"
+      - "\u092B\u093C\u094D\u0930\u0947\u0902\u091A"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Fried Chicken
@@ -1517,7 +1552,6 @@ MonoBehaviour:
       - "\u30D5\u30E9\u30A4\u30C9\u30C1\u30AD\u30F3"
       - Frango Frito
       - Pollo Frito
-      - "\u0E44\u0E01\u0E48\u0E17\u0E2D\u0E14"
       - Ayam Goreng
       - "K\u0131zarm\u0131\u015F Tavuk"
       - "Brath\xE4hnchen"
@@ -1525,6 +1559,7 @@ MonoBehaviour:
       - Pollo fritto
       - "\u0416\u0430\u0440\u0435\u043D\u0430\u044F \u043A\u0443\u0440\u0438\u0446\u0430"
       - "\u0E44\u0E01\u0E48\u0E17\u0E2D\u0E14"
+      - "\u092B\u094D\u0930\u093E\u0907\u0921 \u091A\u093F\u0915\u0928"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Frozen items can't be moved. Complete order in the same tray to melt!
@@ -1533,30 +1568,40 @@ MonoBehaviour:
       Languages:
       - Frozen items can't be moved. Complete order in the same tray to melt!
       - "M\xF3n b\u1ECB \u0111\xF3ng b\u0103ng kh\xF4ng th\u1EC3 di chuy\u1EC3n.
-        Ho\xE0n th\xE0nh \u0111\u01A1n trong khay \u0111\u1EC3 l\xE0m tan b\u0103ng!"
+        Ho\xE0n th\xE0nh \u0111\u01A1n h\xE0ng trong c\xF9ng khay \u0111\u1EC3 l\xE0m
+        tan b\u0103ng!"
       - "\u51BB\u7ED3\u7269\u54C1\u65E0\u6CD5\u79FB\u52A8\u3002\u5728\u540C\u4E00\u4E2A\u6258\u76D8\u4E2D\u5B8C\u6210\u8BA2\u5355\u4EE5\u89E3\u51BB\uFF01"
-      - "\uC5BC\uC74C\uC5D0 \uAC07\uD78C \uC544\uC774\uD15C\uC740 \uC6C0\uC9C1\uC77C
-        \uC218 \uC5C6\uC2B5\uB2C8\uB2E4. \uAC19\uC740 \uD2B8\uB808\uC774\uC5D0\uC11C
-        \uC8FC\uBB38\uC744 \uC644\uC131\uD574 \uB179\uC774\uC138\uC694!"
+      - "\uC5BC\uC5B4\uBD99\uC740 \uC544\uC774\uD15C\uC740 \uC774\uB3D9\uD560 \uC218
+        \uC5C6\uC2B5\uB2C8\uB2E4. \uAC19\uC740 \uD2B8\uB808\uC774\uC5D0\uC11C \uC8FC\uBB38\uC744
+        \uC644\uB8CC\uD558\uC5EC \uD574\uB3D9\uD558\uC138\uC694!"
       - "\u51CD\u3063\u305F\u30A2\u30A4\u30C6\u30E0\u306F\u52D5\u304B\u305B\u307E\u305B\u3093\u3002\u540C\u3058\u30C8\u30EC\u30A4\u3067\u6CE8\u6587\u3092\u5B8C\u6210\u3055\u305B\u3066\u6EB6\u304B\u305D\u3046\uFF01"
       - "Itens congelados n\xE3o podem ser movidos. Complete o pedido na mesma bandeja
         para descongelar!"
-      - "Los objetos congelados no se pueden mover. \xA1Completa el pedido en la
-        misma bandeja para descongelar!"
-      - "\u0E44\u0E21\u0E48\u0E2A\u0E32\u0E21\u0E32\u0E23\u0E16\u0E22\u0E49\u0E32\u0E22\u0E23\u0E32\u0E22\u0E01\u0E32\u0E23\u0E17\u0E35\u0E48\u0E16\u0E39\u0E01\u0E41\u0E0A\u0E48\u0E41\u0E02\u0E47\u0E07\u0E44\u0E14\u0E49
-        \u0E01\u0E23\u0E38\u0E13\u0E32\u0E17\u0E33\u0E04\u0E33\u0E2A\u0E31\u0E48\u0E07\u0E0B\u0E37\u0E49\u0E2D\u0E1A\u0E19\u0E16\u0E32\u0E14\u0E40\u0E14\u0E35\u0E22\u0E27\u0E01\u0E31\u0E19\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E43\u0E2B\u0E49\u0E25\u0E30\u0E25\u0E32\u0E22!"
-      - Item beku tidak dapat dipindahkan. Selesaikan pesanan di baki yang sama untuk
-        mencairkannya!
-      - "Dondurulmu\u015F \xF6\u011Feler hareket ettirilemez. Ayn\u0131 tepside sipari\u015Fi
-        tamamlay\u0131n"
-      - " b\xF6ylece \xE7\xF6z\xFCl\xFCr!"
+      - "\xA1Los objetos congelados no se pueden mover! Completa el pedido en la
+        misma bandeja para descongelar."
+      - "Os itens congelados n\xE3o podem ser movidos. Complete o pedido na mesma
+        bandeja para derreter!"
+      - "Donmu\u015F e\u015Fyalar ta\u015F\u0131namaz. Sipari\u015Fi ayn\u0131 tepside
+        tamamlay\u0131n, b\xF6ylece \xE7\xF6z\xFClecek!"
       - "Gefrorene Gegenst\xE4nde k\xF6nnen nicht bewegt werden. Schlie\xDFe die
-        Bestellung auf dem gleichen Tablett ab"
-      - ' um sie zu schmelzen!'
+        Bestellung auf dem gleichen Tablett ab, um sie zu schmelzen!"
       - "Les \xE9l\xE9ments gel\xE9s ne peuvent pas \xEAtre d\xE9plac\xE9s. Terminez
         la commande dans le m\xEAme plateau pour les d\xE9congeler !"
       - "Gli oggetti congelati non possono essere spostati. Completa l\u2019ordine
         nello stesso vassoio per scongelarli!"
+      - "\u0417\u0430\u043C\u043E\u0440\u043E\u0436\u0435\u043D\u043D\u044B\u0435
+        \u043F\u0440\u0435\u0434\u043C\u0435\u0442\u044B \u043D\u0435\u043B\u044C\u0437\u044F
+        \u043F\u0435\u0440\u0435\u043C\u0435\u0449\u0430\u0442\u044C. \u0417\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u0435
+        \u0437\u0430\u043A\u0430\u0437 \u043D\u0430 \u0442\u043E\u043C \u0436\u0435
+        \u043F\u043E\u0434\u043D\u043E\u0441\u0435, \u0447\u0442\u043E\u0431\u044B
+        \u0440\u0430\u0441\u0442\u043E\u043F\u0438\u0442\u044C!"
+      - "\u0E23\u0E32\u0E22\u0E01\u0E32\u0E23\u0E17\u0E35\u0E48\u0E16\u0E39\u0E01\u0E41\u0E0A\u0E48\u0E41\u0E02\u0E47\u0E07\u0E08\u0E30\u0E44\u0E21\u0E48\u0E2A\u0E32\u0E21\u0E32\u0E23\u0E16\u0E02\u0E22\u0E31\u0E1A\u0E44\u0E14\u0E49
+        \u0E01\u0E23\u0E38\u0E13\u0E32\u0E17\u0E33\u0E2D\u0E2D\u0E40\u0E14\u0E2D\u0E23\u0E4C\u0E40\u0E14\u0E35\u0E22\u0E27\u0E01\u0E31\u0E19\u0E43\u0E19\u0E16\u0E32\u0E14\u0E40\u0E14\u0E35\u0E22\u0E27\u0E01\u0E31\u0E19\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E43\u0E2B\u0E49\u0E25\u0E30\u0E25\u0E32\u0E22!"
+      - "\u091C\u092E\u0947 \u0939\u0941\u090F \u0906\u0907\u091F\u092E \u0928\u0939\u0940\u0902
+        \u0939\u093F\u0932\u093E \u0938\u0915\u0924\u0947\u0964 \u0909\u0938\u0940
+        \u091F\u094D\u0930\u0947 \u092E\u0947\u0902 \u0911\u0930\u094D\u0921\u0930
+        \u092A\u0942\u0930\u093E \u0915\u0930\u0947\u0902 \u0924\u093E\u0915\u093F
+        \u092A\u093F\u0918\u0932 \u091C\u093E\u090F!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Full
@@ -1570,7 +1615,6 @@ MonoBehaviour:
       - "\u6E80\u30BF\u30F3"
       - Cheio
       - Lleno
-      - "\u0E40\u0E15\u0E47\u0E21"
       - Penuh
       - Dolu
       - Voll
@@ -1578,9 +1622,31 @@ MonoBehaviour:
       - Pieno
       - "\u041F\u043E\u043B\u043D\u044B\u0439"
       - "\u0E40\u0E15\u0E47\u0E21"
+      - "\u092A\u0942\u0930\u093E"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
-    - Term: Get cards from card packs and frends to complete sets!
+    - Term: German
+      TermType: 0
+      Description: 
+      Languages:
+      - German
+      - "Ti\u1EBFng \u0110\u1EE9c"
+      - "\u5FB7\u8BED"
+      - "\uB3C5\uC77C\uC5B4"
+      - "\u30C9\u30A4\u30C4\u8A9E"
+      - "Alem\xE3o"
+      - "Alem\xE1n"
+      - Allemand
+      - Deutsch
+      - Tedesco
+      - "\u041D\u0435\u043C\u0435\u0446\u043A\u0438\u0439"
+      - "\u0E40\u0E22\u0E2D\u0E23\u0E21\u0E31\u0E19"
+      - "\u091C\u0930\u094D\u092E\u0928"
+      - "\u0E40\u0E22\u0E2D\u0E23\u0E21\u0E31\u0E19"
+      - "\u091C\u0930\u094D\u092E\u0928"
+      Flags: 000000000000000000000000000000
+      Languages_Touch: []
+    - Term: Get cards from card packs and friends to complete sets!
       TermType: 0
       Description: 
       Languages:
@@ -1593,16 +1659,20 @@ MonoBehaviour:
       - "\u30AB\u30FC\u30C9\u30D1\u30C3\u30AF\u3084\u30D5\u30EC\u30F3\u30C9\u304B\u3089\u30AB\u30FC\u30C9\u3092\u96C6\u3081\u3066\u30BB\u30C3\u30C8\u3092\u5B8C\u6210\u3055\u305B\u3088\u3046\uFF01"
       - Pegue cartas dos pacotes e amigos para completar conjuntos!
       - "\xA1Obt\xE9n cartas de paquetes y amigos para completar conjuntos!"
-      - "\u0E23\u0E31\u0E1A\u0E01\u0E32\u0E23\u0E4C\u0E14\u0E08\u0E32\u0E01\u0E0B\u0E2D\u0E07\u0E01\u0E32\u0E23\u0E4C\u0E14\u0E41\u0E25\u0E30\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E19\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E2A\u0E30\u0E2A\u0E21\u0E0A\u0E38\u0E14\u0E43\u0E2B\u0E49\u0E04\u0E23\u0E1A!"
-      - Dapatkan kartu dari paket dan teman untuk menyelesaikan set!
-      - "Kart paketlerinden ve arkada\u015Flardan kartlar alarak setleri tamamlay\u0131n!"
-      - Erhalte Karten aus Packs und von Freunden
-      - " um Sets zu vervollst\xE4ndigen!"
+      - Dapatkan kartu dari paket kartu dan teman untuk menyelesaikan set!
+      - "Kart paketlerinden ve arkada\u015Flardan kart alarak setleri tamamla!"
+      - "Sammle Karten aus Kartensets und von Freunden, um Sets zu vervollst\xE4ndigen!"
       - "Obtenez des cartes \xE0 partir de packs et d'amis pour compl\xE9ter les
         sets !"
       - Ottieni carte dai pacchetti e dagli amici per completare i set!
       - "\u041F\u043E\u043B\u0443\u0447\u0430\u0439\u0442\u0435 \u043A\u0430\u0440\u0442\u044B
-        \u0438\u0437 \u043F\u0430\u043A\u043E\u0432 \u0438 \u043E\u0442 \u0434\u0440\u0443\u0437\u0435\u0439"
+        \u0438\u0437 \u043D\u0430\u0431\u043E\u0440\u043E\u0432 \u0438 \u043E\u0442
+        \u0434\u0440\u0443\u0437\u0435\u0439 \u0434\u043B\u044F \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F
+        \u043A\u043E\u043B\u043B\u0435\u043A\u0446\u0438\u0439!"
+      - "\u0E23\u0E31\u0E1A\u0E01\u0E32\u0E23\u0E4C\u0E14\u0E08\u0E32\u0E01\u0E41\u0E1E\u0E47\u0E04\u0E01\u0E32\u0E23\u0E4C\u0E14\u0E41\u0E25\u0E30\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E19\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E2A\u0E30\u0E2A\u0E21\u0E0A\u0E38\u0E14!"
+      - "\u0915\u093E\u0930\u094D\u0921 \u092A\u0948\u0915 \u0914\u0930 \u092B\u094D\u0930\u0947\u0902\u0921\u094D\u0938
+        \u0938\u0947 \u0915\u093E\u0930\u094D\u0921 \u0932\u0947\u0902 \u0914\u0930
+        \u0938\u0947\u091F \u092A\u0942\u0930\u093E \u0915\u0930\u0947\u0902!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Giant Bundle
@@ -1616,14 +1686,14 @@ MonoBehaviour:
       - "\u30B8\u30E3\u30A4\u30A2\u30F3\u30C8\u30D0\u30F3\u30C9\u30EB"
       - Pacote Gigante
       - Gran paquete
-      - "\u0E0A\u0E38\u0E14\u0E43\u0E2B\u0E0D\u0E48"
       - Paket Raksasa
       - Dev Paket
       - Riesenpaket
       - Gros lot
       - Pacco gigante
       - "\u0413\u0438\u0433\u0430\u043D\u0442\u0441\u043A\u0438\u0439 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442"
-      - "\u0E0A\u0E38\u0E14\u0E22\u0E31\u0E01\u0E29\u0E4C"
+      - "\u0E0A\u0E38\u0E14\u0E43\u0E2B\u0E0D\u0E48"
+      - "\u0935\u093F\u0936\u093E\u0932 \u092C\u0902\u0921\u0932"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Golden Skewer
@@ -1637,14 +1707,14 @@ MonoBehaviour:
       - "\u30B4\u30FC\u30EB\u30C7\u30F3\u30B9\u30AD\u30E5\u30A2"
       - Espeto de Ouro
       - Brocheta Dorada
-      - "\u0E44\u0E21\u0E49\u0E40\u0E2A\u0E35\u0E22\u0E1A\u0E17\u0E2D\u0E07\u0E04\u0E33"
       - Sate Emas
       - "Alt\u0131n \u015Ei\u015F"
       - "Goldener Spie\xDF"
       - "Brochette dor\xE9e"
       - Spiedo dorato
       - "\u0417\u043E\u043B\u043E\u0442\u043E\u0439 \u0448\u0430\u043C\u043F\u0443\u0440"
-      - "\u0E44\u0E21\u0E49\u0E40\u0E2A\u0E35\u0E22\u0E1A\u0E17\u0E2D\u0E07"
+      - "\u0E44\u0E21\u0E49\u0E40\u0E2A\u0E35\u0E22\u0E1A\u0E17\u0E2D\u0E07\u0E04\u0E33"
+      - "\u0917\u094B\u0932\u094D\u0921\u0928 \u0938\u094D\u0915\u094D\u092F\u0942\u0930"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Grand Prize
@@ -1658,7 +1728,6 @@ MonoBehaviour:
       - "\u30B0\u30E9\u30F3\u30D7\u30EA"
       - "Grande Pr\xEAmio"
       - Gran Premio
-      - "\u0E23\u0E32\u0E07\u0E27\u0E31\u0E25\u0E43\u0E2B\u0E0D\u0E48"
       - Hadiah Utama
       - "B\xFCy\xFCk \xD6d\xFCl"
       - Hauptpreis
@@ -1666,6 +1735,7 @@ MonoBehaviour:
       - Gran Premio
       - "\u0413\u0440\u0430\u043D-\u043F\u0440\u0438"
       - "\u0E23\u0E32\u0E07\u0E27\u0E31\u0E25\u0E43\u0E2B\u0E0D\u0E48"
+      - "\u0917\u094D\u0930\u0948\u0902\u0921 \u092A\u094D\u0930\u093E\u0907\u091C\u093C"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Grill
@@ -1679,7 +1749,6 @@ MonoBehaviour:
       - "\u30B0\u30EA\u30EB"
       - Grelha
       - Parrilla
-      - "\u0E40\u0E15\u0E32\u0E22\u0E48\u0E32\u0E07"
       - Pemanggang
       - Izgara
       - Grill
@@ -1687,6 +1756,7 @@ MonoBehaviour:
       - Griglia
       - "\u0413\u0440\u0438\u043B\u044C"
       - "\u0E40\u0E15\u0E32\u0E22\u0E48\u0E32\u0E07"
+      - "\u0917\u094D\u0930\u093F\u0932"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Grill Ribs
@@ -1700,14 +1770,14 @@ MonoBehaviour:
       - "\u30B0\u30EA\u30EB\u30EA\u30D6"
       - Costelas na grelha
       - Costillas a la parrilla
-      - "\u0E0B\u0E35\u0E48\u0E42\u0E04\u0E23\u0E07\u0E22\u0E48\u0E32\u0E07"
-      - Iga panggang
+      - Iga Panggang
       - Izgara Kaburga
       - Gegrillte Rippen
       - "C\xF4tes grill\xE9es"
       - Costine alla griglia
       - "\u0413\u0440\u0438\u043B\u044C-\u0440\u0451\u0431\u0440\u044B\u0448\u043A\u0438"
       - "\u0E0B\u0E35\u0E48\u0E42\u0E04\u0E23\u0E07\u0E2B\u0E21\u0E39\u0E22\u0E48\u0E32\u0E07"
+      - "\u0917\u094D\u0930\u093F\u0932 \u0930\u093F\u092C\u094D\u0938"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Hamburger
@@ -1721,14 +1791,14 @@ MonoBehaviour:
       - "\u30CF\u30F3\u30D0\u30FC\u30AC\u30FC"
       - "Hamb\xFArguer"
       - Hamburguesa
-      - "\u0E41\u0E2E\u0E21\u0E40\u0E1A\u0E2D\u0E23\u0E4C\u0E40\u0E01\u0E2D\u0E23\u0E4C"
       - Hamburger
       - Hamburger
       - Hamburger
       - Hamburger
-      - Panino
+      - Hamburger
       - "\u0413\u0430\u043C\u0431\u0443\u0440\u0433\u0435\u0440"
       - "\u0E41\u0E2E\u0E21\u0E40\u0E1A\u0E2D\u0E23\u0E4C\u0E40\u0E01\u0E2D\u0E23\u0E4C"
+      - "\u0939\u0948\u092E\u092C\u0930\u094D\u0917\u0930"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Hidden Item
@@ -1744,12 +1814,33 @@ MonoBehaviour:
       - Elemento oculto
       - Barang Tersembunyi
       - "Gizli \xD6\u011Fre"
-      - Hiddes Objekt
+      - Versteckter Gegenstand
       - "\xC9l\xE9ment cach\xE9"
       - Oggetto nascosto
       - "\u0421\u043A\u0440\u044B\u0442\u044B\u0439 \u043F\u0440\u0435\u0434\u043C\u0435\u0442"
       - "\u0E23\u0E32\u0E22\u0E01\u0E32\u0E23\u0E17\u0E35\u0E48\u0E0B\u0E48\u0E2D\u0E19\u0E2D\u0E22\u0E39\u0E48"
       - "\u091B\u093F\u092A\u093E \u0939\u0941\u0906 \u0906\u0907\u091F\u092E"
+      Flags: 000000000000000000000000000000
+      Languages_Touch: []
+    - Term: Hindi
+      TermType: 0
+      Description: 
+      Languages:
+      - Hindi
+      - "Ti\u1EBFng Hindi"
+      - "\u5370\u5730\u8BED"
+      - "\uD78C\uB514\uC5B4"
+      - "\u30D2\u30F3\u30C7\u30A3\u30FC\u8A9E"
+      - Hindi
+      - Hindi
+      - Hindi
+      - Hindi
+      - Hindi
+      - "\u0425\u0438\u043D\u0434\u0438"
+      - "\u0E2E\u0E34\u0E19\u0E14\u0E35"
+      - "\u0939\u093F\u0928\u094D\u0926\u0940"
+      - "\u0E2E\u0E34\u0E19\u0E14\u0E35"
+      - "\u0939\u093F\u0928\u094D\u0926\u0940"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Home
@@ -1834,6 +1925,48 @@ MonoBehaviour:
       - "\u041B\u0435\u0434\u044F\u043D\u043E\u0439 \u0437\u0430\u043C\u043E\u043A"
       - "\u0E25\u0E47\u0E2D\u0E04\u0E19\u0E49\u0E33\u0E41\u0E02\u0E47\u0E07"
       - "\u0906\u0907\u0938 \u0932\u0949\u0915"
+      Flags: 000000000000000000000000000000
+      Languages_Touch: []
+    - Term: Indonesian
+      TermType: 0
+      Description: 
+      Languages:
+      - Indonesian
+      - "Ti\u1EBFng Indonesia"
+      - "\u5370\u5C3C\u8BED"
+      - "\uC778\uB3C4\uB124\uC2DC\uC544\uC5B4"
+      - "\u30A4\u30F3\u30C9\u30CD\u30B7\u30A2\u8A9E"
+      - "Indon\xE9sio"
+      - Indonesio
+      - "Indon\xE9sien"
+      - Indonesisch
+      - Indonesiano
+      - "\u0418\u043D\u0434\u043E\u043D\u0435\u0437\u0438\u0439\u0441\u043A\u0438\u0439"
+      - "\u0E2D\u0E34\u0E19\u0E42\u0E14\u0E19\u0E35\u0E40\u0E0B\u0E35\u0E22"
+      - "\u0907\u0902\u0921\u094B\u0928\u0947\u0936\u093F\u092F\u093E\u0908"
+      - "\u0E2D\u0E34\u0E19\u0E42\u0E14\u0E19\u0E35\u0E40\u0E0B\u0E35\u0E22"
+      - "\u0907\u0902\u0921\u094B\u0928\u0947\u0936\u093F\u092F\u093E\u0908"
+      Flags: 000000000000000000000000000000
+      Languages_Touch: []
+    - Term: Italian
+      TermType: 0
+      Description: 
+      Languages:
+      - Italian
+      - "Ti\u1EBFng \xDD"
+      - "\u610F\u5927\u5229\u8BED"
+      - "\uC774\uD0C8\uB9AC\uC544\uC5B4"
+      - "\u30A4\u30BF\u30EA\u30A2\u8A9E"
+      - Italiano
+      - Italiano
+      - Italien
+      - Italienisch
+      - Italiano
+      - "\u0418\u0442\u0430\u043B\u044C\u044F\u043D\u0441\u043A\u0438\u0439"
+      - "\u0E2D\u0E34\u0E15\u0E32\u0E25\u0E35"
+      - "\u0907\u0924\u093E\u0932\u0935\u0940"
+      - "\u0E2D\u0E34\u0E15\u0E32\u0E25\u0E35"
+      - "\u0907\u0924\u093E\u0932\u0935\u0940"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Japanese
@@ -1971,16 +2104,16 @@ MonoBehaviour:
       - "\u7F8A\u6392"
       - "\uC591\uAC08\uBE44"
       - "\u30E9\u30E0\u30C1\u30E7\u30C3\u30D7"
-      - "C\xF4telettes d'agneau"
-      - Chuletas de cordero
       - Costeletas de cordeiro
-      - Kambing Cincang
-      - Kuzu Pirzola
+      - Chuletas de cordero
+      - Kambing cincang
+      - Kuzu pirzola
       - Lammkoteletts
-      - Costolette d'agnello
+      - "C\xF4telettes d'agneau"
+      - Costolette di agnello
       - "\u0411\u0430\u0440\u0430\u043D\u044C\u0438 \u043E\u0442\u0431\u0438\u0432\u043D\u044B\u0435"
       - "\u0E0B\u0E35\u0E48\u0E42\u0E04\u0E23\u0E07\u0E41\u0E01\u0E30"
-      - "\u092D\u0947\u0921\u093C \u0915\u0947 \u0915\u093E\u091F\u0932\u0947\u091F"
+      - "\u0932\u0948\u092E\u094D\u092C \u091A\u0949\u092A\u094D\u0938"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Language
@@ -1992,9 +2125,9 @@ MonoBehaviour:
       - "\u8BED\u8A00"
       - "\uC5B8\uC5B4"
       - "\u8A00\u8A9E"
+      - Idioma
+      - Idioma
       - Langue
-      - Idioma
-      - Idioma
       - Bahasa
       - Dil
       - Sprache
@@ -2034,9 +2167,9 @@ MonoBehaviour:
       - "\u8BED\u8A00\uFF1A"
       - "\uC5B8\uC5B4:"
       - "\u8A00\u8A9E\uFF1A"
+      - 'Idiomas:'
+      - 'Idiomas:'
       - "Langues\_:"
-      - 'Idiomas:'
-      - 'Idiomas:'
       - 'Bahasa:'
       - 'Diller:'
       - 'Sprachen:'
@@ -2055,9 +2188,9 @@ MonoBehaviour:
       - "\u5927\u578B\u793C\u5305"
       - "\uB300\uD615 \uBC88\uB4E4"
       - "\u30E9\u30FC\u30B8\u30D0\u30F3\u30C9\u30EB"
-      - Gros lot
-      - Gran paquete
       - Pacote grande
+      - Gran paquete
+      - Gros lot
       - Paket Besar
       - "B\xFCy\xFCk Paket"
       - "Gro\xDFes Bundle"
@@ -2076,9 +2209,9 @@ MonoBehaviour:
       - "\u85B0\u8863\u8349"
       - "\uB77C\uBCA4\uB354"
       - "\u30E9\u30D9\u30F3\u30C0\u30FC"
+      - Lavanda
+      - Lavanda
       - Lavande
-      - Lavanda
-      - Lavanda
       - Lavender
       - Lavanta
       - Lavendel
@@ -2097,9 +2230,9 @@ MonoBehaviour:
       - "\u4F20\u5947\u793C\u5305"
       - "\uC804\uC124 \uBC88\uB4E4"
       - "\u30EC\u30B8\u30A7\u30F3\u30C0\u30EA\u30FC\u30D0\u30F3\u30C9\u30EB"
-      - "Lot l\xE9gendaire"
-      - Paquete legendario
       - "Pacote lend\xE1rio"
+      - Paquete legendario
+      - "Lot l\xE9gendaire"
       - Paket Legendaris
       - Efsanevi Paket
       - "Legend\xE4res Bundle"
@@ -2118,9 +2251,9 @@ MonoBehaviour:
       - "\u66F4\u5C11\u7684\u4F18\u60E0\uFF01"
       - "\uC801\uC740 \uD61C\uD0DD!"
       - "\u30AA\u30D5\u30A1\u30FC\u304C\u5C11\u306A\u3044\uFF01"
-      - "Moins d'offres\_!"
-      - "\xA1Menos ofertas!"
       - Menos ofertas!
+      - Menos ofertas!
+      - "Moins d'offres\_!"
       - Penawaran Lebih Sedikit!
       - Daha az teklif!
       - Weniger Angebote!
@@ -2139,16 +2272,16 @@ MonoBehaviour:
       - "\u7B49\u7EA7 {[VALUE]}"
       - "\uB808\uBCA8 {[VALUE]}"
       - "\u30EC\u30D9\u30EB {[VALUE]}"
-      - Niveau {[VALUE]}
-      - Nivel {[VALUE]}
       - "N\xEDvel {[VALUE]}"
+      - Nivel {[VALUE]}
+      - Niveau {[VALUE]}
       - Level {[VALUE]}
       - Seviye {[VALUE]}
       - Level {[VALUE]}
-      - Niveau {[VALUE]}
       - Livello {[VALUE]}
       - "\u0423\u0440\u043E\u0432\u0435\u043D\u044C {[VALUE]}"
       - "\u0E40\u0E25\u0E40\u0E27\u0E25 {[VALUE]}"
+      - "\u0932\u0947\u0935\u0932 {[VALUE]}"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Lidded Tray
@@ -2162,10 +2295,10 @@ MonoBehaviour:
       - "\u30D5\u30BF\u4ED8\u304D\u30C8\u30EC\u30A4"
       - Bandeja com tampa
       - Bandeja con tapa
-      - "T\xE1lca fed\xE9llel"
-      - "Kapakl\u0131 Tepsi"
-      - Tablett mit Deckel
       - Plateau avec couvercle
+      - Mini Tepsi
+      - Tablett mit Deckel
+      - "T\xE1lca fed\xE9llel"
       - Vassoio con coperchio
       - "\u041B\u043E\u0442\u043E\u043A \u0441 \u043A\u0440\u044B\u0448\u043A\u043E\u0439"
       - "\u0E16\u0E32\u0E14\u0E21\u0E35\u0E1D\u0E32\u0E1B\u0E34\u0E14"
@@ -2183,10 +2316,10 @@ MonoBehaviour:
       - "\u9650\u5B9A\u30D0\u30F3\u30C9\u30EB"
       - Pacote Limitado
       - Paquete limitado
-      - "Csomag korl\xE1tozott"
+      - "Lot limit\xE9"
       - Limitli Paket
       - Limitiertes Bundle
-      - "Lot limit\xE9"
+      - "Csomag korl\xE1tozott"
       - Pacchetto limitato
       - "\u041E\u0433\u0440\u0430\u043D\u0438\u0447\u0435\u043D\u043D\u044B\u0439
         \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442"
@@ -2203,12 +2336,12 @@ MonoBehaviour:
       - "\u9650\u65F6\u4F18\u60E0"
       - "\uD55C\uC815 \uD61C\uD0DD"
       - "\u671F\u9593\u9650\u5B9A\u30AA\u30D5\u30A1\u30FC"
-      - Oferta Limitada
       - Oferta limitada
+      - Oferta Limitada
+      - "Offre limit\xE9e"
       - "Korl\xE1tozott aj\xE1nlat"
       - Limitli Teklif
       - Limitierte Aktion
-      - "Offre limit\xE9e"
       - Offerta limitata
       - "\u041E\u0433\u0440\u0430\u043D\u0438\u0447\u0435\u043D\u043D\u043E\u0435
         \u043F\u0440\u0435\u0434\u043B\u043E\u0436\u0435\u043D\u0438\u0435"
@@ -2227,7 +2360,7 @@ MonoBehaviour:
       - "\u8AAD\u307F\u8FBC\u307F\u4E2D"
       - Carregando
       - Cargando
-      - "T\xF6lt\xE9s"
+      - Memuat
       - "Y\xFCkleniyor"
       - "L\xE4dt"
       - Chargement
@@ -2311,10 +2444,10 @@ MonoBehaviour:
       - "\u30ED\u30D6\u30B9\u30BF\u30FC"
       - Lagosta
       - Langosta
-      - "Hom\xE1r"
+      - Homard
       - Istakoz
       - Hummer
-      - Homard
+      - "Hom\xE1r"
       - Astice
       - "\u041E\u043C\u0430\u0440"
       - "\u0E25\u0E47\u0E2D\u0E1A\u0E2A\u0E40\u0E15\u0E2D\u0E23\u0E4C"
@@ -2332,10 +2465,10 @@ MonoBehaviour:
       - "\u30ED\u30C3\u30AF\uFF06\u30AD\u30FC"
       - Cadeado e chave
       - Cerradura y llave
-      - "Z\xE1r \xE9s kulcs"
+      - "Serrure et cl\xE9"
       - Kilit & Anahtar
       - "Schloss und Schl\xFCssel"
-      - "Serrure et cl\xE9"
+      - "Z\xE1r \xE9s kulcs"
       - Lucchetto e chiave
       - "\u0417\u0430\u043C\u043E\u043A \u0438 \u043A\u043B\u044E\u0447"
       - "\u0E01\u0E38\u0E0D\u0E41\u0E08\u0E41\u0E25\u0E30\u0E41\u0E21\u0E48\u0E01\u0E38\u0E0D\u0E41\u0E08"
@@ -2374,10 +2507,10 @@ MonoBehaviour:
       - "\u9593\u9055\u3048\u305F\uFF1F\u6700\u5F8C\u306E\u52D5\u304D\u3092\u53D6\u308A\u6D88\u305D\u3046\uFF01"
       - "Cometeu um erro? Desfa\xE7a o \xFAltimo movimento!"
       - "\xBFCometiste un error? \xA1Deshaz tu \xFAltimo movimiento!"
-      - "Hib\xE1zt\xE1l? Vond vissza az utols\xF3 l\xE9p\xE9st!"
+      - "Une erreur ? Annulez le dernier coup\_!"
       - "Hata m\u0131 yapt\u0131n? Son hamleni geri al!"
       - "Fehler gemacht? R\xFCckg\xE4ngig machen!"
-      - "Une erreur ? Annulez le dernier coup\_!"
+      - "Hib\xE1zt\xE1l? Vond vissza az utols\xF3 l\xE9p\xE9st!"
       - "Hai commesso un errore? Annulla l\u2019ultima mossa!"
       - "\u0421\u0434\u0435\u043B\u0430\u043B\u0438 \u043E\u0448\u0438\u0431\u043A\u0443?
         \u041E\u0442\u043C\u0435\u043D\u0438\u0442\u0435 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0439
@@ -2399,10 +2532,10 @@ MonoBehaviour:
       - "\u8089"
       - Carne
       - Carne
-      - "H\xFAs"
+      - Viande
       - Et
       - ' Fleisch'
-      - Viande
+      - "H\xFAs"
       - Carne
       - "\u041C\u044F\u0441\u043E"
       - "\u0E40\u0E19\u0E37\u0E49\u0E2D"
@@ -2418,13 +2551,13 @@ MonoBehaviour:
       - "\u8FF7\u4F60\u793C\u5305"
       - "\uBBF8\uB2C8 \uBC88\uB4E4"
       - "\u30DF\u30CB\u30D0\u30F3\u30C9\u30EB"
-      - Mini Pacote
+      - Mini pacchetto
       - Paquete mini
-      - Mini csomag
+      - Mini lot
       - Mini Paket
       - Mini-Bundle
-      - Mini lot
-      - Mini pacchetto
+      - Mini csomag
+      - Mini Pacote
       - "\u041C\u0438\u043D\u0438-\u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442"
       - "\u0E0A\u0E38\u0E14\u0E02\u0E19\u0E32\u0E14\u0E40\u0E25\u0E47\u0E01"
       - "\u092E\u093F\u0928\u0940 \u092C\u0902\u0921\u0932"
@@ -2439,13 +2572,13 @@ MonoBehaviour:
       - "\u8FF7\u4F60\u70E4\u67B6"
       - "\uBBF8\uB2C8 \uADF8\uB9B4"
       - "\u30DF\u30CB\u30B0\u30EA\u30EB"
-      - Mini Grelha
+      - Mini griglia
       - Mini parrilla
       - Mini grill
       - Mini Izgara
       - Mini-Grill
       - Mini grill
-      - Mini griglia
+      - Mini Grelha
       - "\u041C\u0438\u043D\u0438-\u0433\u0440\u0438\u043B\u044C"
       - "\u0E40\u0E15\u0E32\u0E22\u0E48\u0E32\u0E07\u0E02\u0E19\u0E32\u0E14\u0E40\u0E25\u0E47\u0E01"
       - "\u092E\u093F\u0928\u0940 \u0917\u094D\u0930\u093F\u0932"
@@ -2460,13 +2593,13 @@ MonoBehaviour:
       - "\u8FF7\u4F60\u6258\u76D8"
       - "\uBBF8\uB2C8 \uD2B8\uB808\uC774"
       - "\u30DF\u30CB\u30C8\u30EC\u30A4"
-      - Mini Bandeja
+      - Vassoio mini
       - Bandeja mini
-      - "Mini t\xE1lca"
+      - Mini-plateau
       - Mini Tepsi
       - Mini-Tablett
-      - Mini-plateau
-      - Vassoio mini
+      - "Mini t\xE1lca"
+      - Mini Bandeja
       - "\u041C\u0438\u043D\u0438-\u043B\u043E\u0442\u043E\u043A"
       - "\u0E16\u0E32\u0E14\u0E02\u0E19\u0E32\u0E14\u0E40\u0E25\u0E47\u0E01"
       - "\u092E\u093F\u0928\u0940 \u091F\u094D\u0930\u0947"
@@ -2482,13 +2615,13 @@ MonoBehaviour:
       - "\uBBF8\uB2C8 \uD2B8\uB808\uC774\uB294 \uD558\uB098\uB9CC \uB2F4\uC744 \uC218
         \uC788\uC5B4\uC694!"
       - "\u30DF\u30CB\u30C8\u30EC\u30A4\u306B\u306F1\u3064\u306E\u30A2\u30A4\u30C6\u30E0\u3057\u304B\u7F6E\u3051\u307E\u305B\u3093\uFF01"
-      - "Mini bandejas s\xF3 podem conter um item!"
+      - I mini vassoi contengono solo un oggetto!
       - "\xA1Las bandejas mini solo pueden contener un objeto!"
-      - Mini tray hanya bisa menampung satu item!
+      - "Les mini plateaux ne peuvent contenir qu\u2019un seul objet !"
       - "Mini tepsilere yaln\u0131zca bir \xF6\u011Fe konulabilir!"
       - "Mini-Tabletts nur f\xFCr ein Element!"
-      - "Les mini plateaux ne peuvent contenir qu\u2019un seul objet !"
-      - I mini vassoi contengono solo un oggetto!
+      - Mini tray hanya bisa menampung satu item!
+      - "Mini bandejas s\xF3 podem conter um item!"
       - "\u041C\u0438\u043D\u0438-\u043F\u043E\u0434\u043D\u043E\u0441\u044B \u043C\u043E\u0433\u0443\u0442
         \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0442\u043E\u043B\u044C\u043A\u043E
         \u043E\u0434\u0438\u043D \u043F\u0440\u0435\u0434\u043C\u0435\u0442!"
@@ -2507,13 +2640,13 @@ MonoBehaviour:
       - "\u66F4\u591A\u4F18\u60E0\uFF01"
       - "\uB354 \uB9CE\uC740 \uD61C\uD0DD!"
       - "\u3088\u308A\u591A\u304F\u306E\u30AA\u30D5\u30A1\u30FC\uFF01"
-      - Plus d'offres !
+      - "Pi\xF9 offerte!"
       - "\xA1M\xE1s ofertas!"
-      - Mais ofertas!
+      - Plus d'offres !
       - Lebih banyak penawaran!
       - Daha fazla teklif!
       - Mehr Angebote!
-      - "Pi\xF9 offerte!"
+      - Mais ofertas!
       - "\u0411\u043E\u043B\u044C\u0448\u0435 \u043F\u0440\u0435\u0434\u043B\u043E\u0436\u0435\u043D\u0438\u0439!"
       - "\u0E02\u0E49\u0E2D\u0E40\u0E2A\u0E19\u0E2D\u0E40\u0E1E\u0E34\u0E48\u0E21\u0E40\u0E15\u0E34\u0E21!"
       - "\u0905\u0927\u093F\u0915 \u0911\u092B\u0930!"
@@ -2528,13 +2661,13 @@ MonoBehaviour:
       - "\u66F4\u591A\u751F\u547D"
       - "\uCD94\uAC00 \uC0DD\uBA85"
       - "\u30E9\u30A4\u30D5\u3092\u8FFD\u52A0"
-      - Plus de vies
+      - "Pi\xF9 vite"
       - "M\xE1s vidas"
-      - Mais vidas
+      - Plus de vies
       - Lebih banyak nyawa
       - Daha fazla can
       - Mehr Leben
-      - "Pi\xF9 vite"
+      - Mais vidas
       - "\u0411\u043E\u043B\u044C\u0448\u0435 \u0436\u0438\u0437\u043D\u0435\u0439"
       - "\u0E40\u0E1E\u0E34\u0E48\u0E21\u0E0A\u0E35\u0E27\u0E34\u0E15"
       - "\u0905\u0927\u093F\u0915 \u091C\u0940\u0935\u0928"
@@ -2549,13 +2682,13 @@ MonoBehaviour:
       - "\u97F3\u4E50"
       - "\uC74C\uC545"
       - "\u97F3\u697D"
+      - Musica
+      - "M\xFAsica"
       - Musique
-      - "M\xFAsica"
-      - "M\xFAsica"
       - Musik
       - " M\xFCzik"
       - Musik
-      - Musica
+      - Musique
       - "\u041C\u0443\u0437\u044B\u043A\u0430"
       - "\u0E14\u0E19\u0E15\u0E23\u0E35"
       - "\u0938\u0902\u0917\u0940\u0924"
@@ -2571,13 +2704,13 @@ MonoBehaviour:
       - "\u65B0\u52A9\u63A8\u5668\u5DF2\u89E3\u9501\uFF01"
       - "\uC0C8 \uBD80\uC2A4\uD130\uAC00 \uC7A0\uAE08 \uD574\uC81C\uB418\uC5C8\uC2B5\uB2C8\uB2E4!"
       - "\u65B0\u3057\u3044\u30D6\u30FC\u30B9\u30BF\u30FC\u304C\u30A2\u30F3\u30ED\u30C3\u30AF\u3055\u308C\u307E\u3057\u305F\uFF01"
-      - "Nouveau booster d\xE9bloqu\xE9 !"
+      - Nuovo potenziamento sbloccato!
       - "\xA1Nuevo potenciador desbloqueado!"
-      - Novo impulsionador desbloqueado!
+      - "Nouveau booster d\xE9bloqu\xE9 !"
       - Booster baru dibuka!
       - "Yeni g\xFC\xE7lendirici a\xE7\u0131ld\u0131!"
       - Neuer Booster freigeschaltet!
-      - Nuovo potenziamento sbloccato!
+      - Novo impulsionador desbloqueado!
       - "\u041D\u043E\u0432\u044B\u0439 \u0431\u0443\u0441\u0442\u0435\u0440 \u0440\u0430\u0437\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D!"
       - "\u0E1B\u0E25\u0E14\u0E25\u0E47\u0E2D\u0E01\u0E1A\u0E39\u0E2A\u0E40\u0E15\u0E2D\u0E23\u0E4C\u0E43\u0E2B\u0E21\u0E48!"
       - "\u0928\u092F\u093E \u092C\u0942\u0938\u094D\u091F\u0930 \u0905\u0928\u0932\u0949\u0915
@@ -2625,6 +2758,64 @@ MonoBehaviour:
       - "\u041B\u0430\u043F\u0448\u0430"
       - "\u0E1A\u0E30\u0E2B\u0E21\u0E35\u0E48"
       - "\u0928\u0942\u0921\u0932"
+      Flags: 000000000000000000000000000000
+      Languages_Touch: []
+    - Term: Octochef
+      TermType: 0
+      Description: 
+      Languages:
+      - Octochef
+      - Octochef
+      - "\u7AE0\u9C7C\u53A8\u5E08"
+      - "\uC625\uD1A0\uC170\uD504"
+      - "\u30AA\u30AF\u30C8\u30B7\u30A7\u30D5"
+      - Octochef
+      - Octochef
+      - Octochef
+      - Octochef
+      - Octochef
+      - "\u041E\u043A\u0442\u043E\u043F\u043E\u0432\u0430\u0440"
+      - "\u0E2D\u0E2D\u0E04\u0E42\u0E15\u0E40\u0E0A\u0E1F"
+      - "\u0911\u0915\u094D\u091F\u094B\u0936\u0947\u092B"
+      - "\u0E2D\u0E2D\u0E04\u0E42\u0E15\u0E40\u0E0A\u0E1F"
+      - "\u0911\u0915\u094D\u091F\u094B\u0936\u0947\u092B"
+      Flags: 000000000000000000000000000000
+      Languages_Touch: []
+    - Term: Octochef moves after each match and blocks the tray it lands on!
+      TermType: 0
+      Description: 
+      Languages:
+      - Octochef moves after each match and blocks the tray it lands on!
+      - "Octochef di chuy\u1EC3n sau m\u1ED7i l\u01B0\u1EE3t gh\xE9p v\xE0 ch\u1EB7n
+        khay m\xE0 n\xF3 \u0111\xE1p xu\u1ED1ng!"
+      - "\u7AE0\u9C7C\u53A8\u5E08\u6BCF\u6B21\u5339\u914D\u540E\u90FD\u4F1A\u79FB\u52A8\uFF0C\u5E76\u963B\u6321\u5B83\u505C\u7559\u7684\u6258\u76D8\uFF01"
+      - "\uC625\uD1A0\uC170\uD504\uB294 \uB9E4\uCE58\uD560 \uB54C\uB9C8\uB2E4 \uC774\uB3D9\uD558\uBA70
+        \uCC29\uC9C0\uD55C \uD2B8\uB808\uC774\uB97C \uB9C9\uC2B5\uB2C8\uB2E4!"
+      - "\u30AA\u30AF\u30C8\u30B7\u30A7\u30D5\u306F\u30DE\u30C3\u30C1\u306E\u305F\u3073\u306B\u79FB\u52D5\u3057\u3001\u7740\u5730\u3057\u305F\u30C8\u30EC\u30A4\u3092\u30D6\u30ED\u30C3\u30AF\u3057\u307E\u3059\uFF01"
+      - "O Octochef se move ap\xF3s cada combina\xE7\xE3o e bloqueia a bandeja onde
+        pousa!"
+      - "\xA1Octochef se mueve despu\xE9s de cada combinaci\xF3n y bloquea la bandeja
+        en la que cae!"
+      - Octochef bergerak setelah setiap pencocokan dan memblokir nampan tempat ia
+        mendarat!
+      - "Octochef her e\u015Fle\u015Fmeden sonra hareket eder ve indi\u011Fi tepsiyi
+        engeller!"
+      - Octochef bewegt sich nach jedem Match und blockiert das Tablett, auf dem
+        er landet!
+      - "Octochef se d\xE9place apr\xE8s chaque correspondance et bloque le plateau
+        sur lequel il atterrit !"
+      - Octochef si sposta dopo ogni abbinamento e blocca il vassoio su cui atterra!
+      - "\u041E\u043A\u0442\u043E\u043F\u043E\u0432\u0430\u0440 \u043F\u0435\u0440\u0435\u043C\u0435\u0449\u0430\u0435\u0442\u0441\u044F
+        \u043F\u043E\u0441\u043B\u0435 \u043A\u0430\u0436\u0434\u043E\u0433\u043E
+        \u0441\u043E\u0432\u043F\u0430\u0434\u0435\u043D\u0438\u044F \u0438 \u0431\u043B\u043E\u043A\u0438\u0440\u0443\u0435\u0442
+        \u043F\u043E\u0434\u043D\u043E\u0441, \u043D\u0430 \u043A\u043E\u0442\u043E\u0440\u044B\u0439
+        \u043F\u0440\u0438\u0437\u0435\u043C\u043B\u044F\u0435\u0442\u0441\u044F!"
+      - "\u0E2D\u0E2D\u0E04\u0E42\u0E15\u0E40\u0E0A\u0E1F\u0E08\u0E30\u0E02\u0E22\u0E31\u0E1A\u0E2B\u0E25\u0E31\u0E07\u0E08\u0E32\u0E01\u0E08\u0E31\u0E1A\u0E04\u0E39\u0E48\u0E41\u0E15\u0E48\u0E25\u0E30\u0E04\u0E23\u0E31\u0E49\u0E07\u0E41\u0E25\u0E30\u0E1A\u0E25\u0E47\u0E2D\u0E01\u0E16\u0E32\u0E14\u0E17\u0E35\u0E48\u0E21\u0E31\u0E19\u0E15\u0E01\u0E25\u0E07\u0E44\u0E1B!"
+      - "\u0911\u0915\u094D\u091F\u094B\u0936\u0947\u092B \u0939\u0930 \u092E\u0948\u091A
+        \u0915\u0947 \u092C\u093E\u0926 \u091A\u0932\u0924\u093E \u0939\u0948 \u0914\u0930
+        \u091C\u093F\u0938 \u091F\u094D\u0930\u0947 \u092A\u0930 \u0909\u0924\u0930\u0924\u093E
+        \u0939\u0948 \u0909\u0938\u0947 \u092C\u094D\u0932\u0949\u0915 \u0915\u0930
+        \u0926\u0947\u0924\u093E \u0939\u0948!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Octochef!
@@ -2679,16 +2870,23 @@ MonoBehaviour:
       - "\uBAA8\uB4E0 \uD53D\uC5C5 \uD134\uC774 \uC18C\uBAA8\uB418\uBA74 \uD2B8\uB808\uC774\uAC00
         \uC7A0\uAE41\uB2C8\uB2E4!"
       - "\u3059\u3079\u3066\u306E\u53D6\u5F97\u56DE\u6570\u3092\u4F7F\u3044\u5207\u308B\u3068\u30C8\u30EC\u30A4\u304C\u30ED\u30C3\u30AF\u3055\u308C\u307E\u3059\uFF01"
-      - "Une fois tous les tours de ramassage utilis\xE9s"
-      - " le plateau sera verrouill\xE9 !"
-      - "\xA1Una vez que se usen todos los turnos de recogida"
-      - " la bandeja se bloquear\xE1!"
-      - Uma vez que todas as tentativas de coleta sejam usadas
-      - " a bandeja ser\xE1 bloqueada!"
-      - Setelah semua giliran pengambilan habis
-      - ' baki akan terkunci!'
+      - "Uma vez que todas as tentativas de coleta sejam usadas, a bandeja ser\xE1
+        bloqueada!"
+      - "\xA1Una vez que se usen todos los turnos de recogida, la bandeja se bloquear\xE1!"
+      - Setelah semua giliran pengambilan habis, baki akan terkunci!
       - "T\xFCm alma haklar\u0131 kullan\u0131ld\u0131\u011F\u0131nda tepsi kilitlenir!"
-      - Sobald alle Abholversuche aufgebraucht sind
+      - Sobald alle Abholversuche aufgebraucht sind, wird das Tablett gesperrt!
+      - "Une fois tous les tours de ramassage utilis\xE9s, le plateau sera verrouill\xE9
+        !"
+      - "Una volta utilizzati tutti i turni di prelievo, il vassoio verr\xE0 bloccato!"
+      - "\u041A\u043E\u0433\u0434\u0430 \u0432\u0441\u0435 \u043F\u043E\u043F\u044B\u0442\u043A\u0438
+        \u0437\u0430\u0431\u043E\u0440\u0430 \u0438\u0441\u0447\u0435\u0440\u043F\u0430\u043D\u044B,
+        \u043F\u043E\u0434\u043D\u043E\u0441 \u0431\u0443\u0434\u0435\u0442 \u0437\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D!"
+      - "\u0E40\u0E21\u0E37\u0E48\u0E2D\u0E43\u0E0A\u0E49\u0E42\u0E2D\u0E01\u0E32\u0E2A\u0E2B\u0E22\u0E34\u0E1A\u0E04\u0E23\u0E1A\u0E16\u0E49\u0E27\u0E19\u0E41\u0E25\u0E49\u0E27
+        \u0E16\u0E32\u0E14\u0E08\u0E30\u0E16\u0E39\u0E01\u0E25\u0E47\u0E2D\u0E04!"
+      - "\u0938\u092D\u0940 \u092A\u093F\u0915\u0905\u092A \u092E\u094B\u0921\u093C
+        \u0909\u092A\u092F\u094B\u0917 \u0939\u094B \u091C\u093E\u0928\u0947 \u092A\u0930
+        \u091F\u094D\u0930\u0947 \u0932\u0949\u0915 \u0939\u094B \u091C\u093E\u090F\u0917\u0940!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Oven
@@ -2837,6 +3035,27 @@ MonoBehaviour:
       - "\u0E2B\u0E21\u0E39\u0E1B\u0E34\u0E49\u0E07"
       - "\u0938\u0942\u0905\u0930 \u0915\u0947 \u0915\u091F\u0947 \u091F\u0941\u0915\u0921\u093C\u094B\u0902
         \u0915\u0940 \u0938\u0940\u0916"
+      Flags: 000000000000000000000000000000
+      Languages_Touch: []
+    - Term: Portuguese
+      TermType: 0
+      Description: 
+      Languages:
+      - Portuguese
+      - "Ti\u1EBFng B\u1ED3 \u0110\xE0o Nha"
+      - "\u8461\u8404\u7259\u8BED"
+      - "\uD3EC\uB974\uD22C\uAC08\uC5B4"
+      - "\u30DD\u30EB\u30C8\u30AC\u30EB\u8A9E"
+      - "Portugu\xEAs"
+      - "Portugu\xE9s"
+      - Portugais
+      - Portugiesisch
+      - Portoghese
+      - "\u041F\u043E\u0440\u0442\u0443\u0433\u0430\u043B\u044C\u0441\u043A\u0438\u0439"
+      - "\u0E42\u0E1B\u0E23\u0E15\u0E38\u0E40\u0E01\u0E2A"
+      - "\u092A\u0941\u0930\u094D\u0924\u0917\u093E\u0932\u0940"
+      - "\u0E42\u0E1B\u0E23\u0E15\u0E38\u0E40\u0E01\u0E2A"
+      - "\u092A\u0941\u0930\u094D\u0924\u0917\u093E\u0932\u0940"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Pretzel
@@ -3139,6 +3358,27 @@ MonoBehaviour:
       - "\u0930\u094B\u0938\u094D\u091F \u092C\u0940\u092B\u093C"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
+    - Term: Russian
+      TermType: 0
+      Description: 
+      Languages:
+      - Russian
+      - "Ti\u1EBFng Nga"
+      - "\u4FC4\u8BED"
+      - "\uB7EC\uC2DC\uC544\uC5B4"
+      - "\u30ED\u30B7\u30A2\u8A9E"
+      - Russo
+      - Ruso
+      - Russe
+      - Russisch
+      - Russo
+      - "\u0420\u0443\u0441\u0441\u043A\u0438\u0439"
+      - "\u0E23\u0E31\u0E2A\u0E40\u0E0B\u0E35\u0E22"
+      - "\u0930\u0942\u0938\u0940"
+      - "\u0E23\u0E31\u0E2A\u0E40\u0E0B\u0E35\u0E22"
+      - "\u0930\u0942\u0938\u0940"
+      Flags: 000000000000000000000000000000
+      Languages_Touch: []
     - Term: Salmon
       TermType: 0
       Description: 
@@ -3228,27 +3468,34 @@ MonoBehaviour:
       Description: 
       Languages:
       - Secret items hide their color until sorted correctly!
-      - "V\u1EADt ph\u1EA9m b\xED m\u1EADt \u1EA9n m\xE0u cho \u0111\u1EBFn khi \u0111\u01B0\u1EE3c
-        s\u1EAFp \u0111\xFAng!"
-      - "\u79D8\u5BC6\u7269\u54C1\u4F1A\u9690\u85CF\u989C\u8272\uFF0C\u76F4\u5230\u6B63\u786E\u6392\u5E8F\uFF01"
-      - "\uBE44\uBC00 \uC544\uC774\uD15C\uC740 \uC62C\uBC14\uB974\uAC8C \uC815\uB9AC\uD560
-        \uB54C\uAE4C\uC9C0 \uC0C9\uC774 \uC228\uACA8\uC9D1\uB2C8\uB2E4!"
+      - "V\u1EADt ph\u1EA9m b\xED m\u1EADt s\u1EBD \u1EA9n m\xE0u cho \u0111\u1EBFn
+        khi \u0111\u01B0\u1EE3c s\u1EAFp x\u1EBFp \u0111\xFAng!"
+      - "\u79D8\u5BC6\u7269\u54C1\u4F1A\u9690\u85CF\u989C\u8272\uFF0C\u76F4\u5230\u88AB\u6B63\u786E\u5206\u7C7B\uFF01"
+      - "\uBE44\uBC00 \uC544\uC774\uD15C\uC740 \uC62C\uBC14\uB974\uAC8C \uC815\uB82C\uB420
+        \uB54C\uAE4C\uC9C0 \uC0C9\uC744 \uC228\uAE41\uB2C8\uB2E4!"
       - "\u79D8\u5BC6\u306E\u30A2\u30A4\u30C6\u30E0\u306F\u6B63\u3057\u304F\u4E26\u3079\u308B\u307E\u3067\u8272\u304C\u96A0\u308C\u3066\u3044\u307E\u3059\uFF01"
-      - "Os itens secretos escondem sua cor at\xE9 serem organizados corretamente!"
+      - "Itens secretos escondem sua cor at\xE9 serem organizados corretamente!"
       - "\xA1Los objetos secretos ocultan su color hasta que sean ordenados correctamente!"
-      - "A titkos t\xE1rgyak rejtik a sz\xEDn\xFCket"
-      - " am\xEDg helyesen nem rendezik \u0151ket!"
-      - "Gizli \xF6\u011Feler do\u011Fru \u015Fekilde s\u0131ralanana kadar renklerini
-        saklar!"
-      - "Geheime Gegenst\xE4nde verbergen ihre Farbe"
-      - ' bis sie richtig sortiert werden!'
       - "Les objets secrets cachent leur couleur jusqu'\xE0 ce qu'ils soient correctement
         tri\xE9s !"
       - Gli oggetti segreti nascondono il loro colore fino a quando non saranno ordinati
         correttamente!
+      - "Gizli e\u015Fyalar do\u011Fru \u015Fekilde s\u0131ralanana kadar rengini
+        gizler!"
+      - "Geheime Gegenst\xE4nde verbergen ihre Farbe, bis sie richtig sortiert werden!"
+      - "A titkos t\xE1rgyak rejtik a sz\xEDn\xFCket, am\xEDg helyesen nem rendezik
+        \u0151ket!"
       - "\u0421\u0435\u043A\u0440\u0435\u0442\u043D\u044B\u0435 \u043F\u0440\u0435\u0434\u043C\u0435\u0442\u044B
         \u0441\u043A\u0440\u044B\u0432\u0430\u044E\u0442 \u0441\u0432\u043E\u0439
-        \u0446\u0432\u0435\u0442"
+        \u0446\u0432\u0435\u0442, \u043F\u043E\u043A\u0430 \u043D\u0435 \u0431\u0443\u0434\u0443\u0442
+        \u043E\u0442\u0441\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u044B
+        \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E!"
+      - "\u0E44\u0E2D\u0E40\u0E17\u0E47\u0E21\u0E25\u0E31\u0E1A\u0E08\u0E30\u0E0B\u0E48\u0E2D\u0E19\u0E2A\u0E35\u0E02\u0E2D\u0E07\u0E21\u0E31\u0E19\u0E08\u0E19\u0E01\u0E27\u0E48\u0E32\u0E08\u0E30\u0E16\u0E39\u0E01\u0E08\u0E31\u0E14\u0E40\u0E23\u0E35\u0E22\u0E07\u0E43\u0E2B\u0E49\u0E16\u0E39\u0E01\u0E15\u0E49\u0E2D\u0E07!"
+      - "\u0917\u0941\u092A\u094D\u0924 \u0935\u0938\u094D\u0924\u0941\u090F\u0901
+        \u0924\u092C \u0924\u0915 \u0905\u092A\u0928\u093E \u0930\u0902\u0917 \u091B\u0941\u092A\u093E\u0924\u0940
+        \u0939\u0948\u0902 \u091C\u092C \u0924\u0915 \u0909\u0928\u094D\u0939\u0947\u0902
+        \u0938\u0939\u0940 \u0922\u0902\u0917 \u0938\u0947 \u0928\u0939\u0940\u0902
+        \u091B\u093E\u0902\u091F\u093E \u091C\u093E\u0924\u093E \u0939\u0948!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Select any item to match
@@ -3256,21 +3503,22 @@ MonoBehaviour:
       Description: 
       Languages:
       - Select any item to match
-      - "Ch\u1ECDn b\u1EA5t k\u1EF3 m\xF3n n\xE0o \u0111\u1EC3 gh\xE9p"
+      - "Ch\u1ECDn b\u1EA5t k\u1EF3 v\u1EADt ph\u1EA9m n\xE0o \u0111\u1EC3 gh\xE9p"
       - "\u9009\u62E9\u4EFB\u610F\u7269\u54C1\u8FDB\u884C\u5339\u914D"
       - "\uC544\uC774\uD15C\uC744 \uC120\uD0DD\uD558\uC5EC \uB9E4\uCE58\uD558\uC138\uC694"
       - "\u30A2\u30A4\u30C6\u30E0\u3092\u9078\u3093\u3067\u30DE\u30C3\u30C1\u3055\u305B\u3088\u3046"
       - Selecione qualquer item para combinar
       - Selecciona cualquier objeto para emparejar
-      - "V\xE1lassz ki b\xE1rmilyen elemet a p\xE1ros\xEDt\xE1shoz"
-      - "E\u015Fle\u015Fmek i\xE7in herhangi bir \xF6\u011Feyi se\xE7in"
-      - "Ein beliebiges Element ausw\xE4hlen"
-      - ' um es zuzuordnen'
       - "S\xE9lectionnez n\u2019importe quel objet \xE0 associer"
       - Seleziona qualsiasi oggetto da abbinare
+      - "Herhangi bir e\u015Fyay\u0131 e\u015Fle\u015Ftirmek i\xE7in se\xE7in"
+      - "Ein beliebiges Element ausw\xE4hlen, um es zuzuordnen"
+      - "V\xE1lassz ki b\xE1rmilyen elemet a p\xE1ros\xEDt\xE1shoz"
       - "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043B\u044E\u0431\u043E\u0439
         \u043F\u0440\u0435\u0434\u043C\u0435\u0442 \u0434\u043B\u044F \u0441\u043E\u0432\u043F\u0430\u0434\u0435\u043D\u0438\u044F"
       - "\u0E40\u0E25\u0E37\u0E2D\u0E01\u0E44\u0E2D\u0E40\u0E17\u0E47\u0E21\u0E43\u0E14\u0E01\u0E47\u0E44\u0E14\u0E49\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E08\u0E31\u0E1A\u0E04\u0E39\u0E48"
+      - "\u092E\u0947\u0932 \u0916\u093E\u0928\u0947 \u0915\u0947 \u0932\u093F\u090F
+        \u0915\u094B\u0908 \u092D\u0940 \u0935\u0938\u094D\u0924\u0941 \u091A\u0941\u0928\u0947\u0902"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Send
@@ -3378,30 +3626,6 @@ MonoBehaviour:
       - "\u0926\u0941\u0915\u093E\u0928"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
-    - Term: Show your love by giving 5 Stars !
-      TermType: 0
-      Description: 
-      Languages:
-      - Show your love by giving 5 Stars !
-      - "Th\u1EC3 hi\u1EC7n t\xECnh y\xEAu c\u1EE7a b\u1EA1n b\u1EB1ng c\xE1ch t\u1EB7ng
-        5 sao!"
-      - "\u7528\u4E94\u661F\u597D\u8BC4\u5C55\u793A\u4F60\u7684\u7231\uFF01"
-      - "\uBCC4 5\uAC1C\uB85C \uC0AC\uB791\uC744 \uD45C\uD604\uD574\uBCF4\uC138\uC694!"
-      - "5 \u3064\u661F\u3092\u4ED8\u3051\u3066\u611B\u3092\u4F1D\u3048\u3088\u3046\uFF01"
-      - Mostre seu amor dando 5 estrelas!
-      - "\xA1Demuestra tu amor dando 5 estrellas!"
-      - Mutasd ki szereteted 5 csillaggal!
-      - "Be\u015F Y\u0131ld\u0131z vererek sevgini g\xF6ster!"
-      - Zeige deine Liebe mit 5 Sternen!
-      - "Montrez votre amour en donnant 5 \xE9toiles\_!"
-      - Mostra il tuo amore con 5 stelle!
-      - "\u041F\u043E\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u0432\u043E\u044E
-        \u043B\u044E\u0431\u043E\u0432\u044C"
-      - " \u043F\u043E\u0441\u0442\u0430\u0432\u0438\u0432 5 \u0437\u0432\u0435\u0437\u0434!"
-      - "\u0E41\u0E2A\u0E14\u0E07\u0E04\u0E27\u0E32\u0E21\u0E23\u0E31\u0E01\u0E02\u0E2D\u0E07\u0E04\u0E38\u0E13\u0E42\u0E14\u0E22\u0E43\u0E2B\u0E49
-        5 \u0E14\u0E32\u0E27!"
-      Flags: 000000000000000000000000000000
-      Languages_Touch: []
     - Term: Show your love by giving 5 Stars!
       TermType: 0
       Description: 
@@ -3414,16 +3638,18 @@ MonoBehaviour:
       - "5\u3064\u661F\u3092\u4ED8\u3051\u3066\u611B\u3092\u4F1D\u3048\u3088\u3046\uFF01"
       - Mostre seu amor dando 5 estrelas!
       - "\xA1Demuestra tu amor dando 5 estrellas!"
-      - Mutasd ki szereteted 5 csillaggal!
+      - "Montrez votre amour en donnant 5 \xE9toiles !"
       - "Be\u015F Y\u0131ld\u0131z vererek sevgini g\xF6ster!"
       - Zeige deine Liebe mit 5 Sternen!
-      - "Montrez votre amour en donnant 5 \xE9toiles\_!"
+      - Mutasd ki szereteted 5 csillaggal!
       - Mostra il tuo amore con 5 stelle!
       - "\u041F\u043E\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u0432\u043E\u044E
-        \u043B\u044E\u0431\u043E\u0432\u044C"
-      - " \u043F\u043E\u0441\u0442\u0430\u0432\u0438\u0432 5 \u0437\u0432\u0435\u0437\u0434!"
+        \u043B\u044E\u0431\u043E\u0432\u044C, \u043F\u043E\u0441\u0442\u0430\u0432\u0438\u0432
+        5 \u0437\u0432\u0435\u0437\u0434!"
       - "\u0E41\u0E2A\u0E14\u0E07\u0E04\u0E27\u0E32\u0E21\u0E23\u0E31\u0E01\u0E02\u0E2D\u0E07\u0E04\u0E38\u0E13\u0E42\u0E14\u0E22\u0E43\u0E2B\u0E49
         5 \u0E14\u0E32\u0E27!"
+      - "\u0905\u092A\u0928\u093E \u092A\u094D\u092F\u093E\u0930 \u0926\u093F\u0916\u093E\u090F\u0902
+        - 5 \u0938\u094D\u091F\u093E\u0930 \u0926\u0947\u0902!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Shrimp
@@ -3437,14 +3663,14 @@ MonoBehaviour:
       - "\u30A8\u30D3"
       - "Camar\xE3o"
       - "Camar\xF3n"
-      - "R\xE1k"
-      - Gamberetto
+      - Udang
       - Karides
       - Garnele
       - Crevette
       - Gamberetto
       - "\u041A\u0440\u0435\u0432\u0435\u0442\u043A\u0430"
       - "\u0E01\u0E38\u0E49\u0E07"
+      - "\u091D\u0940\u0902\u0917\u093E"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Shuffle
@@ -3528,16 +3754,30 @@ MonoBehaviour:
         uma vez que todo o gelo seja destru\xEDdo!"
       - "Ordena los objetos para romper las capas de hielo. Podr\xE1s moverlos cuando
         desaparezca todo el hielo!"
-      - "Rendezd a t\xE1rgyakat"
-      - " hogy felt\xF6rd a j\xE9gr\xE9tegeket. Mozgatni csak akkor tudod \u0151ket"
-      - " ha minden j\xE9g elt\u0171nt!"
+      - "Triez les objets pour briser les couches de glace. Vous pourrez les d\xE9placer
+        une fois la glace compl\xE8tement disparue!"
+      - Ordina gli oggetti per rompere gli strati di ghiaccio. Puoi spostarli solo
+        dopo aver eliminato tutto il ghiaccio!
+      - Sortiere die Elemente, um die Eisschichten zu durchbrechen. Du kannst sie
+        bewegen, wenn das gesamte Eis entfernt wurde.
+      - "Rendezd a t\xE1rgyakat, hogy felt\xF6rd a j\xE9gr\xE9tegeket. Mozgatni csak
+        akkor tudod \u0151ket, ha minden j\xE9g elt\u0171nt!"
       - "E\u015Fyalar\u0131 buz katmanlar\u0131n\u0131 k\u0131racak \u015Fekilde
         s\u0131rala. B\xFCt\xFCn buz temizlenince \xF6\u011Feleri hareket ettirebilirsin!"
-      - Sortiere die Elemente
-      - ' um die Eisschichten zu durchbrechen. Du kannst sie bewegen'
-      - ' wenn das gesamte Eis entfernt wurde.'
-      - "Triez les objets pour briser les couches de glace. Vous pourrez les d\xE9placer
-        une fois la glace compl\xE8tement disparue"
+      - "\u041E\u0442\u0441\u043E\u0440\u0442\u0438\u0440\u0443\u0439\u0442\u0435
+        \u043F\u0440\u0435\u0434\u043C\u0435\u0442\u044B, \u0447\u0442\u043E\u0431\u044B
+        \u0440\u0430\u0437\u0431\u0438\u0442\u044C \u043B\u0435\u0434\u044F\u043D\u044B\u0435
+        \u0441\u043B\u043E\u0438. \u041F\u0435\u0440\u0435\u043C\u0435\u0449\u0430\u0442\u044C
+        \u043C\u043E\u0436\u043D\u043E, \u043A\u043E\u0433\u0434\u0430 \u0432\u0435\u0441\u044C
+        \u043B\u0435\u0434 \u0438\u0441\u0447\u0435\u0437\u043D\u0435\u0442!"
+      - "\u0E08\u0E31\u0E14\u0E44\u0E2D\u0E40\u0E17\u0E47\u0E21\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E17\u0E25\u0E32\u0E22\u0E19\u0E49\u0E33\u0E41\u0E02\u0E47\u0E07
+        \u0E2A\u0E32\u0E21\u0E32\u0E23\u0E16\u0E22\u0E49\u0E32\u0E22\u0E44\u0E14\u0E49\u0E40\u0E21\u0E37\u0E48\u0E2D\u0E41\u0E1C\u0E48\u0E19\u0E19\u0E49\u0E33\u0E41\u0E02\u0E47\u0E07\u0E16\u0E39\u0E01\u0E17\u0E33\u0E25\u0E32\u0E22\u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14!"
+      - "\u0906\u0907\u0938 \u0932\u0947\u092F\u0930 \u0924\u094B\u0921\u093C\u0928\u0947
+        \u0915\u0947 \u0932\u093F\u090F \u0935\u0938\u094D\u0924\u0941\u0913\u0902
+        \u0915\u094B \u091B\u093E\u0902\u091F\u0947\u0902\u0964 \u091C\u092C \u0938\u093E\u0930\u0940
+        \u092C\u0930\u094D\u092B \u0939\u091F \u091C\u093E\u090F \u0924\u094B \u0906\u092A
+        \u0909\u0928\u094D\u0939\u0947\u0902 \u0939\u093F\u0932\u093E \u0938\u0915\u0924\u0947
+        \u0939\u0948\u0902\u0964"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Sort the bomb-tagged item within the number of moves shown on the bomb!
@@ -3553,14 +3793,14 @@ MonoBehaviour:
       - "\u30DC\u30E0\u306B\u8868\u793A\u3055\u308C\u305F\u624B\u6570\u4EE5\u5185\u306B\u30DC\u30E0\u4ED8\u304D\u30A2\u30A4\u30C6\u30E0\u3092\u4E26\u3079\u3088\u3046\uFF01"
       - "Organize o item marcado com bomba no n\xFAmero de movimentos indicados!"
       - "\xA1Ordena el objeto con bomba en el n\xFAmero de movimientos mostrados!"
+      - "Triez l'objet marqu\xE9 de la bombe dans le nombre de d\xE9placements indiqu\xE9s!"
+      - "Ordina l\u2019oggetto con la bomba nel numero di mosse indicato!"
+      - "Sortiere den bombenmarkierten Gegenstand innerhalb der durch die Bombe angegebenen
+        Z\xFCge!"
       - "Rendezd a bomb\xE1val jel\xF6lt t\xE1rgyat a megadott l\xE9p\xE9ssz\xE1mon
         bel\xFCl!"
       - "Bombal\u0131 etiketi olan \xF6\u011Feyi belirtilen hamle say\u0131s\u0131nda
         s\u0131rala!"
-      - "Sortiere den bombenmarkierten Gegenstand innerhalb der durch die Bombe angegebenen
-        Z\xFCge!"
-      - "Triez l'objet marqu\xE9 de la bombe dans le nombre de d\xE9placements indiqu\xE9s!"
-      - "Ordina l\u2019oggetto con la bomba nel numero di mosse indicato!"
       - "\u041E\u0442\u0441\u043E\u0440\u0442\u0438\u0440\u0443\u0439\u0442\u0435
         \u043F\u0440\u0435\u0434\u043C\u0435\u0442 \u0441 \u0431\u043E\u043C\u0431\u043E\u0439
         \u0437\u0430 \u0443\u043A\u0430\u0437\u0430\u043D\u043D\u043E\u0435 \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E
@@ -3584,18 +3824,25 @@ MonoBehaviour:
       - "\u30D5\u30BF\u306B\u8868\u793A\u3055\u308C\u305F\u30A2\u30A4\u30C6\u30E0\u3092\u6B63\u3057\u304F\u4E26\u3079\u3066\u3053\u306E\u30C8\u30EC\u30A4\u3092\u89E3\u9664\u3057\u3088\u3046\uFF01"
       - Organize os itens corretos mostrados na tampa para desbloquear esta bandeja!
       - "\xA1Ordena los objetos mostrados en la tapa para desbloquear esta bandeja!"
-      - "Rendezd a fed\xE9len l\xE1that\xF3 helyes t\xE1rgyakat a t\xE1lca felold\xE1s\xE1hoz!"
-      - "Kapakta g\xF6sterilen do\u011Fru \xFCr\xFCnleri s\u0131ralay\u0131p tepsinin
-        kilidini a\xE7!"
-      - "Sortiere die richtigen Gegenst\xE4nde wie auf dem Deckel angezeigt"
-      - ' um dieses Tablett zu entsperren!'
       - "Triez les bons objets indiqu\xE9s sur le couvercle pour d\xE9verrouiller
         ce plateau !"
       - Ordina i giusti oggetti mostrati sul coperchio per sbloccare questo vassoio!
+      - "Sortiere die richtigen Gegenst\xE4nde wie auf dem Deckel angezeigt, um dieses
+        Tablett zu entsperren!"
+      - "Rendezd a fed\xE9len l\xE1that\xF3 helyes t\xE1rgyakat a t\xE1lca felold\xE1s\xE1hoz!"
+      - "Kapakta g\xF6sterilen do\u011Fru \xFCr\xFCnleri s\u0131ralay\u0131p tepsinin
+        kilidini a\xE7!"
       - "\u041E\u0442\u0441\u043E\u0440\u0442\u0438\u0440\u0443\u0439\u0442\u0435
-        \u043D\u0443\u0436\u043D\u044B\u0435 \u043F\u0440\u0435\u0434\u043C\u0435\u0442\u044B"
-      - " \u043F\u043E\u043A\u0430\u0437\u0430\u043D\u043D\u044B\u0435 \u043D\u0430
-        \u043A\u0440\u044B\u0448\u043A\u0435"
+        \u043D\u0443\u0436\u043D\u044B\u0435 \u043F\u0440\u0435\u0434\u043C\u0435\u0442\u044B,
+        \u043F\u043E\u043A\u0430\u0437\u0430\u043D\u043D\u044B\u0435 \u043D\u0430
+        \u043A\u0440\u044B\u0448\u043A\u0435, \u0447\u0442\u043E\u0431\u044B \u0440\u0430\u0437\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u0442\u044C
+        \u044D\u0442\u043E\u0442 \u043F\u043E\u0434\u043D\u043E\u0441!"
+      - "\u0E08\u0E31\u0E14\u0E40\u0E23\u0E35\u0E22\u0E07\u0E44\u0E2D\u0E40\u0E17\u0E47\u0E21\u0E17\u0E35\u0E48\u0E16\u0E39\u0E01\u0E15\u0E49\u0E2D\u0E07\u0E15\u0E32\u0E21\u0E17\u0E35\u0E48\u0E41\u0E2A\u0E14\u0E07\u0E1A\u0E19\u0E1D\u0E32\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E1B\u0E25\u0E14\u0E25\u0E47\u0E2D\u0E01\u0E16\u0E32\u0E14\u0E19\u0E35\u0E49!"
+      - "\u0922\u0915\u094D\u0915\u0928 \u092A\u0930 \u0926\u093F\u0916\u093E\u090F
+        \u0917\u090F \u0938\u0939\u0940 \u0935\u0938\u094D\u0924\u0941\u0913\u0902
+        \u0915\u094B \u091B\u093E\u0902\u091F\u0947\u0902 \u0924\u093E\u0915\u093F
+        \u092F\u0939 \u091F\u094D\u0930\u0947 \u0905\u0928\u0932\u0949\u0915 \u0939\u094B
+        \u0938\u0915\u0947!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Sort the items with matching key to unlock the locked tray!
@@ -3612,20 +3859,25 @@ MonoBehaviour:
       - Organize os itens com chave correspondente para desbloquear a bandeja trancada!
       - "\xA1Ordena los objetos con llave correspondiente para desbloquear la bandeja
         bloqueada!"
-      - "Rendezd a kulccsal rendelkez\u0151 t\xE1rgyakat a z\xE1rt t\xE1lca felold\xE1s\xE1hoz!"
-      - "Anahtarl\u0131 e\u015Fyalar\u0131 s\u0131ralay\u0131p kilitli tepsiyi a\xE7\u0131n!"
-      - "Sortiere die Gegenst\xE4nde mit passendem Schl\xFCssel"
-      - ' um das Tablett zu entsperren!'
       - "Triez les objets avec la cl\xE9 correspondante pour d\xE9verrouiller le
         plateau verrouill\xE9 !"
       - Ordina gli oggetti con la chiave corrispondente per sbloccare il vassoio
         bloccato!
+      - "Sortiere die Gegenst\xE4nde mit passendem Schl\xFCssel, um das Tablett zu
+        entsperren!"
+      - "Rendezd a kulccsal rendelkez\u0151 t\xE1rgyakat a z\xE1rt t\xE1lca felold\xE1s\xE1hoz!"
+      - "Anahtarl\u0131 e\u015Fyalar\u0131 s\u0131ralay\u0131p kilitli tepsiyi a\xE7\u0131n!"
       - "\u041E\u0442\u0441\u043E\u0440\u0442\u0438\u0440\u0443\u0439\u0442\u0435
         \u043F\u0440\u0435\u0434\u043C\u0435\u0442\u044B \u0441 \u043F\u043E\u0434\u0445\u043E\u0434\u044F\u0449\u0438\u043C
-        \u043A\u043B\u044E\u0447\u043E\u043C"
-      - " \u0447\u0442\u043E\u0431\u044B \u043E\u0442\u043A\u0440\u044B\u0442\u044C
+        \u043A\u043B\u044E\u0447\u043E\u043C, \u0447\u0442\u043E\u0431\u044B \u043E\u0442\u043A\u0440\u044B\u0442\u044C
         \u0437\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0439
         \u043F\u043E\u0434\u043D\u043E\u0441!"
+      - "\u0E08\u0E31\u0E14\u0E40\u0E23\u0E35\u0E22\u0E07\u0E44\u0E2D\u0E40\u0E17\u0E47\u0E21\u0E17\u0E35\u0E48\u0E21\u0E35\u0E25\u0E39\u0E01\u0E01\u0E38\u0E0D\u0E41\u0E08\u0E43\u0E2B\u0E49\u0E15\u0E23\u0E07\u0E01\u0E31\u0E19\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E1B\u0E25\u0E14\u0E25\u0E47\u0E2D\u0E01\u0E16\u0E32\u0E14\u0E17\u0E35\u0E48\u0E16\u0E39\u0E01\u0E25\u0E47\u0E2D\u0E01!"
+      - "\u092E\u093F\u0932\u0924\u0940 \u0939\u0941\u0908 \u091A\u093E\u092C\u0940
+        \u0935\u093E\u0932\u0940 \u0935\u0938\u094D\u0924\u0941\u0913\u0902 \u0915\u094B
+        \u091B\u093E\u0902\u091F\u0947\u0902 \u0924\u093E\u0915\u093F \u0932\u0949\u0915
+        \u0915\u0940 \u0917\u0908 \u091F\u094D\u0930\u0947 \u0905\u0928\u0932\u0949\u0915
+        \u0939\u094B \u0938\u0915\u0947!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Sound
@@ -3649,6 +3901,27 @@ MonoBehaviour:
       - "\u0927\u094D\u0935\u0928\u093F"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
+    - Term: Spanish
+      TermType: 0
+      Description: 
+      Languages:
+      - Spanish
+      - "Ti\u1EBFng T\xE2y Ban Nha"
+      - "\u897F\u73ED\u7259\u8BED"
+      - "\uC2A4\uD398\uC778\uC5B4"
+      - "\u30B9\u30DA\u30A4\u30F3\u8A9E"
+      - Espanhol
+      - "Espa\xF1ol"
+      - Espagnol
+      - Spanisch
+      - Spagnolo
+      - "\u0418\u0441\u043F\u0430\u043D\u0441\u043A\u0438\u0439"
+      - "\u0E2A\u0E40\u0E1B\u0E19"
+      - "\u0938\u094D\u092A\u0947\u0928\u093F\u0936"
+      - "\u0E2A\u0E40\u0E1B\u0E19"
+      - "\u0938\u094D\u092A\u0947\u0928\u093F\u0936"
+      Flags: 000000000000000000000000000000
+      Languages_Touch: []
     - Term: Spatula
       TermType: 0
       Description: 
@@ -3662,8 +3935,8 @@ MonoBehaviour:
       - "Esp\xE1tula"
       - Spatula
       - Spatula
-      - Spatel
       - Spatule
+      - Spatel
       - Spatola
       - "\u041B\u043E\u043F\u0430\u0442\u043A\u0430"
       - "\u0E1E\u0E32\u0E22"
@@ -3679,12 +3952,12 @@ MonoBehaviour:
       - "\u9C7F\u9C7C"
       - "\uC624\uC9D5\uC5B4"
       - "\u30A4\u30AB"
-      - Lula
       - Calamar
+      - Lula
       - Tintahal
       - Kalamar
-      - Aal
       - Calmar
+      - Aal
       - Calamaro
       - "\u041A\u0430\u043B\u044C\u043C\u0430\u0440"
       - "\u0E1B\u0E25\u0E32\u0E2B\u0E21\u0E36\u0E01"
@@ -3700,16 +3973,16 @@ MonoBehaviour:
       - "\u661F\u7BB1"
       - "\uBCC4 \uC0C1\uC790"
       - "\u30B9\u30BF\u30FC \u30C1\u30A7\u30B9\u30C8"
-      - "Chest \xE0 \xC9toiles"
-      - Cofre Estrella
-      - Baule Stella
-      - Cofre de Estrelas
-      - Bau Estrela
+      - Cofre de estrelas
+      - Cofre de estrellas
+      - Petik bintang
+      - "Y\u0131ld\u0131z Sand\u0131\u011F\u0131"
       - Sternentruhe
-      - Cofre de Estrelas
-      - Baule delle Stelle
-      - "\u0421\u0443\u043D\u0434\u0443\u043A \u0437\u0432\u0451\u0437\u0434"
-      - "\u0E01\u0E25\u0E48\u0E2D\u0E07\u0E14\u0E32\u0E27"
+      - "Coffre \xE9toil\xE9"
+      - Baule stellare
+      - "\u0421\u0443\u043D\u0434\u0443\u043A \u0441\u043E \u0437\u0432\u0435\u0437\u0434\u0430\u043C\u0438"
+      - "\u0E2B\u0E35\u0E1A\u0E14\u0E32\u0E27"
+      - "\u0938\u093F\u0924\u093E\u0930\u093E \u0938\u0902\u0926\u0942\u0915"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Starter
@@ -3721,16 +3994,16 @@ MonoBehaviour:
       - "\u5165\u95E8"
       - "\uC2A4\uD0C0\uD130"
       - "\u30B9\u30BF\u30FC\u30BF\u30FC"
-      - "Entr\xE9e"
-      - Principiante
-      - Principiante
       - Iniciante
-      - "In\xEDcio"
+      - Principiante
+      - Pemula
+      - "Ba\u015Flang\u0131\xE7"
       - Starter
-      - "D\xE9butant"
+      - "Entr\xE9e"
       - Principiante
       - "\u041D\u0430\u0447\u0430\u043B\u044C\u043D\u044B\u0439"
       - "\u0E40\u0E23\u0E34\u0E48\u0E21\u0E15\u0E49\u0E19"
+      - "\u0936\u0941\u0930\u0941\u0906\u0924"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Starter Bundle
@@ -3742,16 +4015,16 @@ MonoBehaviour:
       - "\u65B0\u624B\u793C\u5305"
       - "\uC2A4\uD0C0\uD130 \uBC88\uB4E4"
       - "\u30B9\u30BF\u30FC\u30BF\u30FC\u30D0\u30F3\u30C9\u30EB"
-      - "Coffret de D\xE9marrage"
+      - Pacote Inicial
       - Paquete Inicial
-      - Pacchetto Iniziale
-      - Pacote Inicial
-      - Pacote Inicial
+      - Paket Pemula
+      - "Ba\u015Flang\u0131\xE7 Paketi"
       - Starterpaket
-      - "Pack de D\xE9marrage"
-      - Pacchetto Starter
+      - "Coffret de D\xE9marrage"
+      - Pacchetto Iniziale
       - "\u0421\u0442\u0430\u0440\u0442\u043E\u0432\u044B\u0439 \u043D\u0430\u0431\u043E\u0440"
       - "\u0E0A\u0E38\u0E14\u0E40\u0E23\u0E34\u0E48\u0E21\u0E15\u0E49\u0E19"
+      - "\u092A\u094D\u0930\u093E\u0930\u0902\u092D\u093F\u0915 \u092C\u0902\u0921\u0932"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Steak
@@ -3763,16 +4036,16 @@ MonoBehaviour:
       - "\u725B\u6392"
       - "\uC2A4\uD14C\uC774\uD06C"
       - "\u30B9\u30C6\u30FC\u30AD"
-      - Steak
+      - Bife
       - Bistec
-      - Bistecca
-      - Bife
-      - Bife
+      - Steak
+      - Biftek
       - Steak
       - Steak
       - Bistecca
       - "\u0421\u0442\u0435\u0439\u043A"
       - "\u0E2A\u0E40\u0E15\u0E47\u0E01"
+      - "\u0938\u094D\u091F\u0947\u0915"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Strawberry
@@ -3784,16 +4057,16 @@ MonoBehaviour:
       - "\u8349\u8393"
       - "\uB538\uAE30"
       - "\u3044\u3061\u3054"
-      - Fraise
+      - Morango
       - Fresa
-      - Fragola
-      - Morango
-      - Morango
+      - Stroberi
+      - "\xC7ilek"
       - Erdbeere
       - Fraise
       - Fragola
       - "\u041A\u043B\u0443\u0431\u043D\u0438\u043A\u0430"
       - "\u0E2A\u0E15\u0E23\u0E2D\u0E27\u0E4C\u0E40\u0E1A\u0E2D\u0E23\u0E4C\u0E23\u0E35\u0E48"
+      - "\u0938\u094D\u091F\u094D\u0930\u0949\u092C\u0947\u0930\u0940"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Sweets
@@ -3805,16 +4078,16 @@ MonoBehaviour:
       - "\u751C\u98DF"
       - "\uACFC\uC790"
       - "\u30B9\u30A4\u30FC\u30C4"
-      - Bonbons
+      - Doces
       - Dulces
-      - Dolci
-      - Doces
-      - Doces
+      - Permen
+      - "Tatl\u0131lar"
       - "S\xFC\xDFigkeiten"
       - Bonbons
       - Dolci
       - "\u0421\u043B\u0430\u0434\u043E\u0441\u0442\u0438"
       - "\u0E02\u0E19\u0E21\u0E2B\u0E27\u0E32\u0E19"
+      - "\u092E\u093F\u0920\u093E\u0907\u092F\u093E\u0901"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Tacos
@@ -3828,14 +4101,14 @@ MonoBehaviour:
       - "\u30BF\u30B3\u30B9"
       - Tacos
       - Tacos
-      - Tacos
-      - Tacos
-      - Tacos
+      - Taco
+      - Tako
       - Tacos
       - Tacos
       - Tacos
       - "\u0422\u0430\u043A\u043E"
       - "\u0E17\u0E32\u0E42\u0E01\u0E49"
+      - "\u091F\u093E\u0915\u094B"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Tap To Continue
@@ -3847,16 +4120,18 @@ MonoBehaviour:
       - "\u70B9\u51FB\u7EE7\u7EED"
       - "\uD0ED\uD558\uC5EC \uACC4\uC18D"
       - "\u30BF\u30C3\u30D7\u3057\u3066\u7D9A\u884C"
-      - Touchez pour continuer
+      - Toque para continuar
       - Toca para continuar
-      - Tocca per continuare
-      - Toque para continuar
-      - Toque para continuar
+      - Ketuk untuk melanjutkan
+      - "Devam etmek i\xE7in dokunun"
       - Zum Fortfahren tippen
       - Touchez pour continuer
       - Tocca per continuare
-      - "\u041D\u0430\u0436\u043C\u0438\u0442\u0435"
-      - " \u0447\u0442\u043E\u0431\u044B \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C"
+      - "\u041D\u0430\u0436\u043C\u0438\u0442\u0435, \u0447\u0442\u043E\u0431\u044B
+        \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C"
+      - "\u0E41\u0E15\u0E30\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E14\u0E33\u0E40\u0E19\u0E34\u0E19\u0E01\u0E32\u0E23\u0E15\u0E48\u0E2D"
+      - "\u091C\u093E\u0930\u0940 \u0930\u0916\u0928\u0947 \u0915\u0947 \u0932\u093F\u090F
+        \u091F\u0948\u092A \u0915\u0930\u0947\u0902"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Tea Bag
@@ -3868,16 +4143,16 @@ MonoBehaviour:
       - "\u8336\u5305"
       - "\uD2F0\uBC31"
       - "\u30C6\u30A3\u30FC\u30D0\u30C3\u30B0"
-      - "Sachet de th\xE9"
+      - "Saquinho de Ch\xE1"
       - "Bolsa de t\xE9"
-      - "Bustina di t\xE8"
-      - "Saquinho de Ch\xE1"
-      - "Saquinho de Ch\xE1"
+      - Kantong Teh
+      - "\xC7ay Po\u015Feti"
       - Teebeutel
       - "Sachet de th\xE9"
       - "Bustina di t\xE8"
       - "\u041F\u0430\u043A\u0435\u0442\u0438\u043A \u0447\u0430\u044F"
       - "\u0E16\u0E38\u0E07\u0E0A\u0E32"
+      - "\u091F\u0940 \u092C\u0948\u0917"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Tea Time
@@ -3889,16 +4164,37 @@ MonoBehaviour:
       - "\u8336\u6B47\u65F6\u95F4"
       - "\uD2F0\uD0C0\uC784"
       - "\u30C6\u30A3\u30FC\u30BF\u30A4\u30E0"
-      - "Heure du th\xE9"
+      - "Hora do Ch\xE1"
       - "Hora del t\xE9"
-      - "Ora del t\xE8"
-      - "Hora do Ch\xE1"
-      - "Hora do Ch\xE1"
+      - Waktu minum teh
+      - "\xC7ay Saati"
       - Teestunde
       - "Heure du th\xE9"
       - "Ora del t\xE8"
       - "\u0427\u0430\u0435\u043F\u0438\u0442\u0438\u0435"
-      - "\u0E40\u0E27\u0E25\u0E32\u0E14\u0E37\u0E48\u0E21\u0E0A\u0E32"
+      - "\u0E40\u0E27\u0E25\u0E32\u0E19\u0E49\u0E33\u0E0A\u0E32"
+      - "\u091A\u093E\u092F \u0915\u093E \u0938\u092E\u092F"
+      Flags: 000000000000000000000000000000
+      Languages_Touch: []
+    - Term: Thai
+      TermType: 0
+      Description: 
+      Languages:
+      - Thai
+      - "Ti\u1EBFng Th\xE1i"
+      - "\u6CF0\u8BED"
+      - "\uD0DC\uAD6D\uC5B4"
+      - "\u30BF\u30A4\u8A9E"
+      - "Tailand\xEAs"
+      - "Tailand\xE9s"
+      - Thai
+      - Tayca
+      - "Thail\xE4ndisch"
+      - "Tha\xEF"
+      - Tailandese
+      - "\u0422\u0430\u0439\u0441\u043A\u0438\u0439"
+      - "\u0E44\u0E17\u0E22"
+      - "\u0925\u093E\u0908"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Toaster
@@ -3910,16 +4206,16 @@ MonoBehaviour:
       - "\u70E4\u9762\u5305\u673A"
       - "\uD1A0\uC2A4\uD130"
       - "\u30C8\u30FC\u30B9\u30BF\u30FC"
-      - Grille-pain
+      - Torradeira
       - Tostadora
-      - ' Tostapane'
-      - Torradeira
-      - Torradeira
+      - Pemanggang roti
+      - "Ekmek K\u0131zartma Makinesi"
       - Toaster
       - Grille-pain
       - Tostapane
       - "\u0422\u043E\u0441\u0442\u0435\u0440"
       - "\u0E40\u0E04\u0E23\u0E37\u0E48\u0E2D\u0E07\u0E1B\u0E34\u0E49\u0E07\u0E02\u0E19\u0E21\u0E1B\u0E31\u0E07"
+      - "\u091F\u0942\u0938\u094D\u091F\u0930"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Trays on conveyor moves continuously!
@@ -3932,17 +4228,40 @@ MonoBehaviour:
       - "\uCEE8\uBCA0\uC774\uC5B4 \uC704\uC758 \uD2B8\uB808\uC774\uAC00 \uACC4\uC18D
         \uC6C0\uC9C1\uC785\uB2C8\uB2E4!"
       - "\u30B3\u30F3\u30D9\u30A2\u4E0A\u306E\u30C8\u30EC\u30A4\u306F\u52D5\u304D\u7D9A\u3051\u307E\u3059\uFF01"
-      - Les plateaux sur le convoyeur bougent en continu !
+      - As bandejas na esteira se movem continuamente!
       - "\xA1Las bandejas en la cinta transportadora se mueven continuamente!"
-      - I vassoi sul nastro trasportatore si muovono continuamente!
-      - As bandejas na esteira se movem continuamente!
-      - As bandejas na esteira se movem continuamente!
+      - Baki di atas konveyor bergerak terus-menerus!
+      - "Konvey\xF6r \xFCzerindeki tepsiler s\xFCrekli hareket ediyor!"
       - "Die Tabletts bewegen sich auf dem F\xF6rderband kontinuierlich!"
       - Les plateaux sur le convoyeur bougent en continu !
       - I vassoi sul nastro trasportatore si muovono continuamente!
       - "\u041B\u043E\u0442\u043A\u0438 \u043D\u0430 \u043A\u043E\u043D\u0432\u0435\u0439\u0435\u0440\u0435
         \u0434\u0432\u0438\u0433\u0430\u044E\u0442\u0441\u044F \u043D\u0435\u043F\u0440\u0435\u0440\u044B\u0432\u043D\u043E!"
       - "\u0E16\u0E32\u0E14\u0E1A\u0E19\u0E2A\u0E32\u0E22\u0E1E\u0E32\u0E19\u0E40\u0E04\u0E25\u0E37\u0E48\u0E2D\u0E19\u0E17\u0E35\u0E48\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E15\u0E48\u0E2D\u0E40\u0E19\u0E37\u0E48\u0E2D\u0E07!"
+      - "\u0915\u0928\u094D\u0935\u0947\u092F\u0930 \u092A\u0930 \u091F\u094D\u0930\u0947
+        \u0932\u0917\u093E\u0924\u093E\u0930 \u091A\u0932\u0924\u0940 \u0930\u0939\u0924\u0940
+        \u0939\u0948!"
+      Flags: 000000000000000000000000000000
+      Languages_Touch: []
+    - Term: Turkish
+      TermType: 0
+      Description: 
+      Languages:
+      - Turkish
+      - "Ti\u1EBFng Th\u1ED5 Nh\u0129 K\u1EF3"
+      - "\u571F\u8033\u5176\u8BED"
+      - "\uD130\uD0A4\uC5B4"
+      - "\u30C8\u30EB\u30B3\u8A9E"
+      - Turco
+      - Turco
+      - Turki
+      - "T\xFCrk\xE7e"
+      - "T\xFCrkisch"
+      - Turc
+      - Turco
+      - "\u0422\u0443\u0440\u0435\u0446\u043A\u0438\u0439"
+      - "\u0E15\u0E38\u0E23\u0E01\u0E35"
+      - "\u0924\u0941\u0930\u094D\u0915\u0940"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Ultra Bundle
@@ -3954,16 +4273,16 @@ MonoBehaviour:
       - "\u7EC8\u6781\u793C\u5305"
       - "\uC6B8\uD2B8\uB77C \uBC88\uB4E4"
       - "\u30A6\u30EB\u30C8\u30E9\u30D0\u30F3\u30C9\u30EB"
-      - Coffret Ultra
+      - Pacote Ultra
       - Paquete Ultra
-      - Pacchetto Ultra
-      - Pacote Ultra
-      - Pacote Ultra
+      - Bundle Ultra
+      - Ultra Paket
       - Ultra-Paket
-      - Pack Ultra
+      - Coffret Ultra
       - Pacchetto Ultra
       - "\u0423\u043B\u044C\u0442\u0440\u0430-\u043D\u0430\u0431\u043E\u0440"
-      - "\u0E41\u0E1E\u0E47\u0E04\u0E2D\u0E31\u0E25\u0E15\u0E23\u0E49\u0E32"
+      - "\u0E41\u0E1E\u0E47\u0E04\u0E40\u0E01\u0E08\u0E2D\u0E31\u0E25\u0E15\u0E23\u0E49\u0E32"
+      - "\u0905\u0932\u094D\u091F\u094D\u0930\u093E \u092C\u0902\u0921\u0932"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Undo
@@ -3975,16 +4294,16 @@ MonoBehaviour:
       - "\u64A4\u9500"
       - "\uC2E4\uD589 \uCDE8\uC18C"
       - "\u5143\u306B\u623B\u3059"
-      - Annuler
+      - Desfazer
       - Deshacer
-      - Annulla
-      - Desfazer
-      - Desfazer
+      - Batal
+      - Geri Al
       - "R\xFCckg\xE4ngig machen"
       - Annuler
       - Annulla
       - "\u041E\u0442\u043C\u0435\u043D\u0438\u0442\u044C"
-      - "\u0E22\u0E49\u0E2D\u0E19\u0E01\u0E25\u0E31\u0E1A"
+      - "\u0E40\u0E25\u0E34\u0E01\u0E17\u0E33"
+      - "\u092A\u0942\u0930\u094D\u0935\u0935\u0924 \u0915\u0930\u0947\u0902"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Unlock another plate!
@@ -3996,17 +4315,18 @@ MonoBehaviour:
       - "\u89E3\u9501\u53E6\u4E00\u4E2A\u76D8\u5B50\uFF01"
       - "\uB2E4\uB978 \uC811\uC2DC\uB97C \uC7A0\uAE08 \uD574\uC81C\uD558\uC138\uC694!"
       - "\u3082\u30461\u679A\u76BF\u3092\u30A2\u30F3\u30ED\u30C3\u30AF\uFF01"
-      - "D\xE9bloquez une autre assiette !"
+      - Desbloquear outro prato!
       - "\xA1Desbloquea otro plato!"
-      - Sblocca un altro piatto!
-      - Desbloqueie outro prato!
-      - Desbloqueie outro prato!
+      - Buka piring tambahan!
+      - "Ba\u015Fka bir tabak a\xE7!"
       - Schalte einen weiteren Teller frei!
       - "D\xE9bloquez une autre assiette !"
       - Sblocca un altro piatto!
       - "\u041E\u0442\u043A\u0440\u043E\u0439\u0442\u0435 \u0435\u0449\u0435 \u043E\u0434\u043D\u0443
         \u0442\u0430\u0440\u0435\u043B\u043A\u0443!"
-      - "\u0E1B\u0E25\u0E14\u0E25\u0E47\u0E2D\u0E01\u0E08\u0E32\u0E19\u0E2D\u0E37\u0E48\u0E19!"
+      - "\u0E1B\u0E25\u0E14\u0E25\u0E47\u0E2D\u0E01\u0E08\u0E32\u0E19\u0E2D\u0E35\u0E01\u0E43\u0E1A!"
+      - "\u090F\u0915 \u0914\u0930 \u092A\u094D\u0932\u0947\u091F \u0905\u0928\u0932\u0949\u0915
+        \u0915\u0930\u0947\u0902!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Unlock another tray!
@@ -4018,17 +4338,18 @@ MonoBehaviour:
       - "\u89E3\u9501\u53E6\u4E00\u4E2A\u6258\u76D8\uFF01"
       - "\uB2E4\uB978 \uD2B8\uB808\uC774\uB97C \uC7A0\uAE08 \uD574\uC81C\uD558\uC138\uC694!"
       - "\u3082\u30461\u3064\u30C8\u30EC\u30A4\u3092\u30A2\u30F3\u30ED\u30C3\u30AF\uFF01"
-      - "D\xE9bloquez un autre plateau !"
+      - Desbloquear outra bandeja!
       - "\xA1Desbloquea otra bandeja!"
-      - Sblocca un altro vassoio!
-      - Desbloqueie outra bandeja!
-      - Desbloqueie outra bandeja!
+      - Buka baki tambahan!
+      - "Ba\u015Fka bir tepsi a\xE7!"
       - Schalte ein weiteres Tablett frei!
       - "D\xE9bloquez un autre plateau !"
       - Sblocca un altro vassoio!
       - "\u041E\u0442\u043A\u0440\u043E\u0439\u0442\u0435 \u0435\u0449\u0435 \u043E\u0434\u0438\u043D
         \u043F\u043E\u0434\u043D\u043E\u0441!"
-      - "\u0E1B\u0E25\u0E14\u0E25\u0E47\u0E2D\u0E01\u0E16\u0E32\u0E14\u0E2D\u0E37\u0E48\u0E19!"
+      - "\u0E1B\u0E25\u0E14\u0E25\u0E47\u0E2D\u0E01\u0E16\u0E32\u0E14\u0E2D\u0E35\u0E01\u0E43\u0E1A!"
+      - "\u090F\u0915 \u0914\u0930 \u091F\u094D\u0930\u0947 \u0905\u0928\u0932\u0949\u0915
+        \u0915\u0930\u0947\u0902!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Unlock at level
@@ -4040,18 +4361,19 @@ MonoBehaviour:
       - "\u5728 {[VALUE]} \u7EA7\u89E3\u9501"
       - "{[VALUE]} \uB808\uBCA8\uC5D0\uC11C \uC7A0\uAE08 \uD574\uC81C"
       - "{[VALUE]} \u30EC\u30D9\u30EB\u3067\u30A2\u30F3\u30ED\u30C3\u30AF"
-      - "D\xE9verrouillez au niveau {[VALUE]}"
-      - Desbloquea en el nivel {[VALUE]}
-      - Sblocca al livello {[VALUE]}
       - "Desbloquear no n\xEDvel {[VALUE]}"
-      - "Desbloquear no n\xEDvel {[VALUE]}"
+      - "\xA1Desbloquea al nivel {[VALUE]}!"
+      - Buka di level {[VALUE]}
+      - "{[VALUE]} seviyede a\xE7\u0131l\u0131r"
       - Auf Stufe {[VALUE]} freischalten
-      - "D\xE9bloquez au niveau {[VALUE]}"
+      - "D\xE9verrouillez au niveau {[VALUE]}"
       - Sblocca al livello {[VALUE]}
       - "\u041E\u0442\u043A\u0440\u043E\u0439\u0442\u0435 \u043D\u0430 \u0443\u0440\u043E\u0432\u043D\u0435
         {[VALUE]}"
-      - "\u0E1B\u0E25\u0E14\u0E25\u0E47\u0E2D\u0E01\u0E17\u0E35\u0E48\u0E40\u0E25\u0E40\u0E27\u0E25
+      - "\u0E1B\u0E25\u0E14\u0E25\u0E47\u0E2D\u0E01\u0E17\u0E35\u0E48\u0E23\u0E30\u0E14\u0E31\u0E1A
         {[VALUE]}"
+      - "\u0932\u0947\u0935\u0932 {[VALUE]} \u092A\u0930 \u0905\u0928\u0932\u0949\u0915
+        \u0915\u0930\u0947\u0902"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Unlock the tray!
@@ -4063,16 +4385,16 @@ MonoBehaviour:
       - "\u89E3\u9501\u6258\u76D8\uFF01"
       - "\uD2B8\uB808\uC774 \uC7A0\uAE08 \uD574\uC81C!"
       - "\u30C8\u30EC\u30A4\u3092\u30A2\u30F3\u30ED\u30C3\u30AF\uFF01"
-      - "D\xE9verrouillez le plateau !"
+      - Desbloquear a bandeja!
       - "\xA1Desbloquea la bandeja!"
-      - Sblocca il vassoio!
-      - Desbloqueie a bandeja!
-      - Desbloqueie a bandeja!
+      - Buka baki!
+      - "Tepsiyi a\xE7!"
       - Schalte das Tablett frei!
       - "D\xE9verrouillez le plateau !"
       - Sblocca il vassoio!
       - "\u041E\u0442\u043A\u0440\u043E\u0439\u0442\u0435 \u043F\u043E\u0434\u043D\u043E\u0441!"
       - "\u0E1B\u0E25\u0E14\u0E25\u0E47\u0E2D\u0E01\u0E16\u0E32\u0E14!"
+      - "\u091F\u094D\u0930\u0947 \u0905\u0928\u0932\u0949\u0915 \u0915\u0930\u0947\u0902!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Unlock!
@@ -4084,16 +4406,16 @@ MonoBehaviour:
       - "\u89E3\u9501\uFF01"
       - "\uC7A0\uAE08 \uD574\uC81C!"
       - "\u30A2\u30F3\u30ED\u30C3\u30AF\uFF01"
-      - "D\xE9verrouiller!"
+      - Desbloquear!
       - "\xA1Desbloquear!"
-      - Sblocca!
-      - Desbloquear!
-      - Desbloquear!
+      - Item terbungkus!
+      - "Sar\u0131lan \xD6\u011Fe!"
       - Freischalten!
       - "D\xE9verrouiller!"
       - Sblocca!
       - "\u0420\u0430\u0437\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u0442\u044C!"
       - "\u0E1B\u0E25\u0E14\u0E25\u0E47\u0E2D\u0E01!"
+      - "\u0905\u0928\u0932\u0949\u0915 \u0915\u0930\u0947\u0902!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Use your extra stars to open chest!
@@ -4105,17 +4427,21 @@ MonoBehaviour:
       - "\u4F7F\u7528\u591A\u4F59\u7684\u661F\u661F\u6765\u6253\u5F00\u5B9D\u7BB1\uFF01"
       - "\uB0A8\uC740 \uBCC4\uC744 \uC0AC\uC6A9\uD574 \uC0C1\uC790\uB97C \uC5EC\uC138\uC694!"
       - "\u4F59\u3063\u305F\u30B9\u30BF\u30FC\u3067\u5B9D\u7BB1\u3092\u958B\u3051\u3088\u3046\uFF01"
-      - "Utilisez vos \xE9toiles suppl\xE9mentaires pour ouvrir le coffre !"
+      - "Use suas estrelas extras para abrir o ba\xFA!"
       - "\xA1Usa tus estrellas extra para abrir el cofre!"
-      - Usa le stelle extra per aprire il forziere!
-      - "Use suas estrelas extras para abrir o ba\xFA!"
-      - "Use suas estrelas extras para abrir o ba\xFA!"
-      - "Benutze zus\xE4tzliche Sterne"
-      - " um die Truhe zu \xF6ffnen!"
+      - Gunakan bintang ekstra Anda untuk membuka peti!
+      - "Fazladan y\u0131ld\u0131zlar\u0131n\u0131 sand\u0131\u011F\u0131 a\xE7mak
+        i\xE7in kullan!"
+      - "Benutze zus\xE4tzliche Sterne, um die Truhe zu \xF6ffnen!"
       - "Utilisez vos \xE9toiles suppl\xE9mentaires pour ouvrir le coffre !"
       - Usa le stelle extra per aprire il forziere!
       - "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u043B\u0438\u0448\u043D\u0438\u0435
-        \u0437\u0432\u0435\u0437\u0434\u044B"
+        \u0437\u0432\u0435\u0437\u0434\u044B, \u0447\u0442\u043E\u0431\u044B \u043E\u0442\u043A\u0440\u044B\u0442\u044C
+        \u0441\u0443\u043D\u0434\u0443\u043A!"
+      - "\u0E43\u0E0A\u0E49\u0E14\u0E32\u0E27\u0E1E\u0E34\u0E40\u0E28\u0E29\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E40\u0E1B\u0E34\u0E14\u0E2B\u0E35\u0E1A!"
+      - "\u0905\u092A\u0928\u0947 \u0905\u0924\u093F\u0930\u093F\u0915\u094D\u0924
+        \u0938\u093F\u0924\u093E\u0930\u094B\u0902 \u0915\u093E \u0909\u092A\u092F\u094B\u0917
+        \u0915\u0930\u0915\u0947 \u091A\u0947\u0938\u094D\u091F \u0916\u094B\u0932\u0947\u0902!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Vending Tray
@@ -4127,16 +4453,16 @@ MonoBehaviour:
       - "\u81EA\u52A8\u552E\u8D27\u6258\u76D8"
       - "\uBCA4\uB529 \uD2B8\uB808\uC774"
       - "\u30D9\u30F3\u30C7\u30A3\u30F3\u30B0\u30C8\u30EC\u30A4"
-      - Plateau de distribution
+      - Bandeja de vendas
       - Bandeja expendedora
-      - Vassoio distributore
-      - Bandeja de vendas
-      - Bandeja de vendas
+      - Nampan Penjual
+      - "Sat\u0131\u015F Tepsisi"
       - Verkaufstablett
       - Plateau de vente
       - Vassoio distributore
       - "\u041B\u043E\u0442\u043E\u043A \u0441 \u0442\u043E\u0432\u0430\u0440\u0430\u043C\u0438"
       - "\u0E16\u0E32\u0E14\u0E02\u0E32\u0E22\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32"
+      - "\u0935\u093F\u0915\u094D\u0930\u092F \u091F\u094D\u0930\u0947"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Video Bar
@@ -4148,16 +4474,16 @@ MonoBehaviour:
       - "\u89C6\u9891\u680F"
       - "\uBE44\uB514\uC624 \uBC14"
       - "\u30D3\u30C7\u30AA\u30D0\u30FC"
-      - "Barre vid\xE9o"
-      - "Barra de v\xEDdeo"
-      - Barra video
       - "Barra de v\xEDdeo"
       - "Barra de v\xEDdeo"
+      - Bilah Video
+      - "Video \xC7ubu\u011Fu"
       - Videoleiste
       - "Barre vid\xE9o"
       - Barra video
       - "\u0412\u0438\u0434\u0435\u043E\u043F\u043E\u043B\u043E\u0441\u0430"
       - "\u0E41\u0E16\u0E1A\u0E27\u0E34\u0E14\u0E35\u0E42\u0E2D"
+      - "\u0935\u0940\u0921\u093F\u092F\u094B \u092C\u093E\u0930"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Vietnamese
@@ -4169,16 +4495,16 @@ MonoBehaviour:
       - "\u8D8A\u5357\u8BED"
       - "\uBCA0\uD2B8\uB0A8\uC5B4"
       - "\u30D9\u30C8\u30CA\u30E0\u8A9E"
-      - Vietnamien
       - Vietnamita
       - Vietnamita
-      - Vietnamita
-      - Vietnamita
+      - Bahasa Vietnam
+      - Vietnamca
       - Vietnamesisch
       - Vietnamien
       - Vietnamita
       - "\u0412\u044C\u0435\u0442\u043D\u0430\u043C\u0441\u043A\u0438\u0439"
       - "\u0E40\u0E27\u0E35\u0E22\u0E14\u0E19\u0E32\u0E21"
+      - "\u0935\u093F\u092F\u0924\u0928\u093E\u092E\u0940"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: WELL DONE!
@@ -4190,16 +4516,16 @@ MonoBehaviour:
       - "\u5E72\u5F97\u597D\uFF01"
       - "\uC798\uD588\uC5B4\uC694!"
       - "\u3088\u304F\u3084\u3063\u305F\uFF01"
-      - "Bien jou\xE9 !"
+      - Muito bem!
       - "\xA1Bien hecho!"
-      - Ben Fatto!
-      - Muito bem!
-      - Muito bem!
+      - Kerja bagus!
+      - Aferin!
       - Gut gemacht!
       - "Bien jou\xE9 !"
       - Ben Fatto!
       - "\u041C\u043E\u043B\u043E\u0434\u0435\u0446!"
       - "\u0E17\u0E33\u0E44\u0E14\u0E49\u0E14\u0E35\u0E21\u0E32\u0E01!"
+      - "\u0936\u093E\u0928\u0926\u093E\u0930!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Waffle Maker
@@ -4211,16 +4537,16 @@ MonoBehaviour:
       - "\u534E\u592B\u997C\u673A"
       - "\uC640\uD50C \uAE30\uACC4"
       - "\u30EF\u30C3\u30D5\u30EB\u30E1\u30FC\u30AB\u30FC"
-      - Gaufrier
+      - "M\xE1quina de Waffle"
       - Waflera
-      - Macchina per waffle
-      - "M\xE1quina de Waffle"
-      - "M\xE1quina de Waffle"
+      - Pembuat Wafel
+      - Waffle Makinesi
       - Waffeleisen
       - Gaufrier
       - Macchina per waffle
       - "\u0412\u0430\u0444\u0435\u043B\u044C\u043D\u0438\u0446\u0430"
       - "\u0E40\u0E04\u0E23\u0E37\u0E48\u0E2D\u0E07\u0E17\u0E33\u0E27\u0E32\u0E1F\u0E40\u0E1F\u0E34\u0E25"
+      - "\u0935\u0949\u092B\u0932 \u092E\u0947\u0915\u0930"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Watch Ads
@@ -4232,16 +4558,16 @@ MonoBehaviour:
       - "\u89C2\u770B\u5E7F\u544A"
       - "\uAD11\uACE0 \uC2DC\uCCAD"
       - "\u5E83\u544A\u3092\u898B\u308B"
-      - "Regarder les publicit\xE9s"
+      - "Assista An\xFAncios"
       - Ver anuncios
-      - Guarda annunci
-      - "Assista An\xFAncios"
-      - "Assista An\xFAncios"
+      - Tonton Iklan
+      - "Reklamlar\u0131 \u0130zle"
       - Werbung ansehen
       - "Regardez les publicit\xE9s"
       - Guarda gli annunci
       - "\u0421\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0440\u0435\u043A\u043B\u0430\u043C\u0443"
       - "\u0E14\u0E39\u0E42\u0E06\u0E29\u0E13\u0E32"
+      - "\u0935\u093F\u091C\u094D\u091E\u093E\u092A\u0928 \u0926\u0947\u0916\u0947\u0902"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Watch Video
@@ -4253,16 +4579,16 @@ MonoBehaviour:
       - "\u89C2\u770B\u89C6\u9891"
       - "\uC601\uC0C1 \uC2DC\uCCAD"
       - "\u52D5\u753B\u3092\u898B\u308B"
-      - "Regarder la vid\xE9o"
+      - "Assistir v\xEDdeo"
       - Ver video
-      - Guarda video
-      - "Assistir v\xEDdeo"
-      - "Assistir v\xEDdeo"
+      - Tonton Video
+      - "Video \u0130zle"
       - Video ansehen
       - "Regarder la vid\xE9o"
       - Guarda video
       - "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0432\u0438\u0434\u0435\u043E"
       - "\u0E14\u0E39\u0E27\u0E34\u0E14\u0E35\u0E42\u0E2D"
+      - "\u0935\u0940\u0921\u093F\u092F\u094B \u0926\u0947\u0916\u0947\u0902"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Watch videos
@@ -4274,16 +4600,16 @@ MonoBehaviour:
       - "\u89C2\u770B\u89C6\u9891"
       - "\uC601\uC0C1 \uC2DC\uCCAD"
       - "\u52D5\u753B\u3092\u898B\u308B"
-      - "Regarder les vid\xE9os"
+      - "Assistir v\xEDdeos"
       - Ver videos
-      - Guarda video
-      - "Assistir v\xEDdeos"
-      - "Assistir v\xEDdeos"
+      - Tonton Video
+      - "Videolar\u0131 \u0130zle"
       - Videos ansehen
       - "Regardez les vid\xE9os"
       - Guarda video
       - "\u0421\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0432\u0438\u0434\u0435\u043E"
       - "\u0E14\u0E39\u0E27\u0E34\u0E14\u0E35\u0E42\u0E2D"
+      - "\u0935\u0940\u0921\u093F\u092F\u094B \u0926\u0947\u0916\u0947\u0902"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Wine
@@ -4295,181 +4621,16 @@ MonoBehaviour:
       - "\u8461\u8404\u9152"
       - "\uC640\uC778"
       - "\u30EF\u30A4\u30F3"
-      - Vin
-      - Vino
-      - Vino
       - Vinho
-      - Vinho
+      - Vino
+      - Anggur
+      - "\u015Earap"
       - Wein
       - Vin
       - Vino
       - "\u0412\u0438\u043D\u043E"
       - "\u0E44\u0E27\u0E19\u0E4C"
-      Flags: 000000000000000000000000000000
-      Languages_Touch: []
-    - Term: You don't have enough stars
-      TermType: 0
-      Description: 
-      Languages:
-      - You don't have enough stars
-      - "B\u1EA1n kh\xF4ng \u0111\u1EE7 sao"
-      - "\u4F60\u7684\u661F\u661F\u4E0D\u591F"
-      - "\uBCC4\uC774 \uBD80\uC871\uD569\uB2C8\uB2E4"
-      - "\u30B9\u30BF\u30FC\u304C\u8DB3\u308A\u307E\u305B\u3093"
-      - "Vous n'avez pas assez d'\xE9toiles"
-      - No tienes suficientes estrellas
-      - Non hai abbastanza stelle
-      - "Voc\xEA n\xE3o tem estrelas suficientes"
-      - "Voc\xEA n\xE3o tem estrelas suficientes"
-      - Du hast nicht genug Sterne
-      - "Vous n'avez pas assez d'\xE9toiles"
-      - Non hai abbastanza stelle
-      - "\u0423 \u0432\u0430\u0441 \u043D\u0435\u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u043E
-        \u0437\u0432\u0435\u0437\u0434"
-      - "\u0E04\u0E38\u0E13\u0E21\u0E35\u0E14\u0E32\u0E27\u0E44\u0E21\u0E48\u0E1E\u0E2D"
-      Flags: 000000000000000000000000000000
-      Languages_Touch: []
-    - Term: You have
-      TermType: 0
-      Description: 
-      Languages:
-      - You have
-      - "B\u1EA1n c\xF3"
-      - "\u4F60\u62E5\u6709"
-      - "\uBCF4\uC720 \uC911"
-      - "\u6240\u6301"
-      - Vous avez
-      - Tienes
-      - Hai
-      - "Voc\xEA tem"
-      - "Voc\xEA tem"
-      - Du hast
-      - Vous avez
-      - Hai
-      - "\u0423 \u0432\u0430\u0441"
-      - "\u0E04\u0E38\u0E13\u0E21\u0E35"
-      Flags: 000000000000000000000000000000
-      Languages_Touch: []
-    - Term: You have already received the reward
-      TermType: 0
-      Description: 
-      Languages:
-      - You have already received the reward
-      - "B\u1EA1n \u0111\xE3 nh\u1EADn ph\u1EA7n th\u01B0\u1EDFng r\u1ED3i"
-      - "\u60A8\u5DF2\u9886\u53D6\u5956\u52B1"
-      - "\uC774\uBBF8 \uBCF4\uC0C1\uC744 \uBC1B\uC558\uC2B5\uB2C8\uB2E4"
-      - "\u3059\u3067\u306B\u5831\u916C\u3092\u53D7\u3051\u53D6\u308A\u307E\u3057\u305F"
-      - "Vous avez d\xE9j\xE0 re\xE7u la r\xE9compense"
-      - Ya recibiste la recompensa
-      - "Hai gi\xE0 ricevuto il premio"
-      - "Voc\xEA j\xE1 recebeu a recompensa"
-      - "Voc\xEA j\xE1 recebeu a recompensa"
-      - Du hast die Belohnung bereits erhalten
-      - "Vous avez d\xE9j\xE0 re\xE7u la r\xE9compense"
-      - "Hai gi\xE0 ricevuto il premio"
-      - "\u0412\u044B \u0443\u0436\u0435 \u043F\u043E\u043B\u0443\u0447\u0438\u043B\u0438
-        \u043D\u0430\u0433\u0440\u0430\u0434\u0443"
-      - "\u0E04\u0E38\u0E13\u0E44\u0E14\u0E49\u0E23\u0E31\u0E1A\u0E23\u0E32\u0E07\u0E27\u0E31\u0E25\u0E41\u0E25\u0E49\u0E27"
-      Flags: 000000000000000000000000000000
-      Languages_Touch: []
-    - Term: You will lose a life!
-      TermType: 0
-      Description: 
-      Languages:
-      - You will lose a life!
-      - "B\u1EA1n s\u1EBD m\u1EA5t m\u1ED9t m\u1EA1ng!"
-      - "\u4F60\u4F1A\u5931\u53BB\u4E00\u6761\u547D\uFF01"
-      - "\uC0DD\uBA85\uC744 \uC783\uAC8C \uB429\uB2C8\uB2E4!"
-      - "\u30E9\u30A4\u30D5\u3092\u5931\u3044\u307E\u3059\uFF01"
-      - Vous allez perdre une vie !
-      - "\xA1Perder\xE1s una vida!"
-      - Perderai una vita!
-      - "Voc\xEA perder\xE1 uma vida!"
-      - "Voc\xEA perder\xE1 uma vida!"
-      - Du wirst ein Leben verlieren!
-      - Vous allez perdre une vie !
-      - Perderai una vita!
-      - "\u0412\u044B \u043F\u043E\u0442\u0435\u0440\u044F\u0435\u0442\u0435 \u0436\u0438\u0437\u043D\u044C!"
-      - "\u0E04\u0E38\u0E13\u0E08\u0E30\u0E40\u0E2A\u0E35\u0E22\u0E2B\u0E19\u0E36\u0E48\u0E07\u0E0A\u0E35\u0E27\u0E34\u0E15!"
-      Flags: 000000000000000000000000000000
-      Languages_Touch: []
-    - Term: 'You''ll miss out on:'
-      TermType: 0
-      Description: 
-      Languages:
-      - 'You''ll miss out on:'
-      - "B\u1EA1n s\u1EBD b\u1ECF l\u1EE1:"
-      - "\u4F60\u5C06\u9519\u8FC7\uFF1A"
-      - "\uB193\uCE58\uAC8C \uB429\uB2C8\uB2E4:"
-      - "\u898B\u9003\u3057\u307E\u3059\uFF1A"
-      - 'Vous manquerez :'
-      - "Te lo perder\xE1s:"
-      - 'Ti perderai:'
-      - "Voc\xEA perder\xE1:"
-      - "Voc\xEA perder\xE1:"
-      - 'Du wirst verpassen:'
-      - "Vous passerez \xE0 c\xF4t\xE9 de\_:"
-      - 'Ti perderai:'
-      - "\u0412\u044B \u043F\u0440\u043E\u043F\u0443\u0441\u0442\u0438\u0442\u0435:"
-      - "\u0E04\u0E38\u0E13\u0E08\u0E30\u0E1E\u0E25\u0E32\u0E14:"
-      Flags: 000000000000000000000000000000
-      Languages_Touch: []
-    - Term: Octochef
-      TermType: 0
-      Description: 
-      Languages:
-      - Octochef
-      - Octochef
-      - "\u7AE0\u9C7C\u53A8\u5E08"
-      - "\uC625\uD1A0\uC170\uD504"
-      - "\u30AA\u30AF\u30C8\u30B7\u30A7\u30D5"
-      - Octochef
-      - "\xA1Octochef!"
-      - Octochef
-      - Octochef
-      - Octochef
-      - Octochef
-      - Octochef
-      - "\u041E\u043A\u0442\u043E\u043F\u043E\u0432\u0430\u0440"
-      - "\u0E2D\u0E2D\u0E04\u0E42\u0E15\u0E40\u0E0A\u0E1F"
-      - "\u0911\u0915\u094D\u091F\u094B\u0936\u0947\u092B"
-      Flags: 000000000000000000000000000000
-      Languages_Touch: []
-    - Term: Octochef moves after each match and blocks the tray it lands on!
-      TermType: 0
-      Description: 
-      Languages:
-      - Octochef moves after each match and blocks the tray it lands on!
-      - "Octochef di chuy\u1EC3n sau m\u1ED7i l\u01B0\u1EE3t gh\xE9p v\xE0 ch\u1EB7n
-        khay m\xE0 n\xF3 \u0111\xE1p xu\u1ED1ng!"
-      - "\u7AE0\u9C7C\u53A8\u5E08\u6BCF\u6B21\u5339\u914D\u540E\u90FD\u4F1A\u79FB\u52A8\uFF0C\u5E76\u963B\u6321\u5B83\u505C\u7559\u7684\u6258\u76D8\uFF01"
-      - "\uC625\uD1A0\uC170\uD504\uB294 \uB9E4\uCE58\uD560 \uB54C\uB9C8\uB2E4 \uC774\uB3D9\uD558\uBA70
-        \uCC29\uC9C0\uD55C \uD2B8\uB808\uC774\uB97C \uB9C9\uC2B5\uB2C8\uB2E4!"
-      - "\u30AA\u30AF\u30C8\u30B7\u30A7\u30D5\u306F\u30DE\u30C3\u30C1\u306E\u305F\u3073\u306B\u79FB\u52D5\u3057\u3001\u7740\u5730\u3057\u305F\u30C8\u30EC\u30A4\u3092\u30D6\u30ED\u30C3\u30AF\u3057\u307E\u3059\uFF01"
-      - "O Octochef se move ap\xF3s cada combina\xE7\xE3o e bloqueia a bandeja onde
-        pousa!"
-      - "\xA1Octochef se mueve despu\xE9s de cada combinaci\xF3n y bloquea la bandeja
-        en la que cae!"
-      - Octochef bergerak setelah setiap pencocokan dan memblokir nampan tempat ia
-        mendarat!
-      - "Octochef her e\u015Fle\u015Fmeden sonra hareket eder ve indi\u011Fi tepsiyi
-        engeller!"
-      - Octochef bewegt sich nach jedem Match und blockiert das Tablett, auf dem
-        er landet!
-      - "Octochef se d\xE9place apr\xE8s chaque correspondance et bloque le plateau
-        sur lequel il atterrit !"
-      - Octochef si sposta dopo ogni abbinamento e blocca il vassoio su cui atterra!
-      - "\u041E\u043A\u0442\u043E\u043F\u043E\u0432\u0430\u0440 \u043F\u0435\u0440\u0435\u043C\u0435\u0449\u0430\u0435\u0442\u0441\u044F
-        \u043F\u043E\u0441\u043B\u0435 \u043A\u0430\u0436\u0434\u043E\u0433\u043E
-        \u0441\u043E\u0432\u043F\u0430\u0434\u0435\u043D\u0438\u044F \u0438 \u0431\u043B\u043E\u043A\u0438\u0440\u0443\u0435\u0442
-        \u043F\u043E\u0434\u043D\u043E\u0441, \u043D\u0430 \u043A\u043E\u0442\u043E\u0440\u044B\u0439
-        \u043F\u0440\u0438\u0437\u0435\u043C\u043B\u044F\u0435\u0442\u0441\u044F!"
-      - "\u0E2D\u0E2D\u0E04\u0E42\u0E15\u0E40\u0E0A\u0E1F\u0E08\u0E30\u0E02\u0E22\u0E31\u0E1A\u0E2B\u0E25\u0E31\u0E07\u0E08\u0E32\u0E01\u0E08\u0E31\u0E1A\u0E04\u0E39\u0E48\u0E41\u0E15\u0E48\u0E25\u0E30\u0E04\u0E23\u0E31\u0E49\u0E07\u0E41\u0E25\u0E30\u0E1A\u0E25\u0E47\u0E2D\u0E01\u0E16\u0E32\u0E14\u0E17\u0E35\u0E48\u0E21\u0E31\u0E19\u0E15\u0E01\u0E25\u0E07\u0E44\u0E1B!"
-      - "\u0911\u0915\u094D\u091F\u094B\u0936\u0947\u092B \u0939\u0930 \u092E\u0948\u091A
-        \u0915\u0947 \u092C\u093E\u0926 \u091A\u0932\u0924\u093E \u0939\u0948 \u0914\u0930
-        \u091C\u093F\u0938 \u091F\u094D\u0930\u0947 \u092A\u0930 \u0909\u0924\u0930\u0924\u093E
-        \u0939\u0948 \u0909\u0938\u0947 \u092C\u094D\u0932\u0949\u0915 \u0915\u0930
-        \u0926\u0947\u0924\u093E \u0939\u0948!"
+      - "\u0936\u0930\u093E\u092C"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     - Term: Wrapped Item
@@ -4482,7 +4643,7 @@ MonoBehaviour:
       - "\uD3EC\uC7A5\uB41C \uC544\uC774\uD15C"
       - "\u5305\u307E\u308C\u305F\u30A2\u30A4\u30C6\u30E0"
       - Item embrulhado
-      - "\xA1Objeto envuelto!"
+      - Objeto envuelto
       - Item terbungkus
       - "Sar\u0131lan \xD6\u011Fe"
       - Verpackter Gegenstand
@@ -4500,10 +4661,10 @@ MonoBehaviour:
       - Wrapped Item!!!
       - "M\xF3n \u0111\u01B0\u1EE3c g\xF3i!!!"
       - "\u5305\u88F9\u7269\u54C1\uFF01\uFF01\uFF01"
-      - "\uD3EC\uC7A5\uB41C \uC544\uC774\uD15C!!!"
-      - "\u5305\u307E\u308C\u305F\u30A2\u30A4\u30C6\u30E0!!!"
+      - "\uD3EC\uC7A5\uB41C \uC544\uC774\uD15C\uFF01\uFF01\uFF01"
+      - "\u5305\u307E\u308C\u305F\u30A2\u30A4\u30C6\u30E0\uFF01\uFF01\uFF01"
       - Item embrulhado!!!
-      - "\xA1\xA1\xA1Objeto envuelto!!!"
+      - Objeto envuelto!!!
       - Item terbungkus!!!
       - "Sar\u0131lan \xD6\u011Fe!!!"
       - Verpackter Gegenstand!!!
@@ -4514,214 +4675,114 @@ MonoBehaviour:
       - "\u0932\u093F\u092A\u091F\u093E \u0939\u0941\u0906 \u0906\u0907\u091F\u092E!!!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
-    - Term: Portuguese
+    - Term: You don't have enough stars
       TermType: 0
       Description: 
       Languages:
-      - Portuguese
-      - "Ti\u1EBFng B\u1ED3 \u0110\xE0o Nha"
-      - "\u8461\u8404\u7259\u8BED"
-      - "\uD3EC\uB974\uD22C\uAC08\uC5B4"
-      - "\u30DD\u30EB\u30C8\u30AC\u30EB\u8A9E"
-      - "Portugu\xEAs"
-      - "Espa\xF1ol Portugu\xE9s"
-      - Bahasa Portugis
-      - Portekizce
-      - Portugiesisch
-      - "Fran\xE7ais Portugais"
-      - Italiano Portoghese
-      - "\u041F\u043E\u0440\u0442\u0443\u0433\u0430\u043B\u044C\u0441\u043A\u0438\u0439"
-      - "\u0E42\u0E1B\u0E23\u0E15\u0E38\u0E40\u0E01\u0E2A"
-      - "\u092A\u0941\u0930\u094D\u0924\u0917\u093E\u0932\u0940"
+      - You don't have enough stars
+      - "B\u1EA1n kh\xF4ng \u0111\u1EE7 sao"
+      - "\u4F60\u7684\u661F\u661F\u4E0D\u591F"
+      - "\uBCC4\uC774 \uBD80\uC871\uD569\uB2C8\uB2E4"
+      - "\u30B9\u30BF\u30FC\u304C\u8DB3\u308A\u307E\u305B\u3093"
+      - "Voc\xEA n\xE3o tem estrelas suficientes"
+      - No tienes suficientes estrellas
+      - Anda tidak memiliki cukup bintang
+      - "Yeterli y\u0131ld\u0131z\u0131n yok"
+      - Du hast nicht genug Sterne
+      - "Vous n'avez pas assez d'\xE9toiles"
+      - Non hai abbastanza stelle
+      - "\u0423 \u0432\u0430\u0441 \u043D\u0435\u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u043E
+        \u0437\u0432\u0435\u0437\u0434"
+      - "\u0E04\u0E38\u0E13\u0E21\u0E35\u0E14\u0E32\u0E27\u0E44\u0E21\u0E48\u0E1E\u0E2D"
+      - "\u0906\u092A\u0915\u0947 \u092A\u093E\u0938 \u092A\u0930\u094D\u092F\u093E\u092A\u094D\u0924
+        \u0938\u093F\u0924\u093E\u0930\u0947 \u0928\u0939\u0940\u0902 \u0939\u0948\u0902"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
-    - Term: Spanish
+    - Term: You have
       TermType: 0
       Description: 
       Languages:
-      - Spanish
-      - "Ti\u1EBFng T\xE2y Ban Nha"
-      - "\u897F\u73ED\u7259\u8BED"
-      - "\uC2A4\uD398\uC778\uC5B4"
-      - "\u30B9\u30DA\u30A4\u30F3\u8A9E"
-      - Espanhol
-      - "Espa\xF1ol"
-      - Bahasa Spanyol
-      - "\u0130spanyolca"
-      - Spanisch
-      - "Fran\xE7ais Espagnol"
-      - Italiano Spagnolo
-      - "\u0418\u0441\u043F\u0430\u043D\u0441\u043A\u0438\u0439"
-      - "\u0E2A\u0E40\u0E1B\u0E19"
-      - "\u0938\u094D\u092A\u0947\u0928\u093F\u0936"
+      - You have
+      - "B\u1EA1n c\xF3"
+      - "\u4F60\u62E5\u6709"
+      - "\uBCF4\uC720 \uC911"
+      - "\u6240\u6301"
+      - "Voc\xEA tem"
+      - Tienes
+      - Anda punya
+      - Sende var
+      - Du hast
+      - Vous avez
+      - Hai
+      - "\u0423 \u0432\u0430\u0441"
+      - "\u0E04\u0E38\u0E13\u0E21\u0E35"
+      - "\u0906\u092A\u0915\u0947 \u092A\u093E\u0938 \u0939\u0948"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
-    - Term: Indonesian
+    - Term: You have already received the reward
       TermType: 0
       Description: 
       Languages:
-      - Indonesian
-      - "Ti\u1EBFng Indonesia"
-      - "\u5370\u5C3C\u8BED"
-      - "\uC778\uB3C4\uB124\uC2DC\uC544\uC5B4"
-      - "\u30A4\u30F3\u30C9\u30CD\u30B7\u30A2\u8A9E"
-      - "Indon\xE9sio"
-      - "Espa\xF1ol Indonesio"
-      - Bahasa Indonesia
-      - Endonezce
-      - Indonesisch
-      - "Fran\xE7ais Indon\xE9sien"
-      - Italiano Indonesiano
-      - "\u0418\u043D\u0434\u043E\u043D\u0435\u0437\u0438\u0439\u0441\u043A\u0438\u0439"
-      - "\u0E2D\u0E34\u0E19\u0E42\u0E14\u0E19\u0E35\u0E40\u0E0B\u0E35\u0E22"
-      - "\u0907\u0902\u0921\u094B\u0928\u0947\u0936\u093F\u092F\u093E\u0908"
+      - You have already received the reward
+      - "B\u1EA1n \u0111\xE3 nh\u1EADn ph\u1EA7n th\u01B0\u1EDFng r\u1ED3i"
+      - "\u60A8\u5DF2\u9886\u53D6\u5956\u52B1"
+      - "\uC774\uBBF8 \uBCF4\uC0C1\uC744 \uBC1B\uC558\uC2B5\uB2C8\uB2E4"
+      - "\u3059\u3067\u306B\u5831\u916C\u3092\u53D7\u3051\u53D6\u308A\u307E\u3057\u305F"
+      - "Voc\xEA j\xE1 recebeu a recompensa"
+      - Ya recibiste la recompensa
+      - Anda sudah menerima hadiah
+      - "\xD6d\xFCl\xFC zaten ald\u0131n\u0131z"
+      - Du hast die Belohnung bereits erhalten
+      - "Vous avez d\xE9j\xE0 re\xE7u la r\xE9compense"
+      - "Hai gi\xE0 ricevuto il premio"
+      - "\u0412\u044B \u0443\u0436\u0435 \u043F\u043E\u043B\u0443\u0447\u0438\u043B\u0438
+        \u043D\u0430\u0433\u0440\u0430\u0434\u0443"
+      - "\u0E04\u0E38\u0E13\u0E44\u0E14\u0E49\u0E23\u0E31\u0E1A\u0E23\u0E32\u0E07\u0E27\u0E31\u0E25\u0E41\u0E25\u0E49\u0E27"
+      - "\u0906\u092A\u0915\u094B \u0907\u0928\u093E\u092E \u092E\u093F\u0932 \u091A\u0941\u0915\u093E
+        \u0939\u0948"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
-    - Term: Turkish
+    - Term: You will lose a life!
       TermType: 0
       Description: 
       Languages:
-      - Turkish
-      - "Ti\u1EBFng Th\u1ED5 Nh\u0129 K\u1EF3"
-      - "\u571F\u8033\u5176\u8BED"
-      - "\uD130\uD0A4\uC5B4"
-      - "\u30C8\u30EB\u30B3\u8A9E"
-      - Turco
-      - "Espa\xF1ol Turco"
-      - Bahasa Turki
-      - "T\xFCrk\xE7e"
-      - "T\xFCrkisch"
-      - "Fran\xE7ais Turc"
-      - Italiano Turco
-      - "\u0422\u0443\u0440\u0435\u0446\u043A\u0438\u0439"
-      - "\u0E15\u0E38\u0E23\u0E01\u0E35"
-      - "\u0924\u0941\u0930\u094D\u0915\u0940"
+      - You will lose a life!
+      - "B\u1EA1n s\u1EBD m\u1EA5t m\u1ED9t m\u1EA1ng!"
+      - "\u4F60\u4F1A\u5931\u53BB\u4E00\u6761\u547D\uFF01"
+      - "\uC0DD\uBA85\uC744 \uC783\uAC8C \uB429\uB2C8\uB2E4!"
+      - "\u30E9\u30A4\u30D5\u3092\u5931\u3044\u307E\u3059\uFF01"
+      - "Voc\xEA perder\xE1 uma vida!"
+      - "\xA1Perder\xE1s una vida!"
+      - Anda akan kehilangan satu nyawa!
+      - "Bir can\u0131n\u0131 kaybedeceksin!"
+      - Du wirst ein Leben verlieren!
+      - Vous allez perdre une vie !
+      - Perderai una vita!
+      - "\u0412\u044B \u043F\u043E\u0442\u0435\u0440\u044F\u0435\u0442\u0435 \u0436\u0438\u0437\u043D\u044C!"
+      - "\u0E04\u0E38\u0E13\u0E08\u0E30\u0E40\u0E2A\u0E35\u0E22\u0E2B\u0E19\u0E36\u0E48\u0E07\u0E0A\u0E35\u0E27\u0E34\u0E15!"
+      - "\u0906\u092A\u0915\u0940 \u090F\u0915 \u0932\u093E\u0907\u092B \u091A\u0932\u0940
+        \u091C\u093E\u090F\u0917\u0940!"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
-    - Term: German
+    - Term: 'You''ll miss out on:'
       TermType: 0
       Description: 
       Languages:
-      - German
-      - "Ti\u1EBFng \u0110\u1EE9c"
-      - "\u5FB7\u8BED"
-      - "\uB3C5\uC77C\uC5B4"
-      - "\u30C9\u30A4\u30C4\u8A9E"
-      - "Alem\xE3o"
-      - "Espa\xF1ol Alem\xE1n"
-      - Bahasa Jerman
-      - Almanca
-      - Deutsch
-      - "Fran\xE7ais Allemand"
-      - Italiano Tedesco
-      - "\u041D\u0435\u043C\u0435\u0446\u043A\u0438\u0439"
-      - "\u0E40\u0E22\u0E2D\u0E23\u0E21\u0E31\u0E19"
-      - "\u091C\u0930\u094D\u092E\u0928"
-      Flags: 000000000000000000000000000000
-      Languages_Touch: []
-    - Term: French
-      TermType: 0
-      Description: 
-      Languages:
-      - French
-      - "Ti\u1EBFng Ph\xE1p"
-      - "\u6CD5\u8BED"
-      - "\uD504\uB791\uC2A4\uC5B4"
-      - "\u30D5\u30E9\u30F3\u30B9\u8A9E"
-      - "Franc\xEAs"
-      - "Espa\xF1ol Franc\xE9s"
-      - Bahasa Prancis
-      - "Frans\u0131zca"
-      - "Franz\xF6sisch"
-      - "Fran\xE7ais"
-      - Italiano Francese
-      - "\u0424\u0440\u0430\u043D\u0446\u0443\u0437\u0441\u043A\u0438\u0439"
-      - "\u0E1D\u0E23\u0E31\u0E48\u0E07\u0E40\u0E28\u0E2A"
-      - "\u092B\u093C\u094D\u0930\u0947\u0902\u091A"
-      Flags: 000000000000000000000000000000
-      Languages_Touch: []
-    - Term: Italian
-      TermType: 0
-      Description: 
-      Languages:
-      - Italian
-      - "Ti\u1EBFng \xDD"
-      - "\u610F\u5927\u5229\u8BED"
-      - "\uC774\uD0C8\uB9AC\uC544\uC5B4"
-      - "\u30A4\u30BF\u30EA\u30A2\u8A9E"
-      - Italiano
-      - "Espa\xF1ol Italiano"
-      - Bahasa Italia
-      - "\u0130talyanca"
-      - Italienisch
-      - "Fran\xE7ais Italien"
-      - Italiano
-      - "\u0418\u0442\u0430\u043B\u044C\u044F\u043D\u0441\u043A\u0438\u0439"
-      - "\u0E2D\u0E34\u0E15\u0E32\u0E25\u0E35"
-      - "\u0907\u0924\u093E\u0932\u0935\u0940"
-      Flags: 000000000000000000000000000000
-      Languages_Touch: []
-    - Term: Russian
-      TermType: 0
-      Description: 
-      Languages:
-      - Russian
-      - "Ti\u1EBFng Nga"
-      - "\u4FC4\u8BED"
-      - "\uB7EC\uC2DC\uC544\uC5B4"
-      - "\u30ED\u30B7\u30A2\u8A9E"
-      - Russo
-      - "Espa\xF1ol Ruso"
-      - Bahasa Rusia
-      - "Rus\xE7a"
-      - Russisch
-      - "Fran\xE7ais Russe"
-      - Italiano Russo
-      - "\u0420\u0443\u0441\u0441\u043A\u0438\u0439"
-      - "\u0E23\u0E31\u0E2A\u0E40\u0E0B\u0E35\u0E22"
-      - "\u0930\u0942\u0938\u0940"
-      Flags: 000000000000000000000000000000
-      Languages_Touch: []
-    - Term: Thai
-      TermType: 0
-      Description: 
-      Languages:
-      - Thai
-      - "Ti\u1EBFng Th\xE1i"
-      - "\u6CF0\u8BED"
-      - "\uD0DC\uAD6D\uC5B4"
-      - "\u30BF\u30A4\u8A9E"
-      - "Tailand\xEAs"
-      - "Espa\xF1ol Tailand\xE9s"
-      - Bahasa Thailandia
-      - Tayca
-      - "Thail\xE4ndisch"
-      - "Fran\xE7ais Tha\xEF"
-      - Italiano Tailandese
-      - "\u0422\u0430\u0439\u0441\u043A\u0438\u0439"
-      - "\u0E44\u0E17\u0E22"
-      - "\u0925\u093E\u0908"
-      Flags: 000000000000000000000000000000
-      Languages_Touch: []
-    - Term: Hindi
-      TermType: 0
-      Description: 
-      Languages:
-      - Hindi
-      - "Ti\u1EBFng Hindi"
-      - "\u5370\u5730\u8BED"
-      - "\uD78C\uB514\uC5B4"
-      - "\u30D2\u30F3\u30C7\u30A3\u30FC\u8A9E"
-      - "H\xEDndi"
-      - "Espa\xF1ol Hindi"
-      - Bahasa Hindi
-      - "Hint\xE7e"
-      - Hindi
-      - "Fran\xE7ais Hindi"
-      - Italiano Hindi
-      - "\u0425\u0438\u043D\u0434\u0438"
-      - "\u0E2E\u0E34\u0E19\u0E14\u0E35"
-      - "\u0939\u093F\u0928\u094D\u0926\u0940"
+      - 'You''ll miss out on:'
+      - "B\u1EA1n s\u1EBD b\u1ECF l\u1EE1:"
+      - "\u4F60\u5C06\u9519\u8FC7\uFF1A"
+      - "\uB193\uCE58\uAC8C \uB429\uB2C8\uB2E4:"
+      - "\u898B\u9003\u3057\u307E\u3059\uFF1A"
+      - "Voc\xEA perder\xE1:"
+      - "Te lo perder\xE1s:"
+      - 'Anda akan melewatkan:'
+      - "Bunu ka\xE7\u0131racaks\u0131n:"
+      - 'Du wirst verpassen:'
+      - 'Vous manquerez :'
+      - 'Ti perderai:'
+      - "\u0412\u044B \u043F\u0440\u043E\u043F\u0443\u0441\u0442\u0438\u0442\u0435:"
+      - "\u0E04\u0E38\u0E13\u0E08\u0E30\u0E1E\u0E25\u0E32\u0E14:"
+      - "\u0906\u092A \u091A\u0942\u0915 \u091C\u093E\u090F\u0902\u0917\u0947:"
       Flags: 000000000000000000000000000000
       Languages_Touch: []
     CaseInsensitiveTerms: 0
@@ -4934,7 +4995,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 36fdecb6b9143be4ab50457c90cf69bf, type: 2}
     - {fileID: 11400000, guid: 75dd9612f0cec5b46b3f34857baf0498, type: 2}
     - {fileID: 11400000, guid: 4d195ec0346ea1b4bbdc38fb7f476877, type: 2}
-    Spreadsheet_LocalFileName: C:/Users/ADMIN/Documents/GameSonat2025/ThisIsBlast/GrillSort3/Localization/LocalizationExport.csv
+    Spreadsheet_LocalFileName: C:/Users/ADMIN/Documents/GameSonat2025/ThisIsBlast/GrillSort3/Localization/LocalizationBackup.csv
     Spreadsheet_LocalCSVSeparator: ','
     Spreadsheet_LocalCSVEncoding: utf-8
     Spreadsheet_SpecializationAsRows: 1

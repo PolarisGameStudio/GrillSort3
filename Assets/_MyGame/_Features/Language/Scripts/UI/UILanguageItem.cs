@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using SonatFramework.Systems;
 using SonatFramework.Scripts.Helper;
-using MyGame.Modules.CardCollection;
 
 namespace MyGame.Modules.Language.UI
 {
@@ -41,7 +40,9 @@ namespace MyGame.Modules.Language.UI
 
         private void UpdateUI()
         {
-            text.SetLocalize(_language.ToString());
+            text.text = _languageService.Instance.GetConfig().GetLanguageData(_language).languageString;
+            text.font = _languageService.Instance.GetConfig().GetLanguageData(_language).font;
+            // text.fontSharedMaterial = _languageService.Instance.GetConfig().GetLanguageData(_language).material;
             if (_language == _languageService.Instance.CurrentLanguage)
             {
                 Selected();
