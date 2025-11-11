@@ -115,14 +115,14 @@ namespace MyGame.Editor.LevelData
 
         private LevelDifficulty GetLevelDifficulty(string difficulty)
         {
-            if (difficulty == "E1") return LevelDifficulty.Easy1;
-            if (difficulty == "E2") return LevelDifficulty.Easy2;
-            if (difficulty == "M1") return LevelDifficulty.Medium1;
-            if (difficulty == "M2") return LevelDifficulty.Medium2;
-            if (difficulty == "H1") return LevelDifficulty.Hard1;
-            if (difficulty == "H2") return LevelDifficulty.Hard2;
+            // if (difficulty == "E1") return LevelDifficulty.Easy1;
+            // if (difficulty == "E2") return LevelDifficulty.Easy2;
+            // if (difficulty == "M1") return LevelDifficulty.Medium1;
+            // if (difficulty == "M2") return LevelDifficulty.Medium2;
+            // if (difficulty == "H1") return LevelDifficulty.Hard1;
+            // if (difficulty == "H2") return LevelDifficulty.Hard2;
 
-            return LevelDifficulty.Easy1;
+            return LevelDifficulty.Easy;
         }
 
         private int GetSequenceIndex(string seq)

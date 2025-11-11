@@ -63,17 +63,17 @@ public class MySonatFramework : SonatSystem
 
     public static LevelDifficulty GetLevelDifficulty(int level)
     {
-        // try
-        // {
+        try
+        {
 
-        //     return LevelGenerator.levelService != null
-        //         ? LevelGenerator.levelService.GetLevelData<Gameplay.LevelData.LevelData>(level, GameMode.Classic).difficulty
-        //             : levelService.GetLevelData<Gameplay.LevelData.LevelData>(level, GameMode.Classic).difficulty;
-        // }
-        // catch (Exception)
-        // {
-        return LevelDifficulty.Easy1;
-        // }
+            return levelService != null
+                ? levelService.GetLevelData<Gameplay.LevelData.LevelData>(level, GameMode.Classic).difficulty
+                    : levelService.GetLevelData<Gameplay.LevelData.LevelData>(level, GameMode.Classic).difficulty;
+        }
+        catch (Exception)
+        {
+            return LevelDifficulty.Easy;
+        }
     }
 
     public static LevelType GetLevelType(int level)

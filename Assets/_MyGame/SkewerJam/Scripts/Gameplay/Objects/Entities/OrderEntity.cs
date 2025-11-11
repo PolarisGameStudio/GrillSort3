@@ -8,6 +8,7 @@ using Gameplay.LevelData;
 using Manager;
 using MyGame.SkewerJam.Gameplay;
 using MyGame.SkewerJam.Gameplay.Helpers;
+using MyGame.SkewerJam.Gameplay.LogicOrder;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
 using SonatFramework.Scripts.Utils;

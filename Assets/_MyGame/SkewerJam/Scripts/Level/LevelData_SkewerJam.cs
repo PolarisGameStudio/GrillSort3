@@ -84,66 +84,66 @@ namespace MyGame.SkewerJam.Level
             {
                 switch (difficulty)
                 {
-                    case LevelDifficulty.Easy1:
+                    case LevelDifficulty.Easy:
                         maxNumberRescues = 5;
                         rateRescue = 0.75f;
                         break;
-                    case LevelDifficulty.Easy2:
+                    case LevelDifficulty.Medium:
                         maxNumberRescues = 4;
                         rateRescue = 0.7f;
                         break;
-                    case LevelDifficulty.Medium1:
+                    case LevelDifficulty.Hard:
                         maxNumberRescues = 3;
                         rateRescue = 0.65f;
                         break;
-                    case LevelDifficulty.Medium2:
-                        maxNumberRescues = 3;
-                        rateRescue = 0.5f;
-                        break;
-                    case LevelDifficulty.Hard1:
-                        maxNumberRescues = 3;
-                        rateRescue = 0.3f;
-                        break;
-                    case LevelDifficulty.Hard2:
-                        maxNumberRescues = 2;
-                        rateRescue = 0.2f;
-                        break;
+                    // case LevelDifficulty.Medium2:
+                    //     maxNumberRescues = 3;
+                    //     rateRescue = 0.5f;
+                    //     break;
+                    // case LevelDifficulty.Hard1:
+                    //     maxNumberRescues = 3;
+                    //     rateRescue = 0.3f;
+                    //     break;
+                    // case LevelDifficulty.Hard2:
+                    //     maxNumberRescues = 2;
+                    //     rateRescue = 0.2f;
+                    //     break;
                 }
             }
             else
             {
                 switch (difficulty)
                 {
-                    case LevelDifficulty.Easy1:
+                    case LevelDifficulty.Easy:
                         maxNumberRescues = 4;
                         rateRescue = 0.75f;
                         break;
-                    case LevelDifficulty.Easy2:
+                    case LevelDifficulty.Medium:
                         maxNumberRescues = 3;
                         rateRescue = 0.7f;
                         break;
-                    case LevelDifficulty.Medium1:
+                    case LevelDifficulty.Hard:
                         maxNumberRescues = 2;
                         rateRescue = 0.65f;
                         break;
-                    case LevelDifficulty.Medium2:
-                        maxNumberRescues = 2;
-                        rateRescue = 0.5f;
-                        break;
-                    case LevelDifficulty.Hard1:
-                        maxNumberRescues = 2;
-                        rateRescue = 0.3f;
-                        break;
-                    case LevelDifficulty.Hard2:
-                        maxNumberRescues = 1;
-                        rateRescue = 0.2f;
-                        break;
+                    // case LevelDifficulty.Medium2:
+                    //     maxNumberRescues = 2;
+                    //     rateRescue = 0.5f;
+                    //     break;
+                    // case LevelDifficulty.Hard1:
+                    //     maxNumberRescues = 2;
+                    //     rateRescue = 0.3f;
+                    //     break;
+                    // case LevelDifficulty.Hard2:
+                    //     maxNumberRescues = 1;
+                    //     rateRescue = 0.2f;
+                    //     break;
                 }
             }
 
             switch (difficulty)
             {
-                case LevelDifficulty.Hard2:
+                case LevelDifficulty.Hard:
                     remainingWaitingGrillCondition = 1;
                     break;
             }

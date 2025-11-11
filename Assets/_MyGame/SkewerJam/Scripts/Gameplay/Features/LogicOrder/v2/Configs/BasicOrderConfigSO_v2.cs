@@ -1,0 +1,65 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Sirenix.OdinInspector;
+using UnityEngine;
+
+namespace MyGame.SkewerJam.Gameplay.LogicOrder.Configs
+{
+    [CreateAssetMenu(fileName = "BasicOrderConfigSO_v2", menuName = "MyGame/SkewerJam/Gameplay/LogicOrder/Configs/BasicOrderConfigSO_v2")]
+    public class BasicOrderConfigSO_v2 : ScriptableObject
+    {
+        public List<CurveConfig> listCurveConfigs;
+
+        public int GetRandomRemainingSlot(int phase)
+        {
+            var curveConfig = listCurveConfigs[phase];
+            var random = UnityEngine.Random.Range(0f, 1f);
+            Debug.Log("<color=purple>BasicOrderConfigSO_v2: GetRandomRemainingSlot: " + phase + "</color> >>> random" + random);
+            foreach (var rateConfig in curveConfig.listRateConfigs)
+            {
+                if (random < rateConfig.rate)
+                {
+                    return rateConfig.remainingSlot;
+                }
+            }
+            return 0;
+        }
+#if UNITY_EDITOR
+        public void OnValidate()
+        {
+            foreach (var curveConfig in listCurveConfigs)
+            {
+                curveConfig.index = listCurveConfigs.IndexOf(curveConfig);
+                foreach (var rateConfig in curveConfig.listRateConfigs)
+                {
+                    rateConfig.index = curveConfig.listRateConfigs.IndexOf(rateConfig);
+                    rateConfig.remainingSlot = curveConfig.listRateConfigs.Count - rateConfig.index - 1;
+                }
+            }
+        }
+#endif
+    }
+
+    [Serializable]
+    public class CurveConfig
+    {
+        [GUIColor(0f, 1f, 0f)]
+        [ReadOnly]
+        public int index;
+        public List<RateConfig> listRateConfigs;
+    }
+
+
+    [Serializable]
+    public class RateConfig
+    {
+        [GUIColor(0f, 1f, 0f)]
+        [ReadOnly]
+        public int index;
+        public int remainingSlot;
+
+        [Range(0, 1)]
+        public float rate;
+    }
+}

@@ -13,6 +13,7 @@ using SonatFramework.Systems.AudioManagement;
 using Sonat.Enums;
 using MyGame.SkewerJam.Utils;
 using System;
+using MyGame.SkewerJam.Gameplay.LogicOrder;
 
 namespace MyGame.SkewerJam.Gameplay.Objects
 {
@@ -26,8 +27,8 @@ namespace MyGame.SkewerJam.Gameplay.Objects
         [SerializeField] private Transform leftStartPos;
 
         [Header("Logic Order")]
-        [SerializeField] private LogicOrderHandler logicOrderHandler;
-        public LogicOrderHandler LogicOrderHandler => logicOrderHandler;
+        [SerializeField] private BaseLogicOrderHandler logicOrderHandler;
+        public BaseLogicOrderHandler LogicOrderHandler => logicOrderHandler;
 
 
         private List<OrderData_SkewerJam> _listOrderData = new List<OrderData_SkewerJam>();
