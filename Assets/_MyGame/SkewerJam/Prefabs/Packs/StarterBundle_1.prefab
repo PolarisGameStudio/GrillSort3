@@ -248,18 +248,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4777345223025667187, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: mTerm
+      value: Sale
+      objectReference: {fileID: 0}
     - target: {fileID: 4892736783187194642, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_text
-      value: Starter Bundle
+      value: Pacchetto Iniziale
       objectReference: {fileID: 0}
     - target: {fileID: 4892736783187194642, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 67.85
       objectReference: {fileID: 0}
+    - target: {fileID: 4892736783187194642, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
     - target: {fileID: 4892736783187194642, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c52d3dfc10804354fb84543b1e1743ad, type: 2}
+      objectReference: {fileID: 2100000, guid: 717c01a3e0e7a9b43afe19058388a824, type: 2}
     - target: {fileID: 5021228179410338451, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -291,6 +299,14 @@ PrefabInstance:
     - target: {fileID: 7623555330506873404, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -427
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731147986630566739, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: value
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731147986630566739, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: tagType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8219699011774354216, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_Enabled
@@ -324,6 +340,10 @@ PrefabInstance:
       propertyPath: m_text
       value: 65% Sale
       objectReference: {fileID: 0}
+    - target: {fileID: 8934566491478307726, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 7b855a6abbecf8946bf36854d1b99209, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 2796261471902414013, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}

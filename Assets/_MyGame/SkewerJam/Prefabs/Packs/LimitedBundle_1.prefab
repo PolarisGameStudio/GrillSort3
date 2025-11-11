@@ -324,7 +324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4892736783187194642, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_fontSize
-      value: 67.3
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 4894619779023653772, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_LocalScale.x
@@ -366,12 +366,24 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7731147986630566739, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: value
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731147986630566739, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: tagType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8219699011774354216, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8647078261093202049, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
       propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8934566491478307726, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9025066963376488250, guid: 7f40287ba8afc0345bab1572acf330ee, type: 3}
