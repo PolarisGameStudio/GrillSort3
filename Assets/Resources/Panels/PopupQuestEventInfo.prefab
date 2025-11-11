@@ -66,11 +66,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Thu th\u1EADp <color=#FFE92B>\u0111\xF9i g\xE0 v\xE0ng</color> \u0111\u1EC3
-    m\u1EDF v\xE0 nh\u1EADn ph\u1EA7n th\u01B0\u1EDFng!"
+  m_text: "<color=#FFE92B>\u91D1\u306E\u30C1\u30AD\u30F3\u30C9\u30E9\u30E0</color>\u3092\u96C6\u3081\u3066\u5831\u916C\u3092\u7372\u5F97\u3057\u3088\u3046\uFF01"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 77048ad586e137a40b98b1f9be571abd, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 8f70d7e22943e954eb086685ba8a50fa, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -94,7 +93,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 75.3
+  m_fontSize: 80.7
   m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -427,12 +426,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 452028972814236675, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
       propertyPath: m_text
-      value: "Ti\u1EBFp t\u1EE5c"
+      value: "\u7D9A\u3051\u308B"
       objectReference: {fileID: 0}
+    - target: {fileID: 452028972814236675, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
     - target: {fileID: 452028972814236675, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 0a32742b6c7b4474180003b8f3188837, type: 2}
+      objectReference: {fileID: 2100000, guid: 23c3dddf9958adb4897e8416d9197576, type: 2}
     - target: {fileID: 649503989189120637, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
       propertyPath: mTerm
       value: Continue
@@ -487,12 +490,20 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: e6fb7c3a76770264d84a18bbc611d7d6, type: 3}
     - target: {fileID: 2302525876580298392, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
       propertyPath: m_text
-      value: "Xi\xEAn v\xE0ng"
+      value: "\u30B4\u30FC\u30EB\u30C7\u30F3\u30B9\u30AD\u30E5\u30A2"
       objectReference: {fileID: 0}
     - target: {fileID: 2302525876580298392, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
       propertyPath: m_fontSize
-      value: 95
+      value: 73.3
       objectReference: {fileID: 0}
+    - target: {fileID: 2302525876580298392, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
+    - target: {fileID: 2302525876580298392, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 4c8df708265f982439af139538291d37, type: 2}
     - target: {fileID: 2783794934424032130, guid: 695aba3eb1941b44b8dac6ef3067d6ce, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 684

@@ -142,8 +142,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4570516174493971043, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_fontSize
-      value: 85
+      value: 89.95
       objectReference: {fileID: 0}
+    - target: {fileID: 4570516174493971043, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+    - target: {fileID: 4570516174493971043, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2317955595084648453, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
     - target: {fileID: 4721765967361507076, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -195,7 +203,7 @@ PrefabInstance:
     - target: {fileID: 6659841476006072537, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 3583879164573703614, guid: 1ad186f6383d0f6449e226da1f38334b, type: 2}
+      objectReference: {fileID: 2317955595084648453, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
     - target: {fileID: 6693080085290027414, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -211,6 +219,18 @@ PrefabInstance:
     - target: {fileID: 7794184162579932216, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_text
       value: Do you want to skip ?
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259862576792038776, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259862576792038776, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259862576792038776, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8928334083526460003, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_AnchorMax.y

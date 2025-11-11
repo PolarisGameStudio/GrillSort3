@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Manager;
 using MyGame.Modules.CardCollection;
 using Sonat.CustomService;

@@ -77,5 +77,13 @@ namespace MyGame.Modules
 
         protected abstract UniTask TryShowTutorial();
         protected abstract void ProgressUnlockFeature();
+
+        public void RemoveTutorial()
+        {
+            ResetData();
+            isUnlocked.Value = 0;
+            PlayerPrefs.DeleteKey($"{DATA_KEY}_ShowTutorial");
+            PlayerPrefs.Save();
+        }
     }
 }

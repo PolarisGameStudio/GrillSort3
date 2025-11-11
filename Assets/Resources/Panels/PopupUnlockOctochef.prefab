@@ -1023,6 +1023,7 @@ GameObject:
   - component: {fileID: 1687311101631906726}
   - component: {fileID: 1501846904778913331}
   - component: {fileID: 4733362893592131866}
+  - component: {fileID: 4221824134223330796}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1077,10 +1078,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Eliminate Octochef immediately!
+  m_text: "\u0E01\u0E33\u0E08\u0E31\u0E14 Octochef \u0E17\u0E31\u0E19\u0E17\u0E35!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e13e4bfa3ed5b20408dd981c4a6cca19, type: 2}
-  m_sharedMaterial: {fileID: -4516441159803420151, guid: e13e4bfa3ed5b20408dd981c4a6cca19, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 36fdecb6b9143be4ab50457c90cf69bf, type: 2}
+  m_sharedMaterial: {fileID: 2598251489247747528, guid: 36fdecb6b9143be4ab50457c90cf69bf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1104,7 +1105,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60.75
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1146,6 +1147,45 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4221824134223330796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5895882732953743805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Eliminate Octochef immediately!
+  mTermSecondary: 1FTVVIPMikado-Black SDF
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &5995814893335638237
 GameObject:
   m_ObjectHideFlags: 0
@@ -1970,6 +2010,7 @@ GameObject:
   - component: {fileID: 2062197252741083557}
   - component: {fileID: 2282453562194794618}
   - component: {fileID: 1236272665659306729}
+  - component: {fileID: 156048967970131447}
   m_Layer: 5
   m_Name: TitleText
   m_TagString: Untagged
@@ -2024,10 +2065,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Octochef
+  m_text: "\u0E2D\u0E2D\u0E04\u0E42\u0E15\u0E40\u0E0A\u0E1F"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e13e4bfa3ed5b20408dd981c4a6cca19, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 8419bf081bb55a3429d96a10ff4cfb73, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 36fdecb6b9143be4ab50457c90cf69bf, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 40b708cb02b971345991e57b7d37f697, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2051,7 +2092,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 97.8
+  m_fontSize: 87.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2093,6 +2134,45 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &156048967970131447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8249435812247272359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Octochef
+  mTermSecondary: 1FTVVIPMikado-Black SDF-Title-Brown
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &8911342908008167086
 GameObject:
   m_ObjectHideFlags: 0
@@ -2341,8 +2421,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4570516174493971043, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_fontSize
-      value: 85
+      value: 89.95
       objectReference: {fileID: 0}
+    - target: {fileID: 4570516174493971043, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+    - target: {fileID: 4570516174493971043, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 0a32742b6c7b4474180003b8f3188837, type: 2}
     - target: {fileID: 4855997368239842548, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2397,8 +2485,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9056328102784659380, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_text
-      value: Free
+      value: "\u0E1F\u0E23\u0E35"
       objectReference: {fileID: 0}
+    - target: {fileID: 9056328102784659380, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 36fdecb6b9143be4ab50457c90cf69bf, type: 2}
+    - target: {fileID: 9056328102784659380, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 6476845509e27204499fda9b39d25b5b, type: 2}
     - target: {fileID: 9141805345166389359, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2746,6 +2842,18 @@ PrefabInstance:
     - target: {fileID: 4197389785341917251, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936695781943790007, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936695781943790007, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936695781943790007, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5604051763818473132, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
       propertyPath: m_AnchorMax.y

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using MyGame.Modules;
 using MyGame.Modules.CardCollection;
 using MyGame.Modules.QuestEvent;
+using MyGame.SkewerJam.Gameplay;
 using Sonat;
 using Sonat.DebugViewModule;
 using Sonat.Enums;
@@ -156,7 +158,12 @@ public class CheatPanel : Panel
                 break;
             case CheatOption.QuestEvent:
                 OnInputField(1);
+                break;
+            case CheatOption.RemoveTutorial:
+                OnDropdown(1);
+                OnInputField(0);
 
+                InitRemoveTutorialDropdown();
                 break;
         }
     }
@@ -239,6 +246,17 @@ public class CheatPanel : Panel
         cheatDropdowns[0].ClearOptions();
         cheatDropdowns[0].options = opts;
         cheatDropdowns[0].value = cheatLevelSource;
+    }
+
+    public void InitRemoveTutorialDropdown()
+    {
+        List<TMP_Dropdown.OptionData> opts = new List<TMP_Dropdown.OptionData>();
+        opts.Add(new TMP_Dropdown.OptionData() { text = "InGame" });
+        opts.Add(new TMP_Dropdown.OptionData() { text = "Services" });
+
+        cheatDropdowns[0].onValueChanged.RemoveAllListeners();
+        cheatDropdowns[0].ClearOptions();
+        cheatDropdowns[0].options = opts;
     }
 
     public void OnCheatClick()
@@ -330,6 +348,18 @@ public class CheatPanel : Panel
                     {
                         PopupToast.Cretate("Vào gameplay đi ạ !!!");
                     }
+                }
+                break;
+            case CheatOption.RemoveTutorial:
+                var opt = cheatDropdowns[0].options[cheatDropdowns[0].value].text;
+                if (opt == "InGame")
+                {
+                    TutorialManager.ResetAllTutorial();
+                }
+                else if (opt == "Services")
+                {
+                    MySonatFramework.GetService<QuestEventService>().RemoveTutorial();
+                    MySonatFramework.GetService<CardCollectionService>().RemoveTutorial();
                 }
                 break;
         }

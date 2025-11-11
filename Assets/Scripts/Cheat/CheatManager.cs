@@ -178,6 +178,7 @@ public enum CheatOption
 	TransportTracking,
 	CardCollection,
 	QuestEvent,
+	RemoveTutorial,
 	MAX,
 }
 

@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 5923565355275509858}
   - component: {fileID: 6311529186501469988}
   - component: {fileID: 1834969994692132544}
+  - component: {fileID: 1488336606918510091}
   m_Layer: 5
   m_Name: TitleText
   m_TagString: Untagged
@@ -140,10 +141,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: More lives
+  m_text: "\u30E9\u30A4\u30D5\u3092\u8FFD\u52A0"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
-  m_sharedMaterial: {fileID: 2100000, guid: 8419bf081bb55a3429d96a10ff4cfb73, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 4c8df708265f982439af139538291d37, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -167,7 +168,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 97.8
+  m_fontSize: 80.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -209,6 +210,45 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1488336606918510091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258453809282386943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: More lives
+  mTermSecondary: 1FTVVIPMikado-Black SDF-Title-Brown
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &636460927728314982
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,8 +741,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 5
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
-  m_sharedMaterial: {fileID: 2100000, guid: 8419bf081bb55a3429d96a10ff4cfb73, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 9113ded81be41a74aaefafb0c9799731, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1429,7 +1469,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "N\u1EA1p l\u1EA1i"
+  m_text: Refill
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 917d1465f6f4b514cb583051b2efe8d2, type: 2}
@@ -1456,7 +1496,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 79.3
+  m_fontSize: 90
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1603,7 +1643,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "T\u1EB7ng 1 m\u1EA1ng mi\u1EC5n ph\xED"
+  m_text: Free 1 Life
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 856fa396abbeb2d489413f669b4c121f, type: 2}
@@ -1630,7 +1670,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 54.65
+  m_fontSize: 90
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2459,6 +2499,7 @@ GameObject:
   - component: {fileID: 7182307244149242687}
   - component: {fileID: 9021682793925211690}
   - component: {fileID: 5112447540533720849}
+  - component: {fileID: 8681093479201737691}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2515,8 +2556,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Unlimited life in:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
-  m_sharedMaterial: {fileID: -4516441159803420151, guid: e13e4bfa3ed5b20408dd981c4a6cca19, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: cb0cdd8a12e2a094fa8afa58a87419f2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2582,6 +2623,45 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8681093479201737691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6194545231378778374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: 'Unlimited life in:'
+  mTermSecondary: 1FTVVIPMikado-Black SDF
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &6238415936282663289
 GameObject:
   m_ObjectHideFlags: 0
@@ -3114,6 +3194,7 @@ GameObject:
   - component: {fileID: 3827381504149315473}
   - component: {fileID: 3619536541945311770}
   - component: {fileID: 1391471963172966735}
+  - component: {fileID: 977378485309188168}
   m_Layer: 5
   m_Name: TitleText
   m_TagString: Untagged
@@ -3168,10 +3249,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: More lives
+  m_text: "\u30E9\u30A4\u30D5\u3092\u8FFD\u52A0"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
-  m_sharedMaterial: {fileID: 2100000, guid: 8419bf081bb55a3429d96a10ff4cfb73, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 4c8df708265f982439af139538291d37, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3195,7 +3276,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 97.8
+  m_fontSize: 80.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3237,6 +3318,45 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &977378485309188168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7483134122487329019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: More lives
+  mTermSecondary: 1FTVVIPMikado-Black SDF-Title-Brown
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &7493298686802598123
 GameObject:
   m_ObjectHideFlags: 0
@@ -3323,6 +3443,7 @@ GameObject:
   - component: {fileID: 4793587428655792522}
   - component: {fileID: 4606934712830939775}
   - component: {fileID: 482982855495513556}
+  - component: {fileID: 3968167510285936519}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -3377,10 +3498,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Your lives are full !
+  m_text: Your lives are full!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
-  m_sharedMaterial: {fileID: -4516441159803420151, guid: e13e4bfa3ed5b20408dd981c4a6cca19, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: cb0cdd8a12e2a094fa8afa58a87419f2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3446,6 +3567,45 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3968167510285936519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8193253637255215870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Your lives are full!
+  mTermSecondary: 1FTVVIPMikado-Black SDF
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &8982735592573790599
 GameObject:
   m_ObjectHideFlags: 0
@@ -4100,9 +4260,13 @@ PrefabInstance:
       propertyPath: mTerm
       value: More lives
       objectReference: {fileID: 0}
+    - target: {fileID: 7575742409349998590, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7794184162579932216, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_text
-      value: 'Next life in: '
+      value: 'Next life in:'
       objectReference: {fileID: 0}
     - target: {fileID: 7794184162579932216, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_sharedMaterial

@@ -284,6 +284,16 @@ namespace MyGame.SkewerJam.Gameplay
             PanelManager.Instance.OpenPanelByName<PopupTutorialGroup>(popuTutorialName, uiData);
         }
 
+        public static void ResetAllTutorial()
+        {
+            foreach (var tutorialType in Enum.GetValues(typeof(TutorialType)))
+            {
+                var playerPrefs = PlayerPrefs.GetInt($"PopupTutorial_Showed_{tutorialType}");
+                PlayerPrefs.DeleteKey($"PopupTutorial_Showed_{tutorialType}");
+            }
+            PlayerPrefs.Save();
+        }
+
 #if UNITY_EDITOR
         // private void Update()
         // {

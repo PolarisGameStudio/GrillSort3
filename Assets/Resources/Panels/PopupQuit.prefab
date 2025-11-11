@@ -130,16 +130,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6845531344152134449, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
       propertyPath: m_text
-      value: "\u0110\u1EA7y"
+      value: "\u6E80\u30BF\u30F3"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6845531344152134449, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
+      propertyPath: m_fontSize
+      value: 50.25
       objectReference: {fileID: 0}
     - target: {fileID: 6845531344152134449, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+      objectReference: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
     - target: {fileID: 6845531344152134449, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 7b855a6abbecf8946bf36854d1b99209, type: 2}
+      objectReference: {fileID: 2100000, guid: cb0cdd8a12e2a094fa8afa58a87419f2, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -182,6 +186,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnContinueClick
       objectReference: {fileID: 0}
+    - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_text
+      value: "\u7D42\u4E86"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_fontSize
+      value: 103.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
+    - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 4c8df708265f982439af139538291d37, type: 2}
     - target: {fileID: 2338080940412523142, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -226,14 +246,46 @@ PrefabInstance:
       propertyPath: mTerm
       value: Quit
       objectReference: {fileID: 0}
+    - target: {fileID: 7575742409349998590, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794184162579932216, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_text
+      value: "\u30E9\u30A4\u30D5\u3092\u5931\u3044\u307E\u3059\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794184162579932216, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
     - target: {fileID: 7794184162579932216, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 7b855a6abbecf8946bf36854d1b99209, type: 2}
+      objectReference: {fileID: 2100000, guid: cb0cdd8a12e2a094fa8afa58a87419f2, type: 2}
     - target: {fileID: 7920637122189102667, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_text
-      value: "Ti\u1EBFp t\u1EE5c"
+      value: "\u7D9A\u3051\u308B"
       objectReference: {fileID: 0}
+    - target: {fileID: 7920637122189102667, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
+    - target: {fileID: 7920637122189102667, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 23c3dddf9958adb4897e8416d9197576, type: 2}
+    - target: {fileID: 9056328102784659380, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_text
+      value: "\u7D42\u4E86"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9056328102784659380, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
+    - target: {fileID: 9056328102784659380, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: a1d9c185b1103af4db49baeaea0a3b89, type: 2}
     - target: {fileID: 9141805345166389359, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
