@@ -255,6 +255,11 @@ namespace MyGame.SkewerJam.Objects
             return false;
         }
 
+        public void CallClearItem(WaitingGrill waitingGrill)
+        {
+            OnClearItem?.Invoke(waitingGrill);
+        }
+
         public async UniTask Unlock(WaitingGrill waitingGrill)
         {
             GameController.Instance.SetBlockUI(true);

@@ -48,6 +48,7 @@ namespace MyGame.SkewerJamSO.Boosters
                 if (item == null) continue;
 
                 waitingGrill.GetSlot(0).SetItem(null);
+                waitingGrillManager.CallClearItem(waitingGrill);
                 // waitingGrill.transform.DOShakePosition(scaleDuration, 0.5f, 10, 90);
                 // item.transform.DOScale(0, scaleDuration).SetEase(Ease.InBack).OnComplete(() =>
                 // {

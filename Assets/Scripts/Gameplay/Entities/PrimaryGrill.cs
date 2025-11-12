@@ -451,11 +451,11 @@ namespace Gameplay.Entities
 
                 SonatUtils.DelayCall(GameDefine.itemScaleIntro + 0.2f, () =>
                 {
-                    if (CanShuffle()) grillVisual.OpenGrill();
+                    grillVisual.OpenGrill();
                     CheckSubGrills();
                     CheckComplete();
-                    SonatUtils.DelayCall(GameDefine.itemScaleIntro, CheckEmpty, this);
-                }, this);
+                    SonatUtils.DelayCall(GameDefine.itemScaleIntro, CheckEmpty);
+                });
             }, this);
         }
 
