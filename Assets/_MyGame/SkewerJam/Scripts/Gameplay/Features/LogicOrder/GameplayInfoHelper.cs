@@ -2,33 +2,30 @@ using System.Collections.Generic;
 
 namespace MyGame.SkewerJam.Gameplay.LogicOrder
 {
-    public struct SubNode
+    public struct NodeAsOneLayerInGrill
     {
         public int id;
-        public int score;
+        public int rootId;
         public int cost;
-        public int costOrder; // số vị trí cần trong order
+        public List<int> listCostOrder;
+        public int score;
     }
 
     public struct Node
     {
-        public int cost;
-        public int costOrder; // số vị trí cần trong order
-        public List<int> listSubNodes;
+        public int totalCost;
+        public List<int> listRootIds;
+        public Dictionary<int, List<int>> dictCostOrder; // rootId -> listCostOrder
 
         // INSERT_YOUR_CODE
         public static bool operator >(Node a, Node b)
         {
-            if (a.cost != b.cost)
-                return a.cost > b.cost;
-            return a.costOrder > b.costOrder;
+            return a.totalCost > b.totalCost;
         }
 
         public static bool operator <(Node a, Node b)
         {
-            if (a.cost != b.cost)
-                return a.cost < b.cost;
-            return a.costOrder < b.costOrder;
+            return a.totalCost < b.totalCost;
         }
     }
 }

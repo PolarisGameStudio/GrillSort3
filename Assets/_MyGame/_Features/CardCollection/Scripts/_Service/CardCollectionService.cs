@@ -34,10 +34,8 @@ namespace MyGame.Modules.CardCollection
         public event Action OnNewCardCountChanged;
 
         #region Init
-        public override void Initialize()
+        protected override void Init()
         {
-            base.Initialize();
-
             new EventBinding<AddItemEvent>(OnAddItemEvent);
 
             SonatUtils.ExecuteNextFrame(() =>

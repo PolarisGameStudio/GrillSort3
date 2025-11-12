@@ -14,6 +14,11 @@ namespace MyGame.Modules.Language
         public event Action OnLanguageChanged;
 
         #region Override
+        protected override void Init()
+        {
+            // do nothing
+        }
+
         protected override void LoadConfig()
         {
             // do nothing

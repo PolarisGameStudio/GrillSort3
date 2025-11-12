@@ -14,8 +14,11 @@ namespace MyGame.Modules
         {
             LoadConfig();
             LoadData();
+
+            Init();
         }
 
+        protected abstract void Init();
         protected abstract void LoadData();
         protected abstract void LoadConfig();
         protected abstract void ResetData();

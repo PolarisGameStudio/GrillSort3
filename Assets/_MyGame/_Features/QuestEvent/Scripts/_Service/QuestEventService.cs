@@ -28,10 +28,8 @@ namespace MyGame.Modules.QuestEvent
 
         private int _numCollectAtHome = 0;
 
-        public override void Initialize()
+        protected override void Init()
         {
-            base.Initialize();
-
             new EventBinding<LevelStartedEvent>(OnLevelStarted);
             new EventBinding<LevelEndedEvent>(OnLevelEnded);
             new EventBinding<LevelQuitEvent>(OnLevelQuit);

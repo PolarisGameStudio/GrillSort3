@@ -24,49 +24,49 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                 );
 
             Debug.Log("BasicOrderSO_v2: GetOrder: " + "currentNumEmptyWaitingSlot: " + numEmptyWaitingSlot + " >>> expected remainingSlot: " + remainingSlotAfter);
-            var dictNeededSlots = gameplayInfo.DictNeededSlots;
-            var dictRandomItemIds = new Dictionary<int, List<(ItemId itemId, int numItems, int step)>>();
+            var dictDeltaSlots = gameplayInfo.DictDeltaSlots;
+            var dictDiff2ItemIdsAndNum = new Dictionary<int, List<(ItemId itemId, int numItems, int deltaSlot)>>();
 
-            foreach (var itemId in dictNeededSlots.Keys)
+            foreach (var itemId in dictDeltaSlots.Keys)
             {
-                foreach (var (numItems, step) in dictNeededSlots[itemId])
+                foreach (var (numItems, delta) in dictDeltaSlots[itemId])
                 {
-                    var numSlotIfOrder = numEmptyWaitingSlot - step; // số slot còn lại nếu thực hiện order này
-                    var delta = remainingSlotAfter - numSlotIfOrder;
+                    var numSlotIfOrder = numEmptyWaitingSlot - delta; // số slot còn lại nếu thực hiện order này
+                    var difference = remainingSlotAfter - numSlotIfOrder;
 
-                    dictRandomItemIds.TryAdd(delta, new List<(ItemId itemId, int numItems, int step)>());
-                    dictRandomItemIds[delta].Add((itemId, numItems, step));
+                    dictDiff2ItemIdsAndNum.TryAdd(difference, new List<(ItemId itemId, int numItems, int deltaSlot)>());
+                    dictDiff2ItemIdsAndNum[difference].Add((itemId, numItems, delta));
                 }
             }
 
-            if (dictRandomItemIds.Count != 0)
+            if (dictDiff2ItemIdsAndNum.Count != 0)
             {
-                var listKeys = dictRandomItemIds.Keys.ToList();
-                var positiveKeys = listKeys.Where(e => e >= 0).ToList().OrderBy(e => e).ToList();
+                var listDiffKeys = dictDiff2ItemIdsAndNum.Keys.ToList();
+                var positiveDiffKeys = listDiffKeys.Where(e => e >= 0).ToList().OrderBy(e => e).ToList();
 
-                foreach (var key in positiveKeys)
+                foreach (var diff in positiveDiffKeys)
                 {
-                    var randomItemIds = dictRandomItemIds[key];
-                    var maxNumItems = randomItemIds.Max(e => e.numItems);
+                    var listItemIdAndNum = dictDiff2ItemIdsAndNum[diff];
+                    var maxNumItems = listItemIdAndNum.Max(e => e.numItems);
 
-                    var filteredRandomItemIds = randomItemIds.Where(e => e.numItems == maxNumItems).ToList();
+                    var filteredRandomItemIds = listItemIdAndNum.Where(e => e.numItems == maxNumItems).ToList();
                     var randomItemId = filteredRandomItemIds[UnityEngine.Random.Range(0, filteredRandomItemIds.Count)];
-                    Debug.Log("BasicOrderSO_v2: GetOrder: " + "result remaining slots: >= " + (numEmptyWaitingSlot - randomItemId.step));
-                    Debug.Log("BasicOrderSO_v2: GetOrder: >> step: " + randomItemId.step);
+                    Debug.Log("BasicOrderSO_v2: GetOrder: " + "result remaining slots: >= " + (numEmptyWaitingSlot - randomItemId.deltaSlot));
+                    Debug.Log("BasicOrderSO_v2: GetOrder: >> delta slot: " + randomItemId.deltaSlot);
                     return (randomItemId.itemId, randomItemId.numItems);
                 }
 
-                var negativeKeys = listKeys.Where(e => e < 0).ToList().OrderBy(e => -e).ToList();
+                var negativeDiffKeys = listDiffKeys.Where(e => e < 0).ToList().OrderBy(e => -e).ToList();
 
-                foreach (var key in negativeKeys)
+                foreach (var diff in negativeDiffKeys)
                 {
-                    var randomItemIds = dictRandomItemIds[key];
-                    var maxNumItems = randomItemIds.Max(e => e.numItems);
+                    var listItemIdAndNum = dictDiff2ItemIdsAndNum[diff];
+                    var maxNumItems = listItemIdAndNum.Max(e => e.numItems);
 
-                    var filteredRandomItemIds = randomItemIds.Where(e => e.numItems == maxNumItems).ToList();
+                    var filteredRandomItemIds = listItemIdAndNum.Where(e => e.numItems == maxNumItems).ToList();
                     var randomItemId = filteredRandomItemIds[UnityEngine.Random.Range(0, filteredRandomItemIds.Count)];
-                    Debug.Log("BasicOrderSO_v2: GetOrder: " + "result remaining slots: >= " + (numEmptyWaitingSlot - randomItemId.step));
-                    Debug.Log("BasicOrderSO_v2: GetOrder: >> step: " + randomItemId.step);
+                    Debug.Log("BasicOrderSO_v2: GetOrder: " + "result remaining slots: >= " + (numEmptyWaitingSlot - randomItemId.deltaSlot));
+                    Debug.Log("BasicOrderSO_v2: GetOrder: >> delta slot: " + randomItemId.deltaSlot);
                     return (randomItemId.itemId, randomItemId.numItems);
                 }
             }
