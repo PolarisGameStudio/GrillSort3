@@ -168,8 +168,6 @@ GameObject:
   - component: {fileID: 9065047033613988935}
   - component: {fileID: 4782197014377722058}
   - component: {fileID: 9085868711517030909}
-  - component: {fileID: 8366774958493608705}
-  - component: {fileID: 1804968480867388622}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -224,10 +222,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30B3\u30F3\u30DC 1"
+  m_text: Combo 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: d2deb86bd858bd24da9e6ec279105520, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 917d1465f6f4b514cb583051b2efe8d2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -293,61 +291,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &8366774958493608705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859049445767629949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mTerm: Combo
-  mTermSecondary: 1FTVVIPMikado-Black SDF-Desc-Green
-  PrimaryTermModifier: 0
-  SecondaryTermModifier: 0
-  TermPrefix: 
-  TermSuffix: 
-  LocalizeOnAwake: 1
-  IgnoreRTL: 0
-  MaxCharactersInRTL: 0
-  IgnoreNumbersInRTL: 1
-  CorrectAlignmentForRTL: 1
-  AddSpacesToJoinedLanguages: 0
-  AllowLocalizedParameters: 1
-  AllowParameters: 1
-  TranslatedObjects: []
-  LocalizeEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  AlwaysForceLocalize: 0
-  LocalizeCallBack:
-    Target: {fileID: 0}
-    MethodName: 
-  mGUI_ShowReferences: 0
-  mGUI_ShowTems: 1
-  mGUI_ShowCallback: 0
-  mLocalizeTarget: {fileID: 0}
-  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
---- !u!114 &1804968480867388622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859049445767629949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9586cfd190ca384a8dd72aa92c86152, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Params:
-  - Name: VALUE
-    Value: 1
-  _IsGlobalManager: 0
 --- !u!1 &1061483510353939343
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,10 +397,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30EC\u30D9\u30EB 1"
+  m_text: Nivel 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 62e87a457dbc3a64ca73669e8f7a3797, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 0a8884e6035b2b946889a93f0eb81edd, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1474,7 +1417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 3340052610044325119}
-  comboParamsManager: {fileID: 1804968480867388622}
+  txtCombo: {fileID: 9085868711517030909}
   mainObject: {fileID: 4361609816977853854}
   blastEffect: {fileID: 0}
   layoutElement: {fileID: 0}

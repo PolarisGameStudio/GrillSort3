@@ -14,6 +14,24 @@ public class PopupExchangeCardStar : Panel
     private readonly Service<CardCollectionService> _cardCollectionService = new();
 
     private int star = 0;
+
+    private void OnEnable()
+    {
+        var starModule = _cardCollectionService.Instance.StarSubmodule;
+        starModule.OnStarChanged += OnStarChanged;
+    }
+
+    private void OnDisable()
+    {
+        var starModule = _cardCollectionService.Instance.StarSubmodule;
+        starModule.OnStarChanged -= OnStarChanged;
+    }
+
+    private void OnStarChanged(int star)
+    {
+        UpdateUI();
+    }
+
     public override void OnSetup()
     {
         base.OnSetup();

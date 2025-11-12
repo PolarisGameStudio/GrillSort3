@@ -13,6 +13,7 @@ namespace MyGame.Modules.CardCollection.CardStarExchange
         [SerializeField] private UIBubbleReward bubbleReward;
         [SerializeField] private Button btnGreen;
         [SerializeField] private Button btnGray;
+        [SerializeField] private Button btnClaimed;
 
         private readonly Service<CardCollectionService> _cardCollectionService = new();
 
@@ -58,8 +59,19 @@ namespace MyGame.Modules.CardCollection.CardStarExchange
         {
             var starModule = _cardCollectionService.Instance.StarSubmodule;
             var canClick = starModule.CanReceiveChest(index);
-            btnGreen.gameObject.SetActive(canClick);
-            btnGray.gameObject.SetActive(!canClick);
+
+            if (starModule.CardStarExchangeIndex >= index)
+            {
+                btnGreen.gameObject.SetActive(false);
+                btnGray.gameObject.SetActive(false);
+                btnClaimed.gameObject.SetActive(true);
+            }
+            else
+            {
+                btnClaimed.gameObject.SetActive(false);
+                btnGray.gameObject.SetActive(!canClick);
+                btnGreen.gameObject.SetActive(canClick);
+            }
         }
     }
 }

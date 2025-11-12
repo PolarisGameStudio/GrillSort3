@@ -13,7 +13,7 @@ namespace MyGame.SkewerJam.Gameplay
     public class UICombo : MonoBehaviour
     {
         [SerializeField] private Slider slider;
-        [SerializeField] private LocalizationParamsManager comboParamsManager;
+        [SerializeField] private TMP_Text txtCombo;
         [SerializeField] private GameObject mainObject;
         [SerializeField] private ParticleSystem blastEffect;
         [SerializeField] private LayoutElement layoutElement;
@@ -67,7 +67,7 @@ namespace MyGame.SkewerJam.Gameplay
                     blastEffect.gameObject.SetActive(true);
                     blastEffect.Play();
                 }
-                comboParamsManager.SetParameterValue("VALUE", combo.ToString());
+                txtCombo.text = $"Combo {combo}";
                 if (cooldownCoroutine != null)
                 {
                     StopCoroutine(cooldownCoroutine);

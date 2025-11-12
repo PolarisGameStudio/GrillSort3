@@ -20,6 +20,7 @@ namespace MyGame.Modules.CardCollection
 
         public int NumberStar => _cardStar.Value;
         public int NumberStarView => _numStarView;
+        public int CardStarExchangeIndex => _cardStarExchangeIndex.Value;
 
         public event Action<int> OnStarChanged;
 

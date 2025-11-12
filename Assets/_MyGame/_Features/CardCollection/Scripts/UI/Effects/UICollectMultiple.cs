@@ -39,7 +39,9 @@ public class UICollectMultiple : MonoBehaviour, IPoolingObject
 
         delayMove = (float)args[4];
 
+        uiResourceItem.transform.DOKill();
         uiResourceItem.SetQuantity(quantity);
+        uiResourceItem.transform.localScale = Vector3.one;
         DOEffect().Forget();
     }
 

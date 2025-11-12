@@ -634,10 +634,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u4F59\u3063\u305F\u30B9\u30BF\u30FC\u3067\u5B9D\u7BB1\u3092\u958B\u3051\u3088\u3046\uFF01"
+  m_text: "D\xF9ng sao d\u01B0 \u0111\u1EC3 m\u1EDF r\u01B0\u01A1ng!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 8f70d7e22943e954eb086685ba8a50fa, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 77048ad586e137a40b98b1f9be571abd, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -980,7 +980,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 378.5, y: -45}
+  m_AnchoredPosition: {x: 482.225, y: -45}
   m_SizeDelta: {x: 120.15, y: 84.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &504552466066287554
@@ -1434,8 +1434,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 218.41, y: -45}
-  m_SizeDelta: {x: 0, y: 84.6}
+  m_AnchoredPosition: {x: 218.425, y: -45}
+  m_SizeDelta: {x: 204.47, y: 84.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5111776468724174947
 CanvasRenderer:
@@ -1465,10 +1465,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u6240\u6301"
+  m_text: "B\u1EA1n c\xF3"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: cb0cdd8a12e2a094fa8afa58a87419f2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 7b855a6abbecf8946bf36854d1b99209, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1492,7 +1492,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 69
+  m_fontSize: 66.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1978,20 +1978,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_text
-      value: "\u30AB\u30FC\u30C9\u30B9\u30BF\u30FC"
+      value: "Th\u1EBB sao"
       objectReference: {fileID: 0}
     - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_fontSize
-      value: 81.05
+      value: 103.5
       objectReference: {fileID: 0}
     - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
     - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 4c8df708265f982439af139538291d37, type: 2}
+      objectReference: {fileID: 2100000, guid: 9113ded81be41a74aaefafb0c9799731, type: 2}
     - target: {fileID: 2338080940412523142, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -2645,6 +2645,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 566115979896786516}
     m_Modifications:
+    - target: {fileID: 284297956437461742, guid: 04018c54d4d41974c9fb44843e9acb6f, type: 3}
+      propertyPath: m_fontSize
+      value: 63.45
+      objectReference: {fileID: 0}
     - target: {fileID: 596959137896867432, guid: 04018c54d4d41974c9fb44843e9acb6f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3258,6 +3262,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 566115979896786516}
     m_Modifications:
+    - target: {fileID: 284297956437461742, guid: 04018c54d4d41974c9fb44843e9acb6f, type: 3}
+      propertyPath: m_fontSize
+      value: 63.45
+      objectReference: {fileID: 0}
     - target: {fileID: 596959137896867432, guid: 04018c54d4d41974c9fb44843e9acb6f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3756,6 +3764,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 566115979896786516}
     m_Modifications:
+    - target: {fileID: 284297956437461742, guid: 04018c54d4d41974c9fb44843e9acb6f, type: 3}
+      propertyPath: m_fontSize
+      value: 63.45
+      objectReference: {fileID: 0}
     - target: {fileID: 596959137896867432, guid: 04018c54d4d41974c9fb44843e9acb6f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
