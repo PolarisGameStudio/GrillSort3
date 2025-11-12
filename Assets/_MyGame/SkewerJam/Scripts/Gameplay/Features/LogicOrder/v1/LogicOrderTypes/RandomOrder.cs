@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay.LogicOrder
 {
+    
     [CreateAssetMenu(fileName = "RandomOrderSO", menuName = "MyGame/SkewerJam/Gameplay/LogicOrder/RandomOrderSO")]
     public class RandomOrderSO : BaseOrderSO
     {

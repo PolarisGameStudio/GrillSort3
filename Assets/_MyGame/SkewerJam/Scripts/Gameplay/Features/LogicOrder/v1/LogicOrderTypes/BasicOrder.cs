@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay.LogicOrder
 {
+    
     [CreateAssetMenu(fileName = "BasicOrderSO", menuName = "MyGame/SkewerJam/Gameplay/LogicOrder/BasicOrderSO")]
     public class BasicOrderSO : BaseOrderSO
     {

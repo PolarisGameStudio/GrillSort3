@@ -57,7 +57,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
         public static (ItemId itemId, int num, int step) GetOptimizedRandomLockedOrder(List<ItemId> randomItemIds, GameplayInfoForLogicOrder info)
         {
-            var dictNeededSlots = info.DictNeededSlots;
+            var dictNeededSlots = info.DictDeltaSlots;
             var listRandomItemIds = new List<ItemId>();
             var minStep = int.MaxValue;
 

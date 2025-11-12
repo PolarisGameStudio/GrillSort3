@@ -4,6 +4,8 @@ using Cysharp.Threading.Tasks;
 using Manager;
 using MyGame.SkewerJam.Gameplay.LogicOrder;
 using MyGame.SkewerJam.Gameplay.LogicOrder.Configs;
+using MyGame.SkewerJam.Level;
+using Sonat.Enums;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay.Helpers
@@ -14,6 +16,32 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
         [Header("Configs")]
         [SerializeField] private LogicOrderConfigSO_v2 logicOrderConfigSO_v2;
+
+        private FlowConfigSO_v2 flowConfigSO_v2;
+
+        public override void Init()
+        {
+            base.Init();
+            var levelGenerator = GameController.Instance.LevelGenerator;
+            levelGenerator.OnLoadLevelData += OnLoadLevelData;
+        }
+
+        public override void Clear()
+        {
+            base.Clear();
+            var levelGenerator = GameController.Instance.LevelGenerator;
+            levelGenerator.OnLoadLevelData -= OnLoadLevelData;
+        }
+
+        private void OnLoadLevelData(LevelData_SkewerJam levelData)
+        {
+
+            var randomDifficultyValue = levelData.level % 4;
+            var randomDifficulty = levelData.level % 3;
+            Debug.Log("<color=purple>LogicOrderHandler_v2:</color> OnLoadLevelData: " + (LevelDifficulty)randomDifficulty + " " + randomDifficultyValue);
+            var randomFlowConfigSO = logicOrderConfigSO_v2.GetFlowConfigSO((LevelDifficulty)randomDifficulty, randomDifficultyValue);
+            flowConfigSO_v2 = randomFlowConfigSO;
+        }
 
         public override async UniTask<(ItemId itemId, int num, LogicOrderType logicOrderType)> GetItemOrder(bool isRescue = false)
         {
@@ -35,6 +63,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
                 }
                 else
                 {
+                    SetForceRescue(false, -1);
                     return ForceGetItemOrder(gameplayInfoForLogicOrder);
                 }
             }
@@ -43,7 +72,8 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             SetForceRescue(false, -1);
 
             var phase = GetCurrentPhase();
-            gameplayInfoForLogicOrder.phase = phase;
+            var curveIndex = flowConfigSO_v2.GetCurveIndex(phase);
+            gameplayInfoForLogicOrder.phase = curveIndex;
 
             var selectedFlowConfigSO = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Basic_v2) as BasicOrderSO_v2;
             var (item, num) = selectedFlowConfigSO.GetOrder(gameplayInfoForLogicOrder);

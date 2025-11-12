@@ -3,6 +3,7 @@ using System.Linq;
 using Gameplay.Entities;
 using Manager;
 using MyGame.SkewerJam.Gameplay.Helpers;
+using Sonat.TrackingModule;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay.LogicOrder
@@ -205,8 +206,21 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                     var currentNeededSlot = dictCountSlotByGrill.GetValueOrDefault(primaryGrill.id, 0);
 
                     // nếu ở layer bên trên có item này thì trừ đi số lượng itme ở layer trên đó
-                    var numItemsInUpperLayer = dictNumItemsInUpperLayer.GetValueOrDefault(primaryGrill.id, new List<Item>()).Where(e => (ItemId)e.id == itemId).Count();
-                    currentNeededSlot = currentNeededSlot - numItemsInUpperLayer;
+                    var listItemsInUpperLayer = dictNumItemsInUpperLayer.GetValueOrDefault(primaryGrill.id, new List<Item>());
+                    var numItemsInUpperLayer = listItemsInUpperLayer.Where(e => (ItemId)e.id == itemId).Count();
+
+
+                    var tempNeededItemsForCurrentOrder = OrderHelper.GetNeededItemsForCurrentOrder();
+                    var numItemInUpperLayerInOrder = 0;
+                    foreach (var item in listItemsInUpperLayer)
+                    {
+                        if ((ItemId)item.id != itemId) continue;
+                        if (tempNeededItemsForCurrentOrder.ContainsKey((ItemId)item.id) && tempNeededItemsForCurrentOrder[(ItemId)item.id] > numItemInUpperLayerInOrder)
+                        {
+                            numItemInUpperLayerInOrder += 1;
+                        }
+                    }
+                    currentNeededSlot = currentNeededSlot - numItemsInUpperLayer - numItemInUpperLayerInOrder;
 
                     if (dp.ContainsKey(itemId) == false)
                     {

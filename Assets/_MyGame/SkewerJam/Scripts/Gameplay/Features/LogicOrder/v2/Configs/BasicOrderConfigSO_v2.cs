@@ -15,10 +15,19 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder.Configs
         {
             var curveConfig = listCurveConfigs[phase];
             var random = UnityEngine.Random.Range(0f, 1f);
-            Debug.Log("<color=purple>BasicOrderConfigSO_v2: GetRandomRemainingSlot: " + phase + "</color> >>> random" + random);
+            Debug.Log("<color=purple>BasicOrderConfigSO_v2: GetRandomRemainingSlot: " + phase + "</color> >>> random: " + random);
+            var str = "";
             foreach (var rateConfig in curveConfig.listRateConfigs)
             {
-                if (random < rateConfig.rate)
+                str += $"({rateConfig.remainingSlot}, {rateConfig.rate}) >> ";
+            }
+            Debug.Log("BasicOrderConfigSO_v2: curveConfig: >>> " + str);
+
+            var accumulatedRate = 0f;
+            foreach (var rateConfig in curveConfig.listRateConfigs)
+            {
+                accumulatedRate += rateConfig.rate;
+                if (random < accumulatedRate)
                 {
                     return rateConfig.remainingSlot;
                 }
@@ -37,6 +46,11 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder.Configs
                     rateConfig.remainingSlot = curveConfig.listRateConfigs.Count - rateConfig.index - 1;
                 }
             }
+        }
+
+        public int GetMaxRemainingSlot()
+        {
+            return 5;
         }
 #endif
     }

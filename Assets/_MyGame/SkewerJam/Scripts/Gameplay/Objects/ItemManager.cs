@@ -46,7 +46,7 @@ namespace MyGame.SkewerJam.Gameplay.Objects
             if (slot.GetGrill() is OrderEntity orderEntity)
             {
                 currentItems -= 1;
-                Debug.Log($"OnItemEndSwitch: {currentItems}");
+                // Debug.Log($"OnItemEndSwitch: {currentItems}");
                 OnUpdateItems?.Invoke(currentItems);
             }
             else
@@ -57,7 +57,7 @@ namespace MyGame.SkewerJam.Gameplay.Objects
         private void OnClearItem(WaitingGrill waitingGrill)
         {
             currentItems -= 1;
-            Debug.Log($"OnClearItem: {currentItems}");
+            // Debug.Log($"OnClearItem: {currentItems}");
             OnUpdateItems?.Invoke(currentItems);
         }
 
