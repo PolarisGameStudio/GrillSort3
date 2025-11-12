@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PopupBombExplosive
       objectReference: {fileID: 0}
+    - target: {fileID: 1781423882037182852, guid: 0998e206a7a3f044cb9252baa5f0bbc4, type: 3}
+      propertyPath: mTerm
+      value: Continue
+      objectReference: {fileID: 0}
     - target: {fileID: 2734168327982546386, guid: 0998e206a7a3f044cb9252baa5f0bbc4, type: 3}
       propertyPath: m_text
       value: "\u7121\u6599"
@@ -19,11 +23,11 @@ PrefabInstance:
     - target: {fileID: 2734168327982546386, guid: 0998e206a7a3f044cb9252baa5f0bbc4, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
     - target: {fileID: 2734168327982546386, guid: 0998e206a7a3f044cb9252baa5f0bbc4, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: a1d9c185b1103af4db49baeaea0a3b89, type: 2}
+      objectReference: {fileID: 2100000, guid: f123a376f24a13b4391c2a497fd6fda3, type: 2}
     - target: {fileID: 2774510322834268681, guid: 0998e206a7a3f044cb9252baa5f0bbc4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -120,18 +124,38 @@ PrefabInstance:
       propertyPath: mTerm
       value: Bomb!
       objectReference: {fileID: 0}
+    - target: {fileID: 3780135019542312542, guid: 0998e206a7a3f044cb9252baa5f0bbc4, type: 3}
+      propertyPath: m_text
+      value: Do you want to skip?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780135019542312542, guid: 0998e206a7a3f044cb9252baa5f0bbc4, type: 3}
+      propertyPath: m_fontSize
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780135019542312542, guid: 0998e206a7a3f044cb9252baa5f0bbc4, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+    - target: {fileID: 3780135019542312542, guid: 0998e206a7a3f044cb9252baa5f0bbc4, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 7b855a6abbecf8946bf36854d1b99209, type: 2}
+    - target: {fileID: 5164233368756206846, guid: 0998e206a7a3f044cb9252baa5f0bbc4, type: 3}
+      propertyPath: m_text
+      value: Bomb!
+      objectReference: {fileID: 0}
     - target: {fileID: 5164233368756206846, guid: 0998e206a7a3f044cb9252baa5f0bbc4, type: 3}
       propertyPath: m_fontSize
-      value: 103.73
+      value: 103.5
       objectReference: {fileID: 0}
     - target: {fileID: 5164233368756206846, guid: 0998e206a7a3f044cb9252baa5f0bbc4, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
     - target: {fileID: 5164233368756206846, guid: 0998e206a7a3f044cb9252baa5f0bbc4, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 4c8df708265f982439af139538291d37, type: 2}
+      objectReference: {fileID: 2100000, guid: 9113ded81be41a74aaefafb0c9799731, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

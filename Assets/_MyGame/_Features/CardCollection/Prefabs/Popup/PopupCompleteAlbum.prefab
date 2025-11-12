@@ -24956,8 +24956,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Rewards
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1ad186f6383d0f6449e226da1f38334b, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 3ea39f9ae5c24c44fbb4886ff4b2a41a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+  m_sharedMaterial: {fileID: 2317955595084648453, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -25036,7 +25036,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   materialSO: {fileID: 11400000, guid: a8a15c604715ffa40bc71e6542d8aa69, type: 2}
-  useFillColor: 0
   index: 0
 --- !u!114 &7770899855057046253
 MonoBehaviour:
@@ -25108,8 +25107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTerm: 
-  mTermSecondary: TextMeshPro Material Outline Red
+  mTerm: Reward
+  mTermSecondary: 1FTVVIPMikado-Black SDF-Desc-Red
   PrimaryTermModifier: 0
   SecondaryTermModifier: 0
   TermPrefix: 
@@ -25191,6 +25190,8 @@ MonoBehaviour:
   customIcon: 0
   quantityFormat: x{0}
   iconNameFormat: ico_{0}
+  useCustomIconScale: 0
+  customIconScale: 1
 --- !u!1 &4081410447843197007
 GameObject:
   m_ObjectHideFlags: 0
@@ -30514,8 +30515,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1000
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1ad186f6383d0f6449e226da1f38334b, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 3ea39f9ae5c24c44fbb4886ff4b2a41a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+  m_sharedMaterial: {fileID: 2317955595084648453, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -40683,10 +40684,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tap To Claim
+  m_text: Dokun ve al
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1ad186f6383d0f6449e226da1f38334b, type: 2}
-  m_sharedMaterial: {fileID: 3583879164573703614, guid: 1ad186f6383d0f6449e226da1f38334b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+  m_sharedMaterial: {fileID: 2317955595084648453, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -40764,8 +40765,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTerm: Tap To Claim
-  mTermSecondary: TextMeshPro Material None Effect
+  mTerm: Tap To Continue
+  mTermSecondary: 1FTVVIPMikado-Black SDF
   PrimaryTermModifier: 0
   SecondaryTermModifier: 0
   TermPrefix: 
@@ -40842,11 +40843,11 @@ PrefabInstance:
     - target: {fileID: 2422682400173778170, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 1ad186f6383d0f6449e226da1f38334b, type: 2}
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
     - target: {fileID: 2422682400173778170, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 3ea39f9ae5c24c44fbb4886ff4b2a41a, type: 2}
+      objectReference: {fileID: 2317955595084648453, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
     - target: {fileID: 3481723704534869172, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -40899,14 +40900,6 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4026670770091142794, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
-      propertyPath: m_fontSize
-      value: 23.65
-      objectReference: {fileID: 0}
-    - target: {fileID: 4026670770091142794, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -4516441159803420151, guid: e13e4bfa3ed5b20408dd981c4a6cca19, type: 2}
     - target: {fileID: 4593001824185217669, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
       propertyPath: m_Value
       value: 1
@@ -40921,7 +40914,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6223271472700239312, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
       propertyPath: m_fontSize
-      value: 41.85
+      value: 44.3
       objectReference: {fileID: 0}
     - target: {fileID: 7449105712174547472, guid: 1c87bb090890cdf4f9e8cbfb691fafc3, type: 3}
       propertyPath: m_Pivot.x
@@ -41259,34 +41252,66 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5595647575737297019}
     m_Modifications:
+    - target: {fileID: 1690243310610898639, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
+      propertyPath: mTerm
+      value: Set Completed!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1690243310610898639, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
+      propertyPath: mTermSecondary
+      value: 1FTVVIPMikado-Black SDF-Title-Big
+      objectReference: {fileID: 0}
     - target: {fileID: 2267683189109818233, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
       propertyPath: m_text
-      value: Set Completed!
+      value: "Set Tamamland\u0131!"
       objectReference: {fileID: 0}
     - target: {fileID: 2267683189109818233, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
       propertyPath: m_fontSize
-      value: 122.65
+      value: 113.35
       objectReference: {fileID: 0}
+    - target: {fileID: 2267683189109818233, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+    - target: {fileID: 2267683189109818233, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: f2be6daa777110c45ab2f574cedc25d5, type: 2}
     - target: {fileID: 2722110780565629150, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
       propertyPath: m_Name
       value: __TxtName
       objectReference: {fileID: 0}
     - target: {fileID: 4572605952750673445, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
       propertyPath: m_text
-      value: Set Completed!
+      value: "Set Tamamland\u0131!"
       objectReference: {fileID: 0}
     - target: {fileID: 4572605952750673445, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
       propertyPath: m_fontSize
-      value: 122.65
+      value: 113.35
       objectReference: {fileID: 0}
+    - target: {fileID: 4572605952750673445, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+    - target: {fileID: 4572605952750673445, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: f2be6daa777110c45ab2f574cedc25d5, type: 2}
     - target: {fileID: 7172381818977553712, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
       propertyPath: m_text
-      value: Set Completed!
+      value: "Set Tamamland\u0131!"
       objectReference: {fileID: 0}
     - target: {fileID: 7172381818977553712, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
       propertyPath: m_fontSize
-      value: 122.65
+      value: 113.35
       objectReference: {fileID: 0}
+    - target: {fileID: 7172381818977553712, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+    - target: {fileID: 7172381818977553712, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 9113ded81be41a74aaefafb0c9799731, type: 2}
     - target: {fileID: 8394826223844972066, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -41366,6 +41391,18 @@ PrefabInstance:
     - target: {fileID: 8394826223844972066, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813171321001116051, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
+      propertyPath: mTerm
+      value: Set Completed!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9024152371993065631, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
+      propertyPath: mTerm
+      value: Set Completed!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9024152371993065631, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
+      propertyPath: mTermSecondary
+      value: 1FTVVIPMikado-Black SDF-Title-Big
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8365801849040414927, guid: f0c150edf0e3156459b4cdb4ab6b614b, type: 3}
