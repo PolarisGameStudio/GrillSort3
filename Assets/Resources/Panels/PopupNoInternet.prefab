@@ -46,16 +46,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_text
-      value: Connection Lose
+      value: "\u63A5\u7D9A\u304C\u5931\u308F\u308C\u307E\u3057\u305F"
       objectReference: {fileID: 0}
     - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_fontSize
-      value: 88
+      value: 87.75
       objectReference: {fileID: 0}
+    - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
     - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_fontSizeMax
       value: 88
       objectReference: {fileID: 0}
+    - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 4c8df708265f982439af139538291d37, type: 2}
     - target: {fileID: 2338080940412523142, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -148,22 +156,46 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PopupNoInternetBase, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 7553130033245090066, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: mTerm
+      value: Connection Lose
+      objectReference: {fileID: 0}
     - target: {fileID: 7794184162579932216, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_text
-      value: Please connect to the internet
+      value: "\u30A4\u30F3\u30BF\u30FC\u30CD\u30C3\u30C8\u306B\u63A5\u7D9A\u3057\u3066\u304F\u3060\u3055\u3044"
       objectReference: {fileID: 0}
     - target: {fileID: 7794184162579932216, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_fontSize
-      value: 62.75
+      value: 61.15
       objectReference: {fileID: 0}
+    - target: {fileID: 7794184162579932216, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
+    - target: {fileID: 7794184162579932216, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: cb0cdd8a12e2a094fa8afa58a87419f2, type: 2}
     - target: {fileID: 8456836611739720061, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_SizeDelta.x
       value: 720
       objectReference: {fileID: 0}
     - target: {fileID: 9056328102784659380, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_text
-      value: Retry
+      value: "\u30EA\u30C8\u30E9\u30A4"
       objectReference: {fileID: 0}
+    - target: {fileID: 9056328102784659380, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_fontSize
+      value: 74.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 9056328102784659380, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
+    - target: {fileID: 9056328102784659380, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: a1d9c185b1103af4db49baeaea0a3b89, type: 2}
     - target: {fileID: 9141805345166389359, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -251,12 +283,59 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6009096099012315714, guid: b3886f02809de454383b21112b46a072, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2347741859590626774}
+    - targetCorrespondingSourceObject: {fileID: 2948731703609037416, guid: b3886f02809de454383b21112b46a072, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1061890092454531303}
   m_SourcePrefab: {fileID: 100100000, guid: b3886f02809de454383b21112b46a072, type: 3}
 --- !u!224 &1562705930642665830 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 393699781657886915, guid: b3886f02809de454383b21112b46a072, type: 3}
   m_PrefabInstance: {fileID: 1214119352178323877}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4049462579092300749 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2948731703609037416, guid: b3886f02809de454383b21112b46a072, type: 3}
+  m_PrefabInstance: {fileID: 1214119352178323877}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1061890092454531303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4049462579092300749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Please connect to the internet
+  mTermSecondary: 1FTVVIPMikado-Black SDF
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &4881323716292951015 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6009096099012315714, guid: b3886f02809de454383b21112b46a072, type: 3}

@@ -86,7 +86,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_text
-      value: Bomb
+      value: Bom!
+      objectReference: {fileID: 0}
+    - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_fontSize
+      value: 103.73
       objectReference: {fileID: 0}
     - target: {fileID: 2302525876580298392, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_fontStyle
@@ -151,7 +155,7 @@ PrefabInstance:
     - target: {fileID: 4570516174493971043, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2317955595084648453, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+      objectReference: {fileID: 2100000, guid: 0a32742b6c7b4474180003b8f3188837, type: 2}
     - target: {fileID: 4721765967361507076, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -203,7 +207,7 @@ PrefabInstance:
     - target: {fileID: 6659841476006072537, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2317955595084648453, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
+      objectReference: {fileID: 2100000, guid: 9f5d41a75bf5044458f1b271a5e475c7, type: 2}
     - target: {fileID: 6693080085290027414, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -216,10 +220,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -40
       objectReference: {fileID: 0}
+    - target: {fileID: 7553130033245090066, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: mTerm
+      value: Bomb!
+      objectReference: {fileID: 0}
     - target: {fileID: 7794184162579932216, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_text
-      value: Do you want to skip ?
+      value: "B\u1EA1n c\xF3 mu\u1ED1n b\u1ECF qua kh\xF4ng?"
       objectReference: {fileID: 0}
+    - target: {fileID: 7794184162579932216, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_fontSize
+      value: 68.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794184162579932216, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 7b855a6abbecf8946bf36854d1b99209, type: 2}
     - target: {fileID: 8259862576792038776, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_LocalScale.x
       value: 0
@@ -254,7 +270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9056328102784659380, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_text
-      value: Free
+      value: "Mi\u1EC5n ph\xED"
       objectReference: {fileID: 0}
     - target: {fileID: 9056328102784659380, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_fontSize
@@ -347,6 +363,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6009096099012315714, guid: b3886f02809de454383b21112b46a072, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3280833099908200694}
+    - targetCorrespondingSourceObject: {fileID: 2948731703609037416, guid: b3886f02809de454383b21112b46a072, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5725417965665720206}
   m_SourcePrefab: {fileID: 100100000, guid: b3886f02809de454383b21112b46a072, type: 3}
 --- !u!114 &302796154756219583 stripped
 MonoBehaviour:
@@ -483,3 +502,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8121329515408687118 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2948731703609037416, guid: b3886f02809de454383b21112b46a072, type: 3}
+  m_PrefabInstance: {fileID: 6367876528760951398}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5725417965665720206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8121329515408687118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Do you want to skip?
+  mTermSecondary: 1FTVVIPMikado-Black SDF
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI

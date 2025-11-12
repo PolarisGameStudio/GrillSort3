@@ -60,7 +60,7 @@ namespace MyGame.Modules.QuestEvent.UI.Elements
             else
             {
                 var unlockLevel = _questEventService.Instance.GetConfig().unlockLevel;
-                PopupToast.Cretate($"Unlock at level {unlockLevel}");
+                PopupToast.Cretate($"Unlock at level", unlockLevel.ToString());
             }
         }
     }
