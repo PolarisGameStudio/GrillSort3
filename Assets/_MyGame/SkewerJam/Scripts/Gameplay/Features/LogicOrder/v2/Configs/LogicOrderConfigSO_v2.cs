@@ -12,7 +12,6 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder.Configs
     public class LogicOrderConfigSO_v2 : ScriptableObject
     {
         public List<DifficultyAndFlowConfig> difficultyAndFlowConfigs;
-        public RescueCondititonSO rescueCondititonSO;
 
         public FlowConfigSO_v2 GetFlowConfigSO(LevelDifficulty difficulty, int difficultyValue)
         {

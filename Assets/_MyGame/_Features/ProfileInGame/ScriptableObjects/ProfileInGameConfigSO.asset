@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultPerformanceRate: 1500
   accumulatedLevelCount: 5
+  daysToReset: 3
   listPlayerRankConfigs:
   - rank: 0
     prMileStone: 0
@@ -24,7 +25,7 @@ MonoBehaviour:
   - rank: 2
     prMileStone: 1700
     changeDifficultyValue: 1
-  gameplayConfigSO: {fileID: 0}
+  gameplayConfigSO: {fileID: 11400000, guid: a204b9400f0887b4d824ef9cf8117eb9, type: 2}
   startCountPRConfigSO: {fileID: 11400000, guid: 0640d5aca9579c242a0cf3edce5ae099, type: 2}
   winStreakPRConfigSO: {fileID: 11400000, guid: cf8b63f8014a26d4a925b7b88ea0548d, type: 2}
   boosterPRConfigSO: {fileID: 11400000, guid: 771eb8bc5a6a50e42b08e6f8a1968fdd, type: 2}

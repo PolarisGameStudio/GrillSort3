@@ -1,11 +1,8 @@
-using System.Collections.Generic;
 using System.Linq;
-using MyGame.Modules.ProfileInGame.Config;
 using MyGame.Modules.ProfileInGame.Data;
 using MyGame.SkewerJam.Gameplay;
 using Sonat.Enums;
 using SonatFramework.Scripts.Helper;
-using SonatFramework.Scripts.Utils;
 using UnityEngine;
 
 namespace MyGame.Modules.ProfileInGame
@@ -23,12 +20,17 @@ namespace MyGame.Modules.ProfileInGame
             _listPreviousLevelPRs = new ListDataPref<int>($"{DATA_KEY}_ListPreviousLevelPRs");
         }
 
-        private void LoadCurrentLevelInfoData()
+        private void LoadCurrentLevelInfoData(int level)
         {
+            var curLevel = MySonatFramework.userDataService.GetLevel();
             if (_currentLevelInfoData == null)
             {
-                var level = MySonatFramework.userDataService.GetLevel();
-                _currentLevelInfoData = new ClassDataPref<LevelInfoData>($"{DATA_KEY}_LevelInfoData", new LevelInfoData(level, config.defaultPerformanceRate));
+                _currentLevelInfoData = new ClassDataPref<LevelInfoData>($"{DATA_KEY}_LevelInfoData", new LevelInfoData(curLevel, config.defaultPerformanceRate));
+            }
+
+            if (level != curLevel)
+            {
+                _currentLevelInfoData.Value = new LevelInfoData(curLevel, config.defaultPerformanceRate);
             }
         }
 
@@ -43,13 +45,21 @@ namespace MyGame.Modules.ProfileInGame
 
         public int GetPR()
         {
-            return _currentLevelInfoData.Value.startPr;
+            if (_currentLevelInfoData != null)
+            {
+                return _currentLevelInfoData.Value.startPr;
+            }
+            else
+            {
+                _currentLevelInfoData = new ClassDataPref<LevelInfoData>($"{DATA_KEY}_LevelInfoData", new LevelInfoData(0, config.defaultPerformanceRate));
+                return _currentLevelInfoData.Value.startPr;
+            }
         }
 
 
-        public void UpdateLevelStarted()
+        public void UpdateLevelStarted(int level)
         {
-            LoadCurrentLevelInfoData();
+            LoadCurrentLevelInfoData(level);
 
             var temp = _currentLevelInfoData.Value;
             temp.startCount += 1;
@@ -79,6 +89,7 @@ namespace MyGame.Modules.ProfileInGame
                 if (checkStartCollectData)
                 {
                     nextPr = Mathf.RoundToInt(GetNextPr());
+                    nextPr = Mathf.Max(nextPr, 0);
                 }
                 temp.NextLevel(nextPr);
                 _currentLevelInfoData.Value = temp;

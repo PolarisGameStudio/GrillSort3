@@ -1,4 +1,5 @@
 using System.Linq;
+using MyGame.Modules.ProfileInGame;
 using MyGame.SkewerJam.Gameplay.LogicOrder;
 using MyGame.SkewerJam.Gameplay.LogicOrder.Configs;
 using MyGame.SkewerJam.Level;
@@ -17,13 +18,9 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
         protected override void OnLoadLevelData(LevelData_SkewerJam levelData)
         {
-            Debug.Log("<color=pink>LogicOrderHandler_v2:</color> ON_LOAD_LEVEL_DATA: " + levelData.difficulty + " " + levelData.difficultyValue);
-            var randomFlowConfigSO = logicOrderConfigSO_v2.GetFlowConfigSO(levelData.difficulty, levelData.difficultyValue);
+            base.OnLoadLevelData(levelData);
+            var randomFlowConfigSO = logicOrderConfigSO_v2.GetFlowConfigSO(_logicOrderData.difficulty, _logicOrderData.difficultyValue);
             flowConfigSO_v2 = randomFlowConfigSO;
-
-            var rescueCondition = logicOrderConfigSO_v2.rescueCondititonSO.GetRescueCondition(levelData.level, levelData.difficulty, levelData.difficultyValue);
-            var rescueOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Rescue) as RescueOrderSO;
-            rescueOrder.SetRescueCondition(rescueCondition);
         }
 
         protected override GameplayInfoForLogicOrder GetGameplayInfoForLogicOrder()

@@ -4,6 +4,7 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using Manager;
 using MyGame.Modules.ProfileInGame;
+using MyGame.SkewerJam.Gameplay.Features.LogicOrder;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Level;
 using Sonat.Enums;
@@ -14,13 +15,14 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
     public abstract class BaseLogicOrderHandler : MonoBehaviour
     {
         [SerializeField] protected List<BaseOrderSO> listLogicOrders;
+        [SerializeField] RescueCondititonSO rescueCondititonSO;
 
         public bool IsForceRescue { get; private set; }
         public ForceRescueData ForceRescueData => _forceRescueData;
         public LogicOrderData LogicOrderData => _logicOrderData;
 
         private ForceRescueData _forceRescueData = new ForceRescueData();
-        private LogicOrderData _logicOrderData = new LogicOrderData();
+        protected LogicOrderData _logicOrderData = new LogicOrderData();
 
         #region Init
         public virtual void Init()
@@ -45,12 +47,6 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
         protected virtual void OnLoadLevelData(LevelData_SkewerJam levelData)
         {
-            Debug.Log("<color=purple>LogicOrderHandler:</color> OnLoadLevelData: " + levelData.sequenceLogicOrderIndex + " - " + levelData.difficulty);
-            // foreach (var logicOrder in listLogicOrders)
-            // {
-            //     logicOrder.SetLevelData(levelData);
-            // }
-
             var profileInGameService = MySonatFramework.GetService<ProfileInGameService>();
             var (difficulty, difficultyValue) = profileInGameService.GetDifficultyValue(levelData.difficulty, levelData.difficultyValue);
 
@@ -58,6 +54,12 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             _logicOrderData.level = levelData.level;
             _logicOrderData.difficulty = difficulty;
             _logicOrderData.difficultyValue = difficultyValue;
+
+            Debug.Log("<color=purple>LogicOrderHandler:</color> OnLoadLevelData: " + _logicOrderData.level + " - " + _logicOrderData.difficulty + " - " + _logicOrderData.difficultyValue);
+
+            var rescueCondition = rescueCondititonSO.GetRescueCondition(levelData.level, difficulty, difficultyValue);
+            var rescueOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Rescue) as RescueOrderSO;
+            rescueOrder.SetRescueCondition(rescueCondition);
         }
         #endregion
 

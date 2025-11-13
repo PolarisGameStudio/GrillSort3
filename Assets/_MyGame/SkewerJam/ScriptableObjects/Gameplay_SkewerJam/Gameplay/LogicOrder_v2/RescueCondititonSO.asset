@@ -12,4 +12,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a489671c4b8504a93a5f551a4d65e9, type: 3}
   m_Name: RescueCondititonSO
   m_EditorClassIdentifier: 
-  listRescueConditions: []
+  listRescueConditions:
+  - level: 0
+    difficulty: 0
+    difficultyValue: 0
+    maxNumberRescues: 5
+    maxRescueGap: 2
+    remainingWaitingGrillCondition: 2
+    rateRescue: 0.75
+  - level: 0
+    difficulty: 1
+    difficultyValue: 0
+    maxNumberRescues: 5
+    maxRescueGap: 2
+    remainingWaitingGrillCondition: 2
+    rateRescue: 0.6
+  - level: 0
+    difficulty: 2
+    difficultyValue: 0
+    maxNumberRescues: 4
+    maxRescueGap: 2
+    remainingWaitingGrillCondition: 2
+    rateRescue: 0.45
+  - level: 0
+    difficulty: 3
+    difficultyValue: 0
+    maxNumberRescues: 3
+    maxRescueGap: 2
+    remainingWaitingGrillCondition: 2
+    rateRescue: 0.3
+  - level: 50
+    difficulty: 0
+    difficultyValue: 0
+    maxNumberRescues: 5
+    maxRescueGap: 2
+    remainingWaitingGrillCondition: 2
+    rateRescue: 0.7
+  - level: 50
+    difficulty: 1
+    difficultyValue: 0
+    maxNumberRescues: 4
+    maxRescueGap: 2
+    remainingWaitingGrillCondition: 2
+    rateRescue: 0.5
+  - level: 50
+    difficulty: 2
+    difficultyValue: 0
+    maxNumberRescues: 3
+    maxRescueGap: 2
+    remainingWaitingGrillCondition: 2
+    rateRescue: 0.3
+  - level: 50
+    difficulty: 3
+    difficultyValue: 0
+    maxNumberRescues: 2
+    maxRescueGap: 2
+    remainingWaitingGrillCondition: 1
+    rateRescue: 0.1

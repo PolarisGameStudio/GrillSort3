@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4def04cae39150b46b3dd8168d28d138, type: 3}
-  m_Name: LogicOrderConfigSO_v2
+  m_Name: LogicOrderHandlerConfigSO_v2
   m_EditorClassIdentifier: 
   difficultyAndFlowConfigs:
   - difficulty: 0
@@ -72,3 +72,4 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 6cd939fb57afc0c49a63b1794f6f67cc, type: 2}
       - {fileID: 11400000, guid: 8191da8266963c740a2366f491ea28a4, type: 2}
       - {fileID: 11400000, guid: 26622a64f0ede5d4db8e2993f7303d2b, type: 2}
+  rescueCondititonSO: {fileID: 11400000, guid: 3ba7d6c41ac4ab749ae1a67050fb76f6, type: 2}

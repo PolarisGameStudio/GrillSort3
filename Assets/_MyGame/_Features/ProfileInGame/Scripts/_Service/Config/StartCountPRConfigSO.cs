@@ -10,7 +10,7 @@ namespace MyGame.Modules.ProfileInGame.Config
     [CreateAssetMenu(fileName = "LoseStreakPRConfigSO", menuName = "MyGame/Features/ProfileInGame/LoseStreakPRConfigSO")]
     public class StartCountPRConfigSO : ScriptableObject
     {
-        public List<LevelRangeAndStartCountPRConfig> listLRASCs;
+        public List<LevelAndStartCountPRConfigSO> listLRASCs;
 
         #region OnValidate
         public void OnValidate()
@@ -28,7 +28,7 @@ namespace MyGame.Modules.ProfileInGame.Config
 
         public int GetPRByStartCount(int level, LevelDifficulty difficulty, int difficultyValue, int startCount)
         {
-            var temp = new LevelRangeAndStartCountPRConfig() { levelStart = level };
+            var temp = new LevelAndStartCountPRConfigSO() { levelStart = level };
             var levelRangeAndStartCountPRConfig = listLRASCs.GetFirstGreaterThan(temp);
             if (levelRangeAndStartCountPRConfig == null)
             {
@@ -42,51 +42,13 @@ namespace MyGame.Modules.ProfileInGame.Config
                 return 0;
             }
             var temp3 = new DifficultyAndPR() { difficulty = difficulty, difficultyValue = difficultyValue };
-            return startCountPR.listDifficultyAndPR.GetFirstGreaterThan(temp3).PR;
-
-        }
-    }
-
-    [Serializable]
-    public class LevelRangeAndStartCountPRConfig : IComparable<LevelRangeAndStartCountPRConfig>
-    {
-        [GUIColor(1f, 1f, 0f)]
-        public int levelStart;
-        public List<StartCountPR> listStartCountPRs;
-
-        public int CompareTo(LevelRangeAndStartCountPRConfig other)
-        {
-            return levelStart.CompareTo(other.levelStart);
-        }
-    }
-
-    [Serializable]
-    public class StartCountPR : IComparable<StartCountPR>
-    {
-        public int startCountMilestone;
-        public List<DifficultyAndPR> listDifficultyAndPR;
-
-        public int CompareTo(StartCountPR other)
-        {
-            return startCountMilestone.CompareTo(other.startCountMilestone);
-        }
-    }
-
-    [Serializable]
-    public class DifficultyAndPR : IComparable<DifficultyAndPR>
-    {
-        public LevelDifficulty difficulty;
-        public int difficultyValue;
-        [GUIColor(0f, 1f, 0f)]
-        public int PR;
-
-        public int CompareTo(DifficultyAndPR other)
-        {
-            if (difficulty == other.difficulty)
+            var difficultyAndPR = startCountPR.listDifficultyAndPR.GetFirstGreaterThan(temp3);
+            if (difficultyAndPR == null)
             {
-                return difficultyValue.CompareTo(other.difficultyValue);
+                return 0;
             }
-            return difficulty.CompareTo(other.difficulty);
+            return difficultyAndPR.PR;
+
         }
     }
 }

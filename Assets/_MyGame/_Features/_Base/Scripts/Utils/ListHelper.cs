@@ -8,8 +8,8 @@ namespace MyGame.Modules.Utils
     {
         public static T GetFirstGreaterThan<T>(this List<T> list, T value) where T : IComparable<T>
         {
-            list.OrderBy(e => -e.CompareTo(value)); // sort lại từ lớn đến nhỏ
-            for (int i = 0; i < list.Count; i++)
+            // list = list.OrderBy(e => -e.CompareTo(value)).ToList(); // sort lại từ lớn đến nhỏ
+            for (int i = list.Count - 1; i >= 0; i--)
             {
                 if (value.CompareTo(list[i]) >= 0)
                 {

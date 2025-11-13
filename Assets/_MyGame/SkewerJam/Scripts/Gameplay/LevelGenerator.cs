@@ -90,6 +90,8 @@ namespace MyGame.SkewerJam.Gameplay
         {
             var levelDataSkewerJam = levelData.CloneSkewerJam();
             levelDataSkewerJam.numberOfWaitingGrill = 5;
+
+            levelDataSkewerJam.difficulty = levelDataSkewerJam.difficulty >= LevelDifficulty.MAX ? LevelDifficulty.MAX - 1 : levelDataSkewerJam.difficulty;
             levelDataSkewerJam.difficultyValue = _level % 3;
 
             // shuffle item

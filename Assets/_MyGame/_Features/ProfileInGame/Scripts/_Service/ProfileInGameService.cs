@@ -1,4 +1,5 @@
 using System.Linq;
+using MyGame.Modules.Utils;
 using Sonat.Enums;
 using SonatFramework.Scripts.Helper;
 using SonatFramework.Systems.EventBus;
@@ -60,7 +61,7 @@ namespace MyGame.Modules.ProfileInGame
         #region Event Handlers
         private void OnLevelStarted(LevelStartedEvent eventData)
         {
-            inventoryModule.UpdateLevelStarted();
+            inventoryModule.UpdateLevelStarted(eventData.level);
             _lastPlayTime.Value = MySonatFramework.GetService<TimeService>().GetUnixTimeSeconds();
         }
 
@@ -85,6 +86,8 @@ namespace MyGame.Modules.ProfileInGame
             var playerRankConfig = GetPlayerRankConfig();
             var changeDifficultyValue = playerRankConfig.changeDifficultyValue;
 
+
+            Debug.Log("ProfileInGame:" + _pr + " diff: " + difficulty + " value: " + difficultyValue + " change: " + changeDifficultyValue);
             var maxValue = config.GetMaxValue(difficulty);
             var newValue = difficultyValue + changeDifficultyValue;
 
@@ -123,15 +126,9 @@ namespace MyGame.Modules.ProfileInGame
 
         private PlayerRankConfig GetPlayerRankConfig()
         {
-            for (int i = 0; i < config.listPlayerRankConfigs.Count; i++)
-            {
-                if (_pr >= config.listPlayerRankConfigs[i].prMileStone)
-                {
-                    return config.listPlayerRankConfigs[i];
-                }
-            }
-
-            return config.listPlayerRankConfigs.Last();
+            var temp = new PlayerRankConfig() { prMileStone = _pr };
+            var result = config.listPlayerRankConfigs.GetFirstGreaterThan(temp);
+            return result;
         }
     }
 }

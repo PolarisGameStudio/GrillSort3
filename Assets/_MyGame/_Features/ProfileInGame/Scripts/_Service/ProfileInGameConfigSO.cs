@@ -55,12 +55,17 @@ namespace MyGame.Modules.ProfileInGame
     }
 
     [Serializable]
-    public class PlayerRankConfig
+    public class PlayerRankConfig : IComparable<PlayerRankConfig>
     {
         [GUIColor(0, 1, 0)]
         [ReadOnly]
         public int rank;
         public int prMileStone;
         public int changeDifficultyValue = 1;
+
+        public int CompareTo(PlayerRankConfig other)
+        {
+            return prMileStone.CompareTo(other.prMileStone);
+        }
     }
 }
