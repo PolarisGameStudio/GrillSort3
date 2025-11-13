@@ -3226,6 +3226,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4839002914680083833, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
+      propertyPath: m_fontSize
+      value: 37.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4839002914680083833, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
@@ -3317,6 +3321,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5567227345131998253, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2598251489247747528, guid: 36fdecb6b9143be4ab50457c90cf69bf, type: 2}
     - target: {fileID: 5596363132132042285, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
       propertyPath: m_SortingLayer
       value: 0
@@ -3401,6 +3409,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8880004793819862501, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2598251489247747528, guid: 36fdecb6b9143be4ab50457c90cf69bf, type: 2}
     - target: {fileID: 8981420573346421097, guid: 83a8bf76cefa6c54c9a9e01f55de7b27, type: 3}
       propertyPath: m_Name
       value: PackSwitcher_RescuePack
@@ -3683,6 +3695,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 0a32742b6c7b4474180003b8f3188837, type: 2}
+    - target: {fileID: 4676951258947474402, guid: b3886f02809de454383b21112b46a072, type: 3}
+      propertyPath: mTerm
+      value: Free
+      objectReference: {fileID: 0}
     - target: {fileID: 4855997368239842548, guid: b3886f02809de454383b21112b46a072, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -4517,6 +4533,10 @@ PrefabInstance:
     - target: {fileID: 6675797901248306529, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
       propertyPath: m_SortingLayer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6845531344152134449, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
+      propertyPath: m_fontAsset
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8426690850092064512, guid: b25e41a7b2ba9d14f861c6c44b414541, type: 3}
       propertyPath: m_SortingLayer
