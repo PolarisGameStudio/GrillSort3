@@ -9,8 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4171b903d8e96c84d963d0e24fb63850, type: 3}
-  m_Name: ProfileInGameService
+  m_Script: {fileID: 11500000, guid: 68b5f6b1d7e454342a50f352a10699e9, type: 3}
+  m_Name: BoosterPRConfigSO
   m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: 9dd351c6445ea6246a103baea3ba7508, type: 2}
-  inventoryModule: {fileID: 11400000, guid: 002386b4877b88e4b950be192916ef06, type: 2}
+  listBoosterPRs:
+  - booster: 101
+    PR: -50
+  - booster: 102
+    PR: -50
+  - booster: 103
+    PR: -50
+  - booster: 104
+    PR: -50

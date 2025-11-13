@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace MyGame.Modules.Language
 {
-    [CreateAssetMenu(fileName = "LanguageConfigSO", menuName = "MyGame/SkewerJam/Features/Language/LanguageConfigSO")]
+    [CreateAssetMenu(fileName = "LanguageConfigSO", menuName = "MyGame/Features/Language/LanguageConfigSO")]
     public class LanguageConfigSO : MyServiceConfigSO
     {
         public List<LanguageData> listLanguageDatas;

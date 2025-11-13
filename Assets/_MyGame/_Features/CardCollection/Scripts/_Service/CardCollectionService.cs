@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace MyGame.Modules.CardCollection
 {
-    [CreateAssetMenu(fileName = "CardCollectionService", menuName = "MyGame/SkewerJam/Features/CardCollection/CardCollectionService")]
+    [CreateAssetMenu(fileName = "CardCollectionService", menuName = "MyGame/Features/CardCollection/CardCollectionService")]
 
     public class CardCollectionService : BaseExpireService<CardCollectionConfigSO>
     {

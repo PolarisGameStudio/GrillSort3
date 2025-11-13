@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace MyGame.Modules.QuestEvent
 {
-    [CreateAssetMenu(fileName = "QuestEventService", menuName = "MyGame/SkewerJam/Features/QuestEvent/QuestEventService")]
+    [CreateAssetMenu(fileName = "QuestEventService", menuName = "MyGame/Features/QuestEvent/QuestEventService")]
     public class QuestEventService : BaseExpireService<QuestEventConfigSO>
     {
         public override string DATA_KEY => "QUEST_EVENT";

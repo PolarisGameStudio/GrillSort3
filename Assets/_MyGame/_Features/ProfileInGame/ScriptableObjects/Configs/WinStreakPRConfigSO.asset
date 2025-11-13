@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4171b903d8e96c84d963d0e24fb63850, type: 3}
-  m_Name: ProfileInGameService
+  m_Script: {fileID: 11500000, guid: 54a3449b26e93eb418fc017f6212353e, type: 3}
+  m_Name: WinStreakPRConfigSO
   m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: 9dd351c6445ea6246a103baea3ba7508, type: 2}
-  inventoryModule: {fileID: 11400000, guid: 002386b4877b88e4b950be192916ef06, type: 2}
+  listWinStreakPRs:
+  - winStreak: 3
+    PR: 50
+  - winStreak: 5
+    PR: 100

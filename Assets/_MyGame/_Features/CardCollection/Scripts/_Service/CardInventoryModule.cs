@@ -6,11 +6,10 @@ using UnityEngine;
 
 namespace MyGame.Modules.CardCollection
 {
-    [CreateAssetMenu(fileName = "CardInventoryModule", menuName = "MyGame/SkewerJam/Features/CardCollection/CardInventoryModule")]
-    public class CardInventoryModule : ScriptableObject
+    [CreateAssetMenu(fileName = "CardInventoryModule", menuName = "MyGame/Features/CardCollection/CardInventoryModule")]
+    public class CardInventoryModule : BaseInventoryModule<CardCollectionService, CardCollectionConfigSO>
     {
-        [SerializeField] private CardCollectionConfigSO config;
-        public const string DATA_KEY = "CARD_COLLECTION_CARD_INVENTORY_MODULE";
+        public override string DATA_KEY => "CARD_COLLECTION_CARD_INVENTORY_MODULE";
 
         private Dictionary<AlbumType, ListDataPref<int>> _dictAlbumAndCollectedCard = new();
         private Dictionary<AlbumType, ListDataPref<int>> _dictAlbumAndNewCard = new(); // những thẻ mới
@@ -22,7 +21,7 @@ namespace MyGame.Modules.CardCollection
         public event Action<CardType, AlbumType> OnChangeNewCard;
         public event Action<bool> OnCompleteCardCollection;
 
-        public void LoadData()
+        public override void LoadData()
         {
             _dictAlbumAndCollectedCard = new Dictionary<AlbumType, ListDataPref<int>>();
             _dictAlbumAndNewCard = new Dictionary<AlbumType, ListDataPref<int>>();
@@ -36,7 +35,7 @@ namespace MyGame.Modules.CardCollection
             completedCardCollection = new IntDataPref($"{DATA_KEY}_completedCardCollection", 0);
         }
 
-        public void ResetData()
+        public override void ResetData()
         {
             completedCardCollection.Value = 0;
 
