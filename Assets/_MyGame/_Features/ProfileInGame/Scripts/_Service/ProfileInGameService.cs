@@ -1,5 +1,5 @@
-using System.Linq;
 using MyGame.Modules.Utils;
+using MyGame.SkewerJam.Gameplay.LogicOrder;
 using Sonat.Enums;
 using SonatFramework.Scripts.Helper;
 using SonatFramework.Systems.EventBus;
@@ -88,40 +88,7 @@ namespace MyGame.Modules.ProfileInGame
 
 
             Debug.Log("ProfileInGame:" + _pr + " diff: " + difficulty + " value: " + difficultyValue + " change: " + changeDifficultyValue);
-            var maxValue = config.GetMaxValue(difficulty);
-            var newValue = difficultyValue + changeDifficultyValue;
-
-            while (newValue > maxValue)
-            {
-                newValue = newValue - maxValue;
-                difficulty += 1;
-                if (difficulty >= LevelDifficulty.MAX)
-                {
-                    newValue = maxValue;
-                    difficulty = LevelDifficulty.MAX - 1;
-                    break;
-                }
-
-                maxValue = config.GetMaxValue(difficulty);
-            }
-
-            while (newValue < 0)
-            {
-                var preMaxValue = config.GetMaxValue(difficulty - 1);
-                newValue = preMaxValue + newValue;
-                difficulty -= 1;
-
-                if (difficulty < LevelDifficulty.Easy)
-                {
-                    newValue = 0;
-                    difficulty = LevelDifficulty.Easy;
-                    break;
-                }
-
-                maxValue = config.GetMaxValue(difficulty);
-            }
-
-            return (difficulty, newValue);
+            return LogicOrderHelper.GetDynamicDifficultyAndValue(difficulty, difficultyValue, changeDifficultyValue);
         }
 
         private PlayerRankConfig GetPlayerRankConfig()

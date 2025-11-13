@@ -8,8 +8,6 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 {
     public class LogicOrderHandler_v1 : BaseLogicOrderHandler
     {
-        [SerializeField] private DynamicLogicOrder dynamicLogicOrder;
-
         [Header("Configs")]
         [SerializeField] private LogicOrderConfigSO logicOrderConfigSO;
         [SerializeField] private SpecialOrderConfigSO specialOrderConfigSO;

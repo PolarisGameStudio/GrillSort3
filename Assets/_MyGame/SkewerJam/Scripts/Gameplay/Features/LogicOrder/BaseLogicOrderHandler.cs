@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Manager;
-using MyGame.Modules.ProfileInGame;
 using MyGame.SkewerJam.Gameplay.Features.LogicOrder;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Level;
@@ -14,6 +12,9 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 {
     public abstract class BaseLogicOrderHandler : MonoBehaviour
     {
+        [SerializeField] protected DynamicLogicOrder dynamicLogicOrder;
+
+        [Header("Configs")]
         [SerializeField] protected List<BaseOrderSO> listLogicOrders;
         [SerializeField] RescueCondititonSO rescueCondititonSO;
 
@@ -47,17 +48,18 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
         protected virtual void OnLoadLevelData(LevelData_SkewerJam levelData)
         {
-            var profileInGameService = MySonatFramework.GetService<ProfileInGameService>();
-            var (difficulty, difficultyValue) = profileInGameService.GetDifficultyValue(levelData.difficulty, levelData.difficultyValue);
+            _logicOrderData = new LogicOrderData()
+            {
+                level = levelData.level,
+                difficulty = levelData.difficulty,
+                difficultyValue = levelData.difficultyValue
+            };
 
-            _logicOrderData = new LogicOrderData();
-            _logicOrderData.level = levelData.level;
-            _logicOrderData.difficulty = difficulty;
-            _logicOrderData.difficultyValue = difficultyValue;
+            Debug.Log("<color=purple>LogicOrderHandler:</color> Before dynamic: " + _logicOrderData.level + " - " + _logicOrderData.difficulty + " - " + _logicOrderData.difficultyValue);
+            _logicOrderData = dynamicLogicOrder.GetDynamicDifficultyAndValue(_logicOrderData);
 
-            Debug.Log("<color=purple>LogicOrderHandler:</color> OnLoadLevelData: " + _logicOrderData.level + " - " + _logicOrderData.difficulty + " - " + _logicOrderData.difficultyValue);
-
-            var rescueCondition = rescueCondititonSO.GetRescueCondition(levelData.level, difficulty, difficultyValue);
+            Debug.Log("<color=purple>LogicOrderHandler:</color> After dynamic: " + _logicOrderData.level + " - " + _logicOrderData.difficulty + " - " + _logicOrderData.difficultyValue);
+            var rescueCondition = rescueCondititonSO.GetRescueCondition(_logicOrderData.level, _logicOrderData.difficulty, _logicOrderData.difficultyValue);
             var rescueOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Rescue) as RescueOrderSO;
             rescueOrder.SetRescueCondition(rescueCondition);
         }

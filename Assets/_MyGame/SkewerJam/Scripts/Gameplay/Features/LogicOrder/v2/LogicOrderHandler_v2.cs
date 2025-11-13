@@ -18,7 +18,9 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
         protected override void OnLoadLevelData(LevelData_SkewerJam levelData)
         {
+            // thay đổi diff theo profile
             base.OnLoadLevelData(levelData);
+
             var randomFlowConfigSO = logicOrderConfigSO_v2.GetFlowConfigSO(_logicOrderData.difficulty, _logicOrderData.difficultyValue);
             flowConfigSO_v2 = randomFlowConfigSO;
         }
