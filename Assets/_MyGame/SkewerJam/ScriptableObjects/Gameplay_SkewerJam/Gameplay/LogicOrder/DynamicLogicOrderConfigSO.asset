@@ -13,20 +13,4 @@ MonoBehaviour:
   m_Name: DynamicLogicOrderConfigSO
   m_EditorClassIdentifier: 
   completionRate: 0.1
-  configs:
-  - difficulty: 2
-    gapCountLose: 2
-    thresholdBO: 5
-    minIndexBO: 0
-  - difficulty: 3
-    gapCountLose: 3
-    thresholdBO: 6
-    minIndexBO: 0
-  - difficulty: 4
-    gapCountLose: 4
-    thresholdBO: 7
-    minIndexBO: 0
-  - difficulty: 5
-    gapCountLose: 5
-    thresholdBO: 8
-    minIndexBO: 0
+  listLevelAndDynamicDifficultyConfigs: []

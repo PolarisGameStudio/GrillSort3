@@ -5,7 +5,7 @@ using System;
 
 namespace MyGame.Modules.Language
 {
-    [CreateAssetMenu(fileName = "LanguageService", menuName = "MyGame/SkewerJam/Features/Language/LanguageService")]
+    [CreateAssetMenu(fileName = "LanguageService", menuName = "MyGame/Features/Language/LanguageService")]
     public class LanguageService : MyService<LanguageConfigSO>
     {
         public override string DATA_KEY => "LANGUAGE_SERVICE";
@@ -14,6 +14,11 @@ namespace MyGame.Modules.Language
         public event Action OnLanguageChanged;
 
         #region Override
+        protected override void Init()
+        {
+            // do nothing
+        }
+
         protected override void LoadConfig()
         {
             // do nothing

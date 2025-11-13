@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace MyGame.Modules.QuestEvent
 {
-    [CreateAssetMenu(fileName = "QuestEventConfigSO", menuName = "MyGame/SkewerJam/Features/QuestEvent/QuestEventConfigSO")]
+    [CreateAssetMenu(fileName = "QuestEventConfigSO", menuName = "MyGame/Features/QuestEvent/QuestEventConfigSO")]
     public class QuestEventConfigSO : LockServiceConfigSO
     {
         [Space(10)]

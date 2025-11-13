@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using Sonat.Enums;
 using SonatFramework.Scripts.Gameplay;
 using SonatFramework.Systems.InventoryManagement.GameResources;
 using UnityEngine;
@@ -13,5 +16,17 @@ namespace MyGame.SkewerJam.Scripts.SO.SkewerJam.Gameplay
         public ResourceData unlockOctoChefPrice;
         public ResourceData skipBombPrice;
         public ResourceData unlockLockObstaclePrice;
+
+        [Header("Level Difficulty")]
+        public List<DifficultyAndMaxValue> listDifficultyAndMaxValues;
+    }
+
+
+
+    [Serializable]
+    public class DifficultyAndMaxValue
+    {
+        public LevelDifficulty difficulty;
+        public int maxValue;
     }
 }

@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace MyGame.Modules.SubInventory
 {
-    [CreateAssetMenu(fileName = "SubInventoryService", menuName = "MyGame/SkewerJam/Features/SubInventory/SubInventoryService")]
+    [CreateAssetMenu(fileName = "SubInventoryService", menuName = "MyGame/Features/SubInventory/SubInventoryService")]
     public class SubInventoryService : SonatServiceSo, IServiceInitialize
     {
         protected const string SubInventoryPrefixKey = "SUB_INVENTORY_";

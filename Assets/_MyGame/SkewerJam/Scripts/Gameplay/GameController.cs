@@ -226,7 +226,7 @@ namespace MyGame.SkewerJam.Gameplay
                 spendId = "pumpkin",
                 source = "gameplay"
             };
-            var winReward = gameConfig.GetWinReward(LevelDifficulty.Easy1);
+            var winReward = gameConfig.GetWinReward(LevelDifficulty.Easy);
             MySonatFramework.GetService<InventoryService>().AddResource(winReward.resource, winReward.quantity, log, false);
 
             var data = new WinPanelBase.Data()

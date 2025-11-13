@@ -19,7 +19,7 @@ namespace MyGame.SkewerJamSO.Boosters
     {
         [SerializeField] private int maxPlate = 10;
         [SerializeField] private float delay = 2f;
-        public override GameResource boosterType => GameResource.BoosterAddPlate;
+        public override GameResource boosterType => GameResource.BuffAddPlate;
         public int MaxPlate => maxPlate;
 
         #region Behavior

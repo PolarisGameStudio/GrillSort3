@@ -91,22 +91,8 @@ namespace MyGame.SkewerJam.Gameplay
             var levelDataSkewerJam = levelData.CloneSkewerJam();
             levelDataSkewerJam.numberOfWaitingGrill = 5;
 
-            levelDataSkewerJam.rescueCondition = new RescueCondition(_level, levelDataSkewerJam.difficulty);
-
-            // bộ level cũ
-            // if ((int)levelDataSkewerJam.difficulty == 0)
-            // {
-            //     levelDataSkewerJam.difficulty = LevelDifficulty.Easy1;
-            // }
-            // if ((int)levelDataSkewerJam.difficulty == 1)
-            // {
-            //     levelDataSkewerJam.difficulty = LevelDifficulty.Medium1;
-            // }
-            // if ((int)levelDataSkewerJam.difficulty == 2)
-            // {
-            //     levelDataSkewerJam.difficulty = LevelDifficulty.Hard1;
-            // }
-
+            levelDataSkewerJam.difficulty = levelDataSkewerJam.difficulty >= LevelDifficulty.MAX ? LevelDifficulty.MAX - 1 : levelDataSkewerJam.difficulty;
+            levelDataSkewerJam.difficultyValue = _level % 3;
 
             // shuffle item
             var sonatLevelServiceAsync = levelService as SonatLevelServiceAsync;
@@ -159,7 +145,6 @@ namespace MyGame.SkewerJam.Gameplay
 
 
             levelDataSkewerJam.ListWaitingGrillData = ValidateListWaitingGrill(5, 1);
-
 
             if (_level == 1)
             {

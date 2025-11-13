@@ -6,7 +6,9 @@ using Gameplay.BoosteeManagement;
 using Gameplay.Entities;
 using Gameplay.LevelData;
 using MyGame.SkewerJam.Gameplay;
+using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
+using SonatFramework.Systems.EventBus;
 using SonatFramework.Systems.SettingsManagement.Vibation;
 using UnityEngine;
 using static PopupUnlockInGame;
@@ -91,6 +93,7 @@ namespace MyGame.SkewerJam.Objects.Entities
             {
                 var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
                 waitingGrillManager.Unlock(this);
+                EventBus<UseBoosterEvent>.Raise(new UseBoosterEvent() { booster = GameResource.BuffAddPlate });
             }));
             PanelManager.Instance.OpenPanel<PopupUnlockInGame>(uiData);
         }

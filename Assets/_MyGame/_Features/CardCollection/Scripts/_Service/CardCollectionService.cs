@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace MyGame.Modules.CardCollection
 {
-    [CreateAssetMenu(fileName = "CardCollectionService", menuName = "MyGame/SkewerJam/Features/CardCollection/CardCollectionService")]
+    [CreateAssetMenu(fileName = "CardCollectionService", menuName = "MyGame/Features/CardCollection/CardCollectionService")]
 
     public class CardCollectionService : BaseExpireService<CardCollectionConfigSO>
     {
@@ -34,10 +34,8 @@ namespace MyGame.Modules.CardCollection
         public event Action OnNewCardCountChanged;
 
         #region Init
-        public override void Initialize()
+        protected override void Init()
         {
-            base.Initialize();
-
             new EventBinding<AddItemEvent>(OnAddItemEvent);
 
             SonatUtils.ExecuteNextFrame(() =>

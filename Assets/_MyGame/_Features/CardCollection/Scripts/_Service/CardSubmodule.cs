@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace MyGame.Modules.CardCollection
 {
-    [CreateAssetMenu(fileName = "CardSubmodule", menuName = "MyGame/SkewerJam/Features/CardCollection/CardSubmodule")]
+    [CreateAssetMenu(fileName = "CardSubmodule", menuName = "MyGame/Features/CardCollection/CardSubmodule")]
     public class CardSubmodule : ScriptableObject
     {
         public const string DATA_KEY = "CARD_COLLECTION_CARD_SUBMODULE";

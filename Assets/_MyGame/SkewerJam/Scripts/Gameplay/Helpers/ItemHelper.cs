@@ -147,5 +147,9 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             return randomItems;
         }
 
+        public static bool IsLockType(ItemType itemType)
+        {
+            return itemType == ItemType.Ice;
+        }
     }
 }

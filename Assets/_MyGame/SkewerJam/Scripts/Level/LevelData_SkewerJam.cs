@@ -13,13 +13,7 @@ namespace MyGame.SkewerJam.Level
 
         public List<WaitingGrillData> ListWaitingGrillData { get; set; } = new List<WaitingGrillData>();
         public List<OrderData_SkewerJam> ListOrderData { get; set; } = new List<OrderData_SkewerJam>();
-
-        // logic order rescue
-        public RescueCondition rescueCondition;
         public int sequenceLogicOrderIndex;
-
-        // // logic order basic
-        // public List<LogicOrderConfig> logicOrderConfigs;
 
         public LevelData_SkewerJam CloneSkewerJam()
         {
@@ -44,7 +38,7 @@ namespace MyGame.SkewerJam.Level
                 numberOfWaitingGrill = this.numberOfWaitingGrill,
                 numberOfOrder = this.numberOfOrder,
 
-                rescueCondition = this.rescueCondition,
+                // rescueCondition = this.rescueCondition,
                 sequenceLogicOrderIndex = this.sequenceLogicOrderIndex,
                 // logicOrderConfigs = this.logicOrderConfigs,
             };
@@ -65,89 +59,6 @@ namespace MyGame.SkewerJam.Level
     {
         public int id;
         public int active;
-    }
-
-    [Serializable]
-    public class RescueCondition
-    {
-        public int maxNumberRescues = 5;
-        public int maxRescueGap = 2;
-        public int remainingWaitingGrillCondition = 2;
-        public float rateRescue = 0.75f;
-
-        public RescueCondition(int level, LevelDifficulty difficulty)
-        {
-            maxRescueGap = 2;
-            remainingWaitingGrillCondition = 2;
-
-            if ((level - 1) % 100 < 50)
-            {
-                switch (difficulty)
-                {
-                    case LevelDifficulty.Easy1:
-                        maxNumberRescues = 6;
-                        rateRescue = 0.75f;
-                        break;
-                    case LevelDifficulty.Easy2:
-                        maxNumberRescues = 6;
-                        rateRescue = 0.7f;
-                        break;
-                    case LevelDifficulty.Medium1:
-                        maxNumberRescues = 5;
-                        rateRescue = 0.45f;
-                        break;
-                    case LevelDifficulty.Medium2:
-                        maxNumberRescues = 5;
-                        rateRescue = 0.35f;
-                        break;
-                    case LevelDifficulty.Hard1:
-                        maxNumberRescues = 4;
-                        rateRescue = 0.25f;
-                        break;
-                    case LevelDifficulty.Hard2:
-                        maxNumberRescues = 3;
-                        rateRescue = 0.15f;
-                        break;
-                }
-            }
-            else
-            {
-                switch (difficulty)
-                {
-                    case LevelDifficulty.Easy1:
-                        maxNumberRescues = 5;
-                        rateRescue = 0.7f;
-                        break;
-                    case LevelDifficulty.Easy2:
-                        maxNumberRescues = 5;
-                        rateRescue = 0.6f;
-                        break;
-                    case LevelDifficulty.Medium1:
-                        maxNumberRescues = 4;
-                        rateRescue = 0.4f;
-                        break;
-                    case LevelDifficulty.Medium2:
-                        maxNumberRescues = 4;
-                        rateRescue = 0.3f;
-                        break;
-                    case LevelDifficulty.Hard1:
-                        maxNumberRescues = 3;
-                        rateRescue = 0.2f;
-                        break;
-                    case LevelDifficulty.Hard2:
-                        maxNumberRescues = 3;
-                        rateRescue = 0.1f;
-                        break;
-                }
-            }
-
-            switch (difficulty)
-            {
-                case LevelDifficulty.Hard2:
-                    remainingWaitingGrillCondition = 1;
-                    break;
-            }
-        }
     }
 
     [Serializable]

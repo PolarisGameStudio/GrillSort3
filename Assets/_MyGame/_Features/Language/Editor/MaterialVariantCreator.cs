@@ -10,10 +10,10 @@ public class MaterialVariantCreator : EditorWindow
     private int variantCount = 3;
     private string savePath = "Assets/";
 
-    [MenuItem("Tools/Create Material Variants")]
+    [MenuItem("Tools/Language/Create Material Variants")]
     public static void ShowWindow()
     {
-        GetWindow<MaterialVariantCreator>("Material Variant Creator");
+        GetWindow<MaterialVariantCreator>("Language/Material Variant Creator");
     }
 
     void OnGUI()
