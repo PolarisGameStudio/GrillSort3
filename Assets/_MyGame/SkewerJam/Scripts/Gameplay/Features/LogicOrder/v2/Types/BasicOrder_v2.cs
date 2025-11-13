@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Manager;
+using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Gameplay.LogicOrder.Configs;
 using UnityEngine;
 
@@ -15,7 +16,8 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
         public override (ItemId itemId, int num) GetOrder(GameplayInfoForLogicOrder gameplayInfo = null)
         {
-            var remainingSlotAfter = basicOrderConfigSO.GetRandomRemainingSlot(gameplayInfo.phase);
+            var curveIndex = gameplayInfo.GetTempData(LogicOrderHandler_v2.KEY_CURVE_INDEX);
+            var remainingSlotAfter = basicOrderConfigSO.GetRandomRemainingSlot(curveIndex);
 
             var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
             var numEmptyWaitingSlot = waitingGrillManager.ListWaitingGrills.Count(

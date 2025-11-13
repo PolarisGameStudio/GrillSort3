@@ -1,11 +1,7 @@
-using System.Collections.Generic;
 using System.Linq;
-using Cysharp.Threading.Tasks;
-using Manager;
 using MyGame.SkewerJam.Gameplay.LogicOrder;
 using MyGame.SkewerJam.Gameplay.LogicOrder.Configs;
 using MyGame.SkewerJam.Level;
-using Sonat.Enums;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay.Helpers
@@ -20,84 +16,13 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
         private SequenceConfigSO selectedSequenceConfig;
 
-        public override void Init()
+        protected override void OnLoadLevelData(LevelData_SkewerJam levelData)
         {
-            base.Init();
-            var levelGenerator = GameController.Instance.LevelGenerator;
-            levelGenerator.OnLoadLevelData += OnLoadLevelData;
-
-            SetForceRescue(false, -1);
-
-            // dynamicLogicOrder.Init();
-        }
-
-        public override void Clear()
-        {
-            var levelGenerator = GameController.Instance.LevelGenerator;
-            levelGenerator.OnLoadLevelData -= OnLoadLevelData;
-
-            SetForceRescue(false, -1);
-            // dynamicLogicOrder.Clear();
-        }
-
-        private void OnLoadLevelData(LevelData_SkewerJam levelData)
-        {
-            // var sequenceIndex = ValidateSequenceIndex(levelData.sequenceLogicOrderIndex, levelData.difficulty);
-            Debug.Log("<color=purple>LogicOrderHandler:</color> OnLoadLevelData: " + levelData.sequenceLogicOrderIndex + " - " + levelData.difficulty);
+            base.OnLoadLevelData(levelData);
             selectedSequenceConfig = logicOrderConfigSO.GetSequenceConfigSO(levelData.sequenceLogicOrderIndex, levelData.difficulty);
-            foreach (var logicOrder in listLogicOrders)
-            {
-                logicOrder.SetLevelData(levelData);
-            }
         }
 
-
-        public override async UniTask<(ItemId itemId, int num, LogicOrderType logicOrderType)> GetItemOrder(bool isRescue = false)
-        {
-            // ưu tiện chọn theo logic được chọn
-            // otherwise chọn theo basic order
-            // otherwise chọn theo force basic order
-            // otherwise chọn theo random order
-            var gameplayInfoForLogicOrder = new GameplayInfoForLogicOrder();
-            gameplayInfoForLogicOrder.UpdateState();
-
-
-            Debug.Log("<color=purple>LogicOrderHandler:</color> -----GetItemOrder----");
-            var forceLogicOrder = listLogicOrders.FirstOrDefault(e => e.ForceUse(isRescue));
-            if (forceLogicOrder != null)
-            {
-                Debug.Log("<color=blue>OrderHelper:</color> Use " + forceLogicOrder.name + " to rescue");
-                var (rescueItemId, rescueNum) = forceLogicOrder.GetOrder(gameplayInfoForLogicOrder);
-                if (rescueItemId != ItemId.None)
-                {
-                    SetForceRescue(false, -1);
-                    return (rescueItemId, rescueNum, LogicOrderType.Rescue);
-                }
-                else
-                {
-                    return ForceGetItemOrder(gameplayInfoForLogicOrder);
-                }
-            }
-
-            var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
-            SetForceRescue(false, -1);
-
-            // lấy order info mỗi layer (2 layer đầu) --> OPTIMIZE: giảm tính toán
-            var selectedLogicOrder = ChooseLogicOrder();
-            Debug.Log("<color=green>OrderHelper:</color> Use " + selectedLogicOrder.name);
-
-            var (itemId, num) = selectedLogicOrder.GetOrder(gameplayInfoForLogicOrder);
-            if (itemId != ItemId.None)
-            {
-                return (itemId, num, selectedLogicOrder.LogicOrderType);
-            }
-            else
-            {
-                return ForceGetItemOrder(gameplayInfoForLogicOrder);
-            }
-        }
-
-        private BaseOrderSO ChooseLogicOrder()
+        protected override BaseOrderSO ChooseLogicOrder()
         {
             if (CheckChooseRandomOrder() == true)
             {
@@ -193,23 +118,6 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             var itemManager = GameController.Instance.GameLogicHandler.ItemManager;
             var currentItems = itemManager.CurrentItems;
             return currentItems < 10f;
-        }
-
-        private (ItemId itemId, int num, LogicOrderType logicOrderType) ForceGetItemOrder(GameplayInfoForLogicOrder gameplayInfoForLogicOrder)
-        {
-            Debug.Log("<color=red>OrderHelper:</color> ForceGetItemOrder");
-            var basicOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Basic);
-            var (i, n, s) = (basicOrder as BasicOrderSO).ForceGetItemOrderBasic(gameplayInfoForLogicOrder);
-            if (i != ItemId.None)
-            {
-                return (i, n, LogicOrderType.Basic);
-            }
-            else
-            {
-                var randomOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Random);
-                var (randomItemId, randomNum) = randomOrder.GetOrder(gameplayInfoForLogicOrder);
-                return (randomItemId, randomNum, LogicOrderType.Random);
-            }
         }
     }
 }

@@ -8,11 +8,23 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 {
     public class GameplayInfoForLogicOrder
     {
-        public int phase;
-
         private Dictionary<ItemId, Dictionary<int, int>> _dictDeltaSlots;
 
         public Dictionary<ItemId, Dictionary<int, int>> DictDeltaSlots => _dictDeltaSlots;
+
+
+        private Dictionary<string, int> _dictTempData = new Dictionary<string, int>();
+        public Dictionary<string, int> DictTempData => _dictTempData;
+
+        public int GetTempData(string key)
+        {
+            return _dictTempData[key];
+        }
+
+        public void SetTempData(string key, int value)
+        {
+            _dictTempData[key] = value;
+        }
 
         public void UpdateState()
         {
