@@ -15,7 +15,8 @@ namespace Sonat.Enums
         BoosterSpatula,
         BoosterShuffle,
         BoosterFoodBox,
-        BoosterAddPlate,
+        BuffAddPlate, // bổ trợ thêm
+        BuffAddOrder, // bổ trợ thêm
 
         Card_Randomx1 = 120,
         Card_Randomx2 = 121,
@@ -51,6 +52,8 @@ namespace Sonat.Enums
                 case GameResource.BoosterSpatula:
                 case GameResource.BoosterShuffle:
                 case GameResource.BoosterFoodBox:
+                case GameResource.BuffAddPlate:
+                case GameResource.BuffAddOrder:
                     return GameResourceType.Booster;
                 case GameResource.Card_Randomx1:
                 case GameResource.Card_Randomx2:

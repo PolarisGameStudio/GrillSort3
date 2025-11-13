@@ -23,11 +23,11 @@ namespace MyGame.SkewerJam.Scripts.Features.Inventory
             // value = dataService.Instance.GetInt($"{GameResourcePrefixKey}{resource}", 0);
             // currentResources.Add(resource, value);
             // return value;
-            var addPlate = dataService.Instance.GetInt($"{GameResourcePrefixKey}{GameResource.BoosterAddPlate}", 0);
+            var addPlate = dataService.Instance.GetInt($"{GameResourcePrefixKey}BoosterAddPlate", 0);
             if (addPlate != 0)
             {
                 dataService.Instance.SetInt($"{GameResourcePrefixKey}{GameResource.BoosterUndo}", addPlate);
-                dataService.Instance.SetInt($"{GameResourcePrefixKey}{GameResource.BoosterAddPlate}", 0);
+                dataService.Instance.SetInt($"{GameResourcePrefixKey}BoosterAddPlate", 0);
             }
         }
 

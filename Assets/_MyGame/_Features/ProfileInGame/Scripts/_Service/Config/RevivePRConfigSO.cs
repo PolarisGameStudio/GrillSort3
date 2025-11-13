@@ -17,5 +17,10 @@ namespace MyGame.Modules.ProfileInGame.Config
             }
         }
         #endregion
+
+        public int GetPR()
+        {
+            return PR;
+        }
     }
 }

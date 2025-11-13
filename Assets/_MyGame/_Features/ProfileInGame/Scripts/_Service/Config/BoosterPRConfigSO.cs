@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using Sonat.Enums;
 using UnityEngine;
 
@@ -19,7 +20,6 @@ namespace MyGame.Modules.ProfileInGame.Config
                 {
                     Debug.LogError($"BoosterPRConfig: Booster {boosterPR.booster} is not a booster");
                 }
-
                 if (boosterPR.PR > 0)
                 {
                     Debug.LogError($"BoosterPRConfig: PR is greater than 0");
@@ -27,12 +27,24 @@ namespace MyGame.Modules.ProfileInGame.Config
             }
         }
         #endregion
+        public int GetPRByBooster(GameResource key)
+        {
+            foreach (var boosterPR in listBoosterPRs)
+            {
+                if (boosterPR.booster == key)
+                {
+                    return boosterPR.PR;
+                }
+            }
+            return 0;
+        }
     }
 
     [Serializable]
     public class BoosterPR
     {
         public GameResource booster;
+        [GUIColor(0f, 1f, 0f)]
         public int PR;
     }
 }

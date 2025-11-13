@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Manager;
+using MyGame.Modules.ProfileInGame;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Level;
+using Sonat.Enums;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay.LogicOrder
@@ -14,8 +17,12 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
         public bool IsForceRescue { get; private set; }
         public ForceRescueData ForceRescueData => _forceRescueData;
-        private ForceRescueData _forceRescueData = new ForceRescueData();
+        public LogicOrderData LogicOrderData => _logicOrderData;
 
+        private ForceRescueData _forceRescueData = new ForceRescueData();
+        private LogicOrderData _logicOrderData = new LogicOrderData();
+
+        #region Init
         public virtual void Init()
         {
             foreach (var logicOrder in listLogicOrders)
@@ -36,18 +43,23 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             SetForceRescue(false, -1);
         }
 
-
-
         protected virtual void OnLoadLevelData(LevelData_SkewerJam levelData)
         {
-            // var sequenceIndex = ValidateSequenceIndex(levelData.sequenceLogicOrderIndex, levelData.difficulty);
             Debug.Log("<color=purple>LogicOrderHandler:</color> OnLoadLevelData: " + levelData.sequenceLogicOrderIndex + " - " + levelData.difficulty);
-            // selectedSequenceConfig = logicOrderConfigSO.GetSequenceConfigSO(levelData.sequenceLogicOrderIndex, levelData.difficulty);
             foreach (var logicOrder in listLogicOrders)
             {
                 logicOrder.SetLevelData(levelData);
             }
+
+            var profileInGameService = MySonatFramework.GetService<ProfileInGameService>();
+            var (difficulty, difficultyValue) = profileInGameService.GetDifficultyValue(levelData.difficulty, levelData.difficultyValue);
+
+            _logicOrderData = new LogicOrderData();
+            _logicOrderData.level = levelData.level;
+            _logicOrderData.difficulty = difficulty;
+            _logicOrderData.difficultyValue = difficultyValue;
         }
+        #endregion
 
         public bool CheckCreateNextOrder()
         {
@@ -157,6 +169,13 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                 return (randomItemId, randomNum, LogicOrderType.Random);
             }
         }
+    }
+
+    public class LogicOrderData
+    {
+        public int level;
+        public LevelDifficulty difficulty;
+        public int difficultyValue;
     }
 
     public class ForceRescueData

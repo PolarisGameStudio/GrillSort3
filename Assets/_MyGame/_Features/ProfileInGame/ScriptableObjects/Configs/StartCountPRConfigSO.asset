@@ -1,0 +1,186 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f726cbd8574990942abc644980363fbc, type: 3}
+  m_Name: StartCountPRConfigSO
+  m_EditorClassIdentifier: 
+  listLRASCs:
+  - levelStart: 1
+    listStartCountPRs:
+    - startCountMilestone: 1
+      listDifficultyAndPR:
+      - difficulty: 1
+        difficultyValue: 0
+        PR: 50
+      - difficulty: 2
+        difficultyValue: 0
+        PR: 100
+      - difficulty: 2
+        difficultyValue: 3
+        PR: 200
+    - startCountMilestone: 2
+      listDifficultyAndPR:
+      - difficulty: 1
+        difficultyValue: 0
+        PR: 0
+      - difficulty: 2
+        difficultyValue: 0
+        PR: 50
+      - difficulty: 2
+        difficultyValue: 3
+        PR: 150
+    - startCountMilestone: 3
+      listDifficultyAndPR:
+      - difficulty: 1
+        difficultyValue: 0
+        PR: -100
+      - difficulty: 2
+        difficultyValue: 0
+        PR: -50
+      - difficulty: 2
+        difficultyValue: 3
+        PR: -100
+    - startCountMilestone: 5
+      listDifficultyAndPR:
+      - difficulty: 1
+        difficultyValue: 0
+        PR: -150
+      - difficulty: 2
+        difficultyValue: 0
+        PR: -150
+      - difficulty: 2
+        difficultyValue: 3
+        PR: -150
+    - startCountMilestone: 7
+      listDifficultyAndPR:
+      - difficulty: 1
+        difficultyValue: 0
+        PR: -200
+      - difficulty: 2
+        difficultyValue: 0
+        PR: -150
+      - difficulty: 2
+        difficultyValue: 3
+        PR: -100
+  - levelStart: 11
+    listStartCountPRs:
+    - startCountMilestone: 1
+      listDifficultyAndPR:
+      - difficulty: 1
+        difficultyValue: 0
+        PR: 50
+      - difficulty: 2
+        difficultyValue: 0
+        PR: 100
+      - difficulty: 2
+        difficultyValue: 3
+        PR: 200
+    - startCountMilestone: 2
+      listDifficultyAndPR:
+      - difficulty: 1
+        difficultyValue: 0
+        PR: 0
+      - difficulty: 2
+        difficultyValue: 0
+        PR: 50
+      - difficulty: 2
+        difficultyValue: 3
+        PR: 150
+    - startCountMilestone: 3
+      listDifficultyAndPR:
+      - difficulty: 1
+        difficultyValue: 0
+        PR: -100
+      - difficulty: 2
+        difficultyValue: 0
+        PR: -50
+      - difficulty: 2
+        difficultyValue: 3
+        PR: -100
+    - startCountMilestone: 5
+      listDifficultyAndPR:
+      - difficulty: 1
+        difficultyValue: 0
+        PR: -150
+      - difficulty: 2
+        difficultyValue: 0
+        PR: -150
+      - difficulty: 2
+        difficultyValue: 3
+        PR: -150
+    - startCountMilestone: 7
+      listDifficultyAndPR:
+      - difficulty: 1
+        difficultyValue: 0
+        PR: -200
+      - difficulty: 2
+        difficultyValue: 0
+        PR: -150
+      - difficulty: 2
+        difficultyValue: 3
+        PR: -100
+  - levelStart: 51
+    listStartCountPRs:
+    - startCountMilestone: 1
+      listDifficultyAndPR:
+      - difficulty: 1
+        difficultyValue: 0
+        PR: 50
+      - difficulty: 2
+        difficultyValue: 0
+        PR: 100
+      - difficulty: 2
+        difficultyValue: 3
+        PR: 200
+    - startCountMilestone: 2
+      listDifficultyAndPR:
+      - difficulty: 1
+        difficultyValue: 0
+        PR: 0
+      - difficulty: 2
+        difficultyValue: 0
+        PR: 50
+      - difficulty: 2
+        difficultyValue: 3
+        PR: 150
+    - startCountMilestone: 3
+      listDifficultyAndPR:
+      - difficulty: 1
+        difficultyValue: 0
+        PR: -100
+      - difficulty: 2
+        difficultyValue: 0
+        PR: -50
+      - difficulty: 2
+        difficultyValue: 3
+        PR: -100
+    - startCountMilestone: 5
+      listDifficultyAndPR:
+      - difficulty: 1
+        difficultyValue: 0
+        PR: -150
+      - difficulty: 2
+        difficultyValue: 0
+        PR: -150
+      - difficulty: 2
+        difficultyValue: 3
+        PR: -150
+    - startCountMilestone: 7
+      listDifficultyAndPR:
+      - difficulty: 1
+        difficultyValue: 0
+        PR: -200
+      - difficulty: 2
+        difficultyValue: 0
+        PR: -150
+      - difficulty: 2
+        difficultyValue: 3
+        PR: -100

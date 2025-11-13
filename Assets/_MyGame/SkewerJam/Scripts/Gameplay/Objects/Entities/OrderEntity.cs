@@ -7,11 +7,10 @@ using Gameplay.Entities;
 using Gameplay.LevelData;
 using Manager;
 using MyGame.SkewerJam.Gameplay;
-using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Gameplay.LogicOrder;
 using Sonat.Enums;
 using SonatFramework.Scripts.UIModule;
-using SonatFramework.Scripts.Utils;
+using SonatFramework.Systems.EventBus;
 using UnityEngine;
 using static PopupUnlockInGame;
 
@@ -264,6 +263,7 @@ namespace MyGame.SkewerJam.Objects.Entities
             {
                 var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
                 orderManager.Unlock(this);
+                EventBus<UseBoosterEvent>.Raise(new UseBoosterEvent() { booster = GameResource.BuffAddOrder });
             }));
             PanelManager.Instance.OpenPanel<PopupUnlockInGame>(uiData);
         }

@@ -6,13 +6,11 @@ using Cysharp.Threading.Tasks;
 using Manager;
 using DG.Tweening;
 using System.Linq;
-using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Level;
 using static MyGame.SkewerJam.Objects.Entities.OrderEntity;
 using SonatFramework.Systems.AudioManagement;
 using Sonat.Enums;
 using MyGame.SkewerJam.Utils;
-using System;
 using MyGame.SkewerJam.Gameplay.LogicOrder;
 
 namespace MyGame.SkewerJam.Gameplay.Objects

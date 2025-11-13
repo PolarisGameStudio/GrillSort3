@@ -1,4 +1,6 @@
 
+using Sonat.Attributes;
+
 namespace Sonat.Enums
 {
     public enum GameMode : byte
@@ -8,9 +10,11 @@ namespace Sonat.Enums
 
     public enum LevelDifficulty : byte
     {
-        Easy,
-        Medium,
-        Hard
+        Easy = 0,
+        Medium = 1,
+        Hard = 2,
+        SuperHard = 3,
+        MAX = 4,
     }
 
     public enum LevelType : byte

@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using MyGame.Modules.ProfileInGame.Config;
+using MyGame.SkewerJam.Scripts.SO.SkewerJam.Gameplay;
 using Sirenix.OdinInspector;
+using Sonat.Enums;
 using UnityEngine;
 
 namespace MyGame.Modules.ProfileInGame
@@ -11,14 +14,16 @@ namespace MyGame.Modules.ProfileInGame
     {
         public int defaultPerformanceRate = 1500;
         public int accumulatedLevelCount = 5;
+        public int daysToReset = 3;
 
         [Space(10)]
         [Header("Player Rank Configs")]
         public List<PlayerRankConfig> listPlayerRankConfigs;
+        public GameplayConfig_SkewerJam gameplayConfigSO;
 
         [Space(10)]
         [Header("PR Configs")]
-        public LoseStreakPRConfigSO loseStreakPRConfigSO;
+        public StartCountPRConfigSO startCountPRConfigSO;
         public WinStreakPRConfigSO winStreakPRConfigSO;
         public BoosterPRConfigSO boosterPRConfigSO;
         public RevivePRConfigSO revivePRConfigSO;
@@ -37,6 +42,16 @@ namespace MyGame.Modules.ProfileInGame
             }
         }
         #endregion
+
+        public int GetMaxValue(LevelDifficulty difficulty)
+        {
+            var difficultyAndMaxValue = gameplayConfigSO.listDifficultyAndMaxValues.FirstOrDefault(x => x.difficulty == difficulty);
+            if (difficultyAndMaxValue == null)
+            {
+                difficultyAndMaxValue = gameplayConfigSO.listDifficultyAndMaxValues.Last();
+            }
+            return difficultyAndMaxValue.maxValue;
+        }
     }
 
     [Serializable]

@@ -1,4 +1,8 @@
+using System.Linq;
+using Sonat.Enums;
+using SonatFramework.Scripts.Helper;
 using SonatFramework.Systems.EventBus;
+using SonatFramework.Systems.TimeManagement;
 using UnityEngine;
 
 namespace MyGame.Modules.ProfileInGame
@@ -9,11 +13,22 @@ namespace MyGame.Modules.ProfileInGame
         public override string DATA_KEY => "PROFILE_IN_GAME";
         public ProfileInGameInventoryModule inventoryModule;
 
-        public int pr => inventoryModule.GetPR();
+        private LongDataPref _lastPlayTime;
+        private int _pr => inventoryModule.GetPR();
+
         #region Init
         protected override void Init()
         {
             new EventBinding<LevelStartedEvent>(OnLevelStarted);
+            new EventBinding<LevelEndedEvent>(OnLevelEnded);
+            new EventBinding<LevelContinueEvent>(OnLevelContinue);
+
+            new EventBinding<UseBoosterEvent>(OnUseBooster);
+
+            if (CheckLastPlayTime())
+            {
+                ResetData();
+            }
         }
 
         protected override void LoadConfig()
@@ -23,39 +38,100 @@ namespace MyGame.Modules.ProfileInGame
 
         protected override void LoadData()
         {
+            _lastPlayTime = new LongDataPref($"{DATA_KEY}_LastPlayTime");
             inventoryModule.LoadData();
         }
 
         protected override void ResetData()
         {
             inventoryModule.ResetData();
-
+            _lastPlayTime.Value = 0;
         }
+
+        private bool CheckLastPlayTime()
+        {
+            var now = MySonatFramework.GetService<TimeService>().GetUnixTimeSeconds();
+            long daysToResetSeconds = config.daysToReset * 24 * 60 * 60;
+            return now - _lastPlayTime.Value > daysToResetSeconds;
+        }
+
         #endregion
 
         #region Event Handlers
         private void OnLevelStarted(LevelStartedEvent eventData)
         {
-            // do nothing
+            inventoryModule.UpdateLevelStarted();
+            _lastPlayTime.Value = MySonatFramework.GetService<TimeService>().GetUnixTimeSeconds();
+        }
+
+        private void OnLevelEnded(LevelEndedEvent eventData)
+        {
+            inventoryModule.UpdateLevelEnded(eventData.success);
+        }
+
+        private void OnLevelContinue(LevelContinueEvent eventData)
+        {
+            inventoryModule.UpdateReviveUsed();
+        }
+
+        private void OnUseBooster(UseBoosterEvent eventData)
+        {
+            inventoryModule.UpdateBoosterUsed(eventData.booster);
         }
         #endregion
 
-        public int GetRankPR()
+        public (LevelDifficulty difficulty, int difficultyValue) GetDifficultyValue(LevelDifficulty difficulty, int difficultyValue)
         {
-            if (pr <= 0)
+            var playerRankConfig = GetPlayerRankConfig();
+            var changeDifficultyValue = playerRankConfig.changeDifficultyValue;
+
+            var maxValue = config.GetMaxValue(difficulty);
+            var newValue = difficultyValue + changeDifficultyValue;
+
+            while (newValue > maxValue)
             {
-                return 0;
+                newValue = newValue - maxValue;
+                difficulty += 1;
+                if (difficulty >= LevelDifficulty.MAX)
+                {
+                    newValue = maxValue;
+                    difficulty = LevelDifficulty.MAX - 1;
+                    break;
+                }
+
+                maxValue = config.GetMaxValue(difficulty);
             }
 
+            while (newValue < 0)
+            {
+                var preMaxValue = config.GetMaxValue(difficulty - 1);
+                newValue = preMaxValue + newValue;
+                difficulty -= 1;
+
+                if (difficulty < LevelDifficulty.Easy)
+                {
+                    newValue = 0;
+                    difficulty = LevelDifficulty.Easy;
+                    break;
+                }
+
+                maxValue = config.GetMaxValue(difficulty);
+            }
+
+            return (difficulty, newValue);
+        }
+
+        private PlayerRankConfig GetPlayerRankConfig()
+        {
             for (int i = 0; i < config.listPlayerRankConfigs.Count; i++)
             {
-                if (pr >= config.listPlayerRankConfigs[i].prMileStone)
+                if (_pr >= config.listPlayerRankConfigs[i].prMileStone)
                 {
-                    return config.listPlayerRankConfigs[i].rank;
+                    return config.listPlayerRankConfigs[i];
                 }
             }
 
-            return config.listPlayerRankConfigs.Count - 1;
+            return config.listPlayerRankConfigs.Last();
         }
     }
 }
