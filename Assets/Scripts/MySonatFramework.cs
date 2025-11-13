@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Manager;
 using MyGame.Modules.CardCollection;
 using Sonat.CustomService;
@@ -24,18 +25,19 @@ public class MySonatFramework : SonatSystem
     public static SonatPoolingService poolingService;
     public static SonatPoolingContainer poolingContainer;
     public static SonatLoadAddressableAsync sonatLoadAddressableAsync;
-    public static SonatLevelService sonatLevelService;
     public static AudioService audioService;
     public static UserDataService userDataService;
     public static LivesService livesService;
     public static InventoryService inventoryService;
-    public static LevelService levelService;
+    public static LevelServiceAsync levelServiceAsync;
     public static TrackingService trackingService;
     public static GameplayAnalyticsService gameplayAnalyticsService;
     public static SonatBoosterService sonatBoosterService;
     public static CheckInternetService checkInternetService;
 
     public static event Action<bool> OnNoAdsUpdate;
+
+    private static Dictionary<int, LevelDifficulty> cachedLevelDifficulty = new Dictionary<int, LevelDifficulty>();
 
     private void Start()
     {
@@ -49,36 +51,36 @@ public class MySonatFramework : SonatSystem
         poolingService = GetService<SonatPoolingService>();
         poolingContainer = GetService<SonatPoolingContainer>();
         sonatLoadAddressableAsync = GetService<SonatLoadAddressableAsync>();
-        sonatLevelService = GetService<SonatLevelService>();
         audioService = GetService<AudioService>();
         userDataService = GetService<UserDataService>();
         livesService = GetService<LivesService>();
         inventoryService = GetService<InventoryService>();
-        levelService = GetService<LevelRemoteService>();
+        levelServiceAsync = GetService<SonatLevelServiceAsync>();
         trackingService = GetService<TrackingService>();
         gameplayAnalyticsService = GetService<GameplayAnalyticsService>();
         sonatBoosterService = GetService<SonatBoosterService>();
         checkInternetService = GetService<CheckInternetService>();
     }
 
-    public static LevelDifficulty GetLevelDifficulty(int level)
+    public static async UniTask<LevelDifficulty> GetLevelDifficulty()
     {
+        var level = userDataService.GetLevel(GameMode.Classic);
         try
         {
+            if (cachedLevelDifficulty.TryGetValue(level, out var difficulty))
+            {
+                return difficulty;
+            }
 
-            return levelService != null
-                ? levelService.GetLevelData<Gameplay.LevelData.LevelData>(level, GameMode.Classic).difficulty
-                    : levelService.GetLevelData<Gameplay.LevelData.LevelData>(level, GameMode.Classic).difficulty;
+            var levelData = await levelServiceAsync.GetLevelData<Gameplay.LevelData.LevelData>(level, GameMode.Classic);
+            cachedLevelDifficulty.Add(level, levelData.difficulty);
+
+            return levelData.difficulty;
         }
         catch (Exception)
         {
             return LevelDifficulty.Easy;
         }
-    }
-
-    public static LevelType GetLevelType(int level)
-    {
-        return levelService.GetLevelData<Gameplay.LevelData.LevelData>(level, GameMode.Classic).levelType;
     }
 
     public static bool IsRewardAdsReady()

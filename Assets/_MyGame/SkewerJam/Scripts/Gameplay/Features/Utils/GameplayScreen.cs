@@ -5,10 +5,10 @@ using I2.Loc;
 using MyGame.SkewerJam.Features.BannerController;
 using MyGame.SkewerJam.Gameplay.Booster;
 using Sonat.Enums;
-using SonatFramework.Scripts.SonatSDKAdapterModule;
 using SonatFramework.Scripts.UIModule.UIElements;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MyGame.SkewerJam.Gameplay
 {
