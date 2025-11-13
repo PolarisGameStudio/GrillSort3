@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MyGame.SkewerJam.Gameplay.Features.LogicOrder;
 using Sirenix.OdinInspector;
 using Sonat.Enums;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder.Configs
     public class LogicOrderConfigSO_v2 : ScriptableObject
     {
         public List<DifficultyAndFlowConfig> difficultyAndFlowConfigs;
+        public RescueCondititonSO rescueCondititonSO;
 
         public FlowConfigSO_v2 GetFlowConfigSO(LevelDifficulty difficulty, int difficultyValue)
         {

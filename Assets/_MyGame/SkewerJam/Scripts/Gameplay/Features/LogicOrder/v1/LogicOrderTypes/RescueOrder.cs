@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Manager;
+using MyGame.SkewerJam.Gameplay.Features.LogicOrder;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using MyGame.SkewerJam.Level;
 using Sirenix.OdinInspector;
@@ -23,9 +24,9 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             numberRescues = 0;
         }
 
-        public override void SetLevelData(LevelData_SkewerJam levelData)
+        public void SetRescueCondition(RescueCondition rescueCondition)
         {
-            rescueCondition = levelData.rescueCondition;
+            this.rescueCondition = rescueCondition;
         }
 
         public override (ItemId itemId, int num) GetOrder(GameplayInfoForLogicOrder gameplayInfo = null)

@@ -46,10 +46,10 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
         protected virtual void OnLoadLevelData(LevelData_SkewerJam levelData)
         {
             Debug.Log("<color=purple>LogicOrderHandler:</color> OnLoadLevelData: " + levelData.sequenceLogicOrderIndex + " - " + levelData.difficulty);
-            foreach (var logicOrder in listLogicOrders)
-            {
-                logicOrder.SetLevelData(levelData);
-            }
+            // foreach (var logicOrder in listLogicOrders)
+            // {
+            //     logicOrder.SetLevelData(levelData);
+            // }
 
             var profileInGameService = MySonatFramework.GetService<ProfileInGameService>();
             var (difficulty, difficultyValue) = profileInGameService.GetDifficultyValue(levelData.difficulty, levelData.difficultyValue);

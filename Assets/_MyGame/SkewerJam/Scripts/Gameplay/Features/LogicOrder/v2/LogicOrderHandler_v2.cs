@@ -1,10 +1,7 @@
 using System.Linq;
-using Cysharp.Threading.Tasks;
-using Manager;
 using MyGame.SkewerJam.Gameplay.LogicOrder;
 using MyGame.SkewerJam.Gameplay.LogicOrder.Configs;
 using MyGame.SkewerJam.Level;
-using Sonat.Enums;
 using UnityEngine;
 
 namespace MyGame.SkewerJam.Gameplay.Helpers
@@ -20,11 +17,13 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
         protected override void OnLoadLevelData(LevelData_SkewerJam levelData)
         {
-            var randomDifficultyValue = levelData.level % 4;
-            var randomDifficulty = levelData.level % 3;
-            Debug.Log("<color=purple>LogicOrderHandler_v2:</color> OnLoadLevelData: " + (LevelDifficulty)randomDifficulty + " " + randomDifficultyValue);
-            var randomFlowConfigSO = logicOrderConfigSO_v2.GetFlowConfigSO((LevelDifficulty)randomDifficulty, randomDifficultyValue);
+            Debug.Log("<color=pink>LogicOrderHandler_v2:</color> ON_LOAD_LEVEL_DATA: " + levelData.difficulty + " " + levelData.difficultyValue);
+            var randomFlowConfigSO = logicOrderConfigSO_v2.GetFlowConfigSO(levelData.difficulty, levelData.difficultyValue);
             flowConfigSO_v2 = randomFlowConfigSO;
+
+            var rescueCondition = logicOrderConfigSO_v2.rescueCondititonSO.GetRescueCondition(levelData.level, levelData.difficulty, levelData.difficultyValue);
+            var rescueOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Rescue) as RescueOrderSO;
+            rescueOrder.SetRescueCondition(rescueCondition);
         }
 
         protected override GameplayInfoForLogicOrder GetGameplayInfoForLogicOrder()
