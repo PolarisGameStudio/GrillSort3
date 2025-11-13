@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using Gameplay.Entities;
+using Gameplay.LevelData;
 using Manager;
 using MyGame.SkewerJam.Gameplay.Helpers;
 using UnityEngine;
@@ -8,6 +10,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 {
     public class GameplayInfoForLogicOrder
     {
+        private int _maxDepth;
         private Dictionary<ItemId, Dictionary<int, int>> _dictDeltaSlots;
 
         public Dictionary<ItemId, Dictionary<int, int>> DictDeltaSlots => _dictDeltaSlots;
@@ -26,9 +29,10 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             _dictTempData[key] = value;
         }
 
-        public void UpdateState()
+        public void UpdateState(int maxDepth)
         {
             // đã loại các item và grill bị lock
+            _maxDepth = maxDepth;
             _dictDeltaSlots = GetDictDeltaSlots();
         }
 
@@ -141,6 +145,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             var dictNode = new Dictionary<ItemId, List<NodeAsOneLayerInGrill>>(); // itemId/listNode
 
             var countId = 0;
+
             // duyệt qua waiting grill;
             var listWaitingItems = OrderHelper.GetItemsInWaitingGrill();
             foreach (var item in listWaitingItems)
@@ -155,65 +160,52 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
             }
 
+            // duyệt qua grill;
             var grillManager = GameController.Instance.GameLogicHandler.GrillManager;
             foreach (var primaryGrill in grillManager.ListGrills)
             {
-                if (primaryGrill.IsLock) continue;
+                CalculateInGrill(primaryGrill, neededItemsForCurrentOrder, ref dictNode, ref countId);
+            }
 
-                // duyệt qua layer 0:
-                var slots = primaryGrill.GetSlots();
-                if (slots == null) continue;
+            return dictNode;
+        }
 
-                var currentRootId = countId;
-                var listItemsInLayer0 = slots.Select(e => e.GetItem()).Where(e => e != null && e.IsLocked == false).ToList();
-                var dictItemsInLayer0 = listItemsInLayer0.GroupBy(e => (ItemId)e.id).ToDictionary(e => e.Key, e => e.Count());
-                var listKeysInLayer0 = dictItemsInLayer0.Keys.ToList();
-                foreach (var itemId in listKeysInLayer0)
+        private void CalculateInGrill(PrimaryGrill primaryGrill, Dictionary<ItemId, int> neededItemsForCurrentOrder, ref Dictionary<ItemId, List<NodeAsOneLayerInGrill>> dictNode, ref int countId)
+        {
+            if (primaryGrill.IsLock) return;
+
+            var currentRootId = countId;
+            var listItemInUpperLayer = new List<ItemId>();
+            for (int i = 0; i < _maxDepth; i++)
+            {
+                var layerData = GetLayerData(primaryGrill, i);
+                if (layerData == null) return;
+
+                var filteredLayerData = layerData.itemData.Where(e => e != null && e.id != 0 && ItemHelper.IsLockType(e.itemType) == false && ItemHelper.IsItemSpecial((ItemId)e.id) == false).ToList();
+                var dictItemsInLayer = filteredLayerData.GroupBy(e => (ItemId)e.id).ToDictionary(e => e.Key, e => e.Count());
+                var listKeysInLayer = dictItemsInLayer.Keys.ToList();
+                foreach (var itemId in listKeysInLayer)
                 {
-                    if (ItemHelper.IsItemSpecial(itemId)) continue;
-                    if (dictNode.ContainsKey(itemId) == false)
-                    {
-                        dictNode[itemId] = new List<NodeAsOneLayerInGrill>();
-                    }
-
-                    var numItems = dictItemsInLayer0[itemId];
-                    var nodeId = countId++;
-                    dictNode[itemId].Add(new NodeAsOneLayerInGrill() { id = nodeId, rootId = currentRootId, score = numItems, cost = 0, listCostOrder = new List<int>() });
-                }
-
-                // duyệt qua layer 1:
-                var subGrills = primaryGrill.GetSubGrills();
-                if (subGrills == null || subGrills.Count == 0) continue;
-                var slotsInLayer1 = subGrills[0].GetSlots();
-                if (slotsInLayer1 == null) continue;
-
-                var listItemsInLayer1 = slotsInLayer1.Select(e => e.GetItem()).Where(e => e != null && e.IsLocked == false).ToList();
-                var dictItemsInLayer1 = listItemsInLayer1.GroupBy(e => (ItemId)e.id).ToDictionary(e => e.Key, e => e.Count());
-                var listKeysInLayer1 = dictItemsInLayer1.Keys.ToList();
-                foreach (var itemId in listKeysInLayer1)
-                {
-                    if (ItemHelper.IsItemSpecial(itemId)) continue;
                     if (dictNode.ContainsKey(itemId) == false)
                     {
                         dictNode[itemId] = new List<NodeAsOneLayerInGrill>();
                     }
 
                     // tính score:
-                    var score = dictItemsInLayer1[itemId];
+                    var score = dictItemsInLayer[itemId];
                     var cost = 0;
                     var listCostOrder = new List<int>();
-                    foreach (var it in listItemsInLayer0)
+                    foreach (var it in listItemInUpperLayer)
                     {
-                        if (ItemHelper.IsItemSpecial((ItemId)it.id)) continue;
-                        if ((ItemId)it.id == itemId)
+                        if (it == itemId)
                         {
                             score += 1;
                         }
                         else
                         {
-                            if (neededItemsForCurrentOrder.ContainsKey((ItemId)it.id) && neededItemsForCurrentOrder[(ItemId)it.id] > listCostOrder.Count)
+                            if (neededItemsForCurrentOrder.ContainsKey(it) && neededItemsForCurrentOrder[it] > listCostOrder.Count)
                             {
-                                listCostOrder.Add(it.id);
+                                listCostOrder.Add((int)it);
                             }
                             else
                             {
@@ -222,11 +214,35 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                         }
                     }
                     var nodeId = countId++;
-                    dictNode[itemId].Add(new NodeAsOneLayerInGrill() { id = nodeId, rootId = currentRootId, score = score, cost = cost, listCostOrder = listCostOrder });
+                    dictNode[itemId].Add(new NodeAsOneLayerInGrill()
+                    {
+                        id = nodeId,
+                        rootId = currentRootId,
+                        score = score,
+                        cost = cost,
+                        listCostOrder = listCostOrder
+                    });
+
                 }
+                // prepare data for next layer:
+                listItemInUpperLayer.AddRange(filteredLayerData.Select(e => (ItemId)e.id));
             }
 
-            return dictNode;
+        }
+
+        private LayerData GetLayerData(PrimaryGrill primaryGrill, int layer)
+        {
+            if (layer == 0)
+            {
+                return primaryGrill.GetCurrentData();
+            }
+            else
+            {
+                var subGrills = primaryGrill.GetSubGrills();
+                if (subGrills == null || subGrills.Count <= layer - 1) return null;
+                var selectedSubGrill = subGrills[layer - 1];
+                return selectedSubGrill.GetCurrentData();
+            }
         }
     }
 }

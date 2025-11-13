@@ -12,6 +12,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 {
     public abstract class BaseLogicOrderHandler : MonoBehaviour
     {
+        [SerializeField] protected int maxDepth = 3;
         [SerializeField] protected DynamicLogicOrder dynamicLogicOrder;
 
         [Header("Configs")]
@@ -150,7 +151,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
         protected virtual GameplayInfoForLogicOrder GetGameplayInfoForLogicOrder()
         {
             var gameplayInfoForLogicOrder = new GameplayInfoForLogicOrder();
-            gameplayInfoForLogicOrder.UpdateState();
+            gameplayInfoForLogicOrder.UpdateState(maxDepth);
             return gameplayInfoForLogicOrder;
         }
 

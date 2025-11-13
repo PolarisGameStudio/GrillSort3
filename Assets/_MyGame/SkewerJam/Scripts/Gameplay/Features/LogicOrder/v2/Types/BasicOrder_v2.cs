@@ -55,6 +55,8 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                     var randomItemId = filteredRandomItemIds[UnityEngine.Random.Range(0, filteredRandomItemIds.Count)];
                     Debug.Log("BasicOrderSO_v2: GetOrder: " + "result remaining slots: >= " + (numEmptyWaitingSlot - randomItemId.deltaSlot));
                     Debug.Log("BasicOrderSO_v2: GetOrder: >> delta slot: " + randomItemId.deltaSlot);
+                    Debug.Log("BasicOrderSO_v2: GetOrder: >> item id: " + randomItemId.itemId);
+                    Debug.Log("BasicOrderSO_v2: GetOrder: >> num items: " + randomItemId.numItems);
                     return (randomItemId.itemId, randomItemId.numItems);
                 }
 
@@ -69,6 +71,8 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                     var randomItemId = filteredRandomItemIds[UnityEngine.Random.Range(0, filteredRandomItemIds.Count)];
                     Debug.Log("BasicOrderSO_v2: GetOrder: " + "result remaining slots: >= " + (numEmptyWaitingSlot - randomItemId.deltaSlot));
                     Debug.Log("BasicOrderSO_v2: GetOrder: >> delta slot: " + randomItemId.deltaSlot);
+                    Debug.Log("BasicOrderSO_v2: GetOrder: >> item id: " + randomItemId.itemId);
+                    Debug.Log("BasicOrderSO_v2: GetOrder: >> num items: " + randomItemId.numItems);
                     return (randomItemId.itemId, randomItemId.numItems);
                 }
             }

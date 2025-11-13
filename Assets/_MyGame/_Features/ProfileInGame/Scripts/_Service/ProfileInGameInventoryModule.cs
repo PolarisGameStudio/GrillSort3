@@ -22,15 +22,14 @@ namespace MyGame.Modules.ProfileInGame
 
         private void LoadCurrentLevelInfoData(int level)
         {
-            var curLevel = MySonatFramework.userDataService.GetLevel();
             if (_currentLevelInfoData == null)
             {
-                _currentLevelInfoData = new ClassDataPref<LevelInfoData>($"{DATA_KEY}_LevelInfoData", new LevelInfoData(curLevel, config.defaultPerformanceRate));
+                _currentLevelInfoData = new ClassDataPref<LevelInfoData>($"{DATA_KEY}_LevelInfoData", new LevelInfoData(level, config.defaultPerformanceRate));
             }
 
-            if (level != curLevel)
+            if (level != _currentLevelInfoData.Value.level)
             {
-                _currentLevelInfoData.Value = new LevelInfoData(curLevel, config.defaultPerformanceRate);
+                _currentLevelInfoData.Value = new LevelInfoData(level, config.defaultPerformanceRate);
             }
         }
 
