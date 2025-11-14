@@ -328,6 +328,9 @@ namespace MyGame.SkewerJam.Gameplay
             // check lose khi:
             // - order tĩnh: không có order nào đang di chuyển vào
             // - waiting grill tĩnh: không còn item nào nhảy lên đĩa
+            // yield return new WaitForSeconds(0.5f);
+            if (GameController.Instance.GameResult != GameResult.None) yield break;
+
             yield return new WaitUntil(() =>
             {
                 return orderManager.ListOrders.Where(e => e.State == OrderEntityState.Waiting && e.IsActive).Count() == 0;
@@ -350,17 +353,47 @@ namespace MyGame.SkewerJam.Gameplay
 
             // waiting grill còn slot trống thì chưa thua
             var listWaitingGrill = waitingGrillManager.ListWaitingGrills;
+            var checkEmptyWaitingGrill = false;
             foreach (var waitingGrill in listWaitingGrill)
             {
                 if (waitingGrill.GetSlots().Where(e => e.isEmpty() && waitingGrill.IsActive).Count() > 0)
                 {
-                    // Debug.Log("waitingGrill.GetSlots().Where(e => e.isEmpty() && waitingGrill.IsActive).Count() > 0");
-                    return null;
+                    checkEmptyWaitingGrill = true;
+                    break;
                 }
             }
 
-            // else continue
-            return StuckType.OutOfMove;
+            // nếu tất cả các item trên grill đều không thể di chuyển thì thua
+            var grillManager = GameController.Instance.GameLogicHandler.GrillManager;
+            var checkAnyAvailableItem = false;
+            foreach (var grill in grillManager.ListGrills)
+            {
+                if (grill.IsLock == false)
+                {
+                    foreach (var slot in grill.GetSlots())
+                    {
+                        if (slot.GetItem() != null && slot.GetItem().IsLocked == false)
+                        {
+                            checkAnyAvailableItem = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (checkEmptyWaitingGrill == false)
+            {
+                return StuckType.OutOfMove;
+            }
+            else
+            {
+                if (checkAnyAvailableItem == false)
+                {
+                    return StuckType.OutOfMove_AllLockedItem;
+                }
+            }
+
+            return null;
         }
 
         public void UndoSwitchSlot(Item item, SlotBase sourceSlot)

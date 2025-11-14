@@ -133,6 +133,9 @@ namespace MyGame.SkewerJam.Gameplay.Objects
 
                     GameController.Instance.GameLogicHandler.StartCollectItem(orderEntity);
                 }
+
+                // await GameController.Instance.GameLogicHandler.TryCheckMatchItem(item);
+                GameController.Instance.GameLogicHandler.TryCheckLoseGame();
             }
 
         }

@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Facebook.Unity;
 using Gameplay.BoosteeManagement;
 using Gameplay.Entities.GrillScripts;
 using Gameplay.LevelData;
-using Sonat.Enums;
 using SonatFramework.Scripts.Utils;
 using UnityEngine;
 
@@ -33,6 +31,7 @@ namespace Gameplay.Entities
         public Transform SubContainer => subContainer;
 
         //protected bool isFirstUnlock = true; // đã được unlock lần đầu
+        protected bool completed = false;
 
         protected virtual void ResetData()
         {
@@ -45,6 +44,7 @@ namespace Gameplay.Entities
 
         public virtual async UniTask SetData(GrillData grillData)
         {
+            completed = false;
             grillVisual.SetDefaultGrill(grillData);
             grillInteractionLayer?.gameObject.SetActive(false);
 
@@ -113,6 +113,7 @@ namespace Gameplay.Entities
             grillVisual.UpdateSubGrill();
             if (subGrills == null || subGrills.Count == 0)
             {
+                completed = true;
                 grillVisual.CloseGrill(true, true);
                 return;
             }

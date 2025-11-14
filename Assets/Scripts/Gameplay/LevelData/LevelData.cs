@@ -252,7 +252,6 @@ namespace Gameplay.LevelData
     public enum GrillType : byte
     {
         Normal = 0,
-
         //Single = 1,
         //Drop = 2,
         //Drop7 = 3,
@@ -263,7 +262,6 @@ namespace Gameplay.LevelData
         Lid = 8,
         Vending = 9,
         LockAndKey2 = 10,
-
         // Drop7Lock,
         // Drop7LockAds,
         // Drop7LockAndKey,
@@ -275,7 +273,12 @@ namespace Gameplay.LevelData
         SingleMin = 11,
         Spicy = 12,
         Broken = 13,
-        Simple = 14
+        Simple = 14,
+        IceMain = 15,
+        IceNeighbor = 16,
+        Overcooked = 17,
+        Bomb = 18,
+        Shutter = 19,
     }
 
     public enum ItemType : byte

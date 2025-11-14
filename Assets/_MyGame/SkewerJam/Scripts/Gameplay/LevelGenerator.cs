@@ -165,7 +165,7 @@ namespace MyGame.SkewerJam.Gameplay
         {
             foreach (var grillData in listGrillData)
             {
-                if (grillData.isLock) grillData.grillType = GrillType.Lock;
+                if (GrillHelper.CheckLockAds(grillData)) grillData.grillType = GrillType.Lock;
 
                 var grillType = grillData.grillType.ValidateGrillType();
                 var slotCount = grillData.SlotCount;

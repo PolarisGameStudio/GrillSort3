@@ -128,5 +128,12 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
         {
             return primaryGrill.CanShuffle();
         }
+
+        public static bool CheckLockAds(GrillData grillData)
+        {
+            if (grillData.isLock
+                && grillData.grillType != GrillType.Shutter) return true;
+            return false;
+        }
     }
 }

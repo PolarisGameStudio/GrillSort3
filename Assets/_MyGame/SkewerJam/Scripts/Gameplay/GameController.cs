@@ -262,7 +262,7 @@ namespace MyGame.SkewerJam.Gameplay
 
             await UniTask.Delay(500);
             // var showPopupContinue = GameLogicHandler.WaitingGrillManager.ListWaitingGrills.Where(e => e.IsActive == false).Count() > 0;
-            if (CanRevive())
+            if (CanRevive(stuckType))
             {
                 PopupContinue.Data data = new PopupContinue.Data()
                 {
@@ -279,10 +279,14 @@ namespace MyGame.SkewerJam.Gameplay
 
         }
 
-        private bool CanRevive()
+        private bool CanRevive(StuckType stuckType)
         {
+            switch (stuckType)
+            {
+                case StuckType.OutOfMove_AllLockedItem:
+                    return false;
+            }
             return true;
-            // return GameLogicHandler.OrderManager.ListOrders.Where(e => e.IsActive == false).Count() > 0;
         }
 
         private async UniTaskVoid Revive(StuckType stuckType, string by, object[] objectParams = null)

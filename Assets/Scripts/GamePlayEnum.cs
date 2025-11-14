@@ -62,6 +62,6 @@ namespace Sonat.Enums
     {
         Stuck = 0,
         OutOfMove = 1,
-        OutOfTime = 2
+        OutOfMove_AllLockedItem = 2
     }
 }

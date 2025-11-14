@@ -245,12 +245,16 @@ namespace MyGame.SkewerJam.Objects
         public bool ClearOnePlate()
         {
             var count = listWaitingGrills.Count(e => e.IsActive);
-            if (count > 0 && listWaitingGrills[count - 1].GetSlot(0).GetItem() != null)
+            for (int i = count - 1; i >= 0; i--)
             {
-                var waitingGrill = listWaitingGrills[count - 1];
-                waitingGrill.ClearItem();
-                OnClearItem?.Invoke(waitingGrill);
-                return true;
+                var item = listWaitingGrills[i].GetSlot(0).GetItem();
+                if (item != null && ItemHelper.CanClearOnePlate(item))
+                {
+                    var waitingGrill = listWaitingGrills[i];
+                    waitingGrill.ClearItem();
+                    OnClearItem?.Invoke(waitingGrill);
+                    return true;
+                }
             }
             return false;
         }

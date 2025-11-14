@@ -151,5 +151,10 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
         {
             return itemType == ItemType.Ice;
         }
+
+        public static bool CanClearOnePlate(Item item)
+        {
+            return item.Data.itemType != ItemType.Key && item.Data.itemType != ItemType.Key2 && item.Data.itemType != ItemType.KeyArea;
+        }
     }
 }
