@@ -142,5 +142,9 @@ namespace Gameplay.Entities.ItemScripts
             sortingGroup.sortingLayerName = sortingLayerName;
             sortingGroup.sortingOrder = sortingOrder;
         }
+
+        public virtual void OnComplete()
+        {
+        }
     }
 }

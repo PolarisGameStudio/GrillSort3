@@ -212,7 +212,6 @@ namespace MyGame.SkewerJam.Gameplay
         {
             if (gameResult == GameResult.Win)
             {
-                gameResult = GameResult.None;
                 Win();
             }
         }
@@ -341,6 +340,7 @@ namespace MyGame.SkewerJam.Gameplay
 
         public async UniTaskVoid Lose(StuckType stuckType)
         {
+            gameResult = GameResult.Lose;
             MySonatFramework.livesService.ReduceLive(1, "lose");
             EventBus<LevelEndedEvent>.Raise(new LevelEndedEvent() { level = level, gameMode = GameMode.Classic, success = false });
             PanelManager.Instance.OpenPanelByName<PopupLose_SkewerJam>("PopupLose_SkewerJam");

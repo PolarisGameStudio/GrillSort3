@@ -438,6 +438,7 @@ namespace Gameplay.Entities
         public virtual void OnComplete()
         {
             CheckAddTimeBonus();
+            visual.OnComplete();
         }
 
         public virtual void SetSuggest(bool suggest)
