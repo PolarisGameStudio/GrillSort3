@@ -27,10 +27,15 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
         protected override GameplayInfoForLogicOrder GetGameplayInfoForLogicOrder()
         {
-            var gameplayInfoForLogicOrder = base.GetGameplayInfoForLogicOrder();
-
             var phase = GetCurrentPhase();
+
+            if (phase >= 8) _maxDepth = 3;
+
+            var gameplayInfoForLogicOrder = new GameplayInfoForLogicOrder();
+            gameplayInfoForLogicOrder.UpdateState(_maxDepth);
+
             var curveIndex = flowConfigSO_v2.GetCurveIndex(phase);
+            Debug.Log("LogicOrderHandler_v2: GetGameplayInfoForLogicOrder: phase: " + phase + " >>> curveIndex: " + curveIndex);
             gameplayInfoForLogicOrder.SetTempData(KEY_CURVE_INDEX, curveIndex);
             return gameplayInfoForLogicOrder;
         }
@@ -48,7 +53,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             var totalItems = itemManager.TotalItems;
 
             var percentage = (float)(totalItems - currentItems) / totalItems;
-            return Mathf.FloorToInt(percentage * 100f);
+            return Mathf.FloorToInt(percentage * 10f);
         }
     }
 }

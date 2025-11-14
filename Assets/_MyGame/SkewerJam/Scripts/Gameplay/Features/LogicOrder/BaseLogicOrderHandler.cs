@@ -12,7 +12,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 {
     public abstract class BaseLogicOrderHandler : MonoBehaviour
     {
-        [SerializeField] protected int maxDepth = 3;
+        [SerializeField] protected int defaultMaxDepth = 2;
         [SerializeField] protected DynamicLogicOrder dynamicLogicOrder;
 
         [Header("Configs")]
@@ -26,6 +26,8 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
         private ForceRescueData _forceRescueData = new ForceRescueData();
         protected LogicOrderData _logicOrderData = new LogicOrderData();
 
+        protected int _maxDepth;
+
         #region Init
         public virtual void Init()
         {
@@ -38,6 +40,8 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             levelGenerator.OnLoadLevelData += OnLoadLevelData;
 
             SetForceRescue(false, -1);
+
+            _maxDepth = defaultMaxDepth;
         }
 
         public virtual void Clear()
@@ -151,7 +155,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
         protected virtual GameplayInfoForLogicOrder GetGameplayInfoForLogicOrder()
         {
             var gameplayInfoForLogicOrder = new GameplayInfoForLogicOrder();
-            gameplayInfoForLogicOrder.UpdateState(maxDepth);
+            gameplayInfoForLogicOrder.UpdateState(_maxDepth);
             return gameplayInfoForLogicOrder;
         }
 

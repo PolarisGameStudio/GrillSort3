@@ -14,16 +14,31 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
         public override LogicOrderType LogicOrderType => LogicOrderType.Basic_v2;
 
+        private int previousRemainingSlot = int.MaxValue;
+
         public override (ItemId itemId, int num) GetOrder(GameplayInfoForLogicOrder gameplayInfo = null)
         {
-            var curveIndex = gameplayInfo.GetTempData(LogicOrderHandler_v2.KEY_CURVE_INDEX);
-            var remainingSlotAfter = basicOrderConfigSO.GetRandomRemainingSlot(curveIndex);
-
             var waitingGrillManager = GameController.Instance.GameLogicHandler.WaitingGrillManager;
             var numEmptyWaitingSlot = waitingGrillManager.ListWaitingGrills.Count(
                 e => e.IsActive == true
                 && e.GetSlots().Count(s => s.GetItem() == null) > 0
                 );
+
+            var remainingSlotAfter = previousRemainingSlot;
+            if (CheckFindNewOrder(numEmptyWaitingSlot) == false)
+            {
+            }
+            else
+            {
+                var curveIndex = gameplayInfo.GetTempData(LogicOrderHandler_v2.KEY_CURVE_INDEX);
+                remainingSlotAfter = basicOrderConfigSO.GetRandomRemainingSlot(curveIndex);
+
+                previousRemainingSlot = remainingSlotAfter;
+            }
+
+
+
+
 
             Debug.Log("BasicOrderSO_v2: GetOrder: " + "currentNumEmptyWaitingSlot: " + numEmptyWaitingSlot + " >>> expected remainingSlot: " + remainingSlotAfter);
             var dictDeltaSlots = gameplayInfo.DictDeltaSlots;
@@ -82,7 +97,14 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
         public override void Init()
         {
-            // throw new System.NotImplementedException();
+            previousRemainingSlot = int.MaxValue;
+        }
+
+        private bool CheckFindNewOrder(int curEmptyWaitingSlot)
+        {
+            // nếu số slot còn lại thực tế mà nhỏ hơn số cần tìm
+            // thì đã thỏa mãn để tìm order mới
+            return previousRemainingSlot >= 2 || curEmptyWaitingSlot <= previousRemainingSlot;
         }
     }
 }
