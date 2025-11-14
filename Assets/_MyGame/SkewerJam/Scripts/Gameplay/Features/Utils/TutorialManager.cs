@@ -83,7 +83,10 @@ namespace MyGame.SkewerJam.Gameplay
             var levelData = GameController.Instance.LevelGenerator.LevelData;
             foreach (var grillData in levelData.grillData)
             {
-                if (grillData.isLock) listTutorialTypes.Add(TutorialType.PrimaryGrill_Lock);
+                if (GrillHelper.CheckLockAds(grillData))
+                {
+                    listTutorialTypes.Add(TutorialType.PrimaryGrill_Lock);
+                }
 
                 var grillType = grillData.grillType.ValidateGrillType();
                 var slotCount = grillData.SlotCount;
@@ -108,6 +111,9 @@ namespace MyGame.SkewerJam.Gameplay
                     case GrillType.Normal:
                         if (slotCount == 1)
                             listTutorialTypes.Add(TutorialType.PrimaryGrill_Single);
+                        break;
+                    case GrillType.Shutter:
+                        listTutorialTypes.Add(TutorialType.PrimaryGrill_Shutter);
                         break;
                 }
 
@@ -146,9 +152,17 @@ namespace MyGame.SkewerJam.Gameplay
             {
                 foreach (var obstacleData in levelData.obstacleData)
                 {
-                    if (obstacleData.obstacleType == ObstacleType.OctoChef)
+                    switch (obstacleData.obstacleType)
                     {
-                        listTutorialTypes.Add(TutorialType.Obstacle_Octochef_1);
+                        case ObstacleType.OctoChef:
+                            listTutorialTypes.Add(TutorialType.Obstacle_Octochef_1);
+                            break;
+                        case ObstacleType.LockAreaHorizontal:
+                        case ObstacleType.LockAreaVertical:
+                            listTutorialTypes.Add(TutorialType.Obstacle_LockArea);
+                            break;
+                        default:
+                            break;
                     }
                 }
             }
@@ -221,10 +235,12 @@ namespace MyGame.SkewerJam.Gameplay
                 case TutorialType.PrimaryGrill_LockAndKey:
                 case TutorialType.PrimaryGrill_Vending:
                 case TutorialType.PrimaryGrill_Ice:
+                case TutorialType.PrimaryGrill_Shutter:
                     ShowPopupTutorialGroup(tutorialType, $"PopupTutorialGroup_{tutorialType}");
                     return;
 
                 case TutorialType.Obstacle_Conveyor:
+                case TutorialType.Obstacle_LockArea:
                     ShowPopupTutorialObstacle(tutorialType, $"PopupTutorialObstacle_{tutorialType}");
                     return;
 
@@ -295,41 +311,41 @@ namespace MyGame.SkewerJam.Gameplay
         }
 
 #if UNITY_EDITOR
-        // private void Update()
-        // {
-        //     if (Input.GetKeyDown(KeyCode.Alpha1))
-        //     {
-        //         ShowPopupTutorial(TutorialType.BoosterAddPlate);
-        //     }
-        //     if (Input.GetKeyDown(KeyCode.Alpha2))
-        //     {
-        //         ShowPopupTutorial(TutorialType.PrimaryGrill_Single);
-        //     }
-        //     if (Input.GetKeyDown(KeyCode.Alpha3))
-        //     {
-        //         ShowPopupTutorial(TutorialType.Item_Bomb);
-        //     }
-        //     if (Input.GetKeyDown(KeyCode.Alpha4))
-        //     {
-        //         ShowPopupTutorial(TutorialType.Obstacle_Octochef_1);
-        //     }
-        //     if (Input.GetKeyDown(KeyCode.Alpha5))
-        //     {
-        //         ShowPopupTutorial(TutorialType.PrimaryGrill_Ice);
-        //     }
-        //     if (Input.GetKeyDown(KeyCode.Alpha6))
-        //     {
-        //         ShowPopupTutorial(TutorialType.PrimaryGrill_Vending);
-        //     }
-        //     if (Input.GetKeyDown(KeyCode.Alpha7))
-        //     {
-        //         ShowPopupTutorial(TutorialType.PrimaryGrill_LockAndKey);
-        //     }
-        //     if (Input.GetKeyDown(KeyCode.Alpha8))
-        //     {
-        //         ShowPopupTutorial(TutorialType.Obstacle_Conveyor);
-        //     }
-        // }
+        private void Update()
+        {
+            //     if (Input.GetKeyDown(KeyCode.Alpha1))
+            //     {
+            //         ShowPopupTutorial(TutorialType.BoosterAddPlate);
+            //     }
+            //     if (Input.GetKeyDown(KeyCode.Alpha2))
+            //     {
+            //         ShowPopupTutorial(TutorialType.PrimaryGrill_Single);
+            //     }
+            //     if (Input.GetKeyDown(KeyCode.Alpha3))
+            //     {
+            //         ShowPopupTutorial(TutorialType.Item_Bomb);
+            //     }
+            //     if (Input.GetKeyDown(KeyCode.Alpha4))
+            //     {
+            //         ShowPopupTutorial(TutorialType.Obstacle_Octochef_1);
+            //     }
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                ShowPopupTutorial(TutorialType.PrimaryGrill_Ice);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                ShowPopupTutorial(TutorialType.PrimaryGrill_Shutter);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                ShowPopupTutorial(TutorialType.Obstacle_LockArea);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                ShowPopupTutorial(TutorialType.PrimaryGrill_LockAndKey);
+            }
+        }
 #endif
     }
 
@@ -349,6 +365,7 @@ namespace MyGame.SkewerJam.Gameplay
         PrimaryGrill_Vending = 13,
         PrimaryGrill_LockAndKey = 14,
         PrimaryGrill_Ice = 15,
+        PrimaryGrill_Shutter = 16,
 
         Item_Bomb = 40,
         Item_Hidden = 41,
@@ -357,5 +374,6 @@ namespace MyGame.SkewerJam.Gameplay
 
         Obstacle_Octochef_1 = 70,
         Obstacle_Conveyor = 71,
+        Obstacle_LockArea = 72,
     }
 }

@@ -3791,6 +3791,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4207750069005980321}
     m_Modifications:
+    - target: {fileID: 208285865459769570, guid: 3f5257c1ae7f30243afceef5acaa53e1, type: 3}
+      propertyPath: moveCurve.m_Curve.Array.data[1].inSlope
+      value: 1.0569977
+      objectReference: {fileID: 0}
+    - target: {fileID: 208285865459769570, guid: 3f5257c1ae7f30243afceef5acaa53e1, type: 3}
+      propertyPath: moveCurve.m_Curve.Array.data[2].inSlope
+      value: 5.093659
+      objectReference: {fileID: 0}
+    - target: {fileID: 208285865459769570, guid: 3f5257c1ae7f30243afceef5acaa53e1, type: 3}
+      propertyPath: moveCurve.m_Curve.Array.data[3].inSlope
+      value: 1.2244617
+      objectReference: {fileID: 0}
+    - target: {fileID: 208285865459769570, guid: 3f5257c1ae7f30243afceef5acaa53e1, type: 3}
+      propertyPath: moveCurve.m_Curve.Array.data[1].outSlope
+      value: 1.0569977
+      objectReference: {fileID: 0}
+    - target: {fileID: 208285865459769570, guid: 3f5257c1ae7f30243afceef5acaa53e1, type: 3}
+      propertyPath: moveCurve.m_Curve.Array.data[2].outSlope
+      value: 5.093659
+      objectReference: {fileID: 0}
+    - target: {fileID: 208285865459769570, guid: 3f5257c1ae7f30243afceef5acaa53e1, type: 3}
+      propertyPath: moveCurve.m_Curve.Array.data[3].outSlope
+      value: 1.2244617
+      objectReference: {fileID: 0}
+    - target: {fileID: 208285865459769570, guid: 3f5257c1ae7f30243afceef5acaa53e1, type: 3}
+      propertyPath: moveCurve.m_Curve.Array.data[1].outWeight
+      value: 0.55398226
+      objectReference: {fileID: 0}
+    - target: {fileID: 208285865459769570, guid: 3f5257c1ae7f30243afceef5acaa53e1, type: 3}
+      propertyPath: moveCurve.m_Curve.Array.data[2].outWeight
+      value: 0.17699099
+      objectReference: {fileID: 0}
+    - target: {fileID: 208285865459769570, guid: 3f5257c1ae7f30243afceef5acaa53e1, type: 3}
+      propertyPath: moveCurve.m_Curve.Array.data[3].outWeight
+      value: 0.15988207
+      objectReference: {fileID: 0}
     - target: {fileID: 2418175612950429131, guid: 3f5257c1ae7f30243afceef5acaa53e1, type: 3}
       propertyPath: m_Name
       value: UIWheel

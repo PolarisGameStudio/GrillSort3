@@ -122,20 +122,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4848153371313107739, guid: 182320162e5ae994da85a9735fa80033, type: 3}
       propertyPath: m_text
-      value: "\u65B0\u3057\u3044\u30D6\u30FC\u30B9\u30BF\u30FC\u304C\u30A2\u30F3\u30ED\u30C3\u30AF\u3055\u308C\u307E\u3057\u305F\uFF01"
+      value: "\u0110\xE3 m\u1EDF kh\xF3a v\u1EADt ph\u1EA9m t\u0103ng c\u01B0\u1EDDng
+        m\u1EDBi!"
       objectReference: {fileID: 0}
     - target: {fileID: 4848153371313107739, guid: 182320162e5ae994da85a9735fa80033, type: 3}
       propertyPath: m_fontSize
-      value: 50.9
+      value: 58.35
       objectReference: {fileID: 0}
     - target: {fileID: 4848153371313107739, guid: 182320162e5ae994da85a9735fa80033, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
     - target: {fileID: 4848153371313107739, guid: 182320162e5ae994da85a9735fa80033, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 8f70d7e22943e954eb086685ba8a50fa, type: 2}
+      objectReference: {fileID: 2100000, guid: 77048ad586e137a40b98b1f9be571abd, type: 2}
     - target: {fileID: 5774354934344979602, guid: 182320162e5ae994da85a9735fa80033, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -147,39 +148,43 @@ PrefabInstance:
     - target: {fileID: 6204064719346989471, guid: 182320162e5ae994da85a9735fa80033, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
     - target: {fileID: 6204064719346989471, guid: 182320162e5ae994da85a9735fa80033, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: cb0cdd8a12e2a094fa8afa58a87419f2, type: 2}
+      objectReference: {fileID: 2100000, guid: 7b855a6abbecf8946bf36854d1b99209, type: 2}
+    - target: {fileID: 6415925197229746423, guid: 182320162e5ae994da85a9735fa80033, type: 3}
+      propertyPath: mTerm
+      value: New obstacle unlocked!
+      objectReference: {fileID: 0}
     - target: {fileID: 7788351469688856082, guid: 182320162e5ae994da85a9735fa80033, type: 3}
       propertyPath: m_text
-      value: "\u3088\u304F\u3084\u3063\u305F\uFF01"
+      value: "L\xE0m t\u1ED1t l\u1EAFm!"
       objectReference: {fileID: 0}
     - target: {fileID: 7788351469688856082, guid: 182320162e5ae994da85a9735fa80033, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
     - target: {fileID: 7788351469688856082, guid: 182320162e5ae994da85a9735fa80033, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 8f70d7e22943e954eb086685ba8a50fa, type: 2}
+      objectReference: {fileID: 2100000, guid: 77048ad586e137a40b98b1f9be571abd, type: 2}
     - target: {fileID: 7926056400983687701, guid: 182320162e5ae994da85a9735fa80033, type: 3}
       propertyPath: m_SizeDelta.x
       value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 8406705152610806135, guid: 182320162e5ae994da85a9735fa80033, type: 3}
       propertyPath: m_text
-      value: "\u30BF\u30C3\u30D7\u3057\u3066\u7D9A\u884C"
+      value: "Ch\u1EA1m \u0111\u1EC3 ti\u1EBFp t\u1EE5c"
       objectReference: {fileID: 0}
     - target: {fileID: 8406705152610806135, guid: 182320162e5ae994da85a9735fa80033, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 6ec045d73fbbb574fba4911782fdce49, type: 2}
+      objectReference: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
     - target: {fileID: 8406705152610806135, guid: 182320162e5ae994da85a9735fa80033, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: cb0cdd8a12e2a094fa8afa58a87419f2, type: 2}
+      objectReference: {fileID: 2100000, guid: 7b855a6abbecf8946bf36854d1b99209, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -335,7 +340,7 @@ MonoBehaviour:
   - {fileID: 655421519367657894}
   icon: {fileID: 5969362579046935421}
   delayClickClose: 3
-  delayClose: 10
+  delayClose: 20
 --- !u!1 &8578978029981020516 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2886634236463124829, guid: 182320162e5ae994da85a9735fa80033, type: 3}

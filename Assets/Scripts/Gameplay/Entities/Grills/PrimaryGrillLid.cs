@@ -3,6 +3,8 @@ using Cysharp.Threading.Tasks;
 using Gameplay.BoosteeManagement;
 using Gameplay.LevelData;
 using Manager;
+using Sonat.Enums;
+using SonatFramework.Systems.AudioManagement;
 using UnityEngine;
 
 namespace Gameplay.Entities.Grills
@@ -64,6 +66,10 @@ namespace Gameplay.Entities.Grills
             base.Unlock();
             grillVisual.OpenGrill();
             grillBaseBehaviorSO.eventSystemSO.UnregisterEvents_OnCollectItem(OnCollectItem);
+
+            var rand = Random.Range((int) AudioId.Pot_lid_Close_01_Grill3, (int) AudioId.Pot_lid_Close_03_Grill3 + 1);
+            var audioId = (AudioId)rand;
+            MySonatFramework.GetService<AudioService>().PlaySound(audioId);
         }
 
         public override void OnCreateObj(params object[] args)

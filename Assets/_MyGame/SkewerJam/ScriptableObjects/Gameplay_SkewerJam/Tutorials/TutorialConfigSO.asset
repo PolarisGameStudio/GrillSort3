@@ -44,7 +44,7 @@ MonoBehaviour:
   - tutorialType: 12
     name: Lidded Tray
     listDescription:
-    - Sort the correct items shown on the lid to unlock this tray!
+    - Clear the items shown on the Lid to unlock this tray
   - tutorialType: 13
     name: Vending Tray
     listDescription:
@@ -83,3 +83,12 @@ MonoBehaviour:
     name: Wrapped Item
     listDescription:
     - Wrapped Item!!!
+  - tutorialType: 72
+    name: Area Lock
+    listDescription:
+    - Clear the item with key to unlock the Lock
+  - tutorialType: 16
+    name: Shutter
+    listDescription:
+    - 'Opens or closes after 4 items picked. Tips: If the Lid opens, don''t miss
+      the chance!'

@@ -1,15 +1,13 @@
-using System;
 using Cysharp.Threading.Tasks;
 using Gameplay.Entities;
 using Gameplay.LevelData;
-using MyGame.SkewerJam.Gameplay;
 using UnityEngine;
 
 public class PrimaryGrillShutter : PrimaryGrill
 {
     [SerializeField] private GrillVisualShutter visualShutter;
 
-    private const int MoveToChangeState = 3;
+    private const int MoveToChangeState = 4;
 
     private bool isClosed = false;
 
