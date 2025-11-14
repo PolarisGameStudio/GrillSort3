@@ -111,6 +111,8 @@ namespace MyGame.SkewerJam.Gameplay
 
             if (item.OnCustomSelect() == true)
             {
+                TryCheckWinGame();
+                GameController.Instance.TryWin();
                 return true;
             }
 
@@ -192,7 +194,7 @@ namespace MyGame.SkewerJam.Gameplay
             if (grillManager.CheckClearAllItems())
             {
                 _blockUIWhenEnd = true;
-                TryCheckWinGame().Forget();
+                TryCheckWinGame();
             }
 
             // if (toOrder == true)
@@ -286,7 +288,7 @@ namespace MyGame.SkewerJam.Gameplay
 
         #region Check Win Lose Game
 
-        public async UniTask TryCheckWinGame()
+        public void TryCheckWinGame()
         {
             if (CheckWinGame())
             {
@@ -356,28 +358,6 @@ namespace MyGame.SkewerJam.Gameplay
                     return null;
                 }
             }
-
-            // // nếu order còn có thể di chuyển item vào thì chưa thua + loại các item bị lock
-            // var listTargetItemIds = orderManager.GetTargetItemIds();
-
-            // var listItemIdInLayer1 = GrillHelper.GetItemIdListWithLayer(1, true);
-            // var dictItems = listItemIdInLayer1.GroupBy(e => e).ToDictionary(e => e.Key, e => e.Count());
-
-            // var listLockedItems = ItemHelper.GetItemIdsInLockedGrill();
-            // foreach (var item in listLockedItems)
-            // {
-            //     if (dictItems.ContainsKey(item) == false) continue;
-            //     dictItems[item]--;
-            // }
-
-            // foreach (var id in listTargetItemIds)
-            // {
-            //     if (dictItems.ContainsKey(id) == true && dictItems[id] > 0)
-            //     {
-            //         Debug.Log("dictItems.ContainsKey(id) == true && dictItems[id] > 0");
-            //         return null;
-            //     }
-            // }
 
             // else continue
             return StuckType.OutOfMove;

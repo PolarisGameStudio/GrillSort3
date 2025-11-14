@@ -22,7 +22,7 @@ using UnityEngine;
 
 public class MySonatFramework : SonatSystem
 {
-    public static SonatPoolingService poolingService;
+    public static PoolingServiceAsync poolingServiceAsync;
     public static SonatPoolingContainer poolingContainer;
     public static SonatLoadAddressableAsync sonatLoadAddressableAsync;
     public static AudioService audioService;
@@ -48,7 +48,7 @@ public class MySonatFramework : SonatSystem
 
     public static void InitService()
     {
-        poolingService = GetService<SonatPoolingService>();
+        poolingServiceAsync = GetService<PoolingServiceAsync>();
         poolingContainer = GetService<SonatPoolingContainer>();
         sonatLoadAddressableAsync = GetService<SonatLoadAddressableAsync>();
         audioService = GetService<AudioService>();

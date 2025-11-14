@@ -58,6 +58,18 @@ namespace MyGame.SkewerJam.Gameplay
             await CreateGrill(levelData.grillData, grillManager);
             await UniTask.DelayFrame(1);
 
+            // create conveyor
+            var conveyorManager = gameLogicHandler.ConveyorManager;
+            await CreateConveyors(levelData.conveyorData, conveyorManager);
+
+
+            // create obstacles
+            var obstacleManager = gameLogicHandler.ObstacleManager;
+            await GenerateObstacles(levelData.obstacleData, obstacleManager);
+            await UniTask.DelayFrame(1);
+
+
+            #region update viewport -> create waiting grill, order
             // tính toán viewport mới create conveyor
             await GameController.Instance.GameViewport.CalculateViewport();
             await UniTask.DelayFrame(1);
@@ -71,16 +83,7 @@ namespace MyGame.SkewerJam.Gameplay
             var orderManager = gameLogicHandler.OrderManager;
             await CreateOrder(levelData.ListOrderData, orderManager);
             await UniTask.DelayFrame(1);
-
-            // create conveyor
-            var conveyorManager = gameLogicHandler.ConveyorManager;
-            await CreateConveyors(levelData.conveyorData, conveyorManager);
-
-
-            // create obstacles
-            var obstacleManager = gameLogicHandler.ObstacleManager;
-            await GenerateObstacles(levelData.obstacleData, obstacleManager);
-            await UniTask.DelayFrame(1);
+            #endregion
 
             // create special item = quest item
             GenerateQuestItem();

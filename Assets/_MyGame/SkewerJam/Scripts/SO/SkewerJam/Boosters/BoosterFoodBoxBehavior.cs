@@ -64,7 +64,7 @@ namespace MyGame.SkewerJamSO.Boosters
                 "BoosterAnimFoodBox",
                 PanelManager.Instance.transform);
             await boosterAnim.SetData(position, listItem);
-            await GameController.Instance.GameLogicHandler.TryCheckWinGame();
+            GameController.Instance.GameLogicHandler.TryCheckWinGame();
             return true;
         }
 

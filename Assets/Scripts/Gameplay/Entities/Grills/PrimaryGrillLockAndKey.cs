@@ -61,7 +61,13 @@ namespace Gameplay.Entities.Grills
             if (!IsLock) return;
             keyRemaining--;
             if (keyRemaining < 0) keyRemaining = 0;
-            var keyEffect = MySonatFramework.poolingService.Create<KeyEffect>("KeyEffect");
+
+            CollectAsync(item).Forget();
+        }
+
+        private async UniTask CollectAsync(ItemKey item)
+        {
+            var keyEffect = await MySonatFramework.poolingServiceAsync.CreateAsync<KeyEffect>("KeyEffect");
             keyEffects.Add(keyEffect);
             keyEffect.transform.SetParent(this.transform);
             Vector3 pos = item != null ? item.transform.position : Vector3.zero;
@@ -73,7 +79,7 @@ namespace Gameplay.Entities.Grills
                 if (keyEffect != null)
                 {
                     keyEffect.StopAllCoroutines();
-                    MySonatFramework.poolingService.ReturnObj(keyEffect);
+                    MySonatFramework.poolingServiceAsync.ReturnObj(keyEffect);
                     keyEffects.Remove(keyEffect);
                 }
 
@@ -89,7 +95,7 @@ namespace Gameplay.Entities.Grills
                 if (keyEffect != null)
                 {
                     keyEffect.StopAllCoroutines();
-                    MySonatFramework.poolingService.ReturnObj(keyEffect);
+                    MySonatFramework.poolingServiceAsync.ReturnObj(keyEffect);
                 }
             }
 

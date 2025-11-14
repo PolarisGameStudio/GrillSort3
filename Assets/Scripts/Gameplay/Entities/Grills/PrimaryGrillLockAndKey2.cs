@@ -45,14 +45,19 @@ namespace Gameplay.Entities.Grills
         public void OnCollectItemKey(ItemKey2 item)
         {
             if (!IsLock) return;
-            keyEffect = MySonatFramework.poolingService.Create<KeyEffect>("KeyEffect_2");
+            CollectAsync(item).Forget();
+        }
+
+        private async UniTask CollectAsync(ItemKey2 item)
+        {
+            keyEffect = await MySonatFramework.poolingServiceAsync.CreateAsync<KeyEffect>("KeyEffect_2");
             keyEffect.SetData(item.transform.position, posForKey.position, () =>
             {
                 MySonatFramework.audioService.PlaySound(AudioId.Obstacle_Locknkey_Open_Grill_sort);
                 Unlock();
                 if (keyEffect != null)
                 {
-                    MySonatFramework.poolingService.ReturnObj(keyEffect);
+                    MySonatFramework.poolingServiceAsync.ReturnObj(keyEffect);
                     keyEffect = null;
                 }
             });
@@ -63,7 +68,7 @@ namespace Gameplay.Entities.Grills
             base.OnReturnObj();
             if (keyEffect != null)
             {
-                MySonatFramework.poolingService.ReturnObj(keyEffect);
+                MySonatFramework.poolingServiceAsync.ReturnObj(keyEffect);
                 keyEffect = null;
             }
         }

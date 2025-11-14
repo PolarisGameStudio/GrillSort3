@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Gameplay.Effect;
 using Gameplay.Entities.Items;
 using Gameplay.Entities.Obstacle.Visual;
 using Gameplay.LevelData;
+using MyGame.SkewerJam.Gameplay;
 using Sonat.Enums;
 using SonatFramework.Scripts.Utils;
 using UnityEngine;
@@ -54,12 +56,21 @@ namespace Gameplay.Entities.Obstacle
             {
                 if (grill is PrimaryGrill primaryGrill)
                 {
-                    primaryGrill.SetLockItems(true);
+                    primaryGrill.AddLockState();
                     primaryGrills.Add(primaryGrill);
                     primaryGrill.transform.SetParent(slots[index]);
                     primaryGrill.transform.localPosition = Vector3.zero;
+
+                    primaryGrill.transform.localScale = Vector3.one * 0.85f;
                     if (obstacleType == ObstacleType.LockAreaHorizontal)
-                        primaryGrill.transform.localScale = Vector3.one * 0.85f;
+                    {
+                        primaryGrill.transform.SetLocalPositionY(0);
+                    }
+                    else
+                    {
+                        primaryGrill.transform.SetLocalPositionX(0);
+                    }
+
                     index++;
                 }
             }
@@ -81,7 +92,12 @@ namespace Gameplay.Entities.Obstacle
         {
             if (!active) return;
 
-            var keyEffect = MySonatFramework.poolingService.Create<KeyEffect>("KeyEffect");
+            CollectAsync(item).Forget();
+        }
+
+        private async UniTask CollectAsync(ItemKeyArea item)
+        {
+            var keyEffect = await MySonatFramework.poolingServiceAsync.CreateAsync<KeyEffect>("KeyEffect");
             keyEffects.Add(keyEffect);
             keyEffect.transform.SetParent(this.transform);
             keyEffect.SetData(item.transform.position, LockPosition.position, () =>
@@ -91,7 +107,7 @@ namespace Gameplay.Entities.Obstacle
                 if (keyEffect != null)
                 {
                     keyEffect.StopAllCoroutines();
-                    MySonatFramework.poolingService.ReturnObj(keyEffect);
+                    MySonatFramework.poolingServiceAsync.ReturnObj(keyEffect);
                     keyEffects.Remove(keyEffect);
                 }
             });
@@ -102,10 +118,11 @@ namespace Gameplay.Entities.Obstacle
             if (!active) return;
             foreach (var primaryGrill in primaryGrills)
             {
-                // primaryGrill.transform.SetParent(GameplayController.instance.levelGenerator.GameplaySpace);
-                // primaryGrill.SetLockItems(false);
-                // if (obstacleType == ObstacleType.LockAreaHorizontal)
-                //     primaryGrill.transform.DOScale(1, 0.3f).SetEase(Ease.InOutQuad).SetDelay(0.65f);
+                var grillManager = GameController.Instance.GameLogicHandler.GrillManager;
+                primaryGrill.transform.SetParent(grillManager.transform);
+                primaryGrill.UnlockState();
+                //if (obstacleType == ObstacleType.LockAreaHorizontal)
+                primaryGrill.transform.DOScale(1, 0.3f).SetEase(Ease.InOutQuad).SetDelay(0.65f);
             }
 
             visual.Unlock();
@@ -117,12 +134,12 @@ namespace Gameplay.Entities.Obstacle
         {
             if (!active) return;
             Unlock();
-            key.OnUnlockByBooster();
+            key?.OnUnlockByBooster();
         }
 
         public void DestroyObstacle()
         {
-            GameFactory.ReturnEntity(this);
+            MyGame.SkewerJam.Gameplay.GameFactory.Instance.ReturnEntity(this);
         }
 
         public override void Setup()
@@ -140,7 +157,7 @@ namespace Gameplay.Entities.Obstacle
                 if (keyEffect != null)
                 {
                     keyEffect.StopAllCoroutines();
-                    MySonatFramework.poolingService.ReturnObj(keyEffect);
+                    MySonatFramework.poolingServiceAsync.ReturnObj(keyEffect);
                 }
             }
 

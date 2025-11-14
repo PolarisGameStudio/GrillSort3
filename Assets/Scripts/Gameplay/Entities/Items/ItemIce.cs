@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using Gameplay.LevelData;
 using Sonat.Enums;
 using UnityEngine;
@@ -64,7 +65,12 @@ namespace Gameplay.Entities.Items
 
         private void PlayBreakEffect()
         {
-            MySonatFramework.poolingService.Create<EffectPoolBase>("ItemIceBreakEffect", transform.position);
+            PlayBreakEffectAsync().Forget();
+        }
+
+        private async UniTask PlayBreakEffectAsync()
+        {
+            var effect = await MySonatFramework.poolingServiceAsync.CreateAsync<EffectPoolBase>("ItemIceBreakEffect", transform.position);
             MySonatFramework.audioService.PlaySound(AudioId.Obstacle_Ice_break_Grill_sort_01);
         }
 

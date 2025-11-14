@@ -1,4 +1,6 @@
 using MyGame.Modules.SubInventory.UI.Elements;
+using MyGame.SkewerJam.Gameplay;
+using Sonat.Enums;
 using SonatFramework.Systems;
 
 namespace MyGame.Modules.QuestEvent.UI.Elements
@@ -29,6 +31,8 @@ namespace MyGame.Modules.QuestEvent.UI.Elements
 
         private void OnResetItemQuestEvent()
         {
+            // nếu đang win rồi thì không cần reset
+            if (GameController.Instance.GameResult == GameResult.Win) return;
             UpdateValueView(false);
         }
     }

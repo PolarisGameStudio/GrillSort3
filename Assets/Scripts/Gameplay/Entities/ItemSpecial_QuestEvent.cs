@@ -1,9 +1,6 @@
 using DG.Tweening;
 using Gameplay.Entities;
 using MyGame.Modules.QuestEvent;
-using MyGame.Modules.SubInventory;
-using SonatFramework.Systems;
-using SonatFramework.Systems.EventBus;
 using SonatFramework.Systems.SettingsManagement.Vibation;
 
 public class ItemSpecial_QuestEvent : Item

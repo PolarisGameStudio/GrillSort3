@@ -167,6 +167,8 @@ namespace MyGame.SkewerJam.Gameplay
             tutorialManager.Init();
 
             SetBlockUI(false);
+
+            gameResult = GameResult.None;
         }
 
         public void ClearLevel()

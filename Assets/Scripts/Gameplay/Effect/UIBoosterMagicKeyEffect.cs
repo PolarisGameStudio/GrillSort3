@@ -52,7 +52,7 @@ public class UIBoosterMagicKeyEffect : MonoBehaviour, IPoolingObject
             callback?.Invoke();
             key.transform.DOScale(0f, downScaleDuration).SetEase(Ease.InBack).OnComplete(() =>
             {
-                MySonatFramework.poolingService.ReturnObj(this);
+                MySonatFramework.poolingServiceAsync.ReturnObj(this);
             });
         });
     }
