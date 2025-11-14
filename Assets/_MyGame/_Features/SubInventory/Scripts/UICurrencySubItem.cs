@@ -17,18 +17,25 @@ namespace MyGame.Modules.SubInventory.UI.Elements
         [SerializeField] private SubGameResource resource;
         [SerializeField] private Image icon;
         [SerializeField] private TMP_Text txtValue;
-        protected int value = -1;
-        private bool scaleUp;
-        private Coroutine collectAnim = null;
-        public float counterDuration = 0.5f;
-        public float scaleSpeed = 3f;
-        public float scaleMax = 1.15f;
-
-        private readonly Service<SubInventoryService> subInventoryService = new();
         [SerializeField] private ParticleSystem blastEffect;
 
         [SerializeField] private bool useForceEffect = false;
         [SerializeField, ShowIf("useForceEffect")] private UnityEvent OnForceEffectFinished;
+
+        [Header("Anim")]
+        public float counterDuration = 0.5f;
+        public float scaleSpeed = 3f;
+        public float scaleMax = 1.15f;
+
+        [Header("UI Miss value")]
+        [SerializeField] private bool forceValue = false;
+        [SerializeField, ShowIf("forceValue")] private bool isMiss = false;
+
+        protected int value = -1;
+        private bool scaleUp;
+        private Coroutine collectAnim = null;
+
+        private readonly Service<SubInventoryService> subInventoryService = new();
 
         private EventBinding<AddSubItemEvent> addSubItemEvent;
         private EventBinding<ReduceSubItemEvent> reduceSubItemEvent;
@@ -50,6 +57,12 @@ namespace MyGame.Modules.SubInventory.UI.Elements
             if (useForceEffect)
             {
                 forceEffectSubItemEvent = new EventBinding<ForceEffectSubItemEvent>(OnForceEffectSubItem);
+            }
+
+            if (forceValue)
+            {
+                value = subInventoryService.Instance.GetResourceView(this.resource) * (isMiss ? -1 : 1);
+                txtValue.text = value.ToString();
             }
         }
 

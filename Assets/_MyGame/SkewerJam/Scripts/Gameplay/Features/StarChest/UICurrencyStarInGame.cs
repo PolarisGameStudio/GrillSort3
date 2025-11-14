@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using SonatFramework.Scripts.UIModule.UIElements;
 using SonatFramework.Systems;
 using SonatFramework.Systems.EventBus;
@@ -10,7 +11,7 @@ public class UICurrencyStarInGame : UICurrency
 {
     [Header("UIcurrencyStarInGame")]
     [SerializeField] private bool forceValue = false;
-    [SerializeField] private bool isMiss = false;
+    [SerializeField, ShowIf("forceValue")] private bool isMiss = false;
 
     private readonly Service<StarChestService> starChestService = new();
     private EventBinding<LevelStartedEvent> levelStartedEvent;
