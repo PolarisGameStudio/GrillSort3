@@ -400,7 +400,7 @@ MonoBehaviour:
   m_text: Level 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c03fbb4d8f22cbc4c86d110c99afa674, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 0a8884e6035b2b946889a93f0eb81edd, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: aedd583d3b1a5dd4287e6528155335d7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -479,7 +479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mTerm: Level
-  mTermSecondary: 1FTVVIPMikado-Black SDF-Title-Purple
+  mTermSecondary: 1FTVVIPMikado-Black SDF-Title-Blue
   PrimaryTermModifier: 0
   SecondaryTermModifier: 0
   TermPrefix: 
@@ -1520,6 +1520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathPrefix: Assets/_MyGame/SkewerJam/Arts/Gameplay/Difficulty/timer_combo_
+  listDifficultyAndObjects: []
   imgProgressBar: {fileID: 483188169198426302}
   txt: {fileID: 6881760160640662047}
   playOnAwake: 0
@@ -1995,7 +1996,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 768d28ed2ab4aa24f8a93c964e58cc1a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 948abfe7087b1274c8b73d6093f9e025, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2221,6 +2222,10 @@ PrefabInstance:
     - target: {fileID: 2582924790688880936, guid: 69467e67d9973514fb9158d4a37a27f1, type: 3}
       propertyPath: m_fontSize
       value: 43
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582924790688880936, guid: 69467e67d9973514fb9158d4a37a27f1, type: 3}
+      propertyPath: m_fontAsset
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2874,6 +2879,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 6.31
       objectReference: {fileID: 0}
+    - target: {fileID: 6595599844791757690, guid: 5a733276605c07648ad3cc201fc90b52, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 38fa38973ea70e749a4e8e9adf7ac262, type: 3}
     - target: {fileID: 6699287656234416987, guid: 5a733276605c07648ad3cc201fc90b52, type: 3}
       propertyPath: m_SizeDelta.x
       value: 93.88
@@ -3036,9 +3045,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathPrefix: Assets/_MyGame/SkewerJam/Arts/Gameplay/Difficulty/btnSettings_
+  listDifficultyAndObjects: []
   imgProgressBar: {fileID: 8388782839755133259}
   txt: {fileID: 0}
-  playOnAwake: 1
+  playOnAwake: 0
 --- !u!114 &8388782839755133259 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6595599844791757690, guid: 5a733276605c07648ad3cc201fc90b52, type: 3}

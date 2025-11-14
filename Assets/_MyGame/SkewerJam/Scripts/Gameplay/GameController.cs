@@ -59,6 +59,7 @@ namespace MyGame.SkewerJam.Gameplay
         private EventBinding<GameStateChangeEvent> gameStateChangeEvent;
         private EventBinding<PanelUpdatedEvent> onPanelsUpdatedEvent;
         private AudioId bgm;
+        private bool _waitingWin = false;
 
         private IntDataPref _checkRewardFreeLives = new IntDataPref("check_reward_free_lives");
 
@@ -144,6 +145,16 @@ namespace MyGame.SkewerJam.Gameplay
 
         public async UniTask PlayStartGame(Action onComplete = null)
         {
+            var difficulty = await MySonatFramework.GetLevelDifficulty();
+            if (difficulty == LevelDifficulty.Hard || difficulty == LevelDifficulty.SuperHard)
+            {
+
+            }
+            else
+            {
+                gameplayScreen.UiDifficultyController.UpdateDifficultyAsync(true);
+            }
+
             foreach (var grill in gameLogicHandler.GrillManager.ListGrills)
             {
                 grill.OpenGrillWhenStart();
@@ -151,7 +162,6 @@ namespace MyGame.SkewerJam.Gameplay
 
             await UniTask.Delay(500);
 
-            var difficulty = await MySonatFramework.GetLevelDifficulty();
             if (difficulty == LevelDifficulty.Hard || difficulty == LevelDifficulty.SuperHard)
             {
                 gameLogicHandler.OrderManager.PlayAppearOrders();
@@ -172,7 +182,7 @@ namespace MyGame.SkewerJam.Gameplay
             uiData.Add(PopupDifficultyLevelInGame.TARGET_KEY, target.transform);
             uiData.Add(PopupDifficultyLevelInGame.ON_COMPLETE_KEY, (Action)(() =>
             {
-                target.UpdateDifficulty();
+                target.UpdateDifficultyAsync(true);
                 target.transform.DOScale(1.2f, 0.2f).SetLoops(2, LoopType.Yoyo);
             }));
             var popupDifficultyLevelInGame = PanelManager.Instance.OpenPanel<PopupDifficultyLevelInGame>(uiData);
@@ -193,6 +203,7 @@ namespace MyGame.SkewerJam.Gameplay
             SetBlockUI(false);
 
             gameResult = GameResult.None;
+            _waitingWin = false;
         }
 
         public void ClearLevel()
@@ -205,6 +216,7 @@ namespace MyGame.SkewerJam.Gameplay
 
             tutorialManager.Clear();
             gameResult = GameResult.None;
+            _waitingWin = false;
         }
 
         #endregion
@@ -234,8 +246,9 @@ namespace MyGame.SkewerJam.Gameplay
 
         public void TryWin()
         {
-            if (gameResult == GameResult.Win)
+            if (gameResult == GameResult.Win && _waitingWin == false)
             {
+                _waitingWin = true;
                 Win();
             }
         }

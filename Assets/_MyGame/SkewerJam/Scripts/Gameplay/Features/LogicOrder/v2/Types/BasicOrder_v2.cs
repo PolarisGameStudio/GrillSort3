@@ -75,7 +75,9 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                     return (randomItemId.itemId, randomItemId.numItems);
                 }
 
-                var negativeDiffKeys = listDiffKeys.Where(e => e < 0).ToList().OrderBy(e => -e).ToList();
+
+
+                var negativeDiffKeys = listDiffKeys.Where(e => e < 0).ToList().OrderBy(e => Random.Range(0, 100)).ToList();
 
                 foreach (var diff in negativeDiffKeys)
                 {
