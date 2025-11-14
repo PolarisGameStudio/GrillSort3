@@ -29,6 +29,7 @@ namespace MyGame.SO.Boosters
         {
             var gameLogicHandler = GameController.Instance.GameLogicHandler;
             gameLogicHandler.CommandInvoker.ResetStack();
+            gameLogicHandler.OrderManager.LogicOrderHandler.ResetData();
         }
 
 

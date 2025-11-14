@@ -262,6 +262,9 @@ namespace MyGame.SkewerJam.Objects
 
         public async UniTask Unlock(WaitingGrill waitingGrill)
         {
+            var gameLogicHandler = GameController.Instance.GameLogicHandler;
+            gameLogicHandler.OrderManager.LogicOrderHandler.ResetData();
+            gameLogicHandler.OrderManager.LogicOrderHandler.SetForceRescue(true);
             GameController.Instance.SetBlockUI(true);
             if (listWaitingGrills.Count(e => e.IsActive) + 1 < boosterAddPlateBehaviorSO.MaxPlate)
             {

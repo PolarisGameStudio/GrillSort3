@@ -13,6 +13,10 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
         }
 
+        public virtual void ResetData()
+        {
+        }
+
         public abstract (ItemId itemId, int num) GetOrder(GameplayInfoForLogicOrder gameplayInfo = null);
 
         public virtual bool CanUse(GameplayInfoForLogicOrder gameplayInfo = null)

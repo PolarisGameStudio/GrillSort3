@@ -106,5 +106,10 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             // thì đã thỏa mãn để tìm order mới
             return previousRemainingSlot >= 2 || curEmptyWaitingSlot <= previousRemainingSlot;
         }
+
+        public override void ResetData()
+        {
+            previousRemainingSlot = int.MaxValue;
+        }
     }
 }

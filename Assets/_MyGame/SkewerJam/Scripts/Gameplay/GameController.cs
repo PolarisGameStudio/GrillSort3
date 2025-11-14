@@ -319,6 +319,7 @@ namespace MyGame.SkewerJam.Gameplay
 
                             if (progressLoseCount.Value >= ProgressLoseController.MaxCount)
                             {
+                                orderManager.LogicOrderHandler.ResetData();
                                 orderManager.LogicOrderHandler.SetForceRescue(true, -2);
                             }
 

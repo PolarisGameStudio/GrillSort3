@@ -349,6 +349,7 @@ namespace MyGame.SkewerJam.Gameplay.Objects
                 orderEntity = _listOrders.Where(e => e.IsActive == false).FirstOrDefault();
                 if (orderEntity == null) return;
             }
+            logicOrderHandler.ResetData();
             logicOrderHandler.SetForceRescue(isRescue, -2);
             orderEntity.PlayUnlock(isRescue);
         }

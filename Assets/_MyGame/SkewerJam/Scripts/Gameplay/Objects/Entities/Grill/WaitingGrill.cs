@@ -1,7 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Gameplay;
 using Gameplay.BoosteeManagement;
 using Gameplay.Entities;
 using Gameplay.LevelData;

@@ -68,6 +68,14 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             var rescueOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Rescue) as RescueOrderSO;
             rescueOrder.SetRescueCondition(rescueCondition);
         }
+
+        public virtual void ResetData()
+        {
+            foreach (var logicOrder in listLogicOrders)
+            {
+                logicOrder.ResetData();
+            }
+        }
         #endregion
 
         public bool CheckCreateNextOrder()
