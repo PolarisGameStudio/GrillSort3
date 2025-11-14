@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Sonat.Enums;
 using SonatFramework.Scripts.Helper;
 using SonatFramework.Systems.EventBus;
@@ -10,27 +11,31 @@ public class UIDifficultyController : MonoBehaviour
     [SerializeField] private string pathPrefix = "Assets/_MyGame/SkewerJam/Arts/Gameplay/Difficulty/";
     [SerializeField] private Image imgProgressBar;
     [SerializeField] private TMP_Text txt;
+    [SerializeField] private bool playOnAwake = true;
 
     private EventBinding<LevelStartedEvent> levelStartedEvent;
 
     private void OnEnable()
     {
-        UpdateDifficulty();
+        if (playOnAwake)
+        {
+            UpdateDifficulty();
+        }
+        // levelStartedEvent = new EventBinding<LevelStartedEvent>(OnLevelStarted);
 
-        levelStartedEvent = new EventBinding<LevelStartedEvent>(OnLevelStarted);
     }
 
     private void OnDisable()
     {
-        EventBus<LevelStartedEvent>.Deregister(levelStartedEvent);
+        // EventBus<LevelStartedEvent>.Deregister(levelStartedEvent);
     }
 
-    private void OnLevelStarted(LevelStartedEvent eventData)
-    {
-        UpdateDifficulty();
-    }
+    // private void OnLevelStarted(LevelStartedEvent eventData)
+    // {
+    //     UpdateDifficulty();
+    // }
 
-    private async void UpdateDifficulty()
+    public async UniTask UpdateDifficulty()
     {
         var difficulty = await MySonatFramework.GetLevelDifficulty();
 
@@ -48,8 +53,15 @@ public class UIDifficultyController : MonoBehaviour
                 break;
         }
         var path = $"{pathPrefix}{subfix}.png";
-        imgProgressBar.SetSpriteAsync(path);
 
-        txt.SetSecondaryTerm(term);
+        if (imgProgressBar != null)
+        {
+            imgProgressBar.SetSpriteAsync(path);
+        }
+
+        if (txt != null)
+        {
+            txt.SetSecondaryTerm(term);
+        }
     }
 }

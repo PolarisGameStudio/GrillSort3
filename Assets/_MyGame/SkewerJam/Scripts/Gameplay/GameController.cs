@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Manager;
 using MyGame.Modules.QuestEvent;
 using MyGame.SkewerJam.Gameplay.Helpers;
@@ -137,7 +138,6 @@ namespace MyGame.SkewerJam.Gameplay
             LoadingHelper.CompleteLoadingInGameplay(() => PlayStartGame(() =>
             {
                 ChangeGameState(GameState.Playing);
-
                 OnPlayTutorial?.Invoke();
             }).Forget());
         }
@@ -150,10 +150,34 @@ namespace MyGame.SkewerJam.Gameplay
             }
 
             await UniTask.Delay(500);
-            await gameLogicHandler.OrderManager.PlayAppearOrders();
+
+            var difficulty = await MySonatFramework.GetLevelDifficulty();
+            if (difficulty == LevelDifficulty.Hard || difficulty == LevelDifficulty.SuperHard)
+            {
+                gameLogicHandler.OrderManager.PlayAppearOrders();
+                await OpenPopupDifficultyLevelInGame();
+            }
+            else
+            {
+                await gameLogicHandler.OrderManager.PlayAppearOrders();
+
+            }
             onComplete?.Invoke();
         }
 
+        private async UniTask OpenPopupDifficultyLevelInGame()
+        {
+            var target = gameplayScreen.UiDifficultyController;
+            var uiData = new UIData();
+            uiData.Add(PopupDifficultyLevelInGame.TARGET_KEY, target.transform);
+            uiData.Add(PopupDifficultyLevelInGame.ON_COMPLETE_KEY, (Action)(() =>
+            {
+                target.UpdateDifficulty();
+                target.transform.DOScale(1.2f, 0.2f).SetLoops(2, LoopType.Yoyo);
+            }));
+            var popupDifficultyLevelInGame = PanelManager.Instance.OpenPanel<PopupDifficultyLevelInGame>(uiData);
+            await UniTask.WaitUntil(() => popupDifficultyLevelInGame == null || popupDifficultyLevelInGame.gameObject.activeSelf == false);
+        }
         public void InitLevel()
         {
             OnInitLevel?.Invoke();

@@ -20,6 +20,9 @@ namespace MyGame.SkewerJam.Gameplay
 
         [SerializeField] private UIBooster[] uiBoosters;
         [SerializeField] private BannerController bannerController;
+        [SerializeField] private UIDifficultyController  uiDifficultyController;
+
+        public UIDifficultyController UiDifficultyController => uiDifficultyController;
 
         public UIBooster[] UiBoosters => uiBoosters;
 

@@ -1469,8 +1469,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4324097068470457762}
   - component: {fileID: 7549231925033174298}
+  - component: {fileID: 1372211879279593504}
   m_Layer: 5
-  m_Name: Level+Combo
+  m_Name: UIDifficultyController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1506,6 +1507,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4864151077315834002}
   m_CullTransparentMesh: 1
+--- !u!114 &1372211879279593504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4864151077315834002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d7543c4634c9ec498d180fdb5421964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathPrefix: Assets/_MyGame/SkewerJam/Arts/Gameplay/Difficulty/timer_combo_
+  imgProgressBar: {fileID: 483188169198426302}
+  txt: {fileID: 6881760160640662047}
+  playOnAwake: 0
 --- !u!1 &5751115111742083897
 GameObject:
   m_ObjectHideFlags: 0
@@ -1571,7 +1588,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4b1870e688f891848b5bbff15d173710, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eb57fdbd05ff7a14bb1dd4f0fc34e07d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2000,7 +2017,6 @@ GameObject:
   - component: {fileID: 8181472817592030608}
   - component: {fileID: 3348882395833454161}
   - component: {fileID: 2049063783175802991}
-  - component: {fileID: 2278891523087068248}
   m_Layer: 5
   m_Name: GameplayScreen_SkewerJam
   m_TagString: Untagged
@@ -2070,21 +2086,7 @@ MonoBehaviour:
   - {fileID: 6279225410194480500}
   - {fileID: 4149200546146625682}
   bannerController: {fileID: 622442496923887842}
---- !u!114 &2278891523087068248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8771599076207761647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d7543c4634c9ec498d180fdb5421964, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pathPrefix: Assets/_MyGame/SkewerJam/Arts/Gameplay/Difficulty/timer_combo_
-  imgProgressBar: {fileID: 483188169198426302}
-  txt: {fileID: 6881760160640662047}
+  uiDifficultyController: {fileID: 1372211879279593504}
 --- !u!1 &8844473119215089388
 GameObject:
   m_ObjectHideFlags: 0
@@ -2995,7 +2997,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7138018782488562167, guid: 5a733276605c07648ad3cc201fc90b52, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5238517388227749842}
   m_SourcePrefab: {fileID: 100100000, guid: 5a733276605c07648ad3cc201fc90b52, type: 3}
 --- !u!224 &933292265365723656 stripped
 RectTransform:
@@ -3011,6 +3016,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0a234b0d00b9c247a8be4d2393aea2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &5543333911634670534 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7138018782488562167, guid: 5a733276605c07648ad3cc201fc90b52, type: 3}
+  m_PrefabInstance: {fileID: 3450520999077902897}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5238517388227749842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5543333911634670534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d7543c4634c9ec498d180fdb5421964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathPrefix: Assets/_MyGame/SkewerJam/Arts/Gameplay/Difficulty/btnSettings_
+  imgProgressBar: {fileID: 8388782839755133259}
+  txt: {fileID: 0}
+  playOnAwake: 1
+--- !u!114 &8388782839755133259 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6595599844791757690, guid: 5a733276605c07648ad3cc201fc90b52, type: 3}
+  m_PrefabInstance: {fileID: 3450520999077902897}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &4417116110367294511
