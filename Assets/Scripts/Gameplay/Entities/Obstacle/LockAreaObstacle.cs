@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Gameplay.Effect;
@@ -52,6 +53,7 @@ namespace Gameplay.Entities.Obstacle
         {
             primaryGrills = new List<PrimaryGrill>();
             int index = 0;
+            var listPosition = new List<Vector3>();
             foreach (var grill in grills)
             {
                 if (grill is PrimaryGrill primaryGrill)
@@ -59,7 +61,7 @@ namespace Gameplay.Entities.Obstacle
                     primaryGrill.AddLockState();
                     primaryGrills.Add(primaryGrill);
                     primaryGrill.transform.SetParent(slots[index]);
-                    primaryGrill.transform.localPosition = Vector3.zero;
+                    // primaryGrill.transform.localPosition = Vector3.zero;
 
                     primaryGrill.transform.localScale = Vector3.one * 0.85f;
                     if (obstacleType == ObstacleType.LockAreaHorizontal)
@@ -72,8 +74,16 @@ namespace Gameplay.Entities.Obstacle
                     }
 
                     index++;
+
+                    listPosition.Add(primaryGrill.transform.position);
                 }
             }
+
+            // var posX = listPosition.Sum(e => e.x) / listPosition.Count;
+            // var posY = listPosition.Sum(e => e.y) / listPosition.Count;
+            // var posZ = listPosition.Sum(e => e.z) / listPosition.Count;
+            // var pos = new Vector3(posX, posY, posZ);
+            // transform.position = pos;
 
             instance = this;
             active = true;
