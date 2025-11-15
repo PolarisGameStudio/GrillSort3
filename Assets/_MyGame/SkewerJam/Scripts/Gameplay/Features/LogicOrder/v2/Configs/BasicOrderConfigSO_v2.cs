@@ -13,7 +13,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder.Configs
 
         public int GetRandomRemainingSlot(int curveIndex)
         {
-            var curveConfig = listCurveConfigs[curveIndex];
+            var curveConfig = listCurveConfigs[Mathf.Clamp(curveIndex, 0, listCurveConfigs.Count - 1)];
             var random = UnityEngine.Random.Range(0f, 1f);
             Debug.Log("<color=purple>BasicOrderConfigSO_v2: GetRandomRemainingSlot: curveIndex: " + curveIndex + "</color> >>> random: " + random);
             var str = "";
@@ -46,7 +46,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder.Configs
                 foreach (var rateConfig in curveConfig.listRateConfigs)
                 {
                     rateConfig.index = curveConfig.listRateConfigs.IndexOf(rateConfig);
-                    rateConfig.remainingSlot = curveConfig.listRateConfigs.Count - rateConfig.index - 1;
+                    rateConfig.remainingSlot = 5 - rateConfig.index;
                 }
             }
         }

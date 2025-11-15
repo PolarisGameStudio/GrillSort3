@@ -1,5 +1,4 @@
 using System.Linq;
-using MyGame.Modules.ProfileInGame;
 using MyGame.SkewerJam.Gameplay.LogicOrder;
 using MyGame.SkewerJam.Gameplay.LogicOrder.Configs;
 using MyGame.SkewerJam.Level;
@@ -14,7 +13,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
         [Header("Configs")]
         [SerializeField] private LogicOrderConfigSO_v2 logicOrderConfigSO_v2;
 
-        private FlowConfigSO_v2 flowConfigSO_v2;
+        private HardFlowConfigSO_v2 hardFlowConfigSO_v2;
 
         protected override void OnLoadLevelData(LevelData_SkewerJam levelData)
         {
@@ -22,7 +21,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             base.OnLoadLevelData(levelData);
 
             var randomFlowConfigSO = logicOrderConfigSO_v2.GetFlowConfigSO(_logicOrderData.difficulty, _logicOrderData.difficultyValue);
-            flowConfigSO_v2 = randomFlowConfigSO;
+            hardFlowConfigSO_v2 = randomFlowConfigSO;
         }
 
         protected override GameplayInfoForLogicOrder GetGameplayInfoForLogicOrder()
@@ -34,7 +33,7 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
             var gameplayInfoForLogicOrder = new GameplayInfoForLogicOrder();
             gameplayInfoForLogicOrder.UpdateState(_maxDepth);
 
-            var curveIndex = flowConfigSO_v2.GetCurveIndex(phase);
+            var curveIndex = hardFlowConfigSO_v2.GetCurveIndex(phase);
             Debug.Log("LogicOrderHandler_v2: GetGameplayInfoForLogicOrder: phase: " + phase + " >>> curveIndex: " + curveIndex);
             gameplayInfoForLogicOrder.SetTempData(KEY_CURVE_INDEX, curveIndex);
             return gameplayInfoForLogicOrder;
@@ -42,7 +41,31 @@ namespace MyGame.SkewerJam.Gameplay.Helpers
 
         protected override BaseOrderSO ChooseLogicOrder()
         {
-            return listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Basic_v2) as BasicOrderSO_v2;
+            var phase = GetCurrentPhase();
+            var curveIndex = hardFlowConfigSO_v2.GetCurveIndex(phase);
+
+            if (curveIndex == 0)
+            {
+                return listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.ForceEasy_v2) as ForceEasyOrder_v2;
+            }
+            else if (curveIndex == 1)
+            {
+                return listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Basic_v2) as BasicOrderSO_v2;
+            }
+            else if (curveIndex >= 2)
+            {
+                var forceHardOrder = listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.ForceHard_v2) as ForceHardOrder_v2;
+                if (forceHardOrder.CanUse())
+                {
+                    return forceHardOrder;
+                }
+                else
+                {
+                    return listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.Basic_v2) as BasicOrderSO_v2;
+                }
+            }
+
+            return listLogicOrders.FirstOrDefault(e => e.LogicOrderType == LogicOrderType.ForceEasy_v2) as ForceEasyOrder_v2;
         }
 
         private int GetCurrentPhase()

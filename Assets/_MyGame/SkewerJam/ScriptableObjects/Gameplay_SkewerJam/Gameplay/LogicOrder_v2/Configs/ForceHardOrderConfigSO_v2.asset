@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac3b3010001709c45b2ea46457a88b9e, type: 3}
+  m_Name: ForceHardOrderConfigSO_v2
+  m_EditorClassIdentifier: 
+  listForceHardOrderDatas:
+  - index: 0
+    rateP4: 0
+    rateP5: 0
+    rateDuplicate: 0
+  - index: 0
+    rateP4: 0
+    rateP5: 0
+    rateDuplicate: 0
+  - index: 0
+    rateP4: 1
+    rateP5: 0
+    rateDuplicate: 0.05
+  - index: 0
+    rateP4: 0.9
+    rateP5: 0.1
+    rateDuplicate: 0.1
+  - index: 0
+    rateP4: 0.8
+    rateP5: 0.2
+    rateDuplicate: 0.15
+  - index: 0
+    rateP4: 0.7
+    rateP5: 0.3
+    rateDuplicate: 0.25
+  - index: 0
+    rateP4: 0.6
+    rateP5: 0.4
+    rateDuplicate: 0.35
+  - index: 0
+    rateP4: 0.5
+    rateP5: 0.5
+    rateDuplicate: 0.45
+  - index: 0
+    rateP4: 0.4
+    rateP5: 0.6
+    rateDuplicate: 0.65
+  - index: 0
+    rateP4: 0.3
+    rateP5: 0.7
+    rateDuplicate: 0.8
+  - index: 0
+    rateP4: 0.2
+    rateP5: 0.8
+    rateDuplicate: 0.9
+  - index: 0
+    rateP4: 0
+    rateP5: 1
+    rateDuplicate: 1

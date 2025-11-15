@@ -117,7 +117,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             return true;
         }
 
-        public override bool ForceUse(bool isRescue = false)
+        public override bool CheckForceUse(bool isRescue = false)
         {
             var orderManager = GameController.Instance.GameLogicHandler.OrderManager;
             var logicOrderHandler = orderManager.LogicOrderHandler;

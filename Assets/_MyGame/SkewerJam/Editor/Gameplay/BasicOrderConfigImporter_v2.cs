@@ -9,10 +9,10 @@ public class BasicOrderConfigImporter_v2 : CSVImporter
 {
     private string savePath = "Assets/_MyGame/SkewerJam/ScriptableObjects/Gameplay_SkewerJam/Gameplay/LogicOrder_v2";
 
-    [MenuItem("Tools/SkewerSort/BasicOrderConfigImporter_v2")]
+    [MenuItem("Tools/SkewerSort/v2/BasicOrderConfigImporter_v2")]
     public static void Open()
     {
-        GetWindow<LogicOrderImporter_v2>("Gameplay/BasicOrderConfigImporter_v2");
+        GetWindow<BasicOrderConfigImporter_v2>("Gameplay/v2/BasicOrderConfigImporter_v2");
     }
 
 

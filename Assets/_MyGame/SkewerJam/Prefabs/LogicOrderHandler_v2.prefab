@@ -90,12 +90,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 246572fe3e26dde4696125f79de930ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDepth: 3
+  defaultMaxDepth: 2
   dynamicLogicOrder: {fileID: 924799287532140176}
   listLogicOrders:
   - {fileID: 11400000, guid: ee847661638ddc14c9f7002192b888ab, type: 2}
   - {fileID: 11400000, guid: 97492c86cd13e7a408078dd29ace2b1d, type: 2}
   - {fileID: 11400000, guid: 4ca81dc825e1a1543b85ae898dccbb93, type: 2}
   - {fileID: 11400000, guid: bb9922effcd1beb4083e3a145cc542c9, type: 2}
+  - {fileID: 11400000, guid: 5a3d3c6bc3e18bd4fa0fe6d8561326cc, type: 2}
+  - {fileID: 11400000, guid: b733306fef6ad9749a5ef186246d5eda, type: 2}
   rescueCondititonSO: {fileID: 11400000, guid: 3ba7d6c41ac4ab749ae1a67050fb76f6, type: 2}
   logicOrderConfigSO_v2: {fileID: 11400000, guid: 702aaf972a119f74681f2a30979e123e, type: 2}

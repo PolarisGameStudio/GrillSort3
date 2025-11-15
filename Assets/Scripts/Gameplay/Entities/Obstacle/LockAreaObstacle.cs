@@ -79,12 +79,6 @@ namespace Gameplay.Entities.Obstacle
                 }
             }
 
-            // var posX = listPosition.Sum(e => e.x) / listPosition.Count;
-            // var posY = listPosition.Sum(e => e.y) / listPosition.Count;
-            // var posZ = listPosition.Sum(e => e.z) / listPosition.Count;
-            // var pos = new Vector3(posX, posY, posZ);
-            // transform.position = pos;
-
             instance = this;
             active = true;
         }

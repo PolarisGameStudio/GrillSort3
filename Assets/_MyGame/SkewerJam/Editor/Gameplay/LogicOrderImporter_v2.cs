@@ -30,48 +30,42 @@ public class LogicOrderImporter_v2 : CSVImporter
         var columns = lines[0].Split(',').Length;
 
         string[] prefixNames = new string[] {
-            "SE_0",
-            "SE_1",
-            "SE_2",
-            "E1_0",
-            "E1_1",
-            "E1_2",
-            "E1_3",
-            "E2_0",
-            "E2_1",
-            "E2_2",
-            "E2_3",
-            "M1_0",
-            "M1_1",
-            "M1_2",
-            "M1_3",
-            "M2_0",
-            "M2_1",
-            "M2_2",
-            "M2_3",
-            "H1_0",
-            "H1_1",
-            "H1_2",
-            "H1_3",
-            "H2_0",
-            "H2_1",
-            "H2_2",
-            "H2_3",
-            "SH1_0",
-            "SH1_1",
-            "SH1_2",
-            "SH1_3",
-            "SH2_0",
-            "SH2_1",
-            "SH2_2",
-            "SH2_3"
+            "E0",
+            "E1",
+            "M0",
+            "M0",
+            "M0",
+            "M1",
+            "M1",
+            "M1",
+            "M2",
+            "M2",
+            "M2",
+            "H0",
+            "H0",
+            "H0",
+            "H1",
+            "H1",
+            "H1",
+            "H2",
+            "H2",
+            "H2",
+            "SH0",
+            "SH0",
+            "SH0",
+            "SH1",
+            "SH1",
+            "SH1",
+            "SH2",
+            "SH2",
+            "SH2",
             };
         for (int i = 0; i < rows; i++)
         {
-            var name = $"LogicOrderConfigSO_v2_{prefixNames[i]}.asset";
+            var name = $"LogicOrderConfigSO_v2_{prefixNames[i]}_{i}.asset";
             string assetPath = $"{savePath}";
 
-            var flowConfigSO_v2 = ScriptableObject.CreateInstance<FlowConfigSO_v2>();
+            var flowConfigSO_v2 = ScriptableObject.CreateInstance<HardFlowConfigSO_v2>();
             flowConfigSO_v2.listCurveIndices = new List<int>();
             for (int j = 0; j < columns; j++)
             {
