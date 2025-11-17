@@ -117,6 +117,11 @@ namespace MyGame.Modules.CardCollection
             return _dictAlbumAndCollectedCard[albumType].Value.Count == config.GetAlbumConfig(albumType).cards.Count;
         }
 
+        public int GetCompletedCardInAlbum(AlbumType albumType)
+        {
+            return _dictAlbumAndCollectedCard[albumType].Value.Count;
+        }
+
         public bool CheckAllAlbumComplete()
         {
             foreach (var album in config.albums)

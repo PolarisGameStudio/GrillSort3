@@ -74,6 +74,7 @@ namespace MyGame.Modules.CardCollection
                 var randomStar = GetRandomStar();
                 var isNewCard = GetRandomIsNewCard();
 
+                // Debug.Log($"<color=red>[CardSubmodule] datlt: GetNormalRandomCardType: randomStar={randomStar}, isNewCard={isNewCard}</color>");
                 var randoms = new List<CardType>();
                 if (isNewCard && dictCard[randomStar].listNewCards.Count > 0)
                 {
@@ -93,11 +94,9 @@ namespace MyGame.Modules.CardCollection
                 else
                 {
                     // backup random in all cards
-                    Debug.Log($"<color=red>[CardSubmodule] datlt: GetNormalRandomCardType: randoms is empty</color>");
-                    listAllCards.RemoveAll(e => listSelectedCards.Contains(e));
+                    var backupRandom = GetBackupRandom(cardDataToRandom, listSelectedCards, randomStar);
+                    listSelectedCards.Add(backupRandom);
 
-                    var randomInAllCards = listAllCards.Rand();
-                    listSelectedCards.Add(randomInAllCards);
                 }
             }
             return listSelectedCards;
@@ -105,7 +104,8 @@ namespace MyGame.Modules.CardCollection
 
         private int GetRandomStar()
         {
-            var random = UnityEngine.Random.Range(0.0f, 1.0f);
+            var random = UnityEngine.Random.Range(0, 100);
+            // Debug.Log($"<color=red>[CardSubmodule] datlt: GetRandomStar: random={random}</color>");
             var sum = 0.0f;
             for (int i = 0; i < listProbabilityCardStars.Count; i++)
             {
@@ -120,8 +120,60 @@ namespace MyGame.Modules.CardCollection
 
         private bool GetRandomIsNewCard()
         {
-            var random = UnityEngine.Random.Range(0.0f, 1.0f);
-            return random < 0.2f;
+            var (cavg, numCompletedAlbum) = GetCAVGAndNumCompletedAlbum();
+
+            var probability = Mathf.Max(0.05f, 0.9f - 0.7f * cavg - 0.05f * numCompletedAlbum);
+            return UnityEngine.Random.Range(0.0f, 1.0f) <= probability;
+        }
+
+        private (float cavg, int numCompletedAlbum) GetCAVGAndNumCompletedAlbum()
+        {
+            // tỉ lệ hoàn thành album trung bình
+            var totalAlbum = config.albums.Count;
+            var totalCompletedRatio = 0.0f;
+            var count = 0;
+
+            var countCompletedAlbum = 0;
+
+            foreach (var album in config.albums)
+            {
+                var completedCard = cardInventoryModule.GetCompletedCardInAlbum(album.type);
+                var numCardInAlbum = album.cards.Count;
+                var completedRatio = completedCard * 1.0f / numCardInAlbum;
+                totalCompletedRatio += completedRatio;
+                count++;
+
+                if (completedRatio == 1.0f)
+                {
+                    countCompletedAlbum++;
+                }
+            }
+            return (totalCompletedRatio / count, countCompletedAlbum);
+        }
+
+        private CardType GetBackupRandom(CardDataToRandom cardDataToRandom, List<CardType> listSelectedCards, int randomStar)
+        {
+            for (int i = 0; i < config.MaxStar; i++)
+            {
+                var jStar = (randomStar + i) % config.MaxStar + 1;
+                var listRandom = cardDataToRandom.dictCard[jStar].listOldCards;
+                listRandom.AddRange(cardDataToRandom.dictCard[jStar].listNewCards);
+                listRandom.RemoveAll(e => listSelectedCards.Contains(e));
+
+                if (listRandom.Count > 0)
+                {
+                    return listRandom.Rand();
+                }
+            }
+
+            var listRandomAllCards = cardDataToRandom.listAllCards;
+            listRandomAllCards.RemoveAll(e => listSelectedCards.Contains(e));
+            if (listRandomAllCards.Count > 0)
+            {
+                return listRandomAllCards.Rand();
+            }
+
+            return cardDataToRandom.listAllCards.Rand();
         }
 
         #region GetRandomx6
@@ -182,10 +234,8 @@ namespace MyGame.Modules.CardCollection
                 }
                 else
                 {
-                    Debug.Log($"<color=red>[CardSubmodule] datlt: GetNormalRandomCardType: randoms is empty</color>");
-                    listAllCards.RemoveAll(e => listSelectedCards.Contains(e));
-                    var randomInAllCards = listAllCards.Rand();
-                    listSelectedCards.Add((CardType)randomInAllCards);
+                    var backupRandom = GetBackupRandom(cardDataToRandom, listSelectedCards, randomStar);
+                    listSelectedCards.Add(backupRandom);
                 }
             }
 
@@ -275,10 +325,8 @@ namespace MyGame.Modules.CardCollection
                 }
                 else
                 {
-                    Debug.Log($"<color=red>[CardSubmodule] datlt: GetNormalRandomCardType: randoms is empty</color>");
-                    listAllCards.RemoveAll(e => listSelectedCards.Contains(e));
-                    var randomInAllCards = listAllCards.Rand();
-                    listSelectedCards.Add((CardType)randomInAllCards);
+                    var backupRandom = GetBackupRandom(cardDataToRandom, listSelectedCards, randomStar);
+                    listSelectedCards.Add(backupRandom);
                 }
             }
 
