@@ -41,7 +41,8 @@ public class MySonatFramework : SonatSystem
 
     private void Start()
     {
-        Application.targetFrameRate = 80;
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
         Input.multiTouchEnabled = false;
         InitService();
     }
