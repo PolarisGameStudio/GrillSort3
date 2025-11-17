@@ -126,7 +126,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             var gameplayInfoForLogicOrder = GetGameplayInfoForLogicOrder();
 
             Debug.Log("<color=purple>LogicOrderHandler:</color> -----GetItemOrder----");
-            var forceLogicOrder = listLogicOrders.FirstOrDefault(e => e.ForceUse(isRescue));
+            var forceLogicOrder = listLogicOrders.FirstOrDefault(e => e.CheckForceUse(isRescue));
             if (forceLogicOrder != null)
             {
                 Debug.Log("<color=blue>OrderHelper:</color> Use " + forceLogicOrder.name + " to rescue");
@@ -138,6 +138,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                 }
                 else
                 {
+                    SetForceRescue(false, -1);
                     return ForceGetItemOrder(gameplayInfoForLogicOrder);
                 }
             }

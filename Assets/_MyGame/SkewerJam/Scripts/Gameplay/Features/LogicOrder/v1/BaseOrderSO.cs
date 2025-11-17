@@ -24,7 +24,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             return true;
         }
 
-        public virtual bool ForceUse(bool isRescue = false)
+        public virtual bool CheckForceUse(bool isRescue = false)
         {
             return false;
         }

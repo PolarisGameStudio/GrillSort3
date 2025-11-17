@@ -25,16 +25,16 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                 );
 
             var remainingSlotAfter = previousRemainingSlot;
-            if (CheckFindNewOrder(numEmptyWaitingSlot) == false)
-            {
-            }
-            else
-            {
-                var curveIndex = gameplayInfo.GetTempData(LogicOrderHandler_v2.KEY_CURVE_INDEX);
-                remainingSlotAfter = basicOrderConfigSO.GetRandomRemainingSlot(curveIndex);
+            // if (CheckFindNewOrder(numEmptyWaitingSlot) == false)
+            // {
+            // }
+            // else
+            // {
+            var curveIndex = gameplayInfo.GetTempData(LogicOrderHandler_v2.KEY_CURVE_INDEX);
+            remainingSlotAfter = basicOrderConfigSO.GetRandomRemainingSlot(curveIndex);
 
-                previousRemainingSlot = remainingSlotAfter;
-            }
+            previousRemainingSlot = remainingSlotAfter;
+            // }
 
 
 
@@ -65,6 +65,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
                 {
                     var listItemIdAndNum = dictDiff2ItemIdsAndNum[diff];
                     var maxNumItems = listItemIdAndNum.Max(e => e.numItems);
+                    if (maxNumItems == 1) continue;
 
                     var filteredRandomItemIds = listItemIdAndNum.Where(e => e.numItems == maxNumItems).ToList();
                     var randomItemId = filteredRandomItemIds[UnityEngine.Random.Range(0, filteredRandomItemIds.Count)];
@@ -77,12 +78,13 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
 
 
 
-                var negativeDiffKeys = listDiffKeys.Where(e => e < 0).ToList().OrderBy(e => Random.Range(0, 100)).ToList();
+                var negativeDiffKeys = listDiffKeys.Where(e => e < 0).ToList().OrderBy(e => e).ToList();
 
                 foreach (var diff in negativeDiffKeys)
                 {
                     var listItemIdAndNum = dictDiff2ItemIdsAndNum[diff];
                     var maxNumItems = listItemIdAndNum.Max(e => e.numItems);
+                    if (maxNumItems == 1) continue;
 
                     var filteredRandomItemIds = listItemIdAndNum.Where(e => e.numItems == maxNumItems).ToList();
                     var randomItemId = filteredRandomItemIds[UnityEngine.Random.Range(0, filteredRandomItemIds.Count)];

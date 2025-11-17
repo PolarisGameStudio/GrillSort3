@@ -13,7 +13,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder.Configs
     {
         public List<DifficultyAndFlowConfig> difficultyAndFlowConfigs;
 
-        public FlowConfigSO_v2 GetFlowConfigSO(LevelDifficulty difficulty, int difficultyValue)
+        public HardFlowConfigSO_v2 GetFlowConfigSO(LevelDifficulty difficulty, int difficultyValue)
         {
             var difficultyAndFlowConfig = difficultyAndFlowConfigs.FirstOrDefault(e => e.difficulty == difficulty);
             if (difficultyAndFlowConfig == null)
@@ -44,7 +44,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder.Configs
         public LevelDifficulty difficulty;
         public List<DifficultyValueAndFlowConfigSO_v2> listFlowConfigSOs;
 
-        public FlowConfigSO_v2 GetFlowConfigSO(int difficultyValue)
+        public HardFlowConfigSO_v2 GetFlowConfigSO(int difficultyValue)
         {
             if (difficultyValue < 0)
             {
@@ -66,9 +66,9 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder.Configs
         [GUIColor(1f, 1f, 1f)]
         [ReadOnly]
         public int index;
-        public List<FlowConfigSO_v2> listFlowConfigSOs;
+        public List<HardFlowConfigSO_v2> listFlowConfigSOs;
 
-        public FlowConfigSO_v2 GetRandomFlowConfigSO()
+        public HardFlowConfigSO_v2 GetRandomFlowConfigSO()
         {
             var random = UnityEngine.Random.Range(0, listFlowConfigSOs.Count);
             return listFlowConfigSOs[random];

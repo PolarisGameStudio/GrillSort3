@@ -52,7 +52,7 @@ namespace MyGame.SkewerJam.Gameplay.LogicOrder
             return (blindedItems[UnityEngine.Random.Range(0, blindedItems.Count)], 1);
         }
 
-        public override bool ForceUse(bool isRescue = false)
+        public override bool CheckForceUse(bool isRescue = false)
         {
             // chỉ để tính gap
             // vì lần vào gọi order cx sẽ chạy qua
