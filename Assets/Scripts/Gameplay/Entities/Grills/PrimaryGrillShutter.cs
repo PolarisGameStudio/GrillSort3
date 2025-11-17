@@ -60,4 +60,21 @@ public class PrimaryGrillShutter : PrimaryGrill
     {
 
     }
+
+    public override bool CanShuffle()
+    {
+        return false;
+    }
+
+    public override async UniTask Undo()
+    {
+        moveCount--;
+        if (moveCount < 0)
+        {
+            moveCount = MoveToChangeState - 1;
+            isClosed = !isClosed;
+            SetLockItems(isClosed);
+            visualShutter.SetUpShutter(isClosed);
+        }
+    }
 }

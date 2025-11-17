@@ -41,7 +41,7 @@ namespace MyGame.SkewerJam.Gameplay.Command
         private async UniTask UndoAsync()
         {
             await TryUndoPrimaryGrill();
-
+            await TryUndoGrillManager();
             // nhảy item về vị trí cũ
             _item.Moving = false;
             _item.SetLockState(false);
@@ -69,6 +69,15 @@ namespace MyGame.SkewerJam.Gameplay.Command
             if (grill != null)
             {
                 await grill.UndoUpdateSubGrills(_preGrillData);
+            }
+        }
+
+        private async UniTask TryUndoGrillManager()
+        {
+            var grillManager = GameController.Instance.GameLogicHandler.GrillManager;
+            foreach (var grill in grillManager.ListGrills)
+            {
+                await grill.Undo();
             }
         }
 

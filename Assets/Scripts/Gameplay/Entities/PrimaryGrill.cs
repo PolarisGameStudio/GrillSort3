@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Gameplay.BoosteeManagement;
@@ -815,6 +816,11 @@ namespace Gameplay.Entities
             }
 
 
+
+        }
+
+        public virtual async UniTask Undo()
+        {
 
         }
     }

@@ -311,41 +311,41 @@ namespace MyGame.SkewerJam.Gameplay
         }
 
 #if UNITY_EDITOR
-        private void Update()
-        {
-            //     if (Input.GetKeyDown(KeyCode.Alpha1))
-            //     {
-            //         ShowPopupTutorial(TutorialType.BoosterAddPlate);
-            //     }
-            //     if (Input.GetKeyDown(KeyCode.Alpha2))
-            //     {
-            //         ShowPopupTutorial(TutorialType.PrimaryGrill_Single);
-            //     }
-            //     if (Input.GetKeyDown(KeyCode.Alpha3))
-            //     {
-            //         ShowPopupTutorial(TutorialType.Item_Bomb);
-            //     }
-            //     if (Input.GetKeyDown(KeyCode.Alpha4))
-            //     {
-            //         ShowPopupTutorial(TutorialType.Obstacle_Octochef_1);
-            //     }
-            if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                ShowPopupTutorial(TutorialType.PrimaryGrill_Ice);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha6))
-            {
-                ShowPopupTutorial(TutorialType.PrimaryGrill_Shutter);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha7))
-            {
-                ShowPopupTutorial(TutorialType.Obstacle_LockArea);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha8))
-            {
-                ShowPopupTutorial(TutorialType.PrimaryGrill_LockAndKey);
-            }
-        }
+        // private void Update()
+        // {
+        //     //     if (Input.GetKeyDown(KeyCode.Alpha1))
+        //     //     {
+        //     //         ShowPopupTutorial(TutorialType.BoosterAddPlate);
+        //     //     }
+        //     //     if (Input.GetKeyDown(KeyCode.Alpha2))
+        //     //     {
+        //     //         ShowPopupTutorial(TutorialType.PrimaryGrill_Single);
+        //     //     }
+        //     //     if (Input.GetKeyDown(KeyCode.Alpha3))
+        //     //     {
+        //     //         ShowPopupTutorial(TutorialType.Item_Bomb);
+        //     //     }
+        //     //     if (Input.GetKeyDown(KeyCode.Alpha4))
+        //     //     {
+        //     //         ShowPopupTutorial(TutorialType.Obstacle_Octochef_1);
+        //     //     }
+        //     if (Input.GetKeyDown(KeyCode.Alpha5))
+        //     {
+        //         ShowPopupTutorial(TutorialType.PrimaryGrill_Ice);
+        //     }
+        //     if (Input.GetKeyDown(KeyCode.Alpha6))
+        //     {
+        //         ShowPopupTutorial(TutorialType.PrimaryGrill_Shutter);
+        //     }
+        //     if (Input.GetKeyDown(KeyCode.Alpha7))
+        //     {
+        //         ShowPopupTutorial(TutorialType.Obstacle_LockArea);
+        //     }
+        //     if (Input.GetKeyDown(KeyCode.Alpha8))
+        //     {
+        //         ShowPopupTutorial(TutorialType.PrimaryGrill_LockAndKey);
+        //     }
+        // }
 #endif
     }
 
