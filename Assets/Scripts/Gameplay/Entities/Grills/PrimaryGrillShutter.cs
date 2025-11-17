@@ -1,6 +1,8 @@
 using Cysharp.Threading.Tasks;
 using Gameplay.Entities;
 using Gameplay.LevelData;
+using MyGame.SkewerJam.Gameplay;
+using Sonat.Enums;
 using UnityEngine;
 
 public class PrimaryGrillShutter : PrimaryGrill
@@ -12,6 +14,7 @@ public class PrimaryGrillShutter : PrimaryGrill
     private bool isClosed = false;
 
     private int moveCount = 0;
+    private bool useBooster = false; // sử dụng booster thì tính cộng 1 lần
 
     public override async UniTask SetData(GrillData grillData)
     {
@@ -21,6 +24,7 @@ public class PrimaryGrillShutter : PrimaryGrill
         SetLockItems(isClosed);
 
         moveCount = isClosed ? 0 : 0;
+        useBooster = false;
     }
 
     public void OnEnable()
@@ -40,6 +44,9 @@ public class PrimaryGrillShutter : PrimaryGrill
         if (completed == true) return;
         if (fromWaitingGrill == true) return;
 
+        if (useBooster == true && GameController.Instance.GameState == GameState.UsingBooster) return;
+        useBooster = true;
+
         moveCount++;
         Debug.Log("<color=green>[PrimaryGrillShutter]</color> OnItemDropped: " + name + " -move count" + moveCount);
         if (moveCount >= MoveToChangeState)
@@ -53,6 +60,11 @@ public class PrimaryGrillShutter : PrimaryGrill
             // {
             //     GameController.Instance.GameLogicHandler.TryCheckLoseGame();
             // }
+        }
+
+        if (GameController.Instance.GameState == GameState.Playing)
+        {
+            useBooster = false;
         }
     }
 
